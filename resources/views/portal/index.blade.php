@@ -20,7 +20,7 @@
 
 @section('content')
 
-<div class="container-fluid">
+<!-- <div class="container-fluid"> -->
 
 <div class="panel panel-default">
 
@@ -190,14 +190,14 @@
 
 </div>  <!--panel panel-default-->
 
-</div>  <!--container-fluid-->
+</div>  container-fluid
 
 @stop
 
 
 @section('css')
     <!-- <link rel="stylesheet" href="/css/admin_custom.css"> -->
-    <link href="{{ asset('css/contratacao/cadastro.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/contratacao/cadastro.css') }}" rel="stylesheet"> -->
 @stop
 
 
