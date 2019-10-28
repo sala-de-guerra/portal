@@ -4,16 +4,29 @@
 
 @section('content_header')
 
-<div class="panel-body padding015">
-    <h4 class="animated bounceInLeft  pull-left">
-        Introdução | 
-        <small>Workflow para rotinas de comércio exterior </small>
-    </h4>
-    
-    <ol class="breadcrumb pull-right">
-            <li><a href="/esteiracomex"><i class="fa fa-map-signs"></i>     Introdução</a></li>
-    </ol>
+
+<div class="row mb-2">
+
+    <div class="col-sm-6">
+
+        <h1 class="m-0 text-dark">
+            Principal
+        </h1>
+
+    </div>
+
+    <div class="col-sm-6">
+
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/index"> Home</a> </li>
+        </ol>
+
+    </div>
+
+
 </div>
+
+      
 
 @stop
 
