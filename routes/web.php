@@ -25,3 +25,9 @@ Route::get('/home', function() {
  Route::get('/index', function () {
     return view('portal.index');
 });
+
+ // Controle de Contratação
+ Route::get('/controle-contratacao', function () {
+    return view('portal.controle-contratacao');
+});
+

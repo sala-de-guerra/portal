@@ -213,8 +213,9 @@ return [
             'icon' => 'fas fa-fw fa-lock',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Controle de Contratação',
+                    'url'  => '/controle-contratacao',
+                    'icon' => 'fas fa-fw fa-file-contract',
                 ],
                 [
                     'text' => 'level_one',
