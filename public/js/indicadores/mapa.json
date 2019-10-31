@@ -1,0 +1,20 @@
+
+    {    
+  "estados": [{
+           "nome": "tocantins",
+           "contrato":"50"
+     
+        },
+        {
+            "nome": "piaui",
+            "contrato":"5"
+      
+         },
+         {
+            "nome": "bahia",
+            "contrato":"10"
+      
+         }
+        ]
+    }
+

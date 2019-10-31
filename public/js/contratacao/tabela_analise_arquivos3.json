@@ -1,0 +1,36 @@
+
+[
+    { 
+      "idDocumento": "1",
+      "tipoDocumento": "Invoice",
+      "url": "../../js/contratacao/upload-teste/10222222000188/546654/invoice_546654.jpg",
+      "status": null
+    },
+    {
+      "idDocumento": "2",
+      "tipoDocumento": "DI",
+      "url": "../../js/contratacao/upload-teste/10222222000188/546654/di_546654.pdf",
+      "status": null
+
+    },
+    {
+      "idDocumento": "3",
+      "tipoDocumento": "Autorização SR",
+      "url": "../../js/contratacao/upload-teste/10222222000188/546654/sr_546654.zip",
+      "status": null
+    },
+    {
+      "idDocumento": "4",
+      "tipoDocumento": "DI",
+      "url": "../../js/contratacao/upload-teste/10222222000188/546654/di_546654.pdf",
+      "status": null
+    },
+    {
+      "idDocumento": "5",
+      "tipoDocumento": "Conhecimento",
+      "url": "../../js/contratacao/upload-teste/10222222000188/546654/conhecimento_546654.zip",
+      "status": null
+    }
+]
+
+

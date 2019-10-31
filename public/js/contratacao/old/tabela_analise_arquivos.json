@@ -1,0 +1,25 @@
+
+[
+    {
+      "urlInvoice": "../../js/contratacao/upload-teste/10222222000188/546654/invoice_546654.jpg",
+      "fileInvoice": "invoice_546654.jpg",
+      "typeInvoice": "image",
+      "urlDi": "../../js/contratacao/upload-teste/10222222000188/546654/di_546654.pdf",
+      "fileDi": "di_546654.pdf",
+      "typeDi": "pdf",
+      "urlConhecimento": "../../js/contratacao/upload-teste/10222222000188/546654/conhecimento_546654.docx",
+      "fileConhecimento": "conhecimento_546654.docx",
+      "typeConhecimento": "office",
+      "urlSr": "../../js/contratacao/upload-teste/10222222000188/546654/sr_546654.zip",
+      "fileSr": "sr_546654.zip",
+      "typeSr": "generic",
+      "urlDue": "../../js/contratacao/upload-teste/10222222000188/546654/invoice_546654.jpg",
+      "fileDue": "invoice_546654.jpg",
+      "typeDue": "image",
+      "urlDados": "../../js/contratacao/upload-teste/10222222000188/546654/conhecimento_546654.docx",
+      "fileDados": "conhecimento_546654.docx",
+      "typeDados": "office"
+    }
+]
+
+

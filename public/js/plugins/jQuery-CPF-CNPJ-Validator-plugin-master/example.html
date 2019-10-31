@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery-CPF-CNPJ Plugin</title>
+    <style>
+        .error { border-color: #F70202 }
+    </style>
+</head>
+<body>
+    <input type="text" class="validate" />
+    <input type="text" class="validate" />
+    <input type="button" class="btn" value="Test" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="jquery.mask.js"></script>
+    <script src="jquery.cpfcnpj.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.validate').cpfcnpj({
+                mask: true,
+                validate: 'cpfcnpj',
+                event: 'click',
+                //validateOnlyFocus: true,
+                handler: '.btn',
+                ifValid: function (input) { input.removeClass("error"); alert(returnType); },
+                ifInvalid: function (input) { input.addClass("error"); alert(returnType); }
+            });
+        });
+    </script>
+</body>
+</html>

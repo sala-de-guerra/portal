@@ -177,13 +177,13 @@ return [
         [
             'text'        => 'Principal',
             'url'         => '/index',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-home',
         ],
         ['header' => 'IMÓVEIS CAIXA'],
         [
-            'text' => 'Solicitar atendimento',
+            'text' => 'Preparar e Ofertar',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-sign',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -208,14 +208,13 @@ return [
             ],
         ],
         [
-            'text' => 'Acompanhamentos',
+            'text' => 'Pagamentos e Averbação',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-dollar-sign',
             'submenu' => [
                 [
-                    'text' => 'Controle de Contratação',
-                    'url'  => '/controle-contratacao',
-                    'icon' => 'fas fa-fw fa-file-contract',
+                    'text' => 'level_two',
+                    'url'  => '#',
                 ],
                 [
                     'text' => 'level_one',
@@ -237,8 +236,37 @@ return [
 
         ],
         [
-            'text'    => 'Indicadores',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => 'Contratação',
+            'icon'    => 'fas fa-fw fa-file-contract',
+            'submenu' => [
+                [
+                    'text' => 'Controle de Contratação',
+                    'url'  => '/controle-contratacao',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+
+        ['header' => 'PENHOR'],
+        [
+            'text' => 'Preparar e Ofertar',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-sign',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -262,6 +290,61 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Pagamentos e Averbação',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-dollar-sign',
+            'submenu' => [
+                [
+                    'text' => 'Controle de Contratação',
+                    'url'  => '/controle-contratacao',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+
+        ],
+        [
+            'text'    => 'Contratação',
+            'icon'    => 'fas fa-fw fa-file-contract',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+
         ['header' => 'Gerencial'],
         [
             'text'       => 'Perfis de Acesso',
@@ -271,6 +354,34 @@ return [
             'text'       => 'Requisitos do projeto',
             'icon_color' => 'yellow',
         ],
+
+        [
+            'text'    => 'Indicadores',
+            'icon'    => 'fas fa-fw fa-chart-bar',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+
         // [
         //     'text'       => 'information',
         //     'icon_color' => 'aqua',
