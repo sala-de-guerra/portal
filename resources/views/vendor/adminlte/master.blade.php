@@ -13,7 +13,7 @@
 
     @include('adminlte::plugins', ['type' => 'css'])
 
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.css') }}">
 
     @yield('adminlte_css')
 

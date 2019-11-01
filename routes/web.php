@@ -28,7 +28,7 @@ Route::get('/home', function() {
 
  // Controle de Contratação
  Route::get('/controle-contratacao', function () {
-    return view('portal.acompanhamentos.controle-contratacao');
+    return view('portal.imoveis.controle-contratacao');
 });
 
 // Consulta de bem imóvel

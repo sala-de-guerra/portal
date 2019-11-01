@@ -48,8 +48,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -64,14 +64,14 @@ return [
     |
     */
 
-    'classes_body' => 'layout-navbar-fixed layout-fixed',
-    'classes_brand' => '',
+    'classes_body' => '',
+    'classes_brand' => 'bg-primary',
     'classes_brand_text' => '',
     'classes_content_header' => 'container-fluid',
     'classes_content' => 'container-fluid',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-primary navbar-dark',
     'classes_topnav_nav' => 'navbar-expand-md',
     'classes_topnav_container' => 'container',
 
@@ -165,9 +165,33 @@ return [
 
     'menu' => [
         [
-            'text' => 'Buscar',
+            'text' => 'Pesquisar',
             'search' => true,
             'topnav' => true,
+        ],
+        [
+            'text' => 'VILOP',
+            'url'  => 'http://vilop.caixa/',
+            'topnav' => true,
+            'icon' => '',
+        ],
+        [
+            'text' => 'SULOG',
+            'url'  => 'http://log.caixa/portal/',
+            'topnav' => true,
+            'icon' => '',
+        ],
+        [
+            'text' => 'GEIPT',
+            'url'  => 'http://www.geipt.mz.caixa/site/index.asp',
+            'topnav' => true,
+            'icon' => '',
+        ],
+        [
+            'text' => 'GILIE/SP',
+            'url'  => 'index',
+            'topnav' => true,
+            'icon' => '',
         ],
         [
             'text' => 'blog',
@@ -296,8 +320,8 @@ return [
             'icon' => 'fas fa-fw fa-dollar-sign',
             'submenu' => [
                 [
-                    'text' => 'Controle de Contratação',
-                    'url'  => '/controle-contratacao',
+                    'text' => 'level_two',
+                    'url'  => '#',
                 ],
                 [
                     'text' => 'level_one',

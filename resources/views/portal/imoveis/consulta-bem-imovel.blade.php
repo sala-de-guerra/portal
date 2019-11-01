@@ -27,7 +27,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Trajetória do Imóvel</h3>
             </div> <!-- /.card-header -->
@@ -72,6 +72,60 @@
                             <p id="empreendimento">BALN REGINA MARIA</p>
                         </div>
                     </div>
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Endereço:</label>
+                            <p id="endereco">RUA AUGUSTA, N. 183, Apto 202, TORRE 2B</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Bairro:</label>
+                            <p id="bairro"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Localidade:</label>
+                            <p id="localidade">GUARULHOS/SP </p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Status do imóvel:</label>
+                            <p id="statusImovel">Em Contratação</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Data do Status:</label>
+                            <p id="dataStatus">Em Contratação</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Número do Laudo:</label>
+                            <p id="numeroLaudo">12356546</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Vencimento do Laudo:</label>
+                            <p id="vencimentoLaudo">12356546</p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Descrição Adicional:</label>
+                            <p id="descricaoAdicional">(E) sem débitos condominiais até 12/2018 conforme CND enviada no dossiê </p>
+                        </div>
+                    </div>
                 </div>
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
@@ -89,31 +143,23 @@
             </div> <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>CHB:</label>
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Classificação:</label>
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Tipo de Venda:</label>
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Empreendimento:</label>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
+                    <div class="col-sm-12 table-responsive p-0">
+                        <table id="tblDossieDigital" class="table">
+                            <thead>
+                            <tr>
+                                <th>Visualizar</th>
+                                <th>ID do Documento</th>
+                                <th>Nome do Documento</th>
+                                <th>Tipo de Documento</th>
+                                <th>Data do Upload</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div> <!-- /.col-sm-12 -->
+                </div> <!-- /.row -->
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
@@ -209,5 +255,8 @@
 
 
 @section('js')
-
+    <script src="{{ asset('js/formata_tabela_documentos.js') }}"></script>
+    <script>
+        _formataTabelaDocumentos ();
+    </script>
 @stop
