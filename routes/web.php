@@ -25,3 +25,14 @@ Route::get('/home', function() {
  Route::get('/index', function () {
     return view('portal.index');
 });
+
+ // Controle de Contratação
+ Route::get('/controle-contratacao', function () {
+    return view('portal.imoveis.controle-contratacao');
+});
+
+// Consulta de bem imóvel
+
+Route::get('/consulta-bem-imovel', function () {
+    return view('portal.imoveis.consulta-bem-imovel');
+});

@@ -1,0 +1,38 @@
+_animaLoadingSubmit();  ->  anima_loading_submit.js
+_animaInputFile();  ->  anima_input_file.js
+_tiposArquivosPermitidos();  ->  anima_input_file.js
+_validaSwift();  ->  valida_swift_iban.js
+_validaIban();  ->  valida_swift_iban.js
+_formataData(); -> formata_data.js
+_formataTabelaDocumentos();  ->  formata_tabela_documentos.js
+_formataTabelaHistorico();  ->  formata_tabela_historico.js
+_formataDatatable(); -> formata_datatablw.js
+_progressBar();  ->  anima_progress_bar.js
+
+STATUS:
+
+CADASTRADA
+
+DISTRIBUIDA
+
+EM ANALISE
+
+INCONFORME
+
+CONFORME
+
+CONTRATO ENVIADO
+
+ASSINATURA CONFIRMADA
+
+CANCELADA
+
+LIQUIDADA
+
+/////
+
+APRESENTAR CONTRATO
+
+CONTRATO ASSINADO
+
+ARQUIVADA

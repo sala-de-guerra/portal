@@ -159,7 +159,7 @@
 
         @hasSection('footer')
         <footer class="main-footer">
-
+            
             @yield('footer')
         </footer>
         @endif

@@ -1,0 +1,49 @@
+{
+  "demandasEsteira": [
+  {
+    "contratacao":[
+      {
+        "idDemanda":1,
+        "nomeCliente":"HUEHUE",
+        "cpfCnpj":"418.179.798-84",
+        "tipoOperacao":"Pronto Exporta\u00e7\u00e3o Antecipado",
+        "valorOperacao":"2222222.22",
+        "unidadeDemandante":"2515",
+        "statusAtual":"EM ANÁLISE",
+        "responsavelCeopc":"c080709"
+      },  
+      {
+        "idDemanda":2,
+        "nomeCliente":"ASDASDADAS",
+        "cpfCnpj":"418.179.798-84",
+        "tipoOperacao":"Pronto Exporta\u00e7\u00e3o Antecipado",
+        "valorOperacao":"2222222.22",
+        "unidadeDemandante":"2515",
+        "statusAtual":"CADASTRADA",
+        "responsavelCeopc":"c133633"
+      }
+  
+    ],
+
+    "empregadosDistribuicao":[
+      {
+        "matricula":"c058725",
+        "nome":"THAIS COSTA JOMAH"
+      },
+      {
+        "matricula":"c080709",
+        "nome":"JOSIAS DO NASCIMENTO FLORIANO"
+      },
+      {
+        "matricula":"c133633",
+        "nome":"MARIO ALBERTO LABRONICI BAIARDI"
+      },
+      {
+        "matricula":"c052972",
+        "nome":"MARIA BEATRIZ GARCIA RUSSO"
+      }
+    ]
+    
+  }
+  ]
+}

@@ -48,8 +48,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
 
     /*
@@ -64,14 +64,14 @@ return [
     |
     */
 
-    'classes_body' => 'layout-navbar-fixed layout-fixed',
-    'classes_brand' => '',
+    'classes_body' => '',
+    'classes_brand' => 'bg-primary',
     'classes_brand_text' => '',
     'classes_content_header' => 'container-fluid',
     'classes_content' => 'container-fluid',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-primary navbar-dark',
     'classes_topnav_nav' => 'navbar-expand-md',
     'classes_topnav_container' => 'container',
 
@@ -165,9 +165,33 @@ return [
 
     'menu' => [
         [
-            'text' => 'Buscar',
+            'text' => 'Pesquisar',
             'search' => true,
             'topnav' => true,
+        ],
+        [
+            'text' => 'VILOP',
+            'url'  => 'http://vilop.caixa/',
+            'topnav' => true,
+            'icon' => '',
+        ],
+        [
+            'text' => 'SULOG',
+            'url'  => 'http://log.caixa/portal/',
+            'topnav' => true,
+            'icon' => '',
+        ],
+        [
+            'text' => 'GEIPT',
+            'url'  => 'http://www.geipt.mz.caixa/site/index.asp',
+            'topnav' => true,
+            'icon' => '',
+        ],
+        [
+            'text' => 'GILIE/SP',
+            'url'  => 'index',
+            'topnav' => true,
+            'icon' => '',
         ],
         [
             'text' => 'blog',
@@ -177,13 +201,13 @@ return [
         [
             'text'        => 'Principal',
             'url'         => '/index',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-home',
         ],
         ['header' => 'IMÓVEIS CAIXA'],
         [
-            'text' => 'Solicitar atendimento',
+            'text' => 'Preparar e Ofertar',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-sign',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -208,12 +232,12 @@ return [
             ],
         ],
         [
-            'text' => 'Acompanhamentos',
+            'text' => 'Pagamentos e Averbação',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-dollar-sign',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'level_two',
                     'url'  => '#',
                 ],
                 [
@@ -236,8 +260,37 @@ return [
 
         ],
         [
-            'text'    => 'Indicadores',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => 'Contratação',
+            'icon'    => 'fas fa-fw fa-file-contract',
+            'submenu' => [
+                [
+                    'text' => 'Controle de Contratação',
+                    'url'  => '/controle-contratacao',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+
+        ['header' => 'PENHOR'],
+        [
+            'text' => 'Preparar e Ofertar',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-sign',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -261,6 +314,61 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Pagamentos e Averbação',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-dollar-sign',
+            'submenu' => [
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+
+        ],
+        [
+            'text'    => 'Contratação',
+            'icon'    => 'fas fa-fw fa-file-contract',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+
         ['header' => 'Gerencial'],
         [
             'text'       => 'Perfis de Acesso',
@@ -270,6 +378,34 @@ return [
             'text'       => 'Requisitos do projeto',
             'icon_color' => 'yellow',
         ],
+
+        [
+            'text'    => 'Indicadores',
+            'icon'    => 'fas fa-fw fa-chart-bar',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+
         // [
         //     'text'       => 'information',
         //     'icon_color' => 'aqua',

@@ -1,0 +1,51 @@
+{
+  "_from": "iban",
+  "_id": "iban@0.0.12",
+  "_inBundle": false,
+  "_integrity": "sha512-j+beWwI28a0tOzb2pTEVPwVl3dpWEuVI7EawGb6bUQD1j2GilGnETTnwIPzQZd1sQQuO4ET0giYt7fQkJ6bB3A==",
+  "_location": "/iban",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "iban",
+    "name": "iban",
+    "escapedName": "iban",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "http://binario.caixa:8081/repository/npm-all/iban/-/iban-0.0.12.tgz",
+  "_shasum": "557d4b29b27a5a985e399eaf36f73512c98ec8b6",
+  "_spec": "iban",
+  "_where": "C:\\Users\\c142765\\desktop\\fork_esteira_contratacao\\sistema-inova",
+  "author": {
+    "name": "Laurent VB"
+  },
+  "bugs": {
+    "url": "https://github.com/arhs/iban.js/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A javascript library to validate, format and convert IBAN (International Bank Account Number) and BBAN (Basic Bank Account Number)",
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.14.0"
+  },
+  "homepage": "https://github.com/arhs/iban.js#readme",
+  "license": "MIT",
+  "main": "iban.js",
+  "name": "iban",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arhs/iban.js.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "version": "0.0.12"
+}

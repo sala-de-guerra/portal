@@ -1,0 +1,38 @@
+[
+{    
+    "op":{     
+        "opRecebidasMes":"50"
+    }
+},
+{
+    "clientesEmail":{     
+        "clientesComex":"1063",
+        "emailCadastrado":"144"
+    }
+},
+{
+    "analisesAccAce":{     
+        "cadastradas":"480",
+        "canceladas":"126",
+        "liquidadas":"354"
+    }
+},
+{
+    "antecipados":{     
+        "cadastradas":"124",
+        "analisadas":"142",
+        "inconformeCanceladas":"60"
+       
+    }
+},
+{
+    "antecipadosCobranca":{     
+        "contratado":"500",
+        "bloqueado":"200",
+        "conforme":"100",
+        "reiterado":"300",
+        "cobrado":"400"
+       
+    }
+}
+]
