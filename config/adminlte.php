@@ -129,7 +129,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'index',
 
     'logout_url' => 'logout',
 
