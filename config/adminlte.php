@@ -165,11 +165,6 @@ return [
 
     'menu' => [
         [
-            'text' => 'Pesquisar',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
             'text' => 'VILOP',
             'url'  => 'http://vilop.caixa/',
             'topnav' => true,

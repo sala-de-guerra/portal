@@ -10,6 +10,9 @@
         <h1 class="m-0 text-dark">
             Consultar Bem Imóvel
         </h1>
+        <!-- <div>
+            <input class="typeahead" type="text" placeholder="States of USA">
+        </div> -->
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
