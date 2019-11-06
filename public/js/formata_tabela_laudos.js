@@ -1,6 +1,6 @@
 //Função global que monta a tabela de arquivos do arquivo formata_tabela_documentos.js
 
-function _formataTabelaDocumentos () {
+function _formataTabelaLaudos () {
 
     // var urlDiretorioVirtual = 'https://inova.ceopc.des.caixa/uploads/';
     
@@ -31,12 +31,12 @@ function _formataTabelaDocumentos () {
                 '</div>' +           
             '</td>' +
             '<td>456654</td>' +
-            '<td>00.0000.0001766-3M.pdf</td>' +
-            '<td>MATRICULA</td>' +
             '<td>01/11/2019</td>' +
+            '<td>01/11/2019</td>' +
+            '<td>01/05/2020</td>' +
         '</tr>';
     
-    $(linhas).appendTo('#tblDossieDigital>tbody');
+    $(linhas).appendTo('#tblLaudos>tbody');
 
 };
 

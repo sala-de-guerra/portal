@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4389afb4d5595fa1c2251048401aeb57",
+    "content-hash": "6c3748c2229c70a2866ad7a989d40d75",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -509,20 +509,20 @@
         },
         {
             "name": "jeroennoten/laravel-adminlte",
-            "version": "v3.0.0-rc.2",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeroennoten/Laravel-AdminLTE.git",
-                "reference": "3caadb1765e1c2a0c2fa021fd42a2aeab1815486"
+                "reference": "533697dda18cd7c1ecce5534151050591616ab06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeroennoten/Laravel-AdminLTE/zipball/3caadb1765e1c2a0c2fa021fd42a2aeab1815486",
-                "reference": "3caadb1765e1c2a0c2fa021fd42a2aeab1815486",
+                "url": "https://api.github.com/repos/jeroennoten/Laravel-AdminLTE/zipball/533697dda18cd7c1ecce5534151050591616ab06",
+                "reference": "533697dda18cd7c1ecce5534151050591616ab06",
                 "shasum": ""
             },
             "require": {
-                "almasaeed2010/adminlte": "^3.0.0-rc.4",
+                "almasaeed2010/adminlte": "^3.0",
                 "laravel/framework": "^6.0",
                 "php": ">=7.2.0"
             },
@@ -559,7 +559,7 @@
                 "administrator",
                 "laravel"
             ],
-            "time": "2019-10-16T15:52:22+00:00"
+            "time": "2019-11-02T15:41:20+00:00"
         },
         {
             "name": "laravel/framework",
