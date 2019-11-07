@@ -1,50 +1,3 @@
-// var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-// 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-// 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-// 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-// 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-// 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-// 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-// 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-// 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-// ];
-
-// var states = new Bloodhound({
-//     datumTokenizer: Bloodhound.tokenizers.whitespace,
-//     queryTokenizer: Bloodhound.tokenizers.whitespace,
-//     // `states` is an array of state names defined in "The Basics"
-//     local: states
-//   });
-
-// $('.typeahead').typeahead({
-//     minLength: 3,
-//     highlight: true
-//   },
-//   {
-//     name: 'cpf_cnpj_ex_mutuario',
-//     source: '.json'
-//   },
-//   {
-//     name: 'cpf_cnpj_proponente',
-//     source: '.json'
-//   },
-//   {
-//     name: 'numero_bem',
-//     source: '.json'
-//   },
-//   {
-//     name: 'endereco',
-//     source: '.json'
-//   },
-//   {
-//     name: 'classificado',
-//     source: '.json'
-//   },
-//   {
-//     name: 'states',
-//     source: states
-//   });
-
 $(document).ready(function(){
 
   var substringMatcher = function(strs) {
@@ -103,41 +56,86 @@ $(document).ready(function(){
     'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
-  
+
+  var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen',
+  'Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen',
+  'Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
+
+
+// instantiate the bloodhound suggestion engine
+  var engine = new Bloodhound({
+      datumTokenizer: function (datum) {
+          return Bloodhound.tokenizers.whitespace(datum.title);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: {
+          url: "js/SampleData.json",
+          filter: function (data) {
+              //console.log("data", data.response.songs)
+              return $.map(data.response.songs, function (song) {
+                  return {
+                      title: song.title,
+                      artistName: song.artist_name
+                  };
+              });
+          }
+      }
+  });
+
+  // initialize the bloodhound suggestion engine
+  engine.initialize();
+
+
   $('.typeahead').typeahead({
     hint: false,
     highlight: true,
     minLength: 1
-  },
-  {
-    name: 'states',
-    limit: 10,
-    source: substringMatcher(states),
-    templates: {
-        header: '<h4 class="source-name">Estados</h4>'
+    },
+    {
+      name: 'states',
+      // limit: 10,
+      source: substringMatcher(states),
+      templates: {
+          header: '<h4 class="source-name">Estados</h4>',
+          empty: [
+            '<h4 class="source-name">Estados</h4>' +
+            '<div class="empty-message">' +
+              'Nenhum resultado encontrado.' +
+            '</div>'
+          ]
+      }
+    },
+    {
+      name: 'cars',
+      // limit: 10,
+      source: substringMatcher(cars),
+      templates: {
+        header: '<h4 class="source-name">Carros</h4>',
+        empty: [
+          '<h4 class="source-name">Carros</h4>' +
+          '<div class="empty-message">' +
+            'Nenhum resultado encontrado.' +
+          '</div>'
+        ]
+      }
+    },
+    {
+      name: 'engine',
+      // limit: 10,
+      displayKey: 'title',
+      source: engine.ttAdapter(),
+      templates: {
+          header: '<h4 class="source-name">Songs</h4>',
+          empty: [
+            '<h4 class="source-name">Songs</h4>' +
+            '<div class="empty-message">' +
+              'Nenhum resultado encontrado.' +
+            '</div>'
+          ].join('\n'),
+          suggestion: Handlebars.compile('<p>{{title}} by {{artistName}}</p>')
+      }
     }
-  });
-});
+  );
 
-// $(document).ready(function(){
-//     // Defining the local dataset
-//     var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
-    
-//     // Constructing the suggestion engine
-//     var cars = new Bloodhound({
-//         datumTokenizer: Bloodhound.tokenizers.whitespace,
-//         queryTokenizer: Bloodhound.tokenizers.whitespace,
-//         local: cars
-//     });
-    
-//     // Initializing the typeahead
-//     $('.typeahead').typeahead({
-//         hint: true,
-//         highlight: true, /* Enable substring highlighting */
-//         minLength: 1 /* Specify minimum characters required for showing suggestions */
-//     },
-//     {
-//         name: 'cars',
-//         source: cars
-//     });
-// });
+
+});
