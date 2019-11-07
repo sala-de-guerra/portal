@@ -1140,7 +1140,8 @@
                     top: "100%",
                     left: "0",
                     zIndex: "100",
-                    display: "none"
+                    display: "none",
+                    backgroundColor: "#fff"
                 },
                 ltr: {
                     left: "0",

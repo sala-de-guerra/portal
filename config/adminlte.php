@@ -164,40 +164,35 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'Pesquisar',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
-            'text' => 'VILOP',
-            'url'  => 'http://vilop.caixa/',
-            'topnav' => true,
-            'icon' => '',
-        ],
-        [
-            'text' => 'SULOG',
-            'url'  => 'http://log.caixa/portal/',
-            'topnav' => true,
-            'icon' => '',
-        ],
-        [
-            'text' => 'GEIPT',
-            'url'  => 'http://www.geipt.mz.caixa/site/index.asp',
-            'topnav' => true,
-            'icon' => '',
-        ],
-        [
-            'text' => 'GILIE/SP',
-            'url'  => 'index',
-            'topnav' => true,
-            'icon' => '',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+        // [
+        //     'text' => 'VILOP',
+        //     'url'  => 'http://vilop.caixa/',
+        //     'topnav' => true,
+        //     'icon' => '',
+        // ],
+        // [
+        //     'text' => 'SULOG',
+        //     'url'  => 'http://log.caixa/portal/',
+        //     'topnav' => true,
+        //     'icon' => '',
+        // ],
+        // [
+        //     'text' => 'GEIPT',
+        //     'url'  => 'http://www.geipt.mz.caixa/site/index.asp',
+        //     'topnav' => true,
+        //     'icon' => '',
+        // ],
+        // [
+        //     'text' => 'GILIE/SP',
+        //     'url'  => 'index',
+        //     'topnav' => true,
+        //     'icon' => '',
+        // ],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
+        // ],
         [
             'text'        => 'Principal',
             'url'         => '/index',
