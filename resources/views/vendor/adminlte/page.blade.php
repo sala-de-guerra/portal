@@ -78,7 +78,7 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <div class="input-group">
                             <input class="form-control form-control-navbar typeahead" type="text" name="" placeholder="Pesquisar">
                         </div>
@@ -180,7 +180,7 @@
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/typeahead/typeahead.bundle.js') }}"></script>
+    <script src="{{ asset('plugins/typeahead/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('js/global/configura_typeahead.js') }}"></script>
     @stack('js')
     @yield('js')

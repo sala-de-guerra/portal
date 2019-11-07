@@ -14,6 +14,8 @@
     @include('adminlte::plugins', ['type' => 'css'])
 
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/typeahead/typeahead.css') }}">
 
     @yield('adminlte_css')
 
