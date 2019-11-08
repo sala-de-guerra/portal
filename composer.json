@@ -35,7 +35,14 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "App\\Classes\\Sisadj\\": "app/Classes/Sisadj/"
+            "App\\Classes\\GestaoImoveisCaixa\\": "app/Classes/GestaoImoveisCaixa/",
+
+            "App\\Http\\Controllers\\GestaoImoveisCaixa\\": "app/Http/Controllers/GestaoImoveisCaixa",
+
+            "App\\Models\\": "app/Models/",
+            "App\\Models\\GestaoImoveisCaixa\\": "app/Models/GestaoImoveisCaixa/"
+
+
         },
         "classmap": [
             "database/seeds",

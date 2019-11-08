@@ -26,8 +26,8 @@ Route::get('/home', function() {
     return view('portal.index');
 });
 
- // Controle de Contratação
- Route::get('/controle-contratacao', function () {
+// Controle de Contratação
+Route::get('/controle-contratacao', function () {
     return view('portal.imoveis.controle-contratacao');
 });
 
@@ -40,8 +40,6 @@ Route::get('/consulta-bem-imovel', function () {
 
 // Rotina Automatica de envio de mensagens Adjudicados
 
-Route::prefix('sisadj')->group(function () {
-    Route::get('rotina-mensagens', function () {
-        return 'chegou';
-    });
+Route::prefix('estoque-imoveis')->group(function () {
+    Route::get('rotina-mensagens', 'RotinaMensagensAutomatica@mensagemAutorizacaoImoveisPatrimoniais');
 });
