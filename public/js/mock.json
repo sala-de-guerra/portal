@@ -1,23 +1,21 @@
 {
-    "response": { 
+    "response": {
         "bens":[{
-                "numeroBem": "1444406706576",
-                "endereco": "VIA DAS MAGNOLIAS, N. 1000, CS 65",
-                "nomeProponente": "CAMILA MASTROIENI PAREJA",
-                "cpfCnpjProponente": "30030865883",
-                "nomeExMutuario": "MARCELO OLIVEIRA RAMALHO DE CAMPOS",
-                "cpfCnpjExMutuario": "27869343897",
-                "id": "1"
-            },
-            {
-                "numeroBem": "1444407050305",
-                "endereco": "AVENIDA ANTONIO MATHIAS DE CAMARGO, N. 01, Apto 7, BL B - EDIF ORQUIDEA",
-                "nomeProponente": "CRISTIANE APARECIDA DE SOUZA VAS",
-                "cpfCnpjProponente": "20584758871",
-                "nomeExMutuario": "JULIETE ROSA DOS SANTOS",
-                "cpfCnpjExMutuario": "4329934523",
-                "id": "2"
-            }
-        ]
+            "numero_bem": "1444406706576",
+            "endereco": "VIA DAS MAGNOLIAS",
+            "nome_proponente": "CAMSTROIAMIREEA PJANILA",
+            "cpf_cnpj_proponente": "35868830003",
+            "nome_ex_mutuario": "MAAMPOORO ELALEIRA RAMCHO DE CLIVS",
+            "cpf_cnpj_ex_mutuario": "26834378997",
+            "id": "1"
+        }, {
+            "numero_bem": "1444407050305",
+            "endereco": "AVENIDA ANTONIO MATHIAS DE CAMARGO",
+            "nome_proponente": "CRIACIPNS EOUREATIA DEDASZVAS",
+            "cpf_cnpj_proponente": "25858477081",
+            "nome_ex_mutuario": "JUOIELANTSTOE RADSSS",
+            "cpf_cnpj_ex_mutuario": "4529323493",
+            "id": "2"
+        }]
     }
 }
