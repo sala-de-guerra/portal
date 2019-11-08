@@ -41,5 +41,5 @@ Route::get('/consulta-bem-imovel', function () {
 // Rotina Automatica de envio de mensagens Adjudicados
 
 Route::prefix('estoque-imoveis')->group(function () {
-    Route::get('rotina-mensagens', 'RotinaMensagensAutomatica@mensagemAutorizacaoImoveisPatrimoniais');
+    Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoImoveisPatrimoniais');
 });
