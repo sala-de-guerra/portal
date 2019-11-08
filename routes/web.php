@@ -36,3 +36,12 @@ Route::get('/home', function() {
 Route::get('/consulta-bem-imovel', function () {
     return view('portal.imoveis.consulta-bem-imovel');
 });
+
+
+// Rotina Automatica de envio de mensagens Adjudicados
+
+Route::prefix('sisadj')->group(function () {
+    Route::get('rotina-mensagens', function () {
+        return 'chegou';
+    });
+});
