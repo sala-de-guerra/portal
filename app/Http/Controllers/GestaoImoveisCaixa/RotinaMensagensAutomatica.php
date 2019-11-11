@@ -17,12 +17,142 @@ class RotinaMensagensAutomatica extends Controller
 {
     public static function enviarMensageriasAutorizacaoContratacao()
     {
+        /* IMÓVEIS PATRIMONIAIS */
         $contratosPatromoniais = self::mensagemAutorizacaoImoveisPatrimoniais();
-        // dd($contratosPatromoniais);
-        $contratosCaixaEmgea = self::mensagemAutorizacaoCaixaEngea();
-        dd($contratosCaixaEmgea);
+        echo "IMÓVEIS PATRIMONIAIS<br><br>";
+        foreach ($contratosPatromoniais as $contrato => $value) {
+            echo "numero Bem: $contrato->numeroBem <br>";
+            switch ($contrato->tipoVenda) {
+                // VENDAS DE LEILÃO
+                case 'LEILAO':
+                    echo "Tipo Venda: Leilão <br>";
+                    // VENDA A VISTA
+                    if ($contrato->tipoProposta == 'A VISTA') {
+                        echo "Tipo Proposta: à vista <br>";
+                        if ($contrato->temAcaoJudial == 'NAO') {
+                            // SEM AÇÃO JUDICIAL
+                            echo "Sem ação judicial <hr>";
+                        } else {
+                            // COM AÇÃO JUDICIAL
+                            echo "Com ação judicial <hr>";
+                        }
+                    } else {
+                        // VENDA FINANCIADA OU COM USO DE FGTS
+                        echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+                    }
+                    break;
+                // VENDAS DIRETA OU VENDA ONLINE DIRETA
+                default:
+                    echo "Tipo Venda: VD ou VDO <br>";
+                    // VENDA A VISTA
+                    if ($contrato->tipoProposta == 'A VISTA') {
+                        echo "Tipo Proposta: à vista <br>";
+                        if ($contrato->temAcaoJudial == 'NAO') {
+                            // SEM AÇÃO JUDICIAL
+                            echo "Sem ação judicial <hr>";
+                        } else {
+                            // COM AÇÃO JUDICIAL
+                            echo "Com ação judicial <hr>";
+                        }
+                    } else {
+                        // VENDA FINANCIADA OU COM USO DE FGTS
+                        echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+                    }
+                    break;
+            }
+        }
+            
+        /* IMOVEIS CAIXA */ 
+        $contratosPatromoniais = self::mensagemAutorizacaoCaixaEngea(); 
+        echo "IMÓVEIS CAIXA/EMGEA<br><br>";
+        foreach ($contratosPatromoniais as $contrato => $value) {
+            echo "numero Bem: $contrato->numeroBem <br>";
+            switch ($contrato->classificacao) {
+                case 'CAIXA':
+                    echo "Tipo Imóvel: $contrato->classificacao <br>";
+                    switch ($contrato->tipoDeVenda) {
+                        // VENDAS DE LEILÃO
+                        case 'LEILAO':
+                            echo "Tipo Venda: Leilão <br>";
+                            // VENDA A VISTA
+                            if ($contrato->tipoProposta == 'A VISTA') {
+                                echo "Tipo Proposta: à vista <br>";
+                                if ($contrato->temAcaoJudial == 'NAO') {
+                                    // SEM AÇÃO JUDICIAL
+                                    echo "Sem ação judicial <hr>";
+                                } else {
+                                    // COM AÇÃO JUDICIAL
+                                    echo "Com ação judicial <hr>";
+                                }
+                            } else {
+                                // VENDA FINANCIADA OU COM USO DE FGTS
+                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+                            }
+                            break;
+                        // VENDAS DIRETA OU VENDA ONLINE DIRETA
+                        default:
+                            echo "Tipo Venda: VD ou VDO <br>";
+                            // VENDA A VISTA
+                            if ($contrato->tipoProposta == 'A VISTA') {
+                                echo "Tipo Proposta: à vista <br>";
+                                if ($contrato->temAcaoJudial == 'NAO') {
+                                    // SEM AÇÃO JUDICIAL
+                                    echo "Sem ação judicial <hr>";
+                                } else {
+                                    // COM AÇÃO JUDICIAL
+                                    echo "Com ação judicial <hr>";
+                                }
+                            } else {
+                                // VENDA FINANCIADA OU COM USO DE FGTS
+                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+                            }
+                            break;
+                        }
+                    break;
+                case 'EMGEA':
+                    echo "Tipo Imóvel: $contrato->classificacao <br>";
+                    switch ($contrato->tipoDeVenda) {
+                        // VENDAS DE LEILÃO
+                        case 'LEILAO':
+                            echo "Tipo Venda: Leilão <br>";
+                            // VENDA A VISTA
+                            if ($contrato->tipoProposta == 'A VISTA') {
+                                echo "Tipo Proposta: à vista <br>";
+                                if ($contrato->temAcaoJudial == 'NAO') {
+                                    // SEM AÇÃO JUDICIAL
+                                    echo "Sem ação judicial <hr>";
+                                } else {
+                                    // COM AÇÃO JUDICIAL
+                                    echo "Com ação judicial <hr>";
+                                }
+                            } else {
+                                // VENDA FINANCIADA OU COM USO DE FGTS
+                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+                            }
+                            break;
+                        // VENDAS DIRETA OU VENDA ONLINE DIRETA
+                        default:
+                            echo "Tipo Venda: VD ou VDO <br>";
+                            // VENDA A VISTA
+                            if ($contrato->tipoProposta == 'A VISTA') {
+                                echo "Tipo Proposta: à vista <br>";
+                                if ($contrato->temAcaoJudial == 'NAO') {
+                                    // SEM AÇÃO JUDICIAL
+                                    echo "Sem ação judicial <hr>";
+                                } else {
+                                    // COM AÇÃO JUDICIAL
+                                    echo "Com ação judicial <hr>";
+                                }
+                            } else {
+                                // VENDA FINANCIADA OU COM USO DE FGTS
+                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+                            }
+                            break;
+                        break;
+                    }
+            }
+        }
     }
-
 
     public static function mensagemAutorizacaoImoveisPatrimoniais()
     {
@@ -45,7 +175,7 @@ class RotinaMensagensAutomatica extends Controller
                                                                             WHEN [VALOR_REC_PROPRIOS_PROPOSTA] = [VALOR_TOTAL_PROPOSTA] THEN 'A VISTA'
                                                                             ELSE 'FINANCIADO'
                                                                         END
-                                                        ,'acaoJudial' = CASE
+                                                        ,'temAcaoJudial' = CASE
                                                                             WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
                                                                             WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
                                                                             WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
@@ -86,22 +216,38 @@ class RotinaMensagensAutomatica extends Controller
     public static function mensagemAutorizacaoCaixaEngea()
     {
         $relacaoContratosCaixaEmgea = DB::select("SELECT DISTINCT
-                                                    'numeroBem' = [N_Concil]
-                                                    ,'classificacao' = VENDAS.[CLASSIFICACAO]
-                                                    ,'dataAlteracaoStatus' = [DT_STATUS_ALTERACAO]
-                                                    ,'tipoDeVenda' = [NO_VENDA_TIPO]
+                                                    'numeroBem' = SIMOV.[BEM_FORMATADO]
+                                                    ,'classificacao' = CASE 
+                                                                        WHEN VENDAS.[CLASSIFICACAO] = 'EMGEA' THEN 'EMGEA'
+                                                                        WHEN VENDAS.[CLASSIFICACAO] = 'EMGEA- Alienação Fiduciária' THEN 'EMGEA'
+                                                                        ELSE 'CAIXA'
+                                                                    END
+                                                    ,'tipoDeVenda' = CASE
+                                                                        WHEN [NO_VENDA_TIPO] = '1º Leilão SFI' THEN 'LEILAO'
+                                                                        WHEN [NO_VENDA_TIPO] = '2º Leilão SFI' THEN 'LEILAO'
+                                                                        WHEN [NO_VENDA_TIPO] = 'Venda Direta Online' THEN 'VENDA ONLINE'
+                                                                        WHEN [NO_VENDA_TIPO] = 'Venda Online' THEN 'VENDA ONLINE'
+                                                                        ELSE 'OUTROS TIPOS'
+                                                                    END
+                                                    ,'enderecoImovel' = CONVERT(VARCHAR, SIMOV.[ENDERECO_IMOVEL])
                                                     ,'dataProposta' = [DT_PROPOSTA]
-                                                    ,'valorRecursoProprioProposta' = CONVERT(DECIMAL(17, 2), [Valor])
-                                                    ,'valorFgtsProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FGTS_PROPOSTA])
-                                                    ,'valorFinanciadoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FINANCIADO_PROPOSTA])
-                                                    ,'valorParceladoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_PARCELADO_PROPOSTA])
-                                                    ,'valorTotalProposta' = CONVERT(DECIMAL(17, 2), [VL_PROPOSTA])
-                                                    ,'valorTotalContrato' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_CONTRATO])
-                                                    ,'valorTotalRecebido' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_RECEBIDO])
+                                                    ,'dataAlteracaoStatus' = [DT_STATUS_ALTERACAO]
+                                                    --,'valorRecursoProprioProposta' = CONVERT(DECIMAL(17, 2), [Valor])
+                                                    --,'valorFgtsProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FGTS_PROPOSTA])
+                                                    --,'valorFinanciadoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FINANCIADO_PROPOSTA])
+                                                    --,'valorParceladoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_PARCELADO_PROPOSTA])
+                                                    --,'valorTotalProposta' = CONVERT(DECIMAL(17, 2), [VL_PROPOSTA])
+                                                    --,'valorTotalContrato' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_CONTRATO])
+                                                    --,'valorTotalRecebido' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_RECEBIDO])
                                                     ,'dataUltimoRecebimento' = [DT_Sinaf]
                                                     ,'pvRecebimento' = [Orig]
                                                     ,'nomeAgenciaContratacao' = AGENCIA.[nomeAgencia]
-                                                    ,'vencimentoDoPp15' = CONVERT(VARCHAR(10), DATEADD(DAY, 7, [DT_PROPOSTA]), 103)
+                                                    ,'cpfCnpjProponente' = SIMOV.[CPF_CNPJ_PROPONENTE]
+                                                    ,'nomeProponente' = SIMOV.[NOME_PROPONENTE]
+                                                    ,'cpfCnpjCorretor' = SIMOV.[CPF_CORRETOR]
+                                                    ,'nomeCorretor' = SIMOV.[NO_CORRETOR]
+                                                    
+                                                    --,'vencimentoDoPp15' = CONVERT(VARCHAR(10), DATEADD(DAY, 7, [DT_PROPOSTA]), 103)
                                                 FROM 
                                                     [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS 
                                                     LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
@@ -109,12 +255,12 @@ class RotinaMensagensAutomatica extends Controller
                                                 WHERE 
                                                     [GILIE] = 'GILIE/SP'
                                                     AND [DE_Status_SIMOV] = 'Em Contratação'
-                                                    --AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
+                                                    AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
                                                     AND [DT_Sinaf] >= DATEADD(DAY, -20, GETDATE())
                                                     AND [Valor] >= [VL_TOTAL_RECEBIDO]
                                                 ORDER BY 
-                                                    VENDAS.[CLASSIFICACAO]
-                                                    , [NO_VENDA_TIPO]"); 
+                                                    classificacao
+                                                    , tipoDeVenda"); 
 
         return $relacaoContratosCaixaEmgea;
     }
