@@ -1,5 +1,5 @@
 li.tt-responsive {
-    min-width: 80vmin;
+    min-width: 60vw;
 }
 
 span.twitter-typeahead {
@@ -28,6 +28,7 @@ span.twitter-typeahead .tt-menu {
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     background-clip: padding-box;
+    cursor: pointer;
 }
 span.twitter-typeahead .tt-suggestion > div {
     display: block;
