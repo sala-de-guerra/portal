@@ -1,0 +1,28 @@
+{
+    "response": {
+        "songs": [{
+            "title": "Chimes At Midnight",
+            "artist_name": "Mastodon",
+            "artist_foreign_ids": [{
+                "catalog": "7digital-AU",
+                "foreign_id": "7digital-AU:artist:29785"
+            }, {
+                "catalog": "7digital-UK",
+                "foreign_id": "7digital-UK:artist:29785"
+            }],
+            "tracks": [],
+            "artist_id": "ARMQHX71187B9890D3",
+            "id": "SOKSFNN1463B7E4B1E"
+        }, {
+            "title": "Down Under",
+            "artist_name": "Men at Work",
+            "artist_foreign_ids": [{
+                "catalog": "7digital-AU",
+                "foreign_id": "7digital-AU:artist:50611"
+            }],
+            "tracks": [],
+            "artist_id": "AR4MVC71187B9AEAB3",
+            "id": "SORNNEB133A920BF86"
+        }]
+    }
+}

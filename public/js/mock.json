@@ -1,0 +1,37 @@
+{
+    "response": {
+        "bens":[{
+            "numero_bem": "1444406706576",
+            "endereco": "VIA DAS MAGNOLIAS",
+            "nome_proponente": "CAMSTROIAMIREEA PJANILA",
+            "cpf_cnpj_proponente": "35868830003",
+            "nome_ex_mutuario": "MAAMPOORO ELALEIRA RAMCHO DE CLIVS",
+            "cpf_cnpj_ex_mutuario": "26834378997",
+            "id": "1"
+        }, {
+            "numero_bem": "1444407050305",
+            "endereco": "AVENIDA ANTONIO MATHIAS DE CAMARGO",
+            "nome_proponente": "CRIACIPNS EOUREATIA DEDASZVAS",
+            "cpf_cnpj_proponente": "25858477081",
+            "nome_ex_mutuario": "JUOIELANTSTOE RADSSS",
+            "cpf_cnpj_ex_mutuario": "4529323493",
+            "id": "2"
+        }, {
+            "numero_bem": "3256544560305",
+            "endereco": "ADA ANO MASDAS DE CFDSSGO",
+            "nome_proponente": "QWEEWS EOURHHSDFHA DEPOIUPVAS",
+            "cpf_cnpj_proponente": "88746477081",
+            "nome_ex_mutuario": "JSDFGSGDTOE RKUYTS",
+            "cpf_cnpj_ex_mutuario": "4321677573493",
+            "id": "3"
+        }, {
+            "numero_bem": "99955544407050305",
+            "endereco": "RUA MARIA FONSECA",
+            "nome_proponente": "CERTNS EQWQETIA DTYUTYVAS",
+            "cpf_cnpj_proponente": "25858477081",
+            "nome_ex_mutuario": "JUÇLJNVCDSTOE ASVSDFB",
+            "cpf_cnpj_ex_mutuario": "654345623493",
+            "id": "4"
+        }]
+    }
+}
