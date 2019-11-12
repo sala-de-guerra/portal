@@ -41,4 +41,6 @@ Route::get('/consulta-bem-imovel', function () {
 
 Route::prefix('estoque-imoveis')->group(function () {
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
+
+    Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
 });

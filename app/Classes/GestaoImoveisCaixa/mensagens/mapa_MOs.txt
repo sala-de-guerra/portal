@@ -1,0 +1,23 @@
+valor da variável %MO_UTILIZADO% em cada casp:
+
+Imóvel CAIXA a vista online com ação - "MO19435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial."
+
+Imóvel CAIXA a vista online sem ação - "MO19096 - Escritura Pública de Compra e Venda à Vista"
+
+Imóvel CAIXA a vista leilão com acão - "MO 19.130 – Leilão Caixa com Ação Judicial "
+
+Imóvel CAIXA a vista leilão sem acão (aqui entra EMGEA/CAIXA tbm)- "MO 19.208 – Leilão Caixa sem Ação Judicial"
+
+Imóvel EMGEA a vista online com ação - "com ação judicial MO19467"
+
+Imóvel EMGEA a vista online sem ação - "sem ação judicial MO19319"
+
+Imóvel EMGEA a vista leilão com e sem acão (aqui entra EMGEA/EMGEA )- "MO 19.526 - Leilão Caixa sem Ação Judicial"
+
+Imóvel PATRIMONIAL a vista online com ação - "MO19435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial."
+
+Imóvel PATRIMONIAL a vista online sem ação - "MO19096 - Escritura Pública de Compra e Venda à Vista."
+
+Imóvel 
+
+
