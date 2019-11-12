@@ -198,6 +198,7 @@ return [
             'url'         => '/index',
             'icon'        => 'fas fa-fw fa-home',
         ],
+
         ['header' => 'IMÓVEIS CAIXA'],
         [
             'text' => 'Preparar e Ofertar',

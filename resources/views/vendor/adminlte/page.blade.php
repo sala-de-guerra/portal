@@ -78,11 +78,14 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item tt-responsive">
+                    <form class="form-inline tt-responsive" id="formPesquisa">
                         <div class="input-group">
-                            <input class="form-control form-control-navbar typeahead" type="text" name="" placeholder="Pesquisar">
+                            <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Digite o CHB, endereço, dados do proponente ou ex-mutuário.">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit"> <i class="fas fa-search"></i> </button>
+                            </div>
                         </div>
-                    </li>
+                    </form>
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
                 </ul>
@@ -183,6 +186,9 @@
     <script src="{{ asset('plugins/typeahead/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('plugins/typeahead/handlebars.js') }}"></script>
     <script src="{{ asset('js/global/configura_typeahead.js') }}"></script>
+    <script>
+
+    </script>
     @stack('js')
     @yield('js')
 @stop

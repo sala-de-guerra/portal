@@ -1,8 +1,8 @@
 @if(config('adminlte.layout_topnav') or (isset($item['topnav']) && $item['topnav']))
   @if (isset($item['search']) && $item['search'])
       <form action="{{ $item['href'] }}" method="{{ $item['method'] }}" class="form-inline ml-2 mr-2">
-        <div class="input-group">
-          <input class="form-control form-control-navbar typeahead" type="text" name="{{ $item['input_name'] }}" placeholder="{{ $item['text'] }}" aria-label="{{ $item['aria-label'] ?? $item['text'] }}">
+        <div class="input-group tt-responsive">
+          <input class="form-control form-control-navbar" type="text" name="{{ $item['input_name'] }}" placeholder="{{ $item['text'] }}" aria-label="{{ $item['aria-label'] ?? $item['text'] }}">
           <div class="input-group-append">
             <button class="btn btn-navbar" type="submit">
               <i class="fas fa-search"></i>

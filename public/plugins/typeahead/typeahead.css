@@ -1,4 +1,16 @@
-li.tt-responsive {
+
+.btn-navbar {
+    color:rgba(255, 255, 255, 0.6);
+}
+
+.btn-navbar:hover,
+.btn-navbar:focus {
+    color:rgba(255, 255, 255, 0.6);
+}
+
+
+
+.tt-responsive {
     min-width: 60vw;
 }
 
@@ -50,9 +62,9 @@ span.twitter-typeahead .tt-suggestion.tt-cursor {
     color: #ffffff;
     background-color: #428bca;
 }
-span.twitter-typeahead {
+/* span.twitter-typeahead {
     width: 100%;
-}
+} */
 .input-group span.twitter-typeahead {
     display: block !important;
 }
