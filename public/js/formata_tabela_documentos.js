@@ -7,12 +7,12 @@ function _formataTabelaDocumentos () {
     var linhas = 
         '<tr>' +
             '<td>' +
-                '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">' +
+                '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalArquivo">' +
                     '<i class="fas fa-search-plus"></i>' +
                     '   Visualizar' +
                 '</button>' +
-                '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                    '<div class="modal-dialog" role="document">' +
+                '<div class="modal fade" id="modalArquivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                    '<div class="modal-dialog mw-100 w-75" role="document">' +
                         '<div class="modal-content">' +
                             '<div class="modal-header">' +
                                 '<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>' +
@@ -21,10 +21,7 @@ function _formataTabelaDocumentos () {
                                 '</button>' +
                             '</div>' +
                             '<div class="modal-body">' +
-                                '<embed src="img/mock/00.0000.0001766-3M.pdf" width="100%" height="650px" />' +
-                            '</div>' +
-                            '<div class="modal-footer">' +
-                                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                '<embed src="../img/mock/00.0000.0001766-3M.pdf" width="100%" height="650px" />' +
                             '</div>' +
                         '</div>' +
                     '</div>' +

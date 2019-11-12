@@ -1,0 +1,28 @@
+[{
+"0": {
+    "numeroBemFormatado": "22.2222.2222222-2",
+    "numeroBem": "22222222222222",
+    "classificacao": "CAIXA",
+    "tipoDeVenda": "LEILAO",
+    "enderecoImovel": "RUA VISCONDE, N. 1",
+    "dataProposta": "2020-11-01 00:00:00.000",
+    "dataAlteracaoStatus": "2020-11-08 00:00:00.000",
+    "valorRecursoProprioProposta": "222222.00",
+    "valorFgtsProposta": "22222.00",
+    "valorFinanciadoProposta": "22222.00",
+    "valorParceladoProposta": ".00",
+    "valorTotalProposta": "222222.00",
+    "valorTotalContrato": ".00",
+    "valorTotalRecebido": "22222.00",
+    "tipoProposta": "FINANCIADA OU COM FGTS",
+    "temAcaoJudial": "SIM",
+    "maiorQueTrintaSalariosMinimos": "SIM",
+    "dataUltimoRecebimento": "2019-11-01 00:00:00.000",
+    "pvRecebimento": "2222",
+    "nomeAgenciaContratacao": "LA, SP",
+    "cpfCnpjProponente": "222.222.222-22",
+    "nomeProponente": "CLEWTON",
+    "cpfCnpjCorretor": null,
+    "nomeCorretor": null
+    }
+}]
