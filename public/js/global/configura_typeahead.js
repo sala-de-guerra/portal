@@ -25,20 +25,20 @@ $(document).ready(function(){
     prefetch: {
         url: "js/mock.json",
         transform: function (data) {
-            // console.log(data.response.bens);
-            return $.map(data.response.bens, function (bem) {
-                return {
-                  numeroBem: bem.numero_bem,
-                  endereco: bem.endereco,
-                  nomeProponente: bem.nome_proponente,
-                  cpfCnpjProponente: bem.cpf_cnpj_proponente,
-                  nomeExMutuario: bem.nome_ex_mutuario,
-                  cpfCnpjExMutuario: bem.cpf_cnpj_ex_mutuario
-                };
-            });
+          // console.log(data.response.bens);
+          return $.map(data.response.bens, function (bem) {
+              return {
+                numeroBem: bem.numero_bem,
+                endereco: bem.endereco,
+                nomeProponente: bem.nome_proponente,
+                cpfCnpjProponente: bem.cpf_cnpj_proponente,
+                nomeExMutuario: bem.nome_ex_mutuario,
+                cpfCnpjExMutuario: bem.cpf_cnpj_ex_mutuario
+              };
+          });
         }
-    }
-});
+      }
+  });
 
 
   // initialize the bloodhound
@@ -62,7 +62,7 @@ $(document).ready(function(){
               'Nenhum resultado encontrado.' +
             '</div>'
           ].join('\n'),
-          suggestion: Handlebars.compile('<p>CHB: {{numeroBem}} - Endereço: {{endereco}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</p>')
+          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{endereco}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</li>')
       }
     },
     {
@@ -70,6 +70,9 @@ $(document).ready(function(){
       limit: 10,
       display: 'numeroBem',
       source: imoveis.ttAdapter(),
+      updater: function (selectedName) {  
+        window.location.href =[ selectedName ]+".php";  
+            },
       templates: {
           header: '<h4 class="source-name">Pesquisa por Ex-Mutuário</h4>',
           empty: [
@@ -78,10 +81,21 @@ $(document).ready(function(){
               'Nenhum resultado encontrado.' +
             '</div>'
           ].join('\n'),
-          suggestion: Handlebars.compile('<p>CHB: {{numeroBem}} - Endereço: {{endereco}} - Nome: {{nomeExMutuario}} - CPF/CNPJ: {{cpfCnpjExMutuario}}</p>')
+          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{endereco}} - Nome: {{nomeExMutuario}} - CPF/CNPJ: {{cpfCnpjExMutuario}}</li>')
       }
     },
   );
+
+  // $("#btn-pesquisar-navbar").on( "click", function() {
+  //   var chb = $(".typeahead").data("value"); 
+  //   window.location.href = "/consulta-bem-imovel/" + chb;
+  // });
+
+  $("#formPesquisa").submit(function (){
+      var chb = $(".typeahead").val();
+      $(this).attr('action', '/consulta-bem-imovel/' + chb);
+  });
+
 
 
 });
