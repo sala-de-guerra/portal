@@ -193,6 +193,10 @@ class RotinaMensagensAutomatica extends Controller
                 ,'nomeSr' = [EN]
                 ,'enderecoImovel' = [ENDERECO_IMOVEL]
                 ,'dataAlteracaoStatus' = [DATA_ALTERACAO_STATUS]
+                ,'maiorQueTrintaSalariosMinimos' = CASE
+                                                        WHEN [VL_PROPOSTA] > (998*30) THEN 'SIM'
+                                                        ELSE 'NAO'
+                                                    END
                 --,[VALOR_TOTAL_PROPOSTA]
                 --,[VALOR_REC_PROPRIOS_PROPOSTA]
                 --,[VALOR_FGTS_PROPOSTA]
