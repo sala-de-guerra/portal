@@ -15,54 +15,20 @@ use App\Models\GestaoImoveisCaixa\ImagemCaixaCecom;
 
 class RotinaMensagensAutomatica extends Controller
 {
+    public $existeAcaoJudicial;
+    public $propostaMaiorQueTrintaSalariosMinimos;
+    public $tipoDeVenda;
+    
     public static function enviarMensageriasAutorizacaoContratacao()
     {
         /* IMÓVEIS PATRIMONIAIS */
-        
         $contratosPatromoniais = self::mensagemAutorizacaoImoveisPatrimoniais();
         // dd($contratosPatromoniais);
         echo "<h1>Imóvel Patrimonial</h1>";
         foreach ($contratosPatromoniais as $contratos => $contrato) {
             // dd($value);
             echo "numero Bem: $contrato->numeroBem <br>";
-            switch ($contrato->tipoVenda) {
-                // VENDAS DE LEILÃO
-                case 'LEILAO':
-                    echo "Tipo Venda: Leilão <br>";
-                    // VENDA A VISTA
-                    if ($contrato->tipoProposta == 'A VISTA') {
-                        echo "Tipo Proposta: à vista <br>";
-                        if ($contrato->temAcaoJudial == 'NAO') {
-                            // SEM AÇÃO JUDICIAL
-                            echo "Sem ação judicial <hr>";
-                        } else {
-                            // COM AÇÃO JUDICIAL
-                            echo "Com ação judicial <hr>";
-                        }
-                    } else {
-                        // VENDA FINANCIADA OU COM USO DE FGTS
-                        echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
-                    }
-                    break;
-                // VENDAS DIRETA OU VENDA ONLINE DIRETA
-                default:
-                    echo "Tipo Venda: VD ou VDO <br>";
-                    // VENDA A VISTA
-                    if ($contrato->tipoProposta == 'A VISTA') {
-                        echo "Tipo Proposta: à vista <br>";
-                        if ($contrato->temAcaoJudial == 'NAO') {
-                            // SEM AÇÃO JUDICIAL
-                            echo "Sem ação judicial <hr>";
-                        } else {
-                            // COM AÇÃO JUDICIAL
-                            echo "Com ação judicial <hr>";
-                        }
-                    } else {
-                        // VENDA FINANCIADA OU COM USO DE FGTS
-                        echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
-                    }
-                    break;
-            }
+            self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
         }
             
         /* IMOVEIS CAIXA */ 
@@ -73,91 +39,62 @@ class RotinaMensagensAutomatica extends Controller
             switch ($contrato->classificacao) {
                 case 'CAIXA':
                     echo "Tipo Imóvel: $contrato->classificacao <br>";
-                    switch ($contrato->tipoDeVenda) {
-                        // VENDAS DE LEILÃO
-                        case 'LEILAO':
-                            echo "Tipo Venda: Leilão <br>";
-                            // VENDA A VISTA
-                            if ($contrato->tipoProposta == 'A VISTA') {
-                                echo "Tipo Proposta: à vista <br>";
-                                if ($contrato->temAcaoJudial == 'NAO') {
-                                    // SEM AÇÃO JUDICIAL
-                                    echo "Sem ação judicial <hr>";
-                                } else {
-                                    // COM AÇÃO JUDICIAL
-                                    echo "Com ação judicial <hr>";
-                                }
-                            } else {
-                                // VENDA FINANCIADA OU COM USO DE FGTS
-                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
-                            }
-                            break;
-                        // VENDAS DIRETA OU VENDA ONLINE DIRETA
-                        default:
-                            echo "Tipo Venda: VD ou VDO <br>";
-                            // VENDA A VISTA
-                            if ($contrato->tipoProposta == 'A VISTA') {
-                                echo "Tipo Proposta: à vista <br>";
-                                if ($contrato->temAcaoJudial == 'NAO') {
-                                    // SEM AÇÃO JUDICIAL
-                                    echo "Sem ação judicial <hr>";
-                                } else {
-                                    // COM AÇÃO JUDICIAL
-                                    echo "Com ação judicial <hr>";
-                                }
-                            } else {
-                                // VENDA FINANCIADA OU COM USO DE FGTS
-                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
-                            }
-                            break;
-                        }
-                    break;
+                    self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
                 case 'EMGEA':
                     echo "Tipo Imóvel: $contrato->classificacao <br>";
-                    switch ($contrato->tipoDeVenda) {
-                        // VENDAS DE LEILÃO
-                        case 'LEILAO':
-                            echo "Tipo Venda: Leilão <br>";
-                            // VENDA A VISTA
-                            if ($contrato->tipoProposta == 'A VISTA') {
-                                echo "Tipo Proposta: à vista <br>";
-                                if ($contrato->temAcaoJudial == 'NAO') {
-                                    // SEM AÇÃO JUDICIAL
-                                    echo "Sem ação judicial <hr>";
-                                } else {
-                                    // COM AÇÃO JUDICIAL
-                                    echo "Com ação judicial <hr>";
-                                }
-                            } else {
-                                // VENDA FINANCIADA OU COM USO DE FGTS
-                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
-                            }
-                            break;
-                        // VENDAS DIRETA OU VENDA ONLINE DIRETA
-                        default:
-                            echo "Tipo Venda: VD ou VDO <br>";
-                            // VENDA A VISTA
-                            if ($contrato->tipoProposta == 'A VISTA') {
-                                echo "Tipo Proposta: à vista <br>";
-                                if ($contrato->temAcaoJudial == 'NAO') {
-                                    // SEM AÇÃO JUDICIAL
-                                    echo "Sem ação judicial <hr>";
-                                } else {
-                                    // COM AÇÃO JUDICIAL
-                                    echo "Com ação judicial <hr>";
-                                }
-                            } else {
-                                // VENDA FINANCIADA OU COM USO DE FGTS
-                                echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
-                            }
-                            break;
-                        break;
-                    }
+                    self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
             }
         }
     }
 
-    // public static function 
+    public static function validarTipoDeVendaLeilaoOuVendaDireta($contrato)
+    {
+        switch ($contrato->tipoDeVenda) {
+            // VENDAS DE LEILÃO
+            case 'LEILAO':
+                echo "Tipo Venda: Leilão <br>";
+                // VALIDAR SE A PROPOSTA DE COMPRA É A VISTA, FINANCIADA OU COM USO DE FGTS
+                self::validarTipoDeVendaAvistaOuFinanciadoOuComUsoDeFgts($contrato);
+                break;
+            // VENDAS DIRETA OU VENDA ONLINE DIRETA
+            default:
+                echo "Tipo Venda: VD ou VDO <br>";
+                // VALIDAR SE A PROPOSTA DE COMPRA É A VISTA, FINANCIADA OU COM USO DE FGTS
+                self::validarTipoDeVendaAvistaOuFinanciadoOuComUsoDeFgts($contrato);
+                break;
+            break;
+        }
+    }
+
+    public static function validarTipoDeVendaAvistaOuFinanciadoOuComUsoDeFgts($contrato)
+    {
+        if ($contrato->tipoProposta == 'A VISTA') {
+            // VENDA A VISTA
+            echo "Tipo Proposta: à vista <br>";
+            self::validarExistenciaDeAcaoJudicial($contrato);
+        } else {
+            // VENDA FINANCIADA OU COM USO DE FGTS
+            echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+        }
+    }
+
+    public static function validarExistenciaDeAcaoJudicial($contrato)
+    {
+        if ($contrato->temAcaoJudial == 'NAO') {
+            // SEM AÇÃO JUDICIAL
+            $this->existeAcaoJudicial = 'NAO';
+            echo "Ação Judicial: " . $this->existeAcaoJudicial . "<hr>";
+        } else {
+            // COM AÇÃO JUDICIAL
+            $this->existeAcaoJudicial = 'SIM';
+            echo "Com ação judicial <hr>";
+        }
+    }
+
+    public static function definirMoDeAutorizacaoDaProposta()
+    {
+        
+    }
 
     public static function mensagemAutorizacaoImoveisPatrimoniais()
     {
@@ -170,7 +107,7 @@ class RotinaMensagensAutomatica extends Controller
                                             WHEN [CLASSIFICACAO] = 'Patrimonial -Realização de Garantia' THEN 'PATRIMONIAL'
                                             ELSE 'CAIXA'
                                         END
-                ,'tipoVenda' = CASE
+                ,'tipoDeVenda' = CASE
                                     WHEN [TIPO_VENDA] LIKE 'Venda Online' THEN 'VENDA ONLINE'
                                     WHEN [TIPO_VENDA] LIKE 'Venda Direta Online' THEN 'VENDA ONLINE'
                                     WHEN [TIPO_VENDA] LIKE '%Leilão%' THEN 'LEILAO'
@@ -194,7 +131,7 @@ class RotinaMensagensAutomatica extends Controller
                 ,'enderecoImovel' = [ENDERECO_IMOVEL]
                 ,'dataAlteracaoStatus' = [DATA_ALTERACAO_STATUS]
                 ,'maiorQueTrintaSalariosMinimos' = CASE
-                                                        WHEN [VL_PROPOSTA] > (998*30) THEN 'SIM'
+                                                        WHEN [VALOR_TOTAL_PROPOSTA] > (998*30) THEN 'SIM'
                                                         ELSE 'NAO'
                                                     END
                 --,[VALOR_TOTAL_PROPOSTA]
@@ -218,7 +155,7 @@ class RotinaMensagensAutomatica extends Controller
                 AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] = 'Patrimonial -Realização de Garantia')
             ORDER BY
                 'grupoClassificacao'
-                ,'tipoVenda'
+                ,'tipoDeVenda'
                 ,'tipoProposta'             
         "); 
         return (object) $relacaoContratosPatrimoniais;
@@ -248,11 +185,11 @@ class RotinaMensagensAutomatica extends Controller
                 ,'valorFgtsProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FGTS_PROPOSTA])
                 ,'valorFinanciadoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FINANCIADO_PROPOSTA])
                 ,'valorParceladoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_PARCELADO_PROPOSTA])
-                ,'valorTotalProposta' = CONVERT(DECIMAL(17, 2), [VL_PROPOSTA])
+                ,'valorTotalProposta' = CONVERT(DECIMAL(17, 2), [VALOR_TOTAL_PROPOSTA])
                 ,'valorTotalContrato' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_CONTRATO])
                 ,'valorTotalRecebido' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_RECEBIDO])
                 ,'tipoProposta' = CASE
-                                    WHEN [Valor] >= [VL_PROPOSTA] AND SIMOV.[VALOR_FGTS_PROPOSTA] = 0 AND SIMOV.[VALOR_FINANCIADO_PROPOSTA] = 0 THEN 'A VISTA'
+                                    WHEN [Valor] >= [VALOR_TOTAL_PROPOSTA] AND SIMOV.[VALOR_FGTS_PROPOSTA] = 0 AND SIMOV.[VALOR_FINANCIADO_PROPOSTA] = 0 THEN 'A VISTA'
                                     ELSE 'FINANCIADA OU COM FGTS'
                                 END
                 ,'temAcaoJudial' = CASE
@@ -264,7 +201,7 @@ class RotinaMensagensAutomatica extends Controller
                                         ELSE 'NAO'
                                     END
                 ,'maiorQueTrintaSalariosMinimos' = CASE
-                                                        WHEN [VL_PROPOSTA] > (998*30) THEN 'SIM'
+                                                        WHEN [VALOR_TOTAL_PROPOSTA] > (998*30) THEN 'SIM'
                                                         ELSE 'NAO'
                                                     END
                 --,'sinalPago' = CASE
