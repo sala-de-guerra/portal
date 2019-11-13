@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'GILIE/SP',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Portal</b>    GILIE/SP',
+    'logo' => '<b>Portal</b>    GILIE',
     'logo_img' => 'img/logo-caixa.png',
     'logo_img_alt' => 'CAIXA',
 
@@ -129,7 +129,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'index',
+    'dashboard_url' => '',
 
     'logout_url' => 'logout',
 
@@ -193,11 +193,11 @@ return [
         //     'url'  => 'admin/blog',
         //     'can'  => 'manage-blog',
         // ],
-        [
-            'text'        => 'Principal',
-            'url'         => '/index',
-            'icon'        => 'fas fa-fw fa-home',
-        ],
+        // [
+        //     'text'        => 'Principal',
+        //     'url'         => '/index',
+        //     'icon'        => 'fas fa-fw fa-home',
+        // ],
         // 'ACCOUNT SETTINGS',
         // [
         //     'text' => 'Profile',
@@ -209,6 +209,24 @@ return [
         //     'route' => 'admin.password',
         //     'icon' => 'fas fa-fw fa-lock'
         // ],
+
+        [
+            'text'        => 'Sobre a GILIE',
+            'url'         => '/sobre',
+            'icon'        => false,
+        ],
+        [
+            'text'        => 'Dúvidas Frequentes',
+            'url'         => '/faq',
+            'icon'        => false,
+        ],
+        [
+            'text'        => 'Orientações',
+            'url'         => '/orientacoes',
+            'icon'        => false,
+        ],
+
+
 
         ['header' => 'IMÓVEIS CAIXA'],
         [
@@ -275,7 +293,7 @@ return [
                     'url'  => '/controle-contratacao',
                 ],
                 [
-                    'text' => 'level_one',
+                    'text' => 'Distrato',
                     'url'  => '#',
                 ],
                 [

@@ -4235,8 +4235,6 @@ input[type="button"].btn-block {
 .navbar-nav {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -11641,10 +11639,6 @@ body,
 .nav-sidebar .nav-header {
   font-size: .9rem;
   padding: 0.5rem;
-}
-
-.nav-sidebar .nav-header:not(:first-of-type) {
-  padding: 1.7rem 1rem .5rem;
 }
 
 .nav-sidebar .nav-link p {
