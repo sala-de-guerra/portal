@@ -82,11 +82,11 @@ class RotinaMensagensAutomatica extends Controller
     {
         if ($contrato->temAcaoJudial == 'NAO') {
             // SEM AÇÃO JUDICIAL
-            $this->existeAcaoJudicial = 'NAO';
-            echo "Ação Judicial: " . $this->existeAcaoJudicial . "<hr>";
+            // $this->existeAcaoJudicial = 'NAO';
+            echo "Sem ação judicial <hr>";
         } else {
             // COM AÇÃO JUDICIAL
-            $this->existeAcaoJudicial = 'SIM';
+            // $this->existeAcaoJudicial = 'SIM';
             echo "Com ação judicial <hr>";
         }
     }
