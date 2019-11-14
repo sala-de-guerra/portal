@@ -52,10 +52,14 @@ Route::get('/consulta-bem-imovel', function () {
 
 Route::prefix('estoque-imoveis')->group(function () {
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
-});
 
-// Gerencial
+  // Gerencial
 // equipes
 Route::get('equipes', function () {
     return view('portal.gerencial.equipes');
 });
+
+
+    Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
+});
+
