@@ -510,7 +510,6 @@
 
 @section('footer')
 
-<b>Copyright © 2009 - 2019 - GILIE/SP - Gerência de Alienação de Bens Móveis e Imóveis</b>
 
 @stop
 
