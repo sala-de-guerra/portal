@@ -73,19 +73,21 @@
             <nav class="main-header navbar {{config('adminlte.classes_topnav_nav', 'navbar-expand-md')}} {{config('adminlte.classes_topnav', 'navbar-white navbar-light')}}">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#" @if(config('adminlte.sidebar_collapse_remember')) data-enable-remember="true" @endif @if(!config('adminlte.sidebar_collapse_remember_no_transition')) data-no-transition-after-reload="false" @endif @if(config('adminlte.sidebar_collapse_auto_size')) data-auto-collapse-size="{{config('adminlte.sidebar_collapse_auto_size')}}" @endif>
+                        <a class="nav-link menu-hamburguer" data-widget="pushmenu" href="#" @if(config('adminlte.sidebar_collapse_remember')) data-enable-remember="true" @endif @if(!config('adminlte.sidebar_collapse_remember_no_transition')) data-no-transition-after-reload="false" @endif @if(config('adminlte.sidebar_collapse_auto_size')) data-auto-collapse-size="{{config('adminlte.sidebar_collapse_auto_size')}}" @endif>
                             <i class="fas fa-bars"></i>
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    <form class="form-inline tt-responsive" id="formPesquisa">
-                        <div class="input-group">
-                            <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Digite o CHB, endereço, dados do proponente ou ex-mutuário.">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit"> <i class="fas fa-search"></i> </button>
+                    <li class="nav-item">
+                        <form class="form-inline tt-responsive" id="formPesquisa">
+                            <div class="input-group">
+                                <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Pesquise um imóvel pelo CHB, endereço, dados do proponente ou do ex-mutuário.">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit"> <i class="fas fa-search"></i> </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </li>
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
                 </ul>
@@ -114,6 +116,22 @@
                             </a>
                         </li>
                     @endif
+                    <li class="nav-item dropdown user-menu">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <img src="/img/question-mark.png" class="user-image img-circle elevation-2" alt="User Image">
+                            <span class="d-none d-md-inline">Alexander Pierce</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
+                            <!-- User image -->
+                            <li class="user-header bg-primary">
+                                <img src="/img/question-mark.png" class="img-circle elevation-2" alt="User Image">
+                                <p>
+                                    Alexander Pierce - Web Developer
+                                    <small>Member since Nov. 2012</small>
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
                     </nav>

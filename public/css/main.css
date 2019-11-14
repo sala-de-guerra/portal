@@ -1,3 +1,6 @@
+.absolute {
+    position: absolute!important;
+}
 
 .behind {
     position: absolute;
@@ -14,4 +17,9 @@
 
 .carousel-indicators .active{
     background-color: #000;
+}
+
+.menu-hamburguer{
+    padding-left: 5px!important;
+    padding-right: 15px!important;
 }

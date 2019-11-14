@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   var imoveis = new Bloodhound({
     datumTokenizer: function (datum) {
-      console.log(datum);
+      // console.log(datum);
 
       var numeroBemTokens = Bloodhound.tokenizers.whitespace(datum.numeroBem);
       var enderecoTokens = Bloodhound.tokenizers.whitespace(datum.endereco);
@@ -23,7 +23,7 @@ $(document).ready(function(){
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: {
-        url: "js/mock.json",
+        url: "../js/mock.json",
         transform: function (data) {
           // console.log(data.response.bens);
           return $.map(data.response.bens, function (bem) {

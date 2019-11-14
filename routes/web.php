@@ -11,19 +11,30 @@
 |
 */
 
+// Auth::routes();
+
+// Route::get('/home', function() {
+//     return view('home');
+// })->name('home')->middleware('auth');
+
+//index
 Route::get('/', function () {
-    return view('welcome');
+    return view('portal.index');
+});    
+
+ // sobre
+ Route::get('/sobre', function () {
+    return view('portal.informativas.sobre');
 });
 
-Auth::routes();
+ // duvidas frequentes
+ Route::get('/faq', function () {
+    return view('portal.informativas.faq');
+});
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
-
- // index
- Route::get('/index', function () {
-    return view('portal.index');
+ // orientações
+ Route::get('/orientacoes', function () {
+    return view('portal.informativas.orientacoes');
 });
 
 // Controle de Contratação
@@ -42,5 +53,13 @@ Route::get('/consulta-bem-imovel', function () {
 Route::prefix('estoque-imoveis')->group(function () {
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
 
+  // Gerencial
+// equipes
+Route::get('equipes', function () {
+    return view('portal.gerencial.equipes');
+});
+
+
     Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
 });
+

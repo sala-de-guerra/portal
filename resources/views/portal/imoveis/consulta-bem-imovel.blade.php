@@ -201,7 +201,7 @@
                                                             <i class="fa fa-lg fa-cloud-upload"></i>
                                                                 Carregar arquivo&hellip;
                                                         </span>
-                                                        <input type="file" class="behind" accept=".pdf" name="uploadLaudo[]" id="inputUploadArquivo" required>
+                                                        <input type="file" class="behind" accept=".pdf" name="uploadArquivo[]" id="inputUploadArquivo" required>
                                                     </label>
                                                     <input type="text" class="form-control previewNomeArquivo" readonly>
                                                 </div><!-- /.col input-group -->
