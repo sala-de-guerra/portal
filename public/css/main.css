@@ -1,3 +1,7 @@
+.absolute {
+    position: absolute!important;
+}
+
 .behind {
     position: absolute;
     z-index: -9999;
