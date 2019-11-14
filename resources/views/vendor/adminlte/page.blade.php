@@ -187,6 +187,8 @@
         <footer class="main-footer">
             
             @yield('footer')
+            <b>2019 - GILIE/SP - Gerência de Alienação de Bens Móveis e Imóveis</b>
+
         </footer>
         @endif
 
