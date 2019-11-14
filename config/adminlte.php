@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Portal</b>    GILIE',
+    'logo' => '<h3><b>Portal</b>    GILIE</h3>',
     'logo_img' => 'img/logo-caixa.png',
     'logo_img_alt' => 'CAIXA',
 
@@ -213,17 +213,17 @@ return [
         [
             'text'        => 'Sobre a GILIE',
             'url'         => '/sobre',
-            'icon'        => false,
+            'icon'        => 'fas fa-lg fa-users',
         ],
         [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
-            'icon'        => false,
+            'icon'        => 'fas fa-lg fa-question-circle',
         ],
         [
             'text'        => 'Orientações',
             'url'         => '/orientacoes',
-            'icon'        => false,
+            'icon'        => 'fas fa-lg fa-directions',
         ],
 
 
@@ -232,7 +232,7 @@ return [
         [
             'text' => 'Preparar e Ofertar',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-sign',
+            'icon' => 'fas fa-lg fa-fw fa-sign',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -257,9 +257,9 @@ return [
             ],
         ],
         [
-            'text' => 'Pagamentos e Averbação',
+            'text' => 'Pagamentos',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-dollar-sign',
+            'icon' => 'fas fa-lg fa-fw fa-dollar-sign',
             'submenu' => [
                 [
                     'text' => 'level_two',
@@ -286,7 +286,7 @@ return [
         ],
         [
             'text'    => 'Contratação',
-            'icon'    => 'fas fa-fw fa-file-contract',
+            'icon'    => 'fas fa-lg fa-fw fa-file-contract',
             'submenu' => [
                 [
                     'text' => 'Controle de Contratação',
@@ -311,65 +311,9 @@ return [
             ],
         ],
 
-        ['header' => 'PENHOR'],
         [
-            'text' => 'Preparar e Ofertar',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-sign',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        [
-            'text' => 'Pagamentos e Averbação',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-dollar-sign',
-            'submenu' => [
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-
-        ],
-        [
-            'text'    => 'Contratação',
-            'icon'    => 'fas fa-fw fa-file-contract',
+            'text'    => 'Indicadores',
+            'icon'    => 'fas fa-lg fa-fw fa-chart-bar',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -394,42 +338,102 @@ return [
             ],
         ],
 
-        ['header' => 'Gerencial'],
+
+        // ['header' => 'PENHOR'],
+        // [
+        //     'text' => 'Preparar e Ofertar',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-lg fa-fw fa-sign',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+        // ],
+        // [
+        //     'text' => 'Pagamentos e Averbação',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-lg fa-fw fa-dollar-sign',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+
+        // ],
+        // [
+        //     'text'    => 'Contratação',
+        //     'icon'    => 'fas fa-lg fa-fw fa-file-contract',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+        // ],
+
+        ['header' => 'GERENCIAL'],
         [
             'text'       => 'Perfis de Acesso',
-            'icon_color' => 'red',
+            'url'        => '#',
+            'icon'       => 'fas fa-lg fa-users-cog',
+            // 'icon_color' => 'blue',
         ],
         [
             'text'       => 'Requisitos do projeto',
-            'icon_color' => 'yellow',
+            // 'icon_color' => 'blue',
         ],
 
-        [
-            'text'    => 'Indicadores',
-            'icon'    => 'fas fa-fw fa-chart-bar',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
 
         // [
         //     'text'       => 'information',

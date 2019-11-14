@@ -11464,7 +11464,7 @@ body,
 .brand-link .brand-image {
   float: left;
   line-height: .8;
-  margin-left: .8rem;
+  margin-left: .5rem;
   margin-right: .5rem;
   margin-top: -3px;
   max-height: 33px;
@@ -12872,7 +12872,6 @@ body.text-sm .control-sidebar {
   .navbar-nav > .user-menu .user-image {
     float: none;
     line-height: 10px;
-    margin-right: 0;
     margin-top: -8px;
   }
 }
