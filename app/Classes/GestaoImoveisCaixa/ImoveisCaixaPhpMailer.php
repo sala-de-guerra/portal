@@ -55,7 +55,8 @@ class ImoveisCaixaPhpMailer
     {
         //Server settings
         $mail->isSMTP();
-        $mail->CharSet = 'UTF-8';                                          
+        $mail->CharSet = 'UTF-8'; 
+        $mail->isHTML(true);                                         
         $mail->Host = 'sistemas.correiolivre.caixa';  
         $mail->SMTPAuth = false;                                  
         $mail->Port = 25;

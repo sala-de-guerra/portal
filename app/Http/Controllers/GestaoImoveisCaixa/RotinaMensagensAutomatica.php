@@ -6,18 +6,65 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Exceptions\Handler;
-use App\Http\Controllers\Comex\Contratacao\Exception;
+// use App\Http\Controllers\Comex\Contratacao\Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
 use App\Classes\GestaoImoveisCaixa\ImoveisCaixaPhpMailer;
 use App\RelacaoAgSrComEmail;
 use App\Models\GestaoImoveisCaixa\ImagemCaixaCecom;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class RotinaMensagensAutomatica extends Controller
 {
-    public $existeAcaoJudicial;
-    public $propostaMaiorQueTrintaSalariosMinimos;
-    public $tipoDeVenda;
+    private static $existeAcaoJudicial;
+    private static $propostaMaiorQueTrintaSalariosMinimos;
+    private static $tipoDeProposta;
+    private static $tipoDeVenda;
+
+    public static function getExisteAcaoJucicial()
+    {
+        return self::$existeAcaoJudicial;
+    }
+    public static function setExisteAcaoJucicial($value)
+    {
+        self::$existeAcaoJudicial = $value;
+        
+        return self::$existeAcaoJudicial;
+    }
+
+    public static function getPropostaMaiorQueTrintaSalariosMinimos()
+    {
+        return self::$propostaMaiorQueTrintaSalariosMinimos;
+    }
+    public static function setPropostaMaiorQueTrintaSalariosMinimos($value)
+    {
+        self::$propostaMaiorQueTrintaSalariosMinimos = $value;
+        
+        return self::$propostaMaiorQueTrintaSalariosMinimos;
+    }
+
+    public static function getTipoDeProposta()
+    {
+        return self::$tipoDeProposta;
+    }
+    public static function setTipoDeProposta($value)
+    {
+        self::$tipoDeProposta = $value;
+        
+        return self::$tipoDeProposta;
+    }
+
+    public static function getTipoDeVenda()
+    {
+        return self::$tipoDeVenda;
+    }
+    public static function setTipoDeVenda($value)
+    {
+        self::$tipoDeVenda = $value;
+        
+        return self::$tipoDeVenda;
+    }
     
     public static function enviarMensageriasAutorizacaoContratacao()
     {
@@ -26,8 +73,10 @@ class RotinaMensagensAutomatica extends Controller
         // dd($contratosPatromoniais);
         echo "<h1>Imóvel Patrimonial</h1>";
         foreach ($contratosPatromoniais as $contratos => $contrato) {
+            self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
             // dd($value);
-            echo "numero Bem: $contrato->numeroBem <br>";
+            echo "Número bem: $contrato->numeroBem <br>";
+            echo "Proposta CCA: $contrato->existeCca <br>";
             self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
         }
             
@@ -35,14 +84,18 @@ class RotinaMensagensAutomatica extends Controller
         $contratosCaixaEmgea = self::mensagemAutorizacaoCaixaEngea(); 
         echo "<h1>Imóveis Caixa/EMGEA</h1>";
         foreach ($contratosCaixaEmgea as $contratos => $contrato) {
+            self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
             echo "numero Bem: $contrato->numeroBem <br>";
+            echo "Proposta CCA: $contrato->existeCca <br>";
             switch ($contrato->classificacao) {
                 case 'CAIXA':
-                    echo "Tipo Imóvel: $contrato->classificacao <br>";
+                    echo "Tipo imóvel: $contrato->classificacao <br>";
                     self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+                    break;
                 case 'EMGEA':
-                    echo "Tipo Imóvel: $contrato->classificacao <br>";
+                    echo "Tipo imóvel: $contrato->classificacao <br>";
                     self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+                    break;
             }
         }
     }
@@ -52,13 +105,15 @@ class RotinaMensagensAutomatica extends Controller
         switch ($contrato->tipoDeVenda) {
             // VENDAS DE LEILÃO
             case 'LEILAO':
-                echo "Tipo Venda: Leilão <br>";
+                self::setTipoDeVenda('LEILAO');
+                echo "Tipo venda: Leilão<br>";
                 // VALIDAR SE A PROPOSTA DE COMPRA É A VISTA, FINANCIADA OU COM USO DE FGTS
                 self::validarTipoDeVendaAvistaOuFinanciadoOuComUsoDeFgts($contrato);
                 break;
             // VENDAS DIRETA OU VENDA ONLINE DIRETA
             default:
-                echo "Tipo Venda: VD ou VDO <br>";
+                self::setTipoDeVenda('VDO_VD');
+                echo "Tipo venda: Venda Direta ou Venda Direta Online<br>";
                 // VALIDAR SE A PROPOSTA DE COMPRA É A VISTA, FINANCIADA OU COM USO DE FGTS
                 self::validarTipoDeVendaAvistaOuFinanciadoOuComUsoDeFgts($contrato);
                 break;
@@ -70,30 +125,62 @@ class RotinaMensagensAutomatica extends Controller
     {
         if ($contrato->tipoProposta == 'A VISTA') {
             // VENDA A VISTA
-            echo "Tipo Proposta: à vista <br>";
+            self::setTipoDeProposta('À vista');
+            echo "Tipo proposta: " . self::getTipoDeProposta() . "<br>";
             self::validarExistenciaDeAcaoJudicial($contrato);
         } else {
             // VENDA FINANCIADA OU COM USO DE FGTS
-            echo "Tipo Proposta: financiado ou com uso de FGTS <hr>";
+            self::setTipoDeProposta('Financiado ou com uso de FGTS');
+            // echo "MO utilizado: " . self::definirMoDeAutorizacaoDaProposta() . '<br>';
+            echo "Tipo proposta: " . self::getTipoDeProposta() . "<hr>";
         }
+        
     }
 
     public static function validarExistenciaDeAcaoJudicial($contrato)
     {
         if ($contrato->temAcaoJudial == 'NAO') {
             // SEM AÇÃO JUDICIAL
-            // $this->existeAcaoJudicial = 'NAO';
-            echo "Sem ação judicial <hr>";
+            self::setExisteAcaoJucicial('SIM');
         } else {
             // COM AÇÃO JUDICIAL
-            // $this->existeAcaoJudicial = 'SIM';
-            echo "Com ação judicial <hr>";
+            self::setExisteAcaoJucicial('NAO');
         }
+        echo "MO utilizado: " . self::definirMoDeAutorizacaoDaProposta() . '<br>';
+        echo "Existe ação judicial: " . self::getExisteAcaoJucicial() . "<hr>";
     }
 
     public static function definirMoDeAutorizacaoDaProposta()
     {
-        
+        if (self::getTipoDeVenda() == 'LEILAO') {
+            if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                if (self::getExisteAcaoJucicial() == 'SIM') {
+                    return 'MO 19.130 – Leilão Caixa com Ação Judicial';
+                } else {
+                    return 'MO 19.208 – Leilão Caixa sem Ação Judicial';
+                }
+            } else {
+                if (self::getExisteAcaoJucicial() == 'SIM') {
+                    return 'MO 19.227';
+                } else {
+                    return 'MO 19.436';
+                }
+            }
+        } else {
+            if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                if (self::getExisteAcaoJucicial() == 'SIM') {
+                    return 'MO 19.435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial';
+                } else {
+                    return 'MO 19.096 - Escritura Pública de Compra e Venda à Vista';
+                }
+            } else {
+                if (self::getExisteAcaoJucicial() == 'SIM') {
+                    return 'MO 19.227';
+                } else {
+                    return 'MO 19.436';
+                }
+            }
+        }
     }
 
     public static function mensagemAutorizacaoImoveisPatrimoniais()
@@ -143,7 +230,10 @@ class RotinaMensagensAutomatica extends Controller
                 --,[AGENCIA_CONTRATACAO_PROPOSTA]
                 ,'nomeCorretor' = UPPER([NO_CORRETOR])
                 ,'emailCorretor' = [EMAIL_CORRETOR]
-                --,[ACEITA_CCA]
+                ,'existeCca' = CASE	
+                                    WHEN [ACEITA_CCA] = 'SIM' THEN 'SIM'
+                                    ELSE 'NAO'
+                                END
             FROM 
                 [ALITB001_Imovel_Completo] AS SIMOV
                 --LEFT JOIN [7257_1].[dbo].[ALITB048_CUB120000] AS CUB120000 ON SIMOV.[CPF_CNPJ_PROPONENTE] = CUB120000.[CPF/CNPJ PROPONENTE]
@@ -151,7 +241,7 @@ class RotinaMensagensAutomatica extends Controller
                 [UNA] = 'GILIE/SP'
                 AND [STATUS_IMOVEL] = 'Em contratação'
                 AND ([TIPO_VENDA] LIKE 'Venda Online' OR [TIPO_VENDA] like 'Venda Direta Online' OR [TIPO_VENDA] LIKE '1º Leilão SFI' OR [TIPO_VENDA] LIKE '2º Leilão SFI')
-                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -20, GETDATE())
+                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -40, GETDATE())
                 AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] = 'Patrimonial -Realização de Garantia')
             ORDER BY
                 'grupoClassificacao'
@@ -216,6 +306,10 @@ class RotinaMensagensAutomatica extends Controller
                 ,'cpfCnpjCorretor' = SIMOV.[CPF_CORRETOR]
                 ,'nomeCorretor' = SIMOV.[NO_CORRETOR]
                 --,'vencimentoDoPp15' = CONVERT(VARCHAR(10), DATEADD(DAY, 7, [DT_PROPOSTA]), 103)
+                ,'existeCca' = CASE	
+                                    WHEN SIMOV.[ACEITA_CCA] = 'SIM' THEN 'SIM'
+                                    ELSE 'NAO'
+                                END
             FROM 
                 [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS 
                 LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
@@ -224,7 +318,7 @@ class RotinaMensagensAutomatica extends Controller
                 [GILIE] = 'GILIE/SP'
                 AND [DE_Status_SIMOV] = 'Em Contratação'
                 AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
-                AND [DT_Sinaf] >= DATEADD(DAY, -21, GETDATE())
+                AND [DT_Sinaf] >= DATEADD(DAY, -40, GETDATE())
                 AND [Valor] >= [VL_TOTAL_RECEBIDO]
             ORDER BY 
                 classificacao
