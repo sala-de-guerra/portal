@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'GILIE/SP',
+    'title' => 'GILIE',
     'title_prefix' => '',
     'title_postfix' => '',
 
