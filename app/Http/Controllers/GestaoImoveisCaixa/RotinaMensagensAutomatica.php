@@ -21,6 +21,8 @@ class RotinaMensagensAutomatica extends Controller
     private static $propostaMaiorQueTrintaSalariosMinimos;
     private static $tipoDeProposta;
     private static $tipoDeVenda;
+    private static $classificacaoImovel;
+    private static $origemMatricula;
 
     public static function getExisteAcaoJucicial()
     {
@@ -29,7 +31,6 @@ class RotinaMensagensAutomatica extends Controller
     public static function setExisteAcaoJucicial($value)
     {
         self::$existeAcaoJudicial = $value;
-        
         return self::$existeAcaoJudicial;
     }
 
@@ -40,7 +41,6 @@ class RotinaMensagensAutomatica extends Controller
     public static function setPropostaMaiorQueTrintaSalariosMinimos($value)
     {
         self::$propostaMaiorQueTrintaSalariosMinimos = $value;
-        
         return self::$propostaMaiorQueTrintaSalariosMinimos;
     }
 
@@ -51,7 +51,6 @@ class RotinaMensagensAutomatica extends Controller
     public static function setTipoDeProposta($value)
     {
         self::$tipoDeProposta = $value;
-        
         return self::$tipoDeProposta;
     }
 
@@ -62,8 +61,27 @@ class RotinaMensagensAutomatica extends Controller
     public static function setTipoDeVenda($value)
     {
         self::$tipoDeVenda = $value;
-        
         return self::$tipoDeVenda;
+    }
+
+    public static function getClassificacaoImovel()
+    {
+        return self::$classificacaoImovel;
+    }
+    public static function setClassificacaoImovel($value)
+    {
+        self::$classificacaoImovel = $value;
+        return self::$classificacaoImovel;
+    }
+
+    public static function getOrigemMatricula()
+    {
+        return self::$origemMatricula;
+    }
+    public static function setOrigemMatricula($value)
+    {
+        self::$origemMatricula = $value;
+        return self::$origemMatricula;
     }
     
     public static function enviarMensageriasAutorizacaoContratacao()
@@ -77,26 +95,180 @@ class RotinaMensagensAutomatica extends Controller
             // dd($value);
             echo "Número bem: $contrato->numeroBem <br>";
             echo "Proposta CCA: $contrato->existeCca <br>";
+            
             self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+            // self::defineTipoDeMensageria($contrato);
         }
             
         /* IMOVEIS CAIXA */ 
         $contratosCaixaEmgea = self::mensagemAutorizacaoCaixaEngea(); 
         echo "<h1>Imóveis Caixa/EMGEA</h1>";
         foreach ($contratosCaixaEmgea as $contratos => $contrato) {
+            if ($contrato->grupoClassificacao == 'EMGEA') {
+                self::setClassificacaoImovel('EMGEA');
+                if ($contrato->origemMatricula == 'Emgea') {
+                    self::setOrigemMatricula('EMGEA');
+                } else {
+                    self::setOrigemMatricula('CAIXA');
+                }
+            } else {
+                self::setClassificacaoImovel('CAIXA');
+            }
+            
             self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
             echo "numero Bem: $contrato->numeroBem <br>";
             echo "Proposta CCA: $contrato->existeCca <br>";
-            switch ($contrato->classificacao) {
+            switch ($contrato->grupoClassificacao) {
                 case 'CAIXA':
-                    echo "Tipo imóvel: $contrato->classificacao <br>";
+                    echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
                     self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
                     break;
                 case 'EMGEA':
-                    echo "Tipo imóvel: $contrato->classificacao <br>";
+                    echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
                     self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
                     break;
             }
+            // self::defineTipoDeMensageria($contrato);
+        }
+    } 
+
+    public static function defineTipoDeMensageria($contrato)
+    {
+        $dadosEmail = (object) array(
+            'nomeAgencia' => isset($contrato->nomeAgencia) ? $contrato->nomeAgencia : null,
+            'codigoAgencia' => isset($contrato->codigoAgencia) ? $contrato->codigoAgencia : null,
+            'nomeProponente' => isset($contrato->nomeProponente) ? $contrato->nomeProponente : null,
+            'emailProponente' => isset($contrato->emailPropontente) ? $contrato->emailPropontente : null,
+            'nomeCorretor' => isset($contrato->nomeCorretor) ? $contrato->nomeCorretor : null,
+            'emailCorretor' => isset($contrato->emailCorretor) ? $contrato->emailCorretor : null,
+            'contratoBem' => isset($contrato->numeroBem) ? $contrato->numeroBem : null,
+            'enderecoImovel' => isset($contrato->enderecoImovel) ? $contrato->enderecoImovel : null,
+            'moUtilizado' => self::definirMoDeAutorizacaoDaProposta(),
+            'editalLeilao' => isset($contrato->numeroLeilao) ? $contrato->numeroLeilao : null,
+        );
+        // print_r($dadosEmail);
+        
+        switch ($contrato->grupoClassificacao) {
+            case 'PATRIMONIAL':
+                $assunto = "Autorização para contratação - imóvel $contrato->grupoClassificacao";
+                if ($contrato->existeCca == 'SIM') {
+                    if ($contrato->tipoDeVenda == 'LEILAO') {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                
+                            } else {
+                                # code...
+                            }
+                        }
+                    } else {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    }
+                } else {
+                    if ($contrato->tipoDeVenda == 'LEILAO') {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    } else {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    }
+                }
+                break;
+            case 'CAIXA':
+                $assunto = "Autorização para contratação - imóvel $contrato->grupoClassificacao";
+                if ($contrato->existeCca == 'SIM') {
+                    if ($contrato->tipoDeVenda == 'LEILAO') {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    } else {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    }
+                } else {
+                    if ($contrato->tipoDeVenda == 'LEILAO') {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    } else {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    }
+                }
+                break;
+            case 'EMGEA':
+                $assunto = "Autorização para contratação - imóvel $contrato->grupoClassificacao";
+                if ($contrato->existeCca == 'SIM') {
+                    if ($contrato->tipoDeVenda == 'LEILAO') {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    } else {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    }
+                } else {
+                    if ($contrato->tipoDeVenda == 'LEILAO') {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    } else {
+                        if ($contrato->tipoProposta == 'A VISTA') {
+                            if ($contrato->temAcaoJudial == 'SIM') {
+                                # code...
+                            } else {
+                                # code...
+                            }
+                        }
+                    }
+                }
+                break;
         }
     }
 
@@ -134,7 +306,6 @@ class RotinaMensagensAutomatica extends Controller
             // echo "MO utilizado: " . self::definirMoDeAutorizacaoDaProposta() . '<br>';
             echo "Tipo proposta: " . self::getTipoDeProposta() . "<hr>";
         }
-        
     }
 
     public static function validarExistenciaDeAcaoJudicial($contrato)
@@ -152,32 +323,86 @@ class RotinaMensagensAutomatica extends Controller
 
     public static function definirMoDeAutorizacaoDaProposta()
     {
-        if (self::getTipoDeVenda() == 'LEILAO') {
-            if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
-                if (self::getExisteAcaoJucicial() == 'SIM') {
-                    return 'MO 19.130 – Leilão Caixa com Ação Judicial';
+        if (self::getClassificacaoImovel() == 'EMGEA') {
+            if (self::getOrigemMatricula() == 'EMGEA' ) {
+                echo "Origem matricula: EMGEA/EMGEA <br>";
+                if (self::getTipoDeVenda() == 'LEILAO') {
+                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                        return 'MO 19.526';
+                    } else {
+                        if (self::getExisteAcaoJucicial() == 'SIM') {
+                            return 'MO 19.466';
+                        } else {
+                            return 'MO 19.526';
+                        }
+                    }
                 } else {
-                    return 'MO 19.208 – Leilão Caixa sem Ação Judicial';
+                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                        return 'MO 19.526';
+                    } else {
+                        return 'MO 19.526';
+                    }
                 }
             } else {
-                if (self::getExisteAcaoJucicial() == 'SIM') {
-                    return 'MO 19.227';
+                echo "Origem matricula: EMGEA/CAIXA <br>";
+                if (self::getTipoDeVenda() == 'LEILAO') {
+                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                        if (self::getExisteAcaoJucicial() == 'SIM') {
+                            return 'MO 19.130 – Leilão Caixa com Ação Judicial';
+                        } else {
+                            return 'MO 19.208 – Leilão Caixa sem Ação Judicial';
+                        }
+                    } else {
+                        if (self::getExisteAcaoJucicial() == 'SIM') {
+                            return 'MO 19.227';
+                        } else {
+                            return 'MO 19.436';
+                        }
+                    }
                 } else {
-                    return 'MO 19.436';
+                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                        if (self::getExisteAcaoJucicial() == 'SIM') {
+                            return 'MO 19.435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial';
+                        } else {
+                            return 'MO 19.096 - Escritura Pública de Compra e Venda à Vista';
+                        }
+                    } else {
+                        if (self::getExisteAcaoJucicial() == 'SIM') {
+                            return 'MO 19.227';
+                        } else {
+                            return 'MO 19.436';
+                        }
+                    }
                 }
             }
         } else {
-            if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
-                if (self::getExisteAcaoJucicial() == 'SIM') {
-                    return 'MO 19.435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial';
+            if (self::getTipoDeVenda() == 'LEILAO') {
+                if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        return 'MO 19.130 – Leilão Caixa com Ação Judicial';
+                    } else {
+                        return 'MO 19.208 – Leilão Caixa sem Ação Judicial';
+                    }
                 } else {
-                    return 'MO 19.096 - Escritura Pública de Compra e Venda à Vista';
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        return 'MO 19.227';
+                    } else {
+                        return 'MO 19.436';
+                    }
                 }
             } else {
-                if (self::getExisteAcaoJucicial() == 'SIM') {
-                    return 'MO 19.227';
+                if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        return 'MO 19.435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial';
+                    } else {
+                        return 'MO 19.096 - Escritura Pública de Compra e Venda à Vista';
+                    }
                 } else {
-                    return 'MO 19.436';
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        return 'MO 19.227';
+                    } else {
+                        return 'MO 19.436';
+                    }
                 }
             }
         }
@@ -201,6 +426,7 @@ class RotinaMensagensAutomatica extends Controller
                                     WHEN [TIPO_VENDA] LIKE 'Venda Direta Online' THEN 'VENDA ONLINE'
                                     ELSE 'OUTROS TIPOS'
                                 END
+                ,'numeroLeilao' = SIMOV.[AGRUPAMENTO]
                 ,'tipoProposta' = CASE 
                                     WHEN [VALOR_REC_PROPRIOS_PROPOSTA] = [VALOR_TOTAL_PROPOSTA] THEN 'A VISTA'
                                     ELSE 'FINANCIADO'
@@ -213,8 +439,9 @@ class RotinaMensagensAutomatica extends Controller
                                     WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%ACOES%' THEN 'SIM'
                                     ELSE 'NAO'
                                 END
-                ,'nomeAgencia' = [UNO]
-                ,'nomeSr' = [EN]
+                ,'codigoAgencia' = AGENCIA.[codigoAgencia]
+                ,'nomeAgencia' = [AGENCIA_CONTRATACAO_PROPOSTA]
+                --,'nomeSr' = [EN]
                 ,'enderecoImovel' = [ENDERECO_IMOVEL]
                 ,'dataAlteracaoStatus' = [DATA_ALTERACAO_STATUS]
                 ,'maiorQueTrintaSalariosMinimos' = CASE
@@ -236,6 +463,7 @@ class RotinaMensagensAutomatica extends Controller
                                 END
             FROM 
                 [ALITB001_Imovel_Completo] AS SIMOV
+                LEFT JOIN [TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
                 --LEFT JOIN [7257_1].[dbo].[ALITB048_CUB120000] AS CUB120000 ON SIMOV.[CPF_CNPJ_PROPONENTE] = CUB120000.[CPF/CNPJ PROPONENTE]
             WHERE 
                 [UNA] = 'GILIE/SP'
@@ -246,7 +474,7 @@ class RotinaMensagensAutomatica extends Controller
             ORDER BY
                 'grupoClassificacao'
                 ,'tipoDeVenda'
-                ,'tipoProposta'             
+                ,'tipoProposta'              
         "); 
         return (object) $relacaoContratosPatrimoniais;
     }
@@ -256,7 +484,7 @@ class RotinaMensagensAutomatica extends Controller
         $relacaoContratosCaixaEmgea = DB::select("
             SELECT DISTINCT
                 'numeroBem' = SIMOV.[BEM_FORMATADO]
-                ,'classificacao' = CASE 
+                ,'grupoClassificacao' = CASE 
                                     WHEN VENDAS.[CLASSIFICACAO] = 'EMGEA' THEN 'EMGEA'
                                     WHEN VENDAS.[CLASSIFICACAO] = 'EMGEA- Alienação Fiduciária' THEN 'EMGEA'
                                     ELSE 'CAIXA'
@@ -268,6 +496,7 @@ class RotinaMensagensAutomatica extends Controller
                                     WHEN [NO_VENDA_TIPO] = 'Venda Online' THEN 'VENDA ONLINE'
                                     ELSE 'OUTROS TIPOS'
                                 END
+                ,'numeroLeilao' = SIMOV.[AGRUPAMENTO]
                 ,'enderecoImovel' = CONVERT(VARCHAR, SIMOV.[ENDERECO_IMOVEL])
                 ,'dataProposta' = [DT_PROPOSTA] 
                 ,'dataAlteracaoStatus' = [DT_STATUS_ALTERACAO]
@@ -294,22 +523,18 @@ class RotinaMensagensAutomatica extends Controller
                                                         WHEN [VALOR_TOTAL_PROPOSTA] > (998*30) THEN 'SIM'
                                                         ELSE 'NAO'
                                                     END
-                --,'sinalPago' = CASE
-                --					WHEN [Valor] >= [VL_TOTAL_RECEBIDO] THEN 'SIM'
-                --					ELSE 'NAO'
-                --				END
                 ,'dataUltimoRecebimento' = [DT_Sinaf]
-                ,'pvRecebimento' = [Orig]
-                ,'nomeAgenciaContratacao' = AGENCIA.[nomeAgencia]
+                ,'codigoAgencia' = [Orig]
+                ,'nomeAgencia' = AGENCIA.[nomeAgencia]
                 ,'cpfCnpjProponente' = SIMOV.[CPF_CNPJ_PROPONENTE]
-                ,'nomeProponente' = SIMOV.[NOME_PROPONENTE]
+                ,'nomeProponente' = UPPER(SIMOV.[NOME_PROPONENTE])
                 ,'cpfCnpjCorretor' = SIMOV.[CPF_CORRETOR]
-                ,'nomeCorretor' = SIMOV.[NO_CORRETOR]
-                --,'vencimentoDoPp15' = CONVERT(VARCHAR(10), DATEADD(DAY, 7, [DT_PROPOSTA]), 103)
+                ,'nomeCorretor' = UPPER(SIMOV.[NO_CORRETOR])
                 ,'existeCca' = CASE	
                                     WHEN SIMOV.[ACEITA_CCA] = 'SIM' THEN 'SIM'
                                     ELSE 'NAO'
                                 END
+                ,'origemMatricula' = SIMOV.[ORIGEM_MATRICULA]
             FROM 
                 [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS 
                 LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
@@ -321,7 +546,7 @@ class RotinaMensagensAutomatica extends Controller
                 AND [DT_Sinaf] >= DATEADD(DAY, -40, GETDATE())
                 AND [Valor] >= [VL_TOTAL_RECEBIDO]
             ORDER BY 
-                classificacao
+                grupoClassificacao
                 , tipoDeVenda
                 , tipoProposta
         "); 
