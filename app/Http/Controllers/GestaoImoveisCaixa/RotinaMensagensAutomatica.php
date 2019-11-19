@@ -95,9 +95,7 @@ class RotinaMensagensAutomatica extends Controller
             // dd($value);
             echo "Número bem: $contrato->numeroBem <br>";
             echo "Proposta CCA: $contrato->existeCca <br>";
-            
             self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
-            // self::defineTipoDeMensageria($contrato);
         }
             
         /* IMOVEIS CAIXA */ 
@@ -128,7 +126,7 @@ class RotinaMensagensAutomatica extends Controller
                     self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
                     break;
             }
-            // self::defineTipoDeMensageria($contrato);
+            self::defineTipoDeMensageria($contrato);
         }
     } 
 
@@ -146,130 +144,14 @@ class RotinaMensagensAutomatica extends Controller
             'moUtilizado' => self::definirMoDeAutorizacaoDaProposta(),
             'editalLeilao' => isset($contrato->numeroLeilao) ? $contrato->numeroLeilao : null,
         );
-        // print_r($dadosEmail);
-        
-        switch ($contrato->grupoClassificacao) {
-            case 'PATRIMONIAL':
-                $assunto = "Autorização para contratação - imóvel $contrato->grupoClassificacao";
-                if ($contrato->existeCca == 'SIM') {
-                    if ($contrato->tipoDeVenda == 'LEILAO') {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                
-                            } else {
-                                # code...
-                            }
-                        }
-                    } else {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    }
-                } else {
-                    if ($contrato->tipoDeVenda == 'LEILAO') {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    } else {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    }
-                }
-                break;
-            case 'CAIXA':
-                $assunto = "Autorização para contratação - imóvel $contrato->grupoClassificacao";
-                if ($contrato->existeCca == 'SIM') {
-                    if ($contrato->tipoDeVenda == 'LEILAO') {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    } else {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    }
-                } else {
-                    if ($contrato->tipoDeVenda == 'LEILAO') {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    } else {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    }
-                }
-                break;
-            case 'EMGEA':
-                $assunto = "Autorização para contratação - imóvel $contrato->grupoClassificacao";
-                if ($contrato->existeCca == 'SIM') {
-                    if ($contrato->tipoDeVenda == 'LEILAO') {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    } else {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    }
-                } else {
-                    if ($contrato->tipoDeVenda == 'LEILAO') {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    } else {
-                        if ($contrato->tipoProposta == 'A VISTA') {
-                            if ($contrato->temAcaoJudial == 'SIM') {
-                                # code...
-                            } else {
-                                # code...
-                            }
-                        }
-                    }
-                }
-                break;
+
+        if($contrato->existeCca == 'SIM') { 
+            $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente - Correspondente Caixa Aqui";
+        } else {
+            $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente";
         }
+
+        
     }
 
     public static function validarTipoDeVendaLeilaoOuVendaDireta($contrato)
@@ -317,92 +199,51 @@ class RotinaMensagensAutomatica extends Controller
             // COM AÇÃO JUDICIAL
             self::setExisteAcaoJucicial('NAO');
         }
+        self::defineTipoDeMensageria($contrato);
         echo "MO utilizado: " . self::definirMoDeAutorizacaoDaProposta() . '<br>';
         echo "Existe ação judicial: " . self::getExisteAcaoJucicial() . "<hr>";
     }
 
     public static function definirMoDeAutorizacaoDaProposta()
     {
-        if (self::getClassificacaoImovel() == 'EMGEA') {
-            if (self::getOrigemMatricula() == 'EMGEA' ) {
-                echo "Origem matricula: EMGEA/EMGEA <br>";
+        if (self::getOrigemMatricula() == 'EMGEA') {
+            if (self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
                 if (self::getTipoDeVenda() == 'LEILAO') {
-                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
-                        return 'MO 19.526';
-                    } else {
-                        if (self::getExisteAcaoJucicial() == 'SIM') {
-                            return 'MO 19.466';
-                        } else {
-                            return 'MO 19.526';
-                        }
-                    }
+                    return 'MO 19.526';
                 } else {
-                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
-                        return 'MO 19.526';
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        return 'MO 19.467';
                     } else {
-                        return 'MO 19.526';
+                        return 'MO 19.319';
                     }
                 }
             } else {
-                echo "Origem matricula: EMGEA/CAIXA <br>";
-                if (self::getTipoDeVenda() == 'LEILAO') {
-                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
-                        if (self::getExisteAcaoJucicial() == 'SIM') {
-                            return 'MO 19.130 – Leilão Caixa com Ação Judicial';
-                        } else {
-                            return 'MO 19.208 – Leilão Caixa sem Ação Judicial';
-                        }
-                    } else {
-                        if (self::getExisteAcaoJucicial() == 'SIM') {
-                            return 'MO 19.227';
-                        } else {
-                            return 'MO 19.436';
-                        }
-                    }
+                if (self::getExisteAcaoJucicial() == 'SIM') {
+                    return 'MO 19.466';
                 } else {
-                    if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
-                        if (self::getExisteAcaoJucicial() == 'SIM') {
-                            return 'MO 19.435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial';
-                        } else {
-                            return 'MO 19.096 - Escritura Pública de Compra e Venda à Vista';
-                        }
-                    } else {
-                        if (self::getExisteAcaoJucicial() == 'SIM') {
-                            return 'MO 19.227';
-                        } else {
-                            return 'MO 19.436';
-                        }
-                    }
+                    return 'MO 19.526';
                 }
             }
         } else {
-            if (self::getTipoDeVenda() == 'LEILAO') {
-                if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+            if (self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
+                if (self::getTipoDeVenda() == 'LEILAO') {
                     if (self::getExisteAcaoJucicial() == 'SIM') {
-                        return 'MO 19.130 – Leilão Caixa com Ação Judicial';
+                        return 'MO 19.130';
                     } else {
-                        return 'MO 19.208 – Leilão Caixa sem Ação Judicial';
+                        return 'MO 19.208';
                     }
                 } else {
                     if (self::getExisteAcaoJucicial() == 'SIM') {
-                        return 'MO 19.227';
+                        return 'MO 19.435';
                     } else {
-                        return 'MO 19.436';
+                        return 'MO 19.096';
                     }
-                }
+                } 
             } else {
-                if(self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
-                    if (self::getExisteAcaoJucicial() == 'SIM') {
-                        return 'MO 19.435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial';
-                    } else {
-                        return 'MO 19.096 - Escritura Pública de Compra e Venda à Vista';
-                    }
+                if (self::getExisteAcaoJucicial() == 'SIM') {
+                    return 'MO 19.436';
                 } else {
-                    if (self::getExisteAcaoJucicial() == 'SIM') {
-                        return 'MO 19.227';
-                    } else {
-                        return 'MO 19.436';
-                    }
+                    return 'MO 19.227';
                 }
             }
         }
