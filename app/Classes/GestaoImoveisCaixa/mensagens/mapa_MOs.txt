@@ -1,12 +1,12 @@
 valor da variável %MO_UTILIZADO% em cada casp:
 
-Imóvel CAIXA a vista online com ação - "MO19435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial."
+###Imóvel CAIXA a vista online com ação - "MO19435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial."
 
-Imóvel CAIXA a vista online sem ação - "MO19096 - Escritura Pública de Compra e Venda à Vista"
+###Imóvel CAIXA a vista online sem ação - "MO19096 - Escritura Pública de Compra e Venda à Vista"
 
-Imóvel CAIXA a vista leilão com acão - "MO 19.130 – Leilão Caixa com Ação Judicial "
+###Imóvel CAIXA a vista leilão com acão - "MO 19.130 – Leilão Caixa com Ação Judicial "
 
-Imóvel CAIXA a vista leilão sem acão (aqui entra EMGEA/CAIXA tbm)- "MO 19.208 – Leilão Caixa sem Ação Judicial"
+###Imóvel CAIXA a vista leilão sem acão (aqui entra EMGEA/CAIXA tbm)- "MO 19.208 – Leilão Caixa sem Ação Judicial"
 
 Imóvel EMGEA a vista online com ação - "com ação judicial MO19467"
 
@@ -14,10 +14,96 @@ Imóvel EMGEA a vista online sem ação - "sem ação judicial MO19319"
 
 Imóvel EMGEA a vista leilão com e sem acão (aqui entra EMGEA/EMGEA )- "MO 19.526 - Leilão Caixa sem Ação Judicial"
 
-Imóvel PATRIMONIAL a vista online com ação - "MO19435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial."
+###Imóvel PATRIMONIAL a vista online com ação - "MO19435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial."
 
-Imóvel PATRIMONIAL a vista online sem ação - "MO19096 - Escritura Pública de Compra e Venda à Vista."
+###Imóvel PATRIMONIAL a vista online sem ação - "MO19096 - Escritura Pública de Compra e Venda à Vista."
 
 Imóvel 
 
+/* TIPO MENSAGENS */
 
+            	/* FLUXO */					- 			/* MENSAGEM */						
+FLUXO CCA
+	IMÓVEL CAIXA
+		À VISTA
+			COM AÇÃO 						-
+			SEM AÇÃO 						-
+		FINANCIADO OU COM USO DE FGTS  		-
+	IMÓVEL EMGEA
+		À VISTA
+			COM AÇÃO 						-
+			SEM AÇÃO 						-
+		FINANCIADO OU COM USO DE FGTS 		-
+	IMÓVEL PATRIMONIAL
+		À VISTA
+			COM AÇÃO 						-
+			SEM AÇÃO 						-
+		FINANCIADO OU COM USO DE FGTS		-
+FLUXO AGÊNCIA
+	IMÓVEL CAIXA
+		À VISTA
+			COM AÇÃO 						-
+			SEM AÇÃO 						-
+		FINANCIADO OU COM USO DE FGTS 		-
+	IMÓVEL EMGEA
+		À VISTA
+			COM AÇÃO 						-
+			SEM AÇÃO 						-
+		FINANCIADO OU COM USO DE FGTS		-
+	IMÓVEL PATRIMONIAL
+		À VISTA
+			COM AÇÃO   						-
+			SEM AÇÃO 						-
+		FINANCIADO OU COM USO DE FGTS		- 
+
+
+/* ESTRUTURA MO*/
+
+IMÓVEL CAIXA
+	> 30 SALÁRIOS
+		LEILAO
+			COM AÇÃO - MO 19.130
+			SEM AÇÃO - MO 19.208
+		VD OU VDO
+			COM AÇÃO - MO 19.435
+			SEM AÇÃO - MO 19.096
+	< 30 SALÁRIOS
+		LEILAO / VD OU VDO
+			COM AÇÃO - MO 19.436
+			SEM AÇÃO - MO 19.227
+IMÓVEL PATRIMONIAL
+	> 30 SALÁRIOS
+		LEILAO
+			COM AÇÃO - MO 19.130
+			SEM AÇÃO - MO 19.208
+		VD OU VDO
+			COM AÇÃO - MO 19.435
+			SEM AÇÃO - MO 19.096
+	< 30 SALÁRIOS
+		LEILAO / VD OU VDO
+			COM AÇÃO - MO 19.436
+			SEM AÇÃO - MO 19.227
+IMÓVEL EMGEA
+	EMGEA/EMGEA
+		> 30 SALÁRIOS
+			LEILAO
+				COM / SEM AÇÃO - MO 19.526 - OK
+			VD OU VDO
+				COM AÇÃO - MO 19.467 - OK
+				SEM AÇÃO - MO 19.319 - OK
+		< 30 SALÁRIOS
+			LEILAO / VD OU VDO
+				COM AÇÃO - MO 19.466 - OK
+				SEM AÇÃO - MO 19.526 - OK
+	EMGEA/CAIXA
+		> 30 SALÁRIOS
+			LEILAO
+				COM AÇÃO - MO 19.130
+				SEM AÇÃO - MO 19.208
+			VD OU VDO
+				COM AÇÃO - MO 19.435
+				SEM AÇÃO - MO 19.096
+		< 30 SALÁRIOS
+			LEILAO / VD OU VDO 
+				COM AÇÃO - MO 19.436
+				SEM AÇÃO - MO 19.227
