@@ -91,8 +91,8 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Localidade:</label>
-                            <p id="localidade"></p>
+                            <label>CEP:</label>
+                            <p id="cep"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
@@ -363,7 +363,7 @@
             </div> <!-- /.card-header -->
             <div class="card-body">
 
-                <h2 class="card-title">Proponente Atual</h2>
+                <h2 class="card-title"><b>Proponente Atual</b></h2>
 
                 <br>
 
@@ -403,6 +403,12 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
+                            <label>CRECI do Corretor:</label>
+                            <p id="numeroCreciCorretor"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
                             <label>Telefone do Corretor:</label>
                             <p id="telefoneCorretor"></p>
                         </div>
@@ -415,9 +421,9 @@
                     </div>
                 </div><!-- /.row -->
 
-            <br>
+            <hr>
 
-                <h2 class="card-title">Proposta Atual</h2>
+                <h2 class="card-title"><b>Proposta Atual</b></h2>
 
             <br>
 
@@ -475,9 +481,9 @@
                     </div>
                 </div><!-- /.row -->
 
-                <br>
+                <hr>
 
-                <h2 class="card-title">Agência Responsável</h2>
+                <h2 class="card-title"><b>Agência Responsável</b></h2>
 
                 <br>
 
@@ -508,9 +514,9 @@
                     </div>
                 </div><!-- /.row -->
 
-                <br>
+                <hr>
 
-                <h2 class="card-title">CIOPE</h2>
+                <h2 class="card-title"><b>CIOPE</b></h2>
 
                 <br>
 
@@ -616,14 +622,26 @@
 
 @section('js')
     <script src="{{ asset('js/global/anima_input_file.js') }}"></script>
-    <script src="{{ asset('js/formata_tabela_documentos.js') }}"></script>
-    <script src="{{ asset('js/formata_tabela_laudos.js') }}"></script>
+    <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script>
+    <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script>
 
     <script>
         var tamanhoMaximoView = 8;
         var tamanhoMaximo = 8388608;
+        // var dados = _get_json ('js/imovel_mockado.json');
+        // console.log(dados);
         _animaInputFile();
         _formataTabelaDocumentos ();
         _formataTabelaLaudos ();
+
+        $.getJSON('js/imovel_mockado.json', function(dados){
+            console.log(dados[0]);
+
+            // $.each(dados[0], function(key, item) {
+            //     $('#' + key).html(item);
+            // });
+
+        });
+
     </script>
 @stop
