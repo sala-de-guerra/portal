@@ -11,6 +11,9 @@
 "enderecoImovel": "RUA VISCONDE, N. 1",
 "tipoImovel": "Casa",
 "descricaoImovel": "Casa, 1 Sala, 3 Quartos, 3 Suítes, 1 Cozinha, 2 Sacadas, 4 Vagas, 1 Área de Serviço, 1 Banheiro, 1 Lavabo, 1 DCE",
+"descricaoAdicionalImovel": "CONSTA AÇÃO 1009351-53.2016.8.26.0152 (COND).",
+
+
 "valorAvaliacao": "612000",
 "valorPrimeiroLeilao": "715006,84",
 "valorSegundoLeilao": "715006,84",
@@ -18,8 +21,6 @@
 "valorContabil": "612000",
 "dataConsolidacao": "26/10/2018",
 "dataArremate": "12/06/2006",
-"dataLaudo": "2019-02-05 00:00:00.000",
-"dataVencimentoLaudo": "2019-02-05 00:00:00.000",
 "utilizacaoFgts": "Sim",
 "dataImpedimento": "",
 "estadoOcupacao": "Outros",
@@ -32,9 +33,8 @@
 "statusImovel": "Em Cotratação",
 "dataAlteracaoStatusImovel": "2019-10-14 00:00:00.000",
 "dataUltimaAlteracaoStatus": "2019-10-14 00:00:00.000",
-"descricaoAdicionalImovel": "CONSTA AÇÃO 1009351-53.2016.8.26.0152 (COND).",
 "tipoVenda": "Venda Online",
-"agrupamento": "1309/0119",
+"agrupamentoLeilao": "1309/0119",
 "numeroItem": "0",
 "dataProposta": "2020-11-01 00:00:00.000",
 "valorTotalProposta": "222222.00",
@@ -57,18 +57,61 @@
 "telefoneProponente":"3405-1748",
 "modalidadePagamento": "Financiado CCFGTS",
 "statusContrato": "Em andamento",
-
-
-
-"valorTotalContrato": ".00",
-"valorTotalRecebido": "22222.00",
-"dataAlteracaoStatusProposta": "2020-11-08 00:00:00.000",
-"tipoProposta": "FINANCIADA OU COM FGTS",
-"temAcaoJudial": "SIM",
-"maiorQueTrintaSalariosMinimos": "SIM",
-"dataUltimoRecebimento": "2019-11-01 00:00:00.000",
-"pvRecebimento": "2222",
-"nomeAgenciaContratacao": "LA, SP",
+"dataContrato": "2019-11-05 00:00:00.000",
+"agenciaContratacao": "SERRA DE BRAGANCA, SP",
+"statusProposta": "Classificada",
+"nuColocacao": "1",
 "cpfCnpjCorretor": null,
-"nomeCorretor": null
+"nomeCorretor": null,
+"numeroCreciCorretor": "",
+"telefoneComercialCorretor": "",
+"telefoneCelularCorretor": "",
+"emailCorretor": "a@a.a.a",
+"motivoDevolucao": "",
+"situacaoImovel": "",
+"dataPrimeiroLeilao": "",
+"dataSegundoLeilao": "",
+"dataPropriedadePlena": "",
+"dataRegistroCarta": "",
+"direitoPreferencia": "",
+"numeroDocumentoExMutuario": "",
+"nomeExMutuario": "",
+"numeroDocumentoCoobrigado1": "",
+"numeroDocumentoCoobrigado2": "",
+"aceitaCca": "Sim",
+
+
+"maiorQueTrintaSalariosMinimos": "SIM",
+"temAcaoJudial": "SIM",
+
+
+
+
+"codigoStatusDossie": "169",
+"nomeStatusDossie": "Documentos Imóvel",
+"dataStatusDossie": "2019-11-07 00:00:00.000",
+"cardAgrupamento": "GILIE",
+
+"dataUltimoRecebimento": "",
+"valorTotalRecebido": "222222.00",
+"pvRecebimento": "2222",
+
+"dossieDigital":[
+    {
+    "idDocumento": "654456",
+    "nomeDocumento": "Matrícula"
+    },
+    {
+    "idDocumento": "654456",
+    "nomeDocumento": "Matrícula"
+    }
+    
+],
+
+"numeroLaudo": "123321",
+"dataLaudo": "2019-02-05 00:00:00.000",
+"dataVencimentoLaudo": "2019-02-05 00:00:00.000",
+"dataUploadLaudo":"05-02-2019"
+
+
 }]

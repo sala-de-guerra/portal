@@ -1,9 +1,9 @@
 //Função global que monta a tabela de arquivos do arquivo formata_tabela_documentos.js
 
-function _formataTabelaLaudos () {
+function _formataTabelaLaudos (numeroBem) {
 
-    // var urlDiretorioVirtual = 'https://inova.ceopc.des.caixa/uploads/';
-    
+    var urlDiretorioVirtual = '../img/mock/';
+
     var linhas = 
         '<tr>' +
             '<td>' +
@@ -21,16 +21,16 @@ function _formataTabelaLaudos () {
                                 '</button>' +
                             '</div>' +
                             '<div class="modal-body">' +
-                                '<embed src="../img/mock/00.0000.0001766-3M.pdf" width="100%" height="650px" />' +
+                                '<embed src="' + urlDiretorioVirtual + numeroBem + '.pdf" width="100%" height="650px" />' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +           
             '</td>' +
-            '<td>456654</td>' +
-            '<td>01/11/2019</td>' +
-            '<td>01/11/2019</td>' +
-            '<td>01/05/2020</td>' +
+            '<td id="numeroLaudo"></td>' +
+            '<td id="dataLaudo"></td>' +
+            '<td id="dataVencimentoLaudo"></td>' +
+            '<td id="dataUpload"></td>' +
         '</tr>';
     
     $(linhas).appendTo('#tblLaudos>tbody');

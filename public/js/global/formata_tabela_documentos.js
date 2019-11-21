@@ -1,8 +1,8 @@
 //Função global que monta a tabela de arquivos do arquivo formata_tabela_documentos.js
 
-function _formataTabelaDocumentos () {
+function _formataTabelaDocumentos (numeroBem) {
 
-    // var urlDiretorioVirtual = 'https://inova.ceopc.des.caixa/uploads/';
+    var urlDiretorioVirtual = '../img/mock/';
     
     var linhas = 
         '<tr>' +
@@ -21,16 +21,16 @@ function _formataTabelaDocumentos () {
                                 '</button>' +
                             '</div>' +
                             '<div class="modal-body">' +
-                                '<embed src="../img/mock/00.0000.0001766-3M.pdf" width="100%" height="650px" />' +
+                                '<embed src="' + urlDiretorioVirtual + numeroBem + '.pdf" width="100%" height="650px" />' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +           
             '</td>' +
-            '<td>456654</td>' +
-            '<td>00.0000.0001766-3M.pdf</td>' +
-            '<td>MATRICULA</td>' +
-            '<td>01/11/2019</td>' +
+            '<td id="idDocumento"></td>' +
+            '<td id="nomeDocumento"></td>' +
+            '<td id="tipoDocumento"></td>' +
+            '<td id="dataUpload"></td></td>' +
         '</tr>';
     
     $(linhas).appendTo('#tblDossieDigital>tbody');

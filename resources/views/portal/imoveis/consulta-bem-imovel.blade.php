@@ -54,7 +54,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>CHB:</label>
-                            <p id="chb"></p>
+                            <p id="numeroBemFormatado"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -72,7 +72,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Empreendimento:</label>
-                            <p id="empreendimento"></p>
+                            <p id="nomeEmpreendimento"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
@@ -80,13 +80,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Endereço:</label>
-                            <p id="endereco"></p>
+                            <p id="enderecoImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Bairro:</label>
-                            <p id="bairro"></p>
+                            <p id="bairroImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -99,37 +99,43 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Status do imóvel:</label>
-                            <p id="statusImovel"></p>
+                            <label>UF do Imóvel:</label>
+                            <p id="ufImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Data do Status:</label>
-                            <p id="dataStatus"></p>
+                            <label>Cidade do Imóvel:</label>
+                            <p id="cidadeImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Número do Laudo:</label>
-                            <p id="numeroLaudo"></p>
+                            <label>Tipo de Imóvel:</label>
+                            <p id="tipoImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Vencimento do Laudo:</label>
-                            <p id="vencimentoLaudo"></p>
+                            <label>Estado do Imóvel:</label>
+                            <p id="estadoImovel"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Descrição Adicional:</label>
-                            <p id="descricaoAdicional"></p>
+                            <label>Descrição do Imóvel:</label>
+                            <p id="descricaoImovel"></p>
                         </div>
                     </div>
-                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Descrição Adicional:</label>
+                            <p id="descricaoAdicionalImovel"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
@@ -233,13 +239,14 @@
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
+            
                 <div class="row">
                     <div class="col-sm-12 table-responsive p-0">
                         <table id="tblLaudos" class="table">
                             <thead>
                             <tr>
                                 <th>Visualizar Documento</th>
-                                <th>Nome do Documento</th>
+                                <th>Número do Laudo</th>
                                 <th>Data do Laudo</th>
                                 <th>Vencimento do Laudo </th>
                                 <th>Data do Upload</th>
@@ -626,22 +633,32 @@
     <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script>
 
     <script>
-        var tamanhoMaximoView = 8;
-        var tamanhoMaximo = 8388608;
-        // var dados = _get_json ('js/imovel_mockado.json');
-        // console.log(dados);
-        _animaInputFile();
-        _formataTabelaDocumentos ();
-        _formataTabelaLaudos ();
+
 
         $.getJSON('js/imovel_mockado.json', function(dados){
             console.log(dados[0]);
 
-            // $.each(dados[0], function(key, item) {
-            //     $('#' + key).html(item);
-            // });
+            var numeroBem = dados[0].numeroBem;
+            _formataTabelaDocumentos (numeroBem);
+
+            $.each(dados[0].dossieDigital, function(numeroBem) {
+                _formataTabelaLaudos (numeroBem);
+            });
+
+
+            $.each(dados[0], function(key, item) {
+                $('#' + key).html(item);
+            });
+
 
         });
+
+
+        var tamanhoMaximoView = 8;
+        var tamanhoMaximo = 8388608;
+
+        _animaInputFile();
+
 
     </script>
 @stop
