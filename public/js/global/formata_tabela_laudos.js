@@ -4,7 +4,7 @@ function _formataTabelaLaudos (numeroBem) {
 
     var urlDiretorioVirtual = '../img/mock/';
 
-    var linhas = 
+    var linha = 
         '<tr>' +
             '<td>' +
                 '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLaudo">' +
@@ -15,7 +15,7 @@ function _formataTabelaLaudos (numeroBem) {
                     '<div class="modal-dialog mw-100 w-75" role="document">' +
                         '<div class="modal-content">' +
                             '<div class="modal-header">' +
-                                '<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>' +
+                                '<h5 class="modal-title" id="exampleModalLabel">Laudo</h5>' +
                                 '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
                                 '<span aria-hidden="true">&times;</span>' +
                                 '</button>' +
@@ -30,10 +30,10 @@ function _formataTabelaLaudos (numeroBem) {
             '<td id="numeroLaudo"></td>' +
             '<td id="dataLaudo"></td>' +
             '<td id="dataVencimentoLaudo"></td>' +
-            '<td id="dataUpload"></td>' +
+            '<td id="dataUploadLaudo"></td>' +
         '</tr>';
     
-    $(linhas).appendTo('#tblLaudos>tbody');
+    $(linha).appendTo('#tblLaudos>tbody');
 
 };
 

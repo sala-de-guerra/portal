@@ -136,6 +136,32 @@
                         </div>
                     </div>
                 </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor de Avaliação:</label>
+                            <p id="valorAvaliacao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Matrícula do Imóvel:</label>
+                            <p id="matriculaImovel"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Origem da Matrícula:</label>
+                            <p id="origemMatricula"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Origem do Imóvel:</label>
+                            <p id="origemImovel"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
@@ -347,13 +373,83 @@
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Etapa de Leilão</h3>
+                <h3 class="card-title">Controle de Notificações</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
                 
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col -->
+</div> <!-- /.row -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card collapsed-card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Etapa de Leilão</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                </div> <!-- /.card-tools -->
+            </div> <!-- /.card-header -->
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor no Primeiro Leilão:</label>
+                            <p id="valorPrimeiroLeilao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor no Segundo Leilão:</label>
+                            <p id="valorSegundoLeilao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor de Venda:</label>
+                            <p id="valorVenda"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor Contábil:</label>
+                            <p id="valorContabil"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Data de Consolidação:</label>
+                            <p id="dataConsolidacao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Agrupamento Leilão:</label>
+                            <p id="agrupamentoLeilao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Número do Item:</label>
+                            <p id="numeroItem"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Data Arremate:</label>
+                            <p id="dataArremate"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
@@ -417,7 +513,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Telefone do Corretor:</label>
-                            <p id="telefoneCorretor"></p>
+                            <p id="telefoneComercialCorretor"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -477,13 +573,13 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Número de Parcelas:</label>
-                            <p id="numeroParcelasProposta"></p>
+                            <p id="quantidadeParcelasProposta"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Total Recebido:</label>
-                            <p id="valorTotalRecebidoProposta"></p>
+                            <p id="valorTotalRecebido"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
@@ -639,11 +735,11 @@
             console.log(dados[0]);
 
             var numeroBem = dados[0].numeroBem;
-            _formataTabelaDocumentos (numeroBem);
+            var dossieDigital = dados[0].dossieDigital;
 
-            $.each(dados[0].dossieDigital, function(numeroBem) {
-                _formataTabelaLaudos (numeroBem);
-            });
+            _formataTabelaDocumentos (numeroBem, dossieDigital);
+
+            _formataTabelaLaudos (numeroBem);
 
 
             $.each(dados[0], function(key, item) {
