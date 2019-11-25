@@ -37,6 +37,12 @@ Route::get('/', function () {
     return view('portal.informativas.orientacoes');
 });
 
+ // conheca o projeto
+ Route::get('/projeto', function () {
+    return view('portal.informativas.projeto');
+});
+
+
 // Controle de Contratação
 Route::get('/controle-contratacao', function () {
     return view('portal.imoveis.controle-contratacao');
@@ -52,14 +58,13 @@ Route::get('/consulta-bem-imovel', function () {
 
 Route::prefix('estoque-imoveis')->group(function () {
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
-
-  // Gerencial
-// equipes
-Route::get('equipes', function () {
-    return view('portal.gerencial.equipes');
+    Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
 });
 
+// Gerencial
 
-    Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
+// equipes
+Route::get('/equipes', function () {
+    return view('portal.gerencial.equipes');
 });
 

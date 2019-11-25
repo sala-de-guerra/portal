@@ -54,25 +54,25 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>CHB:</label>
-                            <p id="chb">00.0000.0001766-3</p>
+                            <p id="numeroBemFormatado"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Classificação:</label>
-                            <p id="classificacao">PANAMERICANO</p>
+                            <p id="classificacao"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Tipo de Venda:</label>
-                            <p id="tipoVenda">VENDA DIRETA ONLINE</p>
+                            <p id="tipoVenda"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Empreendimento:</label>
-                            <p id="empreendimento">BALN REGINA MARIA</p>
+                            <p id="nomeEmpreendimento"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
@@ -80,56 +80,88 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Endereço:</label>
-                            <p id="endereco">RUA AUGUSTA, N. 183, Apto 202, TORRE 2B</p>
+                            <p id="enderecoImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Bairro:</label>
-                            <p id="bairro"></p>
+                            <p id="bairroImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Localidade:</label>
-                            <p id="localidade">GUARULHOS/SP </p>
+                            <label>CEP:</label>
+                            <p id="cep"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Status do imóvel:</label>
-                            <p id="statusImovel">Em Contratação</p>
+                            <label>UF do Imóvel:</label>
+                            <p id="ufImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Data do Status:</label>
-                            <p id="dataStatus">Em Contratação</p>
+                            <label>Cidade do Imóvel:</label>
+                            <p id="cidadeImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Número do Laudo:</label>
-                            <p id="numeroLaudo">12356546</p>
+                            <label>Tipo de Imóvel:</label>
+                            <p id="tipoImovel"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Vencimento do Laudo:</label>
-                            <p id="vencimentoLaudo">12356546</p>
+                            <label>Estado do Imóvel:</label>
+                            <p id="estadoImovel"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Descrição do Imóvel:</label>
+                            <p id="descricaoImovel"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>Descrição Adicional:</label>
-                            <p id="descricaoAdicional">(E) sem débitos condominiais até 12/2018 conforme CND enviada no dossiê </p>
+                            <p id="descricaoAdicionalImovel"></p>
                         </div>
                     </div>
-                </div>
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor de Avaliação:</label>
+                            <p id="valorAvaliacao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Matrícula do Imóvel:</label>
+                            <p id="matriculaImovel"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Origem da Matrícula:</label>
+                            <p id="origemMatricula"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Origem do Imóvel:</label>
+                            <p id="origemImovel"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
@@ -141,7 +173,7 @@
             <div class="card-header">
                 <h3 class="card-title">Dossiê Digital</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
@@ -229,17 +261,18 @@
             <div class="card-header">
                 <h3 class="card-title">Laudos de Avaliação</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
+            
                 <div class="row">
                     <div class="col-sm-12 table-responsive p-0">
                         <table id="tblLaudos" class="table">
                             <thead>
                             <tr>
                                 <th>Visualizar Documento</th>
-                                <th>Nome do Documento</th>
+                                <th>Número do Laudo</th>
                                 <th>Data do Laudo</th>
                                 <th>Vencimento do Laudo </th>
                                 <th>Data do Upload</th>
@@ -311,7 +344,7 @@
             <div class="card-header">
                 <h3 class="card-title">Gestão de Chaves</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
@@ -340,173 +373,343 @@
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Etapa de Leilão</h3>
+                <h3 class="card-title">Controle de Notificações</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>CHB:</label>
-                            <p id="chb">00.0000.0001766-3</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Classificação:</label>
-                            <p id="classificacao">PANAMERICANO</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Tipo de Venda:</label>
-                            <p id="tipoVenda">VENDA DIRETA ONLINE</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Empreendimento:</label>
-                            <p id="empreendimento">BALN REGINA MARIA</p>
-                        </div>
-                    </div>
-                </div><!-- /.row -->
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Endereço:</label>
-                            <p id="endereco">RUA AUGUSTA, N. 183, Apto 202, TORRE 2B</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Bairro:</label>
-                            <p id="bairro"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Localidade:</label>
-                            <p id="localidade">GUARULHOS/SP </p>
-                        </div>
-                    </div>
-                </div><!-- /.row -->
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Status do imóvel:</label>
-                            <p id="statusImovel">Em Contratação</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Data do Status:</label>
-                            <p id="dataStatus">Em Contratação</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Número do Laudo:</label>
-                            <p id="numeroLaudo">12356546</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Vencimento do Laudo:</label>
-                            <p id="vencimentoLaudo">12356546</p>
-                        </div>
-                    </div>
-                </div><!-- /.row -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Descrição Adicional:</label>
-                            <p id="descricaoAdicional">(E) sem débitos condominiais até 12/2018 conforme CND enviada no dossiê </p>
-                        </div>
-                    </div>
-                </div>
+                
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
 </div> <!-- /.row -->
-    
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-default">
+        <div class="card collapsed-card card-primary">
             <div class="card-header">
-                <h3 class="card-title">
-                <i class="fas fa-bullhorn"></i>
-                Callouts
-                </h3>
-            </div><!-- /.card-header -->
+                <h3 class="card-title">Etapa de Leilão</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                </div> <!-- /.card-tools -->
+            </div> <!-- /.card-header -->
             <div class="card-body">
-                <div class="callout callout-danger">
-                <h5>I am a danger callout!</h5>
 
-                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
-                    soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                </div>
-                <div class="callout callout-info">
-                <h5>I am an info callout!</h5>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor no Primeiro Leilão:</label>
+                            <p id="valorPrimeiroLeilao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor no Segundo Leilão:</label>
+                            <p id="valorSegundoLeilao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor de Venda:</label>
+                            <p id="valorVenda"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor Contábil:</label>
+                            <p id="valorContabil"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
 
-                <p>Follow the steps to continue to payment.</p>
-                </div>
-                <div class="callout callout-warning">
-                <h5>I am a warning callout!</h5>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Data de Consolidação:</label>
+                            <p id="dataConsolidacao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Agrupamento Leilão:</label>
+                            <p id="agrupamentoLeilao"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Número do Item:</label>
+                            <p id="numeroItem"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Data Arremate:</label>
+                            <p id="dataArremate"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
 
-                <p>This is a yellow callout.</p>
-                </div>
-                <div class="callout callout-success">
-                <h5>I am a success callout!</h5>
-
-                <p>This is a green callout.</p>
-                </div>
-            </div><!-- /.card-body -->
-        </div><!-- /.card -->
-    </div><!-- /.col -->
-</div> <!-- /.row -->
-
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">
-                <i class="fas fa-bullhorn"></i>
-                Callouts
-                </h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="callout callout-danger">
-                <h5>I am a danger callout!</h5>
-
-                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
-                    soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                </div>
-                <div class="callout callout-info">
-                <h5>I am an info callout!</h5>
-
-                <p>Follow the steps to continue to payment.</p>
-                </div>
-                <div class="callout callout-warning">
-                <h5>I am a warning callout!</h5>
-
-                <p>This is a yellow callout.</p>
-                </div>
-                <div class="callout callout-success">
-                <h5>I am a success callout!</h5>
-
-                <p>This is a green callout.</p>
-                </div>
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
 </div> <!-- /.row -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card collapsed-card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Etapa de Venda Direta</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                </div> <!-- /.card-tools -->
+            </div> <!-- /.card-header -->
+            <div class="card-body">
+
+                <h2 class="card-title"><b>Proponente Atual</b></h2>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <p id="nomeProponente"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>CPF / CNPJ:</label>
+                            <p id="cpfCnpjProponente"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Telefone:</label>
+                            <p id="telefoneProponente"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>E-mail:</label>
+                            <p id="emailProponente"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Nome do Corretor:</label>
+                            <p id="nomeCorretor"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>CRECI do Corretor:</label>
+                            <p id="numeroCreciCorretor"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Telefone do Corretor:</label>
+                            <p id="telefoneComercialCorretor"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>E-mail do Corretor:</label>
+                            <p id="emailCorretor"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+            <hr>
+
+                <h2 class="card-title"><b>Proposta Atual</b></h2>
+
+            <br>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Data da Proposta:</label>
+                            <p id="dataProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Total da Proposta:</label>
+                            <p id="valorTotalProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor em Recursos Próprios:</label>
+                            <p id="valorRecursosPropriosProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor de FGTS:</label>
+                            <p id="valorFgtsProposta"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor de Financiamento:</label>
+                            <p id="valorFinanciamentoProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Valor Parcelado:</label>
+                            <p id="valorParceladoProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Número de Parcelas:</label>
+                            <p id="quantidadeParcelasProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Total Recebido:</label>
+                            <p id="valorTotalRecebido"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+                <hr>
+
+                <h2 class="card-title"><b>Agência Responsável</b></h2>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Código:</label>
+                            <p id="codigoAgenciaResponsavelProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Unidade:</label>
+                            <p id="nomeAgenciaResponsavelProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Caixa Postal:</label>
+                            <p id="caixaPostalAgenciaResponsavelProposta"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Contato:</label>
+                            <p id="contatoAgenciaResponsavelProposta"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+                <hr>
+
+                <h2 class="card-title"><b>CIOPE</b></h2>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Tipo de Contratacao:</label>
+                            <p id="tipoContratacaoCiope"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Card Agrupamento:</label>
+                            <p id="cardAgrupamentoCiope"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Status Dossiê:</label>
+                            <p id="statusDossieCiope"></p>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+
+
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col -->
+</div> <!-- /.row -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Histórico</h3>
+            </div> <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div id="tblHistorico" class="col-sm-12 table-responsive p-0">
+                        <!-- <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID Historico</th>
+                                <th>Data/Hora</th>
+                                <th>Responsável</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table> -->
+                    </div> <!-- /.col-sm-12 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col -->
+</div> <!-- /.row -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Mensagens Enviadas</h3>
+            </div> <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div id="tblHistorico" class="col-sm-12 table-responsive p-0">
+                        <!-- <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID Historico</th>
+                                <th>Data/Hora</th>
+                                <th>Responsável</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table> -->
+                    </div> <!-- /.col-sm-12 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col -->
+</div> <!-- /.row -->
+
 
 @section('footer')
 
@@ -522,14 +725,36 @@
 
 @section('js')
     <script src="{{ asset('js/global/anima_input_file.js') }}"></script>
-    <script src="{{ asset('js/formata_tabela_documentos.js') }}"></script>
-    <script src="{{ asset('js/formata_tabela_laudos.js') }}"></script>
+    <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script>
+    <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script>
 
     <script>
+
+
+        $.getJSON('js/imovel_mockado.json', function(dados){
+            console.log(dados[0]);
+
+            var numeroBem = dados[0].numeroBem;
+            var dossieDigital = dados[0].dossieDigital;
+
+            _formataTabelaDocumentos (numeroBem, dossieDigital);
+
+            _formataTabelaLaudos (numeroBem);
+
+
+            $.each(dados[0], function(key, item) {
+                $('#' + key).html(item);
+            });
+
+
+        });
+
+
         var tamanhoMaximoView = 8;
         var tamanhoMaximo = 8388608;
+
         _animaInputFile();
-        _formataTabelaDocumentos ();
-        _formataTabelaLaudos ();
+
+
     </script>
 @stop

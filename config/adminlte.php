@@ -50,7 +50,7 @@ return [
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => true,
-    'layout_fixed_footer' => null,
+    'layout_fixed_footer' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -226,6 +226,11 @@ return [
             'icon'        => 'fas fa-lg fa-directions',
         ],
 
+        [
+            'text'       => 'Conheça o Projeto',
+            'url'         => '/projeto',
+            'icon'        => 'fas fa-lg fa-toolbox',
+        ],
 
 
         ['header' => 'IMÓVEIS CAIXA'],
@@ -425,14 +430,11 @@ return [
         ['header' => 'GERENCIAL'],
         [
             'text'       => 'Perfis de Acesso',
-            'url'        => '#',
+            'url'        => '/equipes',
             'icon'       => 'fas fa-lg fa-users-cog',
             // 'icon_color' => 'blue',
         ],
-        [
-            'text'       => 'Requisitos do projeto',
-            // 'icon_color' => 'blue',
-        ],
+        
 
 
         // [
