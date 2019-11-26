@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Classes;
-use App\Empregado;
+use App\Models\Empregado;
 
 class Ldap
 {

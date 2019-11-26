@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Classes\Ldap;
+use App\Classes\CadastraAcessoPortal;
 use App\Models\Empregado;
-use App\Models\AcessaPortal;
+
 
 class SetCookiesSession
 {
@@ -45,7 +46,7 @@ class SetCookiesSession
                 $usuario = new Ldap;
                 $empregado = Empregado::find($usuario->getMatricula());
                 $urlBaseSistemaInova = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '/')+1));
-                $perfilAcessoEsteiraComex = new AcessaPortal($empregado);
+                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
 
                 $request->session()->put([
                     'matricula' => $empregado->matricula,

@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\LogAcessoPortal;
+use App\Models\LogAcessosPortal;
 
 
 class PortalLogAcessoMiddleware
@@ -17,7 +17,7 @@ class PortalLogAcessoMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $inovaLogAcesso = new LogAcessoPortal;
+        $inovaLogAcesso = new LogAcessosPortal;
         $inovaLogAcesso->dataAcesso = date("Y-m-d H:i:s", time());
         $inovaLogAcesso->matricula = $request->session()->get('matricula');
         
@@ -33,8 +33,10 @@ class PortalLogAcessoMiddleware
         $inovaLogAcesso->nomePagina = preg_replace('/[0-9]+/', '', $request->path());
         
         // CAPTURA NAVEGADOR E A VERSÃO DELE
-        $inovaLogAcesso->nomeNavegador = \Browser::browserFamily();;
-        $inovaLogAcesso->versaoNavegador = \Browser::browserVersion();
+        // $inovaLogAcesso->nomeNavegador = \Browser::browserFamily();
+        // $inovaLogAcesso->versaoNavegador = \Browser::browserVersion();
+        $inovaLogAcesso->nomeNavegador = 'navegadorFake';
+        $inovaLogAcesso->versaoNavegador = 'versaoFake';
         $inovaLogAcesso->save();
 
         return $next($request);
