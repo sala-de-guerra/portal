@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\RelacaoAgSrComEmail;
-// use App\Classes\Comex\Contratacao\MensageriasFaseConformidadeDocumental;
-// use App\Classes\Comex\Contratacao\MensageriasFaseLiquidacaoOperacao;
-// use App\Classes\Comex\Contratacao\MensageriasFaseVerificacaoContrato;
 
 class ImoveisCaixaPhpMailer
 {
