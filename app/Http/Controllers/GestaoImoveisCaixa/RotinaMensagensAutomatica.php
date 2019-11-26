@@ -310,7 +310,7 @@ class RotinaMensagensAutomatica extends Controller
                 [UNA] = 'GILIE/SP'
                 AND [STATUS_IMOVEL] = 'Em contratação'
                 AND ([TIPO_VENDA] LIKE 'Venda Online' OR [TIPO_VENDA] like 'Venda Direta Online' OR [TIPO_VENDA] LIKE '1º Leilão SFI' OR [TIPO_VENDA] LIKE '2º Leilão SFI')
-                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -40, GETDATE())
+                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -60, GETDATE())
                 AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] = 'Patrimonial -Realização de Garantia')
             ORDER BY
                 'grupoClassificacao'
@@ -384,7 +384,7 @@ class RotinaMensagensAutomatica extends Controller
                 [GILIE] = 'GILIE/SP'
                 AND [DE_Status_SIMOV] = 'Em Contratação'
                 AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
-                AND [DT_Sinaf] >= DATEADD(DAY, -40, GETDATE())
+                AND [DT_Sinaf] >= DATEADD(DAY, -60, GETDATE())
                 AND [Valor] >= [VL_TOTAL_RECEBIDO]
             ORDER BY 
                 grupoClassificacao
