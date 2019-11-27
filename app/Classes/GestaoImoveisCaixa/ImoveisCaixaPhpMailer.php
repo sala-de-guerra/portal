@@ -5,10 +5,7 @@ namespace App\Classes\GestaoImoveisCaixa;
 use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use App\RelacaoAgSrComEmail;
-// use App\Classes\Comex\Contratacao\MensageriasFaseConformidadeDocumental;
-// use App\Classes\Comex\Contratacao\MensageriasFaseLiquidacaoOperacao;
-// use App\Classes\Comex\Contratacao\MensageriasFaseVerificacaoContrato;
+use App\Models\RelacaoAgSrComEmail;
 
 class ImoveisCaixaPhpMailer
 {
@@ -16,42 +13,40 @@ class ImoveisCaixaPhpMailer
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      */
-    public static function enviarMensageria(Request $request, $assunto, $modeloMensagem)
+    public static function enviarMensageria($request, $assunto, $modeloMensagem)
     {
         $mail = new PHPMailer(true);
-        $objRelacaoEmailUnidades = ContratacaoPhpMailer::validaUnidadeDemandanteEmail($request->codigoAgencia);
-        ContratacaoPhpMailer::carregarDadosEmail($request, $assunto, $modeloMensagem, $objRelacaoEmailUnidades, $mail);
-        ContratacaoPhpMailer::enviarEmail($mail);
+        $objRelacaoEmailUnidades = self::validaUnidadeDemandanteEmail($request);
+        self::carregarDadosEmail($request, $assunto, $modeloMensagem, $objRelacaoEmailUnidades, $mail);
+        self::enviarEmail($mail);
     }
 
     public static function validaUnidadeDemandanteEmail($objEsteiraContratacao) 
     {
-        if ($objEsteiraContratacao->agResponsavel == null || $objEsteiraContratacao->agResponsavel === "NULL") {
-            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('nomeAgencia', $objEsteiraContratacao->srResponsavel)->first();
-            $arrayDadosEmailUnidade = [
-                'nomeSr' => $objRelacaoEmailUnidades->nomeSr,
-                'emailSr' => $objRelacaoEmailUnidades->emailsr
-            ];
-        } else {
-            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objEsteiraContratacao->agResponsavel)->first();
+        // if ($objEsteiraContratacao->agResponsavel == null || $objEsteiraContratacao->agResponsavel === "NULL") {
+        //     $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('nomeAgencia', $objEsteiraContratacao->srResponsavel)->first();
+        //     $arrayDadosEmailUnidade = [
+        //         'nomeSr' => $objRelacaoEmailUnidades->nomeSr,
+        //         'emailSr' => $objRelacaoEmailUnidades->emailsr
+        //     ];
+        // } else {
+            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objEsteiraContratacao->codigoAgencia)->first();
             $arrayDadosEmailUnidade = [
                 'nomeAgencia' => $objRelacaoEmailUnidades->nomeAgencia,
                 'emailAgencia' => $objRelacaoEmailUnidades->emailAgencia,
                 'nomeSr' => $objRelacaoEmailUnidades->nomeSr,
                 'emailSr' => $objRelacaoEmailUnidades->emailsr
             ];
-        }
+        // }
         return json_decode(json_encode($arrayDadosEmailUnidade), FALSE);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      */
-    public static function carregarDadosEmail(Request $request, $assunto, $modeloMensagem, $objRelacaoEmailUnidades, $mail)
+    public static function carregarDadosEmail($request, $assunto, $modeloMensagem, $objRelacaoEmailUnidades, $mail)
     {
         //Server settings
         $mail->isSMTP();
@@ -92,18 +87,19 @@ class ImoveisCaixaPhpMailer
   
         // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
 
-        $mail->Subject = "$assunto - $numeroBem | $nomeProponente";
+        $mail->Subject = $assunto;
 
-        $mensagemAutomatica = file_get_contents((".Mensagens/{$modeloMensagem}.php"), dirname(__FILE__));
+        $mensagemAutomatica = file_get_contents(("Mensagens/{$modeloMensagem}.php"), dirname(__FILE__));
 
-        $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->numeroBem, $mensagemAutomatica);
+        $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoBem, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $request->nomeAgencia, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_PROPONENTE%", $request->nomeProponente, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%EMAIL_PROPONENTE%", $request->email_Proponente, $mensagemAutomatica);
+        $mensagemAutomatica = str_replace("%EMAIL_PROPONENTE%", $request->emailProponente, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_CORRETOR%", $request->nomeCorretor, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%EMAIL_CORRETOR%", $request->emailCorretor, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%ENDERECO_IMOVEL%", $request->enderecoImovel, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%MO_UTILIZADO%", $request->moUtilizado, $mensagemAutomatica);
+        $mensagemAutomatica = str_replace("%EDITAL_LEILAO%", $request->editalLeilao, $mensagemAutomatica);
 
         $mail->Body = $mensagemAutomatica;
 
@@ -114,9 +110,9 @@ class ImoveisCaixaPhpMailer
     {
         try {
             $mail->send();
-            // echo 'Mensagem enviada com sucesso';
+            echo 'Mensagem enviada com sucesso';
         } catch (Exception $e) {
-            // echo "Mensagem não pode ser enviada. Erro: {$mail->ErrorInfo}";
+            echo "Mensagem não pode ser enviada. Erro: {$mail->ErrorInfo}";
         }
     }
 
