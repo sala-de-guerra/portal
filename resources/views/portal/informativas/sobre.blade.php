@@ -24,6 +24,7 @@
 
 @section('content')
 
+<!--
 
 <div class="row">
     <div class="col-md-6 d-flex justify-content-center">
@@ -89,7 +90,7 @@
                 Callouts
                 </h3>
             </div>
-            <!-- /.card-header -->
+            /.card-header
             <div class="card-body">
                 <div class="callout callout-danger">
                 <h5>I am a danger callout!</h5>
@@ -109,11 +110,11 @@
                 <p>This is a yellow callout.</p>
                 </div>
             </div>
-            <!-- /.card-body -->
+            /.card-body
         </div>
-        <!-- /.card -->
+        /.card
     </div>
-    <!-- /.col -->
+    /.col
 
 </div>
 
@@ -128,7 +129,7 @@
                 Callouts
                 </h3>
             </div>
-            <!-- /.card-header -->
+            /.card-header
             <div class="card-body">
                 <div class="callout callout-danger">
                 <h5>I am a danger callout!</h5>
@@ -153,11 +154,11 @@
                 <p>This is a green callout.</p>
                 </div>
             </div>
-            <!-- /.card-body -->
+            /.card-body
         </div>
-        <!-- /.card -->
+        /.card
     </div>
-    <!-- /.col -->
+    /.col
     <div class="col-md-6">
         <div class="card card-default">
             <div class="card-header">
@@ -166,7 +167,7 @@
                 Callouts
                 </h3>
             </div>
-            <!-- /.card-header -->
+            /.card-header
             <div class="card-body">
                 <div class="callout callout-danger">
                 <h5>I am a danger callout!</h5>
@@ -191,15 +192,18 @@
                 <p>This is a green callout.</p>
                 </div>
             </div>
-            <!-- /.card-body -->
+            /.card-body
         </div>
-        <!-- /.card -->
+        /.card
     </div>
-    <!-- /.col -->
+    /.col
 
 
-</div> <!-- /.row -->
+</div> 
+/.row
 
+
+-->
 @section('footer')
 
 
