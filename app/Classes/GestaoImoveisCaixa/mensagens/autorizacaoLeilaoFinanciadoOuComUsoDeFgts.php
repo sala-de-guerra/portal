@@ -63,14 +63,18 @@
 
     <table>
         <thead>
-            <th class="centralizado"><b>Número do Contrato Anterior</b></th>
-            <th class="centralizado"><b>Endereço Completo do Imóvel</b></th>
-            <th class="centralizado"><b>Nome do Proponente</b></th>
+            <tr>
+                <th class="centralizado"><b>Número do Contrato Anterior</b></th>
+                <th class="centralizado"><b>Endereço Completo do Imóvel</b></th>
+                <th class="centralizado"><b>Nome do Proponente</b></th>
+            </tr>
         </thead>
         <tbody>
-            <td class="centralizado">%CONTRATO_BEM%</td>
-            <td class="centralizado">%ENDERECO_IMOVEL%</td>
-            <td class="centralizado">%NOME_PROPONENTE%</td>
+            <tr>
+                <td class="centralizado">%CONTRATO_BEM%</td>
+                <td class="centralizado">%ENDERECO_IMOVEL%</td>
+                <td class="centralizado">%NOME_PROPONENTE%</td>
+            </tr>
         </tbody>
     </table>
 
