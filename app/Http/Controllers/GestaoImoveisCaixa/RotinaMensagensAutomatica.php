@@ -142,44 +142,55 @@ class RotinaMensagensAutomatica extends Controller
             'emailCorretor' => isset($contrato->emailCorretor) ? $contrato->emailCorretor : null,
             'contratoBem' => isset($contrato->numeroBem) ? $contrato->numeroBem : null,
             'enderecoImovel' => isset($contrato->enderecoImovel) ? $contrato->enderecoImovel : null,
-            'moUtilizado' => self::definirMoDeAutorizacaoDaProposta(),
             'editalLeilao' => isset($contrato->numeroLeilao) ? $contrato->numeroLeilao : null,
+            'moUtilizado' => self::definirMoDeAutorizacaoDaProposta(),
+            
         );
 
-        if($contrato->existeCca == 'SIM') { 
-            $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente - Correspondente Caixa Aqui";
+        if ($dadosEmail->codigoAgencia !== null) {
+            if($contrato->existeCca == 'SIM') { 
+                $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente - Correspondente Caixa Aqui";
+            } else {
+                $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente";
+            }
+    
+            if (self::getTipoDeVenda() == 'LEILAO') {
+                if (self::getTipoDeProposta() == 'À vista') {
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaComAcao');
+                    } else {
+                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaSemAcao');
+                    }
+                } else {
+                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoFinanciadoOuComUsoDeFgts');
+                }
+            } else {
+                if (self::getTipoDeProposta() == 'À vista') {
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
+                    } else {
+                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
+                    }
+                } else {
+                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
+                }
+            } 
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->tipo = "MENSAGERIA";
+            $historico->atividade = "CONTRATACAO";
+            $historico->observacao = "ENVIO DE MENSAGERIA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            $historico->save();
         } else {
-            $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente";
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->tipo = "ERRO MENSAGERIA";
+            $historico->atividade = "CONTRATACAO";
+            $historico->observacao = "FALTA AGENCIA DE VINCULAÇÃO DA PROPOSTA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            $historico->save();
         }
-
-        if (self::getTipoDeVenda() == 'LEILAO') {
-            if (self::getTipoDeProposta() == 'À vista') {
-                if (self::setExisteAcaoJucicial() == 'SIM') {
-                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaComAcao');
-                } else {
-                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaSemAcao');
-                }
-            } else {
-                ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoFinanciadoOuComUsoDeFgts');
-            }
-        } else {
-            if (self::getTipoDeProposta() == 'À vista') {
-                if (self::setExisteAcaoJucicial() == 'SIM') {
-                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
-                } else {
-                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
-                }
-            } else {
-                ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
-            }
-        } 
-
-        $historico = new HistoricoPortalGilie;
-        $historico->matricula = "";
-        $historico->tipo = "MENSAGERIA";
-        $historico->atividade = "CONTRATACAO";
-        $historico->observacao = "ENVIO DE MENSAGERIA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
-        $historico->save();
+        
+        
 
         // switch (self::getClassificacaoImovel()) {
         //     case 'PATRIMONIAL':
@@ -285,7 +296,7 @@ class RotinaMensagensAutomatica extends Controller
 
     public static function validarExistenciaDeAcaoJudicial($contrato)
     {
-        if ($contrato->temAcaoJudial == 'NAO') {
+        if ($contrato->temAcaoJudicial == 'NAO') {
             self::setExisteAcaoJucicial('SIM');
         } else {
             self::setExisteAcaoJucicial('NAO');
@@ -363,7 +374,7 @@ class RotinaMensagensAutomatica extends Controller
                                     WHEN [VALOR_REC_PROPRIOS_PROPOSTA] = [VALOR_TOTAL_PROPOSTA] THEN 'A VISTA'
                                     ELSE 'FINANCIADO'
                                 END
-                ,'temAcaoJudial' = CASE
+                ,'temAcaoJudicial' = CASE
                                     WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
                                     WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
                                     WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
@@ -394,7 +405,7 @@ class RotinaMensagensAutomatica extends Controller
                 [UNA] = 'GILIE/SP'
                 AND [STATUS_IMOVEL] = 'Em contratação'
                 AND ([TIPO_VENDA] LIKE 'Venda Online' OR [TIPO_VENDA] like 'Venda Direta Online' OR [TIPO_VENDA] LIKE '1º Leilão SFI' OR [TIPO_VENDA] LIKE '2º Leilão SFI')
-                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -40, GETDATE())
+                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -60, GETDATE())
                 AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] = 'Patrimonial -Realização de Garantia')
             ORDER BY
                 'grupoClassificacao'
@@ -436,7 +447,7 @@ class RotinaMensagensAutomatica extends Controller
                                     WHEN [Valor] >= [VALOR_TOTAL_PROPOSTA] AND SIMOV.[VALOR_FGTS_PROPOSTA] = 0 AND SIMOV.[VALOR_FINANCIADO_PROPOSTA] = 0 THEN 'A VISTA'
                                     ELSE 'FINANCIADA OU COM FGTS'
                                 END
-                ,'temAcaoJudial' = CASE
+                ,'temAcaoJudicial' = CASE
                                         WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
                                         WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
                                         WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
@@ -468,7 +479,7 @@ class RotinaMensagensAutomatica extends Controller
                 [GILIE] = 'GILIE/SP'
                 AND [DE_Status_SIMOV] = 'Em Contratação'
                 AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
-                AND [DT_Sinaf] >= DATEADD(DAY, -40, GETDATE())
+                AND [DT_Sinaf] >= DATEADD(DAY, -60, GETDATE())
                 AND [Valor] >= [VL_TOTAL_RECEBIDO]
             ORDER BY 
                 grupoClassificacao
