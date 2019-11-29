@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,12 +34,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" type="text/css" href="./estilos.css">  não deu --> 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MODELO - AUTORIZAÇÃO PARA CONTRATAÇÃO LEILÃO À VISTA - IMÓVEL CAIXA</title>
+    <title>MODELO - AUTORIZAÇÃO PARA CONTRATAÇÃO LEILÃO COM FINANCIAMENTO - %ORIGEM_MATRICULA%</title>
 
 </head>
 
 
 <body style='font-family: sans-serif; padding: 20px'>
+
+<h4>Para Conferir e Enviar E-mail</h4>
+<ul>
+    <li>Contrato: %CONTRATO_BEM%</li>
+    <li>Nome Agência: %NOME_AGENCIA%</li>
+    <li>Código Agência: %CODIGO_AGENCIA%</li>
+    <li>Nome Proponente: %NOME_PROPONENTE%</li>
+    <li>E-mail Proponente: %EMAIL_PROPONENTE%</li>
+    <li>Nome Corretor: %NOME_CORRETOR%</li>
+    <li>E-mail Corretor: %EMAIL_CORRETOR%</li>
+    <li>Endereço Imóvel: %ENDERECO_IMOVEL%</li>
+    <li>MO Utilizado: %MO_UTILIZADO%</li>
+    <li>Edital Leião: %EDITAL_LEILAO%</li>
+    <li>Manual Utilizado: %MN_UTILIZADO%</li>
+    <li>Origem Matricula: %ORIGEM_MATRICULA%</li>
+</ul>
 
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
@@ -52,13 +68,13 @@
 <br>
     <p>Senhor (a) Gerente,</p>
 
-    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO DE LEILÃO À VISTA</b>
+    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO - LEILÃO COM FINANCIAMENTO OU USO DE FGTS</b>
 
     <b>1   DA AUTORIZAÇÃO:</b>
     <br>    
 
     <p>
-        1.1  Autorizamos a contratação de imóvel adjudicado oriundo do Edital %EDITAL_LEILAO%, conforme MN AD057 (Imóveis CAIXA):
+        1.1  Autorizamos a contratação de imóvel adjudicado oriundo do Edital %EDITAL_LEILAO%, conforme %MN_UTILIZADO%
     </p>
 
     <table>
@@ -102,7 +118,7 @@
 
     <p>
         2.3   O valor referente ao pagamento dos recursos próprios deverá ser recolhido por meio da guia PP15.  Na data da 
-        autenticação, enviar cópia do comprovante de pagamento digitalizado para o e-mail giliesp04@caixa.gov.br;
+        autenticação, enviar cópia do comprovante de pagamento digitalizado para o e-mail giliesp01@caixa.gov.br;
     </p>
 
     <b>3    DA CONTRATAÇÃO:</b>
