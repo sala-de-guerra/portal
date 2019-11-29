@@ -22,6 +22,12 @@ Route::get('/', function () {
     return view('portal.index');
 });    
 
+//teste
+Route::get('/teste', function () {
+    return view('teste');
+});    
+
+
  // sobre
  Route::get('/sobre', function () {
     return view('portal.informativas.sobre');

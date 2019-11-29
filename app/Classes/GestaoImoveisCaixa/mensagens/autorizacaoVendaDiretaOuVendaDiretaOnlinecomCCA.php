@@ -34,7 +34,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" type="text/css" href="./estilos.css">  não deu --> 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MODELO - AUTORIZAÇÃO PARA CONTRATAÇÃO VENDA ONLINE FINANCIADO - %ORIGEM_IMOVEL%</title>
+    <title>MODELO - AUTORIZAÇÃO PARA CONTRATAÇÃO VENDA ONLINE - CCA - %ORIGEM_IMOVEL%</title>
 
 </head>
 
@@ -70,7 +70,7 @@
 <br>
     <p>Senhor (a) Gerente,</p>
 
-    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO VENDA ONLINE COM FINANCIAMENTO E/OU FGTS</b>
+    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO IMOVEIS CAIXA - CORRESPONDENTE CAIXA AQUI</b>
 
     <b>1   DA AUTORIZAÇÃO:</b>
     <br>    
@@ -128,19 +128,40 @@
     <br>
 
     <p>
-        3.1   Alertamos que todos os imóveis em contratação pela GILIE/SP que contarão com financiamento habitacional 
-        e/ou FGTS estão incluídos na fila: FILA - IMÓVEIS CAIXA/EMGEA - CONTRATAÇÃO;
+        3.1  Informamos que as propostas de compra de imóveis da CAIXA por meio de financiamento habitacional (com ou sem utilização de FGTS) 
+	devem ser contratadas por meio do CCA, conforme opção do cliente realizada no momento da proposta no site da CAIXA;
     </p>
     
     <p>
-        3.2   Após a conformidade pela CICOB/RE da documentação enviada pela GILIE/SP, a Agência deverá proceder a digitalização 
-        dos documentos do cliente na estação de captura SICT2 (FILA - IMOVEIS CAIXA/EMGEA – CONTRATAÇÃO), para complementação do 
-        dossiê habitacional e prosseguimento do processo de contratação;
+        3.2  O CCA acessará o cadastro do imóvel e documentos digitalizados pela GILIE no SIOPI WEB e realizará os procedimentos de concessão no SICAQ e 
+	no SIOPI WEB (pesquisas, avaliação de risco e inclusão dos dados da proposta).
+
     </p>
 
     <p>
-        3.3   Em caso de dúvidas sobre o envio e tratamento da documentação do COMPRADOR pela CICOB/RE, 
-        favor acessar o ATENDE: http://inovacao.suban.caixa/#/atende.
+        3.3 O CCA confirmará a isenção da tarifa de laudo de avaliação e encaminhará toda a documentação do proponente e do imóvel através do SICTDWEB para verificação da conformidade
+    </p>
+	
+     <p>
+        3.4 o CCA verifica a análise do Parecer emitido pela área responsável:
+    </p>
+
+     <p>
+       3.5 O CAA atende às exigências de parecer inconforme
+
+    </p>
+     <p>
+        3.6 O CAA agenda a data de assinatura com a Agência e com o proponente no caso de parecer conforme;
+
+    </p>
+     <p>
+        3.7  A agência realiza os procedimentos no SIOPI para assinatura do contrato 
+	(emissão do instrumento contratual, assinatura do cliente, confirmação da assinatura no sistema) e a autenticação/contabilização dos recebimentos conforme Anexo I do AD084. 
+
+    </p>
+     <p>
+       	3.8 Por fim, A agência, envia os documentos autenticados para a GILIE de vinculação de modo a viabilizar o lançamento da venda no SIACI/SIMOV.
+
     </p>
 
     <b>4    DO REGISTRO:</b>
@@ -192,6 +213,10 @@
         financiamento junto à CAIXA, nos registros da operação perante o cartório de registro de imóveis e prefeitura na 
         intermediação de pagamento de débitos de responsabilidade da CAIXA incidentes sobre o imóvel até e auxílio na desocupação 
         do imóvel, se for o caso.
+    </p>
+     <p>
+        6.4  É importante ressaltar que o serviço de CCA pertence a um contrato distinto de corretagem e portanto, caso o corretor 
+	também seja CCA este será remunerado duas vezes, uma pela intermediação da venda e outra pelo assessoramento na liberação do crédito/FGTS.
     </p>
 
     <b>7    DA IMPOSSIBILIDADE DA CONTRATAÇÃO:</b>

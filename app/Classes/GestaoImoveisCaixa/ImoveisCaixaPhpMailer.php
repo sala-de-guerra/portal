@@ -64,6 +64,8 @@ class ImoveisCaixaPhpMailer
         /* DESTINATÁRIOS PILOTO */
         // if (session()->get('codigoLotacaoAdministrativa') == '7257' || session()->get('codigoLotacaoFisica') == '7257') {
             $mail->addAddress('c111710@mail.caixa');
+            $mail->addAddress('c142765@mail.caixa');
+            $mail->addAddress('c098453@mail.caixa');
         // } else {
         //     $mail->addAddress(session()->get('matricula') . '@mail.caixa');
         // }
@@ -93,6 +95,7 @@ class ImoveisCaixaPhpMailer
 
         $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoBem, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $request->nomeAgencia, $mensagemAutomatica);
+        $mensagemAutomatica = str_replace("%CODIGO_AGENCIA%", $request->codigoAgencia, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_PROPONENTE%", $request->nomeProponente, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%EMAIL_PROPONENTE%", $request->emailProponente, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_CORRETOR%", $request->nomeCorretor, $mensagemAutomatica);
@@ -100,6 +103,8 @@ class ImoveisCaixaPhpMailer
         $mensagemAutomatica = str_replace("%ENDERECO_IMOVEL%", $request->enderecoImovel, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%MO_UTILIZADO%", $request->moUtilizado, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%EDITAL_LEILAO%", $request->editalLeilao, $mensagemAutomatica);
+        $mensagemAutomatica = str_replace("%MN_UTILIZADO%", $request->normativoUtilizado, $mensagemAutomatica);
+        $mensagemAutomatica = str_replace("%ORIGEM_MATRICULA%", $request->origemMatricula, $mensagemAutomatica);
 
         $mail->Body = $mensagemAutomatica;
 

@@ -25,6 +25,7 @@ class RotinaMensagensAutomatica extends Controller
     private static $tipoDeVenda;
     private static $classificacaoImovel;
     private static $origemMatricula;
+    private static $manualUtilizado;
 
     public static function getExisteAcaoJucicial()
     {
@@ -85,6 +86,16 @@ class RotinaMensagensAutomatica extends Controller
         self::$origemMatricula = $value;
         return self::$origemMatricula;
     }
+
+    public static function getManualUtilizado()
+    {
+        return self::$manualUtilizado;
+    }
+    public static function setManualUtilizado($value)
+    {
+        self::$manualUtilizado = $value;
+        return self::$manualUtilizado;
+    }
     
     public static function enviarMensageriasAutorizacaoContratacao()
     {
@@ -106,9 +117,9 @@ class RotinaMensagensAutomatica extends Controller
             if ($contrato->grupoClassificacao == 'EMGEA') {
                 self::setClassificacaoImovel('EMGEA');
                 if ($contrato->origemMatricula == 'Emgea') {
-                    self::setOrigemMatricula('EMGEA');
+                    self::setOrigemMatricula('EMGEA/EMGEA');
                 } else {
-                    self::setOrigemMatricula('CAIXA');
+                    self::setOrigemMatricula('EMGEA/CAIXA');
                 }
             } else {
                 self::setClassificacaoImovel('CAIXA');
@@ -144,37 +155,56 @@ class RotinaMensagensAutomatica extends Controller
             'enderecoImovel' => isset($contrato->enderecoImovel) ? $contrato->enderecoImovel : null,
             'editalLeilao' => isset($contrato->numeroLeilao) ? $contrato->numeroLeilao : null,
             'moUtilizado' => self::definirMoDeAutorizacaoDaProposta(),
+            'origemMatricula' => self::getOrigemMatricula(),
+            'normativoUtilizado' => self::getManualUtilizado(),
             
         );
+        var_dump($dadosEmail) . '<br>';
 
-        if ($dadosEmail->codigoAgencia !== null) {
+        if ($dadosEmail->codigoAgencia !== null || $dadosEmail->emailProponente) {
             if($contrato->existeCca == 'SIM') { 
-                $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente - Correspondente Caixa Aqui";
+                if (self::GetTipoDeProposta() == 'À vista') {
+                    if (self::getExisteAcaoJucicial() == 'SIM') {
+                        $assunto = "Autorização para contratação Imóvel - Correspondente Caixa Aqui - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Com ação Judicial";
+                    } else {
+                        $assunto = "Autorização para contratação Imóvel - Correspondente Caixa Aqui - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Sem ação Judicial";
+                    }
+                } else {
+                    $assunto = "Autorização para contratação Imóvel - Correspondente Caixa Aqui - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao";
+                }                
+                ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlinecomCCA');
             } else {
-                $assunto = "Autorização para contratação Imóvel $contrato->grupoClassificacao - Proponente: $contrato->nomeProponente";
+                if (self::getTipoDeVenda() == 'LEILAO') {
+                    if (self::getTipoDeProposta() == 'À vista') {
+                        if (self::getExisteAcaoJucicial() == 'SIM') {
+                            $assunto = "Autorização para contratação Imóvel - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Leilão à Vista - Com ação Judicial";
+                            ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaComAcao');
+                        } else {
+                            $assunto = "Autorização para contratação Imóvel - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Leilão à Vista - Sem ação Judicial";
+                            ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaSemAcao');
+                        }
+                    } else {
+                        $assunto = "Autorização para contratação Imóvel - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Leilão Financiado ou com uso de FGTS";
+                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoFinanciadoOuComUsoDeFgts');
+                    }
+                } else {
+                    if (self::getTipoDeProposta() == 'À vista') {
+                        if (self::getExisteAcaoJucicial() == 'SIM') {
+                            $assunto = "Autorização para contratação Imóvel - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Venda Direta à Vista - Com ação Judicial";
+                            ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
+                        } else {
+                            $assunto = "Autorização para contratação Imóvel - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Venda Direta à Vista - Sem ação Judicial";
+
+                            ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
+                        }
+                    } else {
+                        $assunto = "Autorização para contratação Imóvel - Proponente: $contrato->nomeProponente - Tipo Imóvel: $contrato->grupoClassificacao - Venda Direta Financiado ou com uso de FGTS";
+                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
+                    }
+                }
             }
-    
-            if (self::getTipoDeVenda() == 'LEILAO') {
-                if (self::getTipoDeProposta() == 'À vista') {
-                    if (self::getExisteAcaoJucicial() == 'SIM') {
-                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaComAcao');
-                    } else {
-                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoAvistaSemAcao');
-                    }
-                } else {
-                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoLeilaoFinanciadoOuComUsoDeFgts');
-                }
-            } else {
-                if (self::getTipoDeProposta() == 'À vista') {
-                    if (self::getExisteAcaoJucicial() == 'SIM') {
-                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
-                    } else {
-                        ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
-                    }
-                } else {
-                    ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'autorizacaoVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
-                }
-            } 
+            echo $assunto . '<br>';
+             
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
             $historico->tipo = "MENSAGERIA";
@@ -186,7 +216,7 @@ class RotinaMensagensAutomatica extends Controller
             $historico->matricula = session('matricula');
             $historico->tipo = "ERRO MENSAGERIA";
             $historico->atividade = "CONTRATACAO";
-            $historico->observacao = "FALTA AGENCIA DE VINCULAÇÃO DA PROPOSTA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            $historico->observacao = "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
             $historico->save();
         }
         
@@ -197,22 +227,22 @@ class RotinaMensagensAutomatica extends Controller
         //         if (self::getTipoDeVenda() == 'LEILAO') {
         //             if (self::getTipoDeProposta() == 'À vista') {
         //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoAvistaComAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoAvistaComAcao');
         //                 } else {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoAvistaSemAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoAvistaSemAcao');
         //                 }
         //             } else {
-        //                 ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoFinanciadoOuComUsoDeFgts');
+                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoFinanciadoOuComUsoDeFgts');
         //             }
         //         } else {
         //             if (self::getTipoDeProposta() == 'À vista') {
         //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
         //                 } else {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
         //                 }
         //             } else {
-        //                 ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
+                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
         //             }
         //         }   
         //         break;
@@ -220,22 +250,22 @@ class RotinaMensagensAutomatica extends Controller
         //         if (self::getTipoDeVenda() == 'LEILAO') {
         //             if (self::getTipoDeProposta() == 'À vista') {
         //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoAvistaComAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoAvistaComAcao');
         //                 } else {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoAvistaSemAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoAvistaSemAcao');
         //                 }
         //             } else {
-        //                 ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoFinanciadoOuComUsoDeFgts');
+                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoFinanciadoOuComUsoDeFgts');
         //             }
         //         } else {
         //             if (self::getTipoDeProposta() == 'À vista') {
         //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
         //                 } else {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
         //                 }
         //             } else {
-        //                 ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
+                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
         //             }
         //         }
         //         break;
@@ -243,22 +273,22 @@ class RotinaMensagensAutomatica extends Controller
         //         if (self::getTipoDeVenda() == 'LEILAO') {
         //             if (self::getTipoDeProposta() == 'À vista') {
         //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoAvistaComAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoAvistaComAcao');
         //                 } else {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoAvistaSemAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoAvistaSemAcao');
         //                 }
         //             } else {
-        //                 ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoFinanciadoOuComUsoDeFgts');
+                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoFinanciadoOuComUsoDeFgts');
         //             }
         //         } else {
         //             if (self::getTipoDeProposta() == 'À vista') {
         //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
         //                 } else {
-        //                     ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
+                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
         //                 }
         //             } else {
-        //                 ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
+                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
         //             }
         //         }
         //         break;
@@ -308,21 +338,26 @@ class RotinaMensagensAutomatica extends Controller
 
     public static function definirMoDeAutorizacaoDaProposta()
     {
-        if (self::getOrigemMatricula() == 'EMGEA') {
+        if (self::getOrigemMatricula() == 'EMGEA/EMGEA') {
             if (self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
                 if (self::getTipoDeVenda() == 'LEILAO') {
+                    self::setManualUtilizado('MN AD084');
                     return 'MO 19.526';
                 } else {
                     if (self::getExisteAcaoJucicial() == 'SIM') {
+                        self::setManualUtilizado('MN AD084');
                         return 'MO 19.467';
                     } else {
+                        self::setManualUtilizado('MN AD084');
                         return 'MO 19.319';
                     }
                 }
             } else {
                 if (self::getExisteAcaoJucicial() == 'SIM') {
+                    self::setManualUtilizado('MN AD084');
                     return 'MO 19.466';
                 } else {
+                    self::setManualUtilizado('MN AD084');
                     return 'MO 19.526';
                 }
             }
@@ -330,21 +365,27 @@ class RotinaMensagensAutomatica extends Controller
             if (self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
                 if (self::getTipoDeVenda() == 'LEILAO') {
                     if (self::getExisteAcaoJucicial() == 'SIM') {
+                        self::setManualUtilizado('MN AD057');
                         return 'MO 19.130';
                     } else {
+                        self::setManualUtilizado('MN AD057');
                         return 'MO 19.208';
                     }
                 } else {
                     if (self::getExisteAcaoJucicial() == 'SIM') {
+                        self::setManualUtilizado('MN AD084');
                         return 'MO 19.435';
                     } else {
+                        self::setManualUtilizado('MN AD057');
                         return 'MO 19.096';
                     }
                 } 
             } else {
                 if (self::getExisteAcaoJucicial() == 'SIM') {
+                    self::setManualUtilizado('MN AD057 e AD084');
                     return 'MO 19.436';
                 } else {
+                    self::setManualUtilizado('MN AD057 e AD084');
                     return 'MO 19.227';
                 }
             }
@@ -354,6 +395,18 @@ class RotinaMensagensAutomatica extends Controller
     public static function listagemContratosAutorizacaoImoveisPatrimoniais()
     {
         $relacaoContratosPatrimoniais = DB::select("
+            WITH TABELA_EMAIL_PROPONETES AS (
+                SELECT DISTINCT
+                    [NOME PROPONENTE]
+                    ,[CPF/CNPJ PROPONENTE]
+                    ,[E-MAIL PROPONENTE]
+                FROM 
+                    [dbo].[ALITB048_CUB120000]
+                WHERE 
+                    [E-MAIL PROPONENTE] IS NOT NULL
+                    AND [GILIE] = 'GILIE/SP'
+            )
+            
             SELECT 
                 'numeroBem' = [BEM_FORMATADO]
                 ,'grupoClassificacao' = CASE 
@@ -391,6 +444,7 @@ class RotinaMensagensAutomatica extends Controller
                                                         ELSE 'NAO'
                                                     END
                 ,'nomeProponente' = UPPER([NOME_PROPONENTE])
+                ,'emailProponente' = [E-MAIL PROPONENTE]
                 ,'cpfProponente' = [CPF_CNPJ_PROPONENTE]
                 ,'nomeCorretor' = UPPER([NO_CORRETOR])
                 ,'emailCorretor' = [EMAIL_CORRETOR]
@@ -401,6 +455,7 @@ class RotinaMensagensAutomatica extends Controller
             FROM 
                 [ALITB001_Imovel_Completo] AS SIMOV
                 LEFT JOIN [TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
+                LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
             WHERE 
                 [UNA] = 'GILIE/SP'
                 AND [STATUS_IMOVEL] = 'Em contratação'
@@ -418,6 +473,18 @@ class RotinaMensagensAutomatica extends Controller
     public static function listagemContratosAutorizacaoCaixaEngea()
     {
         $relacaoContratosCaixaEmgea = DB::select("
+            WITH TABELA_EMAIL_PROPONETES AS (
+                SELECT DISTINCT
+                    [NOME PROPONENTE]
+                    ,[CPF/CNPJ PROPONENTE]
+                    ,[E-MAIL PROPONENTE]
+                FROM 
+                    [dbo].[ALITB048_CUB120000]
+                WHERE 
+                    [E-MAIL PROPONENTE] IS NOT NULL
+                    AND [GILIE] = 'GILIE/SP'
+            )
+            
             SELECT DISTINCT
                 'numeroBem' = SIMOV.[BEM_FORMATADO]
                 ,'grupoClassificacao' = CASE 
@@ -462,19 +529,25 @@ class RotinaMensagensAutomatica extends Controller
                 ,'dataUltimoRecebimento' = [DT_Sinaf]
                 ,'codigoAgencia' = [Orig]
                 ,'nomeAgencia' = AGENCIA.[nomeAgencia]
-                ,'cpfCnpjProponente' = SIMOV.[CPF_CNPJ_PROPONENTE]
                 ,'nomeProponente' = UPPER(SIMOV.[NOME_PROPONENTE])
-                ,'cpfCnpjCorretor' = SIMOV.[CPF_CORRETOR]
+                ,'emailProponente' = [E-MAIL PROPONENTE]
                 ,'nomeCorretor' = UPPER(SIMOV.[NO_CORRETOR])
+                ,'emailCorretor' = SIMOV.[EMAIL_CORRETOR]
                 ,'existeCca' = CASE	
                                     WHEN SIMOV.[ACEITA_CCA] = 'SIM' THEN 'SIM'
                                     ELSE 'NAO'
                                 END
                 ,'origemMatricula' = SIMOV.[ORIGEM_MATRICULA]
+                ,'normativoUtilizado' = CASE
+                                            WHEN SIMOV.[ORIGEM_MATRICULA] = 'Emgea' THEN 'ADXXX'
+                                            WHEN SIMOV.[ORIGEM_MATRICULA] = 'Caixa' THEN 'ADXYZ'
+                                            ELSE NULL
+                                        END
             FROM 
                 [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS 
                 LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
                 LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON VENDAS.[Orig] = AGENCIA.[codigoAgencia]
+                LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
             WHERE 
                 [GILIE] = 'GILIE/SP'
                 AND [DE_Status_SIMOV] = 'Em Contratação'
