@@ -1,3 +1,14 @@
+﻿valor da variável %MN_UTILIZADO% em cada caso:
+
+AD084 - CAIXA - venda online, venda direta online, licitação aberta ou fechada, concorrência pública
+
+AD113 - EMGEA - venda online, venda direta online, licitação aberta ou fechada, concorrência pública
+
+AD057 - Caixa - 1º e 2º Leilão Publico
+
+AD227 - EMGEA - 1º e 2º Leilão Publico
+
+
 valor da variável %MO_UTILIZADO% em cada casp:
 
 ###Imóvel CAIXA a vista online com ação - "MO19435 - Escritura Pública de Compra e Venda à Vista - Imóvel com Ação Judicial."

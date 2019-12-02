@@ -5,6 +5,7 @@ namespace App\Http\Controllers\GestaoImoveisCaixa;
 use App\Classes\GestaoImoveisCaixa\ImoveisCaixaPhpMailer;
 use App\Models\RelacaoAgSrComEmail;
 use App\Models\HistoricoPortalGilie;
+use App\Models\ControleMensageria;
 // use App\Http\Controllers\Comex\Contratacao\Exception;
 use App\Http\Controllers\Controller;
 use App\Exceptions\Handler;
@@ -105,9 +106,11 @@ class RotinaMensagensAutomatica extends Controller
         foreach ($contratosPatromoniais as $contratos => $contrato) {
             self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
             self::setClassificacaoImovel('PATRIMONIAL');
+            self::setOrigemMatricula('CAIXA');
             echo "Número bem: $contrato->numeroBem <br>";
             echo "Proposta CCA: $contrato->existeCca <br>";
             self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+            self::defineTipoDeMensageria($contrato);
         }
             
         /* IMOVEIS CAIXA E EMGEA */ 
@@ -122,6 +125,7 @@ class RotinaMensagensAutomatica extends Controller
                     self::setOrigemMatricula('EMGEA/CAIXA');
                 }
             } else {
+                self::setOrigemMatricula('CAIXA');
                 self::setClassificacaoImovel('CAIXA');
             }
             
@@ -148,7 +152,7 @@ class RotinaMensagensAutomatica extends Controller
             'nomeAgencia' => isset($contrato->nomeAgencia) ? $contrato->nomeAgencia : null,
             'codigoAgencia' => isset($contrato->codigoAgencia) ? $contrato->codigoAgencia : null,
             'nomeProponente' => isset($contrato->nomeProponente) ? $contrato->nomeProponente : null,
-            'emailProponente' => isset($contrato->emailPropontente) ? $contrato->emailPropontente : null,
+            'emailProponente' => isset($contrato->emailProponente) ? $contrato->emailProponente : null,
             'nomeCorretor' => isset($contrato->nomeCorretor) ? $contrato->nomeCorretor : null,
             'emailCorretor' => isset($contrato->emailCorretor) ? $contrato->emailCorretor : null,
             'contratoBem' => isset($contrato->numeroBem) ? $contrato->numeroBem : null,
@@ -157,11 +161,11 @@ class RotinaMensagensAutomatica extends Controller
             'moUtilizado' => self::definirMoDeAutorizacaoDaProposta(),
             'origemMatricula' => self::getOrigemMatricula(),
             'normativoUtilizado' => self::getManualUtilizado(),
-            
         );
-        var_dump($dadosEmail) . '<br>';
+        // var_dump($dadosEmail) . '<br>';
+        // var_dump('EMAIL: ' . $dadosEmail->emailProponente . 'CODIGO AGÊNCIA: ' . $dadosEmail->codigoAgencia);
 
-        if ($dadosEmail->codigoAgencia !== null || $dadosEmail->emailProponente) {
+        if ($dadosEmail->codigoAgencia != null) {
             if($contrato->existeCca == 'SIM') { 
                 if (self::GetTipoDeProposta() == 'À vista') {
                     if (self::getExisteAcaoJucicial() == 'SIM') {
@@ -211,6 +215,14 @@ class RotinaMensagensAutomatica extends Controller
             $historico->atividade = "CONTRATACAO";
             $historico->observacao = "ENVIO DE MENSAGERIA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
             $historico->save();
+
+            $controleMensageria = new ControleMensageria;
+            $controleMensageria->tipoMensagem = 'AUTORIZAÇÃO DE CONTRATAÇÃO';
+            $controleMensageria->numeroContrato = $dadosEmail->contratoBem;
+            $controleMensageria->codigoAgencia = $dadosEmail->codigoAgencia;
+            $controleMensageria->emailCorretor = $dadosEmail->emailCorretor;
+            $controleMensageria->emailProponente = $dadosEmail->emailProponente;
+            $controleMensageria->save();
         } else {
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
@@ -219,6 +231,15 @@ class RotinaMensagensAutomatica extends Controller
             $historico->observacao = "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
             $historico->save();
         }
+
+        $dadosEmail = '';
+        self::setExisteAcaoJucicial('');
+        self::setPropostaMaiorQueTrintaSalariosMinimos('');
+        self::setTipoDeProposta('');
+        self::setTipoDeVenda('');
+        self::setClassificacaoImovel('');
+        self::setOrigemMatricula('');
+        self::setManualUtilizado('');
         
         
 
@@ -331,7 +352,6 @@ class RotinaMensagensAutomatica extends Controller
         } else {
             self::setExisteAcaoJucicial('NAO');
         }
-        self::defineTipoDeMensageria($contrato);
         echo "MO utilizado: " . self::definirMoDeAutorizacaoDaProposta() . '<br>';
         echo "Existe ação judicial: " . self::getExisteAcaoJucicial() . "<hr>";
     }
@@ -341,14 +361,13 @@ class RotinaMensagensAutomatica extends Controller
         if (self::getOrigemMatricula() == 'EMGEA/EMGEA') {
             if (self::getPropostaMaiorQueTrintaSalariosMinimos() == 'SIM') {
                 if (self::getTipoDeVenda() == 'LEILAO') {
-                    self::setManualUtilizado('MN AD084');
+                    self::setManualUtilizado('MN AD227');
                     return 'MO 19.526';
                 } else {
-                    if (self::getExisteAcaoJucicial() == 'SIM') {
-                        self::setManualUtilizado('MN AD084');
+                    self::setManualUtilizado('MN AD113');
+                    if (self::getExisteAcaoJucicial() == 'SIM') {                       
                         return 'MO 19.467';
                     } else {
-                        self::setManualUtilizado('MN AD084');
                         return 'MO 19.319';
                     }
                 }
@@ -395,7 +414,7 @@ class RotinaMensagensAutomatica extends Controller
     public static function listagemContratosAutorizacaoImoveisPatrimoniais()
     {
         $relacaoContratosPatrimoniais = DB::select("
-            WITH TABELA_EMAIL_PROPONETES AS (
+            WITH TABELA_EMAIL_PROPONENTES AS (
                 SELECT DISTINCT
                     [NOME PROPONENTE]
                     ,[CPF/CNPJ PROPONENTE]
@@ -407,12 +426,13 @@ class RotinaMensagensAutomatica extends Controller
                     AND [GILIE] = 'GILIE/SP'
             )
             
-            SELECT 
+            SELECT DISTINCT
                 'numeroBem' = [BEM_FORMATADO]
                 ,'grupoClassificacao' = CASE 
                                             WHEN [CLASSIFICACAO] LIKE '%EMGEA%' THEN 'EMGEA'
                                             WHEN [CLASSIFICACAO] = 'PANAMERICANO' THEN 'PATRIMONIAL'
-                                            WHEN [CLASSIFICACAO] = 'Patrimonial -Realização de Garantia' THEN 'PATRIMONIAL'
+                                            WHEN [CLASSIFICACAO] LIKE '%Patrimonial%' THEN 'PATRIMONIAL'
+                                            --WHEN [CLASSIFICACAO] = 'Patrimonial - Alienação Fiduciária' THEN 'PATRIMONIAL'
                                             ELSE 'CAIXA'
                                         END
                 ,'tipoDeVenda' = CASE
@@ -455,13 +475,15 @@ class RotinaMensagensAutomatica extends Controller
             FROM 
                 [ALITB001_Imovel_Completo] AS SIMOV
                 LEFT JOIN [TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
-                LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
+                LEFT JOIN [TABELA_EMAIL_PROPONENTES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
+                --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON (CONTROLE_EMAIL.numeroContrato = SIMOV.NU_BEM)
             WHERE 
                 [UNA] = 'GILIE/SP'
                 AND [STATUS_IMOVEL] = 'Em contratação'
-                AND ([TIPO_VENDA] LIKE 'Venda Online' OR [TIPO_VENDA] like 'Venda Direta Online' OR [TIPO_VENDA] LIKE '1º Leilão SFI' OR [TIPO_VENDA] LIKE '2º Leilão SFI')
-                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -60, GETDATE())
-                AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] = 'Patrimonial -Realização de Garantia')
+                AND ([TIPO_VENDA] LIKE '%Venda Online%' OR [TIPO_VENDA] like '%Venda Direta Online%' OR [TIPO_VENDA] LIKE '%1º Leilão SFI%' OR [TIPO_VENDA] LIKE '%2º Leilão SFI%')
+                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -1, GETDATE())
+                AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] LIKE '%Patrimonial%')
+                --AND (CONTROLE_EMAIL.[numeroContrato] IS NULL AND CONTROLE_EMAIL.[codigoAgencia] IS NULL)
             ORDER BY
                 'grupoClassificacao'
                 ,'tipoDeVenda'
@@ -548,12 +570,14 @@ class RotinaMensagensAutomatica extends Controller
                 LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
                 LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON VENDAS.[Orig] = AGENCIA.[codigoAgencia]
                 LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
+                --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON (CONTROLE_EMAIL.numeroContrato = SIMOV.NU_BEM AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] = CONTROLE_EMAIL.[emailProponente])
             WHERE 
                 [GILIE] = 'GILIE/SP'
                 AND [DE_Status_SIMOV] = 'Em Contratação'
                 AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
-                AND [DT_Sinaf] >= DATEADD(DAY, -60, GETDATE())
+                AND [DT_Sinaf] >= DATEADD(DAY, -1, GETDATE())
                 AND [Valor] >= [VL_TOTAL_RECEBIDO]
+                --AND (CONTROLE_EMAIL.numeroContrato IS NULL AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] IS NULL)
             ORDER BY 
                 grupoClassificacao
                 , tipoDeVenda

@@ -15,7 +15,7 @@ class CreateTableLogAcessoPortal extends Migration
     {
         Schema::create('TBL_PORTAL_LOG_ACESSOS', function (Blueprint $table) {
             $table->increments('idLog');
-            $table->date('dataAcesso');
+            $table->datetime('dataAcesso');
             $table->string('matricula', 7);
             $table->string('tipoAcaoAcesso', 20);
             $table->string('sistema', 100);

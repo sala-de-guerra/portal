@@ -41,7 +41,7 @@
 
 <body style='font-family: sans-serif; padding: 20px'>
 
-<h4>Para Conferir e Enviar E-mail</h4>
+<!-- <h4>Para Conferir e Enviar E-mail</h4>
 <ul>
     <li>Contrato: %CONTRATO_BEM%</li>
     <li>Nome Agência: %NOME_AGENCIA%</li>
@@ -55,7 +55,7 @@
     <li>Edital Leião: %EDITAL_LEILAO%</li>
     <li>Manual Utilizado: %MN_UTILIZADO%</li>
     <li>Origem Matricula: %ORIGEM_MATRICULA%</li>
-</ul>
+</ul> -->
 
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
@@ -68,7 +68,7 @@
 <br>
     <p>Senhor (a) Gerente,</p>
 
-    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO - LEILÃO COM FINANCIAMENTO OU USO DE FGTS</b>
+    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO - LEILÃO COM FINANCIAMENTO OU USO DE FGTS</b><br><br><br>
 
     <b>1   DA AUTORIZAÇÃO:</b>
     <br>    
@@ -112,8 +112,7 @@
     </p>
 
     <p>
-        2.2   Alertamos para o prazo destinado ao <b>recolhimento dos recursos próprios de 05 (cinco) dias úteis a contar da 
-        data de recebimento desta autorização. Tal prazo poderá ser prorrogado a critério da Caixa</b>;
+        2.2   Alertamos para o prazo destinado ao <b>recolhimento dos recursos próprios de 05 (cinco) dias úteis;</b>
     </p>
 
     <p>
@@ -179,8 +178,8 @@
         comunicar IMEDIATAMENTE a esta GILIE/SP para adoção das providências cabíveis.
     </p>
 
-    <p>
-        7   Sem mais, agradecemos e colocamo-nos a disposição para dirimir quaisquer dúvidas pelo e-mail: giliesp01@caixa.gov.br, 
+    <p><br>
+    <b>7.</b> Sem mais, agradecemos e colocamo-nos a disposição para dirimir quaisquer dúvidas pelo e-mail: giliesp01@caixa.gov.br, 
     ou consulte o site %QUADRO_EMPREGADOS_POR_ATIVIDADE% e contate um colega da equipe de contratação.
     </p>
     

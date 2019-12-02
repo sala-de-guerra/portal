@@ -59,13 +59,13 @@ class ImoveisCaixaPhpMailer
 
         // DESTINATÁRIOS
         $mail->setFrom('GILIESP09@mail.caixa', 'GILIESP - Rotinas Automáticas');
-        $mail->addReplyTo('GILIESP@mail.caixa');
+        $mail->addReplyTo('GILIESP01@mail.caixa');
         
         /* DESTINATÁRIOS PILOTO */
         // if (session()->get('codigoLotacaoAdministrativa') == '7257' || session()->get('codigoLotacaoFisica') == '7257') {
-            $mail->addAddress('c111710@mail.caixa');
-            $mail->addAddress('c142765@mail.caixa');
-            $mail->addAddress('c098453@mail.caixa');
+            // $mail->addAddress('c111710@mail.caixa');
+            // $mail->addAddress('c142765@mail.caixa');
+            // $mail->addAddress('c098453@mail.caixa');
         // } else {
         //     $mail->addAddress(session()->get('matricula') . '@mail.caixa');
         // }
@@ -75,17 +75,21 @@ class ImoveisCaixaPhpMailer
         /* FIM DESTINATÁRIOS PILOTO */
 
         /* DESTINATÁRIOS PRODUÇÃO */
-        // if (isset($arrayDadosEmailUnidade->emailAgencia)) {
-        //     $mail->addAddress($arrayDadosEmailUnidade->emailAgencia);
-        //     $mail->addCC($arrayDadosEmailUnidade->emailSr);
-        // } else {
-        //     $mail->addAddress($arrayDadosEmailUnidade->emailSr);
-        // }
-        // if (session()->get('codigoLotacaoAdministrativa') == '5459' || session()->get('codigoLotacaoFisica') == '5459') {
-        //     $mail->addCC($objEsteiraContratacao->responsavelAtual . '@mail.caixa');
-        // } else {
-        //     $mail->addCC(session()->get('matricula') . '@mail.caixa');
-        // }
+        if (isset($objRelacaoEmailUnidades->emailAgencia)) {
+            $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+            // $mail->addCC($objRelacaoEmailUnidades->emailSr);
+        } else {
+            $mail->addAddress($objRelacaoEmailUnidades->emailSr);
+        }
+        if ($request->emailProponente) {
+            $mail->addCC($request->emailProponente);
+        }
+        if ($request->emailCorretor) {
+            $mail->addCC($request->emailCorretor);
+        }
+        $mail->addBCC('GILIESP09@mail.caixa');
+        $mail->addBCC('c111710@mail.caixa');
+        $mail->addBCC('c098453@mail.caixa');
   
         // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
 
@@ -105,6 +109,8 @@ class ImoveisCaixaPhpMailer
         $mensagemAutomatica = str_replace("%EDITAL_LEILAO%", $request->editalLeilao, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%MN_UTILIZADO%", $request->normativoUtilizado, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%ORIGEM_MATRICULA%", $request->origemMatricula, $mensagemAutomatica);
+        $mensagemAutomatica = str_replace("%QUADRO_EMPREGADOS_POR_ATIVIDADE%", env('LINK_ATIVIDADE_POR_EMPREGADO'), $mensagemAutomatica);
+        
 
         $mail->Body = $mensagemAutomatica;
 
