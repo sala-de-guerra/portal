@@ -33,10 +33,8 @@ class PortalLogAcessoMiddleware
         $inovaLogAcesso->nomePagina = preg_replace('/[0-9]+/', '', $request->path());
         
         // CAPTURA NAVEGADOR E A VERSÃO DELE
-        // $inovaLogAcesso->nomeNavegador = \Browser::browserFamily();
-        // $inovaLogAcesso->versaoNavegador = \Browser::browserVersion();
-        $inovaLogAcesso->nomeNavegador = 'navegadorFake';
-        $inovaLogAcesso->versaoNavegador = 'versaoFake';
+        $inovaLogAcesso->nomeNavegador = \Browser::browserFamily();
+        $inovaLogAcesso->versaoNavegador = \Browser::browserVersion();
         $inovaLogAcesso->save();
 
         return $next($request);

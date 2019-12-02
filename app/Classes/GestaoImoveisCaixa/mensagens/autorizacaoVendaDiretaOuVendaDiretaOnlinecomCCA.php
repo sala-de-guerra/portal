@@ -41,7 +41,7 @@
 
 <body style='font-family: sans-serif; padding: 20px'>
 
-<h4>Para Conferir e Enviar E-mail</h4>
+<!-- <h4>Para Conferir e Enviar E-mail</h4>
 <ul>
     <li>Contrato: %CONTRATO_BEM%</li>
     <li>Nome Agência: %NOME_AGENCIA%</li>
@@ -55,7 +55,7 @@
     <li>Edital Leião: %EDITAL_LEILAO%</li>
     <li>Manual Utilizado: %MN_UTILIZADO%</li>
     <li>Origem Matricula: %ORIGEM_MATRICULA%</li>
-</ul>
+</ul> -->
 
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
@@ -70,7 +70,7 @@
 <br>
     <p>Senhor (a) Gerente,</p>
 
-    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO IMOVEIS CAIXA - CORRESPONDENTE CAIXA AQUI</b>
+    <b class="centralizado">AUTORIZAÇÃO PARA CONTRATAÇÃO IMOVEIS CAIXA - CORRESPONDENTE CAIXA AQUI</b><br><br><br>
 
     <b>1   DA AUTORIZAÇÃO:</b>
     <br>    
@@ -126,41 +126,42 @@
 
     <b>3    DA CONTRATAÇÃO:</b>
     <br>
-
     <p>
         3.1  Informamos que as propostas de compra de imóveis da CAIXA por meio de financiamento habitacional (com ou sem utilização de FGTS) 
 	devem ser contratadas por meio do CCA, conforme opção do cliente realizada no momento da proposta no site da CAIXA;
     </p>
-    
     <p>
-        3.2  O CCA acessará o cadastro do imóvel e documentos digitalizados pela GILIE no SIOPI WEB e realizará os procedimentos de concessão no SICAQ e 
+        3.2  <b>A partir do recebimento desta autorização a agência de contratação deverá realizar a indicação de um CCA credenciado a sua agência no SIOPI (caso necessário verifique a relação de credenciados com sua SR).
+	No SIOPI deverá acessar a opção Serviços – Cadastro do Imóvel – Individual (preencher com o número da matricula e cartório) Consultar – Entrar no imóvel – Alterar – preencher com o número do CCA (sem o digito) e salvar;</b>
+    <p>
+        3.3  O CCA acessará o cadastro do imóvel e documentos digitalizados pela GILIE no SIOPI WEB e realizará os procedimentos de concessão no SICAQ e 
 	no SIOPI WEB (pesquisas, avaliação de risco e inclusão dos dados da proposta).
 
     </p>
 
     <p>
-        3.3 O CCA confirmará a isenção da tarifa de laudo de avaliação e encaminhará toda a documentação do proponente e do imóvel através do SICTDWEB para verificação da conformidade
+        3.4 O CCA confirmará a isenção da tarifa de laudo de avaliação e encaminhará toda a documentação do proponente e do imóvel através do SICTDWEB para verificação da conformidade
     </p>
 	
      <p>
-        3.4 o CCA verifica a análise do Parecer emitido pela área responsável:
+        3.5 o CCA verifica a análise do Parecer emitido pela área responsável:
     </p>
 
      <p>
-       3.5 O CAA atende às exigências de parecer inconforme
+       3.6 O CCA atende às exigências de parecer inconforme
 
     </p>
      <p>
-        3.6 O CAA agenda a data de assinatura com a Agência e com o proponente no caso de parecer conforme;
+       3.7 O CCA agenda a data de assinatura com a Agência e com o proponente no caso de parecer conforme;
 
     </p>
      <p>
-        3.7  A agência realiza os procedimentos no SIOPI para assinatura do contrato 
+       3.8  A agência realiza os procedimentos no SIOPI para assinatura do contrato 
 	(emissão do instrumento contratual, assinatura do cliente, confirmação da assinatura no sistema) e a autenticação/contabilização dos recebimentos conforme Anexo I do AD084. 
 
     </p>
      <p>
-       	3.8 Por fim, A agência, envia os documentos autenticados para a GILIE de vinculação de modo a viabilizar o lançamento da venda no SIACI/SIMOV.
+       	3.9 Por fim, A agência, envia os documentos autenticados para a GILIE de vinculação de modo a viabilizar o lançamento da venda no SIACI/SIMOV.
 
     </p>
 
@@ -226,9 +227,10 @@
         comunicar IMEDIATAMENTE a esta GILIE/SP para adoção das providências cabíveis.
     </p>
 
-    <p>
-        8   Sem mais, agradecemos e colocamo-nos a disposição para dirimir quaisquer dúvidas pelo e-mail: giliesp01@caixa.gov.br, 
-    ou consulte o site %QUADRO_EMPREGADOS_POR_ATIVIDADE% e contate um colega da equipe de contratação.
+    <p><br>
+ 
+    <b>8.</b> Sem mais, agradecemos e colocamo-nos a disposição para dirimir quaisquer dúvidas pelo e-mail: giliesp01@caixa.gov.br, 
+	     ou consulte o site %QUADRO_EMPREGADOS_POR_ATIVIDADE% e contate um colega da equipe de contratação.
     </p>
     
 <p class="destaque">

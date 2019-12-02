@@ -17,7 +17,9 @@ class CreateControleMensageriasTable extends Migration
             $table->bigIncrements('id');
             $table->string('tipoMensagem', 50);
             $table->string('numeroContrato', 50);
-            $table->string('emailProponente', 50);
+            $table->integer('codigoAgencia');
+            $table->string('emailProponente', 50)->nullable();
+            $table->string('emailCorretor', 50)->nullable();
             $table->timestamps();
         });
     }
