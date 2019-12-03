@@ -6,7 +6,6 @@ use App\Classes\GestaoImoveisCaixa\ImoveisCaixaPhpMailer;
 use App\Models\RelacaoAgSrComEmail;
 use App\Models\HistoricoPortalGilie;
 use App\Models\ControleMensageria;
-// use App\Http\Controllers\Comex\Contratacao\Exception;
 use App\Http\Controllers\Controller;
 use App\Exceptions\Handler;
 use App\Models\GestaoImoveisCaixa\ImagemCaixaCecom;
@@ -481,7 +480,7 @@ class RotinaMensagensAutomatica extends Controller
                 [UNA] = 'GILIE/SP'
                 AND [STATUS_IMOVEL] = 'Em contratação'
                 AND ([TIPO_VENDA] LIKE '%Venda Online%' OR [TIPO_VENDA] like '%Venda Direta Online%' OR [TIPO_VENDA] LIKE '%1º Leilão SFI%' OR [TIPO_VENDA] LIKE '%2º Leilão SFI%')
-                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -1, GETDATE())
+                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -4, GETDATE())
                 AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] LIKE '%Patrimonial%')
                 --AND (CONTROLE_EMAIL.[numeroContrato] IS NULL AND CONTROLE_EMAIL.[codigoAgencia] IS NULL)
             ORDER BY
@@ -522,7 +521,7 @@ class RotinaMensagensAutomatica extends Controller
                                     ELSE 'OUTROS TIPOS'
                                 END
                 ,'numeroLeilao' = SIMOV.[AGRUPAMENTO]
-                ,'enderecoImovel' = CONVERT(VARCHAR, SIMOV.[ENDERECO_IMOVEL])
+                ,'enderecoImovel' = SIMOV.[ENDERECO_IMOVEL]
                 ,'dataProposta' = [DT_PROPOSTA] 
                 ,'dataAlteracaoStatus' = [DT_STATUS_ALTERACAO]
                 ,'valorRecursoProprioProposta' = CONVERT(DECIMAL(17, 2), [Valor])
@@ -549,8 +548,8 @@ class RotinaMensagensAutomatica extends Controller
                                                         ELSE 'NAO'
                                                     END
                 ,'dataUltimoRecebimento' = [DT_Sinaf]
-                ,'codigoAgencia' = [Orig]
-                ,'nomeAgencia' = AGENCIA.[nomeAgencia]
+                ,'codigoAgencia' = AGENCIA.[codigoAgencia]
+                ,'nomeAgencia' = SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA]
                 ,'nomeProponente' = UPPER(SIMOV.[NOME_PROPONENTE])
                 ,'emailProponente' = [E-MAIL PROPONENTE]
                 ,'nomeCorretor' = UPPER(SIMOV.[NO_CORRETOR])
@@ -568,16 +567,17 @@ class RotinaMensagensAutomatica extends Controller
             FROM 
                 [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS 
                 LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
-                LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON VENDAS.[Orig] = AGENCIA.[codigoAgencia]
+                LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
                 LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
                 --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON (CONTROLE_EMAIL.numeroContrato = SIMOV.NU_BEM AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] = CONTROLE_EMAIL.[emailProponente])
             WHERE 
                 [GILIE] = 'GILIE/SP'
                 AND [DE_Status_SIMOV] = 'Em Contratação'
                 AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
-                AND [DT_Sinaf] >= DATEADD(DAY, -1, GETDATE())
+                AND [DT_Sinaf] >= DATEADD(DAY, -4, GETDATE())
                 AND [Valor] >= [VL_TOTAL_RECEBIDO]
                 --AND (CONTROLE_EMAIL.numeroContrato IS NULL AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] IS NULL)
+                --AND SIMOV.[BEM_FORMATADO] = '01.2941.0000284-2'
             ORDER BY 
                 grupoClassificacao
                 , tipoDeVenda

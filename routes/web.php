@@ -65,6 +65,13 @@ Route::get('/consulta-bem-imovel', function () {
 Route::prefix('estoque-imoveis')->group(function () {
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
     Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
+    Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
+});
+
+// Rotina Automatica de envio de mensagens Adjudicados
+
+Route::prefix('portal')->group(function () {
+    Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
 });
 
 // Gerencial

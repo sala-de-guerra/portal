@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ImagemCaixaCecom extends Model
+class BaseSimov extends Model
 {
-    protected $table = 'ADJTBL_imoveisCaixa';
+    protected $table = 'ALITB001_Imovel_Completo';
+    protected $primaryKey = 'BEM_FORMATADO';
 
 
 }
