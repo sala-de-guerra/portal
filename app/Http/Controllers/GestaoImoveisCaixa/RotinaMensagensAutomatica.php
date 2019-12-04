@@ -238,81 +238,7 @@ class RotinaMensagensAutomatica extends Controller
         self::setTipoDeVenda('');
         self::setClassificacaoImovel('');
         self::setOrigemMatricula('');
-        self::setManualUtilizado('');
-        
-        
-
-        // switch (self::getClassificacaoImovel()) {
-        //     case 'PATRIMONIAL':
-        //         if (self::getTipoDeVenda() == 'LEILAO') {
-        //             if (self::getTipoDeProposta() == 'À vista') {
-        //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoAvistaComAcao');
-        //                 } else {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoAvistaSemAcao');
-        //                 }
-        //             } else {
-                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialLeilaoFinanciadoOuComUsoDeFgts');
-        //             }
-        //         } else {
-        //             if (self::getTipoDeProposta() == 'À vista') {
-        //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
-        //                 } else {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
-        //                 }
-        //             } else {
-                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelPatrimonialVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
-        //             }
-        //         }   
-        //         break;
-        //     case 'CAIXA':
-        //         if (self::getTipoDeVenda() == 'LEILAO') {
-        //             if (self::getTipoDeProposta() == 'À vista') {
-        //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoAvistaComAcao');
-        //                 } else {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoAvistaSemAcao');
-        //                 }
-        //             } else {
-                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaLeilaoFinanciadoOuComUsoDeFgts');
-        //             }
-        //         } else {
-        //             if (self::getTipoDeProposta() == 'À vista') {
-        //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
-        //                 } else {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
-        //                 }
-        //             } else {
-                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelCaixaVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
-        //             }
-        //         }
-        //         break;
-        //     case 'EMGEA':
-        //         if (self::getTipoDeVenda() == 'LEILAO') {
-        //             if (self::getTipoDeProposta() == 'À vista') {
-        //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoAvistaComAcao');
-        //                 } else {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoAvistaSemAcao');
-        //                 }
-        //             } else {
-                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaLeilaoFinanciadoOuComUsoDeFgts');
-        //             }
-        //         } else {
-        //             if (self::getTipoDeProposta() == 'À vista') {
-        //                 if (self::setExisteAcaoJucicial() == 'SIM') {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineAvistaComAcao');
-        //                 } else {
-                            // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineAvistaSemAcao');
-        //                 }
-        //             } else {
-                        // ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'imovelEmgeaVendaDiretaOuVendaDiretaOnlineFinanciadoOuComUsoDeFgts');
-        //             }
-        //         }
-        //         break;
-        // }   
+        self::setManualUtilizado(''); 
     }
 
     public static function validarTipoDeVendaLeilaoOuVendaDireta($contrato)
@@ -347,9 +273,9 @@ class RotinaMensagensAutomatica extends Controller
     public static function validarExistenciaDeAcaoJudicial($contrato)
     {
         if ($contrato->temAcaoJudicial == 'NAO') {
-            self::setExisteAcaoJucicial('SIM');
-        } else {
             self::setExisteAcaoJucicial('NAO');
+        } else {
+            self::setExisteAcaoJucicial('SIM');
         }
         echo "MO utilizado: " . self::definirMoDeAutorizacaoDaProposta() . '<br>';
         echo "Existe ação judicial: " . self::getExisteAcaoJucicial() . "<hr>";
