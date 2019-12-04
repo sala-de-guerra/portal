@@ -27,6 +27,10 @@
     background-color: #000;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+  }
+
 .margin0 {
     margin: 0px;
 }
@@ -42,4 +46,9 @@
 
 .padding1220 {
     padding: 12px 20px!important;
+}
+
+.user-image-resize-50px{
+    height: 50px;
+    width: 50px;
 }

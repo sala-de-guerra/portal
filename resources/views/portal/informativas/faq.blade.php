@@ -30,7 +30,7 @@
             <div class="card-header">
                 <h3 class="card-title">
                     Esclarecemos que os imóveis podem ser retirados da venda a qualquer momento. Consulte a relação atualizada no site da CAIXA, 
-                    http://www.caixa.gov.br/voce/habitacao/imoveis-venda.
+                    <a href="http://www.caixa.gov.br/voce/habitacao/imoveis-venda">http://www.caixa.gov.br/voce/habitacao/imoveis-venda</a>.
                 </h3>
             </div> <!-- /.card-header -->
         </div> <!-- /.card -->
@@ -45,10 +45,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                     Quem pode adquirir imóveis da Caixa?
                     <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -72,10 +72,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                     Que tipos de imóveis da Caixa estão à venda?
                     <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -97,10 +97,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         A Caixa possibilita a aquisição financiada do(s) imóvel(is) e utilização do FGTS?
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -124,10 +124,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         Como adquirir o imóvel?
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -149,10 +149,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         Como se dá a compra de um imóvel na modalidade concorrência pública/licitação fechada?
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -176,10 +176,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         Como se dá a compra de um imóvel na modalidade leilão/licitação aberta?
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -204,10 +204,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         O que é depósito de Caução?
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -231,10 +231,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         Quais as vantagens oferecidas pela CAIXA a quem deseja adquirir um dos imóveis da Caixa à venda?
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -260,10 +260,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         A CAIXA possibilita a aquisição utilizando Consórcio?
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -286,10 +286,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         A CAIXA possibilita a aquisição utilizando Financiamento por outra Instituição Financeira? 
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -313,10 +313,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         Se eu comprar um imóvel ocupado, quem será responsável por retirar o ocupante? 
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
@@ -343,10 +343,10 @@
 
             <div class="card-header">
                 <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
-                <div class="direct-chat-text">
+                <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
                         Se eu desistir da aquisição do imóvel, o que acontece?  
                         <div class="float-sm-right">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                     </div>
                 </div> <!-- /.direct-chat-text -->
             </div> <!-- /.card-header -->
