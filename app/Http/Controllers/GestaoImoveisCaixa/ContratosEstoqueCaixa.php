@@ -57,6 +57,8 @@ class ContratosEstoqueCaixa extends Controller
             'statusImovel' => $contrato->STATUS_IMOVEL,
             'dataAlteracaoStatusImovel' => $contrato->DATA_ALTERACAO_STATUS,
             'dataUltimaAlteracaoStatus' => $contrato->DATA_ULTIMA_ALTERACAO,
+
+            
             'tipoVenda' => $contrato->TIPO_VENDA,
             'dataProposta' => $contrato->DATA_PROPOSTA,
             'valorTotalProposta' => number_format($contrato->VALOR_TOTAL_PROPOSTA, 2, ',', '.'),
