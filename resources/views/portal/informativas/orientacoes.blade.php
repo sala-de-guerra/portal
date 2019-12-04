@@ -87,6 +87,26 @@
 </div>
 <!-- /.row -->
 
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Orientações Sobre Contratação em CCA</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <div class="card-body">
+                <embed src="../pdf/	CARTILHA_CONTRATACAO_VIA_CCA_VERSAO_4.pdf" width="100%" height="650px"/>
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+        <!--/.direct-chat -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
 
 
 <div class="row">
