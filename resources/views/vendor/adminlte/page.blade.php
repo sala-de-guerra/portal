@@ -215,7 +215,7 @@
 
         <footer class="main-footer">
             
-            <b>2019 - GILIE/SP - Gerência de Alienação de Bens Móveis e Imóveis</b>
+            <b>2019 - GILIE/SP - Gerência de Alienar de Bens Móveis e Imóveis de São Paulo</b>
 
         </footer>
 
@@ -239,12 +239,10 @@
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('plugins/DataTables/dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/typeahead/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('plugins/typeahead/handlebars.js') }}"></script>
     <script src="{{ asset('js/global/configura_typeahead.js') }}"></script>
-    <script>
-
-    </script>
     @stack('js')
     @yield('js')
 @stop
