@@ -9,6 +9,7 @@ class Ldap
     // private $simularMatricula = 'c032579'; // Euclidio - AG
     private $matricula;
     private $nomeCompleto;
+    private $cpf;
     private $primeiroNome;
     private $dataDeNascimento;
     private $codigoFuncao;
@@ -35,6 +36,15 @@ class Ldap
     public function setNomeCompleto($nomeCompleto)
     {
         $this->nomeCompleto = $nomeCompleto;
+    }
+
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
     }
 
     public function getPrimeiroNome()
@@ -188,7 +198,9 @@ class Ldap
         }
         
         $ldap_user = $ldap_resultado[0];
+        // dd($ldap_user);
         $this->setNomeCompleto($ldap_user['no-usuario'][0]);
+        $this->setCpf(isset($ldap_user['nu-cpf'][0]) ? $ldap_user['nu-cpf'][0] : null);
         $this->setPrimeiroNome($this->getNomeCompleto());
         $this->setNomeFuncao(isset($ldap_user['no-funcao'][0]) ? $ldap_user['no-funcao'][0] : null);
         $this->setCodigoFuncao(isset($ldap_user['nu-funcao'][0]) ? $ldap_user['nu-funcao'][0] : null);
@@ -205,6 +217,7 @@ class Ldap
         $empregado = Empregado::firstOrNew(array('matricula' => $this->getMatricula()));
         $empregado->matricula = $this->getMatricula();
         $empregado->nomeCompleto = $this->getNomeCompleto();
+        $empregado->cpf = $this->getCpf();
         $empregado->primeiroNome = $this->getPrimeiroNome();
         $empregado->dataNascimento = $this->getDataDeNascimento();
         $empregado->codigoFuncao = $this->getCodigoFuncao();
