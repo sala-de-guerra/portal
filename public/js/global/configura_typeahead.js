@@ -4,36 +4,39 @@ $(document).ready(function(){
     datumTokenizer: function (datum) {
       // console.log(datum);
 
+      var bemFormatadoTokens = Bloodhound.tokenizers.whitespace(datum.bemFormatado);
       var numeroBemTokens = Bloodhound.tokenizers.whitespace(datum.numeroBem);
-      var enderecoTokens = Bloodhound.tokenizers.whitespace(datum.endereco);
+      var enderecoCompletoTokens = Bloodhound.tokenizers.whitespace(datum.enderecoCompleto);
       var nomeProponenteTokens = Bloodhound.tokenizers.whitespace(datum.nomeProponente);
       var cpfCnpjProponenteTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjProponente);
       var nomeExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.nomeExMutuario);
       var cpfCnpjExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjExMutuario);
       
       return numeroBemTokens
-        .concat(enderecoTokens)
+        .concat(bemFormatadoTokens)
+        .concat(enderecoCompletoTokens)
         .concat(nomeProponenteTokens)
         .concat(cpfCnpjProponenteTokens)
         .concat(nomeExMutuarioTokens)
-        .concat(cpfCnpjExMutuarioTokens)
-        ;
+        .concat(cpfCnpjExMutuarioTokens);
+        
 
         
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: {
-        url: "../js/mock.json",
+        url: "../js/baseSimov.json",
         transform: function (data) {
           // console.log(data.response.bens);
           return $.map(data.response.bens, function (bem) {
               return {
-                numeroBem: bem.numero_bem,
-                endereco: bem.endereco,
-                nomeProponente: bem.nome_proponente,
-                cpfCnpjProponente: bem.cpf_cnpj_proponente,
-                nomeExMutuario: bem.nome_ex_mutuario,
-                cpfCnpjExMutuario: bem.cpf_cnpj_ex_mutuario
+                bemFormatado: bem.bemFormatado,
+                numeroBem: bem.numeroBem,
+                enderecoCompleto: bem.enderecoCompleto,
+                nomeProponente: bem.nomeProponente,
+                cpfCnpjProponente: bem.cpfCnpjProponente,
+                nomeExMutuario: bem.nomeExMutuario,
+                cpfCnpjExMutuario: bem.cpfCnpjExMutuario
               };
           });
         }
@@ -62,7 +65,7 @@ $(document).ready(function(){
               'Nenhum resultado encontrado.' +
             '</div>'
           ].join('\n'),
-          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{endereco}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</li>')
+          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</li>')
       }
     },
     {
@@ -81,7 +84,7 @@ $(document).ready(function(){
               'Nenhum resultado encontrado.' +
             '</div>'
           ].join('\n'),
-          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{endereco}} - Nome: {{nomeExMutuario}} - CPF/CNPJ: {{cpfCnpjExMutuario}}</li>')
+          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeExMutuario}} - CPF/CNPJ: {{cpfCnpjExMutuario}}</li>')
       }
     },
   );
