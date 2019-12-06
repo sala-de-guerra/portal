@@ -59,7 +59,9 @@
 
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
-<p class="destaque">À</p>
+<p>À</p>
+
+<h3><b>RETIFICAÇÃO: Corrigimos o ponto sobre ação judicial deste contrato. Favor desconsiderar e-mail de autorização enviado anteriormente</b></h3>
 
 <p>Agência %NOME_AGENCIA%</p>
 

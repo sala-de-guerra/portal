@@ -59,7 +59,7 @@
 
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
-<p class="destaque">À</p>
+<p>À</p>
 
 <p>Agência %NOME_AGENCIA%</p>
 
