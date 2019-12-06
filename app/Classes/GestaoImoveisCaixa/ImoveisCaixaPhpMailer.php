@@ -58,8 +58,8 @@ class ImoveisCaixaPhpMailer
         // $mail->SMTPDebug = 2;                                         
 
         // DESTINATÁRIOS
-        $mail->setFrom('GILIESP09@mail.caixa', 'GILIESP - Rotinas Automáticas');
-        $mail->addReplyTo('GILIESP01@mail.caixa');
+        $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+        $mail->addReplyTo('GILIESP01@caixa.gov.br');
         
         /* DESTINATÁRIOS PILOTO */
         // if (session()->get('codigoLotacaoAdministrativa') == '7257' || session()->get('codigoLotacaoFisica') == '7257') {
@@ -87,7 +87,7 @@ class ImoveisCaixaPhpMailer
         if ($request->emailCorretor) {
             $mail->addCC($request->emailCorretor);
         }
-        $mail->addBCC('GILIESP09@mail.caixa');
+        $mail->addBCC('GILIESP09@caixa.gov.br');
         $mail->addBCC('c111710@mail.caixa');
         $mail->addBCC('c098453@mail.caixa');
   

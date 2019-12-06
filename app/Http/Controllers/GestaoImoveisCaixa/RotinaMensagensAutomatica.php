@@ -339,85 +339,179 @@ class RotinaMensagensAutomatica extends Controller
     public static function listagemContratosAutorizacaoImoveisPatrimoniais()
     {
         $relacaoContratosPatrimoniais = DB::select("
-            WITH TABELA_EMAIL_PROPONENTES AS (
-                SELECT DISTINCT
-                    [NOME PROPONENTE]
-                    ,[CPF/CNPJ PROPONENTE]
-                    ,[E-MAIL PROPONENTE]
-                FROM 
-                    [dbo].[ALITB048_CUB120000]
-                WHERE 
-                    [E-MAIL PROPONENTE] IS NOT NULL
-                    AND [GILIE] = 'GILIE/SP'
-            )
-            
+        WITH TABELA_EMAIL_PROPONENTES AS (
             SELECT DISTINCT
-                'numeroBem' = [BEM_FORMATADO]
-                ,'grupoClassificacao' = CASE 
-                                            WHEN [CLASSIFICACAO] LIKE '%EMGEA%' THEN 'EMGEA'
-                                            WHEN [CLASSIFICACAO] = 'PANAMERICANO' THEN 'PATRIMONIAL'
-                                            WHEN [CLASSIFICACAO] LIKE '%Patrimonial%' THEN 'PATRIMONIAL'
-                                            --WHEN [CLASSIFICACAO] = 'Patrimonial - Alienação Fiduciária' THEN 'PATRIMONIAL'
-                                            ELSE 'CAIXA'
-                                        END
-                ,'tipoDeVenda' = CASE
-                                    WHEN [TIPO_VENDA] LIKE 'Venda Online' THEN 'VENDA ONLINE'
-                                    WHEN [TIPO_VENDA] LIKE 'Venda Direta Online' THEN 'VENDA ONLINE'
-                                    WHEN [TIPO_VENDA] LIKE '%Leilão%' THEN 'LEILAO'
-                                    WHEN [TIPO_VENDA] LIKE 'Venda Direta Online' THEN 'VENDA ONLINE'
-                                    ELSE 'OUTROS TIPOS'
-                                END
-                ,'numeroLeilao' = SIMOV.[AGRUPAMENTO]
-                ,'tipoProposta' = CASE 
-                                    WHEN [VALOR_REC_PROPRIOS_PROPOSTA] = [VALOR_TOTAL_PROPOSTA] THEN 'A VISTA'
-                                    ELSE 'FINANCIADO'
-                                END
-                ,'temAcaoJudicial' = CASE
-                                    WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
-                                    WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
-                                    WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
-                                    WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% ACAO %' THEN 'SIM'
-                                    WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%ACOES%' THEN 'SIM'
-                                    ELSE 'NAO'
-                                END
-                ,'codigoAgencia' = AGENCIA.[codigoAgencia]
-                ,'nomeAgencia' = [AGENCIA_CONTRATACAO_PROPOSTA]
-                ,'enderecoImovel' = [ENDERECO_IMOVEL]
-                ,'dataAlteracaoStatus' = [DATA_ALTERACAO_STATUS]
-                ,'maiorQueTrintaSalariosMinimos' = CASE
-                                                        WHEN [VALOR_TOTAL_PROPOSTA] > (998*30) THEN 'SIM'
-                                                        ELSE 'NAO'
-                                                    END
-                ,'nomeProponente' = UPPER([NOME_PROPONENTE])
-                ,'emailProponente' = [E-MAIL PROPONENTE]
-                ,'cpfProponente' = [CPF_CNPJ_PROPONENTE]
-                ,'nomeCorretor' = UPPER([NO_CORRETOR])
-                ,'emailCorretor' = [EMAIL_CORRETOR]
-                ,'existeCca' = CASE	
-                                    WHEN [ACEITA_CCA] = 'SIM' THEN 'SIM'
-                                    ELSE 'NAO'
-                                END
+                [NOME PROPONENTE]
+                ,[CPF/CNPJ PROPONENTE]
+                ,[E-MAIL PROPONENTE]
             FROM 
-                [ALITB001_Imovel_Completo] AS SIMOV
-                LEFT JOIN [TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
-                LEFT JOIN [TABELA_EMAIL_PROPONENTES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
-                --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON (CONTROLE_EMAIL.numeroContrato = SIMOV.NU_BEM)
+                [dbo].[ALITB048_CUB120000]
             WHERE 
-                [UNA] = 'GILIE/SP'
-                AND [STATUS_IMOVEL] = 'Em contratação'
-                AND ([TIPO_VENDA] LIKE '%Venda Online%' OR [TIPO_VENDA] like '%Venda Direta Online%' OR [TIPO_VENDA] LIKE '%1º Leilão SFI%' OR [TIPO_VENDA] LIKE '%2º Leilão SFI%')
-                AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -4, GETDATE())
-                AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] LIKE '%Patrimonial%')
-                --AND (CONTROLE_EMAIL.[numeroContrato] IS NULL AND CONTROLE_EMAIL.[codigoAgencia] IS NULL)
-            ORDER BY
-                'grupoClassificacao'
-                ,'tipoDeVenda'
-                ,'tipoProposta'              
+                [E-MAIL PROPONENTE] IS NOT NULL
+                AND [GILIE] = 'GILIE/SP'
+        )
+        
+        SELECT DISTINCT
+            'numeroBem' = [BEM_FORMATADO]
+            ,'grupoClassificacao' = CASE 
+                                        WHEN [CLASSIFICACAO] LIKE '%EMGEA%' THEN 'EMGEA'
+                                        WHEN [CLASSIFICACAO] = 'PANAMERICANO' THEN 'PATRIMONIAL'
+                                        WHEN [CLASSIFICACAO] LIKE '%Patrimonial%' THEN 'PATRIMONIAL'
+                                        --WHEN [CLASSIFICACAO] = 'Patrimonial - Alienação Fiduciária' THEN 'PATRIMONIAL'
+                                        ELSE 'CAIXA'
+                                    END
+            ,'tipoDeVenda' = CASE
+                                WHEN [TIPO_VENDA] LIKE 'Venda Online' THEN 'VENDA ONLINE'
+                                WHEN [TIPO_VENDA] LIKE 'Venda Direta Online' THEN 'VENDA ONLINE'
+                                WHEN [TIPO_VENDA] LIKE '%Leilão%' THEN 'LEILAO'
+                                WHEN [TIPO_VENDA] LIKE 'Venda Direta Online' THEN 'VENDA ONLINE'
+                                ELSE 'OUTROS TIPOS'
+                            END
+            ,'numeroLeilao' = SIMOV.[AGRUPAMENTO]
+            ,'tipoProposta' = CASE 
+                                WHEN [VALOR_REC_PROPRIOS_PROPOSTA] = [VALOR_TOTAL_PROPOSTA] THEN 'A VISTA'
+                                ELSE 'FINANCIADO'
+                            END
+            ,'temAcaoJudicial' = CASE
+                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
+                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
+                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
+                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% ACAO %' THEN 'SIM'
+                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%ACOES%' THEN 'SIM'
+                                ELSE 'NAO'
+                            END
+            ,'codigoAgencia' = AGENCIA.[codigoAgencia]
+            ,'nomeAgencia' = [AGENCIA_CONTRATACAO_PROPOSTA]
+            ,'enderecoImovel' = [ENDERECO_IMOVEL]
+            ,'dataAlteracaoStatus' = [DATA_ALTERACAO_STATUS]
+            ,'maiorQueTrintaSalariosMinimos' = CASE
+                                                    WHEN [VALOR_TOTAL_PROPOSTA] > (998*30) THEN 'SIM'
+                                                    ELSE 'NAO'
+                                                END
+            ,'nomeProponente' = UPPER([NOME_PROPONENTE])
+            ,'emailProponente' = [E-MAIL PROPONENTE]
+            ,'cpfProponente' = [CPF_CNPJ_PROPONENTE]
+            ,'nomeCorretor' = UPPER([NO_CORRETOR])
+            ,'emailCorretor' = [EMAIL_CORRETOR]
+            ,'existeCca' = CASE	
+                                WHEN [ACEITA_CCA] = 'SIM' THEN 'SIM'
+                                ELSE 'NAO'
+                            END
+        FROM 
+            [ALITB001_Imovel_Completo] AS SIMOV
+            LEFT JOIN [TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
+            LEFT JOIN [TABELA_EMAIL_PROPONENTES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
+            --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON (CONTROLE_EMAIL.numeroContrato = SIMOV.NU_BEM)
+        WHERE 
+            [UNA] = 'GILIE/SP'
+            AND [STATUS_IMOVEL] = 'Em contratação'
+            AND ([TIPO_VENDA] LIKE '%Venda Online%' OR [TIPO_VENDA] like '%Venda Direta Online%' OR [TIPO_VENDA] LIKE '%1º Leilão SFI%' OR [TIPO_VENDA] LIKE '%2º Leilão SFI%')
+            AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -2, GETDATE())
+            AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] LIKE '%Patrimonial%')
+            --AND (CONTROLE_EMAIL.[numeroContrato] IS NULL AND CONTROLE_EMAIL.[codigoAgencia] IS NULL)
+        ORDER BY
+            'grupoClassificacao'
+            ,'tipoDeVenda'
+            ,'tipoProposta'              
         "); 
         return (object) $relacaoContratosPatrimoniais;
     }
 
     public static function listagemContratosAutorizacaoCaixaEngea()
+    {
+        $relacaoContratosCaixaEmgea = DB::select("
+        WITH TABELA_EMAIL_PROPONETES AS (
+            SELECT DISTINCT
+                [NOME PROPONENTE]
+                ,[CPF/CNPJ PROPONENTE]
+                ,[E-MAIL PROPONENTE]
+            FROM 
+                [dbo].[ALITB048_CUB120000]
+            WHERE 
+                [E-MAIL PROPONENTE] IS NOT NULL
+                AND [GILIE] = 'GILIE/SP'
+        )
+        
+        SELECT DISTINCT
+            'numeroBem' = SIMOV.[BEM_FORMATADO]
+            ,'grupoClassificacao' = CASE 
+                                WHEN VENDAS.[CLASSIFICACAO] like '%EMGEA%' THEN 'EMGEA'
+                                ELSE 'CAIXA'
+                            END
+            ,'tipoDeVenda' = CASE
+                                WHEN [NO_VENDA_TIPO] = '1º Leilão SFI' THEN 'LEILAO'
+                                WHEN [NO_VENDA_TIPO] = '2º Leilão SFI' THEN 'LEILAO'
+                                WHEN [NO_VENDA_TIPO] = 'Venda Direta Online' THEN 'VENDA ONLINE'
+                                WHEN [NO_VENDA_TIPO] = 'Venda Online' THEN 'VENDA ONLINE'
+                                ELSE 'OUTROS TIPOS'
+                            END
+            ,'numeroLeilao' = SIMOV.[AGRUPAMENTO]
+            ,'enderecoImovel' = SIMOV.[ENDERECO_IMOVEL]
+            ,'dataProposta' = [DT_PROPOSTA] 
+            ,'dataAlteracaoStatus' = [DT_STATUS_ALTERACAO]
+            ,'valorRecursoProprioProposta' = CONVERT(DECIMAL(17, 2), [Valor])
+            ,'valorFgtsProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FGTS_PROPOSTA])
+            ,'valorFinanciadoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FINANCIADO_PROPOSTA])
+            ,'valorParceladoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_PARCELADO_PROPOSTA])
+            ,'valorTotalProposta' = CONVERT(DECIMAL(17, 2), [VALOR_TOTAL_PROPOSTA])
+            ,'valorTotalContrato' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_CONTRATO])
+            ,'valorTotalRecebido' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_RECEBIDO])
+            ,'tipoProposta' = CASE
+                                WHEN [Valor] >= [VALOR_TOTAL_PROPOSTA] AND SIMOV.[VALOR_FGTS_PROPOSTA] = 0 AND SIMOV.[VALOR_FINANCIADO_PROPOSTA] = 0 THEN 'A VISTA'
+                                ELSE 'FINANCIADA OU COM FGTS'
+                            END
+            ,'temAcaoJudicial' = CASE
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '% ACAO %' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%ACOES%' THEN 'SIM'
+                                    ELSE 'NAO'
+                                END
+            ,'maiorQueTrintaSalariosMinimos' = CASE
+                                                    WHEN [VALOR_TOTAL_PROPOSTA] > (998*30) THEN 'SIM'
+                                                    ELSE 'NAO'
+                                                END
+            ,'dataUltimoRecebimento' = [DT_Sinaf]
+            ,'codigoAgencia' = AGENCIA.[codigoAgencia]
+            ,'nomeAgencia' = SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA]
+            ,'nomeProponente' = UPPER(SIMOV.[NOME_PROPONENTE])
+            ,'emailProponente' = [E-MAIL PROPONENTE]
+            ,'nomeCorretor' = UPPER(SIMOV.[NO_CORRETOR])
+            ,'emailCorretor' = SIMOV.[EMAIL_CORRETOR]
+            ,'existeCca' = CASE	
+                                WHEN SIMOV.[ACEITA_CCA] = 'SIM' THEN 'SIM'
+                                ELSE 'NAO'
+                            END
+            ,'origemMatricula' = SIMOV.[ORIGEM_MATRICULA]
+            ,'normativoUtilizado' = CASE
+                                        WHEN SIMOV.[ORIGEM_MATRICULA] = 'Emgea' THEN 'ADXXX'
+                                        WHEN SIMOV.[ORIGEM_MATRICULA] = 'Caixa' THEN 'ADXYZ'
+                                        ELSE NULL
+                                    END
+        FROM 
+            [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS 
+            LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
+            LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
+            LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
+            --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON (CONTROLE_EMAIL.numeroContrato = SIMOV.NU_BEM AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] = CONTROLE_EMAIL.[emailProponente])
+        WHERE 
+            [GILIE] = 'GILIE/SP'
+            AND [DE_Status_SIMOV] = 'Em Contratação'
+            AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
+            AND [DT_Sinaf] >= DATEADD(DAY, -2, GETDATE())
+            AND [Valor] >= [VL_TOTAL_RECEBIDO]
+            --AND (CONTROLE_EMAIL.numeroContrato IS NULL AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] IS NULL)
+            --AND SIMOV.[BEM_FORMATADO] != '08.5555.2153873-7' -- CONTRATO BUGADO QUE ESTÁ SEMPRE APARECENDO
+        ORDER BY 
+            grupoClassificacao
+            , tipoDeVenda
+            , tipoProposta
+        "); 
+        return (object) $relacaoContratosCaixaEmgea;
+    }
+
+    public static function listagemContratosComListaFixaNoWhereDaQuery()
     {
         $relacaoContratosCaixaEmgea = DB::select("
             WITH TABELA_EMAIL_PROPONETES AS (
@@ -435,8 +529,7 @@ class RotinaMensagensAutomatica extends Controller
             SELECT DISTINCT
                 'numeroBem' = SIMOV.[BEM_FORMATADO]
                 ,'grupoClassificacao' = CASE 
-                                    WHEN VENDAS.[CLASSIFICACAO] = 'EMGEA' THEN 'EMGEA'
-                                    WHEN VENDAS.[CLASSIFICACAO] = 'EMGEA- Alienação Fiduciária' THEN 'EMGEA'
+                                    WHEN VENDAS.[CLASSIFICACAO] like '%EMGEA%' THEN 'EMGEA'
                                     ELSE 'CAIXA'
                                 END
                 ,'tipoDeVenda' = CASE
@@ -498,17 +591,55 @@ class RotinaMensagensAutomatica extends Controller
                 --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON (CONTROLE_EMAIL.numeroContrato = SIMOV.NU_BEM AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] = CONTROLE_EMAIL.[emailProponente])
             WHERE 
                 [GILIE] = 'GILIE/SP'
-                AND [DE_Status_SIMOV] = 'Em Contratação'
+                --AND [DE_Status_SIMOV] = 'Em Contratação'
                 AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
-                AND [DT_Sinaf] >= DATEADD(DAY, -4, GETDATE())
-                AND [Valor] >= [VL_TOTAL_RECEBIDO]
+                --AND [DT_Sinaf] >= DATEADD(DAY, -3, GETDATE())
+                --AND [Valor] >= [VL_TOTAL_RECEBIDO]
                 --AND (CONTROLE_EMAIL.numeroContrato IS NULL AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] IS NULL)
-                --AND SIMOV.[BEM_FORMATADO] = '01.2941.0000284-2'
+                AND SIMOV.[BEM_FORMATADO] IN ('01.0262.4132212-9'
+    ,'08.4444.0337043-5' 
+    ,'08.5555.1589242-7'
+    ,'01.4444.1037266-0')
             ORDER BY 
                 grupoClassificacao
                 , tipoDeVenda
                 , tipoProposta
         "); 
         return (object) $relacaoContratosCaixaEmgea;
+    }
+
+    public static function enviarMensageriasComRelacaoFixaDeContratos()
+    {
+        /* IMOVEIS CAIXA E EMGEA */ 
+        $contratosCaixaEmgea = self::listagemContratosComListaFixaNoWhereDaQuery(); 
+        echo "<h1>Imóveis Caixa/EMGEA</h1>";
+        foreach ($contratosCaixaEmgea as $contratos => $contrato) {
+            if ($contrato->grupoClassificacao == 'EMGEA') {
+                self::setClassificacaoImovel('EMGEA');
+                if ($contrato->origemMatricula == 'Emgea') {
+                    self::setOrigemMatricula('EMGEA/EMGEA');
+                } else {
+                    self::setOrigemMatricula('EMGEA/CAIXA');
+                }
+            } else {
+                self::setOrigemMatricula('CAIXA');
+                self::setClassificacaoImovel('CAIXA');
+            }
+            
+            self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
+            echo "numero Bem: $contrato->numeroBem <br>";
+            echo "Proposta CCA: $contrato->existeCca <br>";
+            switch ($contrato->grupoClassificacao) {
+                case 'CAIXA':
+                    echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
+                    self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+                    break;
+                case 'EMGEA':
+                    echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
+                    self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+                    break;
+            }
+            self::defineTipoDeMensageria($contrato);
+        }
     }
 }
