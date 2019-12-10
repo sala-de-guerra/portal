@@ -56,9 +56,7 @@ Route::get('/controle-contratacao', function () {
 
 // Consulta de bem imóvel
 
-Route::get('/consulta-bem-imovel', function () {
-    return view('portal.imoveis.consulta-bem-imovel');
-});
+Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
 
 // Rotina Automatica de envio de mensagens Adjudicados
 

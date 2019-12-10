@@ -731,7 +731,8 @@
     <script>
 
 
-        $.getJSON('js/imovel_mockado.json', function(dados){
+        // $.getJSON('js/imovel_mockado.json', function(dados){
+            var dados = JSON.stringify({{$dadosContrato}});
             console.log(dados[0]);
 
             var numeroBem = dados[0].numeroBem;
@@ -747,7 +748,7 @@
             });
 
 
-        });
+        // });
 
 
         var tamanhoMaximoView = 8;

@@ -85,6 +85,7 @@ class ContratosEstoqueCaixa extends Controller
 
         ];
         // dd($contrato);
-        return json_encode($dadosContrato);
+        return view('portal.imoveis.consulta-bem-imovel')->with('dadosContrato', json_encode($dadosContrato));
+
     }
 }
