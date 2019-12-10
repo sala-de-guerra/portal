@@ -501,8 +501,12 @@ class RotinaMensagensAutomatica extends Controller
             AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
             AND [DT_Sinaf] >= DATEADD(DAY, -2, GETDATE())
             AND [Valor] >= [VL_TOTAL_RECEBIDO]
+			AND [NO_VENDA_TIPO] != 'Venda Direta'
             --AND (CONTROLE_EMAIL.numeroContrato IS NULL AND EMAIL_CLIENTES.[E-MAIL PROPONENTE] IS NULL)
-            --AND SIMOV.[BEM_FORMATADO] != '08.5555.2153873-7' -- CONTRATO BUGADO QUE ESTÁ SEMPRE APARECENDO
+
+			--AND SIMOV.[BEM_FORMATADO] != '01.4444.0024987-4' -- REMOVE EVENTUAIS CONTRATOS ENVIADOS ANTERIORMENTE
+			--AND SIMOV.[BEM_FORMATADO] != '07.1226.0015675-9' -- CONTRATO RELACIONADO INDEVIDAMENTE
+			--AND SIMOV.[BEM_FORMATADO] != '01.5555.2118109-1' -- LISTA DE EMGEA VENDA DIRETA
         ORDER BY 
             grupoClassificacao
             , tipoDeVenda

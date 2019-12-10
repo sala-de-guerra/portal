@@ -25,10 +25,10 @@ $(document).ready(function(){
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: {
-        url: "../js/baseSimov.json",
+        url: "/portal/public/js/baseSimov.json",
         transform: function (data) {
-          // console.log(data.response.bens);
-          return $.map(data.response.bens, function (bem) {
+          // console.log(data);
+          return $.map(data.bens, function (bem) {
               return {
                 bemFormatado: bem.bemFormatado,
                 numeroBem: bem.numeroBem,
@@ -55,7 +55,7 @@ $(document).ready(function(){
     {
       name: 'proponente',
       limit: 10,
-      display: 'numeroBem',
+      display: 'bemFormatado',
       source: imoveis.ttAdapter(),
       templates: {
           header: '<h4 class="source-name">Pesquisa por Proponente</h4>',
@@ -96,7 +96,7 @@ $(document).ready(function(){
 
   $("#formPesquisa").submit(function (){
       var chb = $(".typeahead").val();
-      $(this).attr('action', '/consulta-bem-imovel/' + chb);
+      $(this).attr('action', 'consulta-bem-imovel/' + chb);
   });
 
 
