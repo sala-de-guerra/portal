@@ -240,6 +240,7 @@
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('plugins/DataTables/dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('plugins/typeahead/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('plugins/typeahead/handlebars.js') }}"></script>
     <script src="{{ asset('js/global/configura_typeahead.js') }}"></script>

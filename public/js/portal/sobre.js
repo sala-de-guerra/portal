@@ -15,8 +15,8 @@ $(document).ready( function () {
             $(linha).appendTo('#tbl_area_atuacao>tbody');
         });
         
-        $('#tbl_area_atuacao').DataTable();
-
+        //Função global que formata DataTable para portugues do arquivo formata_datatable.js.
+        _formataDatatable ();
     });
 
 });

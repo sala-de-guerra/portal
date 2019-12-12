@@ -24,190 +24,96 @@
 
 @section('content')
 
-<!--
 
 <div class="row">
-    <div class="col-md-6 d-flex justify-content-center">
-        <div class="card card-default">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-bullhorn"></i>
-                                Carousel 1
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <img src="{{ asset('/img/CAROUSEL_FLOW_WIDE.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-bullhorn"></i>
-                                Carousel 2
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <img src="{{ asset('/img/CAROUSEL_DEAL_WIDE.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-bullhorn"></i>
-                                Carousel 3
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <img src="{{ asset('/img/CAROUSEL_CHARTS_WIDE.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card card-default">
             <div class="card-header">
                 <h3 class="card-title">
-                <i class="fas fa-bullhorn"></i>
-                Callouts
+                    Vitrine
                 </h3>
-            </div>
-            /.card-header
+            </div><!-- /.card-header -->
             <div class="card-body">
-                <div class="callout callout-danger">
-                <h5>I am a danger callout!</h5>
+                <div class="row">
 
-                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
-                    soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                </div>
-                <div class="callout callout-info">
-                <h5>I am an info callout!</h5>
-
-                <p>Follow the steps to continue to payment.</p>
-                </div>
-                <div class="callout callout-warning">
-                <h5>I am a warning callout!</h5>
-
-                <p>This is a yellow callout.</p>
-                </div>
-            </div>
-            /.card-body
-        </div>
-        /.card
-    </div>
-    /.col
-
-</div>
+                    <div class="col-md-8">
+                        <p class="text-justify">
+                            Fundada em 01 de outubro de 1998, a Gerência de Alienar Bens Móveis e Imóveis de São Paulo é responsável pela guarda 
+                            e desfazimento de bens retomados, oriundos principalmente de contratos descumpridos, como imóveis e jóias.
+                        </p>
+                        <p class="text-justify">
+                            Sob a gestão do gerente de filial Marcelo Barboza Fernandes e dos coordenadores Fernanda Pereira Mendonça, 
+                            João Marcel Quintiliano e Vladimir Pereira de Lemos, a filial conta com um quadro atual de aproximadamente 60 
+                            funcionários, divididos entre suas áreas de atuação.
+                        </p>
+                    </div> <!-- /.col -->
+                    
+                    <div class="col-md-4">
+                        <img src="{{ asset('/img/edificio_eluma.jpg') }}" class="d-block img-fluid" alt="Foto do Edifício Eluma, na Av. Paulista.">
+                    </div><!-- /.col -->
+                    
+                </div> <!-- /.row -->
+            </div><!-- /.card-body -->
+        </div><!-- /.card -->
+    </div><!-- /.col -->
+</div> <!-- /.row -->
 
 <br>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card card-default">
+
             <div class="card-header">
-                <h3 class="card-title">
-                <i class="fas fa-bullhorn"></i>
-                Callouts
-                </h3>
-            </div>
-            /.card-header
+                <h3 class="card-title">Área de atuação</h3>
+            </div> <!-- /.card-header -->
+            
             <div class="card-body">
-                <div class="callout callout-danger">
-                <h5>I am a danger callout!</h5>
 
-                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
-                    soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="text-justify">A área de atuação da GILIE/SP acompanha a distribuição das cidades conforme a SR de vinculação. 
+                        Estão vinculadas a GILIE/SP todas as SR da capital (Sé, Santana, Santo Amaro, Penha, Paulista) e ABC, 
+                        Osasco e Baixada Santista. As demais cidades do estado de São Paulo estão vinculadas a GILIE/BU.</p>
+                        <p class="text-justify">Pesquise uma agência ou município na tabela abaixo para saber qual é a GILIE de vinculação.</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <img src="{{ asset('/img/area_atuacao_giliesp.jpg') }}" class="img-fluid" alt="Mapa do estado de São Paulo com a área de atuação da GILIE SP grifada.">
+                    </div>
                 </div>
-                <div class="callout callout-info">
-                <h5>I am an info callout!</h5>
 
-                <p>Follow the steps to continue to payment.</p>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="tbl_area_atuacao" class="table table-bordered table-striped dataTable">
+                            <thead>
+                                <tr>
+                                    <th>GILIE</th>
+                                    <th>MUNICÍPIO</th>
+                                    <th>PV</th>
+                                    <th>SR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="callout callout-warning">
-                <h5>I am a warning callout!</h5>
 
-                <p>This is a yellow callout.</p>
-                </div>
-                <div class="callout callout-success">
-                <h5>I am a success callout!</h5>
-
-                <p>This is a green callout.</p>
-                </div>
-            </div>
-            /.card-body
-        </div>
-        /.card
-    </div>
-    /.col
-    <div class="col-md-6">
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">
-                <i class="fas fa-bullhorn"></i>
-                Callouts
-                </h3>
-            </div>
-            /.card-header
-            <div class="card-body">
-                <div class="callout callout-danger">
-                <h5>I am a danger callout!</h5>
-
-                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
-                    soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                </div>
-                <div class="callout callout-info">
-                <h5>I am an info callout!</h5>
-
-                <p>Follow the steps to continue to payment.</p>
-                </div>
-                <div class="callout callout-warning">
-                <h5>I am a warning callout!</h5>
-
-                <p>This is a yellow callout.</p>
-                </div>
-                <div class="callout callout-success">
-                <h5>I am a success callout!</h5>
-
-                <p>This is a green callout.</p>
-                </div>
-            </div>
-            /.card-body
-        </div>
-        /.card
-    </div>
-    /.col
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col -->
 
 
-</div> 
-/.row
-
-
--->
-@section('footer')
+</div> <!-- /.row -->
 
 
 @stop
+
+@section('footer')
 
 @stop
 
@@ -217,5 +123,8 @@
 
 
 @section('js')
+
+<script src="{{ asset('js/portal/sobre.js') }}"></script>
+
 
 @stop
