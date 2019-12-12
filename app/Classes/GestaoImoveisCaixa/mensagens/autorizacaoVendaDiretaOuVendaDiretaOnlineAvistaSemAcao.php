@@ -61,8 +61,6 @@
 
 <p>À</p>
 
-<h3><b>RETIFICAÇÃO: Corrigimos o ponto sobre ação judicial deste contrato. Favor desconsiderar e-mail de autorização enviado anteriormente</b></h3>
-
 <p>Agência %NOME_AGENCIA%</p>
 
 <p>A/C Setor de Habitação</p>

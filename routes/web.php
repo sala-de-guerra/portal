@@ -65,6 +65,61 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::get('rotina-mensagens-com-contrato-fixo', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasComRelacaoFixaDeContratos');
     Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
     Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
+    Route::get('teste-ldap/{matricula}/{usuario}/{senha}', function($matricula, $usuario, $senha) {
+        
+        $server = "ldaps://corp.caixa.gov.br"; //Servidor LDAPS/AD corpcaixa-conexão SSL
+        $user = "corpcaixa\\$usuario"; //usuário de serviço ou usuário que está autenticando no ldap
+        $psw = $senha; //senha do usuário de serviço ou do usuário que está autenticando no ldap
+        $dn = "OU=Usuarios,OU=CAIXA,DC=corp,DC=caixa,DC=gov,DC=br"; //código para consulta dos usuários na caixa
+        
+        dd("$user");
+        
+        $search = "(sAMAccountName=$matricula)";  //usuário o qual se procura a foto
+        // ------------------------------------------------------------------------
+        
+        echo "<h2>php LDAP query test</h2>";
+        // connecting to LDAP server
+        $ds = ldap_connect($server);
+        $r = ldap_bind($ds, $user , $psw);
+        // performing search
+        $sr = ldap_search($ds, $dn, $search);
+        $data = ldap_get_entries($ds, $sr);
+        
+        echo "Found " . $data["count"] . " entries";
+        
+        for ($i = 0; $i < $data["count"]; $i++) {
+            echo "<h4><strong>Common Name: </strong>" . $data[$i]["cn"][0] . "</h4><br />";
+            echo "<strong>Distinguished Name: </strong>" . $data[$i]["dn"] . "<br />";
+        
+            // Check if user photo exists
+            if (isset($data[$i]["thumbnailphoto"]) && isset($data[$i]["thumbnailphoto"][0])) {
+                echo "<strong>Photo in Base64: </strong>" . base64_encode($data[$i]["thumbnailphoto"][0]) . "<br />";
+               echo '<img src="data:image/jpeg;base64,'. base64_encode($data[$i]["thumbnailphoto"][0]) .'" /><br />';
+            }
+            else {
+                echo "<strong>Photo not set</strong><br />";
+            }
+        
+            // Checking if discription exists 
+            if (isset($data[$i]["description"][0])) {
+                echo "<strong>Desription: </strong>" . $data[$i]["description"][0] . "<br />";
+            }
+            else {
+                echo "<strong>Description not set</strong><br />";
+            }
+        
+            // Checking if email exists
+            if (isset($data[$i]["mail"][0])){
+                echo "<strong>Email: </strong>" . $data[$i]["mail"][0] . "<br /><hr />";
+            }
+            else {
+                echo "<strong>Email not set</strong><br /><hr />";
+            }
+        }
+        
+        // close connection
+        ldap_close($ds);
+    });
 });
 
 // Rotina Automatica de envio de mensagens Adjudicados
