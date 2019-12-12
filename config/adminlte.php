@@ -235,6 +235,12 @@ return [
 
         ['header' => 'IMÓVEIS CAIXA'],
         [
+            'text' => 'Pesquisar Imóvel',
+            'url'  => '/pesquisar',
+            'icon' => 'fas fa-lg fa-fw fa-search',
+
+        ],
+        [
             'text' => 'Preparar e Ofertar',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-lg fa-fw fa-sign',

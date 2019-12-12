@@ -78,7 +78,7 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <form class="form-inline tt-responsive" id="formPesquisa">
                             <div class="input-group">
                                 <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Pesquise um imóvel pelo CHB, endereço, dados do proponente ou do ex-mutuário.">
@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         </form>
-                    </li>
+                    </li> -->
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
                 </ul>

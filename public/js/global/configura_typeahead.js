@@ -7,36 +7,36 @@ $(document).ready(function(){
       var bemFormatadoTokens = Bloodhound.tokenizers.whitespace(datum.bemFormatado);
       var numeroBemTokens = Bloodhound.tokenizers.whitespace(datum.numeroBem);
       var enderecoCompletoTokens = Bloodhound.tokenizers.whitespace(datum.enderecoCompleto);
-      var nomeProponenteTokens = Bloodhound.tokenizers.whitespace(datum.nomeProponente);
-      var cpfCnpjProponenteTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjProponente);
-      var nomeExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.nomeExMutuario);
-      var cpfCnpjExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjExMutuario);
+      // var nomeProponenteTokens = Bloodhound.tokenizers.whitespace(datum.nomeProponente);
+      // var cpfCnpjProponenteTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjProponente);
+      // var nomeExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.nomeExMutuario);
+      // var cpfCnpjExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjExMutuario);
       
       return numeroBemTokens
         .concat(bemFormatadoTokens)
         .concat(enderecoCompletoTokens)
-        .concat(nomeProponenteTokens)
-        .concat(cpfCnpjProponenteTokens)
-        .concat(nomeExMutuarioTokens)
-        .concat(cpfCnpjExMutuarioTokens);
+        // .concat(nomeProponenteTokens)
+        // .concat(cpfCnpjProponenteTokens)
+        // .concat(nomeExMutuarioTokens)
+        // .concat(cpfCnpjExMutuarioTokens);
         
 
         
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: {
-        url: "/portal/public/js/baseSimov.json",
+        url: "/js/baseSimov.json",
         transform: function (data) {
-          // console.log(data);
+          console.log(data);
           return $.map(data.bens, function (bem) {
               return {
                 bemFormatado: bem.bemFormatado,
                 numeroBem: bem.numeroBem,
                 enderecoCompleto: bem.enderecoCompleto,
-                nomeProponente: bem.nomeProponente,
-                cpfCnpjProponente: bem.cpfCnpjProponente,
-                nomeExMutuario: bem.nomeExMutuario,
-                cpfCnpjExMutuario: bem.cpfCnpjExMutuario
+                // nomeProponente: bem.nomeProponente,
+                // cpfCnpjProponente: bem.cpfCnpjProponente,
+                // nomeExMutuario: bem.nomeExMutuario,
+                // cpfCnpjExMutuario: bem.cpfCnpjExMutuario
               };
           });
         }
@@ -53,52 +53,61 @@ $(document).ready(function(){
     minLength: 1
     },
     {
-      name: 'proponente',
+      name: 'endereco',
       limit: 10,
       display: 'bemFormatado',
       source: imoveis.ttAdapter(),
       templates: {
-          header: '<h4 class="source-name">Pesquisa por Proponente</h4>',
+          header: '<h4 class="source-name">Pesquisa por Endereço</h4>',
           empty: [
-            '<h4 class="source-name">Pesquisa por Proponente</h4>' +
+            '<h4 class="source-name">Pesquisa por Endereço</h4>' +
             '<div class="empty-message">' +
               'Nenhum resultado encontrado.' +
             '</div>'
           ].join('\n'),
-          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</li>')
+          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}}</li>')
       }
     },
-    {
-      name: 'ex-mutuario',
-      limit: 10,
-      display: 'numeroBem',
-      source: imoveis.ttAdapter(),
-      updater: function (selectedName) {  
-        window.location.href =[ selectedName ]+".php";  
-            },
-      templates: {
-          header: '<h4 class="source-name">Pesquisa por Ex-Mutuário</h4>',
-          empty: [
-            '<h4 class="source-name">Pesquisa por Ex-Mutuário</h4>' +
-            '<div class="empty-message">' +
-              'Nenhum resultado encontrado.' +
-            '</div>'
-          ].join('\n'),
-          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeExMutuario}} - CPF/CNPJ: {{cpfCnpjExMutuario}}</li>')
-      }
-    },
+    // {
+    //   name: 'proponente',
+    //   limit: 10,
+    //   display: 'bemFormatado',
+    //   source: imoveis.ttAdapter(),
+    //   templates: {
+    //       header: '<h4 class="source-name">Pesquisa por Proponente</h4>',
+    //       empty: [
+    //         '<h4 class="source-name">Pesquisa por Proponente</h4>' +
+    //         '<div class="empty-message">' +
+    //           'Nenhum resultado encontrado.' +
+    //         '</div>'
+    //       ].join('\n'),
+    //       suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</li>')
+    //   }
+    // },
+    // {
+    //   name: 'ex-mutuario',
+    //   limit: 10,
+    //   display: 'numeroBem',
+    //   source: imoveis.ttAdapter(),
+    //   updater: function (selectedName) {  
+    //     window.location.href =[ selectedName ]+".php";  
+    //         },
+    //   templates: {
+    //       header: '<h4 class="source-name">Pesquisa por Ex-Mutuário</h4>',
+    //       empty: [
+    //         '<h4 class="source-name">Pesquisa por Ex-Mutuário</h4>' +
+    //         '<div class="empty-message">' +
+    //           'Nenhum resultado encontrado.' +
+    //         '</div>'
+    //       ].join('\n'),
+    //       suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeExMutuario}} - CPF/CNPJ: {{cpfCnpjExMutuario}}</li>')
+    //   }
+    // },
   );
-
-  // $("#btn-pesquisar-navbar").on( "click", function() {
-  //   var chb = $(".typeahead").data("value"); 
-  //   window.location.href = "/consulta-bem-imovel/" + chb;
-  // });
 
   $("#formPesquisa").submit(function (){
       var chb = $(".typeahead").val();
-      $(this).attr('action', 'consulta-bem-imovel/' + chb);
+      $(this).attr('action', '/consulta-bem-imovel/' + chb);
   });
-
-
 
 });
