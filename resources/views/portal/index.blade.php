@@ -44,7 +44,7 @@
                         </div>
                         <div class="card-body">
                             <a href="/sobre">
-                                <img src="{{ asset('/img/equipe.png') }}" class="d-block" width="600px" height="300px" alt="...">
+                                <img src="{{ asset('/img/equipe.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
                             </a>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="card-body">
                             <a href="/faq">
-                                <img src="{{ asset('/img/faq.png') }}" class="d-block" width="600px" height="300px" alt="...">
+                                <img src="{{ asset('/img/faq.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
                             </a>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="card-body">
                             <a href="/orientacoes">
-                                <img src="{{ asset('/img/orientacoes.png') }}" class="d-block" width="600px" height="300px" alt="...">
+                                <img src="{{ asset('/img/orientacoes.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
                             </a>
                         </div>
                     </div>
@@ -87,87 +87,16 @@
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">
-                    Vitrine
-                </h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <p class="text-justify">
-                    Fundada em 01 de outubro de 1998, a Gerência de Alienar Bens Móveis e Imóveis de São Paulo é responsável pela guarda 
-                    e desfazimento de bens retomados, oriundos principalmente de contratos descumpridos, como imóveis e jóias.
-                </p>
-                <p class="text-justify">
-                    Sob a gestão do gerente de filial Marcelo Barboza Fernandes e dos coordenadores Fernanda Pereira Mendonça, 
-                    João Marcel Quintiliano e Vladimir Pereira de Lemos, a filial conta com um quadro atual de aproximadamente 60 
-                    funcionários, divididos entre suas áreas de atuação.
-                </p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-
-</div>
-
-<br>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-default">
-
-            <div class="card-header">
-                <h3 class="card-title">Área de atuação</h3>
-            </div> <!-- /.card-header -->
-            
-            <div class="card-body">
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <p class="text-justify">A área de atuação da GILIE/SP acompanha a distribuição das cidades conforme a SR de vinculação. 
-                        Estão vinculadas a GILIE/SP todas as SR da capital (Sé, Santana, Santo Amaro, Penha, Paulista) e ABC, 
-                        Osasco e Baixada Santista. As demais cidades do estado de São Paulo estão vinculadas a GILIE/BU.</p>
-                    </div>
-
-                    <div class="col-md-4">
-                        <img src="{{ asset('/img/area_atuacao_giliesp.jpg') }}" class="img-fluid" alt="Área de atuação da GILIE SP.">
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <table id="tbl_area_atuacao" class="table table-bordered table-striped dataTable">
-                            <thead>
-                                <tr>
-                                    <th>GILIE</th>
-                                    <th>MUNICÍPIO</th>
-                                    <th>PV</th>
-                                    <th>SR</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-
+    
 
 </div> <!-- /.row -->
 
-@section('footer')
-
+<br>
 
 @stop
+
+@section('footer')
+
 
 @stop
 
@@ -178,6 +107,5 @@
 
 @section('js')
 
-    <script src="{{ asset('js/portal/index.js') }}"></script>
 
 @stop

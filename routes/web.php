@@ -54,6 +54,13 @@ Route::get('/controle-contratacao', function () {
     return view('portal.imoveis.controle-contratacao');
 });
 
+// Pesquisar
+
+Route::get('/pesquisar', function () {
+    return view('portal.imoveis.pesquisar');
+});
+
+
 // Consulta de bem imóvel
 
 Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
