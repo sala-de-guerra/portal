@@ -54,7 +54,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>CHB:</label>
-                            <p id="numeroBemFormatado"></p>
+                            <p id="bemFormatado"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -731,24 +731,24 @@
     <script>
 
 
-        // $.getJSON('js/imovel_mockado.json', function(dados){
-            var dados = JSON.stringify({{$dadosContrato}});
-            console.log(dados[0]);
 
-            var numeroBem = dados[0].numeroBem;
-            var dossieDigital = dados[0].dossieDigital;
+        $.getJSON('/estoque-imoveis/consulta-contrato/{{ $numeroContrato }}', function(dados){
+            console.log(dados);
+
+            var numeroBem = dados.numeroBem;
+            var dossieDigital = dados.dossieDigital;
 
             _formataTabelaDocumentos (numeroBem, dossieDigital);
 
             _formataTabelaLaudos (numeroBem);
 
 
-            $.each(dados[0], function(key, item) {
+            $.each(dados, function(key, item) {
                 $('#' + key).html(item);
             });
 
 
-        // });
+        });
 
 
         var tamanhoMaximoView = 8;
