@@ -63,7 +63,7 @@ Route::get('/pesquisar', function () {
 
 // Consulta de bem imóvel
 
-Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
+Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@show');
 
 // Rotina Automatica de envio de mensagens Adjudicados
 
@@ -79,7 +79,7 @@ Route::prefix('estoque-imoveis')->group(function () {
         $psw = $senha; //senha do usuário de serviço ou do usuário que está autenticando no ldap
         $dn = "OU=Usuarios,OU=CAIXA,DC=corp,DC=caixa,DC=gov,DC=br"; //código para consulta dos usuários na caixa
         
-        dd("$user");
+        // dd("$user");
         
         $search = "(sAMAccountName=$matricula)";  //usuário o qual se procura a foto
         // ------------------------------------------------------------------------

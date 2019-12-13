@@ -15,6 +15,18 @@ class ContratosEstoqueCaixa extends Controller
      * @param int  $contrato
      * @return \Illuminate\Http\Response
      */
+    static public function show($numeroContrato)
+    {
+        return view('portal.imoveis.consulta-bem-imovel')->with('numeroContrato', $numeroContrato);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param int  $contrato
+     * @return \Illuminate\Http\Response
+     */
     static public function capturaDadosBaseSimov($numeroContrato)
     {
         $contrato = BaseSimov::find($numeroContrato);
@@ -82,10 +94,8 @@ class ContratosEstoqueCaixa extends Controller
             'statusContrato' => $contrato->STATUS_CONTRATO,
             'dataContrato' => $contrato->DATA_CONTRATO,
             'statusProposta' => $contrato->STATUS_PROPOSTA,
-
         ];
-        // dd($contrato);
-        return view('portal.imoveis.consulta-bem-imovel')->with('dadosContrato', json_encode($dadosContrato));
 
+        return json_encode($dadosContrato);
     }
 }
