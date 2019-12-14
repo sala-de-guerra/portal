@@ -1,4 +1,4 @@
-[{
+{
 "numeroBemFormatado": "22.2222.2222222-2",
 "numeroBem": "22222222222222",
 "classificacao": "SFI - Gar.Fid.Reg.Créd.Imob",
@@ -33,7 +33,7 @@
 "origemImovel": "",
 "oficioMatriculaImovel": "1",
 "garantia": "Sim",
-"statusImovel": "Em Cotratação",
+"statusImovel": "Em Contratação",
 "dataAlteracaoStatusImovel": "2019-10-14 00:00:00.000",
 "dataUltimaAlteracaoStatus": "2019-10-14 00:00:00.000",
 "tipoVenda": "Venda Online",
@@ -120,4 +120,4 @@
 "dataUploadLaudo":"05-02-2019"
 
 
-}]
+}

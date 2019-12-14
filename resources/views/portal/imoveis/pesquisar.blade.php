@@ -39,9 +39,9 @@
             <div class="card-body">
                 <form class="form-inline tt-responsive" id="formPesquisa">
                     <div class="input-group">
-                        <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Pesquise um imóvel pelo CHB, endereço, dados do proponente ou do ex-mutuário.">
+                        <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Pesquise aqui um imóvel pelo CHB ou endereço.">
                         <div class="input-group-append">
-                            <button class="btn" type="submit"> <i class="fas fa-search"></i> </button>
+                            <button class="btn btn-primary" type="submit"> <i class="fas fa-search"></i> </button>
                         </div>
                     </div>
                 </form> 
