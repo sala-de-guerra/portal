@@ -66,7 +66,6 @@
 
 @section('js')
 
-<script src="{{ asset('js/portal/sobre.js') }}"></script>
 
 
 @stop

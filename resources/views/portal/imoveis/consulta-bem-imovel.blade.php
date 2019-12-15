@@ -40,8 +40,34 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: " aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <br>
-                <div class="row">
+                
+                <ul class="list-inline d-flex justify-content-around progress-ul">
+                    <li>
+                        <div class="progress-step bg-green"></div>
+                        <span class="badge bg-green">Preparaçâo</span>
+                    </li>
+                    <li>
+                        <div class="progress-step bg-secondary progress-leilao"></div>
+                        <span class="badge bg-secondary progress-leilao">Leilão</span>
+                    </li>
+                    <li>
+                        <div class="progress-step bg-secondary progress-venda"></div>
+                        <span class="badge bg-secondary progress-venda">Venda</span>
+                    </li>
+                    <li>
+                        <div class="progress-step bg-secondary progress-contratacao"></div>
+                        <span class="badge bg-secondary progress-contratacao">Contratação</span>
+                    </li>
+                    <li>
+                        <div class="progress-step bg-secondary progress-distrato"></div>
+                        <span class="badge bg-secondary progress-distrato">Distrato</span>
+                    </li>
+                    <li>
+                        <div class="progress-step bg-secondary progress-vendido"></div>
+                        <span class="badge bg-secondary progress-vendido">Vendido</span>
+                    </li>
+                </ul>
+                <!-- <div class="row">
                     <div class="col-sm-2 d-flex justify-content-around">
                         <div class="progress-step bg-green"></div>
                         <span class="badge bg-green">Preparaçâo</span>
@@ -65,26 +91,6 @@
                     <div class="col-sm-2 d-flex justify-content-around">
                         <div class="progress-step bg-secondary progress-vendido"></div>
                         <span class="badge bg-secondary progress-vendido">Vendido</span>
-                    </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <span class="badge bg-secondary">Cadastro</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <span class="badge bg-secondary">Regularização</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <span class="badge bg-secondary">Leilão</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <span class="badge bg-secondary">Venda Online</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <span class="badge bg-secondary">Contratação</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <span class="badge bg-secondary">Vendido</span>
                     </div>
                 </div> -->
             </div>
@@ -390,10 +396,10 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
-            <div class="card-header cursor-pointer" data-card-widget="collapse">
+            <div class="card-header">
                 <h3 class="card-title">Gestão de Chaves</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
@@ -424,7 +430,7 @@
             <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Controle de Notificações</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool"></button><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
@@ -851,6 +857,6 @@
 @section('js')
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
-    <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script>
+    <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
     <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
 @stop

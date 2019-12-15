@@ -305,7 +305,7 @@ return [
                 ],
                 [
                     'text' => 'Distrato',
-                    'url'  => '#',
+                    'url'  => '/distrato',
                 ],
                 [
                     'text' => 'level_two',

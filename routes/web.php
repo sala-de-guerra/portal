@@ -60,10 +60,18 @@ Route::get('/pesquisar', function () {
     return view('portal.imoveis.pesquisar');
 });
 
-
 // Consulta de bem imóvel
 
 Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@show');
+
+//Contratacao
+
+// Distrato
+
+Route::get('/distrato', function () {
+    return view('portal.contratacao.distrato');
+});
+
 
 // Rotina Automatica de envio de mensagens Adjudicados
 
