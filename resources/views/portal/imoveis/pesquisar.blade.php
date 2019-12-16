@@ -65,7 +65,7 @@
 
 
 @section('js')
-
-
-
+    <script src="{{ asset('plugins/typeahead/typeahead.bundle.js') }}"></script>
+    <script src="{{ asset('plugins/typeahead/handlebars.js') }}"></script>
+    <script src="{{ asset('js/global/configura_typeahead.js') }}"></script>
 @stop

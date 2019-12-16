@@ -27,7 +27,6 @@ $(document).ready(function(){
     prefetch: {
         url: "/js/baseSimov.json",
         transform: function (data) {
-          console.log(data);
           return $.map(data.bens, function (bem) {
               return {
                 bemFormatado: bem.bemFormatado,

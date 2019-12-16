@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $.getJSON('/estoque-imoveis/consulta-contrato/{{ $numeroContrato }}', function(dados){
+    $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
 
         var progress = '';
 
