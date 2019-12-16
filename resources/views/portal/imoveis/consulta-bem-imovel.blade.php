@@ -36,7 +36,7 @@
             </div>
             <div class="card-body">
                 <div class="row d-flex justify-content-around">
-                    <div class="col-sm-10 progress padding0">
+                    <div class="col-10 progress padding0">
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: " aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
@@ -221,6 +221,23 @@
         </div> <!-- /.card -->
     </div> <!-- /.col -->
 </div> <!-- /.row -->
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Dossiê Digital</h3>
+            </div>
+            <div class="card-body">
+                <a href="file://sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}">//sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- 
 <div class="row">
     <div class="col-md-12">
@@ -716,33 +733,29 @@
             </div> <!-- /.card-header -->
             <div class="card-body">
 
-                <h2 class="card-title"><b>Proponente Atual</b></h2>
-
-                <br>
-
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nome:</label>
-                            <p id="nomeProponente"></p>
+                            <p id="nomeProponenteDistrato"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>CPF / CNPJ:</label>
-                            <p id="cpfCnpjProponente"></p>
+                            <p id="cpfCnpjProponenteDistrato"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Telefone:</label>
-                            <p id="telefoneProponente"></p>
+                            <p id="telefoneProponenteDistrato"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>E-mail:</label>
-                            <p id="emailProponente"></p>
+                            <p id="emailProponenteDistrato"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
@@ -750,26 +763,26 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Nome do Corretor:</label>
-                            <p id="nomeCorretor"></p>
+                            <label>Data de início:</label>
+                            <p id="dataInicioDistrato"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>CRECI do Corretor:</label>
-                            <p id="numeroCreciCorretor"></p>
+                            <label>Modalidade de compra:</label>
+                            <p id="modalidadeCompraDistrato"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Telefone do Corretor:</label>
-                            <p id="telefoneComercialCorretor"></p>
+                            <label>Motivo do Distrato:</label>
+                            <p id="motivoDistrato"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>E-mail do Corretor:</label>
-                            <p id="emailCorretor"></p>
+                            <label>Status do Distrato:</label>
+                            <p id="statusDistrato"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
