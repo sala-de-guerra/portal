@@ -107,7 +107,7 @@ class RotinaMensagensAutomatica extends Controller
             self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
             self::setClassificacaoImovel('PATRIMONIAL');
             self::setOrigemMatricula('CAIXA');
-            // echo "Número bem: $contrato->numeroBem <br>";
+            echo "Número bem: $contrato->numeroBem <br>";
             // echo "Proposta CCA: $contrato->existeCca <br>";
             self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
             self::defineTipoDeMensageria($contrato);
