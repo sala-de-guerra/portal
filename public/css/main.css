@@ -29,7 +29,11 @@
 
 .cursor-pointer{
     cursor: pointer;
-  }
+}
+
+.front{
+    z-index: 10;
+}
 
 .margin0 {
     margin: 0px;
@@ -46,6 +50,23 @@
 
 .padding1220 {
     padding: 12px 20px!important;
+}
+
+.progress-ul{
+    position: relative;
+    margin: 0px;
+    bottom: 20px;
+}
+.progress-step{
+    width: 30px;
+    height: 30px;
+    border: 2px solid #bebebe;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    line-height: 27px;
+    text-align: center;
+    font-weight: bold;
+    flex: none!important;
 }
 
 .user-image-resize-50px{
