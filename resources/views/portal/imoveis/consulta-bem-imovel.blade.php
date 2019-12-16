@@ -413,10 +413,10 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
-            <div class="card-header">
+            <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Gestão de Chaves</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
@@ -447,7 +447,7 @@
             <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Controle de Notificações</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"></button><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
+                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
             </div> <!-- /.card-header -->
             <div class="card-body">
@@ -868,6 +868,9 @@
 
 
 @section('js')
+    <script>
+        var numeroContrato = '{{ $numeroContrato }}';
+    </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
