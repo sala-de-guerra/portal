@@ -542,30 +542,29 @@ class RotinaMensagensAutomatica extends Controller
         SELECT DISTINCT
             'numeroBem' = SIMOV.[BEM_FORMATADO]
             ,'grupoClassificacao' = CASE 
-                                WHEN VENDAS.[CLASSIFICACAO] like '%EMGEA%' THEN 'EMGEA'
+                                WHEN SIMOV.[CLASSIFICACAO] like '%EMGEA%' THEN 'EMGEA'
                                 ELSE 'CAIXA'
                             END
             ,'tipoDeVenda' = CASE
-                                WHEN [NO_VENDA_TIPO] = '1º Leilão SFI' THEN 'LEILAO'
-                                WHEN [NO_VENDA_TIPO] = '2º Leilão SFI' THEN 'LEILAO'
-                                WHEN [NO_VENDA_TIPO] = 'Venda Direta Online' THEN 'VENDA ONLINE'
-                                WHEN [NO_VENDA_TIPO] = 'Venda Online' THEN 'VENDA ONLINE'
+                                WHEN [TIPO_VENDA] = '1º Leilão SFI' THEN 'LEILAO'
+                                WHEN [TIPO_VENDA]  = '2º Leilão SFI' THEN 'LEILAO'
+                                WHEN [TIPO_VENDA]  = 'Venda Direta Online' THEN 'VENDA ONLINE'
+                                WHEN [TIPO_VENDA]  = 'Venda Online' THEN 'VENDA ONLINE'
                                 ELSE 'OUTROS TIPOS'
                             END
             ,'numeroLeilao' = SIMOV.[AGRUPAMENTO]
             ,'enderecoImovel' = SIMOV.[ENDERECO_IMOVEL]
-            ,'dataProposta' = [DT_PROPOSTA] 
-            ,'dataAlteracaoStatus' = [DT_STATUS_ALTERACAO]
-			,'numeroBem' = SIMOV.[NU_BEM]
-            ,'valorRecursoProprioProposta' = CONVERT(DECIMAL(17, 2), [Valor])
+            ,'dataProposta' = [DATA_PROPOSTA] 
+            ,'dataAlteracaoStatus' = [DATA_ALTERACAO_STATUS]
+            ,'valorRecursoProprioProposta' = CONVERT(DECIMAL(17, 2), [VALOR_REC_PROPRIOS_PROPOSTA])
             ,'valorFgtsProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FGTS_PROPOSTA])
             ,'valorFinanciadoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_FINANCIADO_PROPOSTA])
             ,'valorParceladoProposta' = CONVERT(DECIMAL(17, 2), SIMOV.[VALOR_PARCELADO_PROPOSTA])
             ,'valorTotalProposta' = CONVERT(DECIMAL(17, 2), [VALOR_TOTAL_PROPOSTA])
-            ,'valorTotalContrato' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_CONTRATO])
+            ,'valorTotalContrato' = CONVERT(DECIMAL(17, 2), [VALOR_TOTAL_CONTRATO])
             ,'valorTotalRecebido' = CONVERT(DECIMAL(17, 2), [VL_TOTAL_RECEBIDO])
             ,'tipoProposta' = CASE
-                                WHEN [Valor] >= [VALOR_TOTAL_PROPOSTA] AND SIMOV.[VALOR_FGTS_PROPOSTA] = 0 AND SIMOV.[VALOR_FINANCIADO_PROPOSTA] = 0 THEN 'A VISTA'
+                                WHEN SIMOV.[VALOR_FGTS_PROPOSTA] = 0 AND SIMOV.[VALOR_FINANCIADO_PROPOSTA] = 0 THEN 'A VISTA'
                                 ELSE 'FINANCIADA OU COM FGTS'
                             END
             ,'temAcaoJudicial' = CASE
@@ -593,23 +592,22 @@ class RotinaMensagensAutomatica extends Controller
                             END
             ,'origemMatricula' = SIMOV.[ORIGEM_MATRICULA]
         FROM 
-            [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS 
-            LEFT JOIN [dbo].[ALITB001_Imovel_Completo] AS SIMOV ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
+			[dbo].[ALITB001_Imovel_Completo] AS SIMOV
+            LEFT JOIN [dbo].[ALITB075_VENDA_VL_OL37] AS VENDAS ON VENDAS.[N_Concil] = SIMOV.[NU_BEM]
             LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
             LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
-            LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON CONTROLE_EMAIL.numeroContrato = SIMOV.[BEM_FORMATADO]
+            --LEFT JOIN [TBL_CONTROLE_MENSAGENS_ENVIADAS] AS CONTROLE_EMAIL ON CONTROLE_EMAIL.numeroContrato = SIMOV.[BEM_FORMATADO]
         WHERE 
-            [GILIE] = 'GILIE/SP'
-            AND [DE_Status_SIMOV] = 'Em Contratação'
-            AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
-            AND [DT_Sinaf] >= DATEADD(DAY, -60, GETDATE())
-            AND [Valor] >= [VL_TOTAL_RECEBIDO]
-			AND [NO_VENDA_TIPO] != 'Venda Direta'
-			AND SIMOV.[BEM_FORMATADO] != '07.1226.0015675-9' -- CONTRATO RELACIONADO INDEVIDAMENTE
-			AND SIMOV.[BEM_FORMATADO] != '08.5555.2589920-3' -- CONTRATO RELACIONADO INDEVIDAMENTE
-			AND SIMOV.[BEM_FORMATADO] != '08.4444.1018599-0' -- CONTRATO RELACIONADO INDEVIDAMENTE
-			AND SIMOV.[BEM_FORMATADO] != '08.0238.0064322-7' -- CONTRATO RELACIONADO INDEVIDAMENTE
-			AND CONTROLE_EMAIL.[numeroContrato] IS NULL OR (CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
+            --[GILIE] = 'GILIE/SP'
+            --AND [DE_Status_SIMOV] = 'Em Contratação'
+            --AND [NO_VENDA_TIPO] != 'Venda Direito de Preferência - Lei 9.514'
+            --AND [DT_Sinaf] >= DATEADD(DAY, -60, GETDATE())
+            --AND [Valor] >= [VL_TOTAL_RECEBIDO]
+			--AND [NO_VENDA_TIPO] != 'Venda Direta'
+			SIMOV.[BEM_FORMATADO] = '01.1360.4189313-4' -- CONTRATO RELACIONADO INDEVIDAMENTE
+			OR SIMOV.[BEM_FORMATADO] = '01.4444.0356825-3'
+			OR SIMOV.[BEM_FORMATADO] = '01.4444.0254362-1'
+			--AND CONTROLE_EMAIL.[numeroContrato] IS NULL OR (CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
 
 			
 			--AND SIMOV.[BEM_FORMATADO] != '01.4444.0024987-4' -- REMOVE EVENTUAIS CONTRATOS ENVIADOS ANTERIORMENTE
