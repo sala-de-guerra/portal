@@ -230,7 +230,7 @@
                 <h3 class="card-title">Dossiê Digital</h3>
             </div>
             <div class="card-body">
-                <a href="file://sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}">//sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}</a>
+                <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}</a>
             </div>
         </div>
     </div>
