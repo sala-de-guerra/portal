@@ -22,6 +22,9 @@ Route::get('/', function () {
     return view('portal.index');
 });    
 
+// route 404
+Route::fallback(function(){return response()->view('errors.404', [], 404);});
+
 //teste
 Route::get('/teste', function () {
     return view('teste');
