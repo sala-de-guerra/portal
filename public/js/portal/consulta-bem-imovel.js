@@ -70,4 +70,8 @@ $(document).ready(function(){
 
     // _animaInputFile();
 
+    _formataTabelaHistorico (numeroContrato);
+    _formataTabelaMensagensEnviadas (numeroContrato);
+    _formataDatatable ();
+
 });

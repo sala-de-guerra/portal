@@ -32,7 +32,7 @@ function _formataTabelaDocumentos (numeroBem, dossieDigital) {
                 '<td>' + item.idDocumento + '</td>' +
                 '<td>' + item.nomeDocumento + '</td>' +
                 '<td>' + item.tipoDocumento + '</td>' +
-                '<td>' + item.dataUpload + '</td></td>' +
+                '<td>' + item.dataUpload + '</td>' +
             '</tr>';
         
         $(linha).appendTo('#tblDossieDigital>tbody');
