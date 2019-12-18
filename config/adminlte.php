@@ -300,8 +300,8 @@ return [
             'icon'    => 'fas fa-lg fa-fw fa-file-contract',
             'submenu' => [
                 [
-                    'text' => 'Controle de Contratação',
-                    'url'  => '/controle-contratacao',
+                    'text' => 'Controle de Conformidade',
+                    'url'  => '/controle-conformidade',
                 ],
                 [
                     'text' => 'Distrato',
