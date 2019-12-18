@@ -328,7 +328,7 @@ class RotinaMensagensAutomatica extends Controller
                         self::setManualUtilizado('MN AD084');
                         return 'MO 19.435';
                     } else {
-                        self::setManualUtilizado('MN AD057');
+                        self::setManualUtilizado('MN AD084');
                         return 'MO 19.096';
                     }
                 } 
