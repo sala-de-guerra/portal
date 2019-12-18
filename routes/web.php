@@ -83,6 +83,8 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::get('rotina-mensagens-com-contrato-fixo', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasComRelacaoFixaDeContratos');
     Route::get('rota-charles-imoveis-caixa', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@mensagemAutorizacaoCaixaEngeaCharles');
     Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
+    Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
+
     Route::get('teste-ldap/{matricula}/{usuario}/{senha}', function($matricula, $usuario, $senha) {
         
         $server = "ldaps://corp.caixa.gov.br"; //Servidor LDAPS/AD corpcaixa-conexão SSL
