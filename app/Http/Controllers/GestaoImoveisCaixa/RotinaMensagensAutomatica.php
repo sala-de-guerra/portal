@@ -216,6 +216,7 @@ class RotinaMensagensAutomatica extends Controller
              
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
+            $historico->numeroContrato = $dadosEmail->contratoBem;
             $historico->tipo = "MENSAGERIA";
             $historico->atividade = "CONTRATACAO";
             $historico->observacao = "ENVIO DE MENSAGERIA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
@@ -231,6 +232,7 @@ class RotinaMensagensAutomatica extends Controller
         } else {
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
+            $historico->numeroContrato = $dadosEmail->contratoBem;
             $historico->tipo = "ERRO MENSAGERIA";
             $historico->atividade = "CONTRATACAO";
             $historico->observacao = "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";

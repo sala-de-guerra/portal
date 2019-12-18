@@ -13,7 +13,9 @@ class AlteraHistoricoPortalGiliesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('TBL_HISTORICO_PORTAL_GILIE', function (Blueprint $table) {
+            $table->string('numeroContrato', 50)->nullable();
+        });
     }
 
     /**
@@ -23,6 +25,8 @@ class AlteraHistoricoPortalGiliesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('TBL_HISTORICO_PORTAL_GILIE', function (Blueprint $table) {
+            $table->dropColumn('numeroContrato');
+        });
     }
 }

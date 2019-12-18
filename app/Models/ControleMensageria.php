@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ControleMensageria extends Model
 {
     protected $table = 'TBL_CONTROLE_MENSAGENS_ENVIADAS';
+    protected $primaryKey = 'numeroContrato';
     protected $fillable = [
             'tipoMensagem',
             'numeroContrato',
