@@ -1,5 +1,5 @@
 {
-"numeroBemFormatado": "22.2222.2222222-2",
+"bemFormatado": "22.2222.2222222-2",
 "numeroBem": "22222222222222",
 "classificacao": "SFI - Gar.Fid.Reg.Créd.Imob",
 "dataEntrada": "2019-06-26 00:00:00.000",
@@ -12,8 +12,6 @@
 "tipoImovel": "Casa",
 "descricaoImovel": "Casa, 1 Sala, 3 Quartos, 3 Suítes, 1 Cozinha, 2 Sacadas, 4 Vagas, 1 Área de Serviço, 1 Banheiro, 1 Lavabo, 1 DCE",
 "descricaoAdicionalImovel": "CONSTA AÇÃO 1009351-53.2016.8.26.0152 (COND).",
-
-
 "agrupamentoLeilao": "1309/0119",
 "numeroItem": "0",
 "valorAvaliacao": "612000",
@@ -23,7 +21,6 @@
 "valorContabil": "612000",
 "dataConsolidacao": "26/10/2018",
 "dataArremate": "12/06/2006",
-
 "utilizacaoFgts": "Sim",
 "dataImpedimento": "",
 "estadoOcupacao": "Outros",

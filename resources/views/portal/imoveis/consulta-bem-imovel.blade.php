@@ -230,7 +230,11 @@
                 <h3 class="card-title">Dossiê Digital</h3>
             </div>
             <div class="card-body">
+<<<<<<< HEAD
+                <a href="file://///sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}</a>
+=======
                 <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}</a>
+>>>>>>> e6ab26a62ad98d3cb4e7d7c8e6cbeacfe1a25d84
             </div>
         </div>
     </div>
@@ -531,7 +535,7 @@
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
             <div class="card-header cursor-pointer" data-card-widget="collapse">
-                <h3 class="card-title">Etapa de Venda Direta</h3>
+                <h3 class="card-title">Etapa de Venda Online</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
                 </div> <!-- /.card-tools -->
