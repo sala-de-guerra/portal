@@ -12,14 +12,12 @@
         </h1>
     </div>
     <div class="col-sm-5">
-        <h3 class="m-0 text-dark">
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="mailto:gilie09@mail.caixa?cc=c079436@mail.caixa;c111710@mail.caixa;c142765@mail.caixa&amp;subject=Sobre%20o%20Projeto%20Portal%20GILIE&amp;body=Deixe%20seu%20recado!"><i class="far fa-comment"></i>  #FaleConosco! </a></li>
-                <li class="breadcrumb-item"><a href="sip:C142765@corp.caixa.gov.br">Carlos </a></li>
-                <li class="breadcrumb-item"><a href="sip:c111710@corp.caixa.gov.br">Chuman </a></li>
-                <li class="breadcrumb-item"><a href="sip:C079436@corp.caixa.gov.br">Vlad </a></li>
-            </ul>
-        </h3>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="mailto:gilie09@mail.caixa?cc=c079436@mail.caixa;c111710@mail.caixa;c142765@mail.caixa&amp;subject=Sobre%20o%20Projeto%20Portal%20GILIE&amp;body=Deixe%20seu%20recado!"><i class="far fa-comment"></i>  #FaleConosco! </a></li>
+            <li class="breadcrumb-item"><a href="sip:C142765@corp.caixa.gov.br">Carlos </a></li>
+            <li class="breadcrumb-item"><a href="sip:c111710@corp.caixa.gov.br">Chuman </a></li>
+            <li class="breadcrumb-item"><a href="sip:C079436@corp.caixa.gov.br">Vlad </a></li>
+        </ul>
     </div>
     <div class="col-sm-2">
         <ol class="breadcrumb float-sm-right">

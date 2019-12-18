@@ -53,8 +53,8 @@ Route::get('/teste', function () {
 
 
 // Controle de Contratação
-Route::get('/controle-contratacao', function () {
-    return view('portal.imoveis.controle-contratacao');
+Route::get('/controle-conformidade', function () {
+    return view('portal.imoveis.controle-conformidade');
 });
 
 // Pesquisar
