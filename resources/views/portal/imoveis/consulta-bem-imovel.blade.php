@@ -230,11 +230,7 @@
                 <h3 class="card-title">Dossiê Digital</h3>
             </div>
             <div class="card-body">
-<<<<<<< HEAD
-                <a href="file://///sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}</a>
-=======
                 <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}</a>
->>>>>>> e6ab26a62ad98d3cb4e7d7c8e6cbeacfe1a25d84
             </div>
         </div>
     </div>
@@ -443,7 +439,7 @@
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
-</div> /.row
+</div> <!--/.row -->
 
 <div class="row">
     <div class="col-md-12">
