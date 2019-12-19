@@ -1,9 +1,9 @@
 
 function _formataTabelaMensagensEnviadas (numeroContrato) {
 
-    $.getJSON('/estoque-imoveis/consulta-mensagens-enviadas/' + numeroContrato, function(mensagens){
+    $.getJSON('/estoque-imoveis/consulta-mensagens-enviadas/' + numeroContrato, function(dados){
 
-        $.each(mensagens, function(key, item) {
+        $.each(dados.mensagens, function(key, item) {
             var linha = 
                 '<tr>' +
                     '<td>' + item.tipoMensagem + '</td>' +
