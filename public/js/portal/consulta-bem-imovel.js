@@ -62,6 +62,7 @@ $(document).ready(function(){
         });
 
 
+        _formataDatatable ();
     });
 
 
@@ -72,6 +73,5 @@ $(document).ready(function(){
 
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
-    _formataDatatable ();
 
 });

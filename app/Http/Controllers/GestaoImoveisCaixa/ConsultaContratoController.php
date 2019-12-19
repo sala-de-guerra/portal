@@ -30,7 +30,7 @@ class ConsultaContratoController extends Controller
 
     static public function consultaHistorico($numeroContrato)
     {
-        $universoHistoricoContrato = HistoricoPortalGilie::where('numeroContrato', $numeroContrato)->get();
+        $universoHistoricoContrato = HistoricoPortalGilie::where('numeroContrato', $numeroContrato)->where('idHistorico', '>',  '712')->get(); // Linha 712 é o final dos testes
         $jsonHistoricoContrato = [];
         foreach ($universoHistoricoContrato as $historico) {
             $arrayDadosHistorico = [
