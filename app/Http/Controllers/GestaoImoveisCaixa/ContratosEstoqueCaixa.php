@@ -11,13 +11,22 @@ class ContratosEstoqueCaixa extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param int  $contrato
      * @return \Illuminate\Http\Response
      */
-    static public function show($numeroContrato)
+    static public function show($numeroContrato, Request $request)
     {
-        return view('portal.imoveis.consulta-bem-imovel')->with('numeroContrato', $numeroContrato);
+        if (!preg_match("/([0-9]{2})([.]{1})([0-9]{4})([.]{1})([0-9]{7})([-]{1})([0-9]{1})/", $numeroContrato) || $numeroContrato == '00.0000.0000000-0') {
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Busca não efetuada");
+            $request->session()->flash('corpoMensagem', "O termo digitado não retornou nenhum resultado. Tente novamente");
+
+            return view('portal.imoveis.pesquisar');
+        } else {
+            return view('portal.imoveis.consulta-bem-imovel')->with('numeroContrato', $numeroContrato);
+        }
     }
 
     /**
@@ -30,6 +39,13 @@ class ContratosEstoqueCaixa extends Controller
     static public function capturaDadosBaseSimov($numeroContrato)
     {
         $contrato = BaseSimov::find($numeroContrato);
+
+        if (is_null($contrato->ACEITA_CCA) || $contrato->ACEITA_CCA == 'Nao' || $contrato->ACEITA_CCA == 'NULL') {
+            $fluxoAgenciaOuCca = 'AGÊNCIA';
+        } else {
+            $fluxoAgenciaOuCca = 'CCA';
+        }
+        
 
         $dadosContrato = [
             'bemFormatado' => $numeroContrato,
@@ -79,6 +95,7 @@ class ContratosEstoqueCaixa extends Controller
             'valorFinanciamentoProposta' => number_format($contrato->VALOR_FINANCIADO_PROPOSTA, 2, ',', '.'),
             'valorParceladoProposta' => number_format($contrato->VALOR_PARCELADO_PROPOSTA, 2, ',', '.'),
             'quantidadeParcelasProposta' => $contrato->QTDE_PARCELAS_PROPOSTA,
+            'fluxoAgenciaOuCca' => $fluxoAgenciaOuCca,
 
             'nomeProponente' => $contrato->NOME_PROPONENTE,
             'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
