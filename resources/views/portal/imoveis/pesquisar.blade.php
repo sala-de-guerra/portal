@@ -4,6 +4,17 @@
 
 @section('content_header')
 
+@if (session('tituloMensagem'))
+    <div class="card text-white bg-{{ session('corMensagem') }}">
+        <div class="card-header">
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
+                <br>
+                <p class="card-text">{{ session('corpoMensagem') }}</p>
+            </div>
+        </div>
+    </div>
+@endif
 
 <div class="row mb-2">
     <div class="col-sm-6">
@@ -50,7 +61,6 @@
         </div><!-- /.card -->
     </div><!-- /.col -->
 </div> <!-- /.row -->
-
 
 
 @stop
