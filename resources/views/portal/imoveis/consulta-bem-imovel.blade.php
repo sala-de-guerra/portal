@@ -67,32 +67,6 @@
                         <span class="badge bg-secondary progress-vendido">Vendido</span>
                     </li>
                 </ul>
-                <!-- <div class="row">
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <div class="progress-step bg-green"></div>
-                        <span class="badge bg-green">Preparaçâo</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <div class="progress-step bg-secondary progress-leilao"></div>
-                        <span class="badge bg-secondary progress-leilao">Leilão</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <div class="progress-step bg-secondary progress-venda"></div>
-                        <span class="badge bg-secondary progress-venda">Venda</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <div class="progress-step bg-secondary progress-contratacao"></div>
-                        <span class="badge bg-secondary progress-contratacao">Contratação</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <div class="progress-step bg-secondary progress-distrato"></div>
-                        <span class="badge bg-secondary progress-distrato">Distrato</span>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-around">
-                        <div class="progress-step bg-secondary progress-vendido"></div>
-                        <span class="badge bg-secondary progress-vendido">Vendido</span>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -410,15 +384,15 @@
 </div> -->
 
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
             <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Gestão de Chaves</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
-                </div> <!-- /.card-tools -->
-            </div> <!-- /.card-header -->
+                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 table-responsive p-0">
@@ -434,28 +408,28 @@
 
                             </tbody>
                         </table>
-                    </div> <!-- /.col-sm-12 -->
-                </div> <!-- /.row -->
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!--/.row -->
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
             <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Controle de Notificações</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
-                </div> <!-- /.card-tools -->
-            </div> <!-- /.card-header -->
+                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
             <div class="card-body">
                 
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row -->
+            </div>
+        </div>
+    </div>
+</div> -->
 
 <div class="row">
     <div class="col-md-12">
@@ -463,9 +437,9 @@
             <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Etapa de Leilão</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
-                </div> <!-- /.card-tools -->
-            </div> <!-- /.card-header -->
+                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
             <div class="card-body">
 
                 <div class="row">
@@ -493,7 +467,7 @@
                             <p id="valorContabil"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
                 <div class="row">
                     <div class="col-sm-3">
@@ -520,12 +494,12 @@
                             <p id="dataArremate"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row -->
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -533,9 +507,9 @@
             <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Etapa de Venda Online</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
-                </div> <!-- /.card-tools -->
-            </div> <!-- /.card-header -->
+                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
             <div class="card-body">
 
                 <h2 class="card-title"><b>Proponente Atual</b></h2>
@@ -567,7 +541,7 @@
                             <p id="emailProponente"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
                 <div class="row">
                     <div class="col-sm-3">
@@ -594,7 +568,7 @@
                             <p id="emailCorretor"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
             <hr>
 
@@ -627,7 +601,7 @@
                             <p id="valorFgtsProposta"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
                 <div class="row">
                     <div class="col-sm-3">
@@ -654,7 +628,7 @@
                             <p id="valorTotalRecebido"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
                 <hr>
 
@@ -687,7 +661,7 @@
                             <p id="contatoAgenciaResponsavelProposta"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
                 <hr>
 
@@ -714,23 +688,23 @@
                             <p id="statusDossieCiope"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
 
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row -->
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
             <div class="card-header cursor-pointer" data-card-widget="collapse">
                 <h3 class="card-title">Distrato</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> <!-- Collapse Button -->
-                </div> <!-- /.card-tools -->
-            </div> <!-- /.card-header -->
+                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
             <div class="card-body">
 
                 <div class="row">
@@ -758,7 +732,7 @@
                             <p id="emailProponenteDistrato"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
                 <div class="row">
                     <div class="col-sm-3">
@@ -785,74 +759,74 @@
                             <p id="statusDistrato"></p>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
 
             <hr>
 
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row -->
+            </div>
+        </div>
+    </div>
+</div> -->
 
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Histórico</h3>
-            </div> <!-- /.card-header -->
+            </div>
             <div class="card-body">
                 <div class="row">
-                    <div id="tblHistorico" class="col-sm-12 table-responsive p-0">
-                        <!-- <table class="table">
+                    <div class="col-sm-12">
+                        <table id="tblHistorico" class="table table-bordered table-striped dataTable">
                             <thead>
-                            <tr>
-                                <th>ID Historico</th>
-                                <th>Data/Hora</th>
-                                <th>Responsável</th>
-                                <th>Status</th>
-                                <th>Ação</th>
-                            </tr>
+                                <tr>
+                                    <th>Matrícula</th>
+                                    <th>Tipo</th>
+                                    <th>Atividade</th>
+                                    <th>Observação</th>
+                                    <th>Data</th>
+                                </tr>
                             </thead>
                             <tbody>
 
                             </tbody>
-                        </table> -->
-                    </div> <!-- /.col-sm-12 -->
-                </div> <!-- /.row -->
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Mensagens Enviadas</h3>
-            </div> <!-- /.card-header -->
+            </div>
             <div class="card-body">
                 <div class="row">
-                    <div id="tblHistorico" class="col-sm-12 table-responsive p-0">
-                        <!-- <table class="table">
+                    <div class="col-sm-12">
+                        <table id="tblMensagensEnviadas" class="table table-bordered table-striped dataTable">
                             <thead>
-                            <tr>
-                                <th>ID Historico</th>
-                                <th>Data/Hora</th>
-                                <th>Responsável</th>
-                                <th>Status</th>
-                                <th>Ação</th>
-                            </tr>
+                                <tr>
+                                    <th>Tipo de Mensagem</th>
+                                    <th>Unidade Destino</th>
+                                    <th>E-mail do Proponente</th>
+                                    <th>E-mail do Corretor</th>
+                                    <th>Data</th>
+                                </tr>
                             </thead>
                             <tbody>
 
                             </tbody>
-                        </table> -->
-                    </div> <!-- /.col-sm-12 -->
-                </div> <!-- /.row -->
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section('footer')
@@ -874,5 +848,7 @@
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
+    <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
+    <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
     <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
 @stop
