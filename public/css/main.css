@@ -11,6 +11,10 @@
     border-radius: 10px;
 }
 
+.brand-image {
+    opacity: 1!important;
+}
+
 .brand-link {
     padding: 12px 8px 11px 8px;
 }
