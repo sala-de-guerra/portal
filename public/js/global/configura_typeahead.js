@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  $('.Typeahead-spinner').show();
+  
 
   var imoveis = new Bloodhound({
     datumTokenizer: function (datum) {
@@ -44,8 +44,8 @@ $(document).ready(function(){
       }
   });
 
-  $('.Typeahead-spinner').hide();
-  $('.search-button').show();
+
+
 
 
   // initialize the bloodhound
