@@ -34,39 +34,7 @@
             <div class="card-header">
                 <h3 class="card-title">Trajetória do Imóvel</h3>
             </div>
-            <div class="card-body">
-                <div class="row d-flex justify-content-around">
-                    <div class="col-10 progress padding0">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: " aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                
-                <ul class="list-inline d-flex justify-content-around progress-ul">
-                    <li>
-                        <div class="progress-step bg-green"></div>
-                        <span class="badge bg-green">Preparaçâo</span>
-                    </li>
-                    <li>
-                        <div class="progress-step bg-secondary progress-leilao"></div>
-                        <span class="badge bg-secondary progress-leilao">Leilão</span>
-                    </li>
-                    <li>
-                        <div class="progress-step bg-secondary progress-venda"></div>
-                        <span class="badge bg-secondary progress-venda">Venda</span>
-                    </li>
-                    <li>
-                        <div class="progress-step bg-secondary progress-contratacao"></div>
-                        <span class="badge bg-secondary progress-contratacao">Contratação</span>
-                    </li>
-                    <li>
-                        <div class="progress-step bg-secondary progress-distrato"></div>
-                        <span class="badge bg-secondary progress-distrato">Distrato</span>
-                    </li>
-                    <li>
-                        <div class="progress-step bg-secondary progress-vendido"></div>
-                        <span class="badge bg-secondary progress-vendido">Vendido</span>
-                    </li>
-                </ul>
+            <div class="card-body" id="progressBarGeral">
             </div>
         </div>
     </div>
@@ -844,10 +812,13 @@
 @section('js')
     <script>
         var numeroContrato = '{{ $numeroContrato }}';
+
+
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
+    <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
     <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
