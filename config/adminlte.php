@@ -240,61 +240,61 @@ return [
             'icon' => 'fas fa-lg fa-fw fa-search',
 
         ],
-        [
-            'text' => 'Preparar e Ofertar',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-lg fa-fw fa-sign',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        [
-            'text' => 'Pagamentos',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-lg fa-fw fa-dollar-sign',
-            'submenu' => [
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+        // [
+        //     'text' => 'Preparar e Ofertar',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-lg fa-fw fa-sign',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+        // ],
+        // [
+        //     'text' => 'Pagamentos',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-lg fa-fw fa-dollar-sign',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
 
-        ],
+        // ],
         [
             'text'    => 'Contratação',
             'icon'    => 'fas fa-lg fa-fw fa-file-contract',
@@ -307,47 +307,47 @@ return [
                     'text' => 'Distrato',
                     'url'  => '/distrato',
                 ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
+                // [
+                //     'text' => 'level_two',
+                //     'url'  => '#',
+                // ],
+                // [
+                //     'text' => 'level_two',
+                //     'url'  => '#',
+                // ],
+                // [
+                //     'text' => 'level_one',
+                //     'url'  => '#',
+                // ],
             ],
         ],
 
-        [
-            'text'    => 'Indicadores',
-            'icon'    => 'fas fa-lg fa-fw fa-chart-bar',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_two',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
+        // [
+        //     'text'    => 'Indicadores',
+        //     'icon'    => 'fas fa-lg fa-fw fa-chart-bar',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+        // ],
 
 
         // ['header' => 'PENHOR'],
@@ -433,13 +433,12 @@ return [
         //     ],
         // ],
 
-        ['header' => 'GERENCIAL'],
-        [
-            'text'       => 'Perfis de Acesso',
-            'url'        => '/equipes',
-            'icon'       => 'fas fa-lg fa-users-cog',
-            // 'icon_color' => 'blue',
-        ],
+        // ['header' => 'GERENCIAL'],
+        // [
+        //     'text'       => 'Perfis de Acesso',
+        //     'url'        => '/equipes',
+        //     'icon'       => 'fas fa-lg fa-users-cog',
+        // ],
         
 
 
