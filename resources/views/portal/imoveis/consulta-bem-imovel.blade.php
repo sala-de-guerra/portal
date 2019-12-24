@@ -674,64 +674,76 @@
                 </div>
             </div>
             <div class="card-body">
+                <ul id="listaDistratos" class="list-unstyled">
+                    <li>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Protocolo:</label>
+                                    <p id="protocoloProponenteDistrato"></p>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Nome:</label>
-                            <p id="nomeProponenteDistrato"></p>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Nome:</label>
+                                    <p id="nomeProponenteDistrato"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>CPF / CNPJ:</label>
+                                    <p id="cpfCnpjProponenteDistrato"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Telefone:</label>
+                                    <p id="telefoneProponenteDistrato"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>E-mail:</label>
+                                    <p id="emailProponenteDistrato"></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>CPF / CNPJ:</label>
-                            <p id="cpfCnpjProponenteDistrato"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Telefone:</label>
-                            <p id="telefoneProponenteDistrato"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>E-mail:</label>
-                            <p id="emailProponenteDistrato"></p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Data de início:</label>
-                            <p id="dataInicioDistrato"></p>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data de início:</label>
+                                    <p id="dataInicioDistrato"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Modalidade de compra:</label>
+                                    <p id="modalidadeCompraDistrato"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Motivo do Distrato:</label>
+                                    <p id="motivoDistrato"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Status do Distrato:</label>
+                                    <p id="statusDistrato"></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Modalidade de compra:</label>
-                            <p id="modalidadeCompraDistrato"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Motivo do Distrato:</label>
-                            <p id="motivoDistrato"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Status do Distrato:</label>
-                            <p id="statusDistrato"></p>
-                        </div>
-                    </div>
-                </div>
 
-            <hr>
+                    <hr>
 
-            </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div> -->
