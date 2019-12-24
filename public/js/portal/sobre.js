@@ -8,7 +8,6 @@ $(document).ready( function () {
                 '<tr>' +
                     '<td>' + item.GILIE + '</td>' +
                     '<td>' + item.MUNICIPIO + '</td>' +
-                    '<td>' + item.PV + '</td>' +
                     '<td>' + item.SR + '</td></td>' +
                 '</tr>';
     

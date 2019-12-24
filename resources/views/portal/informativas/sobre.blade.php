@@ -93,7 +93,6 @@
                                 <tr>
                                     <th>GILIE</th>
                                     <th>MUNICÍPIO</th>
-                                    <th>PV</th>
                                     <th>SR</th>
                                 </tr>
                             </thead>
