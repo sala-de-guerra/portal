@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-  
 
   var imoveis = new Bloodhound({
     datumTokenizer: function (datum) {
@@ -27,21 +26,22 @@ $(document).ready(function(){
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: {
-        url: "/js/baseSimov.json",
-        transform: function (data) {
-          return $.map(data.bens, function (bem) {
-              return {
-                bemFormatado: bem.bemFormatado,
-                numeroBem: bem.numeroBem,
-                enderecoCompleto: bem.enderecoCompleto,
-                // nomeProponente: bem.nomeProponente,
-                // cpfCnpjProponente: bem.cpfCnpjProponente,
-                // nomeExMutuario: bem.nomeExMutuario,
-                // cpfCnpjExMutuario: bem.cpfCnpjExMutuario
-              };
-          });
-        }
+      cache: false,
+      url: "/js/baseSimov.json",
+      transform: function (data) {
+        return $.map(data.bens, function (bem) {
+            return {
+              bemFormatado: bem.bemFormatado,
+              numeroBem: bem.numeroBem,
+              enderecoCompleto: bem.enderecoCompleto,
+              // nomeProponente: bem.nomeProponente,
+              // cpfCnpjProponente: bem.cpfCnpjProponente,
+              // nomeExMutuario: bem.nomeExMutuario,
+              // cpfCnpjExMutuario: bem.cpfCnpjExMutuario
+            };
+        });
       }
+    }
   });
 
 
@@ -54,7 +54,7 @@ $(document).ready(function(){
   $('.typeahead').typeahead({
     hint: false,
     highlight: true,
-    minLength: 1
+    minLength: 1,
     },
     {
       name: 'endereco',
