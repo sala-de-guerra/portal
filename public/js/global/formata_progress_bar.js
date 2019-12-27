@@ -13,6 +13,46 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
     
     $(barra).appendTo('#' + idBarra);
 
+    switch (statusAtual) {
+        case 'Em Análise':
+        case 'Em Cadastramento':
+        case 'Aguarda Justif. Avaliação':
+        case 'Em Pendência':
+        case 'Em Reavaliação':
+        case 'Aguarda Licitação':
+        case 'Arrendado':
+        case 'Devolvido':
+        case 'Excluído':
+        case 'Indício de Fraude':
+        case 'Laudo Vencido':
+        case 'Licitação':
+        case 'Montagem de Licitação':
+            statusAtual = 'Preparaçâo';
+            break;
+        case 'Aguarda 1º Leilão SFI':
+        case 'Aguarda 2º Leilão SFI':
+        case 'Em Homologação':
+            statusAtual = 'Leilão';
+            break;
+        case 'Em Contratação':
+        case 'Contratação pendente':
+            statusAtual = 'Contratação';
+            break;
+        case 'Vendido':
+        case 'Venda Direito Preferência':
+        case 'Venda Direta Beneficiário':
+        case 'Venda Direta Especial':
+        case 'Venda Direta FAR':
+        case 'Venda Direta Ocupante':
+        case 'Venda por credenciado':
+            statusAtual = 'Vendido';
+            break;
+        case 'Venda Direta Online':
+        case 'Venda Direta':
+            statusAtual = 'Venda Online';
+            break;
+    }
+
     var porcentagemPreenchimento =  Object.keys(arrayPorcentagemEStatus).find(value => arrayPorcentagemEStatus[value] == statusAtual); 
 
     $.each(arrayPorcentagemEStatus, function(key, item) {

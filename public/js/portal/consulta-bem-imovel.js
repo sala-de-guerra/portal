@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+    _formataTabelaHistorico (numeroContrato);
+    _formataTabelaMensagensEnviadas (numeroContrato);
+
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
 
 
@@ -17,13 +21,14 @@ $(document).ready(function(){
         var arrayPorcentagemEStatus = {
             0: "Preparaçâo",
             25: "Leilão",
-            50: "Venda",
+            50: "Venda Online",
             75: "Contratação",
             99: "Vendido",
         };
 
-        _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, "Contratação")
-        _formataDatatable ();
+        _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, dados.statusImovel);
+        _formataDatatable();
+    
     });
 
 
@@ -31,8 +36,5 @@ $(document).ready(function(){
     // var tamanhoMaximo = 8388608;
 
     // _animaInputFile();
-
-    _formataTabelaHistorico (numeroContrato);
-    _formataTabelaMensagensEnviadas (numeroContrato);
 
 });
