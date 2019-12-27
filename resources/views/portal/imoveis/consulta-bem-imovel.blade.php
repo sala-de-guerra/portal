@@ -51,7 +51,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>CHB:</label>
-                            <p id="bemFormatado"></p>
+                            <p id="numeroBem"></p>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -114,8 +114,8 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label>Estado do Imóvel:</label>
-                            <p id="estadoImovel"></p>
+                            <label>Status SIMOV:</label>
+                            <p id="statusImovel"></p>
                         </div>
                     </div>
                 </div><!-- /.row -->
@@ -824,8 +824,6 @@
 @section('js')
     <script>
         var numeroContrato = '{{ $numeroContrato }}';
-
-
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
