@@ -95,7 +95,7 @@ class ContratosEstoqueCaixa extends Controller
             'valorFinanciamentoProposta' => number_format($contrato->VALOR_FINANCIADO_PROPOSTA, 2, ',', '.'),
             'valorParceladoProposta' => number_format($contrato->VALOR_PARCELADO_PROPOSTA, 2, ',', '.'),
             'quantidadeParcelasProposta' => $contrato->QTDE_PARCELAS_PROPOSTA,
-            'fluxoAgenciaOuCca' => $fluxoAgenciaOuCca,
+            'tipoFluxoContratacao' => $fluxoAgenciaOuCca,
 
             'nomeProponente' => $contrato->NOME_PROPONENTE,
             'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
@@ -115,4 +115,11 @@ class ContratosEstoqueCaixa extends Controller
 
         return json_encode($dadosContrato);
     }
+
+    // public static function consultaApiRetaguardaPontoCaixa()
+    // {
+    //     $content = file_get_contents("http://sistemas1.retaguarda.caixa/relatorios/executar?arquivo=SICT2_imoveis_caixa_contratacao_dossie_campos.sql&movimento=%2220200102%2000:00%22");
+    //     $result = json_decode($content);
+    //     echo ($content);
+    // } 
 }
