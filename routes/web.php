@@ -85,6 +85,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
     Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
     Route::get('consulta-historico-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaHistorico');
+    // Route::get('consulta-retaguarda-caixa', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@consultaApiRetaguardaPontoCaixa');
 
     Route::get('teste-ldap/{matricula}/{usuario}/{senha}', function($matricula, $usuario, $senha) {
         
