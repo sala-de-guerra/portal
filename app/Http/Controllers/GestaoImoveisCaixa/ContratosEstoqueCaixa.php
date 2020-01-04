@@ -17,16 +17,16 @@ class ContratosEstoqueCaixa extends Controller
      */
     static public function show($numeroContrato, Request $request)
     {
-        if (!preg_match("/([0-9]{2})([.]{1})([0-9]{4})([.]{1})([0-9]{7})([-]{1})([0-9]{1})/", $numeroContrato) || $numeroContrato == '00.0000.0000000-0') {
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'danger');
-            $request->session()->flash('tituloMensagem', "Busca não efetuada");
-            $request->session()->flash('corpoMensagem', "O termo digitado não retornou nenhum resultado. Tente novamente");
+        // if (!preg_match("/([0-9]{2})([.]{1})([0-9]{4})([.]{1})([0-9]{7})([-]{1})([0-9]{1})/", $numeroContrato) || $numeroContrato == '00.0000.0000000-0') {
+        //     // RETORNA A FLASH MESSAGE
+        //     $request->session()->flash('corMensagem', 'danger');
+        //     $request->session()->flash('tituloMensagem', "Busca não efetuada");
+        //     $request->session()->flash('corpoMensagem', "O termo digitado não retornou nenhum resultado. Tente novamente");
 
-            return view('portal.imoveis.pesquisar');
-        } else {
+        //     return view('portal.imoveis.pesquisar');
+        // } else {
             return view('portal.imoveis.consulta-bem-imovel')->with('numeroContrato', $numeroContrato);
-        }
+        // }
     }
 
     /**
