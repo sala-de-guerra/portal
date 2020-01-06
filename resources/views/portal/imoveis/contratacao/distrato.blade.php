@@ -42,6 +42,7 @@
                                 <th>CPF / CNPJ</th>
                                 <th>Status</th>
                                 <th>Motivo</th>
+                                <th>Data de Início</th>
                             </tr>
                             </thead>
                             <tbody>

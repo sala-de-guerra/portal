@@ -16,7 +16,7 @@
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/index"> Imóveis Caixa</a> </li>
+            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/pesquisar"> Pesquisar Bem Imóvel</a> </li>
             <li class="breadcrumb-item active"> <a href="/index"> Consultar Bem Imóvel</a> </li>
         </ol>
     </div>
@@ -438,6 +438,12 @@
                                 <div class="form-group">
                                     <label>Status Dossiê:</label>
                                     <p id="statusDossieCiope"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Fluxo de Contratação:</label>
+                                    <p id="tipoFluxoContratacao"></p>
                                 </div>
                             </div>
                         </div>

@@ -49,7 +49,7 @@
                                     <th>Proponente</th>
                                     <th>CPF / CNPJ</th>
                                     <th>Status</th>
-                                    <!-- <th>Ação</th> -->
+                                    <th>Origem do Imóvel</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,7 +79,7 @@
                                     <th>Proponente</th>
                                     <th>CPF / CNPJ</th>
                                     <th>Status</th>
-                                    <!-- <th>Ação</th> -->
+                                    <th>Origem do Imóvel</th>
                                 </tr>
                             </thead>
                             <tbody>
