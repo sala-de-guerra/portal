@@ -108,7 +108,6 @@ class RotinaMensagensAutomatica extends Controller
             self::setClassificacaoImovel('PATRIMONIAL');
             self::setOrigemMatricula('CAIXA');
             echo "Número bem: $contrato->numeroBem <br>";
-            // echo "Proposta CCA: $contrato->existeCca <br>";
             self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
             self::defineTipoDeMensageria($contrato);
             $contagemAutorizacoesPatrimonial++;
@@ -134,14 +133,11 @@ class RotinaMensagensAutomatica extends Controller
             
             self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
             echo "numero Bem: $contrato->numeroBem <br>";
-            // echo "Proposta CCA: $contrato->existeCca <br>";
             switch ($contrato->grupoClassificacao) {
                 case 'CAIXA':
-                    // echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
                     self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
                     break;
                 case 'EMGEA':
-                    // echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
                     self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
                     break;
             }
@@ -167,8 +163,6 @@ class RotinaMensagensAutomatica extends Controller
             'origemMatricula' => self::getOrigemMatricula(),
             'normativoUtilizado' => self::getManualUtilizado(),
         );
-        // var_dump($dadosEmail) . '<br>';
-        // var_dump('EMAIL: ' . $dadosEmail->emailProponente . 'CODIGO AGÊNCIA: ' . $dadosEmail->codigoAgencia);
 
         if ($dadosEmail->codigoAgencia != null) {
             if($contrato->existeCca == 'SIM') { 
@@ -212,7 +206,6 @@ class RotinaMensagensAutomatica extends Controller
                     }
                 }
             }
-            // echo $assunto . '<br>';
              
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
@@ -254,12 +247,10 @@ class RotinaMensagensAutomatica extends Controller
         switch ($contrato->tipoDeVenda) {
             case 'LEILAO':
                 self::setTipoDeVenda('LEILAO');
-                // echo "Tipo venda: Leilão<br>";
                 self::validarTipoDeVendaAvistaOuFinanciadoOuComUsoDeFgts($contrato);
                 break;
             default:
                 self::setTipoDeVenda('VDO_VD');
-                // echo "Tipo venda: Venda Direta ou Venda Direta Online<br>";
                 self::validarTipoDeVendaAvistaOuFinanciadoOuComUsoDeFgts($contrato);
                 break;
             break;
@@ -270,11 +261,9 @@ class RotinaMensagensAutomatica extends Controller
     {
         if ($contrato->tipoProposta == 'A VISTA') {
             self::setTipoDeProposta('À vista');
-            // echo "Tipo proposta: " . self::getTipoDeProposta() . "<br>";
             self::validarExistenciaDeAcaoJudicial($contrato);
         } else {
             self::setTipoDeProposta('Financiado ou com uso de FGTS');
-            // echo "Tipo proposta: " . self::getTipoDeProposta() . "<hr>";
         }
     }
 
@@ -285,8 +274,6 @@ class RotinaMensagensAutomatica extends Controller
         } else {
             self::setExisteAcaoJucicial('SIM');
         }
-        // echo "MO utilizado: " . self::definirMoDeAutorizacaoDaProposta() . '<br>';
-        // echo "Existe ação judicial: " . self::getExisteAcaoJucicial() . "<hr>";
     }
 
     public static function definirMoDeAutorizacaoDaProposta()
@@ -541,7 +528,7 @@ class RotinaMensagensAutomatica extends Controller
                 AND [GILIE] = 'GILIE/SP'
         )
         
-        SELECT DISTINCT
+        SELECT TOP 1 
             'numeroBem' = SIMOV.[BEM_FORMATADO]
             ,'grupoClassificacao' = CASE 
                                 WHEN SIMOV.[CLASSIFICACAO] like '%EMGEA%' THEN 'EMGEA'
@@ -606,7 +593,7 @@ class RotinaMensagensAutomatica extends Controller
             --AND [DT_Sinaf] >= DATEADD(DAY, -60, GETDATE())
             --AND [Valor] >= [VL_TOTAL_RECEBIDO]
 			--AND [NO_VENDA_TIPO] != 'Venda Direta'
-			SIMOV.[BEM_FORMATADO] = '01.4444.0224654-6' -- CONTRATO RELACIONADO INDEVIDAMENTE
+			SIMOV.[BEM_FORMATADO] = '08.0250.0081689-1' -- CONTRATO RELACIONADO INDEVIDAMENTE
 			--OR SIMOV.[BEM_FORMATADO] = '01.4444.0356825-3'
 			--OR SIMOV.[BEM_FORMATADO] = '01.4444.0254362-1'
 			--AND CONTROLE_EMAIL.[numeroContrato] IS NULL OR (CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
