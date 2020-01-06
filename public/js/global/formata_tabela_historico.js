@@ -7,7 +7,7 @@ function _formataTabelaHistorico (numeroContrato) {
                     '<td>' + item.tipo + '</td>' +
                     '<td>' + item.atividade + '</td>' +
                     '<td>' + item.observacao + '</td>' +
-                    '<td>' + item.data + '</td>' +
+                    '<td class="formata-data-sem-hora">' + item.data + '</td>' +
                 '</tr>';
             $(linha).appendTo('#tblHistorico>tbody');
         }) 

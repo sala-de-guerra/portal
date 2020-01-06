@@ -75,8 +75,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <h2 class="card-title"><b>Trajetória do Imóvel</b></h2>
-                                <div class="card-body" id="progressBarGeral">
-                                </div>
+                                <br>
+                                <div class="card-body" id="progressBarGeral"></div>
                             </div>
                         </div>
 
@@ -262,7 +262,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data Arremate:</label>
-                                    <p id="dataArremate"></p>
+                                    <p id="dataArremate" class="formata-data-sem-hora"></p>
                                 </div>
                             </div>
                         </div>
@@ -332,7 +332,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data da Proposta:</label>
-                                    <p id="dataProposta"></p>
+                                    <p id="dataProposta" class="formata-data"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -496,7 +496,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Data de início:</label>
-                                            <p id="dataInicioDistrato"></p>
+                                            <p id="dataInicioDistrato" class="formata-data-sem-hora"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -743,6 +743,9 @@
         var numeroContrato = '{{ $numeroContrato }}';
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
+    <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
+    <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
+    <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
