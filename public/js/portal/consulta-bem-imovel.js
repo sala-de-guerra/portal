@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     _formataTabelaHistorico (numeroContrato);
-    _formataTabelaMensagensEnviadas (numeroContrato);
+    // _formataTabelaMensagensEnviadas (numeroContrato);
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
 
@@ -38,3 +38,14 @@ $(document).ready(function(){
     // _animaInputFile();
 
 });
+
+function copyToClipboard(element) {
+
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+
+    $("#labelCopyToClipboard").fadeIn(600).delay(2000).fadeOut(600);
+}

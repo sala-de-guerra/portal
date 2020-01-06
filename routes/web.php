@@ -36,6 +36,11 @@ Route::get('/teste', function () {
     return view('portal.informativas.sobre');
 });
 
+ // area de atuação
+ Route::get('/area', function () {
+    return view('portal.informativas.area');
+});
+
  // duvidas frequentes
  Route::get('/faq', function () {
     return view('portal.informativas.faq');
@@ -72,7 +77,7 @@ Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoq
 // Distrato
 
 Route::get('/distrato', function () {
-    return view('portal.contratacao.distrato');
+    return view('portal.imoveis.contratacao.distrato');
 });
 
 

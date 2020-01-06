@@ -60,7 +60,7 @@
 "modalidadePagamento": "Financiado CCFGTS",
 "statusContrato": "Em andamento",
 "dataContrato": "2019-11-05 00:00:00.000",
-"agenciaContratacao": "SERRA DE BRAGANCA, SP",
+"agenciaDeContratacao": "SERRA DE BRAGANCA, SP",
 "statusProposta": "Classificada",
 "nuColocacao": "1",
 "cpfCnpjCorretor": null,
@@ -80,7 +80,7 @@
 "nomeExMutuario": "",
 "numeroDocumentoCoobrigado1": "",
 "numeroDocumentoCoobrigado2": "",
-"aceitaCca": "Sim",
+"tipoFluxoContratacao": "Agência",
 
 
 "maiorQueTrintaSalariosMinimos": "SIM",

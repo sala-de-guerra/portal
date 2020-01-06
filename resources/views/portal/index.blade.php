@@ -91,8 +91,39 @@
 
 </div> <!-- /.row -->
 
-<br>
+<div class="row">
 
+    <div class="col-md-12">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Vitrine
+                </h3>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <p class="text-justify">
+                            Fundada em 01 de outubro de 1998, a Gerência de Alienar Bens Móveis e Imóveis de São Paulo é responsável pela guarda 
+                            e desfazimento de bens retomados, oriundos principalmente de contratos descumpridos, como imóveis e jóias.
+                        </p>
+                        <p class="text-justify">
+                            Sob a gestão do gerente de filial Marcelo Barboza Fernandes e dos coordenadores Fernanda Pereira Mendonça, 
+                            João Marcel Quintiliano e Vladimir Pereira de Lemos, a filial conta com um quadro atual de aproximadamente 60 
+                            funcionários, divididos entre suas áreas de atuação.
+                        </p>
+                    </div> <!-- /.col -->
+                    
+                    <div class="col-md-4">
+                        <img src="{{ asset('/img/edificio_eluma.jpg') }}" class="d-block img-fluid" alt="Foto do Edifício Eluma, na Av. Paulista.">
+                    </div><!-- /.col -->
+                    
+                </div> <!-- /.row -->
+            </div><!-- /.card-body -->
+        </div><!-- /.card -->
+    </div><!-- /.col -->
+</div> <!-- /.row -->
 @stop
 
 @section('footer')

@@ -216,6 +216,11 @@ return [
             'icon'        => 'fas fa-lg fa-users',
         ],
         [
+            'text'        => 'Área de Atuação',
+            'url'         => '/area',
+            'icon'        => 'fas fa-lg fa-map-marked-alt',
+        ],
+        [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
             'icon'        => 'fas fa-lg fa-question-circle',
@@ -227,7 +232,7 @@ return [
         ],
 
         [
-            'text'       => 'Conheça o Projeto',
+            'text'        => 'Conheça o Projeto',
             'url'         => '/projeto',
             'icon'        => 'fas fa-lg fa-toolbox',
         ],
