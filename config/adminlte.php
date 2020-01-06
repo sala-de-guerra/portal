@@ -310,7 +310,7 @@ return [
                 ],
                 [
                     'text' => 'Distrato',
-                    'url'  => '/distrato',
+                    'url'  => '/estoque-imoveis/distrato',
                 ],
                 // [
                 //     'text' => 'level_two',
