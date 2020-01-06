@@ -10,7 +10,7 @@ function _formataTabelaMensagensEnviadas (numeroContrato) {
                     '<td>' + item.codigoAgencia + '</td>' +
                     '<td>' + item.emailProponente + '</td>' +
                     '<td>' + item.emailCorretor + '</td>' +
-                    '<td>' + item.dataEnvio + '</td>' +
+                    '<td class="formata-data-sem-hora">' + item.dataEnvio + '</td>' +
                 '</tr>';
             
             $(linha).appendTo('#tblMensagensEnviadas>tbody');
