@@ -309,8 +309,8 @@ return [
                     'url'  => '/controle-conformidade',
                 ],
                 [
-                    'text' => 'Controle de Distratos',
-                    'url'  => '/controle-distrato',
+                    'text' => 'Distrato',
+                    'url'  => '/estoque-imoveis/distrato',
                 ],
                 // [
                 //     'text' => 'level_two',
