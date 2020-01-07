@@ -8,7 +8,7 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Consultar Bem Imóvel
+            Operacionalizar Distrato
         </h1>
         <!-- <div>
             <input class="typeahead" type="text" placeholder="States of USA">
@@ -16,8 +16,8 @@
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/pesquisar"> Pesquisar Bem Imóvel</a> </li>
-            <li class="breadcrumb-item active"> <a href="/index"> Consultar Bem Imóvel</a> </li>
+            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/controle-distrato"> Controle de Distratos</a> </li>
+            <li class="breadcrumb-item active"> <a href="/operacional-distrato"> Operacionalizar Distrato</a> </li>
         </ol>
     </div>
 </div>
@@ -30,6 +30,8 @@
 
 
 @include('portal.imoveis.componentes.tabs-dados-imovel')
+
+
 
 
 @section('footer')
