@@ -80,6 +80,11 @@ Route::get('/controle-distrato', function () {
     return view('portal.imoveis.distrato.controle-distrato');
 });
 
+// Operacional Distrato
+
+Route::get('/operacional-distrato', function () {
+    return view('portal.imoveis.distrato.operacional-distrato');
+});
 
 // Rotina Automatica de envio de mensagens Adjudicados
 

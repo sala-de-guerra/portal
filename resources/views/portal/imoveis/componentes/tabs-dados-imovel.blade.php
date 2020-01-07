@@ -168,7 +168,7 @@
                                 <div class="form-group">
                                     <label>Dossiê Digital:</label>
                                     <br>
-                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato }}" id="linkServidor">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato }}</a>
+                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
                                 </div>
                             </div>
                             <div class="col-sm-2">
