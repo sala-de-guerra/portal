@@ -8,7 +8,7 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Consultar Bem Imóvel
+            Operacional Distrato
         </h1>
         <!-- <div>
             <input class="typeahead" type="text" placeholder="States of USA">
@@ -16,8 +16,8 @@
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/pesquisar"> Pesquisar Bem Imóvel</a> </li>
-            <li class="breadcrumb-item active"> <a href="/index"> Consultar Bem Imóvel</a> </li>
+            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/controle-distrato"> Controle de Distratos</a> </li>
+            <li class="breadcrumb-item active"> <a href="/operacional-distrato"> Operacional Distrato</a> </li>
         </ol>
     </div>
 </div>
@@ -30,6 +30,7 @@
 
 
 @include('portal.imoveis.componentes.tabs-dados-imovel')
+
 
 
 @section('footer')
@@ -46,7 +47,7 @@
 
 @section('js')
     <script>
-        var numeroContrato = '{{ $numeroContrato }}';
+        var numeroContrato = '{{ $numeroContrato ?? '' }}';
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
     <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
@@ -56,6 +57,6 @@
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
-    <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
+    <!-- <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script> -->
     <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
 @stop

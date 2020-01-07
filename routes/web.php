@@ -59,7 +59,7 @@ Route::get('/teste', function () {
 
 // Controle de Contratação
 Route::get('/controle-conformidade', function () {
-    return view('portal.imoveis.controle-conformidade');
+    return view('portal.imoveis.contratacao.controle-conformidade');
 });
 
 // Pesquisar
@@ -75,10 +75,21 @@ Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoq
 //Contratacao
 
 // Distrato
+
+// Route::get('/controle-distrato', function () {
+//     return view('portal.imoveis.distrato.controle-distrato');
+// });
+
 // Route::get('/distrato', function () {
 //     return view('portal.imoveis.contratacao.distrato');
 // });
 
+
+// Operacional Distrato
+
+Route::get('/operacional-distrato', function () {
+    return view('portal.imoveis.distrato.operacional-distrato');
+});
 
 // Rotas web dos processos pertinentes ao Estoque de Imóveis
 
