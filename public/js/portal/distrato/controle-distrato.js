@@ -21,3 +21,20 @@ $(document).ready(function(){
     _formataDatatable ();
 
 });
+
+function _validarCHB(inputChb){
+    $("input[name='nomeProponente']").val('');
+    $("input[name='cpfCnpjProponente']").val('');
+
+    let numeroContrato = $(inputChb).val()
+    
+    console.log(numeroContrato)
+
+    $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
+        $("input[name='nomeProponente']").val(dados.nomeProponente);
+        $("input[name='cpfCnpjProponente']").val(dados.cpfCnpjProponente);
+    })
+    .fail(function() {
+        alert("CHB " + numeroContrato + " não encontrado!");
+    });
+};

@@ -63,7 +63,7 @@
 
 <!-- Botão para acionar modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato">
-  Abrir modal de demonstração
+    Cadastrar Pedido de Distrato
 </button>
 
 <!-- Modal -->
@@ -74,26 +74,40 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Cadastrar Pedido de Distrato</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label>CHB:</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="contratoFormatado" class="form-control" id="inputChb" required>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="_validarCHB('#inputChb');">Validar CHB</button>
+
+                    <div class="form-group">
+                        <label>Nome:</label>
+                        <input type="text" name="nomeProponente" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CPF / CNPJ:</label>
+                        <input type="text" name="cpfCnpjProponente" class="form-control" required>
                     </div>
 
                     <div class="form-group">
                         <label>Motivo de Distrato:</label>
-                        <select class="form-control">
-                            <option>AÇÃO JUDICIAL</option>
-                            <option>AÇÃO JUDICIAL</option>
-                            <option>AÇÃO JUDICIAL</option>
-                            <option>AÇÃO JUDICIAL</option>
-                            <option>AÇÃO JUDICIAL</option>
-                            <option>AÇÃO JUDICIAL</option>
-                            <option>AÇÃO JUDICIAL</option>
+                        <select name="motivoDistrato" class="form-control" required>
+                            <option value="" selected>Selecione</option>
+                            <option value="acaoJudicial">AÇÃO JUDICIAL</option>
+                            <option value="leiloesNegativos">LEILÕES NEGATIVOS</option>
+                            <option value="impossibilidadeAverbacaoAquisicao">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
+                            <option value="desistencia">DESISTÊNCIA</option>
+                            <option value="creditoNaoAprovado">CRÉDITO NÃO APROVADO</option>
+                            <option value="erroFormalEdital">ERRO FORMAL DE EDITAL</option>
+                            <option value="direitoPreferencia">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
+                            <option value="distratoCancelado">DISTRATO CANCELADO</option>
                         </select>
                     </div>
 
@@ -107,6 +121,7 @@
     </div>
 </div>
 
+<br>
 
 @stop
 
@@ -122,6 +137,6 @@
 
 @section('js')
 
-<script src="{{ asset('js/portal/distrato/distrato.js') }}"></script>
+<script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
 
 @stop

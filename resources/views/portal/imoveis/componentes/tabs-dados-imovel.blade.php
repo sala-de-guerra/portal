@@ -36,6 +36,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-mensagens-tab" data-toggle="pill" href="#custom-tabs-one-mensagens" role="tab" aria-controls="custom-tabs-one-mensagens" aria-selected="false">
+                            <h5>Mensagens</h5>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
 
@@ -508,6 +514,27 @@
                                             <th>Tipo</th>
                                             <th>Atividade</th>
                                             <th>Observação</th>
+                                            <th>Data</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="tblMensagensEnviadas" class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo de Mensagem</th>
+                                            <th>Unidade Destino</th>
+                                            <th>E-mail do Proponente</th>
+                                            <th>E-mail do Corretor</th>
                                             <th>Data</th>
                                         </tr>
                                     </thead>
