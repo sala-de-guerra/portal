@@ -5,6 +5,7 @@ namespace App\Http\Controllers\GestaoImoveisCaixa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GestaoImoveisCaixa\Distrato;
+use App\Models\BaseSimov;
 
 class DistratoController extends Controller
 {
@@ -49,6 +50,8 @@ class DistratoController extends Controller
     {
         $universoProtocolosDistrato = Distrato::all();
         return json_encode($universoProtocolosDistrato);
+        // $universoProtocolosDistrato = BaseSimov::with('distrato')->first();
+        // dd($universoProtocolosDistrato);
     }
 
     /**

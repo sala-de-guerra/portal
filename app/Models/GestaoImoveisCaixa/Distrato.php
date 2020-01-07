@@ -20,8 +20,13 @@ class Distrato extends Model
             'matriculaGestor',
         ];
 
-    public function distrato()
+    public function dadosContrato()
     {
-        return $this->belongsTo('App\Models\BaseSimov', 'BEM_FORMATADO', 'contratoFormatado');
+        return $this->hasOne('App\Models\BaseSimov', 'BEM_FORMATADO', 'contratoFormatado');
+    }
+
+    public function despesas()
+    {
+        return $this->hasMany('App\Models\GestaoImoveisCaixa\DistratoRelacaoDespesas', 'idDistrato', 'idDistrato');
     }
 }
