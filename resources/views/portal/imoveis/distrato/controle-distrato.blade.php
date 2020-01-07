@@ -39,10 +39,10 @@
                             <tr>
                                 <th>CHB</th>
                                 <th>Nome do Comprador</th>
-                                <th>CPF / CNPJ</th>
                                 <th>Status</th>
                                 <th>Motivo</th>
                                 <th>Data de Início</th>
+                                <th>Vencimento</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,6 +61,8 @@
 
 <br>
 
+
+
 @stop
 
 @section('footer')
@@ -75,6 +77,6 @@
 
 @section('js')
 
-<script src="{{ asset('js/portal/contratacao/distrato.js') }}"></script>
+<script src="{{ asset('js/portal/distrato/distrato.js') }}"></script>
 
 @stop

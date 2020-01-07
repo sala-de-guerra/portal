@@ -30,7 +30,7 @@
 
     <div class="col-md-12">
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCartilhaContratacaoAVista">
+        <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalCartilhaContratacaoAVista">
             Cartilha para Contratação à Vista &nbsp &nbsp
             <i class="fas fa-lg fa-external-link-alt"></i>
         </button>
@@ -53,7 +53,7 @@
 
         &nbsp
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCartilhaContratacaoFGTS">
+        <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalCartilhaContratacaoFGTS">
             Cartilha para Contratação com uso do FGTS e Parcelamento &nbsp &nbsp
             <i class="fas fa-lg fa-external-link-alt"></i>
         </button>
@@ -76,7 +76,7 @@
 
         &nbsp
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCartilhaVendaOnline">
+        <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalCartilhaVendaOnline">
             Cartilha de Venda Online &nbsp &nbsp
             <i class="fas fa-lg fa-external-link-alt"></i>
         </button>
@@ -99,7 +99,7 @@
 
         &nbsp
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCartilhaContratacaoCCA">
+        <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalCartilhaContratacaoCCA">
             Cartilha de Contratação em CCA &nbsp &nbsp
             <i class="fas fa-lg fa-external-link-alt"></i>
         </button>

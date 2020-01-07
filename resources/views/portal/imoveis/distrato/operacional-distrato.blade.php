@@ -32,8 +32,6 @@
 @include('portal.imoveis.componentes.tabs-dados-imovel')
 
 
-
-
 @section('footer')
 
 
