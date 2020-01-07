@@ -134,7 +134,7 @@
 
     <p>
         4.1   Cabe ao comprador tomar todas as providências necessárias para o registro do Contrato de financiamento habitacional 
-        ou Contrato de Aquisição à Vista com FGTS junto ao Oficial de Registro de Imóveis competente, conforme %MO_UTILIZADO%;
+        ou Contrato de Aquisição à Vista com FGTS junto ao Oficial de Registro de Imóveis competente, conforme <mark>%MO_UTILIZADO%</mark>;
     </p>
 
     <p>
