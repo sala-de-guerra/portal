@@ -2,25 +2,38 @@ $(document).ready(function(){
 
     $.getJSON('/estoque-imoveis/distrato/listar-protocolos', function(dados){
 
-        $.each(distratos, function(key, item) {
+        $.each(dados, function(key, item) {
+            
+            var dataformatada = formataDataHumana(item.created_at);
+
             var linha = 
-                '<tr href="/consulta-bem-imovel/' + item.contratoFormatado + '>' +
+                '<tr href="/consulta-bem-imovel/' + item.contratoFormatado + '">' +
+                    '<td>' + item.idDistrato + '</td>' +
                     '<td>' + item.contratoFormatado + '</td>' +
                     '<td>' + item.nomeProponente + '</td>' +
-                    '<td>' + item.statusAnalise + '</td>' +
+                    '<td>' + item.statusAnaliseDistrato + '</td>' +
                     '<td>' + item.motivoDistrato + '</td>' +
-                    '<td>' + item.created_at + '</td>' +
-                    '<td>' + '</td>' +
+                    '<td>' + dataformatada + '</td>' +
                 '</tr>';
-            
             $(linha).appendTo('#tblDistrato>tbody');
         })
-    
+        _formataDatatable();
     });
-
-    _formataDatatable ();
-
+    // _formataDatatable();
 });
+
+function formataDataHumana(data)
+{
+    let dataNaoFormatada;
+    let dataFormatoPtBr;
+    if (data == null || data == undefined) {
+        dataFormatoPtBr = ''; 
+    } else {
+        dataNaoFormatada = new Date(data); 
+        dataFormatoPtBr = dataNaoFormatada.toLocaleString();
+    }
+    return dataFormatoPtBr;
+}
 
 function _validarCHB(inputChb){
     $("input[name='nomeProponente']").val('');
