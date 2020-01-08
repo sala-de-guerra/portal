@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class BaseSimov extends Model
 {
     protected $table = 'ALITB001_Imovel_Completo';
-    protected $primaryKey = 'BEM_FORMATADO';
+    // protected $primaryKey = 'BEM_FORMATADO';
 
     public function distrato()
     {
-        return $this->belongsTo('App\Models\GestaoImoveisCaixa\Distrato', 'contratoFormatado', 'BEM_FORMATADO');
+        return $this->hasOne('App\Models\GestaoImoveisCaixa\Distrato', 'contratoFormatado', 'BEM_FORMATADO');
     }
 }
