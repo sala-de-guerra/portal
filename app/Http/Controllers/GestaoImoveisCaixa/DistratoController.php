@@ -16,7 +16,7 @@ class DistratoController extends Controller
      */
     public function index()
     {
-        return view('portal.imoveis.contratacao.distrato');
+        return view('portal.imoveis.distrato.controle-distrato');
     }
 
     /**
@@ -48,10 +48,10 @@ class DistratoController extends Controller
      */
     public function show()
     {
-        $universoProtocolosDistrato = Distrato::all();
+        $universoProtocolosDistrato = Distrato::with('simov')->get();
+        // return json_encode($universoProtocolosDistrato->simov->AGENCIA_CONTRATACAO_PROPOSTA);
+        dd($universoProtocolosDistrato[0]);
         return json_encode($universoProtocolosDistrato);
-        // $universoProtocolosDistrato = BaseSimov::with('distrato')->first();
-        // dd($universoProtocolosDistrato);
     }
 
     /**
