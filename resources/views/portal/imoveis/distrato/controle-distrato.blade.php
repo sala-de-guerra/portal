@@ -4,6 +4,17 @@
 
 @section('content_header')
 
+@if (session('tituloMensagem'))
+    <div class="card text-white bg-{{ session('corMensagem') }}">
+        <div class="card-header">
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
+                <br>
+                <p class="card-text">{{ session('corpoMensagem') }}</p>
+            </div>
+        </div>
+    </div>
+@endif
 
 <div class="row mb-2">
     <div class="col-sm-6">
@@ -17,6 +28,12 @@
         </ol>
     </div>
 </div>
+
+<!-- Botão para acionar modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato">
+    <i class="far fa-lg fa-edit"></i>
+     Cadastrar Pedido de Distrato
+</button>
 
 
 @stop
@@ -37,6 +54,7 @@
                         <table id="tblDistrato" class="table dataTable">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>CHB</th>
                                     <th>Nome do Comprador</th>
                                     <th>Status</th>
@@ -63,12 +81,6 @@
 </div> <!-- /.row -->
 
 <br>
-
-<!-- Botão para acionar modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato">
-    <i class="far fa-lg fa-edit"></i>
-     Cadastrar Pedido de Distrato
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="modalCadastraDistrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -143,8 +155,9 @@
 
 
 @section('js')
-<script src="{{ asset('js/global/formata_datatable.js') }}"></script>
+
 <script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
+<script src="{{ asset('js/global/formata_datatable.js') }}"></script>
 
 
 @stop
