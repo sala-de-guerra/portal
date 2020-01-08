@@ -309,7 +309,7 @@ return [
                     'url'  => '/controle-conformidade',
                 ],
                 [
-                    'text' => 'Distrato',
+                    'text' => 'Controle de Distrato',
                     'url'  => '/estoque-imoveis/distrato',
                 ],
                 // [

@@ -19,19 +19,20 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Distrato
+            Controle de Distrato
         </h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/distrato"> Distrato</a> </li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/distrato"> Controle de Distrato</a> </li>
         </ol>
     </div>
 </div>
 
 <!-- Botão para acionar modal -->
-<button type="button" class="btn btn-primary right" data-toggle="modal" data-target="#modalCadastraDistrato">
-    Cadastrar Pedido de Distrato
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato">
+    <i class="far fa-lg fa-edit"></i>
+     Cadastrar Pedido de Distrato
 </button>
 
 
@@ -49,7 +50,7 @@
             </div> <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
-                    <div  class="col-sm-12 table-responsive p-0">
+                    <div class="col-sm-12 table-responsive p-0">
                         <table id="tblDistrato" class="table dataTable">
                             <thead>
                                 <tr>
@@ -60,11 +61,14 @@
                                     <th>Motivo</th>
                                     <th>Data de Início</th>
                                     <!-- <th>Vencimento</th> -->
+
                                 </tr>
                             </thead>
+
                             <tbody>
 
                             </tbody>
+                            
                         </table>
                     </div> <!-- /.col-sm-12 -->
                 </div> <!-- /.row -->
@@ -82,7 +86,7 @@
 <div class="modal fade" id="modalCadastraDistrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method='post' action='/estoque-imoveis/distrato/cadastrar-demanda'>
+            <form method='post' action='/estoque-imoveis/distrato/cadastrar-demanda' id="formCadastraDemandaDistrato">
                 {{ csrf_field() }}
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Cadastrar Pedido de Distrato</h5>
@@ -93,20 +97,22 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label>CHB:</label>
+                        <label>CHB Formatado:</label>
                         <input type="text" name="contratoFormatado" class="form-control" id="inputChb" required>
                     </div>
 
-                    <button type="button" class="btn btn-primary" onclick="_validarCHB('#inputChb');">Validar CHB</button>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="_validarCHB('#inputChb');">Validar CHB</button>
+                    </div>
 
                     <div class="form-group">
-                        <label>Nome:</label>
-                        <input type="text" name="nomeProponente" class="form-control" required readonly>
+                        <label>Nome do Proponente:</label>
+                        <input type="text" name="nomeProponente" class="form-control" readonly required>
                     </div>
 
                     <div class="form-group">
                         <label>CPF / CNPJ:</label>
-                        <input type="text" name="cpfCnpjProponente" class="form-control" required desabled>
+                        <input type="text" name="cpfCnpjProponente" class="form-control" readonly required>
                     </div>
 
                     <div class="form-group">
