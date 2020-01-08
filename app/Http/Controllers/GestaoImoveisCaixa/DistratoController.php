@@ -4,7 +4,9 @@ namespace App\Http\Controllers\GestaoImoveisCaixa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\GestaoImoveisCaixa\Distrato;
+use App\Models\HistoricoPortalGilie;
 use App\Models\BaseSimov;
 
 class DistratoController extends Controller
@@ -14,19 +16,9 @@ class DistratoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public static function index()
     {
         return view('portal.imoveis.distrato.controle-distrato');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -37,17 +29,41 @@ class DistratoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $novoDistrato = new Distrato;
-        $novoDistrato->contratoFormatado = $request->contratoFormatado;
-        $novoDistrato->nomeProponente = $request->nomeProponente;
-        $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
-        $novoDistrato->statusAnaliseDistrato = 'INICIAR ANÁLISE';
-        $novoDistrato->motivoDistrato = $request->motivoDistrato;
-        // dd($novoDistrato);
-        $novoDistrato->save();
+        try {
+            DB::beginTransaction();
+            $novoDistrato = new Distrato;
+            $novoDistrato->contratoFormatado = $request->contratoFormatado;
+            $novoDistrato->nomeProponente = $request->nomeProponente;
+            $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
+            $novoDistrato->statusAnaliseDistrato = 'INICIAR ANÁLISE';
+            $novoDistrato->motivoDistrato = $request->motivoDistrato;
+            // dd($novoDistrato);
+            $novoDistrato->save();
 
-        return view('portal.imoveis.distrato.controle-distrato');
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $request->contratoFormatado;
+            $historico->tipo = "CADASTRO";
+            $historico->atividade = "DISTRATO";
+            $historico->observacao = "CADASTRO DE DISTRATO - MOTIVO: $request->motivoDistrato - PROPONENTE: $request->nomeProponente - PROTOCOLO: #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT);
+            $historico->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Distrato cadastrado!");
+            $request->session()->flash('corpoMensagem', "O protocolo #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi cadastrado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Cadastro não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o cadastro da demanda. Tente novamente");
+        }
+        return redirect('/estoque-imoveis/distrato');
     }
 
     /**
@@ -58,10 +74,7 @@ class DistratoController extends Controller
      */
     public function show()
     {
-        $universoProtocolosDistrato = Distrato::select('contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
-        // $universoProtocolosDistrato = Distrato::with('simov')->get();
-        // return json_encode($universoProtocolosDistrato->simov->AGENCIA_CONTRATACAO_PROPOSTA);
-        // dd($universoProtocolosDistrato[0]);
+        $universoProtocolosDistrato = Distrato::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
         return json_encode($universoProtocolosDistrato);
     }
 
