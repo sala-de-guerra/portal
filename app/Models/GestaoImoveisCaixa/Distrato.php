@@ -11,7 +11,8 @@ class Distrato extends Model
     protected $fillable = [
             'contratoFormatado',
             'nomeProponente',
-            'statusAnalise',
+            'cpfCnpjProponente',
+            'statusAnaliseDistrato',
             'motivoDistrato',
             'observacaoDistrato',
             'parecerAnalista',

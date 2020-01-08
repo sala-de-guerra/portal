@@ -33,17 +33,17 @@
             </div> <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
-                    <div id="tblDistrato" class="col-sm-12 table-responsive p-0">
-                        <table class="table dataTable">
+                    <div  class="col-sm-12 table-responsive p-0">
+                        <table id="tblDistrato" class="table dataTable">
                             <thead>
-                            <tr>
-                                <th>CHB</th>
-                                <th>Nome do Comprador</th>
-                                <th>Status</th>
-                                <th>Motivo</th>
-                                <th>Data de Início</th>
-                                <th>Vencimento</th>
-                            </tr>
+                                <tr>
+                                    <th>CHB</th>
+                                    <th>Nome do Comprador</th>
+                                    <th>Status</th>
+                                    <th>Motivo</th>
+                                    <th>Data de Início</th>
+                                    <!-- <th>Vencimento</th> -->
+                                </tr>
                             </thead>
                             <tbody>
 
@@ -70,7 +70,8 @@
 <div class="modal fade" id="modalCadastraDistrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form>
+            <form method='post' action='/estoque-imoveis/distrato/cadastrar-demanda'>
+                {{ csrf_field() }}
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Cadastrar Pedido de Distrato</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -88,26 +89,26 @@
 
                     <div class="form-group">
                         <label>Nome:</label>
-                        <input type="text" name="nomeProponente" class="form-control" required>
+                        <input type="text" name="nomeProponente" class="form-control" required readonly>
                     </div>
 
                     <div class="form-group">
                         <label>CPF / CNPJ:</label>
-                        <input type="text" name="cpfCnpjProponente" class="form-control" required>
+                        <input type="text" name="cpfCnpjProponente" class="form-control" required desabled>
                     </div>
 
                     <div class="form-group">
                         <label>Motivo de Distrato:</label>
                         <select name="motivoDistrato" class="form-control" required>
                             <option value="" selected>Selecione</option>
-                            <option value="acaoJudicial">AÇÃO JUDICIAL</option>
-                            <option value="leiloesNegativos">LEILÕES NEGATIVOS</option>
-                            <option value="impossibilidadeAverbacaoAquisicao">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
-                            <option value="desistencia">DESISTÊNCIA</option>
-                            <option value="creditoNaoAprovado">CRÉDITO NÃO APROVADO</option>
-                            <option value="erroFormalEdital">ERRO FORMAL DE EDITAL</option>
-                            <option value="direitoPreferencia">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
-                            <option value="distratoCancelado">DISTRATO CANCELADO</option>
+                            <option value="AÇÃO JUDICIAL">AÇÃO JUDICIAL</option>
+                            <option value="LEILÕES NEGATIVOS">LEILÕES NEGATIVOS</option>
+                            <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
+                            <option value="DESISTÊNCIA">DESISTÊNCIA</option>
+                            <option value="CRÉDITO NÃO APROVADO">CRÉDITO NÃO APROVADO</option>
+                            <option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>
+                            <option value="DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
+                            <option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>
                         </select>
                     </div>
 
@@ -136,7 +137,8 @@
 
 
 @section('js')
-
+<script src="{{ asset('js/global/formata_datatable.js') }}"></script>
 <script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
+
 
 @stop
