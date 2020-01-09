@@ -10,9 +10,6 @@
         <h1 class="m-0 text-dark">
             Operacional Distrato
         </h1>
-        <!-- <div>
-            <input class="typeahead" type="text" placeholder="States of USA">
-        </div> -->
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -57,6 +54,6 @@
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
-    <!-- <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script> -->
+    <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
     <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
 @stop

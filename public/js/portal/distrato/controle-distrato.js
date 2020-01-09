@@ -3,7 +3,6 @@ $(document).ready(function(){
     $.getJSON('/estoque-imoveis/distrato/listar-protocolos', function(dados){
 
         $.each(dados, function(key, item) {          
-            var dataformatada = formataDataHumana(item.created_at);
 
             var linha = 
                 '<tr href="/consulta-bem-imovel/' + item.contratoFormatado + '">' +
@@ -12,13 +11,24 @@ $(document).ready(function(){
                     '<td>' + item.nomeProponente + '</td>' +
                     '<td>' + item.statusAnaliseDistrato + '</td>' +
                     '<td>' + item.motivoDistrato + '</td>' +
-                    '<td>' + dataformatada + '</td>' +
+                    '<td class="formata-data">' + item.created_at + '</td>' +
                 '</tr>';
-            $(linha).appendTo('#tblDistrato>tbody');
+            $(linha).appendTo('#tblDistrato>tbody'); 
         })
+
         _formataDatatable();
+        _formataData();
+
+        $('#tblDistrato tbody').on('click', 'tr', function () {
+            var href = $(this).attr("href");            
+            if (href == undefined) {
+                document.location.href = '/estoque-imoveis/distrato';
+            } else {
+                document.location.href = href;
+            };
+        });  
+
     });
-    // _formataDatatable();
 });
 
 // RESETAR CAMPOS DO FORM DE CADASTRO DE DEMANDA DE DISTRATO AO FECHAR O MODAL
@@ -26,21 +36,6 @@ $(document).ready(function(){
 $('#modalCadastraDistrato').on('hidden.bs.modal', function(e){
     $("#formCadastraDemandaDistrato")[0].reset();           
 });
-
-
-// FORMATA DATA DE BANCO DE DADOS PARA DATA PT-BR
-function formataDataHumana(data)
-{
-    let dataNaoFormatada;
-    let dataFormatoPtBr;
-    if (data == null || data == undefined) {
-        dataFormatoPtBr = ''; 
-    } else {
-        dataNaoFormatada = new Date(data); 
-        dataFormatoPtBr = dataNaoFormatada.toLocaleString();
-    }
-    return dataFormatoPtBr;
-}
 
 // FUNCAO DE VALIDAR CHB E JA PEGAR NOME E CPF DA ROTA DE CONSULTA-BEM
 function _validarCHB(inputChb){
