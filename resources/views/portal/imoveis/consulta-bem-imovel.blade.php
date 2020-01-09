@@ -49,8 +49,9 @@
         var numeroContrato = '{{ $numeroContrato }}';
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
-    <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
-    <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
+    <!-- <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
+    <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script> -->
+    <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
