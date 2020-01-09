@@ -248,7 +248,7 @@
 
                     <div class="tab-pane fade" id="custom-tabs-one-contratacao" role="tabpanel" aria-labelledby="custom-tabs-one-contratacao-tab">
                         
-                        <h2 class="card-title"><b>Proposta Atual - </b><b id="tipoVenda"></b></h2>
+                        <h2 class="card-title"><b>Proposta Atual - </b><b class="badge badge-primary" id="tipoVenda"></b></h2>
 
                         <br>
 
@@ -432,75 +432,14 @@
 
                     <div class="tab-pane fade" id="custom-tabs-one-distrato" role="tabpanel" aria-labelledby="custom-tabs-one-distrato-tab">
 
-                        <ul id="listaDistratos" class="list-unstyled">
-                            <!-- <li>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Protocolo:</label>
-                                            <p id="protocoloProponenteDistrato"></p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul id="listaDistratos" class="list-unstyled">
 
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Nome:</label>
-                                            <p id="nomeProponenteDistrato"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>CPF / CNPJ:</label>
-                                            <p id="cpfCnpjProponenteDistrato"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Telefone:</label>
-                                            <p id="telefoneProponenteDistrato"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>E-mail:</label>
-                                            <p id="emailProponenteDistrato"></p>
-                                        </div>
-                                    </div>
-                                </div>
+                                </ul>
+                            </div>
+                        </div>
 
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Data de início:</label>
-                                            <p id="dataInicioDistrato" class="formata-data-sem-hora"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Modalidade de compra:</label>
-                                            <p id="modalidadeCompraDistrato"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Motivo do Distrato:</label>
-                                            <p id="motivoDistrato"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Status do Distrato:</label>
-                                            <p id="statusDistrato"></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                            </li> -->
-                        </ul>
 
                     </div>
 

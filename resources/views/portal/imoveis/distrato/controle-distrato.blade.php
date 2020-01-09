@@ -51,7 +51,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 table-responsive p-0">
-                        <table id="tblDistrato" class="table dataTable">
+                        <table id="tblDistrato" class="table table-bordered table-striped hover dataTable">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -61,7 +61,6 @@
                                     <th>Motivo</th>
                                     <th>Data de Início</th>
                                     <!-- <th>Vencimento</th> -->
-
                                 </tr>
                             </thead>
 
@@ -98,7 +97,7 @@
 
                     <div class="form-group">
                         <label>CHB Formatado:</label>
-                        <input type="text" name="contratoFormatado" class="form-control" id="inputChb" required>
+                        <input type="text" name="contratoFormatado" class="form-control" id="inputChb" placeholder="00.0000.0000000-0" required>
                     </div>
 
                     <div class="form-group">
@@ -158,6 +157,8 @@
 
 <script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
 <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
+<script src="{{ asset('js/global/formata_data.js') }}"></script>
+
 
 
 @stop
