@@ -31,8 +31,8 @@ $(document).ready(function(){
     
     });
 
-    $.getJSON('/estoque-imoveis/distrato/listar-protocolos', function(dados){
-        console.log(dados);
+    $.getJSON('/estoque-imoveis/distrato/consultar-dados-demanda/' + numeroContrato, function(dados){
+        console.log('/estoque-imoveis/distrato/consultar-dados-demanda/' + numeroContrato);
 
 
         $.each(dados, function(key, item) {
@@ -44,7 +44,7 @@ $(document).ready(function(){
                     '<div class="col-sm-3">' +
                         '<div class="form-group">' +
                             '<label>Protocolo:</label>' +
-                            '<p>' + item.idDemanda + '</p>' +
+                            '<p>' + item.idDistrato + '</p>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -124,7 +124,7 @@ $(document).ready(function(){
             $(li).appendTo('#listaDistratos'); 
             
         });
-        
+        _formataData();
     });
 
     // var tamanhoMaximoView = 8;
@@ -132,7 +132,7 @@ $(document).ready(function(){
 
     // _animaInputFile();
 
-    _formataData();
+    
 
 });
 

@@ -32,15 +32,36 @@ class DistratoController extends Controller
     {
         try {
             DB::beginTransaction();
-
-            $dadosProposta = PropostasSimov::where('BEM_FORMATADO', $request->contratoFormatado)->get();
-
+            $dadosProposta = PropostasSimov::where('NÚMERO BEM', $request->contratoFormatado)->where('NOME PROPONENTE', $request->nomeProponente)->first();
+            $dadosSimov = BaseSimov::where('BEM_FORMATADO', $request->contratoFormatado)->first();
+            
+            // VALIDA SE EXISTE PROPOSTA CADASTRADA NA BASE DE DADOS DA GEIPT E VERIFICA SE EXISTE TELEFONE E E-MAIL
+            if ( $dadosProposta == null || $dadosProposta == 'NULL') {
+                $telefone = 'telefone não cadastrado';
+                $emailProponente = 'e-mail não cadastrado';
+            } else {
+                if ($dadosProposta->{'DDD PROPONENTE'} == null || $dadosProposta->{'DDD PROPONENTE'} == 'NULL') {
+                    $telefone = 'telefone não cadastrado';
+                } else {
+                    $telefone = "(" . $dadosProposta->{'DDD PROPONENTE'} . ") " . $dadosProposta->{'TELEFONE PROPONENTE'};
+                }
+                if ($dadosProposta->{'E-MAIL PROPONENTE'} == null || $dadosProposta->{'E-MAIL PROPONENTE'} == 'NULL') {
+                    $emailProponente = 'e-mail não cadastrado';
+                } else {
+                    $emailProponente = $dadosProposta->{'E-MAIL PROPONENTE'};
+                }
+            }
+            
             $novoDistrato = new Distrato;
             $novoDistrato->contratoFormatado = $request->contratoFormatado;
-            $novoDistrato->nomeProponente = $request->nomeProponente;
+            $novoDistrato->nomeProponente = strtoupper ($request->nomeProponente);
             $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
             $novoDistrato->statusAnaliseDistrato = 'INICIAR ANÁLISE';
             $novoDistrato->motivoDistrato = $request->motivoDistrato;
+            $novoDistrato->telefoneProponente = $telefone;
+            $novoDistrato->emailProponente = $emailProponente;
+            $novoDistrato->tipoVendaProposta = $dadosSimov->TIPO_VENDA;
+            $novoDistrato->demandaAtiva = 'SIM';
             // dd($novoDistrato);
             $novoDistrato->save();
 
@@ -60,7 +81,7 @@ class DistratoController extends Controller
 
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
@@ -73,7 +94,6 @@ class DistratoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -85,52 +105,100 @@ class DistratoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $contratoFormatado
+     * @param  string  $contratoFormatado
      * @return \Illuminate\Http\Response
      */
     public function edit($contratoFormatado)
     {
-        return view('portal.imoveis.distrato.operacional-distrato');
+        return view('portal.imoveis.distrato.operacional-distrato')->with('numeroContrato', $contratoFormatado);
     }
 
     /**
-     * Apresenta json com dados do contrato e do distrato para view de ação dos distratos
+     * Apresenta json com dados do distrato para view de ação dos distratos
      *
      * @param  int  $contratoFormatado
      * @return \Illuminate\Http\Response
      */
-    public function jsonDadosSimovComDadosDistrato($contratoFormatado)
+    public function jsonDadosDemandaDistrato($contratoFormatado)
     {
-        // $contrato = BaseSimov::with('distrato')->where('BEM_FORMATADO', $contratoFormatado)->first();
-        $dadosProposta = PropostasSimov::where('NÚMERO BEM', $contratoFormatado)->get();
-        dd($dadosProposta);
-        // $arrayDadosContratoComDistrato = [
-        //     'idDistrato' =>,
-        //     'nomeProponente' =>,
-        //     'cpfCnpjProponente' =>,
-        //     'telefoneProponente' =>,
-        //     'emailProponente' =>,
-        //     'modalidadeProposta' =>,
-        //     'dataCadastro' =>,
-        //     'dataUltimaAlteracaoDemanda' =>,
-        //     'motivoDistrato' =>,
-        //     'statusAnaliseDistrato' =>,
-        //     'observacaoDistrato' =>,
-        // ];
+        $demandaDistrato = Distrato::where('contratoFormatado', $contratoFormatado)->get();
 
-        return json_encode($contrato);
+        $arrayGrupoDemandasDistrato = [];
+        
+        // PASSA POR TODAS AS SOLICITAÇÕES DE DISTRATO DO CONTRATO (CASO HAJA MAIS DE UM CASO)
+        foreach ($demandaDistrato as $demanda) {
+
+            // VALIDA A DATA ANTES DE ATRIBUIR NO ARRAY
+            if ($demanda->created_at == null || $demanda->created_at == 'NULL') {
+                $dataCadastro = null;
+                $dataUltimaAlteracao = null;
+            } else {
+                $dataCadastro = $demanda->created_at->format('yy-m-d h:i:s');
+                $dataUltimaAlteracao = $demanda->updated_at->format('yy-m-d h:i:s');
+            }
+            
+            // MONTA O ARRAY DA DEMANDA COM SOMENTE OS CAMPOS NECESSÁRIOS PARA A VIEW
+            $arrayDemanda = [
+                'idDistrato' => $demanda->idDistrato,
+                'nomeProponente' => $demanda->nomeProponente,
+                'cpfCnpjProponente' => $demanda->cpfCnpjProponente,
+                'telefoneProponente' => $demanda->telefoneProponente,
+                'emailProponente' => $demanda->emailProponente,
+                'modalidadeProposta' => $demanda->tipoVendaProposta,
+                'dataCadastro' => $dataCadastro,
+                'dataUltimaAlteracaoDemanda' => $dataUltimaAlteracao,
+                'motivoDistrato' => $demanda->motivoDistrato,
+                'statusAnaliseDistrato' => $demanda->statusAnaliseDistrato,
+                'observacaoDistrato' => $demanda->observacaoDistrato,
+            ];
+
+            // AGRUPA TODAS AS DEMANDAS EM UM ÚNICO ARRAY
+            array_push($arrayGrupoDemandasDistrato, $arrayDemanda);
+        }
+        return json_encode($arrayGrupoDemandasDistrato);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $demandaDistrato
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $demandaDistrato)
     {
-        //
+        try {
+            DB::beginTransaction();
+            // ATUALIZA DEMANDA
+            $demandaDistrato = Distrato::find($demandaDistrato)->get();
+            $demandaDistrato->motivoDistrato = $request->motivoDistrato;
+            $demandaDistrato->statusAnaliseDistrato = $request->statusAnaliseDistrato;
+            $demandaDistrato->observacaoDistrato = $request->observacaoDistrato;
+            $demandaDistrato->matriculaAnalista = session('matricula');
+            $demandaDistrato->save();
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $demandaDistrato->contratoFormatado;
+            $historico->tipo = "ANALISE";
+            $historico->atividade = "DISTRATO";
+            $historico->observacao = $request->observacaoDistrato;
+            $historico->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Demanda analisada!");
+            $request->session()->flash('corpoMensagem', "A demanda #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi analisada com sucesso.");
+        } catch (\Throwable $th) {
+            // dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Análise não efetuada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da análise. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/distrato/consultar/$demandaDistrato->contratoFormatado");
     }
 
     /**

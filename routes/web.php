@@ -87,9 +87,9 @@ Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoq
 
 // Operacional Distrato
 
-Route::get('/operacional-distrato', function () {
-    return view('portal.imoveis.distrato.operacional-distrato');
-});
+// Route::get('/operacional-distrato', function () {
+//     return view('portal.imoveis.distrato.operacional-distrato');
+// });
 
 // Rotas web dos processos pertinentes ao Estoque de Imóveis
 
@@ -97,7 +97,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::get('distrato', 'GestaoImoveisCaixa\DistratoController@index');
     Route::get('distrato/listar-protocolos', 'GestaoImoveisCaixa\DistratoController@show');
     Route::get('distrato/consultar/{contrato}', 'GestaoImoveisCaixa\DistratoController@edit');
-    Route::get('distrato/consultar-dados-contrato-com-distrato/{contrato}', 'GestaoImoveisCaixa\DistratoController@jsonDadosSimovComDadosDistrato');
+    Route::get('distrato/consultar-dados-demanda/{contrato}', 'GestaoImoveisCaixa\DistratoController@jsonDadosDemandaDistrato');
     Route::post('distrato/cadastrar-demanda', 'GestaoImoveisCaixa\DistratoController@store');
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
     Route::get('rotina-mensagens-com-contrato-fixo', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasComRelacaoFixaDeContratos');

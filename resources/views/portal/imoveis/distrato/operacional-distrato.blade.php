@@ -4,6 +4,17 @@
 
 @section('content_header')
 
+@if (session('tituloMensagem'))
+    <div class="card text-white bg-{{ session('corMensagem') }}">
+        <div class="card-header">
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
+                <br>
+                <p class="card-text">{{ session('corpoMensagem') }}</p>
+            </div>
+        </div>
+    </div>
+@endif
 
 <div class="row mb-2">
     <div class="col-sm-6">
@@ -44,10 +55,10 @@
 
 @section('js')
     <script>
-        var numeroContrato = '{{ $numeroContrato ?? '' }}';
+        var numeroContrato = '{{ $numeroContrato }}';
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
-    <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
+    <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
     <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
