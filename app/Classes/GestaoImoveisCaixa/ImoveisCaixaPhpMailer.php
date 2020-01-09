@@ -90,6 +90,7 @@ class ImoveisCaixaPhpMailer
         $mail->addBCC('GILIESP09@caixa.gov.br');
         $mail->addBCC('c111710@mail.caixa');
         $mail->addBCC('c098453@mail.caixa');
+        $mail->addBCC('c141203@mail.caixa');
   
         // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
 

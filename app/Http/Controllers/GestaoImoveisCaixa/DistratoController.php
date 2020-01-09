@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\GestaoImoveisCaixa\Distrato;
 use App\Models\HistoricoPortalGilie;
 use App\Models\BaseSimov;
+use App\Models\PropostasSimov;
 
 class DistratoController extends Controller
 {
@@ -31,6 +32,9 @@ class DistratoController extends Controller
     {
         try {
             DB::beginTransaction();
+
+            $dadosProposta = PropostasSimov::where('BEM_FORMATADO', $request->contratoFormatado)->get();
+
             $novoDistrato = new Distrato;
             $novoDistrato->contratoFormatado = $request->contratoFormatado;
             $novoDistrato->nomeProponente = $request->nomeProponente;
@@ -81,12 +85,40 @@ class DistratoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $contratoFormatado
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($contratoFormatado)
     {
-        //
+        return view('portal.imoveis.distrato.operacional-distrato');
+    }
+
+    /**
+     * Apresenta json com dados do contrato e do distrato para view de ação dos distratos
+     *
+     * @param  int  $contratoFormatado
+     * @return \Illuminate\Http\Response
+     */
+    public function jsonDadosSimovComDadosDistrato($contratoFormatado)
+    {
+        // $contrato = BaseSimov::with('distrato')->where('BEM_FORMATADO', $contratoFormatado)->first();
+        $dadosProposta = PropostasSimov::where('NÚMERO BEM', $contratoFormatado)->get();
+        dd($dadosProposta);
+        // $arrayDadosContratoComDistrato = [
+        //     'idDistrato' =>,
+        //     'nomeProponente' =>,
+        //     'cpfCnpjProponente' =>,
+        //     'telefoneProponente' =>,
+        //     'emailProponente' =>,
+        //     'modalidadeProposta' =>,
+        //     'dataCadastro' =>,
+        //     'dataUltimaAlteracaoDemanda' =>,
+        //     'motivoDistrato' =>,
+        //     'statusAnaliseDistrato' =>,
+        //     'observacaoDistrato' =>,
+        // ];
+
+        return json_encode($contrato);
     }
 
     /**
