@@ -96,6 +96,8 @@ Route::get('/operacional-distrato', function () {
 Route::prefix('estoque-imoveis')->group(function () {
     Route::get('distrato', 'GestaoImoveisCaixa\DistratoController@index');
     Route::get('distrato/listar-protocolos', 'GestaoImoveisCaixa\DistratoController@show');
+    Route::get('distrato/consultar/{contrato}', 'GestaoImoveisCaixa\DistratoController@edit');
+    Route::get('distrato/consultar-dados-contrato-com-distrato/{contrato}', 'GestaoImoveisCaixa\DistratoController@jsonDadosSimovComDadosDistrato');
     Route::post('distrato/cadastrar-demanda', 'GestaoImoveisCaixa\DistratoController@store');
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
     Route::get('rotina-mensagens-com-contrato-fixo', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasComRelacaoFixaDeContratos');

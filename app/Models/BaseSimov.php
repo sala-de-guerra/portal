@@ -11,6 +11,11 @@ class BaseSimov extends Model
 
     public function distrato()
     {
-        return $this->hasOne('App\Models\GestaoImoveisCaixa\Distrato', 'contratoFormatado', 'BEM_FORMATADO');
+        return $this->hasMany('App\Models\GestaoImoveisCaixa\Distrato', 'contratoFormatado', 'BEM_FORMATADO');
+    }
+
+    public function propostas()
+    {
+        return $this->hasMany('App\Models\PropostasSimov', 'contratoFormatado', 'BEM_FORMATADO');
     }
 }
