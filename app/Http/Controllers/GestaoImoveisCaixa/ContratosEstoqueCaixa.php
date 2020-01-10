@@ -5,6 +5,7 @@ namespace App\Http\Controllers\GestaoImoveisCaixa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BaseSimov;
+use App\Models\RelacaoAgSrComEmail;
 
 class ContratosEstoqueCaixa extends Controller
 {
@@ -38,80 +39,106 @@ class ContratosEstoqueCaixa extends Controller
      */
     static public function capturaDadosBaseSimov($numeroContrato)
     {
-        $contrato = BaseSimov::where('BEM_FORMATADO', $numeroContrato)->get();
-        if (is_null($contrato[0]->ACEITA_CCA) || $contrato[0]->ACEITA_CCA == 'Nao' || $contrato[0]->ACEITA_CCA == 'NULL') {
+        $contrato = BaseSimov::where('BEM_FORMATADO', $numeroContrato)->first();
+        $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $contrato->AGENCIA_CONTRATACAO_PROPOSTA)->first();
+        // dd($dadosAgencia);
+        if (is_null($contrato->ACEITA_CCA) || $contrato->ACEITA_CCA == 'Nao' || $contrato->ACEITA_CCA == 'NULL') {
             $fluxoAgenciaOuCca = 'AGÊNCIA';
         } else {
             $fluxoAgenciaOuCca = 'CCA';
         }
-        
 
+        // VALIDA TELEFONE CORRETOR
+        if ($contrato->TEL_COM_CORRETOR == null || $contrato->TEL_COM_CORRETOR == 'NULL') {
+            if ($contrato->TEL_CEL_CORRETOR == null || $contrato->TEL_CEL_CORRETOR == 'NULL') {
+                $telefoneCorretor = 'sem telefone cadastrado';
+            } else {
+                $telefoneCorretor = '(' . $contrato->DDD_CEL_CORRETOR . ') ' . $contrato->TEL_CEL_CORRETOR;
+            }
+        } else {
+            if ($contrato->TEL_CEL_CORRETOR == null || $contrato->TEL_CEL_CORRETOR == 'NULL') {
+                $telefoneCorretor = '(' . $contrato->DDD_COMERCIAL_CORRETOR . ') ' . $contrato->TEL_COM_CORRETOR;
+            } else {
+                $telefoneCorretor = '(' . $contrato->DDD_COMERCIAL_CORRETOR . ') ' . $contrato->TEL_COM_CORRETOR . '/ (' . $contrato->DDD_CEL_CORRETOR . ') ' . $contrato->TEL_CEL_CORRETOR;
+            }
+        }
+
+        // MONTA O JSON QUE VAI PRA VIEW
         $dadosContrato = [
             'bemFormatado' => $numeroContrato,
-            'numeroBem' => $contrato[0]->NU_BEM,
-            'classificacao' => $contrato[0]->CLASSIFICACAO,
-            'dataEntrada' => $contrato[0]->DATA_ENTRADA,
-            'cep' => $contrato[0]->CEP,
-            'ufImovel' => $contrato[0]->UF,
-            'cidadeImovel' => $contrato[0]->CIDADE,
-            'nomeEmpreendimento' => $contrato[0]->NOME_EMPREENDIMENTO,
-            'bairroImovel' => $contrato[0]->BAIRRO,
-            'enderecoImovel' => $contrato[0]->ENDERECO_IMOVEL,
-            'tipoImovel' => $contrato[0]->TIPO_IMOVEL,
-            'descricaoImovel' => $contrato[0]->DESCRICAO_IMOVEL,
-            'descricaoAdicionalImovel' => $contrato[0]->DESCRICAO_ADIC_IMOVEL,
 
+            // DADOS DO IMÓVEL
+            'numeroBem' => $contrato->NU_BEM,
+            'classificacao' => $contrato->CLASSIFICACAO,
+            'cep' => $contrato->CEP,
+            'nomeEmpreendimento' => $contrato->NOME_EMPREENDIMENTO,
+            'enderecoImovel' => $contrato->ENDERECO_IMOVEL,
+            'bairroImovel' => $contrato->BAIRRO,
+            'ufImovel' => $contrato->UF,
+            'cidadeImovel' => $contrato->CIDADE,
+            'tipoImovel' => $contrato->TIPO_IMOVEL,
+            'statusImovel' => $contrato->STATUS_IMOVEL,
+            'descricaoImovel' => $contrato->DESCRICAO_IMOVEL,
+            'descricaoAdicionalImovel' => $contrato->DESCRICAO_ADIC_IMOVEL,
+            'valorAvaliacao' => number_format($contrato->VALOR_AVALIACAO, 2, ',', '.'),
+            'matriculaImovel' => $contrato->MATRICULA . " / " . $contrato->OFICIO . " Cartório",
+            'origemMatricula' => $contrato->ORIGEM_MATRICULA,
 
-            'agrupamentoLeilao' => $contrato[0]->AGRUPAMENTO,
-            'numeroItem' => $contrato[0]->NUMERO_ITEM,
-            'valorAvaliacao' => number_format($contrato[0]->VALOR_AVALIACAO, 2, ',', '.'),
-            'valorPrimeiroLeilao' => number_format($contrato[0]->VALOR_PRIMEIRO_LEILAO, 2, ',', '.'),
-            'valorSegundoLeilao' => number_format($contrato[0]->VALOR_SEGUNDO_LEILAO, 2, ',', '.'),
-            'valorVenda' => number_format($contrato[0]->VALOR_VENDA, 2, ',', '.'),
-            'valorContabil' => number_format($contrato[0]->VALOR_CONTABIL, 2, ',', '.'),
-            'dataConsolidacao' => $contrato[0]->DATA_CONSOLIDACAO,
-            'dataArremate' => $contrato[0]->DATA_ARREMATE,
+            // LEILÕES
+            'valorPrimeiroLeilao' => number_format($contrato->VALOR_PRIMEIRO_LEILAO, 2, ',', '.'),
+            'valorSegundoLeilao' => number_format($contrato->VALOR_SEGUNDO_LEILAO, 2, ',', '.'),
+            'valorVenda' => number_format($contrato->VALOR_VENDA, 2, ',', '.'),
+            'valorContabil' => number_format($contrato->VALOR_CONTABIL, 2, ',', '.'),
+            'dataConsolidacao' => $contrato->DATA_CONSOLIDACAO,
+            'agrupamentoLeilao' => $contrato->AGRUPAMENTO,
+            'numeroItem' => $contrato->NUMERO_ITEM,
+            'dataArremate' => $contrato->DATA_ARREMATE,
 
-            'utilizacaoFgts' => $contrato[0]->UTILIZACAO_FGTS,
-            'dataImpedimento' => $contrato[0]->DATA_IMPEDIMENTO_ATE,
-            'estadoOcupacao' => $contrato[0]->ESTADO_OCUPACAO,
-            'iptu' => $contrato[0]->IPTU,
-            'matriculaImovel' => $contrato[0]->MATRICULA,
-            'origemMatricula' => $contrato[0]->ORIGEM_MATRICULA,
-            'origemImovel' => $contrato[0]->ORIGEM_IMOVEL,
-            'oficioMatriculaImovel' => $contrato[0]->OFICIO,
-            'garantia' => $contrato[0]->GARANTIA,
-            'statusImovel' => $contrato[0]->STATUS_IMOVEL,
-            'dataAlteracaoStatusImovel' => $contrato[0]->DATA_ALTERACAO_STATUS,
-            'dataUltimaAlteracaoStatus' => $contrato[0]->DATA_ULTIMA_ALTERACAO,
-
-            
-            'tipoVenda' => $contrato[0]->TIPO_VENDA,
-            'dataProposta' => $contrato[0]->DATA_PROPOSTA,
-            'valorTotalProposta' => number_format($contrato[0]->VALOR_TOTAL_PROPOSTA, 2, ',', '.'),
-            'valorRecursosPropriosProposta' => number_format($contrato[0]->VALOR_REC_PROPRIOS_PROPOSTA, 2, ',', '.'),
-            'valorFgtsProposta' => number_format($contrato[0]->VALOR_FGTS_PROPOSTA, 2, ',', '.'),
-            'valorFinanciamentoProposta' => number_format($contrato[0]->VALOR_FINANCIADO_PROPOSTA, 2, ',', '.'),
-            'valorParceladoProposta' => number_format($contrato[0]->VALOR_PARCELADO_PROPOSTA, 2, ',', '.'),
-            'quantidadeParcelasProposta' => $contrato[0]->QTDE_PARCELAS_PROPOSTA,
+            // CONTRATAÇÃO
+            'tipoVenda' => $contrato->TIPO_VENDA,
+            'nomeProponente' => $contrato->NOME_PROPONENTE,
+            'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
+            'telefoneProponente' => '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
+            // 'emailProponente' => ,
+            'nomeCorretor' => $contrato->NO_CORRETOR,
+            'numeroCreciCorretor' => $contrato->NU_CRECI,
+            'telefoneCorretor' => $telefoneCorretor,
+            'emailCorretor' => $contrato->EMAIL_CORRETOR,
+            'dataProposta' => $contrato->DATA_PROPOSTA,
+            'valorTotalProposta' => number_format($contrato->VALOR_TOTAL_PROPOSTA, 2, ',', '.'),
+            'valorRecursosPropriosProposta' => number_format($contrato->VALOR_REC_PROPRIOS_PROPOSTA, 2, ',', '.'),
+            'valorFgtsProposta' => number_format($contrato->VALOR_FGTS_PROPOSTA, 2, ',', '.'),
+            'valorFinanciamentoProposta' => number_format($contrato->VALOR_FINANCIADO_PROPOSTA, 2, ',', '.'),
+            'valorParceladoProposta' => number_format($contrato->VALOR_PARCELADO_PROPOSTA, 2, ',', '.'),
+            'quantidadeParcelasProposta' => $contrato->QTDE_PARCELAS_PROPOSTA,
+            'codigoAgContratacaoProposta' => str_pad($dadosAgencia->codigoAgencia, 4, '0', STR_PAD_LEFT),
+            'nomeAgContratacaoProposta' => $dadosAgencia->nomeAgencia,
+            'emailAgContratacaoProposta' => $dadosAgencia->emailAgencia,
+            // 'tipoContratacao'
+            // 'cardAgrupamento'
+            // 'statusDossie'
             'tipoFluxoContratacao' => $fluxoAgenciaOuCca,
 
-            'nomeProponente' => $contrato[0]->NOME_PROPONENTE,
-            'cpfCnpjProponente' => $contrato[0]->CPF_CNPJ_PROPONENTE,
-            'enderecoProponente' => $contrato[0]->ENDERECO_PROPONENTE,
-            'cidadeProponente' => $contrato[0]->CIDADE_PROPONENTE,
-            'ufProponente' => $contrato[0]->UF_PROPONENTE,
-            'cepProponente' => $contrato[0]->CEP_PROPONENTE,
-            'motivoDesclassificacaoProposta' => $contrato[0]->MOTIVO_DESCLASSIFICACAO_PROPOSTA,
-            'agContratacaoProposta' => $contrato[0]->AGENCIA_CONTRATACAO_PROPOSTA,
-            'dddProponente' => $contrato[0]->DDD_PROPONENTE,
-            'telefoneProponente' => $contrato[0]->TELEFONE_PROPONENTE,
-            'modalidadePagamento' => $contrato[0]->MODALIDADE_PAGAMENTO,
-            'statusContrato' => $contrato[0]->STATUS_CONTRATO,
-            'dataContrato' => $contrato[0]->DATA_CONTRATO,
-            'statusProposta' => $contrato[0]->STATUS_PROPOSTA,
+            // CAMPOS SEM USO HOJE
+            // 'dataEntrada' => $contrato->DATA_ENTRADA,
+            // 'utilizacaoFgts' => $contrato->UTILIZACAO_FGTS,
+            // 'dataImpedimento' => $contrato->DATA_IMPEDIMENTO_ATE,
+            // 'estadoOcupacao' => $contrato->ESTADO_OCUPACAO,
+            // 'iptu' => $contrato->IPTU,
+            // 'origemImovel' => $contrato->ORIGEM_IMOVEL,
+            // 'garantia' => $contrato->GARANTIA,
+            // 'dataAlteracaoStatusImovel' => $contrato->DATA_ALTERACAO_STATUS,
+            // 'dataUltimaAlteracaoStatus' => $contrato->DATA_ULTIMA_ALTERACAO,
+            // 'enderecoProponente' => $contrato->ENDERECO_PROPONENTE,
+            // 'cidadeProponente' => $contrato->CIDADE_PROPONENTE,
+            // 'ufProponente' => $contrato->UF_PROPONENTE,
+            // 'cepProponente' => $contrato->CEP_PROPONENTE,
+            // 'motivoDesclassificacaoProposta' => $contrato->MOTIVO_DESCLASSIFICACAO_PROPOSTA,
+            // 'modalidadePagamento' => $contrato->MODALIDADE_PAGAMENTO,
+            // 'statusContrato' => $contrato->STATUS_CONTRATO,
+            // 'dataContrato' => $contrato->DATA_CONTRATO,
+            // 'statusProposta' => $contrato->STATUS_PROPOSTA,
         ];
-
         return json_encode($dadosContrato);
     }
 

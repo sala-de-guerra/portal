@@ -5,7 +5,7 @@ $(document).ready(function(){
         $.each(dados, function(key, item) {          
 
             var linha = 
-                '<tr href="/consulta-bem-imovel/' + item.contratoFormatado + '">' +
+                '<tr href="/estoque-imoveis/distrato/tratar/' + item.contratoFormatado + '" class="cursor-pointer">' +
                     '<td>' + item.idDistrato + '</td>' +
                     '<td>' + item.contratoFormatado + '</td>' +
                     '<td>' + item.nomeProponente + '</td>' +
@@ -17,7 +17,7 @@ $(document).ready(function(){
         })
 
         _formataDatatable();
-        _formataData();
+        // _formataData();
 
         $('#tblDistrato tbody').on('click', 'tr', function () {
             var href = $(this).attr("href");            
