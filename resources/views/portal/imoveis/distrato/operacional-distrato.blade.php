@@ -66,5 +66,5 @@
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
-    <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
+    <script src="{{ asset('js/portal/operacional-distrato.js') }}"></script>
 @stop
