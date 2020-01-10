@@ -161,12 +161,12 @@
                                     <p id="origemMatricula"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Origem do Imóvel:</label>
                                     <p id="origemImovel"></p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="row">
@@ -295,7 +295,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Telefone do Corretor:</label>
-                                    <p id="telefoneComercialCorretor"></p>
+                                    <p id="telefoneCorretor"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -310,7 +310,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data da Proposta:</label>
-                                    <p id="dataProposta" class="formata-data"></p>
+                                    <p id="dataProposta" class="formata-data-sem-hora"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -370,32 +370,32 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Código:</label>
-                                    <p id="codigoAgenciaResponsavelProposta"></p>
+                                    <p id="codigoAgContratacaoProposta"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Unidade:</label>
-                                    <p id="nomeAgenciaResponsavelProposta"></p>
+                                    <p id="nomeAgContratacaoProposta"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Caixa Postal:</label>
-                                    <p id="caixaPostalAgenciaResponsavelProposta"></p>
+                                    <p id="emailAgContratacaoProposta"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Contato:</label>
                                     <p id="contatoAgenciaResponsavelProposta"></p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <hr>
 
-                        <h2 class="card-title"><b>CIOPE</b></h2>
+                        <!-- <h2 class="card-title"><b>CIOPE</b></h2>
 
                         <br>
 
@@ -424,7 +424,7 @@
                                     <p id="tipoFluxoContratacao"></p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
                     </div>

@@ -58,13 +58,15 @@
         var numeroContrato = '{{ $numeroContrato }}';
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
-    <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
-    <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
-    <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
+    <!-- <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
+    <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
-    <script src="{{ asset('js/portal/operacional-distrato.js') }}"></script>
+    <script src="{{ asset('js/global/formata_lista_distrato.js') }}"></script>
+    <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
+    <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
+    <script src="{{ asset('js/portal/distrato/operacional-distrato.js') }}"></script>
 @stop

@@ -56,7 +56,7 @@ class DistratoController extends Controller
             $novoDistrato->contratoFormatado = $request->contratoFormatado;
             $novoDistrato->nomeProponente = strtoupper ($request->nomeProponente);
             $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
-            $novoDistrato->statusAnaliseDistrato = 'INICIAR ANÁLISE';
+            $novoDistrato->statusAnaliseDistrato = 'CADASTRADA';
             $novoDistrato->motivoDistrato = $request->motivoDistrato;
             $novoDistrato->telefoneProponente = $telefone;
             $novoDistrato->emailProponente = $emailProponente;
@@ -165,15 +165,15 @@ class DistratoController extends Controller
      * @param  int  $demandaDistrato
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $demandaDistrato)
-    {
+    public function update(Request $request, $idDistrato)
+    {       
         try {
             DB::beginTransaction();
             // ATUALIZA DEMANDA
-            $demandaDistrato = Distrato::find($demandaDistrato)->get();
-            $demandaDistrato->motivoDistrato = $request->motivoDistrato;
-            $demandaDistrato->statusAnaliseDistrato = $request->statusAnaliseDistrato;
-            $demandaDistrato->observacaoDistrato = $request->observacaoDistrato;
+            $demandaDistrato = Distrato::find($idDistrato);
+            $demandaDistrato->motivoDistrato = $request->input('motivoDistrato');
+            $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato');
+            $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
             $demandaDistrato->matriculaAnalista = session('matricula');
             $demandaDistrato->save();
 
@@ -181,7 +181,7 @@ class DistratoController extends Controller
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
             $historico->numeroContrato = $demandaDistrato->contratoFormatado;
-            $historico->tipo = "ANALISE";
+            $historico->tipo = "ANALISE - STATUS: $request->statusAnaliseDistrato";
             $historico->atividade = "DISTRATO";
             $historico->observacao = $request->observacaoDistrato;
             $historico->save();
@@ -189,7 +189,9 @@ class DistratoController extends Controller
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Demanda analisada!");
-            $request->session()->flash('corpoMensagem', "A demanda #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi analisada com sucesso.");
+            $request->session()->flash('corpoMensagem', "A demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi analisada com sucesso.");
+
+            DB::commit();
         } catch (\Throwable $th) {
             // dd($th);
             DB::rollback();
@@ -198,7 +200,7 @@ class DistratoController extends Controller
             $request->session()->flash('tituloMensagem', "Análise não efetuada");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da análise. Tente novamente");
         }
-        return redirect("/estoque-imoveis/distrato/consultar/$demandaDistrato->contratoFormatado");
+        return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
     }
 
     /**
