@@ -87,8 +87,31 @@ function _formataListaDistrato (numeroContrato, view) {
                         '</div>' +
                     '</div>' +
 
-                    '<div id="btnAlteraStatus' + item.idDistrato + '" class="row">' +
-                    
+                    '<br>' +
+
+                    '<div class="row">' +    
+                        '<div class="col-sm-12 table-responsive p-0">' +
+                            '<table id="tblDespesasDistrato' + item.idDistrato + '" class="table table-bordered table-striped">' +
+                                '<thead>' +
+                                    '<tr>' +
+                                        '<th>Tipo de Despesa</th>' +
+                                        '<th>Valor</th>' +
+                                        '<th>Data Efetiva</th>' +
+                                    '</tr>' +
+                                '</thead>' +
+                                '<tbody>' +
+
+                                '</tbody>' +
+                            '</table>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<br>' +
+
+                    '<div class="row">' +    
+                        '<div id="btnAlteraStatus' + item.idDistrato + '" class="col-sm-3"></div>' +
+
+                        '<div id="btnCadastraDespesaDistrato' + item.idDistrato + '" class="col-sm-3"></div>' +
                     '</div>' +
 
                 '</li>' +
@@ -97,17 +120,17 @@ function _formataListaDistrato (numeroContrato, view) {
             $(li).appendTo('#listaDistratos'); 
             
             if (view == "operacional") {
-                var btn =
+                var btnAlteraStatus =
                 
-                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato' + item.idDistrato + '">' +
+                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAlteraDistrato' + item.idDistrato + '">' +
                         '<i class="far fa-lg fa-edit"></i>' +
                         'Alterar Distrato' +
                     '</button>' +
 
-                    '<div class="modal fade" id="modalCadastraDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                    '<div class="modal fade" id="modalAlteraDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                         '<div class="modal-dialog" role="document">' +
                             '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/atualizar/' + item.idDistrato + '" id="formCadastraDemandaDistrato">' +
+                                '<form method="post" action="/estoque-imoveis/distrato/atualizar/' + item.idDistrato + '" id="formAlteraDistrato' + item.idDistrato + '">' +
                                     
                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
@@ -123,7 +146,7 @@ function _formataListaDistrato (numeroContrato, view) {
 
                                         '<div class="form-group">' +
                                             '<label>Alterar Motivo de Distrato:</label>' +
-                                            '<select id="select' + item.idDistrato + '" name="motivoDistrato" class="form-control" required>' +
+                                            '<select id="selectMotivo' + item.idDistrato + '" name="motivoDistrato" class="form-control" required>' +
                                                 '<option value="">Selecione</option>' +
                                                 '<option value="AÇÃO JUDICIAL">AÇÃO JUDICIAL</option>' +
                                                 '<option value="LEILÕES NEGATIVOS">LEILÕES NEGATIVOS</option>' +
@@ -171,9 +194,76 @@ function _formataListaDistrato (numeroContrato, view) {
                             '</div>' +
                         '</div>' +
                     '</div>';
-                $(btn).appendTo('#btnAlteraStatus' + item.idDistrato); 
+                $(btnAlteraStatus).appendTo('#btnAlteraStatus' + item.idDistrato);
 
-                $('#select' + item.idDistrato).val(item.motivoDistrato);
+                $('#selectMotivo' + item.idDistrato).val(item.motivoDistrato);
+
+                var btnCadastraDespesaDistrato =
+                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespesaDistrato' + item.idDistrato + '">' +
+                        '<i class="far fa-lg fa-edit"></i>' +
+                        'Cadastrar Despesa' +
+                    '</button>' +
+
+                    '<div class="modal fade" id="modalCadastraDespesaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                        '<div class="modal-dialog" role="document">' +
+                            '<div class="modal-content">' +
+                                '<form method="post" action="/estoque-imoveis/distrato/cadastrar-despesa/' + item.idDistrato + '" id="formCadastraDespesaDistrato">' +
+                                    
+                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+
+
+                                    '<div class="modal-header">' +
+                                        '<h5 class="modal-title" id="exampleModalLabel">Cadastrar Despesa</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                        '</button>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Tipo de Despesa:</label>' +
+                                            '<select name="tipoDespesaDistrato" class="form-control" required>' +
+                                                '<option value="">Selecione</option>' +
+                                                '<option value="despesaRecursosPróprios">Recursos Próprios</option>' +
+                                                '<option value="despesaMultaDistrato">Multa</option>' +
+                                                '<option value="despesaFinanciamentoDistrato">Financiamento</option>' +
+                                                '<option value="despesaFgtsDistrato">FGTS</option>' +
+                                                '<option value="despesaParcelamentoDistrato">Parcelamento</option>' +
+                                                '<option value="despesaItbiDistrato">ITBI</option>' +
+                                                '<option value="despesaCustasCartoráriasDistrato">Custas Cartorárias</option>' +
+                                                '<option value="despesaTaxasFinanciamentoDistrato">Taxas de Concessão de Financiamento</option>' +
+                                                '<option value="despesaCondominioDistrato">Condomínio</option>' +
+                                                '<option value="despesaIptuDistrato">IPTU</option>' +
+                                                '<option value="despesaBenfeitoriasDistrato">Benfeitorias</option>' +
+                                                '<option value="despesaAutorizadaReembolsoEmgea">Autorizadas Reembolso EMGEA</option>' +
+                                                '<option value="despesaOutrasDespesasDistrato">Outras Despesas</option>' +
+                                            '</select>' +
+                                        '</div>' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Data Efetiva da Despesa:</label>' +
+                                            '<input type="date" name="dataEfetivaDespesaDistrato" class="form-control" required>' +
+                                        '</div>' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Valor da Despesa:</label>' +
+                                            '<input type="number" name="valorDespesaDistrato" class="form-control" required>' +                                        
+                                        '</div>' +
+
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
+                                    '</div>' +
+
+                                '</form>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+
+                $(btnCadastraDespesaDistrato).appendTo('#btnCadastraDespesaDistrato' + item.idDistrato);
+
             }
 
         });
