@@ -41,28 +41,24 @@ class ContratosEstoqueCaixa extends Controller
     {
         $contrato = BaseSimov::where('BEM_FORMATADO', $numeroContrato)->first();
         $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $contrato->AGENCIA_CONTRATACAO_PROPOSTA)->first();
-        // dd($dadosAgencia);
-        if (is_null($contrato->ACEITA_CCA) || $contrato->ACEITA_CCA == 'Nao' || $contrato->ACEITA_CCA == 'NULL') {
-            $fluxoAgenciaOuCca = 'AGÊNCIA';
-        } else {
-            $fluxoAgenciaOuCca = 'CCA';
-        }
+        
+        // VALIDA FLUXO CONTRATAÇÃO DA PROPOSTA - CCA OU AGÊNCIA
+        $fluxoAgenciaOuCca = self::validaFluxoContratacaoPropostaCcaAgencia($contrato);
 
         // VALIDA TELEFONE CORRETOR
-        if ($contrato->TEL_COM_CORRETOR == null || $contrato->TEL_COM_CORRETOR == 'NULL') {
-            if ($contrato->TEL_CEL_CORRETOR == null || $contrato->TEL_CEL_CORRETOR == 'NULL') {
-                $telefoneCorretor = 'sem telefone cadastrado';
-            } else {
-                $telefoneCorretor = '(' . $contrato->DDD_CEL_CORRETOR . ') ' . $contrato->TEL_CEL_CORRETOR;
-            }
-        } else {
-            if ($contrato->TEL_CEL_CORRETOR == null || $contrato->TEL_CEL_CORRETOR == 'NULL') {
-                $telefoneCorretor = '(' . $contrato->DDD_COMERCIAL_CORRETOR . ') ' . $contrato->TEL_COM_CORRETOR;
-            } else {
-                $telefoneCorretor = '(' . $contrato->DDD_COMERCIAL_CORRETOR . ') ' . $contrato->TEL_COM_CORRETOR . '/ (' . $contrato->DDD_CEL_CORRETOR . ') ' . $contrato->TEL_CEL_CORRETOR;
-            }
-        }
+        $telefoneCorretor = self::validaTelefoneCorretor($contrato);
 
+        // VALIDA SE EXISTE AGÊNCIA DE CONTRATAÇÃO
+        if ($dadosAgencia == null || $dadosAgencia == 'NULL') {
+            $codigoAgenciaContratacao = null;
+            $nomeAgenciaContratacao = null;
+            $emailAgenciaContratacao = null;
+        } else {
+            $codigoAgenciaContratacao = $dadosAgencia->codigoAgencia;
+            $nomeAgenciaContratacao = $dadosAgencia->nomeAgencia;
+            $emailAgenciaContratacao = $dadosAgencia->emailAgencia;
+        }
+        
         // MONTA O JSON QUE VAI PRA VIEW
         $dadosContrato = [
             'bemFormatado' => $numeroContrato,
@@ -111,9 +107,9 @@ class ContratosEstoqueCaixa extends Controller
             'valorFinanciamentoProposta' => number_format($contrato->VALOR_FINANCIADO_PROPOSTA, 2, ',', '.'),
             'valorParceladoProposta' => number_format($contrato->VALOR_PARCELADO_PROPOSTA, 2, ',', '.'),
             'quantidadeParcelasProposta' => $contrato->QTDE_PARCELAS_PROPOSTA,
-            'codigoAgContratacaoProposta' => str_pad($dadosAgencia->codigoAgencia, 4, '0', STR_PAD_LEFT),
-            'nomeAgContratacaoProposta' => $dadosAgencia->nomeAgencia,
-            'emailAgContratacaoProposta' => $dadosAgencia->emailAgencia,
+            'codigoAgContratacaoProposta' => str_pad($codigoAgenciaContratacao, 4, '0', STR_PAD_LEFT),
+            'nomeAgContratacaoProposta' => $nomeAgenciaContratacao,
+            'emailAgContratacaoProposta' => $emailAgenciaContratacao,
             // 'tipoContratacao'
             // 'cardAgrupamento'
             // 'statusDossie'
@@ -148,4 +144,33 @@ class ContratosEstoqueCaixa extends Controller
     //     $result = json_decode($content);
     //     echo ($content);
     // } 
+
+    public static function validatelefoneCorretor($contrato)
+    {
+        if ($contrato->TEL_COM_CORRETOR == null || $contrato->TEL_COM_CORRETOR == 'NULL') {
+            if ($contrato->TEL_CEL_CORRETOR == null || $contrato->TEL_CEL_CORRETOR == 'NULL') {
+                $telefoneCorretor = 'sem telefone cadastrado';
+            } else {
+                $telefoneCorretor = '(' . $contrato->DDD_CEL_CORRETOR . ') ' . $contrato->TEL_CEL_CORRETOR;
+            }
+        } else {
+            if ($contrato->TEL_CEL_CORRETOR == null || $contrato->TEL_CEL_CORRETOR == 'NULL') {
+                $telefoneCorretor = '(' . $contrato->DDD_COMERCIAL_CORRETOR . ') ' . $contrato->TEL_COM_CORRETOR;
+            } else {
+                $telefoneCorretor = '(' . $contrato->DDD_COMERCIAL_CORRETOR . ') ' . $contrato->TEL_COM_CORRETOR . '/ (' . $contrato->DDD_CEL_CORRETOR . ') ' . $contrato->TEL_CEL_CORRETOR;
+            }
+        }
+        return $telefoneCorretor;
+    }
+
+    public static function validaFluxoContratacaoPropostaCcaAgencia($contrato)
+    {
+        if (is_null($contrato->ACEITA_CCA) || $contrato->ACEITA_CCA == 'Nao' || $contrato->ACEITA_CCA == 'NULL') {
+            $fluxoAgenciaOuCca = 'AGÊNCIA';
+        } else {
+            $fluxoAgenciaOuCca = 'CCA';
+        }
+
+        return $fluxoAgenciaOuCca;
+    }
 }
