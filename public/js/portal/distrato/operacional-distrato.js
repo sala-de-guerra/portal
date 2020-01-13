@@ -3,6 +3,7 @@ $(document).ready(function(){
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
     _formataListaDistrato (numeroContrato, "operacional");
+    _formataTabelaDespesasDistrato (numeroContrato);
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
 
