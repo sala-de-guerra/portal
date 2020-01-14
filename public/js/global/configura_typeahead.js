@@ -29,6 +29,12 @@ $(document).ready(function(){
       cache: false,
       url: "/js/baseSimov.json",
       transform: function (data) {
+
+        $(".Typeahead-spinner").hide();
+        $(".search-button").show();
+        $(".tt-input").attr("placeholder", "Pesquise aqui um imóvel pelo CHB ou endereço.");
+        $(".tt-input").attr("disabled", false);
+      
         return $.map(data.bens, function (bem) {
             return {
               bemFormatado: bem.bemFormatado,
@@ -39,17 +45,20 @@ $(document).ready(function(){
               // nomeExMutuario: bem.nomeExMutuario,
               // cpfCnpjExMutuario: bem.cpfCnpjExMutuario
             };
-        });
+          });
+        }
       }
-    }
-  });
-
+    });
+    
 
 
 
 
   // initialize the bloodhound
   imoveis.initialize();
+
+  $(".search-button").hide();
+  $(".Typeahead-spinner").show();
 
   $('.typeahead').typeahead({
     hint: false,
