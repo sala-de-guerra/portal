@@ -114,6 +114,7 @@ Route::prefix('portal')->group(function () {
     Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
 });
 
+
 // Gerencial
 
 // equipes

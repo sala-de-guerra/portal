@@ -593,7 +593,7 @@ class RotinaMensagensAutomatica extends Controller
             --AND [DT_Sinaf] >= DATEADD(DAY, -60, GETDATE())
             --AND [Valor] >= [VL_TOTAL_RECEBIDO]
 			--AND [NO_VENDA_TIPO] != 'Venda Direta'
-			SIMOV.[BEM_FORMATADO] = '01.4444.0036341-3' -- CONTRATO RELACIONADO INDEVIDAMENTE
+			SIMOV.[BEM_FORMATADO] = '01.5555.1861526-4' -- CONTRATO RELACIONADO INDEVIDAMENTE
 			--AND CONTROLE_EMAIL.[numeroContrato] IS NULL OR (CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
         ORDER BY 
             grupoClassificacao
