@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\GestaoImoveisCaixa\Distrato;
+use App\Models\GestaoImoveisCaixa\DistratoRelacaoDespesas;
 use App\Models\HistoricoPortalGilie;
 use App\Models\BaseSimov;
 use App\Models\PropostasSimov;
@@ -204,13 +205,90 @@ class DistratoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Store a newly created resource in storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function cadastrarDespesa(Request $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $dadosDistrato = Distrato::where('idDistrato', $request->idDistrato)->first();
+
+            // CADASTRA NOVA DESPESA            
+            $novaDespesa = new DistratoRelacaoDespesas;
+            $novaDespesa->idDistrato = $request->idDistrato;
+            $novaDespesa->tipoDespesa = $request->tipoDespesa;
+            $novaDespesa->valorDespesa = $request->valorDespesa;
+            $novaDespesa->dataEfetivaDaDespesa = $request->dataEfetivaDaDespesa;
+            $novaDespesa->devolucaoPertinente = 'SIM';
+            $novaDespesa->observacaoDespesa = $request->observacaoDespesa;
+            $novaDespesa->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Despesa cadastrada!");
+            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($novaDespesa->idDespesa, 4, '0', STR_PAD_LEFT) . " foi cadastrada com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            // dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Cadastro de despesa não foi efetuada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o cadastro da despesa. Tente novamente");
+        }
+        return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idDespesa
+     * @return \Illuminate\Http\Response
+     */
+    public function atualizarDespesa(Request $request, $idDespesa)
+    {       
+        try {
+            DB::beginTransaction();
+            // ATUALIZA DEMANDA          
+            $despesa = DistratoRelacaoDespesas::find('idDespesa', $idDespesa);
+            $despesa->tipoDespesa = $request->tipoDespesa;
+            $despesa->valorDespesa = $request->valorDespesa;
+            $despesa->devolucaoPertinente = $request->devolucaoPertinente;
+            $despesa->dataEfetivaDaDespesa = $request->dataEfetivaDaDespesa;
+            $despesa->observacaoDespesa = $request->observacaoDespesa;
+            $despesa->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Despesa atualizada!");
+            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi atualizada com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            // dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Despesa não atualizada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
+        }
+        return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $idDespesa
+     * @return \Illuminate\Http\Response
+     */
+    public function listarRelacaoDeDespesasDaDemandaDeDistrato($idDistrato)
+    {
+        $relacaoDespesasDaDemandaDeDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->get();
+        return json_encode($relacaoDespesasDaDemandaDeDistrato);
     }
 }
