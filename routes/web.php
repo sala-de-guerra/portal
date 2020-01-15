@@ -102,6 +102,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::post('distrato/cadastrar-demanda', 'GestaoImoveisCaixa\DistratoController@store');
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
     Route::get('rotina-mensagens-com-contrato-fixo', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasComRelacaoFixaDeContratos');
+    Route::get('enviar-autorizacao-contratacao/{contrato}', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarAutorizacaoContratacaoViaPortal');
     Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
     Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
     Route::get('consulta-historico-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaHistorico');
@@ -112,6 +113,7 @@ Route::prefix('estoque-imoveis')->group(function () {
 Route::prefix('portal')->group(function () {
     Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
 });
+
 
 // Gerencial
 
