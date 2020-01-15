@@ -50,7 +50,7 @@
             <div class="card-body">
                 <form class="form-inline tt-responsive" id="formPesquisa">
                     <div class="input-group">
-                        <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Pesquise aqui um imóvel pelo CHB ou endereço.">
+                        <input class="form-control typeahead tt-responsive" type="text" name="" placeholder="Carregando..." disabled>
                         <div class="input-group-append">
                             <button class="btn btn-primary search-button" type="submit"> <i class="fas fa-search"></i> </button>
                             <img class="Typeahead-spinner" src="{{ asset('/img/spinner.gif') }}" style="display: none;">
