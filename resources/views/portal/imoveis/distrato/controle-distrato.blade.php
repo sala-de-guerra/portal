@@ -114,7 +114,7 @@
                         <input type="text" name="cpfCnpjProponente" class="form-control" readonly required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Motivo de Distrato:</label>
                         <select name="motivoDistrato" class="form-control" required>
                             <option value="" selected>Selecione</option>
@@ -127,7 +127,7 @@
                             <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
                             <option value="LEILÕES NEGATIVOS">LEILÕES NEGATIVOS</option>
                         </select>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="modal-footer">

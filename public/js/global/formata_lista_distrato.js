@@ -177,18 +177,10 @@ function _formataListaDistrato (numeroContrato, view) {
                                             '<select name="statusAnaliseDistrato" class="form-control" required>' +
                                                 '<option value="" selected>Selecione</option>' +
                                                 '<option value="AGUARDA AUT. EMGEA">AGUARDA AUT. EMGEA</option>' +
-                                                '<option value="AGUARDA COORDENADOR">AGUARDA COORDENADOR</option>' +
-                                                '<option value="AGUARDA DOC CLIENTE">AGUARDA DOC CLIENTE</option>' +
-                                                '<option value="AGUARDA GF">AGUARDA GF</option>' +
                                                 '<option value="AVERBAÇÃO DISTRATO">AVERBAÇÃO DISTRATO</option>' +
-                                                '<option value="COMANDOS NO CIWEB">COMANDOS NO CIWEB</option>' +
-                                                '<option value="COMANDOS NO SIMOV">COMANDOS NO SIMOV</option>' +
+                                                '<option value="CADASTRADO">CADASTRADO</option>' +
                                                 '<option value="CONCLUÍDO">CONCLUÍDO</option>' +
                                                 '<option value="CONSULTA JURIR">CONSULTA JURIR</option>' +
-                                                '<option value="EM ANÁLISE">EM ANÁLISE</option>' +
-                                                '<option value="ENCAMINHADO AGÊNCIA">ENCAMINHADO AGÊNCIA</option>' +
-                                                '<option value="INICIAR ANÁLISE">INICIAR ANÁLISE</option>' +
-                                                '<option value="PREPARANDO ORIENT. AG.">PREPARANDO ORIENT. AG.</option>' +
                                             '</select>' +
                                         '</div>' +
 
