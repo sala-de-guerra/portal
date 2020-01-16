@@ -283,7 +283,7 @@ class DistratoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $idDespesa
+     * @param  int  $idDistrato
      * @return \Illuminate\Http\Response
      */
     public function listarRelacaoDeDespesasDaDemandaDeDistrato($idDistrato)

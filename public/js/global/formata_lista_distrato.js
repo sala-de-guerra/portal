@@ -101,9 +101,12 @@ function _formataListaDistrato (numeroContrato, view) {
                                                 '<table id="tblDespesasDistrato' + item.idDistrato + '" class="table table-bordered table-striped dataTable">' +
                                                     '<thead>' +
                                                         '<tr>' +
+                                                            '<th>#</th>' +
                                                             '<th>Tipo de Despesa</th>' +
                                                             '<th>Valor</th>' +
                                                             '<th>Data Efetiva</th>' +
+                                                            '<th>Observações</th>' +
+                                                            '<th>Ações</th>' +
                                                         '</tr>' +
                                                     '</thead>' +
                                                     '<tbody>' +
@@ -217,11 +220,11 @@ function _formataListaDistrato (numeroContrato, view) {
                     '<div class="modal fade" id="modalCadastraDespesaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                         '<div class="modal-dialog" role="document">' +
                             '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/cadastrar-despesa/' + item.idDistrato + '" id="formCadastraDespesaDistrato">' +
+                                '<form method="post" action="/estoque-imoveis/distrato/cadastrar-despesa/' + item.idDistrato + '" id="formCadastraDespesaDistrato' + item.idDistrato + '">' +
                                     
                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                                '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-
+                                // '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                                '<input type="hidden" class="form-control" name="idDistrato" value="'+ item.idDistrato +'">' +
 
                                     '<div class="modal-header">' +
                                         '<h5 class="modal-title" id="exampleModalLabel">Cadastrar Despesa</h5>' +
@@ -233,7 +236,7 @@ function _formataListaDistrato (numeroContrato, view) {
 
                                         '<div class="form-group">' +
                                             '<label>Tipo de Despesa:</label>' +
-                                            '<select name="tipoDespesaDistrato" class="form-control" required>' +
+                                            '<select name="tipoDespesa" class="form-control" required>' +
                                                 '<option value="">Selecione</option>' +
                                                 '<option value="despesaAutorizadaReembolsoEmgea">Autorizadas Reembolso EMGEA</option>' +
                                                 '<option value="despesaBenfeitoriasDistrato">Benfeitorias</option>' +
@@ -254,12 +257,17 @@ function _formataListaDistrato (numeroContrato, view) {
 
                                         '<div class="form-group">' +
                                             '<label>Data Efetiva da Despesa:</label>' +
-                                            '<input type="date" name="dataEfetivaDespesaDistrato" class="form-control" required>' +
+                                            '<input type="date" name="dataEfetivaDaDespesa" class="form-control" required>' +
                                         '</div>' +
 
                                         '<div class="form-group">' +
                                             '<label>Valor da Despesa:</label>' +
-                                            '<input type="number" name="valorDespesaDistrato" class="form-control" required>' +                                        
+                                            '<input type="number" name="valorDespesa" class="form-control" required>' +                                        
+                                        '</div>' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Observações:</label>' +
+                                            '<textarea rows="5" name="observacaoDespesa" class="form-control"></textarea>' +                                        
                                         '</div>' +
 
                                     '</div>' +
@@ -275,7 +283,9 @@ function _formataListaDistrato (numeroContrato, view) {
 
                 $(btnCadastraDespesaDistrato).appendTo('#btnCadastraDespesaDistrato' + item.idDistrato);
 
-            }
+            };
+
+            _formataTabelaDespesasDistrato (item.idDistrato);
 
         });
         // _formataData();
