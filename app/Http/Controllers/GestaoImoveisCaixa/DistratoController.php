@@ -14,7 +14,6 @@ use App\Models\PropostasSimov;
 class DistratoController extends Controller
 {
     /**
-     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,7 +23,6 @@ class DistratoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -63,7 +61,6 @@ class DistratoController extends Controller
             $novoDistrato->emailProponente = $emailProponente;
             $novoDistrato->tipoVendaProposta = $dadosSimov->TIPO_VENDA;
             $novoDistrato->demandaAtiva = 'SIM';
-            // dd($novoDistrato);
             $novoDistrato->save();
 
             // CADASTRA HISTÓRICO
@@ -84,6 +81,7 @@ class DistratoController extends Controller
         } catch (\Throwable $th) {
             // dd($th);
             DB::rollback();
+
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Cadastro não efetuado");
@@ -93,7 +91,6 @@ class DistratoController extends Controller
     }
 
     /**
-     * Display the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -104,7 +101,6 @@ class DistratoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
      *
      * @param  string  $contratoFormatado
      * @return \Illuminate\Http\Response
@@ -160,7 +156,6 @@ class DistratoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $demandaDistrato
@@ -205,7 +200,6 @@ class DistratoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -223,6 +217,7 @@ class DistratoController extends Controller
             $novaDespesa->valorDespesa = $request->valorDespesa;
             $novaDespesa->dataEfetivaDaDespesa = $request->dataEfetivaDaDespesa;
             $novaDespesa->devolucaoPertinente = 'SIM';
+            $novaDespesa->excluirDespesa = 'NAO';
             $novaDespesa->observacaoDespesa = $request->observacaoDespesa;
             $novaDespesa->save();
 
@@ -244,7 +239,49 @@ class DistratoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idDespesa
+     * @return \Illuminate\Http\Response
+     */
+    public function excluirDespesa(Request $request, $idDespesa)
+    {       
+        try {
+            DB::beginTransaction();
+            // ATUALIZA DEMANDA          
+            $despesa = DistratoRelacaoDespesas::find('idDespesa', $idDespesa);
+            $despesa->excluirDespesa = 'SIM';
+            $despesa->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Despesa excluida!");
+            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi excluida com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            // dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Despesa não atualizada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
+        }
+        return redirect('/estoque-imoveis/distrato/tratar/' . $request->contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  int  $idDistrato
+     * @return \Illuminate\Http\Response
+     */
+    public function listarRelacaoDeDespesasDaDemandaDeDistrato($idDistrato)
+    {
+        $relacaoDespesasDaDemandaDeDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->where('excluirDespesa', 'NAO')->get();
+        return json_encode($relacaoDespesasDaDemandaDeDistrato);
+    }
+
+    /**
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $idDespesa
@@ -278,17 +315,5 @@ class DistratoController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
         }
         return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $idDistrato
-     * @return \Illuminate\Http\Response
-     */
-    public function listarRelacaoDeDespesasDaDemandaDeDistrato($idDistrato)
-    {
-        $relacaoDespesasDaDemandaDeDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->get();
-        return json_encode($relacaoDespesasDaDemandaDeDistrato);
     }
 }

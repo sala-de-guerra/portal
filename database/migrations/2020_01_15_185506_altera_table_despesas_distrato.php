@@ -15,6 +15,7 @@ class AlteraTableDespesasDistrato extends Migration
     {
         Schema::table('TBL_DISTRATO_RELACAO_DESPESAS', function (Blueprint $table) {
             $table->date('dataEfetivaDaDespesa')->nullable();
+            $table->string('excluirDespesa', 3)->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class AlteraTableDespesasDistrato extends Migration
     {
         Schema::table('TBL_DISTRATO_RELACAO_DESPESAS', function (Blueprint $table) {
             $table->dropColumn('dataEfetivaDaDespesa');
+            $table->dropColumn('excluirDespesa');
         });
     }
 }
