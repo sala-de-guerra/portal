@@ -385,12 +385,12 @@
                                     <p id="emailAgContratacaoProposta"></p>
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-3">
+                            <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Contato:</label>
-                                    <p id="contatoAgenciaResponsavelProposta"></p>
+                                    <label>Fluxo de Contratação:</label>
+                                    <p id="tipoFluxoContratacao"></p>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <hr>
@@ -425,8 +425,6 @@
                                 </div>
                             </div>
                         </div> -->
-
-
                     </div>
 
 

@@ -100,8 +100,12 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::put('distrato/atualizar/{demanda}', 'GestaoImoveisCaixa\DistratoController@update');
     Route::get('distrato/consultar-dados-demanda/{contrato}', 'GestaoImoveisCaixa\DistratoController@jsonDadosDemandaDistrato');
     Route::post('distrato/cadastrar-demanda', 'GestaoImoveisCaixa\DistratoController@store');
+    Route::post('distrato/cadastrar-despesa', 'GestaoImoveisCaixa\DistratoController@cadastrarDespesa');
+    Route::put('distrato/atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@atualizarDespesa');
+    Route::get('distrato/relacao-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoController@listarRelacaoDeDespesasDaDemandaDeDistrato');
     Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
     Route::get('rotina-mensagens-com-contrato-fixo', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasComRelacaoFixaDeContratos');
+    Route::get('enviar-autorizacao-contratacao/{contrato}', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarAutorizacaoContratacaoViaPortal');
     Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
     Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
     Route::get('consulta-historico-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaHistorico');
@@ -112,6 +116,7 @@ Route::prefix('estoque-imoveis')->group(function () {
 Route::prefix('portal')->group(function () {
     Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
 });
+
 
 // Gerencial
 
