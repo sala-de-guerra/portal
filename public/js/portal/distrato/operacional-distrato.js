@@ -62,7 +62,7 @@ function copyToClipboard(element) {
         });
 
         Toast.fire({
-            icon: 'info',
+            icon: 'success',
             title: 'Copiado com sucesso!'
         })    
     })

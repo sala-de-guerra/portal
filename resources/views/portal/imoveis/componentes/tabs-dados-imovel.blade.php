@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Dossiê Digital:</label>
                                     <br>
@@ -268,7 +268,7 @@
 
                     <div class="tab-pane fade" id="custom-tabs-one-contratacao" role="tabpanel" aria-labelledby="custom-tabs-one-contratacao-tab">
                         
-                        <h2 class="card-title"><b>Proposta Atual - </b><b class="badge badge-primary" id="tipoVenda"></b></h2>
+                        <h2 class="card-title"><b>Proposta Atual - </b><b class="badge badge-warning" id="tipoVenda"></b></h2>
 
                         <br>
 
