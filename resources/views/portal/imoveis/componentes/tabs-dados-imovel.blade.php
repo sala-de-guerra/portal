@@ -59,34 +59,31 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Dossiê Digital:</label>
+                                    <br>
+                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                            <br>
+                                <button class="btn btn-primary" onclick="copyToClipboard('#linkServidor')"><i class="far fa-lg fa-copy"></i></button>
+                            </div>
                             <div class="col-sm-3">
+                                <br>    
+                                <b id="labelCopyToClipboard" style="display: none;">Link copiado com sucesso!</b>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>CHB:</label>
                                     <p id="numeroBem"></p>
                                 </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Classificação:</label>
-                                    <p id="classificacao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>CEP:</label>
-                                    <p id="cep"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Empreendimento:</label>
-                                    <p id="nomeEmpreendimento"></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-9">
+                            </div> -->
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Endereço:</label>
                                     <p id="enderecoImovel"></p>
@@ -98,19 +95,25 @@
                                     <p id="bairroImovel"></p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>UF do Imóvel:</label>
-                                    <p id="ufImovel"></p>
+                                    <label>CEP:</label>
+                                    <p id="cep"></p>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Cidade do Imóvel:</label>
                                     <p id="cidadeImovel"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>UF do Imóvel:</label>
+                                    <p id="ufImovel"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -121,8 +124,8 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Status SIMOV:</label>
-                                    <p id="statusImovel"></p>
+                                    <label>Empreendimento:</label>
+                                    <p id="nomeEmpreendimento"></p>
                                 </div>
                             </div>
                         </div>
@@ -145,8 +148,14 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Valor de Avaliação:</label>
-                                    <p id="valorAvaliacao"></p>
+                                    <label>Status SIMOV:</label>
+                                    <p id="statusImovel"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Classificação:</label>
+                                    <p id="classificacao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -161,31 +170,22 @@
                                     <p id="origemMatricula"></p>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <!-- <div class="row"> -->
+                            <!-- <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Valor de Avaliação:</label>
+                                    <p id="valorAvaliacao"></p>
+                                </div>
+                            </div> -->
                             <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Origem do Imóvel:</label>
                                     <p id="origemImovel"></p>
                                 </div>
                             </div> -->
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label>Dossiê Digital:</label>
-                                    <br>
-                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                            <br>
-                                <button class="btn btn-primary" onclick="copyToClipboard('#linkServidor')">Copiar Link</button>
-                            </div>
-                            <div class="col-sm-3">
-                            <br>    
-                                <label id="labelCopyToClipboard" style="display: none;">Link copiado com sucesso!</label>
-                            </div>
-                        </div>
+                        <!-- </div> -->
 
                     </div>
 

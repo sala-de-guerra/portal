@@ -1,6 +1,18 @@
 function _formataTabelaDespesasDistrato (idDistrato) {
     $.getJSON('/estoque-imoveis/distrato/relacao-despesas/' + idDistrato, function(dados){
         $.each(dados, function(key, item) {
+
+            var corIconeDespesa;
+            var sentidoIconeDespesa;
+
+            if (item.despesaPertinente == "SIM" ) {
+                corIconeDespesa = "success";
+                sentidoIconeDespesa = "up";
+            } else {
+                corIconeDespesa = "danger";
+                sentidoIconeDespesa = "down";
+            };
+
             var linha =
                 '<tr>' +
                     '<td>' + item.idDespesa + '</td>' +
@@ -8,6 +20,7 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                     '<td>' + item.valorDespesa + '</td>' +
                     '<td>' + item.dataEfetivaDespesa + '</td>' +
                     '<td>' + item.observacaoDespesa + '</td>' +
+                    '<td><span class=btn btn-' + corIconeDespesa + '><i class="far fa-lg fa-thumbs-' + sentidoIconeDespesa + '"></i></span></td>' +
                     '<td>' +
 
                         '<div class="row">' +    
@@ -108,8 +121,8 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                                                     '<div class="form-group">' +
                                                         '<select name="devolucaoPertinente" class="form-control" required>' +
                                                             '<option value="">Selecione</option>' +
-                                                            '<option value="SIM">Autorizada Devolução</option>' +
-                                                            '<option value="NAO">Não Autoriza Devolução</option>' +
+                                                            '<option value="SIM">Valida</option>' +
+                                                            '<option value="NAO">Não Valida</option>' +
                                                         '</select>' +
                                                     '</div>' +
 

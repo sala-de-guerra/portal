@@ -29,7 +29,10 @@ $(document).ready(function(){
         });  
 
     });
+    $('#inputChb').mask('00.0000.000000-0');
 });
+
+
 
 // RESETAR CAMPOS DO FORM DE CADASTRO DE DEMANDA DE DISTRATO AO FECHAR O MODAL
 
@@ -44,8 +47,6 @@ function _validarCHB(inputChb){
 
     let numeroContrato = $(inputChb).val()
     
-    console.log(numeroContrato)
-
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
         $("input[name='nomeProponente']").val(dados.nomeProponente);
         $("input[name='cpfCnpjProponente']").val(dados.cpfCnpjProponente);
@@ -54,5 +55,3 @@ function _validarCHB(inputChb){
         alert("CHB " + numeroContrato + " não encontrado!");
     });
 };
-
-
