@@ -85,6 +85,39 @@ function _formataListaDistrato (numeroContrato, view) {
                     '</div>' +
 
                     '<div class="row">' +
+                        '<div class="col-sm-2">' +
+                            '<div class="form-group">' +
+                                '<label>Total da Proposta:</label>' +
+                                '<p>' + item.valorTotalPropostaDistrato + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-3">' +
+                            '<div class="form-group">' +
+                                '<label>Valor em Recursos Próprios:</label>' +
+                                '<p>' + item.valorRecursosPropriosPropostaDistrato + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-2">' +
+                            '<div class="form-group">' +
+                                '<label>Valor de FGTS:</label>' +
+                                '<p>' + item.valorFgtsPropostaDistrato + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-2">' +
+                            '<div class="form-group">' +
+                                '<label>Valor de Financiamento:</label>' +
+                                '<p>' + item.valorFinanciamentoPropostaDistrato + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-2">' +
+                            '<div class="form-group">' +
+                                '<label>Valor Parcelado::</label>' +
+                                '<p>' + item.valorParceladoPropostaDistrato + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
                         '<div class="col-md-12">' +
                             '<div class="card collapsed-card card-primary">' +
                                 '<div class="card-header cursor-pointer" data-card-widget="collapse">' +
@@ -106,6 +139,7 @@ function _formataListaDistrato (numeroContrato, view) {
                                                             '<th>Valor</th>' +
                                                             '<th>Data Efetiva</th>' +
                                                             '<th>Observações</th>' +
+                                                            '<th>Validade</th>' +
                                                             '<th>Ações</th>' +
                                                         '</tr>' +
                                                     '</thead>' +
@@ -125,6 +159,11 @@ function _formataListaDistrato (numeroContrato, view) {
                         '<div id="btnAlteraStatus' + item.idDistrato + '" class="col-sm-2"></div>' +
 
                         '<div id="btnCadastraDespesaDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+
+                        '<div id="btnParecerAnalistaDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+
+                        '<div id="btnParecerGerenteDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+
                     '</div>' +
 
                 '</li>' +
@@ -155,6 +194,7 @@ function _formataListaDistrato (numeroContrato, view) {
                                             '<span aria-hidden="true">&times;</span>' +
                                         '</button>' +
                                     '</div>' +
+
                                     '<div class="modal-body">' +
 
                                         '<div class="form-group">' +
@@ -224,6 +264,7 @@ function _formataListaDistrato (numeroContrato, view) {
                                             '<span aria-hidden="true">&times;</span>' +
                                         '</button>' +
                                     '</div>' +
+
                                     '<div class="modal-body">' +
 
                                         '<div class="form-group">' +
@@ -274,6 +315,89 @@ function _formataListaDistrato (numeroContrato, view) {
                     '</div>';
 
                 $(btnCadastraDespesaDistrato).appendTo('#btnCadastraDespesaDistrato' + item.idDistrato);
+
+                var btnParecerAnalistaDistrato =
+                    
+                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParecerAnalistaDistrato' + item.idDistrato + '">' +
+                        '<i class="far fa-lg fa-edit"></i>' +
+                        'Parecer Analista' +
+                    '</button>' +
+
+                    '<div class="modal fade" id="modalParecerAnalistaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                        '<div class="modal-dialog" role="document">' +
+                            '<div class="modal-content">' +
+                                '<form method="post" action="/estoque-imoveis/distrato/parecer-analista/' + item.idDistrato + '" id="formParecerAnalistaDistrato' + item.idDistrato + '">' +
+                                    
+                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+
+
+                                    '<div class="modal-header">' +
+                                        '<h5 class="modal-title" id="exampleModalLabel">Emitir Parecer do Analista</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                        '</button>' +
+                                    '</div>' +
+                                    
+                                    '<div class="modal-body">' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Observações:</label>' +
+                                            '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
+                                        '</div>' +
+
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
+                                    '</div>' +
+
+                                '</form>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                $(btnParecerAnalistaDistrato).appendTo('#btnParecerAnalistaDistrato' + item.idDistrato);
+
+                var btnParecerAnalistaDistrato =
+                    
+                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParecerGerenteDistrato' + item.idDistrato + '">' +
+                        '<i class="far fa-lg fa-edit"></i>' +
+                        'Parecer Gerente' +
+                    '</button>' +
+
+                    '<div class="modal fade" id="modalParecerGerenteDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                        '<div class="modal-dialog" role="document">' +
+                            '<div class="modal-content">' +
+                                '<form method="post" action="/estoque-imoveis/distrato/parecer-gerente/' + item.idDistrato + '" id="formParecerGerenteDistrato' + item.idDistrato + '">' +
+                                    
+                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+
+
+                                    '<div class="modal-header">' +
+                                        '<h5 class="modal-title" id="exampleModalLabel">Emitir Parecer do Gerente</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                        '</button>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Observações:</label>' +
+                                            '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
+                                        '</div>' +
+
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
+                                    '</div>' +
+
+                                '</form>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                $(btnParecerAnalistaDistrato).appendTo('#btnParecerAnalistaDistrato' + item.idDistrato);
 
             };
 
