@@ -1,7 +1,5 @@
 function _formataListaDistrato (numeroContrato, view) {
 
-    var csrfVar = $('meta[name="csrf-token"]').attr('content');
-
     $.getJSON('/estoque-imoveis/distrato/consultar-dados-demanda/' + numeroContrato, function(dados){
 
         $.each(dados, function(key, item) {
