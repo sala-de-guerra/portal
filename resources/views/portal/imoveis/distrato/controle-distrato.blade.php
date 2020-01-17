@@ -114,20 +114,20 @@
                         <input type="text" name="cpfCnpjProponente" class="form-control" readonly required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Motivo de Distrato:</label>
                         <select name="motivoDistrato" class="form-control" required>
                             <option value="" selected>Selecione</option>
                             <option value="AÇÃO JUDICIAL">AÇÃO JUDICIAL</option>
-                            <option value="LEILÕES NEGATIVOS">LEILÕES NEGATIVOS</option>
-                            <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
-                            <option value="DESISTÊNCIA">DESISTÊNCIA</option>
                             <option value="CRÉDITO NÃO APROVADO">CRÉDITO NÃO APROVADO</option>
-                            <option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>
+                            <option value="DESISTÊNCIA">DESISTÊNCIA</option>
                             <option value="DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
                             <option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>
+                            <option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>
+                            <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
+                            <option value="LEILÕES NEGATIVOS">LEILÕES NEGATIVOS</option>
                         </select>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="modal-footer">
@@ -155,6 +155,7 @@
 
 @section('js')
 
+<script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
 <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
