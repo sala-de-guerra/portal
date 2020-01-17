@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\RelacaoAgSrComEmail;
 
-class ImoveisCaixaPhpMailer
+class DistratoPhpMailer
 {
 
     /**
@@ -89,15 +89,15 @@ class ImoveisCaixaPhpMailer
         }
         $mail->addBCC('GILIESP09@caixa.gov.br');
         $mail->addBCC('c111710@mail.caixa');
-        $mail->addBCC('c098453@mail.caixa');
-        $mail->addBCC('c141203@mail.caixa');
-        $mail->addBCC('c079436@mail.caixa');
+        $mail->addBCC('c142765@mail.caixa');
+        // $mail->addBCC('c141203@mail.caixa');
+        // $mail->addBCC('c079436@mail.caixa');
   
         // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
 
         $mail->Subject = $assunto;
 
-        $mensagemAutomatica = file_get_contents(("MensagensAutorizacaoContratacao/{$modeloMensagem}.php"), dirname(__FILE__));
+        $mensagemAutomatica = file_get_contents(("MensagensDistrato/{$modeloMensagem}.php"), dirname(__FILE__));
 
         $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoBem, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $request->nomeAgencia, $mensagemAutomatica);
@@ -107,11 +107,11 @@ class ImoveisCaixaPhpMailer
         $mensagemAutomatica = str_replace("%NOME_CORRETOR%", $request->nomeCorretor, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%EMAIL_CORRETOR%", $request->emailCorretor, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%ENDERECO_IMOVEL%", $request->enderecoImovel, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%MO_UTILIZADO%", $request->moUtilizado, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%EDITAL_LEILAO%", $request->editalLeilao, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%MN_UTILIZADO%", $request->normativoUtilizado, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%ORIGEM_MATRICULA%", $request->origemMatricula, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%QUADRO_EMPREGADOS_POR_ATIVIDADE%", env('LINK_ATIVIDADE_POR_EMPREGADO'), $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%MO_UTILIZADO%", $request->moUtilizado, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%EDITAL_LEILAO%", $request->editalLeilao, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%MN_UTILIZADO%", $request->normativoUtilizado, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%ORIGEM_MATRICULA%", $request->origemMatricula, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%QUADRO_EMPREGADOS_POR_ATIVIDADE%", env('LINK_ATIVIDADE_POR_EMPREGADO'), $mensagemAutomatica);
         
 
         $mail->Body = $mensagemAutomatica;

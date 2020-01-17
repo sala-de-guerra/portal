@@ -33,6 +33,18 @@ class DistratoController extends Controller
             DB::beginTransaction();
             $dadosProposta = PropostasSimov::where('NÚMERO BEM', $request->contratoFormatado)->where('NOME PROPONENTE', $request->nomeProponente)->first();
             $dadosSimov = BaseSimov::where('BEM_FORMATADO', $request->contratoFormatado)->first();
+            $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $dadosSimov->AGENCIA_CONTRATACAO_PROPOSTA)->first();
+
+            // VALIDA SE EXISTE AGÊNCIA DE CONTRATAÇÃO
+            if ($dadosAgencia == null || $dadosAgencia == 'NULL') {
+                $codigoAgenciaContratacao = null;
+                $nomeAgenciaContratacao = null;
+                $emailAgenciaContratacao = null;
+            } else {
+                $codigoAgenciaContratacao = $dadosAgencia->codigoAgencia;
+                $nomeAgenciaContratacao = $dadosAgencia->nomeAgencia;
+                $emailAgenciaContratacao = $dadosAgencia->emailAgencia;
+            }
             
             // VALIDA SE EXISTE PROPOSTA CADASTRADA NA BASE DE DADOS DA GEIPT E VERIFICA SE EXISTE TELEFONE E E-MAIL
             if ( $dadosProposta == null || $dadosProposta == 'NULL') {
@@ -56,12 +68,22 @@ class DistratoController extends Controller
             $novoDistrato->nomeProponente = strtoupper ($request->nomeProponente);
             $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
             $novoDistrato->statusAnaliseDistrato = 'CADASTRADA';
-            $novoDistrato->motivoDistrato = $request->motivoDistrato;
+            // $novoDistrato->motivoDistrato = $request->motivoDistrato;
             $novoDistrato->telefoneProponente = $telefone;
             $novoDistrato->emailProponente = $emailProponente;
             $novoDistrato->tipoVendaProposta = $dadosSimov->TIPO_VENDA;
+            $novoDistrato->valorRecursosPropriosProposta = $dadosSimov->VALOR_REC_PROPRIOS_PROPOSTA;
+            $novoDistrato->valorFgtsProposta = $dadosSimov->VALOR_FGTS_PROPOSTA;
+            $novoDistrato->valorFinanciadoProposta = $dadosSimov->VALOR_FINANCIADO_PROPOSTA;
+            $novoDistrato->valorParceladoProposta = $dadosSimov->VALOR_PARCELADO_PROPOSTA;
+            $novoDistrato->valorTotalProposta = $dadosSimov->VALOR_TOTAL_PROPOSTA;
+            $novoDistrato->codigoAgenciaContratacao = $codigoAgenciaContratacao;
             $novoDistrato->demandaAtiva = 'SIM';
             $novoDistrato->save();
+
+
+            // ENVIA E-MAIL DE CONFIRMAÇÃO DE CADASTRO DE DEMANDA
+
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
@@ -69,7 +91,7 @@ class DistratoController extends Controller
             $historico->numeroContrato = $request->contratoFormatado;
             $historico->tipo = "CADASTRO";
             $historico->atividade = "DISTRATO";
-            $historico->observacao = "CADASTRO DE DISTRATO - MOTIVO: $request->motivoDistrato - PROPONENTE: $request->nomeProponente - PROTOCOLO: #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT);
+            $historico->observacao = "CADASTRO DE DISTRATO - PROTOCOLO: #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - PROPONENTE: " . $request->nomeProponente;
             $historico->save();
 
             // RETORNA A FLASH MESSAGE
@@ -171,7 +193,39 @@ class DistratoController extends Controller
             $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato');
             $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
             $demandaDistrato->matriculaAnalista = session('matricula');
-            $demandaDistrato->save();
+            
+            // RESGATA DADOS DO CONTRATO
+            $dadosSimov = BaseSimov::where('BEM_FORMATADO', $demandaDistrato->contratoFormatado)->first();
+
+            // SOLICITA AUTORIZAÇÃO PARA EMGEA EM CASO DE IMÓVEIS EMGEA/EMGEA
+            if ($dadosSimov->ORIGEM_MATRICULA == 'Emgea') {
+                # CODIGO PARA MANDAR E-MAIL DE AUTORIZAÇÃO PARA EMGEA
+            }
+
+            // VALIDA A RESPONSABILIDADE DO DISTRATO COM BASE NO MOTIVO 
+            switch ($demandaDistrato->motivoDistrato) {
+                // RESPONSABILIDADE CLIENTE
+                case 'ACAO JUDICIAL NAO IMPEDITIVA':
+                case 'CREDITO NAO APROVADO':
+                case 'DESISTENCIA':
+                    # code...
+                    break;
+
+                // RESPONSABILIDADE CAIXA
+                case 'ACAO JUDICIAL IMPEDITIVA':
+                case 'DIREITO DE PREFERENCIA DO EX-MUTUARIO':
+                case 'ERRO FORMAL DE EDITAL':
+                case 'IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO LEILOES NEGATIVOS':
+                    // ENVIAR MENSAGEM SOLICITANDO DOCUMENTOS
+                    if ($demandaDistrato->emailSolicitandoDocumentacaoParaPagamento != 'SIM') {
+                        # ENVIAR MENSAGEM PEDINDO COMPROVANTES DE PAGAMENTO PARA ANÁLISE DE REEMBOLSO
+
+                        // $demandaDistrato->emailSolicitandoDocumentacaoParaPagamento = 'SIM';
+                    }
+
+                    $demandaDistrato->statusAnaliseDistrato = 'AGUARDANDO DOCUMENTOS CLIENTE';
+                    break;
+            }
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
@@ -184,9 +238,12 @@ class DistratoController extends Controller
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Demanda analisada!");
-            $request->session()->flash('corpoMensagem', "A demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi analisada com sucesso.");
+            $request->session()->flash('tituloMensagem', "Análise realizada!");
+            $request->session()->flash('corpoMensagem', "A análise da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi realizada com sucesso.");
 
+
+            // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
+            $demandaDistrato->save();
             DB::commit();
         } catch (\Throwable $th) {
             // dd($th);
@@ -198,6 +255,86 @@ class DistratoController extends Controller
         }
         return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
     }
+
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $demandaDistrato
+     * @return \Illuminate\Http\Response
+     */
+    public function emitirParecerAnalista(Request $request, $idDistrato)
+    {       
+        try {
+            DB::beginTransaction();
+            // ATUALIZA DEMANDA
+            $demandaDistrato = Distrato::find($idDistrato);
+            $demandaDistrato->parecerAnalista = $request->input('parecerAnalista');
+            $demandaDistrato->matriculaAnalista = session('matricula');
+            
+            // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA ANALISE DO GESTOR
+
+            $demandaDistrato->statusAnaliseDistrato = 'AGUARDA PARECER GESTOR';
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Parecer emitido!");
+            $request->session()->flash('corpoMensagem', "O parecer da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi enviado para analiso do gestor.");
+
+            // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
+            $demandaDistrato->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            // dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Parecer não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do parecer. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $demandaDistrato
+     * @return \Illuminate\Http\Response
+     */
+    public function emitirParecerGestor(Request $request, $idDistrato)
+    {       
+        try {
+            DB::beginTransaction();
+            // ATUALIZA DEMANDA
+            $demandaDistrato = Distrato::find($idDistrato);
+            $demandaDistrato->parecerGestor = $request->input('parecerAnalista');
+            $demandaDistrato->matriculaGestor = session('matricula');
+            $demandaDistrato->isentarMulta = input('isentarMulta');
+            
+            // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA ANALISE DO GESTOR
+
+            $demandaDistrato->statusAnaliseDistrato = 'ENCAMINHADO AGENCIA';
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Parecer emitido!");
+            $request->session()->flash('corpoMensagem', "O parecer da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi enviado para a agência com sucesso.");
+
+            // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
+            $demandaDistrato->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            // dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Parecer não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do parecer. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
+    }
+
+
 
     /**
      *

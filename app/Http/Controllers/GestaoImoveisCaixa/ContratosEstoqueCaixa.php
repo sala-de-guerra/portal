@@ -89,6 +89,8 @@ class ContratosEstoqueCaixa extends Controller
             'agrupamentoLeilao' => $contrato->AGRUPAMENTO,
             'numeroItem' => $contrato->NUMERO_ITEM,
             'dataArremate' => $contrato->DATA_ARREMATE,
+            'dataPrimeiroLeilao' => $contrato->DT_PRIMEIRO_LEILAO,
+            'dataSegundoLeilao' => $contrato->DT_SEGUNDO_LEILAO,
 
             // CONTRATAÇÃO
             'tipoVenda' => $contrato->TIPO_VENDA,
