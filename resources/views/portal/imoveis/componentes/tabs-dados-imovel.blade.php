@@ -237,6 +237,33 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Primeiro Leilão:</label>
+                                    <p id="dataPrimeiroLeilao" class="formata-data-sem-hora"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Segundo Leilão:</label>
+                                    <p id="dataSegundoLeilao" class="formata-data-sem-hora"></p>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Número do Item:</label>
+                                    <p id="numeroItem"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Arremate:</label>
+                                    <p id="dataArremate" class="formata-data-sem-hora"></p>
+                                </div>
+                            </div> -->
+                        </div>
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-contratacao" role="tabpanel" aria-labelledby="custom-tabs-one-contratacao-tab">
