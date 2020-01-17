@@ -78,38 +78,32 @@ function _formataListaDistrato (numeroContrato, view) {
                         '</div>' +
                         '<div class="col-sm-3">' +
                             '<div class="form-group">' +
-                                '<label>Data de Alteração:</label>' +
-                                '<p class="formata-data-sem-hora">' + item.dataUltimaAlteracaoDemanda + '</p>' +
+                                '<label>Total da Proposta:</label>' +
+                                '<p>' + item.valorTotalPropostaDistrato + '</p>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
 
                     '<div class="row">' +
-                        '<div class="col-sm-2">' +
-                            '<div class="form-group">' +
-                                '<label>Total da Proposta:</label>' +
-                                '<p>' + item.valorTotalPropostaDistrato + '</p>' +
-                            '</div>' +
-                        '</div>' +
                         '<div class="col-sm-3">' +
                             '<div class="form-group">' +
                                 '<label>Valor em Recursos Próprios:</label>' +
                                 '<p>' + item.valorRecursosPropriosPropostaDistrato + '</p>' +
                             '</div>' +
                         '</div>' +
-                        '<div class="col-sm-2">' +
+                        '<div class="col-sm-3">' +
                             '<div class="form-group">' +
                                 '<label>Valor de FGTS:</label>' +
                                 '<p>' + item.valorFgtsPropostaDistrato + '</p>' +
                             '</div>' +
                         '</div>' +
-                        '<div class="col-sm-2">' +
+                        '<div class="col-sm-3">' +
                             '<div class="form-group">' +
                                 '<label>Valor de Financiamento:</label>' +
                                 '<p>' + item.valorFinanciamentoPropostaDistrato + '</p>' +
                             '</div>' +
                         '</div>' +
-                        '<div class="col-sm-2">' +
+                        '<div class="col-sm-3">' +
                             '<div class="form-group">' +
                                 '<label>Valor Parcelado::</label>' +
                                 '<p>' + item.valorParceladoPropostaDistrato + '</p>' +
@@ -155,7 +149,8 @@ function _formataListaDistrato (numeroContrato, view) {
                         '</div>' +
                     '</div>' +
 
-                    '<div class="row">' +    
+                    '<div class="row">' +
+
                         '<div id="btnAlteraStatus' + item.idDistrato + '" class="col-sm-2"></div>' +
 
                         '<div id="btnCadastraDespesaDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
@@ -216,7 +211,6 @@ function _formataListaDistrato (numeroContrato, view) {
                                             '<label>Alterar Status da Demanda:</label>' +
                                             '<select name="statusAnaliseDistrato" class="form-control" required>' +
                                                 '<option value="" selected>Selecione</option>' +
-                                                '<option value="AGUARDA AUT. EMGEA">AGUARDA AUT. EMGEA</option>' +
                                                 '<option value="AVERBAÇÃO DISTRATO">AVERBAÇÃO DISTRATO</option>' +
                                                 '<option value="CADASTRADO">CADASTRADO</option>' +
                                                 '<option value="CONCLUÍDO">CONCLUÍDO</option>' +
@@ -256,7 +250,7 @@ function _formataListaDistrato (numeroContrato, view) {
                                     
                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                 // '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-                                '<input type="hidden" class="form-control" name="idDistrato" value="'+ item.idDistrato +'">' +
+                                // '<input type="hidden" class="form-control" name="idDistrato" value="'+ item.idDistrato +'">' +
 
                                     '<div class="modal-header">' +
                                         '<h5 class="modal-title" id="exampleModalLabel">Cadastrar Despesa</h5>' +
@@ -271,20 +265,20 @@ function _formataListaDistrato (numeroContrato, view) {
                                             '<label>Tipo de Despesa:</label>' +
                                             '<select name="tipoDespesa" class="form-control" required>' +
                                                 '<option value="">Selecione</option>' +
-                                                '<option value="despesaAutorizadaReembolsoEmgea">Autorizadas Reembolso EMGEA</option>' +
-                                                '<option value="despesaBenfeitoriasDistrato">Benfeitorias</option>' +
-                                                '<option value="despesaComissaoLeiloeiroDistrato">Comissão de Leiloeiro</option>' +
-                                                '<option value="despesaCondominioDistrato">Condomínio</option>' +
-                                                '<option value="despesaCustasCartoráriasDistrato">Custas Cartorárias</option>' +
-                                                '<option value="despesaFgtsDistrato">FGTS</option>' +
-                                                '<option value="despesaFinanciamentoDistrato">Financiamento</option>' +
-                                                '<option value="despesaIptuDistrato">IPTU</option>' +
-                                                '<option value="despesaItbiDistrato">ITBI</option>' +
-                                                '<option value="despesaMultaDistrato">Multa</option>' +
-                                                '<option value="despesaOutrasDespesasDistrato">Outras Despesas</option>' +
-                                                '<option value="despesaParcelamentoDistrato">Parcelamento</option>' +
-                                                '<option value="despesaRecursosPróprios">Recursos Próprios</option>' +
-                                                '<option value="despesaTaxasFinanciamentoDistrato">Taxas de Concessão de Financiamento</option>' +
+                                                '<option value="AUTORIZADAS REEMBOLSO EMGEA">Autorizadas Reembolso EMGEA</option>' +
+                                                '<option value="BENFEITORIAS">Benfeitorias</option>' +
+                                                '<option value="COMISSAO DE LEILOEIRO">Comissão de Leiloeiro</option>' +
+                                                '<option value="CONDOMINIO">Condomínio</option>' +
+                                                '<option value="CUSTAS CARTORARIAS">Custas Cartorárias</option>' +
+                                                // '<option value="FGTS">FGTS</option>' +
+                                                // '<option value="FINANCIAMENTO">Financiamento</option>' +
+                                                '<option value="IPTU">IPTU</option>' +
+                                                '<option value="ITBI">ITBI</option>' +
+                                                '<option value="MULTA">Multa</option>' +
+                                                '<option value="OUTRAS DESPESAS">Outras Despesas</option>' +
+                                                // '<option value="PARCELAMENTO">Parcelamento</option>' +
+                                                // '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
+                                                '<option value="TAXAS DE FINANCIAMENTO">Taxas de Financiamento</option>' +
                                             '</select>' +
                                         '</div>' +
 
@@ -358,7 +352,7 @@ function _formataListaDistrato (numeroContrato, view) {
                     '</div>';
                 $(btnParecerAnalistaDistrato).appendTo('#btnParecerAnalistaDistrato' + item.idDistrato);
 
-                var btnParecerAnalistaDistrato =
+                var btnParecerGerenteDistrato =
                     
                     '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParecerGerenteDistrato' + item.idDistrato + '">' +
                         '<i class="far fa-lg fa-edit"></i>' +
@@ -397,7 +391,7 @@ function _formataListaDistrato (numeroContrato, view) {
                             '</div>' +
                         '</div>' +
                     '</div>';
-                $(btnParecerAnalistaDistrato).appendTo('#btnParecerAnalistaDistrato' + item.idDistrato);
+                $(btnParecerGerenteDistrato).appendTo('#btnParecerGerenteDistrato' + item.idDistrato);
 
             };
 

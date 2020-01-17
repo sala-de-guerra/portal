@@ -96,7 +96,7 @@ class ImoveisCaixaPhpMailer
 
         $mail->Subject = $assunto;
 
-        $mensagemAutomatica = file_get_contents(("Mensagens/{$modeloMensagem}.php"), dirname(__FILE__));
+        $mensagemAutomatica = file_get_contents(("MensagensAutorizacaoContratacao/{$modeloMensagem}.php"), dirname(__FILE__));
 
         $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoBem, $mensagemAutomatica);
         $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $request->nomeAgencia, $mensagemAutomatica);

@@ -54,7 +54,7 @@
                             <div class="col-sm-12">
                                 <h2 class="card-title"><b>Trajetória do Imóvel</b></h2>
                                 <br>
-                                <div class="card-body" id="progressBarGeral"></div>
+                                <div class="card-body pb-0" id="progressBarGeral"></div>
                             </div>
                         </div>
 
@@ -64,15 +64,8 @@
                                     <label>Dossiê Digital:</label>
                                     <br>
                                     <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
+                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy"></i></button>
                                 </div>
-                            </div>
-                            <div class="col-sm-1">
-                            <br>
-                                <button class="btn btn-primary" onclick="copyToClipboard('#linkServidor')"><i class="far fa-lg fa-copy"></i></button>
-                            </div>
-                            <div class="col-sm-3">
-                                <br>    
-                                <b id="labelCopyToClipboard" style="display: none;">Link copiado com sucesso!</b>
                             </div>
                         </div>
 
@@ -256,13 +249,17 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Nome:</label>
-                                    <p id="nomeProponente"></p>
+                                    <br>
+                                    <p class="d-inline" id="nomeProponente"></p>
+                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar nome" onclick="copyToClipboard('#nomeProponente')"><i class="far fa-copy"></i></button>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>CPF / CNPJ:</label>
-                                    <p id="cpfCnpjProponente"></p>
+                                    <br>
+                                    <p class="d-inline" id="cpfCnpjProponente"></p>
+                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar CPF/CNPJ" onclick="copyToClipboard('#cpfCnpjProponente')"><i class="far fa-copy"></i></button>
                                 </div>
                             </div>
                             <div class="col-sm-3">

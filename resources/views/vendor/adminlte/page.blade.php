@@ -242,6 +242,14 @@
 @stop
 
 @section('adminlte_js')
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+    </script>
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('plugins/DataTables/dataTables.min.js') }}"></script>
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>

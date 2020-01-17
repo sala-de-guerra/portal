@@ -53,7 +53,9 @@
                         <input class="form-control typeahead tt-responsive" type="text" name="" placeholder="Carregando..." disabled>
                         <div class="input-group-append">
                             <button class="btn btn-primary search-button" type="submit"> <i class="fas fa-search"></i> </button>
-                            <img class="Typeahead-spinner" src="{{ asset('/img/spinner.gif') }}" style="display: none;">
+                            <div class="Typeahead-spinner spinner-border text-primary" role="status" style="display: none;">
+                                <span class="sr-only"></span>
+                            </div>
                         </div>
                     </div>
                 </form> 

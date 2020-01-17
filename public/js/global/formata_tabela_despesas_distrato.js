@@ -5,7 +5,7 @@ function _formataTabelaDespesasDistrato (idDistrato) {
             var corIconeDespesa;
             var sentidoIconeDespesa;
 
-            if (item.despesaPertinente == "SIM" ) {
+            if (item.devolucaoPertinente == "SIM" ) {
                 corIconeDespesa = "success";
                 sentidoIconeDespesa = "up";
             } else {
@@ -20,11 +20,11 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                     '<td>' + item.valorDespesa + '</td>' +
                     '<td>' + item.dataEfetivaDespesa + '</td>' +
                     '<td>' + item.observacaoDespesa + '</td>' +
-                    '<td><span class=btn btn-' + corIconeDespesa + '><i class="far fa-lg fa-thumbs-' + sentidoIconeDespesa + '"></i></span></td>' +
+                    '<td><span class="btn btn-' + corIconeDespesa + '"><i class="far fa-lg fa-thumbs-' + sentidoIconeDespesa + '"></i></span></td>' +
                     '<td>' +
 
                         '<div class="row">' +    
-                            '<div id="btnAlteraDespesa' + item.idDespesa + '" class="radio-inline"> + '
+                            '<div id="btnAlteraDespesa' + item.idDespesa + '" class="radio-inline m-2">' + 
                                 '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAlteraDespesaDistrato' + item.idDespesa + '">' +
                                     '<i class="far fa-lg fa-edit"></i>' +
                                 '</button>' +
@@ -95,8 +95,8 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                                 '</div>' +
                             '</div>' +
 
-                            '<div id="btnInvalidaDespesaDistrato' + item.idDespesa + '" class="radio-inline"> + '
-                                '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalInvalidaDespesaDistrato' + item.idDespesa + '">' +
+                            '<div id="btnInvalidaDespesaDistrato' + item.idDespesa + '" class="radio-inline m-2">' + 
+                                '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalInvalidaDespesaDistrato' + item.idDespesa + '">' +
                                     '<i class="far fa-lg fa-thumbs-down"></i>' +
                                 '</button>' +
 
@@ -139,7 +139,7 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                                 '</div>' +
                             '</div>' +
     
-                            '<div id="btnExcluiDespesaDistrato' + item.idDespesa + '" class="radio-inline"> + '
+                            '<div id="btnExcluiDespesaDistrato' + item.idDespesa + '" class="radio-inline m-2"> ' +
                                 '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExcluiDespesaDistrato' + item.idDespesa + '">' +
                                     '<i class="fas fa-lg fa-trash-alt"></i>' +
                                 '</button>' +
