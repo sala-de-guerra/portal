@@ -1,5 +1,10 @@
+var csrfVar = $('meta[name="csrf-token"]').attr('content');
+
+
 $(document).ready(function(){
 
+    $("#custom-tabs-one-distrato-tab").click();
+    
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
     _formataListaDistrato (numeroContrato, "operacional");
@@ -48,5 +53,17 @@ function copyToClipboard(element) {
     document.execCommand("copy");
     $temp.remove();
 
-    $("#labelCopyToClipboard").fadeIn(600).delay(2000).fadeOut(600);
+    $(function() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        Toast.fire({
+            icon: 'info',
+            title: 'Copiado com sucesso!'
+        })    
+    })
 }

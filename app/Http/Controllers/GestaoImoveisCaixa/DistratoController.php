@@ -202,17 +202,18 @@ class DistratoController extends Controller
     /**
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $demandaDistrato
      * @return \Illuminate\Http\Response
      */
-    public function cadastrarDespesa(Request $request)
+    public function cadastrarDespesa(Request $request, $idDistrato)
     {
         try {
             DB::beginTransaction();
-            $dadosDistrato = Distrato::where('idDistrato', $request->idDistrato)->first();
+            $dadosDistrato = Distrato::where('idDistrato', $idDistrato)->first();
 
             // CADASTRA NOVA DESPESA            
             $novaDespesa = new DistratoRelacaoDespesas;
-            $novaDespesa->idDistrato = $request->idDistrato;
+            $novaDespesa->idDistrato = $idDistrato;
             $novaDespesa->tipoDespesa = $request->tipoDespesa;
             $novaDespesa->valorDespesa = $request->valorDespesa;
             $novaDespesa->dataEfetivaDaDespesa = $request->dataEfetivaDaDespesa;

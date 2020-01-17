@@ -19,8 +19,8 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Consultar Bem Imóvel - CHB 
-            <b id="numeroBem"></b>
+            Operacional Distrato - CHB 
+            <p class="d-inline" id="numeroBem"></p>
         </h1>
     </div>
     <div class="col-sm-6">

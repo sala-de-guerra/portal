@@ -14,6 +14,7 @@
 
     @include('adminlte::plugins', ['type' => 'css'])
 
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
