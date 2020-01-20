@@ -34,12 +34,14 @@ class ContratosEstoqueCaixa extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param int  $contrato
+     * @param string  $numeroContrato
      * @return \Illuminate\Http\Response
      */
     static public function capturaDadosBaseSimov($numeroContrato)
     {
+        // dd($numeroContrato);
         $contrato = BaseSimov::where('BEM_FORMATADO', $numeroContrato)->first();
+        // dd($contrato);
         $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $contrato->AGENCIA_CONTRATACAO_PROPOSTA)->first();
         
         // VALIDA FLUXO CONTRATAÇÃO DA PROPOSTA - CCA OU AGÊNCIA
