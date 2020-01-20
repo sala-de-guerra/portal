@@ -40,22 +40,6 @@
 
 <body style='font-family: sans-serif; padding: 20px'>
 
-<!-- <h4>Para Conferir e Enviar E-mail</h4>
-<ul>
-    <li>Contrato: %CONTRATO_BEM%</li>
-    <li>Nome Agência: %NOME_AGENCIA%</li>
-    <li>Código Agência: %CODIGO_AGENCIA%</li>
-    <li>Nome Proponente: %NOME_PROPONENTE%</li>
-    <li>E-mail Proponente: %EMAIL_PROPONENTE%</li>
-    <li>Nome Corretor: %NOME_CORRETOR%</li>
-    <li>E-mail Corretor: %EMAIL_CORRETOR%</li>
-    <li>Endereço Imóvel: %ENDERECO_IMOVEL%</li>
-    <li>MO Utilizado: %MO_UTILIZADO%</li>
-    <li>Edital Leião: %EDITAL_LEILAO%</li>
-    <li>Manual Utilizado: %MN_UTILIZADO%</li>
-    <li>Origem Matricula: %ORIGEM_MATRICULA%</li>
-</ul> -->
-
     <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
     <p>À(o)</p>

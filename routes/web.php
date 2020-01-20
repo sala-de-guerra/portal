@@ -103,6 +103,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::post('distrato/cadastrar-despesa/{distrato}', 'GestaoImoveisCaixa\DistratoController@cadastrarDespesa');
     Route::put('distrato/atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@atualizarDespesa');
     Route::put('distrato/excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@excluirDespesa');
+    Route::put('distrato/validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@validarDespesaGestor');
     Route::put('distrato/emitir-parecer-gestor/{distrato}', 'GestaoImoveisCaixa\DistratoController@emitirParecerGestor');
     Route::put('distrato/emitir-parecer-analista/{distrato}', 'GestaoImoveisCaixa\DistratoController@emitirParecerAnalista');
     Route::get('distrato/relacao-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoController@listarRelacaoDeDespesasDaDemandaDeDistrato');

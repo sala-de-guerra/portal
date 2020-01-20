@@ -20,8 +20,14 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                     '<td>' + item.valorDespesa + '</td>' +
                     '<td>' + item.dataEfetivaDespesa + '</td>' +
                     '<td>' + item.observacaoDespesa + '</td>' +
-                    '<td><span class="btn btn-' + corIconeDespesa + '"><i class="far fa-lg fa-thumbs-' + sentidoIconeDespesa + '"></i></span></td>' +
-                    '<td>' +
+                    '<td class="col-sm-1">' +
+                        '<div class="radio-inline m-2">' +
+                            '<span class="btn btn-' + corIconeDespesa + '">' +
+                                '<i class="far fa-lg fa-thumbs-' + sentidoIconeDespesa + '"></i>' +
+                            '</span>' +
+                        '</div>' +
+                    '</td>' +
+                    '<td class="col-sm-2">' +
 
                         '<div class="row">' +    
                             '<div id="btnAlteraDespesa' + item.idDespesa + '" class="radio-inline m-2">' + 
@@ -103,7 +109,7 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                                 '<div class="modal fade" id="modalInvalidaDespesaDistrato' + item.idDespesa + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                                     '<div class="modal-dialog" role="document">' +
                                         '<div class="modal-content">' +
-                                            '<form method="post" action="/estoque-imoveis/distrato/invalidar-despesa/' + item.idDespesa + '" id="formInvalidaDespesaDistrato' + item.idDespesa + '">' +
+                                            '<form method="post" action="/estoque-imoveis/distrato/validar-despesa/' + item.idDespesa + '" id="formInvalidaDespesaDistrato' + item.idDespesa + '">' +
                                                 
                                             '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                             '<input type="hidden" class="form-control" name="_method" value="PUT">' +
@@ -185,5 +191,7 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                 '</tr>';
             $(linha).appendTo('#tblDespesasDistrato' + item.idDistrato +'>tbody');
         });
+        _formataDatatable();
+
     });
 };

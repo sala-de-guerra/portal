@@ -9,7 +9,7 @@
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
             Consultar Bem Imóvel - CHB 
-            <b id="numeroBem"></b>
+            <p class="d-inline" id="numeroBem"></p>
         </h1>
 
 
