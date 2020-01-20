@@ -318,7 +318,7 @@ function _formataListaDistrato (numeroContrato, view) {
                     '<div class="modal fade" id="modalParecerAnalistaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                         '<div class="modal-dialog" role="document">' +
                             '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/parecer-analista/' + item.idDistrato + '" id="formParecerAnalistaDistrato' + item.idDistrato + '">' +
+                                '<form method="post" action="/estoque-imoveis/distrato/emitir-parecer-analista/' + item.idDistrato + '" id="formParecerAnalistaDistrato' + item.idDistrato + '">' +
                                     
                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
@@ -360,7 +360,7 @@ function _formataListaDistrato (numeroContrato, view) {
                     '<div class="modal fade" id="modalParecerGerenteDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                         '<div class="modal-dialog" role="document">' +
                             '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/parecer-gerente/' + item.idDistrato + '" id="formParecerGerenteDistrato' + item.idDistrato + '">' +
+                                '<form method="post" action="/estoque-imoveis/distrato/emitir-parecer-gestor/' + item.idDistrato + '" id="formParecerGerenteDistrato' + item.idDistrato + '">' +
                                     
                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
@@ -373,6 +373,11 @@ function _formataListaDistrato (numeroContrato, view) {
                                         '</button>' +
                                     '</div>' +
                                     '<div class="modal-body">' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Parecer do Analista - ' + item.matriculaAnalista + ':</label>' +
+                                            '<p>' + item.parecerAnalista + '</p>' +
+                                        '</div>' +
 
                                         '<div class="form-group">' +
                                             '<label>Observações:</label>' +

@@ -17,24 +17,25 @@
 @endif
 
 <div class="row mb-2">
-    <div class="col-sm-6">
+    <div class="col-sm-5">
         <h1 class="m-0 text-dark">
-            Controle de Distrato
+            Controle de Distratos em Andamento
         </h1>
     </div>
-    <div class="col-sm-6">
+
+    <div class="col-sm-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato">
+            <i class="far fa-lg fa-edit"></i>
+            Cadastrar Pedido de Distrato
+        </button>
+    </div>
+
+    <div class="col-sm-4">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/distrato"> Controle de Distrato</a> </li>
         </ol>
     </div>
 </div>
-
-<!-- Botão para acionar modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato">
-    <i class="far fa-lg fa-edit"></i>
-     Cadastrar Pedido de Distrato
-</button>
-
 
 @stop
 
@@ -43,11 +44,8 @@
 
 
 <div class="row">
-<div class="col-md-12">
+    <div class="col-md-12">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Distratos em Andamento</h3>
-            </div> <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 table-responsive p-0">
@@ -74,12 +72,7 @@
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
-
-    
-
 </div> <!-- /.row -->
-
-<br>
 
 <!-- Modal -->
 <div class="modal fade" id="modalCadastraDistrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -139,7 +132,6 @@
     </div>
 </div>
 
-<br>
 
 @stop
 
@@ -155,10 +147,10 @@
 
 @section('js')
 
-<script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
-<script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
-<script src="{{ asset('js/global/formata_datatable.js') }}"></script>
-<script src="{{ asset('js/global/formata_data.js') }}"></script>
+    <script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
+    <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
+    <script src="{{ asset('js/global/formata_data.js') }}"></script>
 
 
 

@@ -30,7 +30,7 @@ $(document).ready(function(){
         };
 
         _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, dados.statusImovel);
-        _formataDatatable();
+        // _formataDatatable();
         _formataData();
     
     });

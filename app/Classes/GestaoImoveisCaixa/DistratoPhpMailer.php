@@ -63,8 +63,8 @@ class DistratoPhpMailer
         
         /* DESTINATÁRIOS PILOTO */
         // if (session()->get('codigoLotacaoAdministrativa') == '7257' || session()->get('codigoLotacaoFisica') == '7257') {
-            // $mail->addAddress('c111710@mail.caixa');
-            // $mail->addAddress('c142765@mail.caixa');
+            $mail->addAddress('c111710@mail.caixa');
+            $mail->addAddress('c142765@mail.caixa');
             // $mail->addAddress('c098453@mail.caixa');
         // } else {
         //     $mail->addAddress(session()->get('matricula') . '@mail.caixa');
@@ -75,44 +75,111 @@ class DistratoPhpMailer
         /* FIM DESTINATÁRIOS PILOTO */
 
         /* DESTINATÁRIOS PRODUÇÃO */
-        if (isset($objRelacaoEmailUnidades->emailAgencia)) {
-            $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
-            // $mail->addCC($objRelacaoEmailUnidades->emailSr);
-        } else {
-            $mail->addAddress($objRelacaoEmailUnidades->emailSr);
-        }
-        if ($request->emailProponente) {
-            $mail->addCC($request->emailProponente);
-        }
-        if ($request->emailCorretor) {
-            $mail->addCC($request->emailCorretor);
-        }
-        $mail->addBCC('GILIESP09@caixa.gov.br');
-        $mail->addBCC('c111710@mail.caixa');
-        $mail->addBCC('c142765@mail.caixa');
+        // if (isset($objRelacaoEmailUnidades->emailAgencia)) {
+        //     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+        //     // $mail->addCC($objRelacaoEmailUnidades->emailSr);
+        // } else {
+        //     $mail->addAddress($objRelacaoEmailUnidades->emailSr);
+        // }
+        // if ($request->emailProponente) {
+        //     $mail->addCC($request->emailProponente);
+        // }
+        // if ($request->emailCorretor) {
+        //     $mail->addCC($request->emailCorretor);
+        // }
+        // $mail->addBCC('GILIESP09@caixa.gov.br');
+        // $mail->addBCC('c111710@mail.caixa');
+        // $mail->addBCC('c142765@mail.caixa');
         // $mail->addBCC('c141203@mail.caixa');
         // $mail->addBCC('c079436@mail.caixa');
   
         // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
 
-        $mail->Subject = $assunto;
+
+        // CAPTURA OS DADOS DO CONTRATO
+        $dadosContrato = BaseSimov::find('BEM_FORMATADO', $request->contratoFormatado);
+        
+        // VALIDA CLASSIFICAÇÃO DO IMÓVEL
+        switch ($dadosContrato->CLASSIFICACAO) {
+            case 'Em Cadastramento EMGEA':
+            case 'EMGEA':
+            case 'EMGEA - Realização de Garantia':
+            case 'EMGEA- Alienação Fiduciária': 
+                $classificacao = 'EMGEA';
+                break;
+            case 'Oriundo do Crédito Imobiliário':
+            case 'Oriundos SFI-Gar. Fiduciária':
+            case 'SFI - Gar.Fid.Reg.Créd.Imob':
+                $classificacao = 'CAIXA';
+                break;
+            case 'Patrimonial':
+            case 'Patrimonial - Alienação Fiduciária':
+            case 'Patrimonial -Realização de Garantia':
+                $classificacao = 'PATRIMONIAL';
+                break;
+            default:
+                $classificacao = $dadosContrato->CLASSIFICACAO;
+                break;
+        }
+        
 
         $mensagemAutomatica = file_get_contents(("MensagensDistrato/{$modeloMensagem}.php"), dirname(__FILE__));
 
-        $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoBem, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $request->nomeAgencia, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%CODIGO_AGENCIA%", $request->codigoAgencia, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%NOME_PROPONENTE%", $request->nomeProponente, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%EMAIL_PROPONENTE%", $request->emailProponente, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%NOME_CORRETOR%", $request->nomeCorretor, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%EMAIL_CORRETOR%", $request->emailCorretor, $mensagemAutomatica);
-        $mensagemAutomatica = str_replace("%ENDERECO_IMOVEL%", $request->enderecoImovel, $mensagemAutomatica);
-        // $mensagemAutomatica = str_replace("%MO_UTILIZADO%", $request->moUtilizado, $mensagemAutomatica);
-        // $mensagemAutomatica = str_replace("%EDITAL_LEILAO%", $request->editalLeilao, $mensagemAutomatica);
-        // $mensagemAutomatica = str_replace("%MN_UTILIZADO%", $request->normativoUtilizado, $mensagemAutomatica);
-        // $mensagemAutomatica = str_replace("%ORIGEM_MATRICULA%", $request->origemMatricula, $mensagemAutomatica);
-        // $mensagemAutomatica = str_replace("%QUADRO_EMPREGADOS_POR_ATIVIDADE%", env('LINK_ATIVIDADE_POR_EMPREGADO'), $mensagemAutomatica);
-        
+        switch ($modeloMensagem) {
+            case 'notificacaoCadastroDistrato':
+                $mail->Subject = "Notificação de cadastro de Distrato - Imóvel $request->contratoFormatado";
+                $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_PROPONENTE_DISTRATO%", $request->nomeProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $objRelacaoEmailUnidades->nomeAgencia, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%ENDERECO_IMOVEL%", $dadosContrato->ENDERECO_IMOVEL, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%DATA_PROPOSTA%", $request->dataProposta, $mensagemAutomatica);
+                break;
+            case 'notificacaoGestorParecerAnalista':
+                $mail->Subject = "Notificação de Parecer do Analista de Distrato - Imóvel $request->contratoFormatado";
+                $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
+                break;
+            case 'orientacaoClienteDistratoComMulta':
+                $valorMulta = $request->valorTotalProposta * 0.05;
+
+                $mail->Subject = "Orientações ao cliente para processo de distrato - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
+                $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_PROPONENTE_DISTRATO%", $request->nomeProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MODALIDADE_VENDA%", $classificacao, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $objRelacaoEmailUnidades->nomeAgencia, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CPF_CNPJ_PROPONENTE%", $request->cpfCnpjProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%VALOR_TOTAL_PROPOSTA_DISTRATO%", $request->valorTotalProposta, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%VALOR_MULTA_DISTRATO%", $valorMulta, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);               
+                break;
+            case 'orientacaoClienteDistratoSemMulta':
+                $mail->Subject = "Orientações ao cliente para processo de distrato - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
+                $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_PROPONENTE_DISTRATO%", $request->nomeProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MODALIDADE_VENDA%", $classificacao, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $objRelacaoEmailUnidades->nomeAgencia, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CPF_CNPJ_PROPONENTE%", $request->cpfCnpjProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);
+                break;
+            case 'pedidoAutorizacaoEmgea':
+                $mail->Subject = "Solicitação de autorização de distrato - Imóvel EMGEA - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
+                $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
+                break;
+            case 'solicitacaoDocumentosReembolso':
+                $mail->Subject = "Solicitação de documentos para processo de distrato - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
+                $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $objRelacaoEmailUnidades->nomeAgencia, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MODALIDADE_VENDA%", $classificacao, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_PROPONENTE_DISTRATO%", $request->nomeProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CPF_CNPJ_PROPONENTE%", $request->cpfCnpjProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);
+                break;
+        }       
 
         $mail->Body = $mensagemAutomatica;
 

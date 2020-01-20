@@ -164,7 +164,12 @@
                     </li>
 
                     <li class="list-group-item">
-                        6) Criação de DLE com código de barras no SINAF WEB:
+                        6) Painel de Indicadores da Habitação
+                        <a href="http://habitacao.caixa/">http://habitacao.caixa/</a>
+                    </li>
+
+                    <li class="list-group-item">
+                        7) Criação de DLE com código de barras no SINAF WEB:
                         <a href="http://sinafweb.caixa/">http://sinafweb.caixa/</a>
                     </li>
                     

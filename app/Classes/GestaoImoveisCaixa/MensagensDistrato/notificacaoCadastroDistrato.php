@@ -38,23 +38,13 @@
 
 </head>
 
-<body style='font-family: sans-serif; padding: 20px'>
+<!-- DE GILIESP09@CAIXA.GOV.BR -->
+<!-- PARA %EMAIL_PROPONENTE%  -->
+<!-- CC %EMAIL_AGENCIA% -->
+<!-- CCO GILIESP01@CAIXA.GOV.BR; %USUARIO_SESSAO% -->
+<!-- ASSUNTO Notificação de cadastro de Distrato - Imóvel %CONTRATO_BEM% -->
 
-<!-- <h4>Para Conferir e Enviar E-mail</h4>
-<ul>
-    <li>Contrato: %CONTRATO_BEM%</li>
-    <li>Nome Agência: %NOME_AGENCIA%</li>
-    <li>Código Agência: %CODIGO_AGENCIA%</li>
-    <li>Nome Proponente: %NOME_PROPONENTE%</li>
-    <li>E-mail Proponente: %EMAIL_PROPONENTE%</li>
-    <li>Nome Corretor: %NOME_CORRETOR%</li>
-    <li>E-mail Corretor: %EMAIL_CORRETOR%</li>
-    <li>Endereço Imóvel: %ENDERECO_IMOVEL%</li>
-    <li>MO Utilizado: %MO_UTILIZADO%</li>
-    <li>Edital Leião: %EDITAL_LEILAO%</li>
-    <li>Manual Utilizado: %MN_UTILIZADO%</li>
-    <li>Origem Matricula: %ORIGEM_MATRICULA%</li>
-</ul> -->
+<body style='font-family: sans-serif; padding: 20px'>
 
     <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
@@ -77,7 +67,7 @@
 
     <p>1.1   &nbsp;&nbsp;   A GILIE/SP irá executar a pré-análise desta demanda e reserva-se o direito de solicitar maiores informações ou docuumentos durante o processo de análise.</p>
 
-    <p>2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Em caso de dúvidas, favor entrar em contato com a Agência de vinculação da negociação ou com esta GILIE / SP através da caixa postal GILIESP01@caixa.gov.br.</p>
+    <p>2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Em caso de dúvidas, favor entrar em contato com a Agência de vinculação da negociação ou com esta GILIE/SP através da caixa postal GILIESP01@caixa.gov.br.</p>
 
     <br>        
     <p class="destaque">

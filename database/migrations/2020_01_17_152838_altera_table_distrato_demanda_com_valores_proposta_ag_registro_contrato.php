@@ -22,6 +22,7 @@ class AlteraTableDistratoDemandaComValoresPropostaAgRegistroContrato extends Mig
             $table->string('vendaRegistradaCartorio', 3)->nullable();
             $table->string('emailSolicitandoDocumentacaoParaPagamento', 3)->nullable();
             $table->string('isentarMulta', 3)->nullable();
+            $table->datetime('dataProposta')->nullable();
 
 
             // REMOVI ESSAS COLUNAS POIS AGORA EXITE TABELA AUXILIAR PARA CADASTRAR DESPESAS E MULTAS
@@ -51,6 +52,8 @@ class AlteraTableDistratoDemandaComValoresPropostaAgRegistroContrato extends Mig
             $table->dropColumn('codigoAgenciaContratacao');
             $table->dropColumn('vendaRegistradaCartorio');
             $table->dropColumn('emailSolicitandoDocumentacaoParaPagamento');
+            $table->dropColumn('isentarMulta');
+            $table->dropColumn('dataProposta');
 
             $table->decimal('valorMulta', 17, 2)->nullable();
             $table->string('incidenciaMulta', 3)->nullable();

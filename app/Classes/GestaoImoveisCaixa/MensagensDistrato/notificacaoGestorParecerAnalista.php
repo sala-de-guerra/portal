@@ -38,23 +38,13 @@
 
 </head>
 
-<body style='font-family: sans-serif; padding: 20px'>
+<!-- DE GILIESP09@CAIXA.GOV.BR -->
+<!-- PARA %EMAIL_GESTOR%  -->
+<!-- CCO GILIESP01@CAIXA.GOV.BR; %USUARIO_SESSAO% -->
+<!-- ASSUNTO Notificação de Parecer do Analista de Distrato - Imóvel %CONTRATO_BEM% -->
 
-<!-- <h4>Para Conferir e Enviar E-mail</h4>
-<ul>
-    <li>Contrato: %CONTRATO_BEM%</li>
-    <li>Nome Agência: %NOME_AGENCIA%</li>
-    <li>Código Agência: %CODIGO_AGENCIA%</li>
-    <li>Nome Proponente: %NOME_PROPONENTE%</li>
-    <li>E-mail Proponente: %EMAIL_PROPONENTE%</li>
-    <li>Nome Corretor: %NOME_CORRETOR%</li>
-    <li>E-mail Corretor: %EMAIL_CORRETOR%</li>
-    <li>Endereço Imóvel: %ENDERECO_IMOVEL%</li>
-    <li>MO Utilizado: %MO_UTILIZADO%</li>
-    <li>Edital Leião: %EDITAL_LEILAO%</li>
-    <li>Manual Utilizado: %MN_UTILIZADO%</li>
-    <li>Origem Matricula: %ORIGEM_MATRICULA%</li>
-</ul> -->
+
+<body style='font-family: sans-serif; padding: 20px'>
 
     <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
@@ -71,7 +61,7 @@
     <br>
     <p>1     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  O protocolo de distrato %ID_DISTRATO% teve Parecer do Analista emitido e está disponível para deliberação do Gestor no Portal GILIE atrvés do link abaixo:</p>
 
-    <p>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="https://portal.gilie.hom.sp.caixa/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%">https://portal.gilie.hom.sp.caixa/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%</a></p>
+    <p>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href=<?= env('APP_URL') ?> "/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%"><?= env('APP_URL') ?>/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%</a></p>
 
     <p>2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Favor efetuar a análise levando em consideração o motivo do distrato, as observações do Parecer do Analista e as despesas cadastradas.</p>
 
