@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\RelacaoAgSrComEmail;
+use App\Models\BaseSimov;
 
 class DistratoPhpMailer
 {
@@ -14,11 +15,11 @@ class DistratoPhpMailer
      * Store a newly created resource in storage.
      *
      */
-    public static function enviarMensageria($request, $assunto, $modeloMensagem)
+    public static function enviarMensageria($request, $modeloMensagem)
     {
         $mail = new PHPMailer(true);
         $objRelacaoEmailUnidades = self::validaUnidadeDemandanteEmail($request);
-        self::carregarDadosEmail($request, $assunto, $modeloMensagem, $objRelacaoEmailUnidades, $mail);
+        self::carregarDadosEmail($request, $modeloMensagem, $objRelacaoEmailUnidades, $mail);
         self::enviarEmail($mail);
     }
 
@@ -31,7 +32,7 @@ class DistratoPhpMailer
         //         'emailSr' => $objRelacaoEmailUnidades->emailsr
         //     ];
         // } else {
-            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objEsteiraContratacao->codigoAgencia)->first();
+            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objEsteiraContratacao->codigoAgenciaContratacao)->first();
             $arrayDadosEmailUnidade = [
                 'nomeAgencia' => $objRelacaoEmailUnidades->nomeAgencia,
                 'emailAgencia' => $objRelacaoEmailUnidades->emailAgencia,
@@ -46,7 +47,7 @@ class DistratoPhpMailer
      * Store a newly created resource in storage.
      *
      */
-    public static function carregarDadosEmail($request, $assunto, $modeloMensagem, $objRelacaoEmailUnidades, $mail)
+    public static function carregarDadosEmail($request, $modeloMensagem, $objRelacaoEmailUnidades, $mail)
     {
         //Server settings
         $mail->isSMTP();
@@ -97,8 +98,8 @@ class DistratoPhpMailer
 
 
         // CAPTURA OS DADOS DO CONTRATO
-        $dadosContrato = BaseSimov::find('BEM_FORMATADO', $request->contratoFormatado);
-        
+        $dadosContrato = BaseSimov::where('BEM_FORMATADO', $request->contratoFormatado)->first();
+
         // VALIDA CLASSIFICAÇÃO DO IMÓVEL
         switch ($dadosContrato->CLASSIFICACAO) {
             case 'Em Cadastramento EMGEA':

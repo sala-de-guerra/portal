@@ -29,7 +29,7 @@ $(document).ready(function(){
         });  
 
     });
-    $('#inputChb').mask('00.0000.000000-0');
+    $('#inputChb').mask('00.0000.0000000-0');
 });
 
 

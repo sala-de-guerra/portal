@@ -10,6 +10,9 @@ use App\Models\GestaoImoveisCaixa\DistratoRelacaoDespesas;
 use App\Models\HistoricoPortalGilie;
 use App\Models\BaseSimov;
 use App\Models\PropostasSimov;
+use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
+use App\Models\ControleMensageria;
+use App\Models\RelacaoAgSrComEmail;
 
 class DistratoController extends Controller
 {
@@ -79,12 +82,23 @@ class DistratoController extends Controller
             $novoDistrato->valorTotalProposta = $dadosSimov->VALOR_TOTAL_PROPOSTA;
             $novoDistrato->codigoAgenciaContratacao = $codigoAgenciaContratacao;
             $novoDistrato->dataProposta = $dadosSimov->DATA_PROPOSTA;
+            $novoDistrato->nomeCorretor = $dadosSimov->NO_CORRETOR;
+            $novoDistrato->emailCorretor = $dadosSimov->EMAIL_CORRETOR;
             $novoDistrato->demandaAtiva = 'SIM';
-            $novoDistrato->save();
-
 
             // ENVIA E-MAIL DE CONFIRMAÇÃO DE CADASTRO DE DEMANDA
+            DistratoPhpMailer::enviarMensageria($novoDistrato, 'notificacaoCadastroDistrato');
 
+            $controleMensageriaDistrato = new ControleMensageria;
+            $controleMensageriaDistrato->tipoMensagem = 'CADASTRO DE DISTRATO';
+            $controleMensageriaDistrato->numeroContrato = $novoDistrato->contratoFormatado;
+            $controleMensageriaDistrato->codigoAgencia = $novoDistrato->codigoAgenciaContratacao;
+            $controleMensageriaDistrato->emailCorretor = $novoDistrato->emailCorretor;
+            $controleMensageriaDistrato->emailProponente = $novoDistrato->emailProponente;
+            $controleMensageriaDistrato->save();
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $novoDistrato->save();
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
@@ -100,9 +114,11 @@ class DistratoController extends Controller
             $request->session()->flash('tituloMensagem', "Distrato cadastrado!");
             $request->session()->flash('corpoMensagem', "O protocolo #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi cadastrado com sucesso.");
 
+
+            
             DB::commit();
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             DB::rollback();
 
             // RETORNA A FLASH MESSAGE
@@ -203,6 +219,15 @@ class DistratoController extends Controller
             // SOLICITA AUTORIZAÇÃO PARA EMGEA EM CASO DE IMÓVEIS EMGEA/EMGEA
             if ($dadosSimov->ORIGEM_MATRICULA == 'Emgea') {
                 # CODIGO PARA MANDAR E-MAIL DE AUTORIZAÇÃO PARA EMGEA
+                DistratoPhpMailer::enviarMensageria($demandaDistrato, 'pedidoAutorizacaoEmgea');
+
+                $controleMensageriaDistrato = new ControleMensageria;
+                $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - PEDIDO DE AUTORIZAÇÃO EMGEA';
+                $controleMensageriaDistrato->numeroContrato = $demandaDistrato->contratoFormatado;
+                $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
+                $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
+                $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                $controleMensageriaDistrato->save();
             }
 
             // VALIDA A RESPONSABILIDADE DO DISTRATO COM BASE NO MOTIVO 
@@ -222,8 +247,15 @@ class DistratoController extends Controller
                     // ENVIAR MENSAGEM SOLICITANDO DOCUMENTOS
                     if ($demandaDistrato->emailSolicitandoDocumentacaoParaPagamento != 'SIM') {
                         # ENVIAR MENSAGEM PEDINDO COMPROVANTES DE PAGAMENTO PARA ANÁLISE DE REEMBOLSO
+                        DistratoPhpMailer::enviarMensageria($novoDistrato, 'solicitacaoDocumentosReembolso');
 
-                        // $demandaDistrato->emailSolicitandoDocumentacaoParaPagamento = 'SIM';
+                        $controleMensageriaDistrato = new ControleMensageria;
+                        $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - PEDIDO DE COMPROVANTES PAGAMENTO';
+                        $controleMensageriaDistrato->numeroContrato = $novoDistrato->contratoFormatado;
+                        $controleMensageriaDistrato->codigoAgencia = $novoDistrato->codigoAgenciaContratacao;
+                        $controleMensageriaDistrato->emailCorretor = $novoDistrato->emailCorretor;
+                        $controleMensageriaDistrato->emailProponente = $novoDistrato->emailProponente;
+                        $controleMensageriaDistrato->save();
                     }
 
                     $demandaDistrato->statusAnaliseDistrato = 'AGUARDANDO DOCUMENTOS CLIENTE';
@@ -249,7 +281,7 @@ class DistratoController extends Controller
             $demandaDistrato->save();
             DB::commit();
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
@@ -349,9 +381,55 @@ class DistratoController extends Controller
             $demandaDistrato = Distrato::find($idDistrato);
             $demandaDistrato->parecerGestor = $request->input('parecerAnalista');
             $demandaDistrato->matriculaGestor = session('matricula');
-            $demandaDistrato->isentarMulta = input('isentarMulta');
+            // $demandaDistrato->isentarMulta = input('isentarMulta');
             
-            // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA ANALISE DO GESTOR
+            // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA O CLIENTE/CORRETOR/AGÊNCIA
+            $relacaoDespesasDistrato = DistratoRelacaoDespesas::where('idDistrato', $demandaDistrato->idDistrato)->get();
+            // dd($relacaoDespesasDistrato);
+            if ($relacaoDespesasDistrato == null || $relacaoDespesasDistrato == 'NULL') {
+                # ENVIAR MENSAGEM DE ORIENTAÇÃO SEM MULTA PARA O CLIENTE
+                DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoClienteDistratoSemMulta');
+
+                $controleMensageriaDistrato = new ControleMensageria;
+                $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - ORIENTACAO CLIENTE SEM MULTA';
+                $controleMensageriaDistrato->numeroContrato = $demandaDistrato->contratoFormatado;
+                $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
+                $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
+                $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                $controleMensageriaDistrato->save();
+            } else {
+                $contagemDeDespesasPertinentes = 0;
+                foreach ($relacaoDespesasDistrato as $despesa => $value) {
+                    // dd($value);
+                    if ($value->devolucaoPertinente == 'SIM') {
+                        $contagemDeDespesasPertinentes++;
+                    }
+                }
+
+                if ($contagemDeDespesasPertinentes > 0) {
+                    # ENVIAR MENSAGEM DE ORIENTAÇÃO COM MULTA PARA O CLIENTE
+                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoClienteDistratoComMulta');
+
+                    $controleMensageriaDistrato = new ControleMensageria;
+                    $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - ORIENTACAO CLIENTE COM MULTA';
+                    $controleMensageriaDistrato->numeroContrato = $demandaDistrato->contratoFormatado;
+                    $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
+                    $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
+                    $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                    $controleMensageriaDistrato->save();
+                } else {
+                    # ENVIAR MENSAGEM DE ORIENTAÇÃO SEM MULTA PARA O CLIENTE
+                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoClienteDistratoSemMulta');
+
+                    $controleMensageriaDistrato = new ControleMensageria;
+                    $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - ORIENTACAO CLIENTE SEM MULTA';
+                    $controleMensageriaDistrato->numeroContrato = $demandaDistrato->contratoFormatado;
+                    $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
+                    $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
+                    $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                    $controleMensageriaDistrato->save();
+                }
+            }
 
             $demandaDistrato->statusAnaliseDistrato = 'ENCAMINHADO AGENCIA';
 
@@ -364,7 +442,7 @@ class DistratoController extends Controller
             $demandaDistrato->save();
             DB::commit();
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
