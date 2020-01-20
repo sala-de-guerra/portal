@@ -23,9 +23,16 @@
         font-weight: bolder;
     }
 
-    th, td {
-        border: 1px solid black;
-        padding: 5px;
+    p {
+        margin: 5px;
+    }
+
+    .pl-20px{
+        padding-left: 20px;
+    }
+
+    .pl-40px{
+        padding-left: 40px;
     }
 
    </style>
@@ -58,16 +65,55 @@
 
     <br>
     <br>
-    <br>
-    <p>1     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  O protocolo de distrato %ID_DISTRATO% teve Parecer do Analista emitido e está disponível para deliberação do Gestor no Portal GILIE atrvés do link abaixo:</p>
+    <table>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p class="pl-20px">O protocolo de distrato %ID_DISTRATO% teve Parecer do Analista emitido 
+                    e está disponível para deliberação do Gestor no Portal GILIE atrvés do link abaixo:</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p> </p>
+            </td>
+            <td>
+                <p class="pl-40px">
+                <a href="<?= env('APP_URL') ?>/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%">
+                <?= env('APP_URL') ?>/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%</a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>2</p>
+            </td>
+            <td>
+                <p class="pl-20px">Favor efetuar a análise levando em consideração o motivo do distrato, 
+                    as observações do Parecer do Analista e as despesas cadastradas.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>2.1</p>
+            </td>
+            <td>
+                <p class="pl-20px">Cada despesa pode ser invalidada caso seja pertinente.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>3</p>
+            </td>
+            <td>
+                <p class="pl-20px">Alertamos que a orientação de distrato só será enviada à agência 
+                    mediante a emissão do Parecer do Gestor.</p>
+            </td>
+        </tr>
 
-    <p>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href=<?= env('APP_URL') ?> "/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%"><?= env('APP_URL') ?>/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%</a></p>
-
-    <p>2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Favor efetuar a análise levando em consideração o motivo do distrato, as observações do Parecer do Analista e as despesas cadastradas.</p>
-
-    <p>2.1  &nbsp;&nbsp;    Cada despesa pode ser invalidada caso seja pertinente.</p>
-
-    <p>3   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Alertamos que a orientação de distrato só será enviada à agência mediante a emissão do Parecer do Gestor.</p>
+    </table>
 
     <br>        
     <p class="destaque">

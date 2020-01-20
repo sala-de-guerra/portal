@@ -23,9 +23,16 @@
         font-weight: bolder;
     }
 
-    th, td {
-        border: 1px solid black;
-        padding: 5px;
+    p {
+        margin: 5px;
+    }
+
+    .pl-20px{
+        padding-left: 20px;
+    }
+
+    .pl-40px{
+        padding-left: 40px;
     }
 
    </style>
@@ -58,18 +65,43 @@
     <br>
     <p>Prezados,</p>
 
+    <br>
     <b class="centralizado">NOTIFICAÇÃO DE CADASTRO DE DISTRATO - (IMÓVEL: %CONTRATO_BEM%) </b>
-
+ 
     <br>
     <br>
+    <table>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p class="pl-20px">Informamos que foi cadastrada nesta data a demanda de distrato 
+                número %ID_DISTRATO% referente ao imóvel %CONTRATO_BEM% cito à %ENDERECO_IMOVEL% 
+                comprado por vossa senhoria em %DATA_PROPOSTA% e entraremos em contato em breve.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1.1</p>
+            </td>
+            <td>
+                <p class="pl-20px">A GILIE/SP irá executar a pré-análise desta demanda e reserva-se o 
+                direito de solicitar maiores informações ou docuumentos durante o processo de análise.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>2</p>
+            </td>
+            <td>
+                <p class="pl-20px">Em caso de dúvidas, favor entrar em contato com a Agência de vinculação 
+                da negociação ou com esta GILIE/SP através da caixa postal GILIESP01@caixa.gov.br.</p>
+            </td>
+        </tr>
+    </table>
+    
     <br>
-    <p>1     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Informamos que foi cadastrada nesta data a demanda de distrato número %ID_DISTRATO% referente ao imóvel %CONTRATO_BEM% cito à %ENDERECO_IMOVEL% comprado por vossa senhoria em %DATA_PROPOSTA% e entraremos em contato em breve.</p>
-
-    <p>1.1   &nbsp;&nbsp;   A GILIE/SP irá executar a pré-análise desta demanda e reserva-se o direito de solicitar maiores informações ou docuumentos durante o processo de análise.</p>
-
-    <p>2   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Em caso de dúvidas, favor entrar em contato com a Agência de vinculação da negociação ou com esta GILIE/SP através da caixa postal GILIESP01@caixa.gov.br.</p>
-
-    <br>        
     <p class="destaque">
     Atenciosamente,
     <br>
