@@ -19,9 +19,13 @@ function _formataData() {
 
 function _formataValores() {
     numeral.locale('pt-br');
-    $('.mascaradinheiro').each(function (key, item) {
+    $('.formata-valores').each(function (key, item) {
         var valor = $(this).text()
         var valorFormatado = numeral(valor.replace('.', ',')).format('0,0.00');
         $(item).text(valorFormatado);
     });
+    
+    $('.mascaradinheiro').mask('000.000.000.000.000,00' , { reverse : true});
+    $('.mascaradata').mask('00/00/0000');
+
 };

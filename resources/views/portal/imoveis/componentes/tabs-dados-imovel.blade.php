@@ -340,19 +340,19 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Total da Proposta:</label>
-                                    <p id="valorTotalProposta"></p>
+                                    <p class="formata-valores" id="valorTotalProposta"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor em Recursos Próprios:</label>
-                                    <p id="valorRecursosPropriosProposta"></p>
+                                    <p class="formata-valores" id="valorRecursosPropriosProposta"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor de FGTS:</label>
-                                    <p id="valorFgtsProposta"></p>
+                                    <p class="formata-valores" id="valorFgtsProposta"></p>
                                 </div>
                             </div>
                         </div>
@@ -361,13 +361,13 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor de Financiamento:</label>
-                                    <p id="valorFinanciamentoProposta"></p>
+                                    <p class="formata-valores" id="valorFinanciamentoProposta"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor Parcelado:</label>
-                                    <p id="valorParceladoProposta"></p>
+                                    <p class="formata-valores" id="valorParceladoProposta"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">

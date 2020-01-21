@@ -71,7 +71,7 @@ class DistratoController extends Controller
             $novoDistrato->nomeProponente = strtoupper ($request->nomeProponente);
             $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
             $novoDistrato->statusAnaliseDistrato = 'CADASTRADA';
-            // $novoDistrato->motivoDistrato = $request->motivoDistrato;
+            $novoDistrato->motivoDistrato = 'A CLASSIFICAR';
             $novoDistrato->telefoneProponente = $telefone;
             $novoDistrato->emailProponente = $emailProponente;
             $novoDistrato->tipoVendaProposta = $dadosSimov->TIPO_VENDA;
@@ -114,8 +114,6 @@ class DistratoController extends Controller
             $request->session()->flash('tituloMensagem', "Distrato cadastrado!");
             $request->session()->flash('corpoMensagem', "O protocolo #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi cadastrado com sucesso.");
 
-
-            
             DB::commit();
         } catch (\Throwable $th) {
             dd($th);
@@ -188,6 +186,11 @@ class DistratoController extends Controller
                 'observacaoDistrato' => $demanda->observacaoDistrato,
                 'parecerAnalista' => $demanda->parecerAnalista,
                 'matriculaAnalista' => $demanda->matriculaAnalista,
+                'valorTotalProposta' => $demanda->valorTotalProposta,
+                'valorRecursosPropriosProposta' => $demanda->valorRecursosPropriosProposta,
+                'valorFgtsProposta' => $demanda->valorFgtsProposta,
+                'valorFinanciadoProposta' => $demanda->valorFinanciadoProposta,
+                'valorParceladoProposta' => $demanda->valorParceladoProposta,
             ];
 
             // AGRUPA TODAS AS DEMANDAS EM UM ÚNICO ARRAY
@@ -505,15 +508,18 @@ class DistratoController extends Controller
         try {
             DB::beginTransaction();
             // ATUALIZA DEMANDA          
-            $despesa = DistratoRelacaoDespesas::find('idDespesa', $idDespesa);
+            $despesa = DistratoRelacaoDespesas::where('idDespesa', $idDespesa)->first();
             $despesa->excluirDespesa = 'SIM';
-            $despesa->save();
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Despesa excluida!");
-            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi excluida com sucesso.");
+            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($despesa->idDespesa, 4, '0', STR_PAD_LEFT) . " foi excluida com sucesso.");
 
+            $dadosDistrato = Distrato::where('idDistrato', $despesa->idDistrato)->first();
+
+            // PERSISTE OS DADOS NO FIM DO MÉTODO 
+            $despesa->save();
             DB::commit();
         } catch (\Throwable $th) {
             // dd($th);
@@ -523,7 +529,7 @@ class DistratoController extends Controller
             $request->session()->flash('tituloMensagem', "Despesa não atualizada");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
         }
-        return redirect('/estoque-imoveis/distrato/tratar/' . $request->contratoFormatado);
+        return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
     }
 
     /**

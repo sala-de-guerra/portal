@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 use App\Models\RelacaoAgSrComEmail;
 use App\Models\BaseSimov;
 
+
 class DistratoPhpMailer
 {
 
@@ -128,13 +129,16 @@ class DistratoPhpMailer
 
         switch ($modeloMensagem) {
             case 'notificacaoCadastroDistrato':
+                $dataConvertida = strtotime($request->dataProposta);
+                $dataProposta = date('d/m/Y', $dataProposta);
+
                 $mail->Subject = "Notificação de cadastro de Distrato - Imóvel $request->contratoFormatado";
                 $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
                 $mensagemAutomatica = str_replace("%NOME_PROPONENTE_DISTRATO%", $request->nomeProponente, $mensagemAutomatica);
                 $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $objRelacaoEmailUnidades->nomeAgencia, $mensagemAutomatica);
                 $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
                 $mensagemAutomatica = str_replace("%ENDERECO_IMOVEL%", $dadosContrato->ENDERECO_IMOVEL, $mensagemAutomatica);
-                $mensagemAutomatica = str_replace("%DATA_PROPOSTA%", $request->dataProposta, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%DATA_PROPOSTA%", $dataProposta, $mensagemAutomatica);
                 break;
             case 'notificacaoGestorParecerAnalista':
                 $mail->Subject = "Notificação de Parecer do Analista de Distrato - Imóvel $request->contratoFormatado";

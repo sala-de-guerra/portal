@@ -8,6 +8,8 @@ $(document).ready(function(){
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
     _formataListaDistrato (numeroContrato, "operacional");
+    _formataDatatable();
+
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
 
@@ -33,7 +35,7 @@ $(document).ready(function(){
         };
 
         _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, dados.statusImovel);
-        _formataData();
+
     
     });
 
