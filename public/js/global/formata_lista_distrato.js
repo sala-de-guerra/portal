@@ -326,7 +326,7 @@ function _formataListaDistrato (numeroContrato, view) {
 
                                         '<div class="form-group">' +
                                             '<label>Observações:</label>' +
-                                            '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
+                                            '<textarea rows="5" name="parecerAnalista" class="form-control"></textarea>' +                                        
                                         '</div>' +
 
                                     '</div>' +
