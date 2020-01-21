@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Classes;
+
 use App\Models\Empregado;
+use Exception;
 
 class Ldap
 {
@@ -159,8 +161,10 @@ class Ldap
         } else {
             $this->setMatricula(str_replace('C', 'c', substr($_SERVER["AUTH_USER"], 10)));
         }
-        $this->settaDadosEmpregado();
-        $this->updateBaseEmpregados();
+        $ldapAtivo = $this->settaDadosEmpregado();
+        if ($ldapAtivo == true) {
+            $this->updateBaseEmpregados();
+        }
     }
 
     public function __toString()
@@ -181,41 +185,38 @@ class Ldap
 
     public function settaDadosEmpregado()
     {
-        // if(!isset($_SESSION['aut_matricula']) or strtoupper($_SESSION['aut_matricula']) != strtoupper(substr($_SERVER["AUTH_USER"],10) ) || $this->getMatricula() != "") {                
         $ldap_handle = ldap_connect('ldap://ldapcluster.corecaixa:489');
-        $search_base = 'ou=People,o=caixa';
-        $search_filter = '(uid=%s)';          
-        $search_filter = sprintf( $search_filter, $this->getMatricula());              
-        $search_handle = ldap_search($ldap_handle, $search_base, $search_filter);
         
-        if(!$search_handle) {
-            throw new Exception("Servidor de Autenticação Indisponível (LDAP: erro na consulta)");
-        }
-        
-        $ldap_resultado = ldap_get_entries($ldap_handle, $search_handle);
-        if($ldap_resultado['count'] == 0) {
-            throw new Exception("Usuário não reconhecido");
-        }
-        
-        $ldap_user = $ldap_resultado[0];
-        // dd($ldap_user);
-        $this->setNomeCompleto($ldap_user['no-usuario'][0]);
-        $this->setCpf(isset($ldap_user['nu-cpf'][0]) ? $ldap_user['nu-cpf'][0] : null);
-        $this->setPrimeiroNome($this->getNomeCompleto());
-        $this->setNomeFuncao(isset($ldap_user['no-funcao'][0]) ? $ldap_user['no-funcao'][0] : null);
-        $this->setCodigoFuncao(isset($ldap_user['nu-funcao'][0]) ? $ldap_user['nu-funcao'][0] : null);
-        $this->setCodigoLotacaoAdministrativa($ldap_user['co-unidade'][0]);
-        $this->setNomeLotacaoAdministrativa($ldap_user['no-unidade'][0]);
-        $this->setCodicoLotacaoFisica($ldap_user['nu-lotacaofisica'][0]);
-        $this->setNomeLotacaoFisica($ldap_user['no-lotacaofisica'][0]);         
-        $this->setDataDeNascimento(isset($ldap_user['dt-nascimento'][0]) ? $ldap_user['dt-nascimento'][0] : null);
-        // }
+        if($ldap_handle) {
+            $search_base = 'ou=People,o=caixa';
+            $search_filter = '(uid=%s)';          
+            $search_filter = sprintf($search_filter, $this->getMatricula());              
+            $search_handle = ldap_search($ldap_handle, $search_base, $search_filter);
+            $ldap_resultado = ldap_get_entries($ldap_handle, $search_handle);
+
+            if($ldap_resultado['count'] > 0) {
+                $ldap_user = $ldap_resultado[0];
+                // dd($ldap_user);
+                $this->setNomeCompleto($ldap_user['no-usuario'][0]);
+                $this->setCpf(isset($ldap_user['nu-cpf'][0]) ? $ldap_user['nu-cpf'][0] : null);
+                $this->setPrimeiroNome($this->getNomeCompleto());
+                $this->setNomeFuncao(isset($ldap_user['no-funcao'][0]) ? $ldap_user['no-funcao'][0] : null);
+                $this->setCodigoFuncao(isset($ldap_user['nu-funcao'][0]) ? $ldap_user['nu-funcao'][0] : null);
+                $this->setCodigoLotacaoAdministrativa($ldap_user['co-unidade'][0]);
+                $this->setNomeLotacaoAdministrativa($ldap_user['no-unidade'][0]);
+                $this->setCodicoLotacaoFisica($ldap_user['nu-lotacaofisica'][0]);
+                $this->setNomeLotacaoFisica($ldap_user['no-lotacaofisica'][0]);         
+                $this->setDataDeNascimento(isset($ldap_user['dt-nascimento'][0]) ? $ldap_user['dt-nascimento'][0] : null);
+
+                return true;
+            }
+        } 
+        return false;
     }
 
     public function updateBaseEmpregados()
     {
         $empregado = Empregado::firstOrNew(array('matricula' => $this->getMatricula()));
-        $empregado->matricula = $this->getMatricula();
         $empregado->nomeCompleto = $this->getNomeCompleto();
         $empregado->cpf = $this->getCpf();
         $empregado->primeiroNome = $this->getPrimeiroNome();

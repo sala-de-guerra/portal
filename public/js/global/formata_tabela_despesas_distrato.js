@@ -17,20 +17,20 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                 '<tr>' +
                     '<td>' + item.idDespesa + '</td>' +
                     '<td>' + item.tipoDespesa + '</td>' +
-                    '<td>' + item.valorDespesa + '</td>' +
-                    '<td>' + item.dataEfetivaDespesa + '</td>' +
+                    '<td class="formata-valores">' + item.valorDespesa + '</td>' +
+                    '<td class="formata-data-sem-hora">' + item.dataEfetivaDaDespesa + '</td>' +
                     '<td>' + item.observacaoDespesa + '</td>' +
-                    '<td class="col-sm-1">' +
-                        '<div class="radio-inline m-2">' +
+                    '<td>' +
+                        '<div class="m-2">' +
                             '<span class="btn btn-' + corIconeDespesa + '">' +
                                 '<i class="far fa-lg fa-thumbs-' + sentidoIconeDespesa + '"></i>' +
                             '</span>' +
                         '</div>' +
                     '</td>' +
-                    '<td class="col-sm-2">' +
+                    '<td>' +
 
-                        '<div class="row">' +    
-                            '<div id="btnAlteraDespesa' + item.idDespesa + '" class="radio-inline m-2">' + 
+                        '<div class="row">' +
+                            '<div id="btnAlteraDespesa' + item.idDespesa + '" class="m-2">' + 
                                 '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAlteraDespesaDistrato' + item.idDespesa + '">' +
                                     '<i class="far fa-lg fa-edit"></i>' +
                                 '</button>' +
@@ -53,40 +53,42 @@ function _formataTabelaDespesasDistrato (idDistrato) {
 
                                                 '<div class="modal-body">' +
             
+
+
                                                     '<div class="form-group">' +
                                                         '<label>Tipo de Despesa:</label>' +
                                                         '<select name="tipoDespesa" class="form-control" required>' +
                                                             '<option value="">Selecione</option>' +
-                                                            '<option value="despesaAutorizadaReembolsoEmgea">Autorizadas Reembolso EMGEA</option>' +
-                                                            '<option value="despesaBenfeitoriasDistrato">Benfeitorias</option>' +
-                                                            '<option value="despesaComissaoLeiloeiroDistrato">Comissão de Leiloeiro</option>' +
-                                                            '<option value="despesaCondominioDistrato">Condomínio</option>' +
-                                                            '<option value="despesaCustasCartoráriasDistrato">Custas Cartorárias</option>' +
-                                                            '<option value="despesaFgtsDistrato">FGTS</option>' +
-                                                            '<option value="despesaFinanciamentoDistrato">Financiamento</option>' +
-                                                            '<option value="despesaIptuDistrato">IPTU</option>' +
-                                                            '<option value="despesaItbiDistrato">ITBI</option>' +
-                                                            '<option value="despesaMultaDistrato">Multa</option>' +
-                                                            '<option value="despesaOutrasDespesasDistrato">Outras Despesas</option>' +
-                                                            '<option value="despesaParcelamentoDistrato">Parcelamento</option>' +
-                                                            '<option value="despesaRecursosPróprios">Recursos Próprios</option>' +
-                                                            '<option value="despesaTaxasFinanciamentoDistrato">Taxas de Concessão de Financiamento</option>' +
+                                                            '<option value="AUTORIZADAS REEMBOLSO EMGEA">Autorizadas Reembolso EMGEA</option>' +
+                                                            '<option value="BENFEITORIAS">Benfeitorias</option>' +
+                                                            '<option value="COMISSAO DE LEILOEIRO">Comissão de Leiloeiro</option>' +
+                                                            '<option value="CONDOMINIO">Condomínio</option>' +
+                                                            '<option value="CUSTAS CARTORARIAS">Custas Cartorárias</option>' +
+                                                            '<option value="FGTS">FGTS</option>' +
+                                                            '<option value="FINANCIAMENTO">Financiamento</option>' +
+                                                            '<option value="IPTU">IPTU</option>' +
+                                                            '<option value="ITBI">ITBI</option>' +
+                                                            '<option value="MULTA">Multa</option>' +
+                                                            '<option value="OUTRAS DESPESAS">Outras Despesas</option>' +
+                                                            '<option value="PARCELAMENTO">Parcelamento</option>' +
+                                                            '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
+                                                            '<option value="TAXAS DE FINANCIAMENTO">Taxas de Financiamento</option>' +
                                                         '</select>' +
                                                     '</div>' +
             
                                                     '<div class="form-group">' +
                                                         '<label>Data Efetiva da Despesa:</label>' +
-                                                        '<input type="date" name="dataEfetivaDaDespesa" class="form-control" required>' +
+                                                        '<input type="text" name="dataEfetivaDaDespesa" class="form-control mascaradata" required>' +
                                                     '</div>' +
             
                                                     '<div class="form-group">' +
                                                         '<label>Valor da Despesa:</label>' +
-                                                        '<input type="number" name="valorDespesa" class="form-control" required>' +                                        
+                                                        '<input type="text" name="valorDespesa" class="form-control mascaradinheiro" value="' + item.valorDespesa + '" required>' +                                        
                                                     '</div>' +
             
                                                     '<div class="form-group">' +
                                                         '<label>Observações:</label>' +
-                                                        '<textarea rows="5" name="observacaoDespesa" class="form-control"></textarea>' +                                        
+                                                        '<textarea rows="5" name="observacaoDespesa" class="form-control" value="' + item.observacaoDespesa + '"></textarea>' +                                        
                                                     '</div>' +
             
                                                 '</div>' +
@@ -101,7 +103,7 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                                 '</div>' +
                             '</div>' +
 
-                            '<div id="btnInvalidaDespesaDistrato' + item.idDespesa + '" class="radio-inline m-2">' + 
+                            '<div id="btnInvalidaDespesaDistrato' + item.idDespesa + '" class="m-2">' + 
                                 '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalInvalidaDespesaDistrato' + item.idDespesa + '">' +
                                     '<i class="far fa-lg fa-thumbs-down"></i>' +
                                 '</button>' +
@@ -145,7 +147,7 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                                 '</div>' +
                             '</div>' +
     
-                            '<div id="btnExcluiDespesaDistrato' + item.idDespesa + '" class="radio-inline m-2"> ' +
+                            '<div id="btnExcluiDespesaDistrato' + item.idDespesa + '" class="m-2"> ' +
                                 '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExcluiDespesaDistrato' + item.idDespesa + '">' +
                                     '<i class="fas fa-lg fa-trash-alt"></i>' +
                                 '</button>' +
@@ -172,7 +174,6 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                                                         '<label>Clique em Salvar para excluir a despesa:</label>' +
                                                     '</div>' +
 
-                                                    '<input type="hidden" class="form-control" name="despesaExcluida" value="Sim">' +
             
                                                 '</div>' +
                                                 '<div class="modal-footer">' +
@@ -191,7 +192,9 @@ function _formataTabelaDespesasDistrato (idDistrato) {
                 '</tr>';
             $(linha).appendTo('#tblDespesasDistrato' + item.idDistrato +'>tbody');
         });
-        _formataDatatable();
+    
+        _formataData();
+        _formataValores();
 
     });
 };

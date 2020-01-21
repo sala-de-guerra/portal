@@ -59,8 +59,9 @@
         var numeroContrato = '{{ $numeroContrato }}';
     </script> 
     <!-- <script src="{{ asset('js/global/anima_input_file.js') }}"></script> -->
-    <!-- <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
-    <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script> -->
+    <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
+    <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
+    <script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
