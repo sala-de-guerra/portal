@@ -8,10 +8,8 @@ use PHPMailer\PHPMailer\Exception;
 use App\Models\RelacaoAgSrComEmail;
 use App\Models\BaseSimov;
 
-
 class DistratoPhpMailer
 {
-
     /**
      * Store a newly created resource in storage.
      *
@@ -24,16 +22,16 @@ class DistratoPhpMailer
         self::enviarEmail($mail);
     }
 
-    public static function validaUnidadeDemandanteEmail($objEsteiraContratacao) 
+    public static function validaUnidadeDemandanteEmail($objDistrato) 
     {
-        // if ($objEsteiraContratacao->agResponsavel == null || $objEsteiraContratacao->agResponsavel === "NULL") {
-        //     $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('nomeAgencia', $objEsteiraContratacao->srResponsavel)->first();
+        // if ($objDistrato->agResponsavel == null || $objDistrato->agResponsavel === "NULL") {
+        //     $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('nomeAgencia', $objDistrato->srResponsavel)->first();
         //     $arrayDadosEmailUnidade = [
         //         'nomeSr' => $objRelacaoEmailUnidades->nomeSr,
         //         'emailSr' => $objRelacaoEmailUnidades->emailsr
         //     ];
         // } else {
-            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objEsteiraContratacao->codigoAgenciaContratacao)->first();
+            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objDistrato->codigoAgenciaContratacao)->first();
             $arrayDadosEmailUnidade = [
                 'nomeAgencia' => $objRelacaoEmailUnidades->nomeAgencia,
                 'emailAgencia' => $objRelacaoEmailUnidades->emailAgencia,
@@ -129,8 +127,9 @@ class DistratoPhpMailer
 
         switch ($modeloMensagem) {
             case 'notificacaoCadastroDistrato':
+                // CONVERT A STRING DATA PROPOSTA EM DATETIME E ASSIM MUDAR O FORMATO DELA
                 $dataConvertida = strtotime($request->dataProposta);
-                $dataProposta = date('d/m/Y', $dataProposta);
+                $dataProposta = date('d/m/Y', $dataConvertida);
 
                 $mail->Subject = "Notificação de cadastro de Distrato - Imóvel $request->contratoFormatado";
                 $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);

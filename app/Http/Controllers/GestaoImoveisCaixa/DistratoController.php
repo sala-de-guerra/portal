@@ -212,7 +212,7 @@ class DistratoController extends Controller
             // ATUALIZA DEMANDA
             $demandaDistrato = Distrato::find($idDistrato);
             $demandaDistrato->motivoDistrato = $request->input('motivoDistrato');
-            $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato');
+            // $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato');
             $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
             $demandaDistrato->matriculaAnalista = session('matricula');
             
@@ -239,7 +239,7 @@ class DistratoController extends Controller
                 case 'ACAO JUDICIAL NAO IMPEDITIVA':
                 case 'CREDITO NAO APROVADO':
                 case 'DESISTENCIA':
-                    # code...
+                    $demandaDistrato->statusAnaliseDistrato = 'EM ANALISE';
                     break;
 
                 // RESPONSABILIDADE CAIXA
@@ -269,9 +269,9 @@ class DistratoController extends Controller
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
             $historico->numeroContrato = $demandaDistrato->contratoFormatado;
-            $historico->tipo = "ANALISE - STATUS: $request->statusAnaliseDistrato";
+            $historico->tipo = "ANALISE";
             $historico->atividade = "DISTRATO";
-            $historico->observacao = $request->observacaoDistrato;
+            $historico->observacao = "STATUS: $demandaDistrato->statusAnaliseDistrato - MOTIVO: $demandaDistrato->motivoDistrato - OBSERVAÇÃO: $request->observacaoDistrato";
             $historico->save();
 
             // RETORNA A FLASH MESSAGE
@@ -468,12 +468,12 @@ class DistratoController extends Controller
         try {
             DB::beginTransaction();
             $dadosDistrato = Distrato::where('idDistrato', $idDistrato)->first();
-
+            
             // CADASTRA NOVA DESPESA            
             $novaDespesa = new DistratoRelacaoDespesas;
             $novaDespesa->idDistrato = $idDistrato;
             $novaDespesa->tipoDespesa = $request->tipoDespesa;
-            $novaDespesa->valorDespesa = $request->valorDespesa;
+            $novaDespesa->valorDespesa = str_replace(',', '.', str_replace('.', '', $request->valorDespesa));
             $novaDespesa->dataEfetivaDaDespesa = $request->dataEfetivaDaDespesa;
             $novaDespesa->devolucaoPertinente = 'SIM';
             $novaDespesa->excluirDespesa = 'NAO';

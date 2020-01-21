@@ -17,7 +17,7 @@ $(document).ready(function(){
         })
 
         _formataDatatable();
-        // _formataData();
+        _formataData();
 
         $('#tblDistrato tbody').on('click', 'tr', function () {
             var href = $(this).attr("href");            
