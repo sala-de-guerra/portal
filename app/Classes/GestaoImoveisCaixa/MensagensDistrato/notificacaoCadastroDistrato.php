@@ -71,34 +71,39 @@
     <br>
     <br>
     <table>
-        <tr>
-            <td>
-                <p>1</p>
-            </td>
-            <td>
-                <p class="pl-20px">Informamos que foi cadastrada nesta data a demanda de distrato 
-                número %ID_DISTRATO% referente ao imóvel %CONTRATO_BEM% cito à %ENDERECO_IMOVEL% 
-                comprado por vossa senhoria em %DATA_PROPOSTA% e entraremos em contato em breve.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>1.1</p>
-            </td>
-            <td>
-                <p class="pl-20px">A GILIE/SP irá executar a pré-análise desta demanda e reserva-se o 
-                direito de solicitar maiores informações ou docuumentos durante o processo de análise.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>2</p>
-            </td>
-            <td>
-                <p class="pl-20px">Em caso de dúvidas, favor entrar em contato com a Agência de vinculação 
-                da negociação ou com esta GILIE/SP através da caixa postal GILIESP01@caixa.gov.br.</p>
-            </td>
-        </tr>
+        <thead></thead>
+        <tbody>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td class="pl-20px">
+                    Informamos que foi cadastrada nesta data a demanda de distrato 
+                    número %ID_DISTRATO% referente ao imóvel %CONTRATO_BEM% cito à %ENDERECO_IMOVEL% 
+                    comprado por vossa senhoria em %DATA_PROPOSTA% e entraremos em contato em breve.
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td>
+                    1.1
+                </td>
+                <td class="pl-20px">
+                    A GILIE/SP irá executar a pré-análise desta demanda e reserva-se o 
+                    direito de solicitar maiores informações ou docuumentos durante o processo de análise.
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td>
+                    2
+                </td>
+                <td class="pl-20px">
+                    Em caso de dúvidas, favor entrar em contato com a Agência de vinculação 
+                    da negociação ou com esta GILIE/SP através da caixa postal GILIESP01@caixa.gov.br.
+                </td>
+            </tr>
+        </tbody>
     </table>
     
     <br>
