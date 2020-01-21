@@ -471,6 +471,7 @@
                                 <table id="tblHistorico" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Matrícula</th>
                                             <th>Tipo</th>
                                             <th>Atividade</th>
@@ -492,6 +493,7 @@
                                 <table id="tblMensagensEnviadas" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Tipo de Mensagem</th>
                                             <th>Unidade Destino</th>
                                             <th>E-mail do Proponente</th>
