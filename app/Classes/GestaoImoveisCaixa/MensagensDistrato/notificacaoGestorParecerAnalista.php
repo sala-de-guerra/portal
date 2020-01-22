@@ -78,8 +78,8 @@
             <tr>
                 <td></td>
                 <td class="pl-40px">
-                    <a href="<?php echo env('APP_URL') ?>/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%">
-                    <?php echo env('APP_URL') ?>/estoque-imoveis/distrato/tratar/%CONTRATO_BEM%
+                    <a href="%URL_PORTAL_DEMANDA_DISTRATO%">
+                    %URL_PORTAL_DEMANDA_DISTRATO%
                     </a>
                 </td>
             </tr>

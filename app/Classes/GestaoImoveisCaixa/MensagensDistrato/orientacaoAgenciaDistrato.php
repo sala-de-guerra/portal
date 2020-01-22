@@ -113,8 +113,7 @@
                 </td>
                 <td class="pl-20px">
                     Solicitamos que a agência entre em contato com o cliente para agendar a data para 
-                    a devolução dos valores através dos números de telefone: (%DDD_TELEFONE_PROPONENTE%) 
-                    %TELEFONE_PROPONENTE% ou celular: (%DDD_CELULAR_PROPONENTE%) %CELULAR_PROPONENTE% ou 
+                    a devolução dos valores através dos números de telefone: %TELEFONE_PROPONENTE%  ou 
                     pelo email: %EMAIL_PROPONENTE%. 
                 </td>
             </tr>
@@ -133,7 +132,7 @@
                 </td>
                 <td class="pl-20px">
                     Para confeccionar as DLE de forma automatizada 
-                    <a href="https://portal.gilie.hom.sp.caixa/consulta-bem-imovel/%CONTRATO_BEM%">
+                    <a href="%URL_PORTAL_DEMANDA_DISTRATO%">
                         clique aqui
                     </a> para acessar a página "Consultar Bem Imóvel" do Portal GILIE; 
                 </td>
