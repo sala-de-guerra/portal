@@ -11,7 +11,7 @@ function _formataListaDistrato (numeroContrato, view) {
                         '<div class="col-sm-12">' +
                             '<h2 class="card-title"><b>Trajetória do Distrato</b></h2>' +
                             '<br>' +
-                            '<div class="card-body pb-0" id="progressBarDistrato"></div>' +
+                            '<div class="card-body pb-0" id="progressBarDistrato' + item.idDistrato + '"></div>' +
                         '</div>' +
                     '</div>' +
 
@@ -172,7 +172,18 @@ function _formataListaDistrato (numeroContrato, view) {
                 '</li>' +
                 '<hr>';
                 
-            $(li).appendTo('#listaDistratos'); 
+            $(li).appendTo('#listaDistratos');
+
+            var arrayPorcentagemEStatus = {
+                0: "CADASTRADA",
+                25: "AGUARDANDO DOCUMENTOS CLIENTE",
+                50: "AGUARDA PARECER GESTOR",
+                75: "ENCAMINHADO AGENCIA",
+                99: "CONCLUIDO",
+            };
+    
+            // _formataProgressBar ("progressBarDistrato" + item.idDistrato, arrayPorcentagemEStatus, item.statusAnaliseDistrato);
+    
             
             if (view == "operacional") {
                 var btnAnalisarDistrato =
