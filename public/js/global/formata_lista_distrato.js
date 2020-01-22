@@ -273,7 +273,7 @@ function _formataListaDistrato (numeroContrato, view) {
 
                                         '<div class="form-group">' +
                                             '<label>Data Efetiva da Despesa:</label>' +
-                                            '<input type="text" name="dataEfetivaDaDespesa" class="form-control mascaradata" required>' +
+                                            '<input type="date" name="dataEfetivaDaDespesa" class="form-control mascaradata" required>' +
                                         '</div>' +
 
                                         '<div class="form-group">' +
