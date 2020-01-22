@@ -212,7 +212,6 @@ class DistratoController extends Controller
             // ATUALIZA DEMANDA
             $demandaDistrato = Distrato::find($idDistrato);
             $demandaDistrato->motivoDistrato = $request->input('motivoDistrato');
-            // $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato');
             $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
             $demandaDistrato->matriculaAnalista = session('matricula');
             
@@ -231,6 +230,8 @@ class DistratoController extends Controller
                 $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                 $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
                 $controleMensageriaDistrato->save();
+
+                $demandaDistrato->statusAnaliseDistrato = 'AGUARDA AUTORIZACAO EMGEA';
             }
 
             // VALIDA A RESPONSABILIDADE DO DISTRATO COM BASE NO MOTIVO 
@@ -262,7 +263,6 @@ class DistratoController extends Controller
                         $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
                         $controleMensageriaDistrato->save();
                     }
-
                     $demandaDistrato->statusAnaliseDistrato = 'AGUARDANDO DOCUMENTOS CLIENTE';
                     break;
                 case 'DISTRATO CANCELADO':
@@ -283,7 +283,6 @@ class DistratoController extends Controller
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Análise realizada!");
             $request->session()->flash('corpoMensagem', "A análise da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi realizada com sucesso.");
-
 
             // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
             $demandaDistrato->save();
@@ -488,10 +487,7 @@ class DistratoController extends Controller
             $dadosDistrato = Distrato::where('idDistrato', $idDistrato)->first();
 
             // AJUSTA A DATA EFETIVA DA DESPESA PARA REGISTRAR NO BANCO
-            dd($request->dataEfetivaDaDespesa);
-            // $dataConvertida = strtotime($request->dataEfetivaDaDespesa);
-            // $dataEfetivaDaDespesa = date('Y-m-d', $dataConvertida);
-            // dd($dataEfetivaDaDespesa);
+            $dataEfetivaDaDespesa = substr($request->dataEfetivaDaDespesa, 6, 4) . '-' . substr($request->dataEfetivaDaDespesa, 3, 2) . '-' . substr($request->dataEfetivaDaDespesa, 0, 2);
             
             // CADASTRA NOVA DESPESA            
             $novaDespesa = new DistratoRelacaoDespesas;

@@ -15,6 +15,7 @@ class ConsultaContratoController extends Controller
         $jsonMensagensEnviadas = [];
         foreach ($universoMensagensEnviadas as $mensagem) {
             $arrayDadosMensagem = [
+                'idMensagem' => $mensagem->id,
                 'tipoMensagem' => $mensagem->tipoMensagem,
                 'codigoAgencia' => $mensagem->codigoAgencia,
                 'emailProponente' => $mensagem->emailProponente,
@@ -34,6 +35,7 @@ class ConsultaContratoController extends Controller
         $jsonHistoricoContrato = [];
         foreach ($universoHistoricoContrato as $historico) {
             $arrayDadosHistorico = [
+                'idHistorico' => $historico->idHistorico,
                 'matriculaResponsavel' => $historico->matricula,
                 'tipo' => $historico->tipo,
                 'atividade' => $historico->atividade,

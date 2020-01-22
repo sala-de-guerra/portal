@@ -93,9 +93,6 @@ class DistratoPhpMailer
         // $mail->addBCC('c141203@mail.caixa');
         // $mail->addBCC('c079436@mail.caixa');
   
-        // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
-
-
         // CAPTURA OS DADOS DO CONTRATO
         $dadosContrato = BaseSimov::where('BEM_FORMATADO', $request->contratoFormatado)->first();
 
@@ -122,9 +119,9 @@ class DistratoPhpMailer
                 break;
         }
         
-
         $mensagemAutomatica = file_get_contents(("MensagensDistrato/{$modeloMensagem}.php"), dirname(__FILE__));
 
+        // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
         switch ($modeloMensagem) {
             case 'notificacaoCadastroDistrato':
                 // CONVERT A STRING DATA PROPOSTA EM DATETIME E ASSIM MUDAR O FORMATO DELA
@@ -141,6 +138,11 @@ class DistratoPhpMailer
                 break;
             case 'notificacaoGestorParecerAnalista':
                 $mail->Subject = "Notificação de Parecer do Analista de Distrato - Imóvel $request->contratoFormatado";
+
+                //  CRIA A VARIAVEL DE ACESSO AO PORTAL GILIE CONCATENANDO A VARIAVEL ENV, ROTA WEB E CONTRATO FORMATADO
+                $urlPortalGilie = env('APP_URL') . "/estoque-imoveis/distrato/tratar/" . $request->contratoFormatado;
+
+                $mensagemAutomatica = str_replace("%URL_PORTAL_DEMANDA_DISTRATO%", $urlPortalGilie, $mensagemAutomatica);
                 $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
                 $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
                 break;
@@ -183,10 +185,29 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%CPF_CNPJ_PROPONENTE%", $request->cpfCnpjProponente, $mensagemAutomatica);
                 $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);
                 break;
+            case 'orientacaoAgenciaDistrato':
+                $mail->Subject = "Orientação para contabilização de Distrato- Comprador $request->nomeProponente - CHB $request->contratoFormatado";
+
+                $valorMulta = $request->valorTotalProposta * 0.05;
+
+                //  CRIA A VARIAVEL DE ACESSO AO PORTAL GILIE CONCATENANDO A VARIAVEL ENV, ROTA WEB E CONTRATO FORMATADO
+                $urlPortalGilie = env('APP_URL') . "/consulta-bem-imovel/" . $request->contratoFormatado;
+                
+                $mensagemAutomatica = str_replace("%URL_PORTAL_DEMANDA_DISTRATO%", $urlPortalGilie, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%ID_DISTRATO%", $request->idDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_AGENCIA%", $objRelacaoEmailUnidades->nomeAgencia, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MODALIDADE_VENDA%", $classificacao, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%NOME_PROPONENTE_DISTRATO%", $request->nomeProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%CPF_CNPJ_PROPONENTE%", $request->cpfCnpjProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%VALOR_TOTAL_PROPOSTA_DISTRATO%", $request->valorTotalProposta, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%VALOR_MULTA_DISTRATO%", $valorMulta, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%TELEFONE_PROPONENTE%", $request->telefoneProponente, $mensagemAutomatica);
+                $mensagemAutomatica = str_replace("%EMAIL_PROPONENTE%", $request->emailProponente, $mensagemAutomatica);
+                break;
         }       
-
         $mail->Body = $mensagemAutomatica;
-
         return $mail; 
     }
 
@@ -199,5 +220,4 @@ class DistratoPhpMailer
             // echo "Mensagem não pode ser enviada. Erro: {$mail->ErrorInfo}";
         }
     }
-
 }
