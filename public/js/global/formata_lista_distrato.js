@@ -371,6 +371,18 @@ function _formataListaDistrato (numeroContrato, view) {
                                         '</div>' +
 
                                         '<div class="form-group">' +
+                                            '<label>Realizar Distrato:</label>' +
+                                            '<div class="form-check form-check-inline">' +
+                                                '<input class="form-check-input" type="radio" name="decisaoGerenteDistrato" id="inlineRadio1" value="SIM" required>' +
+                                                '<label class="form-check-label" for="inlineRadio1">Sim</label>' +
+                                            '</div>' +
+                                            '<div class="form-check form-check-inline">' +
+                                                '<input class="form-check-input" type="radio" name="decisaoGerenteDistrato" id="inlineRadio2" value="NAO">' +
+                                                '<label class="form-check-label" for="inlineRadio2">Não</label>' +
+                                            '</div>' +
+                                        '</div>' +
+
+                                        '<div class="form-group">' +
                                             '<label>Observações:</label>' +
                                             '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
                                         '</div>' +

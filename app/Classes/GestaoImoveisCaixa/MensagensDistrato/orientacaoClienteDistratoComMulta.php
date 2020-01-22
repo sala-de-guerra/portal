@@ -62,30 +62,33 @@
 
     <br>
     <table>
-        <tr>
-            <td>
-                <b class="centralizado">Assunto:</b>
-            </td>
-            <td>
-                <b class="pl-40px">Distrato de Imóvel comprado na modalidade %MODALIDADE_VENDA% - Nº do Bem: %CONTRATO_BEM%</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="centralizado">Arrematante:</b>
-            </td>
-            <td>
-                <b class="pl-40px">%NOME_PROPONENTE_DISTRATO% - CPF / CNPJ: %CPF_CNPJ_PROPONENTE%</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="centralizado">Motivo:</b>
-            </td>
-            <td>
-                <b class="pl-40px">%MOTIVO_DISTRATO%</b>
-            </td>
-        </tr>
+        <thead></thead>
+        <tbody>
+            <tr>
+                <td>
+                    <b class="centralizado">Assunto:</b>
+                </td>
+                <td>
+                    <b class="pl-20px">Distrato de Imóvel comprado na modalidade %MODALIDADE_VENDA% - Nº do Bem: %CONTRATO_BEM%</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="centralizado">Arrematante:</b>
+                </td>
+                <td>
+                    <b class="pl-20px">%NOME_PROPONENTE_DISTRATO% - CPF / CNPJ: %CPF_CNPJ_PROPONENTE%</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="centralizado">Motivo:</b>
+                </td>
+                <td>
+                    <b class="pl-20px">%MOTIVO_DISTRATO%</b>
+                </td>
+            </tr>
+        </tbody>
     </table>
 
     <br>
@@ -94,121 +97,124 @@
 
 
     <table>
-        <tr>
-            <td>
-                <p>1.</p>
-            </td>
-            <td>
-                <p class="">Tendo em vista a solicitação de desistência de aquisição pela arrematante, informamos que o 
-                    distrato ou cancelamento motivado por desinteresse do adquirente equipara-se à desistência, com multa revertida 
-                    em favor da CAIXA</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>2.</p>
-            </td>
-            <td>
-                <p class="">A devolução dos valores serão realizados na agência da Caixa escolhida para contração, agência 
-                    %NOME_AGENCIA%, para qual já enviamos autorização e orientações necessárias.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>3.</p>
-            </td>
-            <td>
-                <p class="">Os valores passíveis de devolução pela Caixa são os que seguem:</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-40px">•</b>
-            </td>
-            <td>
-                <b class="">valores pagos a título de recursos próprios tais como sinal, prestação de financiamento e 
-                    tarifa de concessão de financiamento;</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>4.</p>
-            </td>
-            <td>
-                <p class="">Sendo assim, de acordo com as Regras do edital, o arrematante desistente será penalizado 
-                    com multa, conforme segue:</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">16</b>
-            </td>
-            <td>
-                <b class="">DA MULTA</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="pl-20px">16.1</p>
-            </td>
-            <td>
-                <p class="">Após o pagamento da parte em recursos próprios, o proponente vencedor perde em favor da 
-                    CAIXA, o valor equivalente a 5% do valor mínimo de venda, a título de multa, nos casos de: </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="pl-20px">16.1.1</p>
-            </td>
-            <td>
-                <p class="">desistência;</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="pl-20px">16.1.2</p>
-            </td>
-            <td>
-                <p class="">não cumprimento do prazo para pagamento do valor total;</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="pl-20px">16.1.3</p>
-            </td>
-            <td>
-                <p class="">descumprimento de quaisquer outras condições estabelecidas nas presentes regras.</p>
-            </td>
-        </tr>
+        <thead></thead>
+        <tbody>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td class="pl-20px">
+                    Tendo em vista a solicitação de desistência de aquisição pela arrematante, informamos 
+                    que o distrato ou cancelamento motivado por desinteresse do adquirente equipara-se à 
+                    desistência, com multa revertida em favor da CAIXA
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2
+                </td>
+                <td class="pl-20px">
+                    A devolução dos valores serão realizados na agência da Caixa escolhida para contração, 
+                    agência %NOME_AGENCIA%, para qual já enviamos autorização e orientações necessárias.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3
+                </td>
+                <td class="pl-20px">
+                    Os valores passíveis de devolução pela Caixa são os que seguem:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-40px">•</b>
+                </td>
+                <td>
+                    <b>valores pagos a título de recursos próprios tais como sinal, prestação de 
+                    financiamento e tarifa de concessão de financiamento;</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    4
+                </td>
+                <td class="pl-20px">
+                    Sendo assim, de acordo com as Regras do edital, o arrematante desistente será penalizado 
+                    com multa, conforme segue:
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-20px">
+                    <b>16</b>
+                </td>
+                <td class="pl-20px">
+                    <b>DA MULTA</b>
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-20px">
+                    16.1
+                </td>
+                <td class="pl-20px">
+                    Após o pagamento da parte em recursos próprios, o proponente vencedor perde em favor da 
+                    CAIXA, o valor equivalente a 5% do valor mínimo de venda, a título de multa, nos casos de:
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-20px">
+                    16.1.1
+                </td>
+                <td class="pl-20px">
+                    desistência;
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-20px">
+                    16.1.2
+                </td>
+                <td class="pl-20px">
+                    não cumprimento do prazo para pagamento do valor total;
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-20px">
+                    16.1.3
+                </td>
+                <td class="pl-20px">
+                    descumprimento de quaisquer outras condições estabelecidas nas presentes regras.
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <p>5.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Dessa forma, considerando as Regras acima expostas, com as quais o cliente concorda no 
-                    momento em que oferece proposta para o imóvel, informamos que o cliente será multada em 5% do valor de 
-                    venda do imóvel (%VALOR_TOTAL_PROPOSTA_DISTRATO%), ou seja, R$ %VALOR_MULTA_DISTRATO% de multa.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>6.</p>
-            </td>
-            <td>
-                <p class="pl-20px">O valor restante pago em recursos próprios, será creditado na conta de titularidade da 
-                    arremate, a qual solicitamos informar através desse e-mail.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>7.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Sendo o que tínhamos a informar, agradecemos e nos colocamos à disposição.</p>
-            </td>
-        </tr>
-
+            <tr>
+                <td>
+                    5
+                </td>
+                <td class="pl-20px">
+                    Dessa forma, considerando as Regras acima expostas, com as quais o cliente concorda no 
+                    momento em que oferece proposta para o imóvel, informamos que o cliente será multada em 
+                    5% do valor de venda do imóvel (%VALOR_TOTAL_PROPOSTA_DISTRATO%), ou seja, 
+                    R$ %VALOR_MULTA_DISTRATO% de multa.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    6
+                </td>
+                <td class="pl-20px">
+                    O valor restante pago em recursos próprios, será creditado na conta de titularidade da 
+                    arremate, a qual solicitamos informar através desse e-mail.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    7
+                </td>
+                <td class="pl-20px">
+                    Sendo o que tínhamos a informar, agradecemos e nos colocamos à disposição.
+                </td>
+            </tr>
+        </tbody>
     </table>
 
     <br>        

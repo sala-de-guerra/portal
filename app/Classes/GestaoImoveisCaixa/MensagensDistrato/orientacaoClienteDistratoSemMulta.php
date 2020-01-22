@@ -61,138 +61,145 @@
 
     <br>
     <table>
-        <tr>
-            <td>
-                <b class="centralizado">Assunto:</b>
-            </td>
-            <td>
-                <b class="pl-40px">Distrato de Imóvel comprado na modalidade %MODALIDADE_VENDA% - Nº do Bem: %CONTRATO_BEM%</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="centralizado">Arrematante:</b>
-            </td>
-            <td>
-                <b class="pl-40px">%NOME_PROPONENTE_DISTRATO% - CPF / CNPJ: %CPF_CNPJ_PROPONENTE%</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="centralizado">Motivo:</b>
-            </td>
-            <td>
-                <b class="pl-40px">%MOTIVO_DISTRATO%</b>
-            </td>
-        </tr>
+        <thead></thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    <b class="centralizado">Assunto:</b>
+                </td>
+                <td>
+                    <b class="pl-20px">Distrato de Imóvel comprado na modalidade %MODALIDADE_VENDA% - Nº do Bem: %CONTRATO_BEM%</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="centralizado">Arrematante:</b>
+                </td>
+                <td>
+                    <b class="pl-20px">%NOME_PROPONENTE_DISTRATO% - CPF / CNPJ: %CPF_CNPJ_PROPONENTE%</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="centralizado">Motivo:</b>
+                </td>
+                <td>
+                    <b class="pl-20px">%MOTIVO_DISTRATO%</b>
+                </td>
+            </tr>
+        </tbody>
     </table>
 
-    <br>
-    <br>
-    <br>
+        <br>
+        <br>
+        <br>
 
 
     <table>
-        <tr>
-            <td>
-                <p>1.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Considerando a necessidade de distrato pelo motivo citado acima, para o imóvel arrematado 
-                    pelo senhores, a venda será cancelada e os valores pagos serão devolvidos.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>2.</p>
-            </td>
-            <td>
-                <p class="pl-20px">A devolução dos valores serão realizados na agência da Caixa escolhida para contração, agência 
-                    %NOME_AGENCIA%, para qual já enviamos autorização e orientações necessárias.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>3.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Os valores passíveis de devolução pela Caixa são os que seguem:</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">•</b>
-            </td>
-            <td>
-                <b class="pl-20px">valores pagos a título de recursos próprios tais como sinal, prestação de financiamento e 
-                    tarifa de concessão de financiamento;</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">•</b>
-            </td>
-            <td>
-                <b class="pl-20px">comissão do leiloeiro;</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">•</b>
-            </td>
-            <td>
-                <b class="pl-20px">valor das dívidas propter rem pagas pelo adquirente e devidamente comprovadas (Condomínio, IPTU);</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">•</b>
-            </td>
-            <td>
-                <b class="pl-20px">ITBI;</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">•</b>
-            </td>
-            <td>
-                <b class="pl-20px">lavratura de escritura;</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">•</b>
-            </td>
-            <td>
-                <b class="pl-20px">registro em cartório;</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b class="pl-20px">•</b>
-            </td>
-            <td>
-                <b class="pl-20px">honorários Advocatícios</b>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>4.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Sobre os valores autorizados para devolução será calculada atualização monetária composta de 
-                    remuneração básica e juros da poupança, e será calculada da data do pagamento até a data da devolução.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>5.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Lamentamos os transtornos gerados pela situação, e colocamo-nos à disposição.</p>
-            </td>
-        </tr>
+        <thead></thead>
+        <tbody>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td class="pl-20px">
+                    Considerando a necessidade de distrato pelo motivo citado acima, para o imóvel arrematado 
+                    pelo(a) senhor(a), a venda será cancelada e os valores pagos serão devolvidos.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2
+                </td>
+                <td class="pl-20px">
+                    A devolução dos valores serão realizados na agência da Caixa escolhida para contração, agência 
+                    %NOME_AGENCIA%, para qual já enviamos autorização e orientações necessárias.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3
+                </td>
+                <td class="pl-20px">
+                    Os valores passíveis de devolução pela Caixa são os que seguem:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-20px">•</b>
+                </td>
+                <td>
+                    <b class="pl-20px">valores pagos a título de recursos próprios tais como sinal, prestação de financiamento e 
+                        tarifa de concessão de financiamento;</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-20px">•</b>
+                </td>
+                <td>
+                    <b class="pl-20px">comissão do leiloeiro;</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-20px">•</b>
+                </td>
+                <td>
+                    <b class="pl-20px">valor das dívidas propter rem pagas pelo adquirente e devidamente comprovadas (Condomínio, IPTU);</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-20px">•</b>
+                </td>
+                <td>
+                    <b class="pl-20px">ITBI;</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-20px">•</b>
+                </td>
+                <td>
+                    <b class="pl-20px">lavratura de escritura;</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-20px">•</b>
+                </td>
+                <td>
+                    <b class="pl-20px">registro em cartório;</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="pl-20px">•</b>
+                </td>
+                <td>
+                    <b class="pl-20px">honorários Advocatícios</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    4
+                </td>
+                <td class="pl-20px">
+                    Sobre os valores autorizados para devolução será calculada atualização monetária composta de 
+                    remuneração básica e juros da poupança, e será calculada da data do pagamento até a data da devolução.
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-20px">
+                    5
+                </td>
+                <td class="pl-20px">
+                    Lamentamos os transtornos gerados pela situação, e colocamo-nos à disposição.
+                </td>
+            </tr>
+        </tbody>
     </table>
 
     <br>        

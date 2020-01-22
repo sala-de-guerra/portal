@@ -63,32 +63,36 @@
     <br>
 
     <table>
-        <tr>
-            <td>
-                <p>1.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Encaminhamos anexa contextualização, solicitando autorização para cancelamento de venda 
-                    referente ao imóvel  EMGEA CHB %CONTRATO_BEM%.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>2.</p>
-            </td>
-            <td>
-                <p class="pl-20px">A documentação está disponível para consulta no endereço 
-                    \\sp7257sr001\PUBLIC\EstoqueImoveis\%CONTRATO_BEM%.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>3.</p>
-            </td>
-            <td>
-                <p class="pl-20px">Colocamo-nos à disposição para eventuais esclarecimentos.</p>
-            </td>
-        </tr>
+        <thead></thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    1
+                </td>
+                <td class="pl-20px">
+                    Encaminhamos anexa contextualização, solicitando autorização para cancelamento de venda 
+                    referente ao imóvel  EMGEA CHB %CONTRATO_BEM%.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2
+                </td>
+                <td class="pl-20px">
+                    A documentação está disponível para consulta no endereço 
+                    \\sp7257sr001\PUBLIC\EstoqueImoveis\%CONTRATO_BEM%.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3
+                </td>
+                <td class="pl-20px">
+                    Colocamo-nos à disposição para eventuais esclarecimentos.
+                </td>
+            </tr>
+        </tbody>
     </table>
 
     <br>        

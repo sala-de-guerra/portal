@@ -74,9 +74,7 @@
         <thead></thead>
         <tbody>
             <tr>
-                <td>
-                    1
-                </td>
+                <td>1</td>
                 <td class="pl-20px">
                     Informamos que foi cadastrada nesta data a demanda de distrato 
                     número %ID_DISTRATO% referente ao imóvel %CONTRATO_BEM% cito à %ENDERECO_IMOVEL% 
@@ -85,9 +83,7 @@
             </tr>
             <br>
             <tr>
-                <td>
-                    1.1
-                </td>
+                <td>1.1</td>
                 <td class="pl-20px">
                     A GILIE/SP irá executar a pré-análise desta demanda e reserva-se o 
                     direito de solicitar maiores informações ou docuumentos durante o processo de análise.
@@ -95,9 +91,7 @@
             </tr>
             <br>
             <tr>
-                <td>
-                    2
-                </td>
+                <td>2</td>
                 <td class="pl-20px">
                     Em caso de dúvidas, favor entrar em contato com a Agência de vinculação 
                     da negociação ou com esta GILIE/SP através da caixa postal GILIESP01@caixa.gov.br.
