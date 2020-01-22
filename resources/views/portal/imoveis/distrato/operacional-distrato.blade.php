@@ -50,7 +50,9 @@
 @stop
 
 @section('css')
+
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('/js/plugins/jquery-ui/jquery-ui.min.css') }}">
 @stop
 
 
@@ -62,6 +64,7 @@
     <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
     <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
     <script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- <script src="{{ asset('js/global/formata_tabela_documentos.js') }}"></script> -->
     <!-- <script src="{{ asset('js/global/formata_tabela_laudos.js') }}"></script> -->
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>

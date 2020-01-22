@@ -313,7 +313,6 @@ class DistratoController extends Controller
             // CAPTURA A DEMANDA DE DISTRATO E RELAÇÃO DE DESPESAS
             $demandaDistrato = Distrato::find($idDistrato);
             $relacaoDespesasDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->get();
-            dd($relacaoDespesasDistrato->count() == 0);
             
             // VALIDA SE EXISTE DESPESA CADASTRADA - CASO EXISTA SEGUE COM A EMISSÃO DO PARECER - CASO NEGATIVO VOLTA PRA TELA COM ERRO
             if ($relacaoDespesasDistrato->count() == 0) {
@@ -489,10 +488,10 @@ class DistratoController extends Controller
             $dadosDistrato = Distrato::where('idDistrato', $idDistrato)->first();
 
             // AJUSTA A DATA EFETIVA DA DESPESA PARA REGISTRAR NO BANCO
-            // dd($request->dataEfetivaDaDespesa);
-            $dataConvertida = strtotime($request->dataEfetivaDaDespesa);
-            $dataEfetivaDaDespesa = date('Y-m-d', $dataConvertida);
-            dd($dataEfetivaDaDespesa);
+            dd($request->dataEfetivaDaDespesa);
+            // $dataConvertida = strtotime($request->dataEfetivaDaDespesa);
+            // $dataEfetivaDaDespesa = date('Y-m-d', $dataConvertida);
+            // dd($dataEfetivaDaDespesa);
             
             // CADASTRA NOVA DESPESA            
             $novaDespesa = new DistratoRelacaoDespesas;
