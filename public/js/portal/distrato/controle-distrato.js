@@ -36,9 +36,14 @@ $(document).ready(function(){
 
 // RESETAR CAMPOS DO FORM DE CADASTRO DE DEMANDA DE DISTRATO AO FECHAR O MODAL
 
-$('#modalCadastraDistrato').on('hidden.bs.modal', function(e){
-    $("#formCadastraDemandaDistrato")[0].reset();           
+// $('#modalCadastraDistrato').on('hidden.bs.modal', function(e){
+//     $("#formCadastraDemandaDistrato")[0].reset();           
+// });
+
+$(".modal").on('hidden.bs.modal', function(e){
+    $(this).find("form")[0].reset();       
 });
+
 
 // FUNCAO DE VALIDAR CHB E JA PEGAR NOME E CPF DA ROTA DE CONSULTA-BEM
 function _validarCHB(inputChb){

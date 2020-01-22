@@ -46,6 +46,13 @@ $(document).ready(function(){
 
 });
 
+// RESETAR CAMPOS DOS FORM AO FECHAR O MODAL
+
+$(".modal").on('hidden.bs.modal', function(e){
+    $(this).find("form")[0].reset();       
+});
+
+
 function copyToClipboard(element) {
 
     var $temp = $("<input>");
