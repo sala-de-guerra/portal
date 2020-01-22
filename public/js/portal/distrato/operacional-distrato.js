@@ -7,7 +7,7 @@ $(document).ready(function(){
     
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
-    _formataListaDistrato (numeroContrato, "operacional");
+    _formataListaDistrato (numeroContrato, "operacional"); // NO FINAL DESTA FUNÇÃO É CHAMADA A FUNÇÃO _formataTabelaDespesasDistrato
     _formataDatatable();
 
 
@@ -43,14 +43,9 @@ $(document).ready(function(){
     // var tamanhoMaximo = 8388608;
 
     // _animaInputFile();
-
+    
 });
 
-// RESETAR CAMPOS DOS FORM AO FECHAR O MODAL
-
-$(".modal").on('hidden.bs.modal', function(e){
-    $(this).find("form")[0].reset();       
-});
 
 
 function copyToClipboard(element) {
