@@ -28,9 +28,9 @@ $(document).ready(function(){
     // var tamanhoMaximoView = 8;
     // var tamanhoMaximo = 8388608;
     // _animaInputFile();
-    setTimeout(function(){
-        _formataDatatable();
-    },1000);
+    // setTimeout(function(){
+    //     _formataDatatable();
+    // },1000);
 });
 
 function copyToClipboard(element) {

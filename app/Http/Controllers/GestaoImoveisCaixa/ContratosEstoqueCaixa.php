@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BaseSimov;
 use App\Models\RelacaoAgSrComEmail;
+use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
+use App\Models\PropostasSimov;
 
 class ContratosEstoqueCaixa extends Controller
 {
@@ -40,10 +42,16 @@ class ContratosEstoqueCaixa extends Controller
     static public function capturaDadosBaseSimov($numeroContrato)
     {
         // dd($numeroContrato);
+        // CAPTURA OS DADOS SIMOV DO CONTRATO
         $contrato = BaseSimov::where('BEM_FORMATADO', $numeroContrato)->first();
-        // dd($contrato);
+        // CAPTURA OS DADOS DA AGÊNCIA DE CONTRATACAO (SE HOUVER)
         $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $contrato->AGENCIA_CONTRATACAO_PROPOSTA)->first();
-        
+        // CAPTURA DADOS DE CONFORMIDADE
+        $dadosConformidade = ConformidadeContratacao::where('numeroContrato', $contrato->NU_BEM)->first();
+        // CAPTURA OS DADOS DA PROPOSTA DO PROPONENTE ATUAL
+        $dadosProposta = PropostasSimov::where('NU_BEM', $contrato->NU_BEM)->where('VALOR RECURSOS PRÓPRIOS', $contrato->VALOR_REC_PROPRIOS_CONTRATO)->where('VALOR FGTS', $contrato->VALOR_FGTS_PROPOSTA)->where('VALOR FINANCIADO', $contrato->VALOR_FINANCIADO_PROPOSTA)->where('NOME PROPONENTE', $contrato->NOME_PROPONENTE)->first();
+        dd($dadosProposta);
+
         // VALIDA FLUXO CONTRATAÇÃO DA PROPOSTA - CCA OU AGÊNCIA
         $fluxoAgenciaOuCca = self::validaFluxoContratacaoPropostaCcaAgencia($contrato);
 
@@ -59,6 +67,22 @@ class ContratosEstoqueCaixa extends Controller
             $codigoAgenciaContratacao = $dadosAgencia->codigoAgencia;
             $nomeAgenciaContratacao = $dadosAgencia->nomeAgencia;
             $emailAgenciaContratacao = $dadosAgencia->emailAgencia;
+        }
+
+        // VALIDA SE EXISTE CONFORMIDADE NO CONTRATO
+        if ($dadosConformidade == null || $dadosConformidade == 'NULL') {
+            $cardDeAgrupamento = null;
+            $nomeStatusDoDossie =  null;
+        } else {
+            $cardDeAgrupamento = $dadosConformidade->cardDeAgrupamento;
+            $nomeStatusDoDossie =  $dadosConformidade->nomeStatusDoDossie;
+        }
+
+        // VALIDA SE O PROPONENTE TEM E-MAIL CADASTRADO
+        if ($dadosProposta ==  null || $dadosProposta == 'NULL') {
+            $emailProponente = 'sem e-mail cadastrado';
+        } else {
+            $emailProponente = $dadosProposta->{'E-MAIL PROPONENTE'};
         }
         
         // MONTA O JSON QUE VAI PRA VIEW
@@ -99,7 +123,7 @@ class ContratosEstoqueCaixa extends Controller
             'nomeProponente' => $contrato->NOME_PROPONENTE,
             'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
             'telefoneProponente' => '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
-            // 'emailProponente' => ,
+            'emailProponente' => $emailProponente,
             'nomeCorretor' => $contrato->NO_CORRETOR,
             'numeroCreciCorretor' => $contrato->NU_CRECI,
             'telefoneCorretor' => $telefoneCorretor,
@@ -115,8 +139,8 @@ class ContratosEstoqueCaixa extends Controller
             'nomeAgContratacaoProposta' => $nomeAgenciaContratacao,
             'emailAgContratacaoProposta' => $emailAgenciaContratacao,
             // 'tipoContratacao'
-            // 'cardAgrupamento'
-            // 'statusDossie'
+            'cardAgrupamento' => $cardDeAgrupamento,
+            'nomeStatusDossie' => $nomeStatusDoDossie,
             'tipoFluxoContratacao' => $fluxoAgenciaOuCca,
 
             // CAMPOS SEM USO HOJE

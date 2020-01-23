@@ -27,7 +27,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                             '</span>' +
                         '</div>' +
                     '</td>' +
-                    '<td>' +
+                    '<td class="col-sm-2">' +
                         '<div class="row">' +
                             '<div id="btnAlteraDespesa' + item.idDespesa + '" class="m-2"> </div>' +
 
@@ -80,6 +80,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                                                 '<option value="ITBI">ITBI</option>' +
                                                 '<option value="MULTA">Multa</option>' +
                                                 '<option value="OUTRAS DESPESAS">Outras Despesas</option>' +
+                                                '<option value="PARCELA DE FINANCIAMENTO">Prcela de Financiamento</option>' +
                                                 '<option value="PARCELAMENTO">Parcelamento</option>' +
                                                 '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
                                                 '<option value="TAXAS DE FINANCIAMENTO">Taxas de Financiamento</option>' +
@@ -208,9 +209,10 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
             };
         });
     
-        _formataDatatable();
         _formataData();
         _formataValores();
+        _formataDatatableComId ('tblDespesasDistrato' + idDistrato);
+
 
         // RESETAR CAMPOS DOS FORM AO FECHAR O MODAL
     

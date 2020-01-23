@@ -12,5 +12,6 @@ function _formataTabelaMensagensEnviadas (numeroContrato) {
                 '</tr>';
             $(linha).appendTo('#tblMensagensEnviadas>tbody');
         })
+        _formataDatatableComId ("tblMensagensEnviadas");
     });
 };
