@@ -35,6 +35,10 @@
         padding-left: 40px;
     }
 
+    td {
+        text-align: justify;
+        vertical-align: text-top;
+    }
 
    </style>
 
@@ -126,60 +130,60 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <b class="pl-20px">•</b>
+                <td class="pl-40px">
+                    <b>•</b>
                 </td>
-                <td>
-                    <b class="pl-20px">valores pagos a título de recursos próprios tais como sinal, prestação de financiamento e 
-                        tarifa de concessão de financiamento;</b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b class="pl-20px">•</b>
-                </td>
-                <td>
-                    <b class="pl-20px">comissão do leiloeiro;</b>
+                <td class="pl-20px">
+                    <b>valores pagos a título de recursos próprios tais como sinal, prestação de financiamento e 
+                    tarifa de concessão de financiamento;</b>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <b class="pl-20px">•</b>
+                <td class="pl-40px">
+                    <b>•</b>
                 </td>
-                <td>
-                    <b class="pl-20px">valor das dívidas propter rem pagas pelo adquirente e devidamente comprovadas (Condomínio, IPTU);</b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b class="pl-20px">•</b>
-                </td>
-                <td>
-                    <b class="pl-20px">ITBI;</b>
+                <td class="pl-20px">
+                    <b>comissão do leiloeiro;</b>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <b class="pl-20px">•</b>
+                <td class="pl-40px">
+                    <b>•</b>
                 </td>
-                <td>
-                    <b class="pl-20px">lavratura de escritura;</b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b class="pl-20px">•</b>
-                </td>
-                <td>
-                    <b class="pl-20px">registro em cartório;</b>
+                <td class="pl-20px">
+                    <b>valor das dívidas propter rem pagas pelo adquirente e devidamente comprovadas (Condomínio, IPTU);</b>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <b class="pl-20px">•</b>
+                <td class="pl-40px">
+                    <b>•</b>
                 </td>
-                <td>
-                    <b class="pl-20px">honorários Advocatícios</b>
+                <td class="pl-20px">
+                    <b>ITBI;</b>
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>lavratura de escritura;</b>
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>registro em cartório;</b>
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>honorários Advocatícios</b>
                 </td>
             </tr>
             <tr>
@@ -192,7 +196,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="pl-20px">
+                <td>
                     5
                 </td>
                 <td class="pl-20px">

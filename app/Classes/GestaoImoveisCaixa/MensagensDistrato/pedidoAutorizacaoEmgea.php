@@ -35,6 +35,10 @@
         padding-left: 40px;
     }
 
+    td {
+        text-align: justify;
+        vertical-align: text-top;
+    }
 
    </style>
 

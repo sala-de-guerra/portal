@@ -35,6 +35,10 @@
         padding-left: 40px;
     }
 
+    td {
+        text-align: justify;
+        vertical-align: text-top;
+    }
 
    </style>
 
@@ -127,10 +131,10 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <b class="pl-40px">•</b>
+                <td class="pl-40px">
+                    <b>•</b>
                 </td>
-                <td>
+                <td class="pl-20px">
                     <b>valores pagos a título de recursos próprios tais como sinal, prestação de 
                     financiamento e tarifa de concessão de financiamento;</b>
                 </td>
