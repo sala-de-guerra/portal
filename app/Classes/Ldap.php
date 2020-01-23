@@ -217,6 +217,7 @@ class Ldap
     public function updateBaseEmpregados()
     {
         $empregado = Empregado::firstOrNew(array('matricula' => $this->getMatricula()));
+        $empregado->matricula = $this->getMatricula();
         $empregado->nomeCompleto = $this->getNomeCompleto();
         $empregado->cpf = $this->getCpf();
         $empregado->primeiroNome = $this->getPrimeiroNome();

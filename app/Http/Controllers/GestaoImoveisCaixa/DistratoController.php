@@ -484,7 +484,7 @@ class DistratoController extends Controller
             $demandaDistrato->save();
             DB::commit();
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');

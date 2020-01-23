@@ -172,18 +172,7 @@ function _formataListaDistrato (numeroContrato, view) {
                 '</li>' +
                 '<hr>';
                 
-            $(li).appendTo('#listaDistratos');
-
-            var arrayPorcentagemEStatus = {
-                0: "Cadastrada",
-                25: "Aguarda Docs.",
-                50: "Em Análise",
-                75: "Encaminhado Agência",
-                99: "Concluída",
-            };
-    
-            _formataProgressBar ("progressBarDistrato" + item.idDistrato, arrayPorcentagemEStatus, item.statusAnaliseDistrato);
-    
+            $(li).appendTo('#listaDistratos');    
             
             if (view == "operacional") {
                 var btnAnalisarDistrato =
@@ -246,231 +235,233 @@ function _formataListaDistrato (numeroContrato, view) {
 
                 $('#selectMotivo' + item.idDistrato).val(item.motivoDistrato);
 
-                var btnCadastrarDespesaDistrato =
-                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespesaDistrato' + item.idDistrato + '">' +
-                        '<i class="far fa-edit"></i>' +
-                        'Cadastrar Despesa' +
-                    '</button>' +
+                if (item.statusAnaliseDistrato != "CADASTRADA") {
+                    var btnCadastrarDespesaDistrato =
+                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespesaDistrato' + item.idDistrato + '">' +
+                            '<i class="far fa-edit"></i>' +
+                            'Cadastrar Despesa' +
+                        '</button>' +
 
-                    '<div class="modal fade" id="modalCadastraDespesaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                        '<div class="modal-dialog" role="document">' +
-                            '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/cadastrar-despesa/' + item.idDistrato + '" id="formCadastraDespesaDistrato' + item.idDistrato + '">' +
-                                    
-                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                                // '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-                                // '<input type="hidden" class="form-control" name="idDistrato" value="'+ item.idDistrato +'">' +
+                        '<div class="modal fade" id="modalCadastraDespesaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                                '<div class="modal-content">' +
+                                    '<form method="post" action="/estoque-imoveis/distrato/cadastrar-despesa/' + item.idDistrato + '" id="formCadastraDespesaDistrato' + item.idDistrato + '">' +
+                                        
+                                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                    // '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                                    // '<input type="hidden" class="form-control" name="idDistrato" value="'+ item.idDistrato +'">' +
 
-                                    '<div class="modal-header">' +
-                                        '<h5 class="modal-title" id="exampleModalLabel">Cadastrar Despesa</h5>' +
-                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-                                            '<span aria-hidden="true">&times;</span>' +
-                                        '</button>' +
-                                    '</div>' +
-
-                                    '<div class="modal-body">' +
-
-                                        '<div class="form-group">' +
-                                            '<label>Tipo de Despesa:</label>' +
-                                            '<select name="tipoDespesa" class="form-control" required>' +
-                                                '<option value="">Selecione</option>' +
-                                                '<option value="AUTORIZADAS REEMBOLSO EMGEA">Autorizadas Reembolso EMGEA</option>' +
-                                                '<option value="BENFEITORIAS">Benfeitorias</option>' +
-                                                '<option value="COMISSAO DE LEILOEIRO">Comissão de Leiloeiro</option>' +
-                                                '<option value="CONDOMINIO">Condomínio</option>' +
-                                                '<option value="CUSTAS CARTORARIAS">Custas Cartorárias</option>' +
-                                                '<option value="FGTS">FGTS</option>' +
-                                                '<option value="FINANCIAMENTO">Financiamento</option>' +
-                                                '<option value="IPTU">IPTU</option>' +
-                                                '<option value="ITBI">ITBI</option>' +
-                                                '<option value="MULTA">Multa</option>' +
-                                                '<option value="OUTRAS DESPESAS">Outras Despesas</option>' +
-                                                '<option value="PARCELAMENTO">Parcelamento</option>' +
-                                                '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
-                                                '<option value="TAXAS DE FINANCIAMENTO">Taxas de Financiamento</option>' +
-                                            '</select>' +
+                                        '<div class="modal-header">' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">Cadastrar Despesa</h5>' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                                '<span aria-hidden="true">&times;</span>' +
+                                            '</button>' +
                                         '</div>' +
 
-                                        '<div class="form-group">' +
-                                            '<label>Data Efetiva da Despesa:</label>' +
-                                            '<input type="text" name="dataEfetivaDaDespesa" class="form-control datepicker" required>' +
-                                        '</div>' +
+                                        '<div class="modal-body">' +
 
-                                        '<div class="form-group">' +
-                                            '<label>Valor da Despesa:</label>' +
-                                            '<input type="text" name="valorDespesa" class="form-control" required>' +                                        
-                                        '</div>' +
-
-                                        '<div class="form-group">' +
-                                            '<label>Observações:</label>' +
-                                            '<textarea rows="5" name="observacaoDespesa" class="form-control"></textarea>' +                                        
-                                        '</div>' +
-
-                                    '</div>' +
-                                    '<div class="modal-footer">' +
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
-                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
-                                    '</div>' +
-
-                                '</form>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
-
-                $(btnCadastrarDespesaDistrato).appendTo('#btnCadastrarDespesaDistrato' + item.idDistrato);
-
-                var btnParecerAnalistaDistrato =
-                    
-                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParecerAnalistaDistrato' + item.idDistrato + '">' +
-                        '<i class="far fa-edit"></i>' +
-                        'Parecer Analista' +
-                    '</button>' +
-
-                    '<div class="modal fade" id="modalParecerAnalistaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                        '<div class="modal-dialog" role="document">' +
-                            '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/emitir-parecer-analista/' + item.idDistrato + '" id="formParecerAnalistaDistrato' + item.idDistrato + '">' +
-                                    
-                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                                '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-
-
-                                    '<div class="modal-header">' +
-                                        '<h5 class="modal-title" id="exampleModalLabel">Emitir Parecer do Analista</h5>' +
-                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-                                            '<span aria-hidden="true">&times;</span>' +
-                                        '</button>' +
-                                    '</div>' +
-                                    
-                                    '<div class="modal-body">' +
-
-                                        '<div class="form-group">' +
-                                            '<label>Observações:</label>' +
-                                            '<textarea rows="5" name="parecerAnalista" class="form-control"></textarea>' +                                        
-                                        '</div>' +
-
-                                    '</div>' +
-                                    '<div class="modal-footer">' +
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
-                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
-                                    '</div>' +
-
-                                '</form>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
-                $(btnParecerAnalistaDistrato).appendTo('#btnParecerAnalistaDistrato' + item.idDistrato);
-
-                var btnParecerGerenteDistrato =
-                    
-                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParecerGerenteDistrato' + item.idDistrato + '">' +
-                        '<i class="far fa-edit"></i>' +
-                        'Parecer Gerente' +
-                    '</button>' +
-
-                    '<div class="modal fade" id="modalParecerGerenteDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                        '<div class="modal-dialog" role="document">' +
-                            '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/emitir-parecer-gestor/' + item.idDistrato + '" id="formParecerGerenteDistrato' + item.idDistrato + '">' +
-                                    
-                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                                '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-
-
-                                    '<div class="modal-header">' +
-                                        '<h5 class="modal-title" id="exampleModalLabel">Emitir Parecer do Gerente</h5>' +
-                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-                                            '<span aria-hidden="true">&times;</span>' +
-                                        '</button>' +
-                                    '</div>' +
-                                    '<div class="modal-body">' +
-
-                                        '<div class="form-group">' +
-                                            '<label>Parecer do Analista - ' + item.matriculaAnalista + ':</label>' +
-                                            '<p>' + item.parecerAnalista + '</p>' +
-                                        '</div>' +
-
-                                        '<div class="form-group">' +
-                                            '<label>Realizar Distrato:</label>' +
-                                            '<br>' +
-                                            '<div class="form-check form-check-inline">' +
-                                                '<input class="form-check-input" type="radio" name="decisaoGerenteDistrato" id="inlineRadio1" value="SIM" required>' +
-                                                '<label class="form-check-label" for="inlineRadio1">Sim</label>' +
+                                            '<div class="form-group">' +
+                                                '<label>Tipo de Despesa:</label>' +
+                                                '<select name="tipoDespesa" class="form-control" required>' +
+                                                    '<option value="">Selecione</option>' +
+                                                    '<option value="AUTORIZADAS REEMBOLSO EMGEA">Autorizadas Reembolso EMGEA</option>' +
+                                                    '<option value="BENFEITORIAS">Benfeitorias</option>' +
+                                                    '<option value="COMISSAO DE LEILOEIRO">Comissão de Leiloeiro</option>' +
+                                                    '<option value="CONDOMINIO">Condomínio</option>' +
+                                                    '<option value="CUSTAS CARTORARIAS">Custas Cartorárias</option>' +
+                                                    '<option value="FGTS">FGTS</option>' +
+                                                    '<option value="FINANCIAMENTO">Financiamento</option>' +
+                                                    '<option value="IPTU">IPTU</option>' +
+                                                    '<option value="ITBI">ITBI</option>' +
+                                                    '<option value="MULTA">Multa</option>' +
+                                                    '<option value="OUTRAS DESPESAS">Outras Despesas</option>' +
+                                                    '<option value="PARCELAMENTO">Parcelamento</option>' +
+                                                    '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
+                                                    '<option value="TAXAS DE FINANCIAMENTO">Taxas de Financiamento</option>' +
+                                                '</select>' +
                                             '</div>' +
-                                            '<div class="form-check form-check-inline">' +
-                                                '<input class="form-check-input" type="radio" name="decisaoGerenteDistrato" id="inlineRadio2" value="NAO">' +
-                                                '<label class="form-check-label" for="inlineRadio2">Não</label>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Data Efetiva da Despesa:</label>' +
+                                                '<input type="text" name="dataEfetivaDaDespesa" class="form-control mascaradata datepicker" required>' +
                                             '</div>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Valor da Despesa:</label>' +
+                                                '<input type="text" name="valorDespesa" class="form-control mascaradinheiro" required>' +                                        
+                                            '</div>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Observações:</label>' +
+                                                '<textarea rows="5" name="observacaoDespesa" class="form-control"></textarea>' +                                        
+                                            '</div>' +
+
+                                        '</div>' +
+                                        '<div class="modal-footer">' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                            '<button type="submit" class="btn btn-primary">Salvar</button>' +
                                         '</div>' +
 
-                                        '<div class="form-group">' +
-                                            '<label>Observações:</label>' +
-                                            '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
-                                        '</div>' +
-
-                                    '</div>' +
-                                    '<div class="modal-footer">' +
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
-                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
-                                    '</div>' +
-
-                                '</form>' +
+                                    '</form>' +
+                                '</div>' +
                             '</div>' +
-                        '</div>' +
-                    '</div>';
-                $(btnParecerGerenteDistrato).appendTo('#btnParecerGerenteDistrato' + item.idDistrato);
+                        '</div>';
 
-                var btnAlterarStatusDistrato =
-                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAlterarStatusDistrato' + item.idDistrato + '">' +
-                        '<i class="far fa-edit"></i>' +
-                        'Alterar Status' +
-                    '</button>' +
+                    $(btnCadastrarDespesaDistrato).appendTo('#btnCadastrarDespesaDistrato' + item.idDistrato);
 
-                    '<div class="modal fade" id="modalAlterarStatusDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                        '<div class="modal-dialog" role="document">' +
-                            '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/alterar-status-distrato/' + item.idDistrato + '" id="formAlterarStatusDistrato' + item.idDistrato + '">' +
-                                    
+                    var btnParecerAnalistaDistrato =
+                        
+                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParecerAnalistaDistrato' + item.idDistrato + '">' +
+                            '<i class="far fa-edit"></i>' +
+                            'Parecer Analista' +
+                        '</button>' +
+
+                        '<div class="modal fade" id="modalParecerAnalistaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                                '<div class="modal-content">' +
+                                    '<form method="post" action="/estoque-imoveis/distrato/emitir-parecer-analista/' + item.idDistrato + '" id="formParecerAnalistaDistrato' + item.idDistrato + '">' +
+                                        
                                     '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
 
 
-                                    '<div class="modal-header">' +
-                                        '<h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>' +
-                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-                                            '<span aria-hidden="true">&times;</span>' +
-                                        '</button>' +
-                                    '</div>' +
-                                    '<div class="modal-body">' +
+                                        '<div class="modal-header">' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">Emitir Parecer do Analista</h5>' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                                '<span aria-hidden="true">&times;</span>' +
+                                            '</button>' +
+                                        '</div>' +
+                                        
+                                        '<div class="modal-body">' +
 
-                                        '<div class="form-group">' +
-                                            '<label>Alterar Status da Demanda:</label>' +
-                                            '<select name="statusAnaliseDistrato" class="form-control">' +
-                                                '<option value="" selected>Selecione</option>' +
-                                                '<option value="AVERBACAO DISTRATO">AVERBAÇÃO DISTRATO</option>' +
-                                                '<option value="CADASTRADA">CADASTRADA</option>' +
-                                                '<option value="CONCLUIDA">CONCLUÍDA</option>' +
-                                                '<option value="CONSULTA JURIR">CONSULTA JURIR</option>' +
-                                            '</select>' +
+                                            '<div class="form-group">' +
+                                                '<label>Observações:</label>' +
+                                                '<textarea rows="5" name="parecerAnalista" class="form-control"></textarea>' +                                        
+                                            '</div>' +
+
+                                        '</div>' +
+                                        '<div class="modal-footer">' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                            '<button type="submit" class="btn btn-primary">Salvar</button>' +
                                         '</div>' +
 
-                                        '<div class="form-group">' +
-                                            '<label>Observações:</label>' +
-                                            '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
-                                        '</div>' +
-
-                                    '</div>' +
-                                    '<div class="modal-footer">' +
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
-                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
-                                    '</div>' +
-
-                                '</form>' +
+                                    '</form>' +
+                                '</div>' +
                             '</div>' +
-                        '</div>' +
-                    '</div>';
+                        '</div>';
+                    $(btnParecerAnalistaDistrato).appendTo('#btnParecerAnalistaDistrato' + item.idDistrato);
 
-                $(btnAlterarStatusDistrato).appendTo('#btnAlterarStatusDistrato' + item.idDistrato);
+                    var btnParecerGerenteDistrato =
+                        
+                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParecerGerenteDistrato' + item.idDistrato + '">' +
+                            '<i class="far fa-edit"></i>' +
+                            'Parecer Gerente' +
+                        '</button>' +
+
+                        '<div class="modal fade" id="modalParecerGerenteDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                                '<div class="modal-content">' +
+                                    '<form method="post" action="/estoque-imoveis/distrato/emitir-parecer-gestor/' + item.idDistrato + '" id="formParecerGerenteDistrato' + item.idDistrato + '">' +
+                                        
+                                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+
+
+                                        '<div class="modal-header">' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">Emitir Parecer do Gerente</h5>' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                                '<span aria-hidden="true">&times;</span>' +
+                                            '</button>' +
+                                        '</div>' +
+                                        '<div class="modal-body">' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Parecer do Analista - ' + item.matriculaAnalista + ':</label>' +
+                                                '<p>' + item.parecerAnalista + '</p>' +
+                                            '</div>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Realizar Distrato:</label>' +
+                                                '<br>' +
+                                                '<div class="form-check form-check-inline">' +
+                                                    '<input class="form-check-input" type="radio" name="decisaoGerenteDistrato" id="inlineRadio1" value="SIM" required>' +
+                                                    '<label class="form-check-label" for="inlineRadio1">Sim</label>' +
+                                                '</div>' +
+                                                '<div class="form-check form-check-inline">' +
+                                                    '<input class="form-check-input" type="radio" name="decisaoGerenteDistrato" id="inlineRadio2" value="NAO">' +
+                                                    '<label class="form-check-label" for="inlineRadio2">Não</label>' +
+                                                '</div>' +
+                                            '</div>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Observações:</label>' +
+                                                '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
+                                            '</div>' +
+
+                                        '</div>' +
+                                        '<div class="modal-footer">' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                            '<button type="submit" class="btn btn-primary">Salvar</button>' +
+                                        '</div>' +
+
+                                    '</form>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+                    $(btnParecerGerenteDistrato).appendTo('#btnParecerGerenteDistrato' + item.idDistrato);
+
+                    var btnAlterarStatusDistrato =
+                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAlterarStatusDistrato' + item.idDistrato + '">' +
+                            '<i class="far fa-edit"></i>' +
+                            'Alterar Status' +
+                        '</button>' +
+
+                        '<div class="modal fade" id="modalAlterarStatusDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                                '<div class="modal-content">' +
+                                    '<form method="post" action="/estoque-imoveis/distrato/alterar-status-distrato/' + item.idDistrato + '" id="formAlterarStatusDistrato' + item.idDistrato + '">' +
+                                        
+                                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                        '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+
+
+                                        '<div class="modal-header">' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                                '<span aria-hidden="true">&times;</span>' +
+                                            '</button>' +
+                                        '</div>' +
+                                        '<div class="modal-body">' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Alterar Status da Demanda:</label>' +
+                                                '<select name="statusAnaliseDistrato" class="form-control">' +
+                                                    '<option value="" selected>Selecione</option>' +
+                                                    '<option value="AVERBACAO DISTRATO">AVERBAÇÃO DISTRATO</option>' +
+                                                    '<option value="CADASTRADA">CADASTRADA</option>' +
+                                                    '<option value="CONCLUIDA">CONCLUÍDA</option>' +
+                                                    '<option value="CONSULTA JURIR">CONSULTA JURIR</option>' +
+                                                '</select>' +
+                                            '</div>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Observações:</label>' +
+                                                '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
+                                            '</div>' +
+
+                                        '</div>' +
+                                        '<div class="modal-footer">' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                            '<button type="submit" class="btn btn-primary">Salvar</button>' +
+                                        '</div>' +
+
+                                    '</form>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+
+                    $(btnAlterarStatusDistrato).appendTo('#btnAlterarStatusDistrato' + item.idDistrato);
+                }
 
                 _formataTabelaDespesasDistrato (item.idDistrato, "operacional");
 
@@ -478,9 +469,18 @@ function _formataListaDistrato (numeroContrato, view) {
                 _formataTabelaDespesasDistrato (item.idDistrato);
             };
 
+            var arrayPorcentagemEStatus = {
+                0: "Cadastrada",
+                25: "Aguarda Docs.",
+                50: "Em Análise",
+                75: "Encaminhado Agência",
+                99: "Concluída",
+            };
+    
+            _formataProgressBar ("progressBarDistrato" + item.idDistrato, arrayPorcentagemEStatus, item.statusAnaliseDistrato);
 
         });
-    
+        
     });
-
+    
 };

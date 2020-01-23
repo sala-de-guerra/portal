@@ -2,6 +2,10 @@
     position: absolute!important;
 }
 
+.badge-large {
+    font-size: 90%;
+}
+
 .behind {
     position: absolute;
     z-index: -9999;

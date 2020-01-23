@@ -12,5 +12,6 @@ function _formataTabelaHistorico (numeroContrato) {
                 '</tr>';
             $(linha).appendTo('#tblHistorico>tbody');
         }) 
+        _formataDatatableComId ("tblHistorico");
     });
 };

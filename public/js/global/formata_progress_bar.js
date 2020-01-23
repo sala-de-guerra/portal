@@ -1,6 +1,4 @@
-
 function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
-
     var barra = 
         '<div class="d-flex justify-content-around">' +
             '<div class="progress padding0 border-radius-10px min-width-95">' +
@@ -55,7 +53,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
         }
     };
 
-    if (idBarra == "progressBarDistrato") {
+    if (idBarra.indexOf ("progressBarDistrato") > -1) {
         switch (statusAtual) {
             case 'AGUARDA AUTORIZACAO EMGEA':
             case 'CADASTRADA':

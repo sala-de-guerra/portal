@@ -268,7 +268,11 @@
 
                     <div class="tab-pane fade" id="custom-tabs-one-contratacao" role="tabpanel" aria-labelledby="custom-tabs-one-contratacao-tab">
                         
-                        <h2 class="card-title"><b>Proposta Atual - </b><b class="badge badge-warning" id="tipoVenda"></b></h2>
+                        <h2 class="card-title">
+                            <b>Proposta Atual</b>
+                            <b class="badge badge-info badge-large mx-4" id="tipoVenda"></b>
+                            <!-- <b class="badge badge-info badge-large mx-4" id="nomeStatusDossie"></b> -->
+                        </h2>
 
                         <br>
 
@@ -386,6 +390,27 @@
 
                         <hr>
 
+                        <h2 class="card-title"><b>Conformidade</b></h2>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Status Conformidade:</label>
+                                    <p id="nomeStatusDossie"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Card Agrupamento:</label>
+                                    <p id="cardAgrupamentoConformidade"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
                         <h2 class="card-title"><b>Agência Responsável</b></h2>
 
                         <br>
@@ -418,6 +443,9 @@
                         </div>
 
                         <hr>
+
+
+
 
                         <!-- <h2 class="card-title"><b>CIOPE</b></h2>
 
