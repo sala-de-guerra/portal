@@ -1,24 +1,16 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
-
 $(document).ready(function(){
-
     $("#custom-tabs-one-distrato-tab").click();
-    
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
     _formataListaDistrato (numeroContrato, "operacional"); // NO FINAL DESTA FUNÇÃO É CHAMADA A FUNÇÃO _formataTabelaDespesasDistrato
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
-
-
         var numeroBem = dados.numeroBem;
         // var dossieDigital = dados.dossieDigital;
-
         // _formataTabelaDocumentos (numeroBem, dossieDigital);
-
         // _formataTabelaLaudos (numeroBem);
-
 
         $.each(dados, function(key, item) {
             $('#' + key).html(item);
@@ -31,23 +23,17 @@ $(document).ready(function(){
             75: "Contratação",
             99: "Vendido",
         };
-
         _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, dados.statusImovel);
-
-    
     });
-
     // var tamanhoMaximoView = 8;
     // var tamanhoMaximo = 8388608;
-
     // _animaInputFile();
-    
+    setTimeout(function(){
+        _formataDatatable();
+    },1000);
 });
 
-
-
 function copyToClipboard(element) {
-
     var $temp = $("<input>");
     $("body").append($temp);
     $temp.val($(element).text()).select();
@@ -61,7 +47,6 @@ function copyToClipboard(element) {
             showConfirmButton: false,
             timer: 3000
         });
-
         Toast.fire({
             icon: 'success',
             title: 'Copiado com sucesso!'
