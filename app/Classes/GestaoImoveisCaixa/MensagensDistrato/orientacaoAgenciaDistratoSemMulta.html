@@ -243,21 +243,6 @@
                     <b>•</b>
                 </td>
                 <td class="pl-20px">
-                    <b>Finalização do Valor de Compra do Imóvel (Financiamento)- CHB: %CONTRATO_BEM%</b> <br>
-                    -> DLE evento 0223-2 Estorno de concessão de financiamento – SL 1;  <br>
-                    -> Valor: %VALOR_DESPESA%; <br>
-                    -> no GCI/SI, recuperar e excluir o TP 001 do contrato de financiamento; <br>
-                    -> após este procedimento as prestações (TP 310) e a taxa à vista recebida (TP 319) ficarão pendentes no CAR, bem como será gerado um TP 025 no CAC; <br>
-                    -> comandar o pedido 025 com sinal C;
-                </td>
-            </tr>
-
-            <!-- SE TIVER FINANCIAMENTO CADASTRADO -->
-            <tr>
-                <td class="pl-40px">
-                    <b>•</b>
-                </td>
-                <td class="pl-20px">
                     <b>Devolução das Parcelas e taxas de Financiamento - CHB: %CONTRATO_BEM%</b> <br>
                     -> no GCI/SI Excluir as prestações e taxas através da ação EXC; <br>
                     -> DLE evento  0203-8 Devolução de prestação e diferença de prestação - SL 1; <br>
@@ -283,20 +268,38 @@
                 </td>
             </tr>
             
-            <!-- SE TIVER ITBI CADASTRADO -->
+            <!-- SE TIVER (
+                BENFEITORIAS
+                COMISSAO DE LEILOEIRO
+                CONDOMINIO
+                CUSTAS CARTORARIAS
+                IPTU
+                ITBI
+                OUTRAS DESPESAS
+            )CADASTRADO -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
                 <td class="pl-20px">
-                    <b>ITBI + Correção Monetária - CHB: %CONTRATO_BEM%</b> <br>
+                    <b>%TIPO DESPESA% + Correção Monetária - CHB: %CONTRATO_BEM%</b> <br>
                     -> DLE evento 08679-7 Despesas com Distrato - SL 1; <br>
                     -> Valor: %SOMA_DEPESA_E_ATUALIZACAO%
                     -> Centro de Custo: 7257; <br>
                     -> Número de conciliação: %NUMERO_CONTRATO%; <br>
-                    -> Histórico: Valor do ITBI + atualização monetária apurada sobre o valor pago.
+                    -> Histórico: Valor do %TIPO DESPESA% + atualização monetária apurada sobre o valor pago.
                 </td>
             </tr>
+
+            <tr>
+                <td>
+                    4
+                </td>
+                <td class="pl-20px">
+                    Permanecemos à disposição.
+                </td>
+            </tr>
+
             
         </tbody>
     </table>
