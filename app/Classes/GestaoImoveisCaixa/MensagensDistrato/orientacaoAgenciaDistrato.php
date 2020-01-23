@@ -35,6 +35,11 @@
         padding-left: 40px;
     }
 
+    td {
+        text-align: justify;
+        vertical-align: text-top;
+    }
+
    </style>
 
     <meta charset="UTF-8">
@@ -108,7 +113,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="pl-20px">
+                <td>
                     1.1
                 </td>
                 <td class="pl-20px">
@@ -127,7 +132,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="pl-20px">
+                <td>
                     2.1
                 </td>
                 <td class="pl-20px">
@@ -138,7 +143,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="pl-20px">
+                <td>
                     2.2
                 </td>
                 <td class="pl-20px">
@@ -146,7 +151,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="pl-20px">
+                <td>
                     2.3
                 </td>
                 <td class="pl-20px">
@@ -155,109 +160,15 @@
                 </td>
             </tr>
             <tr>
-                <td class="pl-20px">
+                <td>
                     2.4
                 </td>
                 <td class="pl-20px">
                     Ainda no SINAF WEB, clique na aba "Consulta" - "Meus Documentos" e gere as DLE.
                 </td>
             </tr>
-            <tr>
-                <td>
-                    3
-                </td>
-                <td class="pl-20px">
-                    Os valores passíveis de devolução pela Caixa são os que seguem:
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b class="pl-40px">•</b>
-                </td>
-                <td>
-                    <b>valores pagos a título de recursos próprios tais como sinal, prestação de 
-                    financiamento e tarifa de concessão de financiamento;</b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    4
-                </td>
-                <td class="pl-20px">
-                    Sendo assim, de acordo com as Regras do edital, o arrematante desistente será penalizado 
-                    com multa, conforme segue:
-                </td>
-            </tr>
-            <tr>
-                <td class="pl-20px">
-                    <b>16</b>
-                </td>
-                <td class="pl-20px">
-                    <b>DA MULTA</b>
-                </td>
-            </tr>
-            <tr>
-                <td class="pl-20px">
-                    16.1
-                </td>
-                <td class="pl-20px">
-                    Após o pagamento da parte em recursos próprios, o proponente vencedor perde em favor da 
-                    CAIXA, o valor equivalente a 5% do valor mínimo de venda, a título de multa, nos casos de:
-                </td>
-            </tr>
-            <tr>
-                <td class="pl-20px">
-                    16.1.1
-                </td>
-                <td class="pl-20px">
-                    desistência;
-                </td>
-            </tr>
-            <tr>
-                <td class="pl-20px">
-                    16.1.2
-                </td>
-                <td class="pl-20px">
-                    não cumprimento do prazo para pagamento do valor total;
-                </td>
-            </tr>
-            <tr>
-                <td class="pl-20px">
-                    16.1.3
-                </td>
-                <td class="pl-20px">
-                    descumprimento de quaisquer outras condições estabelecidas nas presentes regras.
-                </td>
-            </tr>
 
-            <tr>
-                <td>
-                    5
-                </td>
-                <td class="pl-20px">
-                    Dessa forma, considerando as Regras acima expostas, com as quais o cliente concorda no 
-                    momento em que oferece proposta para o imóvel, informamos que o cliente será multada em 
-                    5% do valor de venda do imóvel (%VALOR_TOTAL_PROPOSTA_DISTRATO%), ou seja, 
-                    R$ %VALOR_MULTA_DISTRATO% de multa.
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    6
-                </td>
-                <td class="pl-20px">
-                    O valor restante pago em recursos próprios, será creditado na conta de titularidade da 
-                    arremate, a qual solicitamos informar através desse e-mail.
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    7
-                </td>
-                <td class="pl-20px">
-                    Sendo o que tínhamos a informar, agradecemos e nos colocamos à disposição.
-                </td>
-            </tr>
+            
         </tbody>
     </table>
 

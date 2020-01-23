@@ -8,8 +8,6 @@ $(document).ready(function(){
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
     _formataListaDistrato (numeroContrato, "operacional"); // NO FINAL DESTA FUNÇÃO É CHAMADA A FUNÇÃO _formataTabelaDespesasDistrato
-    _formataDatatable();
-
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
 

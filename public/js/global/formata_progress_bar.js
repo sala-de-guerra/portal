@@ -57,42 +57,25 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
 
     if (idBarra == "progressBarDistrato") {
         switch (statusAtual) {
+            case 'AGUARDA AUTORIZACAO EMGEA':
             case 'CADASTRADA':
-            case 'Em Cadastramento':
-            case 'Aguarda Justif. Avaliação':
-            case 'Em Pendência':
-            case 'Em Reavaliação':
-            case 'Aguarda Licitação':
-            case 'Arrendado':
-            case 'Devolvido':
-            case 'Excluído':
-            case 'Indício de Fraude':
-            case 'Laudo Vencido':
-            case 'Licitação':
-            case 'Montagem de Licitação':
+            case 'CANCELADA':
                 statusAtual = 'Cadastrada';
                 break;
-            case 'Aguarda 1º Leilão SFI':
-            case 'Aguarda 2º Leilão SFI':
-            case 'Em Homologação':
-                statusAtual = 'Leilão';
+            case 'AGUARDA DOCUMENTACAO CLIENTE':
+                statusAtual = 'Aguarda Docs.';
                 break;
-            case 'Em Contratação':
-            case 'Contratação pendente':
-                statusAtual = 'Contratação';
+            case 'AGUARDA PARECER GESTOR':
+            case 'CONSULTA JURIR':
+            case 'EM ANALISE':
+                statusAtual = 'Em Análise';
                 break;
-            case 'Vendido':
-            case 'Venda Direito Preferência':
-            case 'Venda Direta Beneficiário':
-            case 'Venda Direta Especial':
-            case 'Venda Direta FAR':
-            case 'Venda Direta Ocupante':
-            case 'Venda por credenciado':
-                statusAtual = 'Vendido';
+            case 'AVERBACAO DISTRATO':
+            case 'ENCAMINHADO AGENCIA':
+                statusAtual = 'Encaminhado Agência';
                 break;
-            case 'Venda Direta Online':
-            case 'Venda Direta':
-                statusAtual = 'Venda Online';
+            case 'CONCLUIDA':
+                statusAtual = 'Concluída';
                 break;
         }
     };

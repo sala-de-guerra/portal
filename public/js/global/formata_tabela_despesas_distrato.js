@@ -88,7 +88,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
 
                                         '<div class="form-group">' +
                                             '<label>Data Efetiva da Despesa:</label>' +
-                                            '<input type="text" name="dataEfetivaDaDespesa" class="form-control formata-data-sem-hora mascaradata" required>' +
+                                            '<input type="text" name="dataEfetivaDaDespesa" class="form-control datepicker" required>' +
                                         '</div>' +
 
                                         '<div class="form-group">' +
@@ -208,6 +208,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
             };
         });
     
+        _formataDatatable();
         _formataData();
         _formataValores();
 
@@ -216,6 +217,10 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
         $(".modal").on('hidden.bs.modal', function(e){
             $(this).find("form")[0].reset();       
         });
+
+        $( function() {
+            $( ".datepicker" ).datepicker();
+        }); 
 
     });
     

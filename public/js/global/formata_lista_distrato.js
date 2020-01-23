@@ -175,14 +175,14 @@ function _formataListaDistrato (numeroContrato, view) {
             $(li).appendTo('#listaDistratos');
 
             var arrayPorcentagemEStatus = {
-                0: "CADASTRADA",
-                25: "AGUARDANDO DOCUMENTOS CLIENTE",
-                50: "AGUARDA PARECER GESTOR",
-                75: "ENCAMINHADO AGENCIA",
-                99: "CONCLUIDO",
+                0: "Cadastrada",
+                25: "Aguarda Docs.",
+                50: "Em Análise",
+                75: "Encaminhado Agência",
+                99: "Concluída",
             };
     
-            // _formataProgressBar ("progressBarDistrato" + item.idDistrato, arrayPorcentagemEStatus, item.statusAnaliseDistrato);
+            _formataProgressBar ("progressBarDistrato" + item.idDistrato, arrayPorcentagemEStatus, item.statusAnaliseDistrato);
     
             
             if (view == "operacional") {
@@ -448,8 +448,8 @@ function _formataListaDistrato (numeroContrato, view) {
                                             '<select name="statusAnaliseDistrato" class="form-control">' +
                                                 '<option value="" selected>Selecione</option>' +
                                                 '<option value="AVERBACAO DISTRATO">AVERBAÇÃO DISTRATO</option>' +
-                                                '<option value="CADASTRADO">CADASTRADO</option>' +
-                                                '<option value="CONCLUIDO">CONCLUÍDO</option>' +
+                                                '<option value="CADASTRADA">CADASTRADA</option>' +
+                                                '<option value="CONCLUIDA">CONCLUÍDA</option>' +
                                                 '<option value="CONSULTA JURIR">CONSULTA JURIR</option>' +
                                             '</select>' +
                                         '</div>' +
@@ -481,9 +481,6 @@ function _formataListaDistrato (numeroContrato, view) {
 
         });
     
-        $( function() {
-            $( ".datepicker" ).datepicker();
-        }); 
     });
 
 };
