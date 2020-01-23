@@ -5,7 +5,7 @@ namespace App\Http\Controllers\GestaoImoveisCaixa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\GestaoImoveisCaixa\Distrato;
+use App\Models\GestaoImoveisCaixa\DistratoDemanda;
 use App\Models\GestaoImoveisCaixa\DistratoRelacaoDespesas;
 use App\Models\HistoricoPortalGilie;
 use App\Models\BaseSimov;
@@ -14,7 +14,7 @@ use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
 use App\Models\ControleMensageria;
 use App\Models\RelacaoAgSrComEmail;
 
-class DistratoController extends Controller
+class DistratoDemandaController extends Controller
 {
     /**
      *
@@ -66,7 +66,7 @@ class DistratoController extends Controller
                 }
             }
             
-            $novoDistrato = new Distrato;
+            $novoDistrato = new DistratoDemanda;
             $novoDistrato->contratoFormatado = $request->contratoFormatado;
             $novoDistrato->nomeProponente = strtoupper ($request->nomeProponente);
             $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
@@ -133,7 +133,7 @@ class DistratoController extends Controller
      */
     public function show()
     {
-        $universoProtocolosDistrato = Distrato::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
+        $universoProtocolosDistrato = DistratoDemanda::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
         return json_encode($universoProtocolosDistrato);
     }
 
@@ -155,7 +155,7 @@ class DistratoController extends Controller
      */
     public function jsonDadosDemandaDistrato($contratoFormatado)
     {
-        $demandaDistrato = Distrato::where('contratoFormatado', $contratoFormatado)->get();
+        $demandaDistrato = DistratoDemanda::where('contratoFormatado', $contratoFormatado)->get();
 
         $arrayGrupoDemandasDistrato = [];
         
@@ -210,7 +210,7 @@ class DistratoController extends Controller
         try {
             DB::beginTransaction();
             // ATUALIZA DEMANDA
-            $demandaDistrato = Distrato::find($idDistrato);
+            $demandaDistrato = DistratoDemanda::find($idDistrato);
             $demandaDistrato->motivoDistrato = $request->input('motivoDistrato');
             $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
             $demandaDistrato->matriculaAnalista = session('matricula');
@@ -310,7 +310,7 @@ class DistratoController extends Controller
         try {
             DB::beginTransaction();
             // CAPTURA A DEMANDA DE DISTRATO E RELAÇÃO DE DESPESAS
-            $demandaDistrato = Distrato::find($idDistrato);
+            $demandaDistrato = DistratoDemanda::find($idDistrato);
             $relacaoDespesasDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->get();
             
             // VALIDA SE EXISTE DESPESA CADASTRADA - CASO EXISTA SEGUE COM A EMISSÃO DO PARECER - CASO NEGATIVO VOLTA PRA TELA COM ERRO
@@ -363,7 +363,7 @@ class DistratoController extends Controller
             $despesa->devolucaoPertinente = $request->input('devolucaoPertinente');
 
             // CAPTURA DADOS DISTRATO
-            $dadosDistrato = Distrato::where('idDistrato', $despesa->idDistrato)->first();
+            $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first();
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
@@ -395,7 +395,7 @@ class DistratoController extends Controller
         try {
             DB::beginTransaction();
             // ATUALIZA DEMANDA
-            $demandaDistrato = Distrato::find($idDistrato);
+            $demandaDistrato = DistratoDemanda::find($idDistrato);
             if ($request->decisaoGerenteDistrato == 'SIM') {
                 $demandaDistrato->parecerGestor = $request->input('observacaoDistrato');
                 $demandaDistrato->matriculaGestor = session('matricula');
@@ -504,7 +504,7 @@ class DistratoController extends Controller
     {
         try {
             DB::beginTransaction();
-            $dadosDistrato = Distrato::where('idDistrato', $idDistrato)->first();
+            $dadosDistrato = DistratoDemanda::where('idDistrato', $idDistrato)->first();
 
             // AJUSTA A DATA EFETIVA DA DESPESA PARA REGISTRAR NO BANCO
             $dataEfetivaDaDespesa = substr($request->dataEfetivaDaDespesa, 6, 4) . '-' . substr($request->dataEfetivaDaDespesa, 3, 2) . '-' . substr($request->dataEfetivaDaDespesa, 0, 2);
@@ -556,7 +556,7 @@ class DistratoController extends Controller
             $request->session()->flash('tituloMensagem', "Despesa excluida!");
             $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($despesa->idDespesa, 4, '0', STR_PAD_LEFT) . " foi excluida com sucesso.");
 
-            $dadosDistrato = Distrato::where('idDistrato', $despesa->idDistrato)->first();
+            $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first();
 
             // PERSISTE OS DADOS NO FIM DO MÉTODO 
             $despesa->save();
@@ -604,7 +604,7 @@ class DistratoController extends Controller
             $despesa->observacaoDespesa = $request->observacaoDespesa != null ? $request->observacaoDespesa : $despesa->observacaoDespesa;
 
             // CARREGA OS DADOS DA DEMANDA DE DISTRATO PARA USAR O NUMERO DO CONTRATO NO REDIRECT
-            $dadosDistrato = Distrato::where('idDistrato', $despesa->idDistrato)->first(); 
+            $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first(); 
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');

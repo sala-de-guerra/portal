@@ -11,12 +11,6 @@
 |
 */
 
-// Auth::routes();
-
-// Route::get('/home', function() {
-//     return view('home');
-// })->name('home')->middleware('auth');
-
 //index
 Route::get('/', function () {
     return view('portal.index');
@@ -30,29 +24,28 @@ Route::get('/teste', function () {
     return view('teste');
 });    
 
-
- // sobre
- Route::get('/sobre', function () {
+// sobre
+Route::get('/sobre', function () {
     return view('portal.informativas.sobre');
 });
 
- // area de atuação
- Route::get('/area', function () {
+// area de atuação
+Route::get('/area', function () {
     return view('portal.informativas.area');
 });
 
- // duvidas frequentes
- Route::get('/faq', function () {
+// duvidas frequentes
+Route::get('/faq', function () {
     return view('portal.informativas.faq');
 });
 
- // orientações
- Route::get('/orientacoes', function () {
+// orientações
+Route::get('/orientacoes', function () {
     return view('portal.informativas.orientacoes');
 });
 
- // conheca o projeto
- Route::get('/projeto', function () {
+// conheca o projeto
+Route::get('/projeto', function () {
     return view('portal.informativas.projeto');
 });
 
@@ -69,57 +62,44 @@ Route::get('/pesquisar', function () {
 });
 
 // Consulta de bem imóvel
-
-Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@show');
-
-//Contratacao
-
-// Distrato
-
-// Route::get('/controle-distrato', function () {
-//     return view('portal.imoveis.distrato.controle-distrato');
-// });
-
-// Route::get('/distrato', function () {
-//     return view('portal.imoveis.contratacao.distrato');
-// });
+Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show');
 
 
-// Operacional Distrato
-
-// Route::get('/operacional-distrato', function () {
-//     return view('portal.imoveis.distrato.operacional-distrato');
-// });
-
-// Rotas web dos processos pertinentes ao Estoque de Imóveis
-
+//  ROTAS WEB DOS PROCESSOS PERTINENTES AO ESTOQUE DE IMÓVEIS
 Route::prefix('estoque-imoveis')->group(function () {
-    Route::get('distrato', 'GestaoImoveisCaixa\DistratoController@index');
-    Route::get('distrato/listar-protocolos', 'GestaoImoveisCaixa\DistratoController@show');
-    Route::get('distrato/tratar/{contrato}', 'GestaoImoveisCaixa\DistratoController@edit');
-    Route::put('distrato/atualizar/{demanda}', 'GestaoImoveisCaixa\DistratoController@update');
-    Route::get('distrato/consultar-dados-demanda/{contrato}', 'GestaoImoveisCaixa\DistratoController@jsonDadosDemandaDistrato');
-    Route::post('distrato/cadastrar-demanda', 'GestaoImoveisCaixa\DistratoController@store');
-    Route::post('distrato/cadastrar-despesa/{distrato}', 'GestaoImoveisCaixa\DistratoController@cadastrarDespesa');
-    Route::put('distrato/atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@atualizarDespesa');
-    Route::put('distrato/excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@excluirDespesa');
-    Route::put('distrato/validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@validarDespesaGestor');
-    Route::put('distrato/emitir-parecer-gestor/{distrato}', 'GestaoImoveisCaixa\DistratoController@emitirParecerGestor');
-    Route::put('distrato/emitir-parecer-analista/{distrato}', 'GestaoImoveisCaixa\DistratoController@emitirParecerAnalista');
-    Route::get('distrato/relacao-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoController@listarRelacaoDeDespesasDaDemandaDeDistrato');
-    Route::get('rotina-mensagens', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarMensageriasAutorizacaoContratacao');
-    Route::get('enviar-autorizacao-contratacao/{contrato}', 'GestaoImoveisCaixa\RotinaMensagensAutomatica@enviarAutorizacaoContratacaoViaPortal');
-    Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ContratosEstoqueCaixa@capturaDadosBaseSimov');
+    // ROTAS API DE CONSULTA JSON
+    Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@capturaDadosBaseSimov');
     Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
     Route::get('consulta-historico-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaHistorico');
+
+    // ROTAS DO PROJETO DE DISTRATO
+    Route::prefix('distrato')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\DistratoController@index');
+        Route::get('consultar-dados-demanda/{contrato}', 'GestaoImoveisCaixa\DistratoController@jsonDadosDemandaDistrato');
+        Route::get('listar-protocolos', 'GestaoImoveisCaixa\DistratoController@show');
+        Route::get('relacao-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoController@listarRelacaoDeDespesasDaDemandaDeDistrato');
+        Route::get('tratar/{contrato}', 'GestaoImoveisCaixa\DistratoController@edit');
+        Route::post('cadastrar-demanda', 'GestaoImoveisCaixa\DistratoController@store');
+        Route::post('cadastrar-despesa/{distrato}', 'GestaoImoveisCaixa\DistratoController@cadastrarDespesa');
+        Route::put('atualizar/{demanda}', 'GestaoImoveisCaixa\DistratoController@update');
+        Route::put('atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@atualizarDespesa');
+        Route::put('emitir-parecer-analista/{distrato}', 'GestaoImoveisCaixa\DistratoController@emitirParecerAnalista');
+        Route::put('emitir-parecer-gestor/{distrato}', 'GestaoImoveisCaixa\DistratoController@emitirParecerGestor');
+        Route::put('excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@excluirDespesa');
+        Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoController@validarDespesaGestor');
+    });
+
+    // ROTAS DO PROJETO DE MENSAGENS AUTOMÁTICAS
+    Route::prefix('mensagens-automaticas')->group(function () {
+        Route::get('autorizacao-contratacao', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarMensageriasAutorizacaoContratacao');
+        Route::get('autorizacao-contratacao/{contrato}', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarAutorizacaoContratacaoViaPortal');
+    });
 });
 
-// Rotina Automatica de envio de mensagens Adjudicados
-
+// ROTA QUE ATUALIZA O JSON DA CONSULTA DE IMÓVEIS
 Route::prefix('portal')->group(function () {
     Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
 });
-
 
 // Gerencial
 
@@ -127,4 +107,3 @@ Route::prefix('portal')->group(function () {
 Route::get('/equipes', function () {
     return view('portal.gerencial.equipes');
 });
-

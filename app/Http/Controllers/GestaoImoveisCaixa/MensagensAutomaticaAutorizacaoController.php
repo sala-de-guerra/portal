@@ -17,7 +17,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-class RotinaMensagensAutomatica extends Controller
+class MensagensAutomaticaAutorizacaoController extends Controller
 {
     private static $existeAcaoJudicial;
     private static $propostaMaiorQueTrintaSalariosMinimos;
