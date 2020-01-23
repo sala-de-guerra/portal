@@ -10,8 +10,6 @@
 
     .destaque{
         color:black;
-        font-weight:bolder;
-        font-weight:900;
     }
 
     .margem{
@@ -185,8 +183,8 @@
     
 <p class="destaque">
 Atenciosamente,
-<br>
-Equipe GILIE/SP
+<br><br>
+GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS 
 </P>
 
 

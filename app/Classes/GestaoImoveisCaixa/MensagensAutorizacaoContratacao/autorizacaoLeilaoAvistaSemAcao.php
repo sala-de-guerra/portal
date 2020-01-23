@@ -10,8 +10,6 @@
 
     .destaque{
         color:black;
-        font-weight:bolder;
-        font-weight:900;
     }
 
     .margem{
@@ -138,7 +136,7 @@
 
     <p>
         4.1   Cabe ao comprador tomar todas as providências necessárias para o registro do Contrato de financiamento habitacional 
-        ou Contrato de Aquisição à Vista com FGTS junto ao Oficial de Registro de Imóveis competente, conforme <span style="background-color: red;">%MO_UTILIZADO%</span>;
+        ou Contrato de Aquisição à Vista com FGTS junto ao Oficial de Registro de Imóveis competente, conforme <span style="color: red;">%MO_UTILIZADO%</span>;
     </p>
 
     <p>
@@ -177,8 +175,8 @@
     
 <p class="destaque">
 Atenciosamente,
-<br>
-Equipe GILIE/SP
+<br><br>
+GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS 
 </P>
 
 
