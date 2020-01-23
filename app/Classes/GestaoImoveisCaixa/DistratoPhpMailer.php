@@ -220,4 +220,54 @@ class DistratoPhpMailer
             // echo "Mensagem não pode ser enviada. Erro: {$mail->ErrorInfo}";
         }
     }
+
+    public static function montaOrientacoesAgencia($objDistrato)
+    {
+        // CAPTURA OS DADOS DO CONTRATO PARA VER A CLASSIFICAÇÃO DO IMÓVEL
+        $dadosContrato = BaseSimov::where('BEM_FORMATADO', $objDistrato->contratoFormatado)->first();
+
+        switch ($dadosContrato->CLASSIFICACAO) {
+            // PATRIMONIAL
+            case 'PANAMERICANO':
+            case 'Patrimonial':
+            case 'Patrimonial - Alienação Fiduciária':
+            case 'Patrimonial -Realização de Garantia':
+                $eventoDle = '28246-4';
+                $situacaoLancamentoDle = '1';
+                break;
+            // EMGEA
+            case 'EMGEA':
+            case 'EMGEA - Realização de Garantia':
+            case 'EMGEA- Alienação Fiduciária':
+                $eventoDle = '1295-5';
+                $situacaoLancamentoDle = '2';
+                break;
+            // CAIXA
+            case 'Oriundo do Crédito Imobiliário':
+            case 'Oriundos SFI-Gar. Fiduciária':
+            case 'SFI - Gar.Fid.Reg.Créd.Imob':
+                $eventoDle = '1295-5';
+                $situacaoLancamentoDle = '2';
+                break;
+        }
+
+    }
+
+    public static function montaComponentePorDespesaOrientacoesAgencia($objDistrato)
+    {
+        // CAPTURA AS DESPESAS DA DEMANDA
+
+
+        // PEGA O EVENTO E A SITUAÇÃO DE LANÇAMENTO
+
+
+        // MONTA O COMPONENTE HTML COM AS VARIVÁVEIS
+
+
+        // CONCATENA COM OS DEMAIS COMPONENTES (SE HOUVEREM)
+
+
+        // RETORNA PARA O METODO DE MONTA
+
+    }
 }

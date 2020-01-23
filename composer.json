@@ -37,14 +37,17 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            
+            "App\\Classes\\": "app/Classes/",
             "App\\Classes\\GestaoImoveisCaixa\\": "app/Classes/GestaoImoveisCaixa/",
+            "App\\Classes\\GestaoImoveisCaixa\\MensagensAutorizacaoContratacao\\": "app/Classes/GestaoImoveisCaixa/MensagensAutorizacaoContratacao/",
+            "App\\Classes\\GestaoImoveisCaixa\\MensagensDistrato\\": "app/Classes/GestaoImoveisCaixa/MensagensDistrato/",
 
-            "App\\Http\\Controllers\\GestaoImoveisCaixa\\": "app/Http/Controllers/GestaoImoveisCaixa",
+            "App\\Http\\Controllers\\": "app/Http/Controllers/",
+            "App\\Http\\Controllers\\GestaoImoveisCaixa\\": "app/Http/Controllers/GestaoImoveisCaixa/",
 
             "App\\Models\\": "app/Models/",
             "App\\Models\\GestaoImoveisCaixa\\": "app/Models/GestaoImoveisCaixa/"
-
-
         },
         "classmap": [
             "database/seeds",
