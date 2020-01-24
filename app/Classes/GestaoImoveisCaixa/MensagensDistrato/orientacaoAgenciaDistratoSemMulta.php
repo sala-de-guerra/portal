@@ -193,7 +193,24 @@
                 </td>
             </tr>
 
-            <!-- FIXO -->
+            <!-- SE O IMÓVEL FOR CAIXA OU PATRIMONIAL -->
+            <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>Levantamento do Valor de Compra do Imóvel - CHB: %CONTRATO_BEM%</b> <br>
+                    -> verificar se o imóvel está cadastrado no GCE/GE ou GCI/CE; <br>
+                    -> no GCE/GE ou GCI/CE, recuperar e excluir o TP 195 ou 196 do imóvel; <b>(comando já efetuado pela GILIE)</b>; <br>
+                    -> após este procedimento, o GCE/GCI gera um TP 252 pendente no valor da venda; <br>
+                    -> comandar o TP 252 com sinal D <b>(efetuar este comando na mesma data da contabilização da DLE)</b>; <br>
+                    -> DLE evento 1295-5 SIACI AD Recebimento - IR 5 – SL 2 (estorno);  <br>
+                    -> Data efetiva: %DATA_EFETIVA_DESPESA%, a mesma do TP 195 ou 196; <br>
+                    -> Valor: %VALOR_DESPESA%, correspondente à soma de Valor de Recursos Próprios com Financiamento ou FGTS, se houverem.
+                </td>
+            </tr>
+
+            <!-- SE O IMÓVEL FOR EMGEA -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
@@ -219,6 +236,19 @@
                 <td class="pl-20px">
                     <b>Finalização do Valor de Compra do Imóvel (Recursos Próprios)- CHB: %CONTRATO_BEM%</b> <br>
                     -> Creditar na conta do cliente o valor %VALOR_DESPESA%.
+                </td>
+            </tr>
+
+            <!-- SE TIVER MULTA CADASTRADO -->
+            <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>Finalização do Valor de Compra do Imóvel (Multa)- CHB: %CONTRATO_BEM%</b> <br>
+                    -> DLE Evento 22351-4 ROMID-RECEBIMENTOS A CLASSIFICAR-FINALIZACAO CICOC; <br>
+                    -> Valor: %VALOR_DESPESA%; <br>
+                    -> Histórico: Reversão em multa do processo de distrato chb %NUMERO_CONTRATO%.
                 </td>
             </tr>
 
@@ -286,6 +316,7 @@
                     -> DLE evento 08679-7 Despesas com Distrato - SL 1; <br>
                     -> Valor: %SOMA_DEPESA_E_ATUALIZACAO%
                     -> Centro de Custo: 7257; <br>
+                    -> Produto: 0427-6 Imóveis adjudicados/arrematados; <br>
                     -> Número de conciliação: %NUMERO_CONTRATO%; <br>
                     -> Histórico: Valor do %TIPO DESPESA% + atualização monetária apurada sobre o valor pago.
                 </td>
