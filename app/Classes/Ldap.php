@@ -185,7 +185,7 @@ class Ldap
 
     public function settaDadosEmpregado()
     {
-        $ldap_handle = ldap_connect('ldap://ldapcluster.corecaixa:489');
+        $ldap_handle = ldap_connect(env('SERVIDOR_LDAP'));
         
         if($ldap_handle) {
             $search_base = 'ou=People,o=caixa';
