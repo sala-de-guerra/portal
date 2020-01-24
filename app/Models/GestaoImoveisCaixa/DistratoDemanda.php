@@ -4,7 +4,7 @@ namespace App\Models\GestaoImoveisCaixa;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Distrato extends Model
+class DistratoDemanda extends Model
 {
     protected $table = 'TBL_DISTRATOS_DEMANDAS';
     protected $primaryKey = 'idDistrato';

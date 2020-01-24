@@ -14,63 +14,63 @@ class DistratoDemandasTableSeeder extends Seeder
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '00.0000.1000411-2',
             'nomeProponente' => 'DOUGLAS DOUGRAS DA SILVA',
-            'statusAnalise' => 'INICIAR ANÁLISE',
-            'motivoDistrato' => 'AÇÃO JUDICIAL',
+            'statusAnaliseDistrato' => 'INICIAR ANALISE',
+            'motivoDistrato' => 'ACAO JUDICIAL',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '01.4444.0441059-9',
-            'nomeProponente' => 'AURORA BOREAL DESAPARECIDA DE MOURÃO',
-            'statusAnalise' => 'AGUARDA DOC CLIENTE',
-            'motivoDistrato' => 'IMPOSSIBIL. DE REGISTRO AQUISIÇÃO',
+            'nomeProponente' => 'AURORA BOREAL DESAPARECIDA DE MOURAO',
+            'statusAnaliseDistrato' => 'AGUARDA DOC CLIENTE',
+            'motivoDistrato' => 'IMPOSSIBIL. DE REGISTRO AQUISICAO',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '01.4444.0326764-4',
             'nomeProponente' => 'ROSAMARIA DE OLARIA GIANDULA',
-            'statusAnalise' => 'COMANDOS NO CIWEB',
-            'motivoDistrato' => 'DESISTÊNCIA',
+            'statusAnaliseDistrato' => 'COMANDOS NO CIWEB',
+            'motivoDistrato' => 'DESISTENCIA',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '00.0000.1000833-9',
             'nomeProponente' => 'THIELES BABOSA PÃO',
-            'statusAnalise' => 'ENCAMINHADO AGÊNCIA',
-            'motivoDistrato' => 'AÇÃO JUDICIAL',
+            'statusAnaliseDistrato' => 'ENCAMINHADO AGENCIA',
+            'motivoDistrato' => 'ACAO JUDICIAL',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '01.4444.0386904-0',
             'nomeProponente' => 'EDWARD SMITH',
-            'statusAnalise' => 'CONCLUÍDO',
-            'motivoDistrato' => 'LEILÕES NEGATIVOS',
+            'statusAnaliseDistrato' => 'CONCLUIDO',
+            'motivoDistrato' => 'LEILOES NEGATIVOS',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '01.5555.1397093-7',
             'nomeProponente' => 'MIQUELANGELO PEROBA SILVEIRA',
-            'statusAnalise' => 'AVERBAÇÃO DISTRATO',
+            'statusAnaliseDistrato' => 'AVERBACAO DISTRATO',
             'motivoDistrato' => 'ERRO FORMAL DE EDITAL',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '08.5555.2525120-3',
             'nomeProponente' => 'PANELA RIBEIRINHA DA REPRESA',
-            'statusAnalise' => 'COMANDOS NO CIWEB',
-            'motivoDistrato' => 'CRÉDITO NÃO APROVADO',
+            'statusAnaliseDistrato' => 'COMANDOS NO CIWEB',
+            'motivoDistrato' => 'CREDITO NAO APROVADO',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '08.5555.0984374-6',
             'nomeProponente' => 'MULTIPLICA SENHOR PARTICIPAÇÕES LIMITADAS',
-            'statusAnalise' => 'ENCAMINHADO AGÊNCIA',
-            'motivoDistrato' => 'EX-MUTUÁRIO EXERCEU DIREITO DE PREFERÊNCIA',
+            'statusAnaliseDistrato' => 'ENCAMINHADO AGENCIA',
+            'motivoDistrato' => 'EX-MUTUARIO EXERCEU DIREITO DE PREFERENCIA',
         ]);
 
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '01.4444.0584783-4',
             'nomeProponente' => 'ANDORE MONTEVAI NARDONI',
-            'statusAnalise' => 'CONCLUÍDO',
+            'statusAnaliseDistrato' => 'CONCLUIDO',
             'motivoDistrato' => 'DISTRATO CANCELADO',
         ]);
     }
