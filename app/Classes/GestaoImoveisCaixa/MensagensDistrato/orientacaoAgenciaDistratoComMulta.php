@@ -193,7 +193,7 @@
                 </td>
             </tr>
 
-            <!-- SE O IMÓVEL FOR CAIXA OU PATRIMONIAL -->
+            <!-- SE O IMÓVEL FOR CAIXA OU EMGEA -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
@@ -210,19 +210,15 @@
                 </td>
             </tr>
 
-            <!-- SE O IMÓVEL FOR EMGEA -->
+            <!-- SE O IMÓVEL FOR PATRIMONIAL -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
                 <td class="pl-20px">
                     <b>Levantamento do Valor de Compra do Imóvel - CHB: %CONTRATO_BEM%</b> <br>
-                    -> verificar se o imóvel está cadastrado no GCE/GE ou GCI/CE; <br>
-                    -> no GCE/GE ou GCI/CE, recuperar e excluir o TP 195 ou 196 do imóvel; <b>(comando já efetuado pela GILIE)</b>; <br>
-                    -> após este procedimento, o GCE/GCI gera um TP 252 pendente no valor da venda; <br>
-                    -> comandar o TP 252 com sinal D <b>(efetuar este comando na mesma data da contabilização da DLE)</b>; <br>
-                    -> DLE evento 1295-5 SIACI AD Recebimento - IR 5 – SL 2 (estorno);  <br>
-                    -> Data efetiva: %DATA_EFETIVA_DESPESA%, a mesma do TP 195 ou 196; <br>
+                    -> DLE evento 28246-4 SL-1;  <br>
+                    -> Data efetiva: %DATA_EFETIVA_DESPESA%; <br>
                     -> Valor: %VALOR_DESPESA%, correspondente à soma de Valor de Recursos Próprios com Financiamento ou FGTS, se houverem.
                 </td>
             </tr>
@@ -267,7 +263,6 @@
                 </td>
             </tr>
 
-            <!-- SE TIVER FINANCIAMENTO CADASTRADO -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
@@ -298,30 +293,6 @@
                 </td>
             </tr>
             
-            <!-- SE TIVER (
-                BENFEITORIAS
-                COMISSAO DE LEILOEIRO
-                CONDOMINIO
-                CUSTAS CARTORARIAS
-                IPTU
-                ITBI
-                OUTRAS DESPESAS
-            )CADASTRADO -->
-            <tr>
-                <td class="pl-40px">
-                    <b>•</b>
-                </td>
-                <td class="pl-20px">
-                    <b>%TIPO DESPESA% + Correção Monetária - CHB: %CONTRATO_BEM%</b> <br>
-                    -> DLE evento 08679-7 Despesas com Distrato - SL 1; <br>
-                    -> Valor: %SOMA_DEPESA_E_ATUALIZACAO%
-                    -> Centro de Custo: 7257; <br>
-                    -> Produto: 0427-6 Imóveis adjudicados/arrematados; <br>
-                    -> Número de conciliação: %NUMERO_CONTRATO%; <br>
-                    -> Histórico: Valor do %TIPO DESPESA% + atualização monetária apurada sobre o valor pago.
-                </td>
-            </tr>
-
             <tr>
                 <td>
                     4

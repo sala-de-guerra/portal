@@ -180,7 +180,7 @@
                     <b>•</b>
                 </td>
                 <td class="pl-20px">
-                    <b>Da Exclusão do Contrato de Financiamento em Evolução - CHB: %CONTRATO_BEM%</b> <br>
+                    <b>Exclusão do Contrato de Financiamento em Evolução - CHB: %CONTRATO_BEM%</b> <br>
                     <b>Para exclusão do contrato de financiamento ativo em evolução no SIACI/CIWEB, a agência deverá solicitar a exclusão à CEHOP conforme MN HH160:</b> <br>
                     4.6 EXCLUSÃO DE CONTRATOS HABITACIONAIS EM EVOLUÇÃO NO SIACI/CIWEB/GCI - MÓDULO CONCESSÃO E SIAOI <br>
                     4.6.1 AGÊNCIA/PA <br>
@@ -193,7 +193,7 @@
                 </td>
             </tr>
 
-            <!-- SE O IMÓVEL FOR CAIXA OU PATRIMONIAL -->
+            <!-- SE O IMÓVEL FOR CAIXA OU EMGEA -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
@@ -210,19 +210,15 @@
                 </td>
             </tr>
 
-            <!-- SE O IMÓVEL FOR EMGEA -->
+            <!-- SE O IMÓVEL FOR PATRIMONIAL -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
                 <td class="pl-20px">
                     <b>Levantamento do Valor de Compra do Imóvel - CHB: %CONTRATO_BEM%</b> <br>
-                    -> verificar se o imóvel está cadastrado no GCE/GE ou GCI/CE; <br>
-                    -> no GCE/GE ou GCI/CE, recuperar e excluir o TP 195 ou 196 do imóvel; <b>(comando já efetuado pela GILIE)</b>; <br>
-                    -> após este procedimento, o GCE/GCI gera um TP 252 pendente no valor da venda; <br>
-                    -> comandar o TP 252 com sinal D <b>(efetuar este comando na mesma data da contabilização da DLE)</b>; <br>
-                    -> DLE evento 1295-5 SIACI AD Recebimento - IR 5 – SL 2 (estorno);  <br>
-                    -> Data efetiva: %DATA_EFETIVA_DESPESA%, a mesma do TP 195 ou 196; <br>
+                    -> DLE evento 28246-4 SL-1;  <br>
+                    -> Data efetiva: %DATA_EFETIVA_DESPESA%; <br>
                     -> Valor: %VALOR_DESPESA%, correspondente à soma de Valor de Recursos Próprios com Financiamento ou FGTS, se houverem.
                 </td>
             </tr>
@@ -236,19 +232,6 @@
                 <td class="pl-20px">
                     <b>Finalização do Valor de Compra do Imóvel (Recursos Próprios)- CHB: %CONTRATO_BEM%</b> <br>
                     -> Creditar na conta do cliente o valor %VALOR_DESPESA%.
-                </td>
-            </tr>
-
-            <!-- SE TIVER MULTA CADASTRADO -->
-            <tr>
-                <td class="pl-40px">
-                    <b>•</b>
-                </td>
-                <td class="pl-20px">
-                    <b>Finalização do Valor de Compra do Imóvel (Multa)- CHB: %CONTRATO_BEM%</b> <br>
-                    -> DLE Evento 22351-4 ROMID-RECEBIMENTOS A CLASSIFICAR-FINALIZACAO CICOC; <br>
-                    -> Valor: %VALOR_DESPESA%; <br>
-                    -> Histórico: Reversão em multa do processo de distrato chb %NUMERO_CONTRATO%.
                 </td>
             </tr>
 
@@ -267,7 +250,6 @@
                 </td>
             </tr>
 
-            <!-- SE TIVER FINANCIAMENTO CADASTRADO -->
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
@@ -295,6 +277,20 @@
                 <td class="pl-20px">
                     <b>Devolução do FGTS para a conta vinculada - CHB: %CONTRATO_BEM%</b> <br>
                     -> no  caso  de  utilização  de  FGTS,  efetuar  o  cancelamento  total  do  DAMP,  solicitando  à  GIFUG  o  retorno  à  conta vinculada do FGTS.
+                </td>
+            </tr>
+
+            <!-- SE TIVER REEMBOLSO AUTORIZADO EMGEA CADASTRADO -->
+            <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>Reembolso de Despesas Autorizadas pela EMGEA - CHB: %CONTRATO_BEM%</b> <br>
+                    -> DLE evento 02534-8 - SL 1 - IR 5; <br>
+                    -> Valor: %SOMA_DEPESA_E_ATUALIZACAO%
+                    -> Número de conciliação: %NUMERO_CONTRATO%; <br>
+                    -> Histórico: Valor do %TIPO DESPESA% + atualização monetária apurada sobre o valor pago.
                 </td>
             </tr>
             
