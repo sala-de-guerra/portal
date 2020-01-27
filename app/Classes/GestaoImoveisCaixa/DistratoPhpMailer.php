@@ -221,7 +221,7 @@ class DistratoPhpMailer
         }
     }
 
-    public static function montaOrientacoesAgencia($objDistrato)
+    public static function montaComponenteDistratoPorClassificacaoImovelParaMontarOrientacaoAgencia($objDistrato)
     {
         // CAPTURA OS DADOS DO CONTRATO PARA VER A CLASSIFICAÇÃO DO IMÓVEL
         $dadosContrato = BaseSimov::where('BEM_FORMATADO', $objDistrato->contratoFormatado)->first();
@@ -251,12 +251,77 @@ class DistratoPhpMailer
                 break;
         }
 
+        // MONTA O COMPONENTE HTML PARA INSERIR NO E-MAIL
     }
 
     public static function montaComponentePorDespesaOrientacoesAgencia($objDistrato)
     {
-        // CAPTURA AS DESPESAS DA DEMANDA
+        $relacaoDespesasDistrato = DistratoRelacaoDespesas::where('idDistrato', $objDistrato->idDistrato)->get();
+        
+        foreach ($relacaoDespesasDistrato as $despesa) {
+            // CAPTURA AS DESPESAS DA DEMANDA
+            switch ($relacaoDespesasDistrato->tipoDespesa) {
+                case 'FINANCIAMENTO':
+                    // Finalização do Valor de Compra do Imóvel (Financiamento)- CHB: %CONTRATO_BEM% 
+                    // -> DLE evento 0223-2 Estorno de concessão de financiamento – SL 1; 
+                    // -> Valor: %VALOR_DESPESA%; 
+                    // -> no GCI/SI, recuperar e excluir o TP 001 do contrato de financiamento; 
+                    // -> após este procedimento as prestações (TP 310) e a taxa à vista recebida (TP 319) ficarão pendentes no CAR, bem como será gerado um TP 025 no CAC; 
+                    // -> comandar o pedido 025 com sinal C; 
+                    break;
+                case 'FGTS':
+                    // Devolução do FGTS para a conta vinculada - CHB: %CONTRATO_BEM% 
+                    // -> no caso de utilização de FGTS, efetuar o cancelamento total do DAMP, solicitando à GIFUG o retorno à conta vinculada do FGTS. 
+                    break;
+                case 'MULTA':
+                    // Finalização do Valor de Compra do Imóvel (Multa)- CHB: %CONTRATO_BEM% 
+                    // -> DLE Evento 22351-4 ROMID-RECEBIMENTOS A CLASSIFICAR-FINALIZACAO CICOC; 
+                    // -> Valor: %VALOR_DESPESA%; 
+                    // -> Histórico: Reversão em multa do processo de distrato chb %NUMERO_CONTRATO%. 
+                    break;
+                case 'PARCELAMENTO':
+                    // Devolução das Parcelas e taxas de Financiamento - CHB: %CONTRATO_BEM% 
+                    // -> no GCI/SI Excluir as prestações e taxas através da ação EXC; 
+                    // -> DLE evento 0203-8 Devolução de prestação e diferença de prestação - SL 1; 
+                    // -> Valor: %SOMA_DAS_PRESTACOES%; 
+                    // -> Em contrapartida, efetuar crédito na conta do cliente; 
+                    // -> A atualização monetária das parcelas e taxas é calculada pela taxa da poupança e contabilizada conforme abaixo; 
+                    // -> DLE evento 08679-7 Despesas com Distrato - SL 1; 
+                    // -> Valor: %SOMA_ATUALIZACAO_DESPESA% -> Centro de Custo: 7257; 
+                    // -> Número de conciliação: %NUMERO_CONTRATO%; 
+                    // -> Histórico: atualização monetária apurada sobre o valor pago em taxa e prestações do financiamento. 
+                    break;
+                case 'RECURSOS PROPRIOS':
+                    // Finalização do Valor de Compra do Imóvel (Recursos Próprios)- CHB: %CONTRATO_BEM% 
+                    // -> Creditar na conta do cliente o valor %VALOR_DESPESA%. 
+                    break;
+                case 'AUTORIZADAS REEMBOLSO EMGEA':
 
+                    break;
+                case 'BENFEITORIAS':
+
+                    break;
+                case 'COMISSAO DE LEILOEIRO':
+
+                    break;
+                case 'CONDOMINIO':
+
+                    break;
+                case 'CUSTAS CARTORARIAS':
+
+                    break;
+                case 'IPTU':
+
+                    break;
+                case 'ITBI':
+
+                    break;
+                case 'TAXAS DE FINANCIAMENTO':
+
+                    break;
+            }
+        }
+        
 
         // PEGA O EVENTO E A SITUAÇÃO DE LANÇAMENTO
 
