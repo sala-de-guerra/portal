@@ -161,16 +161,7 @@ class DistratoDemandaController extends Controller
         
         // PASSA POR TODAS AS SOLICITAÇÕES DE DISTRATO DO CONTRATO (CASO HAJA MAIS DE UM CASO)
         foreach ($demandaDistrato as $demanda) {
-
-            // VALIDA A DATA ANTES DE ATRIBUIR NO ARRAY
-            if ($demanda->created_at == null || $demanda->created_at == 'NULL') {
-                $dataCadastro = null;
-                $dataUltimaAlteracao = null;
-            } else {
-                $dataCadastro = $demanda->created_at->format('yy-m-d h:i:s');
-                $dataUltimaAlteracao = $demanda->updated_at->format('yy-m-d h:i:s');
-            }
-            
+           
             // MONTA O ARRAY DA DEMANDA COM SOMENTE OS CAMPOS NECESSÁRIOS PARA A VIEW
             $arrayDemanda = [
                 'idDistrato' => $demanda->idDistrato,
@@ -179,11 +170,10 @@ class DistratoDemandaController extends Controller
                 'telefoneProponente' => $demanda->telefoneProponente,
                 'emailProponente' => $demanda->emailProponente,
                 'modalidadeProposta' => $demanda->tipoVendaProposta,
-                'dataCadastro' => $dataCadastro,
-                'dataUltimaAlteracaoDemanda' => $dataUltimaAlteracao,
+                'dataCadastro' => $demanda->created_at == null ? '' : $demanda->created_at->format('yy-m-d h:i:s'),
                 'motivoDistrato' => $demanda->motivoDistrato,
                 'statusAnaliseDistrato' => $demanda->statusAnaliseDistrato,
-                'observacaoDistrato' => $demanda->observacaoDistrato,
+                'observacaoDistrato' => $demanda->observacaoDistrato == null ? '' : $demanda->observacaoDistrato,
                 'parecerAnalista' => $demanda->parecerAnalista,
                 'matriculaAnalista' => $demanda->matriculaAnalista,
                 'valorTotalProposta' => $demanda->valorTotalProposta,
@@ -192,7 +182,6 @@ class DistratoDemandaController extends Controller
                 'valorFinanciadoProposta' => $demanda->valorFinanciadoProposta,
                 'valorParceladoProposta' => $demanda->valorParceladoProposta,
             ];
-
             // AGRUPA TODAS AS DEMANDAS EM UM ÚNICO ARRAY
             array_push($arrayGrupoDemandasDistrato, $arrayDemanda);
         }
@@ -211,7 +200,8 @@ class DistratoDemandaController extends Controller
             DB::beginTransaction();
             // ATUALIZA DEMANDA
             $demandaDistrato = DistratoDemanda::find($idDistrato);
-            $demandaDistrato->motivoDistrato = $request->input('motivoDistrato');
+            // VALIDA SE OS INPUTS ESTÃO VINDO NULL, CASO POSITIVO MANTER O STATUS ANTERIOR
+            $demandaDistrato->motivoDistrato = $request->input('motivoDistrato') == null ? $demandaDistrato->motivoDistrato : $request->input('motivoDistrato');
             $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
             $demandaDistrato->matriculaAnalista = session('matricula');
             
@@ -263,7 +253,7 @@ class DistratoDemandaController extends Controller
                         $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
                         $controleMensageriaDistrato->save();
                     }
-                    $demandaDistrato->statusAnaliseDistrato = 'AGUARDANDO DOCUMENTOS CLIENTE';
+                    $demandaDistrato->statusAnaliseDistrato = 'AGUARDA DOCUMENTOS CLIENTE';
                     break;
                 case 'DISTRATO CANCELADO':
                     $demandaDistrato->statusAnaliseDistrato = 'CANCELADA';
@@ -360,7 +350,7 @@ class DistratoDemandaController extends Controller
 
             // ATUALIZA DESPESA
             $despesa = DistratoRelacaoDespesas::find($idDespesa);
-            $despesa->devolucaoPertinente = $request->input('devolucaoPertinente');
+            $despesa->devolucaoPertinente = $request->input('devolucaoPertinente') == null ? $despesa->devolucaoPertinente : $request->input('devolucaoPertinente');
 
             // CAPTURA DADOS DISTRATO
             $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first();
@@ -425,6 +415,17 @@ class DistratoDemandaController extends Controller
                     $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                     $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
 
+                    // ENVIAR MENSAGEM DE ORIENTAÇÃO PARA A REDE
+                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistratoComMulta');
+
+                    // CADASTRAR ENVIO DE MENSAGERIA
+                    $controleMensageriaDistrato = new ControleMensageria;
+                    $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - ORIENTACAO CONTÁBIL AGÊNCIA';
+                    $controleMensageriaDistrato->numeroContrato = $demandaDistrato->contratoFormatado;
+                    $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
+                    $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
+                    $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+
                     // CADASTRA HISTÓRICO
                     $historico = new HistoricoPortalGilie;
                     $historico->matricula = session('matricula');
@@ -439,6 +440,17 @@ class DistratoDemandaController extends Controller
 
                     $controleMensageriaDistrato = new ControleMensageria;
                     $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - ORIENTACAO CLIENTE SEM MULTA';
+                    $controleMensageriaDistrato->numeroContrato = $demandaDistrato->contratoFormatado;
+                    $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
+                    $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
+                    $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+
+                    // ENVIAR MENSAGEM DE ORIENTAÇÃO PARA A REDE
+                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistratoSemMulta');
+
+                    // CADASTRAR ENVIO DE MENSAGERIA
+                    $controleMensageriaDistrato = new ControleMensageria;
+                    $controleMensageriaDistrato->tipoMensagem = 'DISTRATO - ORIENTACAO CONTÁBIL AGÊNCIA';
                     $controleMensageriaDistrato->numeroContrato = $demandaDistrato->contratoFormatado;
                     $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
                     $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
@@ -477,8 +489,6 @@ class DistratoDemandaController extends Controller
 
                 $demandaDistrato->statusAnaliseDistrato = 'CANCELADA';
             }
-            // ENVIAR MENSAGEM DE ORIENTAÇÃO PARA A REDE
-            DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistrato');
 
             // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
             $demandaDistrato->save();
@@ -598,7 +608,7 @@ class DistratoDemandaController extends Controller
 
             // ATUALIZA DEMANDA          
             $despesa = DistratoRelacaoDespesas::where('idDespesa', $idDespesa)->first();
-            $despesa->tipoDespesa = $request->tipoDespesa;
+            $despesa->tipoDespesa = $request->tipoDespesa == null ? $despesa->tipoDespesa : $request->tipoDespesa;
             $despesa->valorDespesa = str_replace(',', '.', str_replace('.', '', $request->valorDespesa));
             $despesa->dataEfetivaDaDespesa =  $dataEfetivaDaDespesa;
             $despesa->observacaoDespesa = $request->observacaoDespesa != null ? $request->observacaoDespesa : $despesa->observacaoDespesa;
@@ -623,5 +633,55 @@ class DistratoDemandaController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
         }
         return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $demandaDistrato
+     * @return \Illuminate\Http\Response
+     */
+    public function alterarDemandaDistrato(Request $request, $idDistrato)
+    {       
+        try {
+            DB::beginTransaction();
+            // ATUALIZA DEMANDA
+            $demandaDistrato = DistratoDemanda::find($idDistrato);
+
+            // VALIDA SE OS INPUTS ESTÃO VINDO NULL, CASO POSITIVO MANTER O STATUS ANTERIOR
+            $demandaDistrato->motivoDistrato = $request->input('motivoDistrato') == null ? $demandaDistrato->motivoDistrato : $request->input('motivoDistrato');
+            $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato') == null ? $demandaDistrato->statusAnaliseDistrato : $request->input('statusAnaliseDistrato');
+            $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
+            $demandaDistrato->matriculaAnalista = session('matricula');
+            
+            // RESGATA DADOS DO CONTRATO
+            $dadosSimov = BaseSimov::where('BEM_FORMATADO', $demandaDistrato->contratoFormatado)->first();
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $demandaDistrato->contratoFormatado;
+            $historico->tipo = "ALTERAÇÃO";
+            $historico->atividade = "DISTRATO";
+            $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - STATUS: $demandaDistrato->statusAnaliseDistrato - MOTIVO: $demandaDistrato->motivoDistrato - OBSERVAÇÃO: $request->observacaoDistrato";
+            $historico->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Alteração realizada!");
+            $request->session()->flash('corpoMensagem', "A alteração da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi realizada com sucesso.");
+
+            // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
+            $demandaDistrato->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Alteração não efetuada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da alteração. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
     }
 }
