@@ -165,7 +165,7 @@ function _formataListaDistrato (numeroContrato, view) {
 
                         '<div id="btnParecerGerenteDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
 
-                        '<div id="btnAlterarStatusDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+                        '<div id="btnAlterarDemandaDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
 
                     '</div>' +
 
@@ -175,67 +175,70 @@ function _formataListaDistrato (numeroContrato, view) {
             $(li).appendTo('#listaDistratos');    
             
             if (view == "operacional") {
-                var btnAnalisarDistrato =
-                
-                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAnalisarDistrato' + item.idDistrato + '">' +
-                        '<i class="far fa-edit"></i>' +
-                        'Analisar Distrato' +
-                    '</button>' +
 
-                    '<div class="modal fade" id="modalAnalisarDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                        '<div class="modal-dialog" role="document">' +
-                            '<div class="modal-content">' +
-                                '<form method="post" action="/estoque-imoveis/distrato/atualizar/' + item.idDistrato + '" id="formAnalisarDistrato' + item.idDistrato + '">' +
-                                    
-                                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                if (item.statusAnaliseDistrato == "CADASTRADA") {
+
+                    var btnAnalisarDistrato =
+                    
+                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAnalisarDistrato' + item.idDistrato + '">' +
+                            '<i class="far fa-edit"></i>' +
+                            'Analisar Distrato' +
+                        '</button>' +
+
+                        '<div class="modal fade" id="modalAnalisarDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                                '<div class="modal-content">' +
+                                    '<form method="post" action="/estoque-imoveis/distrato/atualizar/' + item.idDistrato + '" id="formAnalisarDistrato' + item.idDistrato + '">' +
+                                        
+                                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                        '<input type="hidden" class="form-control" name="_method" value="PUT">' +
 
 
-                                    '<div class="modal-header">' +
-                                        '<h5 class="modal-title" id="exampleModalLabel">Analisar Distrato</h5>' +
-                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-                                            '<span aria-hidden="true">&times;</span>' +
-                                        '</button>' +
-                                    '</div>' +
-
-                                    '<div class="modal-body">' +
-
-                                        '<div class="form-group">' +
-                                            '<label>Alterar Motivo de Distrato:</label>' +
-                                            '<select id="selectMotivo' + item.idDistrato + '" name="motivoDistrato" class="form-control" required>' +
-                                                '<option value="">Selecione</option>' +
-                                                '<option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>' +
-                                                '<option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>' +
-                                                '<option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>' +
-                                                '<option value="DESISTENCIA">DESISTÊNCIA</option>' +
-                                                '<option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>' +
-                                                '<option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>' +
-                                                '<option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>' +
-                                                '<option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>' +
-                                                '<option value="LEILOES NEGATIVOS">LEILÕES NEGATIVOS</option>' +
-                                            '</select>' +
+                                        '<div class="modal-header">' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">Analisar Distrato</h5>' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                                '<span aria-hidden="true">&times;</span>' +
+                                            '</button>' +
                                         '</div>' +
 
-                                        '<div class="form-group">' +
-                                            '<label>Observações:</label>' +
-                                            '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
+                                        '<div class="modal-body">' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Alterar Motivo de Distrato:</label>' +
+                                                '<select name="motivoDistrato" class="form-control" required>' +
+                                                    '<option value="">Selecione</option>' +
+                                                    '<option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>' +
+                                                    '<option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>' +
+                                                    '<option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>' +
+                                                    '<option value="DESISTENCIA">DESISTÊNCIA</option>' +
+                                                    '<option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>' +
+                                                    '<option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>' +
+                                                    '<option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>' +
+                                                    '<option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>' +
+                                                    '<option value="LEILOES NEGATIVOS">LEILÕES NEGATIVOS</option>' +
+                                                '</select>' +
+                                            '</div>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Observações:</label>' +
+                                                '<textarea rows="5" name="observacaoDistrato" class="form-control"></textarea>' +                                        
+                                            '</div>' +
+
+                                        '</div>' +
+                                        '<div class="modal-footer">' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
+                                            '<button type="submit" class="btn btn-primary">Salvar</button>' +
                                         '</div>' +
 
-                                    '</div>' +
-                                    '<div class="modal-footer">' +
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
-                                        '<button type="submit" class="btn btn-primary">Salvar</button>' +
-                                    '</div>' +
-
-                                '</form>' +
+                                    '</form>' +
+                                '</div>' +
                             '</div>' +
-                        '</div>' +
-                    '</div>';
-                $(btnAnalisarDistrato).appendTo('#btnAnalisarDistrato' + item.idDistrato);
+                        '</div>';
 
-                $('#selectMotivo' + item.idDistrato).val(item.motivoDistrato);
+                    $(btnAnalisarDistrato).appendTo('#btnAnalisarDistrato' + item.idDistrato);
 
-                if (item.statusAnaliseDistrato != "CADASTRADA") {
+                } else {
+
                     var btnCadastrarDespesaDistrato =
                         '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespesaDistrato' + item.idDistrato + '">' +
                             '<i class="far fa-edit"></i>' +
@@ -410,23 +413,23 @@ function _formataListaDistrato (numeroContrato, view) {
                         '</div>';
                     $(btnParecerGerenteDistrato).appendTo('#btnParecerGerenteDistrato' + item.idDistrato);
 
-                    var btnAlterarStatusDistrato =
-                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAlterarStatusDistrato' + item.idDistrato + '">' +
+                    var btnAlterarDemandaDistrato =
+                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAlterarDemandaDistrato' + item.idDistrato + '">' +
                             '<i class="far fa-edit"></i>' +
-                            'Alterar Status' +
+                            'Alterar Demanda' +
                         '</button>' +
 
-                        '<div class="modal fade" id="modalAlterarStatusDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                        '<div class="modal fade" id="modalAlterarDemandaDistrato' + item.idDistrato + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog" role="document">' +
                                 '<div class="modal-content">' +
-                                    '<form method="post" action="/estoque-imoveis/distrato/alterar-status-distrato/' + item.idDistrato + '" id="formAlterarStatusDistrato' + item.idDistrato + '">' +
+                                    '<form method="post" action="/estoque-imoveis/distrato/alterar-demanda-distrato/' + item.idDistrato + '" id="formAlterarDemandaDistrato' + item.idDistrato + '">' +
                                         
                                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                         '<input type="hidden" class="form-control" name="_method" value="PUT">' +
 
 
                                         '<div class="modal-header">' +
-                                            '<h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">Alterar Demanda</h5>' +
                                             '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                                 '<span aria-hidden="true">&times;</span>' +
                                             '</button>' +
@@ -436,13 +439,32 @@ function _formataListaDistrato (numeroContrato, view) {
                                             '<div class="form-group">' +
                                                 '<label>Alterar Status da Demanda:</label>' +
                                                 '<select name="statusAnaliseDistrato" class="form-control">' +
-                                                    '<option value="" selected>Selecione</option>' +
+                                                    '<option value="' + item.statusAnaliseDistrato + '" selected disabled>' + item.statusAnaliseDistrato + '</option>' +
                                                     '<option value="AVERBACAO DISTRATO">AVERBAÇÃO DISTRATO</option>' +
                                                     '<option value="CADASTRADA">CADASTRADA</option>' +
+                                                    '<option value="CANCELADA">CANCELADA</option>' +
                                                     '<option value="CONCLUIDA">CONCLUÍDA</option>' +
+                                                    '<option value="ENCAMINHADO AGENCIA">ENCAMINHADO AGENCIA</option>' +
                                                     '<option value="CONSULTA JURIR">CONSULTA JURIR</option>' +
                                                 '</select>' +
                                             '</div>' +
+
+                                            '<div class="form-group">' +
+                                                '<label>Alterar Motivo de Distrato:</label>' +
+                                                '<select name="motivoDistrato" class="form-control">' +
+                                                    '<option value="' + item.motivoDistrato + '" selected disabled>' + item.motivoDistrato + '</option>' +
+                                                    '<option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>' +
+                                                    '<option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>' +
+                                                    '<option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>' +
+                                                    '<option value="DESISTENCIA">DESISTÊNCIA</option>' +
+                                                    '<option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>' +
+                                                    '<option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>' +
+                                                    '<option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>' +
+                                                    '<option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>' +
+                                                    '<option value="LEILOES NEGATIVOS">LEILÕES NEGATIVOS</option>' +
+                                                '</select>' +
+                                            '</div>' +
+
 
                                             '<div class="form-group">' +
                                                 '<label>Observações:</label>' +
@@ -460,7 +482,7 @@ function _formataListaDistrato (numeroContrato, view) {
                             '</div>' +
                         '</div>';
 
-                    $(btnAlterarStatusDistrato).appendTo('#btnAlterarStatusDistrato' + item.idDistrato);
+                    $(btnAlterarDemandaDistrato).appendTo('#btnAlterarDemandaDistrato' + item.idDistrato);
                 }
 
                 _formataTabelaDespesasDistrato (item.idDistrato, "operacional");
@@ -480,6 +502,7 @@ function _formataListaDistrato (numeroContrato, view) {
             _formataProgressBar ("progressBarDistrato" + item.idDistrato, arrayPorcentagemEStatus, item.statusAnaliseDistrato);
 
         });
+
         
     });
     

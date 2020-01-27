@@ -81,6 +81,7 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('tratar/{contrato}', 'GestaoImoveisCaixa\DistratoDemandaController@edit');
         Route::post('cadastrar-demanda', 'GestaoImoveisCaixa\DistratoDemandaController@store');
         Route::post('cadastrar-despesa/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@cadastrarDespesa');
+        Route::put('alterar-demanda-distrato/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@alterarDemandaDistrato');
         Route::put('atualizar/{demanda}', 'GestaoImoveisCaixa\DistratoDemandaController@update');
         Route::put('atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoDemandaController@atualizarDespesa');
         Route::put('emitir-parecer-analista/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@emitirParecerAnalista');

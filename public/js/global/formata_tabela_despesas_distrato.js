@@ -13,6 +13,10 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                 sentidoIconeDespesa = "down";
             };
 
+            if (item.observacaoDespesa === null) {
+                item.observacaoDespesa = "";
+            }
+
             var linha =
                 '<tr>' +
                     '<td>' + item.idDespesa + '</td>' +
@@ -67,8 +71,8 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
 
                                         '<div class="form-group">' +
                                             '<label>Tipo de Despesa:</label>' +
-                                            '<select id="selectAlteraTipoDespesa' + item.idDespesa + '" name="tipoDespesa" class="form-control" required>' +
-                                                '<option value="">Selecione</option>' +
+                                            '<select name="tipoDespesa" class="form-control">' +
+                                                '<option value="' + item.tipoDespesa + '" selected disabled>' + item.tipoDespesa + '</option>' +
                                                 '<option value="AUTORIZADAS REEMBOLSO EMGEA">Autorizadas Reembolso EMGEA</option>' +
                                                 '<option value="BENFEITORIAS">Benfeitorias</option>' +
                                                 '<option value="COMISSAO DE LEILOEIRO">Comissão de Leiloeiro</option>' +
@@ -115,8 +119,6 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                 
                 $(btnAlteraDespesa).appendTo("#btnAlteraDespesa" + item.idDespesa);
 
-                $("#selectAlteraTipoDespesa" + item.idDespesa).val(item.tipoDespesa);
-
                 var btnInvalidaDespesaDistrato =
 
                     '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalInvalidaDespesaDistrato' + item.idDespesa + '">' +
@@ -133,7 +135,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                                 '<input type="hidden" class="form-control" name="idDespesa" value="'+ item.idDespesa +'">' +
 
                                     '<div class="modal-header">' +
-                                        '<h5 class="modal-title" id="exampleModalLabel">Validar / Invalidar Despesa</h5>' +
+                                        '<h5 class="modal-title" id="exampleModalLabel">Validar Despesa?</h5>' +
                                         '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                             '<span aria-hidden="true">&times;</span>' +
                                         '</button>' +
@@ -142,15 +144,15 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                                     '<div class="modal-body">' +
 
                                         '<div class="form-group">' +
-                                            '<select id="selectAlteraValidarDespesa' + item.idDespesa + '" name="devolucaoPertinente" class="form-control" required>' +
-                                                '<option value="">Selecione</option>' +
-                                                '<option value="SIM">Valida</option>' +
-                                                '<option value="NAO">Não Valida</option>' +
+                                            '<select name="devolucaoPertinente" class="form-control" required>' +
+                                                '<option value="' + item.devolucaoPertinente + '" selected disabled>' + item.devolucaoPertinente + '</option>' +
+                                                '<option value="SIM">SIM</option>' +
+                                                '<option value="NÃO">NÃO Valida</option>' +
                                             '</select>' +
                                         '</div>' +
 
-
                                     '</div>' +
+
                                     '<div class="modal-footer">' +
                                         '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>' +
                                         '<button type="submit" class="btn btn-primary">Salvar</button>' +
@@ -162,8 +164,6 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                     '</div>';
 
                 $(btnInvalidaDespesaDistrato).appendTo('#btnInvalidaDespesaDistrato' + item.idDespesa);
-
-                $("#selectAlteraValidarDespesa" + item.idDespesa).val(item.devolucaoPertinente);
 
                 var btnExcluiDespesaDistrato =
 
@@ -217,7 +217,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
         // RESETAR CAMPOS DOS FORM AO FECHAR O MODAL
     
         $(".modal").on('hidden.bs.modal', function(e){
-            $(this).find("form")[0].reset();       
+            $(this).find("form")[0].reset();
         });
 
         $( function() {

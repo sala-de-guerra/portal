@@ -210,11 +210,11 @@ return [
         //     'icon' => 'fas fa-fw fa-lock'
         // ],
 
-        [
-            'text'        => 'Sobre a GILIE',
-            'url'         => '/sobre',
-            'icon'        => 'fas fa-lg fa-users',
-        ],
+        // [
+        //     'text'        => 'Sobre a GILIE',
+        //     'url'         => '/sobre',
+        //     'icon'        => 'fas fa-lg fa-users',
+        // ],
         [
             'text'        => 'Área de Atuação',
             'url'         => '/area',
@@ -231,11 +231,11 @@ return [
             'icon'        => 'fas fa-lg fa-directions',
         ],
 
-        [
-            'text'        => 'Conheça o Projeto',
-            'url'         => '/projeto',
-            'icon'        => 'fas fa-lg fa-toolbox',
-        ],
+        // [
+        //     'text'        => 'Conheça o Projeto',
+        //     'url'         => '/projeto',
+        //     'icon'        => 'fas fa-lg fa-toolbox',
+        // ],
 
 
         ['header' => 'IMÓVEIS CAIXA'],
@@ -304,10 +304,10 @@ return [
             'text'    => 'Contratação',
             'icon'    => 'fas fa-lg fa-fw fa-file-contract',
             'submenu' => [
-                [
-                    'text' => 'Controle de Conformidade',
-                    'url'  => '/controle-conformidade',
-                ],
+                // [
+                //     'text' => 'Controle de Conformidade',
+                //     'url'  => '/controle-conformidade',
+                // ],
                 [
                     'text' => 'Controle de Distrato',
                     'url'  => '/estoque-imoveis/distrato',

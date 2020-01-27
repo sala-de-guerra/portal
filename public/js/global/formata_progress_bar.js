@@ -60,7 +60,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
             case 'CANCELADA':
                 statusAtual = 'Cadastrada';
                 break;
-            case 'AGUARDA DOCUMENTACAO CLIENTE':
+            case 'AGUARDA DOCUMENTOS CLIENTE':
                 statusAtual = 'Aguarda Docs.';
                 break;
             case 'AGUARDA PARECER GESTOR':

@@ -11,6 +11,7 @@ use App\Models\PropostasSimov;
 use App\Models\RelacaoAgSrComEmail;
 use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
 
+
 class ConsultaContratoController extends Controller
 {
     /**
@@ -43,16 +44,19 @@ class ConsultaContratoController extends Controller
      */
     static public function capturaDadosBaseSimov($numeroContrato)
     {
-        // dd($numeroContrato);
+        
         // CAPTURA OS DADOS SIMOV DO CONTRATO
         $contrato = BaseSimov::where('BEM_FORMATADO', $numeroContrato)->first();
-        // CAPTURA OS DADOS DA AGÊNCIA DE CONTRATACAO (SE HOUVER)
-        $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $contrato->AGENCIA_CONTRATACAO_PROPOSTA)->first();
+        // RETORNA JSON VAZIO NO CASO DO CONTRATO NÃO ESTAR NA BASE DE DADOS
+        if ($contrato == null || $contrato == 'NULL') {
+            $dadosContrato = [];
+            return json_encode($dadosContrato);
+        }
+        
         // CAPTURA DADOS DE CONFORMIDADE
         $dadosConformidade = ConformidadeContratacao::where('numeroContrato', $contrato->NU_BEM)->first();
         // CAPTURA OS DADOS DA PROPOSTA DO PROPONENTE ATUAL
         $dadosProposta = PropostasSimov::where('NU_BEM', $contrato->NU_BEM)->where('VALOR RECURSOS PRÓPRIOS', $contrato->VALOR_REC_PROPRIOS_CONTRATO)->where('VALOR FGTS', $contrato->VALOR_FGTS_PROPOSTA)->where('VALOR FINANCIADO', $contrato->VALOR_FINANCIADO_PROPOSTA)->where('NOME PROPONENTE', $contrato->NOME_PROPONENTE)->first();
-        dd($dadosProposta);
 
         // VALIDA FLUXO CONTRATAÇÃO DA PROPOSTA - CCA OU AGÊNCIA
         $fluxoAgenciaOuCca = self::validaFluxoContratacaoPropostaCcaAgencia($contrato);
@@ -61,6 +65,7 @@ class ConsultaContratoController extends Controller
         $telefoneCorretor = self::validaTelefoneCorretor($contrato);
 
         // VALIDA SE EXISTE AGÊNCIA DE CONTRATAÇÃO
+        $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $contrato->AGENCIA_CONTRATACAO_PROPOSTA)->first();
         if ($dadosAgencia == null || $dadosAgencia == 'NULL') {
             $codigoAgenciaContratacao = null;
             $nomeAgenciaContratacao = null;
@@ -176,9 +181,9 @@ class ConsultaContratoController extends Controller
             $arrayDadosMensagem = [
                 'idMensagem' => $mensagem->id,
                 'tipoMensagem' => $mensagem->tipoMensagem,
-                'codigoAgencia' => $mensagem->codigoAgencia,
-                'emailProponente' => $mensagem->emailProponente,
-                'emailCorretor' => $mensagem->emailCorretor,
+                'codigoAgencia' => $mensagem->codigoAgencia == null ? '' : $mensagem->codigoAgencia,
+                'emailProponente' => $mensagem->emailProponente == null ? '' : $mensagem->emailProponente,
+                'emailCorretor' => $mensagem->emailCorretor == null ? '' : $mensagem->emailCorretor,
                 'dataEnvio' => $mensagem->created_at,
             ];
             array_push($jsonMensagensEnviadas, $arrayDadosMensagem);
