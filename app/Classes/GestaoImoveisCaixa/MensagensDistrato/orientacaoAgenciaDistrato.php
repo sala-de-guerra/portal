@@ -59,9 +59,10 @@
 
     <p>À</p>
     <p>AG %NOME_AGENCIA%,</p>
+    <p>A/C Setor de Habitação</p>
 
     <br>
-    <p>Prezados,</p>
+    <p>Prezado(a) Senhor(a) Gerente,</p>
 
     <br>
     <table>
@@ -174,8 +175,67 @@
                 </td>
             </tr>
 
-            <!-- SE TIVER FINANCIAMENTO CADASTRADO -->
-            <tr>
+
+            %ORIENTACAO_AGENCIA%
+
+            <!-- SE O IMÓVEL FOR CAIXA OU EMGEA -->
+            <!-- <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>Levantamento do Valor de Compra do Imóvel - CHB: %CONTRATO_BEM%</b> <br>
+                    -> verificar se o imóvel está cadastrado no GCE/GE ou GCI/CE; <br>
+                    -> no GCE/GE ou GCI/CE, recuperar e excluir o TP 195 ou 196 do imóvel <b>(comando já efetuado pela GILIE)</b>; <br>
+                    -> após este procedimento, o GCE/GCI gera um TP 252 pendente no valor da venda; <br>
+                    -> comandar o TP 252 com sinal D <b>(efetuar este comando na mesma data da contabilização da DLE)</b>; <br>
+                    -> DLE evento 1295-5 SIACI AD Recebimento - IR 5 – SL 2 (estorno); <br>
+                    -> Data efetiva: %DATA_EFETIVA_DESPESA%, a mesma do TP 195 ou 196; <br>
+                    -> Valor: %VALOR_DESPESA%, correspondente à soma de Valor de Recursos Próprios com Financiamento e / ou FGTS, se houverem.
+                </td>
+            </tr> -->
+
+            <!-- SE O IMÓVEL FOR PATRIMONIAL -->
+            <!-- <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>Levantamento do Valor de Compra do Imóvel - CHB: %CONTRATO_BEM%</b> <br>
+                    -> DLE evento 28246-4 SL-1;  <br>
+                    -> Valor: %VALOR_DESPESA%, correspondente à soma de Valor de Recursos Próprios com Financiamento e / ou FGTS, se houverem.
+                </td>
+            </tr> -->
+
+            <!-- SE TIVER MULTA CADASTRADO -->
+            <!-- <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>Finalização do Valor de Compra do Imóvel (Multa)- CHB: %CONTRATO_BEM%</b> <br>
+                    -> DLE Evento 22351-4 ROMID-RECEBIMENTOS A CLASSIFICAR-FINALIZACAO CICOC; <br>
+                    -> Valor: %VALOR_DESPESA%; <br>
+                    -> Histórico: Reversão em multa do processo de distrato CHB %NUMERO_CONTRATO%.
+                </td>
+            </tr> -->
+
+            <!-- SE TIVER RECURSOS PROPRIOS CADASTRADO -->
+
+            <!-- <tr>
+                <td class="pl-40px">
+                    <b>•</b>
+                </td>
+                <td class="pl-20px">
+                    <b>Finalização do Valor de Compra do Imóvel (Recursos Próprios)- CHB: %CONTRATO_BEM%</b> <br>
+                    -> Creditar na conta do cliente o valor %VALOR_DESPESA%.
+                </td>
+            </tr> -->
+            
+
+            <!-- SE TIVER FINANCIAMENTO OU PARCELAMENTO CADASTRADO -->
+
+            <!-- <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
@@ -191,52 +251,9 @@
                     4.6.1.5 Aguarda manifestação da Centralizadora em até 10 dias úteis contados da data de cada mensagem recebida pela CEHOP, mensagem única ou de retorno(s). <br>
                     4.6.1.6 Efetua os procedimentos operacionais, contábeis e de estorno, inclusive em contas de clientes, de subsídio e de FGTS, se necessários, além da exclusão/regularização do contrato no SIOPI. 
                 </td>
-            </tr>
+            </tr> -->
 
-            <!-- SE O IMÓVEL FOR CAIXA OU EMGEA -->
-            <tr>
-                <td class="pl-40px">
-                    <b>•</b>
-                </td>
-                <td class="pl-20px">
-                    <b>Levantamento do Valor de Compra do Imóvel - CHB: %CONTRATO_BEM%</b> <br>
-                    -> verificar se o imóvel está cadastrado no GCE/GE ou GCI/CE; <br>
-                    -> no GCE/GE ou GCI/CE, recuperar e excluir o TP 195 ou 196 do imóvel; <b>(comando já efetuado pela GILIE)</b>; <br>
-                    -> após este procedimento, o GCE/GCI gera um TP 252 pendente no valor da venda; <br>
-                    -> comandar o TP 252 com sinal D <b>(efetuar este comando na mesma data da contabilização da DLE)</b>; <br>
-                    -> DLE evento 1295-5 SIACI AD Recebimento - IR 5 – SL 2 (estorno);  <br>
-                    -> Data efetiva: %DATA_EFETIVA_DESPESA%, a mesma do TP 195 ou 196; <br>
-                    -> Valor: %VALOR_DESPESA%, correspondente à soma de Valor de Recursos Próprios com Financiamento ou FGTS, se houverem.
-                </td>
-            </tr>
-
-            <!-- SE O IMÓVEL FOR PATRIMONIAL -->
-            <tr>
-                <td class="pl-40px">
-                    <b>•</b>
-                </td>
-                <td class="pl-20px">
-                    <b>Levantamento do Valor de Compra do Imóvel - CHB: %CONTRATO_BEM%</b> <br>
-                    -> DLE evento 28246-4 SL-1;  <br>
-                    -> Data efetiva: %DATA_EFETIVA_DESPESA%; <br>
-                    -> Valor: %VALOR_DESPESA%, correspondente à soma de Valor de Recursos Próprios com Financiamento ou FGTS, se houverem.
-                </td>
-            </tr>
-
-            <!-- SE TIVER RECURSOS PROPRIOS CADASTRADO -->
-
-            <tr>
-                <td class="pl-40px">
-                    <b>•</b>
-                </td>
-                <td class="pl-20px">
-                    <b>Finalização do Valor de Compra do Imóvel (Recursos Próprios)- CHB: %CONTRATO_BEM%</b> <br>
-                    -> Creditar na conta do cliente o valor %VALOR_DESPESA%.
-                </td>
-            </tr>
-
-            <!-- SE TIVER FINANCIAMENTO CADASTRADO -->
-            <tr>
+            <!-- <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
@@ -248,9 +265,11 @@
                     -> após este procedimento as prestações (TP 310) e a taxa à vista recebida (TP 319) ficarão pendentes no CAR, bem como será gerado um TP 025 no CAC; <br>
                     -> comandar o pedido 025 com sinal C;
                 </td>
-            </tr>
+            </tr> -->
 
-            <tr>
+            <!-- SE TIVER PARCELAS E TAXAS DE FINANCIAMENTO CADASTRADO -->
+
+            <!-- <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
@@ -262,15 +281,15 @@
                     -> Em contrapartida, efetuar crédito na conta do cliente; <br>
                     -> A atualização monetária das parcelas e taxas é calculada pela taxa da poupança e contabilizada conforme abaixo; <br>
                     -> DLE evento 08679-7 Despesas com Distrato - SL 1; <br>
-                    -> Valor: %SOMA_ATUALIZACAO_DESPESA%
+                    -> Valor: %SOMA_ATUALIZACAO_DESPESA%; <br>
                     -> Centro de Custo: 7257; <br>
                     -> Número de conciliação: %NUMERO_CONTRATO%; <br>
                     -> Histórico: atualização monetária apurada sobre o valor pago em taxa e prestações do financiamento.
                 </td>
-            </tr>
+            </tr> -->
 
             <!-- SE TIVER FGTS CADASTRADO -->
-            <tr>
+            <!-- <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
@@ -278,21 +297,21 @@
                     <b>Devolução do FGTS para a conta vinculada - CHB: %CONTRATO_BEM%</b> <br>
                     -> no  caso  de  utilização  de  FGTS,  efetuar  o  cancelamento  total  do  DAMP,  solicitando  à  GIFUG  o  retorno  à  conta vinculada do FGTS.
                 </td>
-            </tr>
+            </tr> -->
 
             <!-- SE TIVER REEMBOLSO AUTORIZADO EMGEA CADASTRADO -->
-            <tr>
+            <!-- <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
                 <td class="pl-20px">
                     <b>Reembolso de Despesas Autorizadas pela EMGEA - CHB: %CONTRATO_BEM%</b> <br>
                     -> DLE evento 02534-8 - SL 1 - IR 5; <br>
-                    -> Valor: %SOMA_DEPESA_E_ATUALIZACAO%
+                    -> Valor: %SOMA_DEPESA_E_ATUALIZACAO%; <br>
                     -> Número de conciliação: %NUMERO_CONTRATO%; <br>
                     -> Histórico: Valor do %TIPO DESPESA% + atualização monetária apurada sobre o valor pago.
                 </td>
-            </tr>
+            </tr> -->
             
             <!-- SE TIVER (
                 BENFEITORIAS
@@ -303,7 +322,7 @@
                 ITBI
                 OUTRAS DESPESAS
             )CADASTRADO -->
-            <tr>
+            <!-- <tr>
                 <td class="pl-40px">
                     <b>•</b>
                 </td>
@@ -316,7 +335,7 @@
                     -> Número de conciliação: %NUMERO_CONTRATO%; <br>
                     -> Histórico: Valor do %TIPO DESPESA% + atualização monetária apurada sobre o valor pago.
                 </td>
-            </tr>
+            </tr> -->
 
             <tr>
                 <td>
@@ -335,7 +354,7 @@
     <p class="destaque">
     Atenciosamente,
     <br>
-    Equipe GILIE/SP
+    GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS
     </P>
 
 

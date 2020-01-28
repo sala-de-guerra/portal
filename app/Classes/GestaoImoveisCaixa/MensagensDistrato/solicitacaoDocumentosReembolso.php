@@ -46,7 +46,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" type="text/css" href="./estilos.css">  não deu --> 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MODELO - SOLICITAÇÃO DE DOCUMENTOS REEMBOLSÁVEIS DE DISTRATO - PROTOCOLO %ID_DISTRATO%</title>
+    <title>SOLICITAÇÃO DE DOCUMENTOS REEMBOLSÁVEIS DE DISTRATO - PROTOCOLO %ID_DISTRATO%</title>
 
 </head>
 
@@ -272,7 +272,7 @@
     <p class="destaque">
     Atenciosamente,
     <br>
-    Equipe GILIE/SP
+    GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS
     </P>
 
 

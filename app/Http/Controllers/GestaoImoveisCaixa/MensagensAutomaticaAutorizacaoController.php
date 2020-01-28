@@ -368,11 +368,11 @@ class MensagensAutomaticaAutorizacaoController extends Controller
                                 ELSE 'FINANCIADO'
                             END
             ,'temAcaoJudicial' = CASE
-                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
-                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
-                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
-                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '% ACAO %' THEN 'SIM'
-                                WHEN [DESCRICAO_ADIC_IMOVEL] LIKE '%ACOES%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]JUDICIA%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]AÇÕES[ ]%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]AÇÃO[ ]%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]ACAO[ ]%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]ACOES[ ]%' THEN 'SIM'
                                 ELSE 'NAO'
                             END
             ,'codigoAgencia' = AGENCIA.[codigoAgencia]
@@ -457,11 +457,11 @@ class MensagensAutomaticaAutorizacaoController extends Controller
                                 ELSE 'FINANCIADA OU COM FGTS'
                             END
             ,'temAcaoJudicial' = CASE
-                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%JUDICIA%' THEN 'SIM'
-                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%AÇÕES%' THEN 'SIM'
-                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '% AÇÃO %' THEN 'SIM'
-                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '% ACAO %' THEN 'SIM'
-                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%ACOES%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]JUDICIA%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]AÇÕES[ ]%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]AÇÃO[ ]%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]ACAO[ ]%' THEN 'SIM'
+                                    WHEN SIMOV.[DESCRICAO_ADIC_IMOVEL] LIKE '%[ ]ACOES[ ]%' THEN 'SIM'
                                     ELSE 'NAO'
                                 END
             ,'maiorQueTrintaSalariosMinimos' = CASE

@@ -114,7 +114,7 @@
     <p class="destaque">
     Atenciosamente,
     <br>
-    Portal GILIE/SP
+    GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS
     </P>
 
 
