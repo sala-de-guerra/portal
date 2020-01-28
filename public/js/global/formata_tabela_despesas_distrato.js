@@ -83,11 +83,10 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                                                 '<option value="IPTU">IPTU</option>' +
                                                 '<option value="ITBI">ITBI</option>' +
                                                 '<option value="MULTA">Multa</option>' +
-                                                '<option value="OUTRAS DESPESAS">Outras Despesas</option>' +
                                                 '<option value="PARCELA DE FINANCIAMENTO">Prcela de Financiamento</option>' +
                                                 '<option value="PARCELAMENTO">Parcelamento</option>' +
+                                                '<option value="PARCELAS E TAXAS DE FINANCIAMENTO">Parcelas e Taxas de Financiamento</option>' +
                                                 '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
-                                                '<option value="TAXAS DE FINANCIAMENTO">Taxas de Financiamento</option>' +
                                             '</select>' +
                                         '</div>' +
 

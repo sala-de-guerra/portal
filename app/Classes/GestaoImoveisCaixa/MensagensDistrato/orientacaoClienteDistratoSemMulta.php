@@ -61,9 +61,6 @@
     <p>Prezados(as) Senhores(as),</p>
 
     <br>
-    <p>C/C Agência %NOME_AGENCIA%</p>
-
-    <br>
     <table>
         <thead></thead>
         <tbody>
@@ -210,7 +207,7 @@
     <p class="destaque">
     Atenciosamente,
     <br>
-    Equipe GILIE/SP
+    GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS
     </P>
 
 

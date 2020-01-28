@@ -109,7 +109,7 @@
     <p class="destaque">
     Atenciosamente,
     <br>
-    Equipe GILIE/SP
+    GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS
     </P>
 
 

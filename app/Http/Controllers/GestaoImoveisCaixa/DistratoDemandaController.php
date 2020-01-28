@@ -30,7 +30,7 @@ class DistratoDemandaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function cadastrarDemanda(Request $request)
     {
         try {
             DB::beginTransaction();
@@ -131,7 +131,7 @@ class DistratoDemandaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function listarDemandas()
     {
         $universoProtocolosDistrato = DistratoDemanda::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
         return json_encode($universoProtocolosDistrato);
@@ -142,7 +142,7 @@ class DistratoDemandaController extends Controller
      * @param  string  $contratoFormatado
      * @return \Illuminate\Http\Response
      */
-    public function edit($contratoFormatado)
+    public function visualizarDemanda($contratoFormatado)
     {
         return view('portal.imoveis.distrato.operacional-distrato')->with('numeroContrato', $contratoFormatado);
     }
@@ -153,7 +153,7 @@ class DistratoDemandaController extends Controller
      * @param  int  $contratoFormatado
      * @return \Illuminate\Http\Response
      */
-    public function jsonDadosDemandaDistrato($contratoFormatado)
+    public function jsonDadosDemanda($contratoFormatado)
     {
         $demandaDistrato = DistratoDemanda::where('contratoFormatado', $contratoFormatado)->get();
 
@@ -189,12 +189,11 @@ class DistratoDemandaController extends Controller
     }
 
     /**
-     *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $demandaDistrato
+     * @param  int  $idDistrato
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idDistrato)
+    public function analisarDemanda(Request $request, $idDistrato)
     {       
         try {
             DB::beginTransaction();
@@ -288,6 +287,54 @@ class DistratoDemandaController extends Controller
         return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
     }
 
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idDistrato
+     * @return \Illuminate\Http\Response
+     */
+    public function alterarDemanda(Request $request, $idDistrato)
+    {       
+        try {
+            DB::beginTransaction();
+            // ATUALIZA DEMANDA
+            $demandaDistrato = DistratoDemanda::find($idDistrato);
+
+            // VALIDA SE OS INPUTS ESTÃO VINDO NULL, CASO POSITIVO MANTER O STATUS ANTERIOR
+            $demandaDistrato->motivoDistrato = $request->input('motivoDistrato') == null ? $demandaDistrato->motivoDistrato : $request->input('motivoDistrato');
+            $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato') == null ? $demandaDistrato->statusAnaliseDistrato : $request->input('statusAnaliseDistrato');
+            $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
+            $demandaDistrato->matriculaAnalista = session('matricula');
+            
+            // RESGATA DADOS DO CONTRATO
+            $dadosSimov = BaseSimov::where('BEM_FORMATADO', $demandaDistrato->contratoFormatado)->first();
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $demandaDistrato->contratoFormatado;
+            $historico->tipo = "ALTERAÇÃO";
+            $historico->atividade = "DISTRATO";
+            $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - STATUS: $demandaDistrato->statusAnaliseDistrato - MOTIVO: $demandaDistrato->motivoDistrato - OBSERVAÇÃO: $request->observacaoDistrato";
+            $historico->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Alteração realizada!");
+            $request->session()->flash('corpoMensagem', "A alteração da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi realizada com sucesso.");
+
+            // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
+            $demandaDistrato->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Alteração não efetuada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da alteração. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
+    }
 
     /**
      *
@@ -340,43 +387,6 @@ class DistratoDemandaController extends Controller
     /**
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $idDespesa
-     * @return \Illuminate\Http\Response
-     */
-    public function validarDespesaGestor(Request $request, $idDespesa)
-    {       
-        try {
-            DB::beginTransaction();
-
-            // ATUALIZA DESPESA
-            $despesa = DistratoRelacaoDespesas::find($idDespesa);
-            $despesa->devolucaoPertinente = $request->input('devolucaoPertinente') == null ? $despesa->devolucaoPertinente : $request->input('devolucaoPertinente');
-
-            // CAPTURA DADOS DISTRATO
-            $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first();
-
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Despesa atualizada!");
-            $request->session()->flash('corpoMensagem', "O status da demanda foi atualizada com sucesso.");
-
-            // SÓ PERSISTE OS DADOS NO BANCO NO FIM DO MÉTODO
-            $despesa->save();
-            DB::commit();
-        } catch (\Throwable $th) {
-            // dd($th);
-            DB::rollback();
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'danger');
-            $request->session()->flash('tituloMensagem', "Despesa não atualizada");
-            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
-        }
-        return redirect("/estoque-imoveis/distrato/tratar/" . $dadosDistrato->contratoFormatado);
-    }
-
-    /**
-     *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $demandaDistrato
      * @return \Illuminate\Http\Response
      */
@@ -416,7 +426,7 @@ class DistratoDemandaController extends Controller
                     $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
 
                     // ENVIAR MENSAGEM DE ORIENTAÇÃO PARA A REDE
-                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistratoComMulta');
+                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistrato');
 
                     // CADASTRAR ENVIO DE MENSAGERIA
                     $controleMensageriaDistrato = new ControleMensageria;
@@ -446,7 +456,7 @@ class DistratoDemandaController extends Controller
                     $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
 
                     // ENVIAR MENSAGEM DE ORIENTAÇÃO PARA A REDE
-                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistratoSemMulta');
+                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistrato');
 
                     // CADASTRAR ENVIO DE MENSAGERIA
                     $controleMensageriaDistrato = new ControleMensageria;
@@ -500,187 +510,6 @@ class DistratoDemandaController extends Controller
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Parecer não efetuado");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do parecer. Tente novamente");
-        }
-        return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
-    }
-
-    /**
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $demandaDistrato
-     * @return \Illuminate\Http\Response
-     */
-    public function cadastrarDespesa(Request $request, $idDistrato)
-    {
-        try {
-            DB::beginTransaction();
-            $dadosDistrato = DistratoDemanda::where('idDistrato', $idDistrato)->first();
-
-            // AJUSTA A DATA EFETIVA DA DESPESA PARA REGISTRAR NO BANCO
-            $dataEfetivaDaDespesa = substr($request->dataEfetivaDaDespesa, 6, 4) . '-' . substr($request->dataEfetivaDaDespesa, 3, 2) . '-' . substr($request->dataEfetivaDaDespesa, 0, 2);
-            
-            // CADASTRA NOVA DESPESA            
-            $novaDespesa = new DistratoRelacaoDespesas;
-            $novaDespesa->idDistrato = $idDistrato;
-            $novaDespesa->tipoDespesa = $request->tipoDespesa;
-            $novaDespesa->valorDespesa = str_replace(',', '.', str_replace('.', '', $request->valorDespesa));
-            $novaDespesa->dataEfetivaDaDespesa = $dataEfetivaDaDespesa;
-            $novaDespesa->devolucaoPertinente = 'SIM';
-            $novaDespesa->excluirDespesa = 'NAO';
-            $novaDespesa->observacaoDespesa = $request->observacaoDespesa;
-            $novaDespesa->save();
-
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Despesa cadastrada!");
-            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($novaDespesa->idDespesa, 4, '0', STR_PAD_LEFT) . " foi cadastrada com sucesso.");
-
-            DB::commit();
-        } catch (\Throwable $th) {
-            dd($th);
-            DB::rollback();
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'danger');
-            $request->session()->flash('tituloMensagem', "Cadastro de despesa não foi efetuada");
-            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o cadastro da despesa. Tente novamente");
-        }
-        return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
-    }
-
-    /**
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $idDespesa
-     * @return \Illuminate\Http\Response
-     */
-    public function excluirDespesa(Request $request, $idDespesa)
-    {       
-        try {
-            DB::beginTransaction();
-            // ATUALIZA DEMANDA          
-            $despesa = DistratoRelacaoDespesas::where('idDespesa', $idDespesa)->first();
-            $despesa->excluirDespesa = 'SIM';
-
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Despesa excluida!");
-            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($despesa->idDespesa, 4, '0', STR_PAD_LEFT) . " foi excluida com sucesso.");
-
-            $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first();
-
-            // PERSISTE OS DADOS NO FIM DO MÉTODO 
-            $despesa->save();
-            DB::commit();
-        } catch (\Throwable $th) {
-            // dd($th);
-            DB::rollback();
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'danger');
-            $request->session()->flash('tituloMensagem', "Despesa não atualizada");
-            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
-        }
-        return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
-    }
-
-    /**
-     *
-     * @param  int  $idDistrato
-     * @return \Illuminate\Http\Response
-     */
-    public function listarRelacaoDeDespesasDaDemandaDeDistrato($idDistrato)
-    {
-        $relacaoDespesasDaDemandaDeDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->where('excluirDespesa', 'NAO')->get();
-        return json_encode($relacaoDespesasDaDemandaDeDistrato);
-    }
-
-    /**
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $idDespesa
-     * @return \Illuminate\Http\Response
-     */
-    public function atualizarDespesa(Request $request, $idDespesa)
-    {       
-        try {
-            DB::beginTransaction();
-            // AJUSTA A DATA EFETIVA DA DESPESA PARA REGISTRAR NO BANCO
-            $dataEfetivaDaDespesa = substr($request->dataEfetivaDaDespesa, 6, 4) . '-' . substr($request->dataEfetivaDaDespesa, 3, 2) . '-' . substr($request->dataEfetivaDaDespesa, 0, 2);
-
-            // ATUALIZA DEMANDA          
-            $despesa = DistratoRelacaoDespesas::where('idDespesa', $idDespesa)->first();
-            $despesa->tipoDespesa = $request->tipoDespesa == null ? $despesa->tipoDespesa : $request->tipoDespesa;
-            $despesa->valorDespesa = str_replace(',', '.', str_replace('.', '', $request->valorDespesa));
-            $despesa->dataEfetivaDaDespesa =  $dataEfetivaDaDespesa;
-            $despesa->observacaoDespesa = $request->observacaoDespesa != null ? $request->observacaoDespesa : $despesa->observacaoDespesa;
-
-            // CARREGA OS DADOS DA DEMANDA DE DISTRATO PARA USAR O NUMERO DO CONTRATO NO REDIRECT
-            $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first(); 
-
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Despesa atualizada!");
-            $request->session()->flash('corpoMensagem', "A despesa #" . str_pad($despesa->idDistrato, 4, '0', STR_PAD_LEFT) . " foi atualizada com sucesso.");
-
-            // PERSISTE OS DADOS NO FIM DO MÉTODO 
-            $despesa->save();
-            DB::commit();
-        } catch (\Throwable $th) {
-            // dd($th);
-            DB::rollback();
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'danger');
-            $request->session()->flash('tituloMensagem', "Despesa não atualizada");
-            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
-        }
-        return redirect('/estoque-imoveis/distrato/tratar/' . $dadosDistrato->contratoFormatado);
-    }
-
-    /**
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $demandaDistrato
-     * @return \Illuminate\Http\Response
-     */
-    public function alterarDemandaDistrato(Request $request, $idDistrato)
-    {       
-        try {
-            DB::beginTransaction();
-            // ATUALIZA DEMANDA
-            $demandaDistrato = DistratoDemanda::find($idDistrato);
-
-            // VALIDA SE OS INPUTS ESTÃO VINDO NULL, CASO POSITIVO MANTER O STATUS ANTERIOR
-            $demandaDistrato->motivoDistrato = $request->input('motivoDistrato') == null ? $demandaDistrato->motivoDistrato : $request->input('motivoDistrato');
-            $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato') == null ? $demandaDistrato->statusAnaliseDistrato : $request->input('statusAnaliseDistrato');
-            $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
-            $demandaDistrato->matriculaAnalista = session('matricula');
-            
-            // RESGATA DADOS DO CONTRATO
-            $dadosSimov = BaseSimov::where('BEM_FORMATADO', $demandaDistrato->contratoFormatado)->first();
-
-            // CADASTRA HISTÓRICO
-            $historico = new HistoricoPortalGilie;
-            $historico->matricula = session('matricula');
-            $historico->numeroContrato = $demandaDistrato->contratoFormatado;
-            $historico->tipo = "ALTERAÇÃO";
-            $historico->atividade = "DISTRATO";
-            $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - STATUS: $demandaDistrato->statusAnaliseDistrato - MOTIVO: $demandaDistrato->motivoDistrato - OBSERVAÇÃO: $request->observacaoDistrato";
-            $historico->save();
-
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Alteração realizada!");
-            $request->session()->flash('corpoMensagem', "A alteração da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi realizada com sucesso.");
-
-            // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
-            $demandaDistrato->save();
-            DB::commit();
-        } catch (\Throwable $th) {
-            dd($th);
-            DB::rollback();
-            // RETORNA A FLASH MESSAGE
-            $request->session()->flash('corMensagem', 'danger');
-            $request->session()->flash('tituloMensagem', "Alteração não efetuada");
-            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da alteração. Tente novamente");
         }
         return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
     }

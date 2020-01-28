@@ -75,19 +75,19 @@ Route::prefix('estoque-imoveis')->group(function () {
     // ROTAS DO PROJETO DE DISTRATO
     Route::prefix('distrato')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\DistratoDemandaController@index');
-        Route::get('consultar-dados-demanda/{contrato}', 'GestaoImoveisCaixa\DistratoDemandaController@jsonDadosDemandaDistrato');
-        Route::get('listar-protocolos', 'GestaoImoveisCaixa\DistratoDemandaController@show');
-        Route::get('relacao-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@listarRelacaoDeDespesasDaDemandaDeDistrato');
-        Route::get('tratar/{contrato}', 'GestaoImoveisCaixa\DistratoDemandaController@edit');
-        Route::post('cadastrar-demanda', 'GestaoImoveisCaixa\DistratoDemandaController@store');
-        Route::post('cadastrar-despesa/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@cadastrarDespesa');
-        Route::put('alterar-demanda-distrato/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@alterarDemandaDistrato');
-        Route::put('atualizar/{demanda}', 'GestaoImoveisCaixa\DistratoDemandaController@update');
-        Route::put('atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoDemandaController@atualizarDespesa');
+        Route::get('consultar-dados-demanda/{contrato}', 'GestaoImoveisCaixa\DistratoDemandaController@jsonDadosDemanda');
+        Route::get('listar-protocolos', 'GestaoImoveisCaixa\DistratoDemandaController@listarDemandas');
+        Route::get('relacao-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@listarRelacaoDeDespesas');
+        Route::get('tratar/{contrato}', 'GestaoImoveisCaixa\DistratoDemandaController@visualizarDemanda');
+        Route::post('cadastrar-demanda', 'GestaoImoveisCaixa\DistratoDemandaController@cadastrarDemanda');
+        Route::post('cadastrar-despesa/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@cadastrarDespesa');
+        Route::put('alterar-demanda-distrato/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@alterarDemanda');
+        Route::put('atualizar/{demanda}', 'GestaoImoveisCaixa\DistratoDemandaController@analisarDemanda');
+        Route::put('atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@atualizarDespesa');
         Route::put('emitir-parecer-analista/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@emitirParecerAnalista');
         Route::put('emitir-parecer-gestor/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@emitirParecerGestor');
-        Route::put('excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoDemandaController@excluirDespesa');
-        Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoDemandaController@validarDespesaGestor');
+        Route::put('excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@excluirDespesa');
+        Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@validarDespesa');
     });
 
     // ROTAS DO PROJETO DE MENSAGENS AUTOMÁTICAS
