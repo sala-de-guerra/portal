@@ -283,6 +283,7 @@
                     -> DLE evento 08679-7 Despesas com Distrato - SL 1; <br>
                     -> Valor: %SOMA_ATUALIZACAO_DESPESA%; <br>
                     -> Centro de Custo: 7257; <br>
+                    -> Produto: 0427-6 Imóveis adjudicados/arrematados; <br>
                     -> Número de conciliação: %NUMERO_CONTRATO%; <br>
                     -> Histórico: atualização monetária apurada sobre o valor pago em taxa e prestações do financiamento.
                 </td>

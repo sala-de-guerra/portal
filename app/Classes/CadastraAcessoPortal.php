@@ -85,12 +85,6 @@ class CadastraAcessoPortal
             } else {
                 $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
             }
-        // } elseif ($this->getUnidade() == '5434') {
-        //     $this->nivelAcesso = 'GECAM';
-        // } elseif ($this->getUnidade() == '5510') {
-        //     $this->nivelAcesso = 'GELIT';
-        // } elseif ($this->getUnidade() == '7854') {
-        //     $this->nivelAcesso = 'CELIT';
         } else {
             $this->nivelAcesso = 'AGENCIA';
         }

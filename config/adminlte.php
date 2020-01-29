@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<h3><b>Portal</b>    GILIE</h3>',
+    'logo' => '<h3><b>Portal</b> GILIE</h3>',
     'logo_img' => 'img/logo-caixa.png',
     'logo_img_alt' => 'CAIXA',
 
@@ -198,17 +198,17 @@ return [
         //     'url'         => '/index',
         //     'icon'        => 'fas fa-fw fa-home',
         // ],
-        // 'ACCOUNT SETTINGS',
-        // [
-        //     'text' => 'Profile',
-        //     'route' => 'admin.profile',
-        //     'icon' => 'fas fa-fw fa-user'
-        // ],
-        // [
-        //     'text' => 'Change Password',
-        //     'route' => 'admin.password',
-        //     'icon' => 'fas fa-fw fa-lock'
-        // ],
+        'ACCOUNT SETTINGS',
+        [
+            'text' => 'Profile',
+            'route' => 'admin.profile',
+            'icon' => 'fas fa-fw fa-user'
+        ],
+        [
+            'text' => 'Change Password',
+            'route' => 'admin.password',
+            'icon' => 'fas fa-fw fa-lock'
+        ],
 
         // [
         //     'text'        => 'Sobre a GILIE',
@@ -219,16 +219,19 @@ return [
             'text'        => 'Área de Atuação',
             'url'         => '/area',
             'icon'        => 'fas fa-lg fa-map-marked-alt',
+            'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
         [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
             'icon'        => 'fas fa-lg fa-question-circle',
+            'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
         [
             'text'        => 'Orientações',
             'url'         => '/orientacoes',
             'icon'        => 'fas fa-lg fa-directions',
+            'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
 
         // [
@@ -243,6 +246,7 @@ return [
             'text' => 'Pesquisar Imóvel',
             'url'  => '/pesquisar',
             'icon' => 'fas fa-lg fa-fw fa-search',
+            'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
 
         ],
         // [
@@ -303,6 +307,7 @@ return [
         [
             'text'    => 'Contratação',
             'icon'    => 'fas fa-lg fa-fw fa-file-contract',
+            'perfil_acesso' => [env('NOME_NOSSA_UNIDADE')],
             'submenu' => [
                 // [
                 //     'text' => 'Controle de Conformidade',
@@ -311,6 +316,7 @@ return [
                 [
                     'text' => 'Controle de Distrato',
                     'url'  => '/estoque-imoveis/distrato',
+                    'perfil_acesso' => [env('NOME_NOSSA_UNIDADE')]
                 ],
                 // [
                 //     'text' => 'level_two',

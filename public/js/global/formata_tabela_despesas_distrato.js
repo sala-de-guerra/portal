@@ -146,8 +146,13 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                                             '<select name="devolucaoPertinente" class="form-control" required>' +
                                                 '<option value="' + item.devolucaoPertinente + '" selected disabled>' + item.devolucaoPertinente + '</option>' +
                                                 '<option value="SIM">SIM</option>' +
-                                                '<option value="NÃO">NÃO Valida</option>' +
+                                                '<option value="NÃO">NÃO</option>' +
                                             '</select>' +
+                                        '</div>' +
+
+                                        '<div class="form-group">' +
+                                            '<label>Observações:</label>' +
+                                            '<textarea rows="5" name="motivoAlteracaoDespesa" class="form-control"></textarea>' +                                        
                                         '</div>' +
 
                                     '</div>' +
