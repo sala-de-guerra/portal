@@ -304,6 +304,11 @@ class DistratoDemandaController extends Controller
             $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato') == null ? $demandaDistrato->statusAnaliseDistrato : $request->input('statusAnaliseDistrato');
             $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
             $demandaDistrato->matriculaAnalista = session('matricula');
+
+            // CASO O STATUS ANALISE FOR IGUAL A "CADASTRADA", ALTERAR O MOTIVO PARA "A CLASSIFICAR"
+            if ($demandaDistrato->statusAnaliseDistrato == 'CADASTRADA') {
+                $demandaDistrato->motivoDistrato = 'A CLASSIFICAR';
+            }
             
             // RESGATA DADOS DO CONTRATO
             $dadosSimov = BaseSimov::where('BEM_FORMATADO', $demandaDistrato->contratoFormatado)->first();
@@ -512,5 +517,37 @@ class DistratoDemandaController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do parecer. Tente novamente");
         }
         return redirect("/estoque-imoveis/distrato/tratar/" . $demandaDistrato->contratoFormatado);
+    }
+
+    public static function indicadoresDistrato()
+    {
+        // TEMPO MÉDIO DE ATENDIMENTO - TMA
+        $demandasConcluidas = DistratoDemanda::where('statusAnaliseDistrato', 'CANCELADA')->orWhere('statusAnaliseDistrato', 'CONCLUIDA')->get();
+
+        $arrayDemandasConcluidas = [];
+        foreach ($demandasConcluidas as $demanda) {
+            $dataCadastroDemanda = Carbon::parse($demanda->created_at);
+            $dataConclusaoDemanda = Carbon::parse($demanda->updated_at);
+            $tmaDemanda = $dataCadastroDemanda->diffInDays($dataConclusaoDemanda);
+            array_push($arrayDemandasConcluidas, $tmaDemanda);
+        }
+        $arrayDistratoMapeado = array_filter($arrayDemandasConcluidas);
+        $tmaDemandasDistratoConcluidas = array_sum($arrayDistratoMapeado) / count($arrayDistratoMapeado);
+        
+        $arrayIndicadoresDistrato = [
+            // QUANTIDADE DEMANDAS NÃO INICIADAS
+            'quantidadeDemandasNaoIniciadas' => DistratoDemanda::where('statusAnaliseDistrato', 'CADASTRADA')->count(),
+            // QUANTIDADE DEMANDAS NA GILIE
+            'quantidadeDemandasEmTratamentoGilie' => DistratoDemanda::where('statusAnaliseDistrato', 'EM ANALISE')->count(),
+            // QUANTIDADE DEMANDAS NA AGÊNCIA
+            'quantidadeDemandasEmTratamentoAgencia' => DistratoDemanda::where('statusAnaliseDistrato', 'AGUARDA DOCUMENTOS CLIENTE')->orWhere('statusAnaliseDistrato', 'ENCAMINHADO AGENCIA')->orWhere('statusAnaliseDistrato', 'AVERBACAO DISTRATO')->count(),
+            // QUANTIDADE DEMANDAS PENDENTES JURIR/EMGEA
+            'quantidadeDemandasPendentesJurirEmgea' => DistratoDemanda::where('statusAnaliseDistrato', 'AGUARDA AUTORIZACAO EMGEA')->orWhere('statusAnaliseDistrato', 'CONSULTA JURIR')->count(),
+            // QUANTIDADE DEMANDAS CONCLUÍDAS
+            'quantidadeDemandasConcluidas' => DistratoDemanda::where('statusAnaliseDistrato', 'CANCELADA')->orWhere('statusAnaliseDistrato', 'CONCLUIDA')->count(),
+            // TEMPO MÉDIO DE ATENDIMENTO - TMA
+            'tmaDemandasDistratoConcluidas' => $tmaDemandasDistratoConcluidas
+        ];
+        return json_encode($arrayIndicadoresDistrato);
     }
 }

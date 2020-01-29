@@ -11,16 +11,17 @@
     z-index: -9999;
 }
 
+.brand-text {
+    position: absolute;
+    bottom: 12px;
+}
+
 .border-radius-10px{
     border-radius: 10px;
 }
 
 .brand-image {
     opacity: 1!important;
-}
-
-.brand-link {
-    padding: 12px 8px 11px 8px;
 }
 
 .brand-text h3 {
@@ -69,6 +70,13 @@
 
 .padding1220 {
     padding: 12px 20px!important;
+}
+
+.pontilhado {
+	/* background-color: #fff; */
+    border-top: 4px dotted #8c8b8b;
+    height:1px;
+    width:95%;
 }
 
 .progress-ul{

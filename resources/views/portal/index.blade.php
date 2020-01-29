@@ -32,19 +32,19 @@
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                    <!-- <li data-target="#carouselExampleCaptions" data-slide-to="2"></li> -->
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <i class="fas fa-lg fa-users "></i>
-                                Sobre a GILIE
+                                <i class="fas fa-lg fa-directions "></i>
+                                Orientações
                             </h3>
                         </div>
                         <div class="card-body">
-                            <a href="/sobre">
-                                <img src="{{ asset('/img/equipe.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
+                            <a href="/orientacoes">
+                                <img src="{{ asset('/img/orientacoes.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
                             </a>
                         </div>
                     </div>
@@ -61,19 +61,19 @@
                             </a>
                         </div>
                     </div>
-                    <div class="carousel-item">
+                    <!-- <div class="carousel-item">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <i class="fas fa-lg fa-directions "></i>
-                                Orientações
+                                <i class="fas fa-lg fa-users "></i>
+                                Sobre a GILIE
                             </h3>
                         </div>
                         <div class="card-body">
-                            <a href="/orientacoes">
-                                <img src="{{ asset('/img/orientacoes.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
+                            <a href="/sobre">
+                                <img src="{{ asset('/img/equipe.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -87,11 +87,30 @@
         </div>
     </div>
 
-    
+    <div class="col-md-6 d-flex justify-content-center">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa fa-files-o"></i> Funcionalidades
+                </h3>
+            </div>
+            <div class="card-body">
+                <h4> 
+                    <a href="/pesquisar">
+                        <i class="fa fa-lg fa-search"></i> Pesquisar Bem Imóvel
+                    </a>
+                    <br>
+                    <small>Pesquise os imóveis administrados pela GILIE SP por número do bem ou endereço. </small>
+                </h4>
+                
+                <hr class="pontilhado">
+            </div>
+        </div>
+    </div>
 
-</div> <!-- /.row -->
+</div>
 
-<div class="row">
+<!-- <div class="row">
 
     <div class="col-md-12">
         <div class="card card-default">
@@ -99,7 +118,7 @@
                 <h3 class="card-title">
                     Vitrine
                 </h3>
-            </div><!-- /.card-header -->
+            </div>
             <div class="card-body">
                 <div class="row">
 
@@ -113,17 +132,17 @@
                             João Marcel Quintiliano e Vladimir Pereira de Lemos, a filial conta com um quadro atual de aproximadamente 60 
                             funcionários, divididos entre suas áreas de atuação.
                         </p>
-                    </div> <!-- /.col -->
+                    </div>
                     
                     <div class="col-md-4">
                         <img src="{{ asset('/img/edificio_eluma.jpg') }}" class="d-block img-fluid" alt="Foto do Edifício Eluma, na Av. Paulista.">
-                    </div><!-- /.col -->
+                    </div>
                     
-                </div> <!-- /.row -->
-            </div><!-- /.card-body -->
-        </div><!-- /.card -->
-    </div><!-- /.col -->
-</div> <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 @stop
 
 @section('footer')

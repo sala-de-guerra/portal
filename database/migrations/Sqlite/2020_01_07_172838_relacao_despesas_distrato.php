@@ -22,6 +22,8 @@ class RelacaoDespesasDistrato extends Migration
             $table->text('observacaoDespesa')->nullable();
             $table->date('dataEfetivaDaDespesa')->nullable();
             $table->string('excluirDespesa', 3)->nullable();
+            $table->string('responsavelAlteracaoDespesa', 7)->nullable();
+            $table->text('motivoAlteracaoDespesa')->nullable();
             $table->timestamps();
         });
     }
