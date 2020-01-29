@@ -133,47 +133,58 @@
             <div class="card-header">
                 <h3 class="card-title">Links Úteis</h3>
             </div>
+            <br><br>
             <!-- /.card-header -->
 
             <div class="card-body">
-                <ul class="list-group">
-
-                    <li class="list-group-item">
-                        1) Endereço para disponibilização de documentos pela GILIE e pelas Agências e tratamento pela CICOB Recife:
-                        <a href="http://retaguarda.caixa/digitalizar/#/">http://retaguarda.caixa/digitalizar/#/</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        2) Acompanhamento do processo de concessão pela GILIE e pelas Agências no Painel Imóveis CAIXA:
-                        <a href="http://imagem.caixa/imoveiscaixa/">http://imagem.caixa/imoveiscaixa/</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        3) Demandas e dúvidas operacionais devem ser enviadas pela GILIE e pelas Agências através do link (ATENDE):
-                        <a href="http://inovacao.suban.caixa/apps/atende/#/login">http://inovacao.suban.caixa/apps/atende/#/login</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        4) Demandas jurídicas no portal DIJUR:
+                <table class="table table-hover m-3">
+                
+                <tbody>
+                    <tr>
+                    <td>
+                        1.   blablablablabla:
+                        <a href="http://alienar.caixa/">http://alienar.caixa/#/</a>
+                        
+                    </td>
+                    </tr>
+                <tr>
+                <td>
+                        2.   Demandas jurídicas no portal DIJUR:
                         <a href="http://www.portal.dijur.caixa/">http://www.portal.dijur.caixa/</a>
-                    </li>
+                    </td>
+                </tr>
 
-                    <li class="list-group-item">
-                        5) Acompanhamento de ativos e contratos no SIGA:
+                <td>
+                        3.   Acompanhamento do processo de concessão pela GILIE e pelas Agências no Painel Imóveis CAIXA:
+                        <a href="http://imagem.caixa/imoveiscaixa/">http://imagem.caixa/imoveiscaixa/</a>
+                    </td>
+                </tr>
+
+                <td>
+                        4.   Demandas e dúvidas operacionais devem ser enviadas pela GILIE e pelas Agências através do link (ATENDE):
+                        <a href="http://inovacao.suban.caixa/apps/atende/#/login">http://inovacao.suban.caixa/apps/atende/#/login</a>
+                    </td>
+                </tr>
+
+                <td>
+                        5.   Endereço para disponibilização de documentos pela GILIE e pelas Agências e tratamento pela CICOB Recife:
+                        <a href="http://retaguarda.caixa/digitalizar/#/">http://retaguarda.caixa/digitalizar/#/</a>
+                    </td>
+                </tr>
+
+                <td>
+                        6.   Acompanhamento de ativos e contratos no SIGA:
                         <a href="http://siga.caixa/">http://siga.caixa/</a>
-                    </li>
+                    </td>
+                </tr>
 
-                    <li class="list-group-item">
-                        6) Painel de Indicadores da Habitação
-                        <a href="http://habitacao.caixa/">http://habitacao.caixa/</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        7) Criação de DLE com código de barras no SINAF WEB:
+                <td>
+                        7.   Criação de DLE com código de barras no SINAF WEB:
                         <a href="http://sinafweb.caixa/">http://sinafweb.caixa/</a>
-                    </li>
+                    </td>
+                </tr>
                     
-                </ul>
+                </table>
  
             </div>
             <!-- /.card-body -->
