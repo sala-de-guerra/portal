@@ -133,47 +133,57 @@
             <div class="card-header">
                 <h3 class="card-title">Links Úteis</h3>
             </div>
+            <br><br>
             <!-- /.card-header -->
 
             <div class="card-body">
-                <ul class="list-group">
+                <table class="table table-hover table-borderless">
+                
+                <tbody>
+                    <tr>
+                    <td>
+                        1.   Portal da GEIPT com indicadores e ferramentas de gestão estratégica :
+                        <a href="http://alienar.caixa/" target="_blank"><br>
+                        http://alienar.caixa/</a>
+                        
+                    </td>
+                    </tr>
+                <tr>
+                <td>
+                        2.   Consulta de ações judiciais e demais demandas jurídicas :
+                        <a href="http://www.portal.dijur.caixa/" target="_blank"><br>
+                        http://www.portal.dijur.caixa/</a>
+                    </td>
+                </tr>
 
-                    <li class="list-group-item">
-                        1) Endereço para disponibilização de documentos pela GILIE e pelas Agências e tratamento pela CICOB Recife:
-                        <a href="http://retaguarda.caixa/digitalizar/#/">http://retaguarda.caixa/digitalizar/#/</a>
-                    </li>
+                <td>
+                        3.   Acompanhamento do processo de contratação:
+                        <a href="http://imagem.caixa/imoveiscaixa/" target="_blank"><br>
+                        http://imagem.caixa/imoveiscaixa/</a>
+                    </td>
+                </tr>
 
-                    <li class="list-group-item">
-                        2) Acompanhamento do processo de concessão pela GILIE e pelas Agências no Painel Imóveis CAIXA:
-                        <a href="http://imagem.caixa/imoveiscaixa/">http://imagem.caixa/imoveiscaixa/</a>
-                    </li>
+                <td>
+                        4.  Dúvidas sobre o envio e tratamento da conformidade (ATENDE):
+                        <a href="http://inovacao.suban.caixa/apps/atende/#/login" target="_blank"><br>
+                        http://inovacao.suban.caixa/apps/atende/#/login</a>
+                    </td>
+                </tr>
+                <td>
+                        5.   Gestão de ativos e contratos:
+                        <a href="http://siga.caixa/" target="_blank"><br>
+                        http://siga.caixa/</a>
+                    </td>
+                </tr>
 
-                    <li class="list-group-item">
-                        3) Demandas e dúvidas operacionais devem ser enviadas pela GILIE e pelas Agências através do link (ATENDE):
-                        <a href="http://inovacao.suban.caixa/apps/atende/#/login">http://inovacao.suban.caixa/apps/atende/#/login</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        4) Demandas jurídicas no portal DIJUR:
-                        <a href="http://www.portal.dijur.caixa/">http://www.portal.dijur.caixa/</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        5) Acompanhamento de ativos e contratos no SIGA:
-                        <a href="http://siga.caixa/">http://siga.caixa/</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        6) Painel de Indicadores da Habitação
-                        <a href="http://habitacao.caixa/">http://habitacao.caixa/</a>
-                    </li>
-
-                    <li class="list-group-item">
-                        7) Criação de DLE com código de barras no SINAF WEB:
-                        <a href="http://sinafweb.caixa/">http://sinafweb.caixa/</a>
-                    </li>
+                <td>
+                        6.   Criação de DLE com código de barras:
+                        <a href="http://sinafweb.caixa/" target="_blank"><br>
+                        http://sinafweb.caixa/</a>
+                    </td>
+                </tr>
                     
-                </ul>
+                </table>
  
             </div>
             <!-- /.card-body -->
