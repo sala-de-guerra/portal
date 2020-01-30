@@ -123,21 +123,16 @@
                             <i class="far fa-lg fa-bell"></i>
                             <span class="badge badge-warning navbar-badge">0</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
-                            <li class="bg-info"> <!-- class user-header -->
-                                <p>
-                                    {{ session()->get('nomeCompleto') }}
-                                </p>
-                            </li>
-                            <li class="bg-info"> <!-- class user-header -->
-                                <small>
-                                    {{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}								
-                                    UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}
-                                    {{ session()->get('acessoEmpregadoEsteiraComex') }}
-                                </small>
 
-                            </li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-item dropdown-header">0 Notificações</span>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="estoque-imoveis/distrato">
+                                <i class="fas fa-envelope mr-2"></i>
+                                0 distratos para enviar.
+                            </a>
+                        </div>
+
                     </li>
 
                     <li class="nav-item dropdown user-menu">
@@ -145,7 +140,7 @@
                         <!-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                         <img src="https://permissoes.correio.corp.caixa.gov.br/ThumbPhoto/C079436_AD.jpg" class="user-image" alt="User Image" onError="this.src='{{ asset('images/userSemFoto.jpg') }}';">
                             -->
-                            <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="user-image img-circle elevation-2" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
+                            <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="user-image img-circle elevation-2" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
                             <!-- {{-- backup <img src="http://tedx.caixa/lib/asp/foto.asp?Matricula={{session()->get('matricula')}}" class="user-image" alt="User Image" onerror="this.src='{{ asset('images/userSemFoto.jpg') }}';">  --}} -->
                             <span class="d-none d-md-inline">{{ session()->get('primeiroNome') }}</span>
                         </a>
@@ -153,9 +148,9 @@
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
                             <a class="dropdown-item">
                                 <div class="media">
-                                    <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="img-size-50 mr-3 img-circle" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
+                                    <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="user-image-dropdown img-circle" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
                                     <div class="media-body">
-                                        <h3 class="dropdown-item-title">{{ session()->get('nomeCompleto') }}</h3>
+                                        <h3 class="dropdown-item-title ">{{ session()->get('nomeCompleto') }}</h3>
                                         <p class="text-sm">{{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}</p>
                                         <p class="text-sm">UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}</p>
                                         <p class="text-sm">{{ session()->get('acessoEmpregadoEsteiraComex') }}</p>
