@@ -12784,7 +12784,7 @@ body.text-sm .control-sidebar {
   border-top-right-radius: 0;
   padding: 0;
   border-top-width: 0;
-  width: 280px;
+  /* width: 300px; */
 }
 
 .navbar-nav > .user-menu > .dropdown-menu,

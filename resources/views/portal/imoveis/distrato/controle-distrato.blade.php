@@ -17,7 +17,7 @@
 @endif
 
 <div class="row mb-2">
-    <div class="col-sm-5">
+    <div class="col-sm-6">
         <h1 class="m-0 text-dark">
             Controle de Distratos em Andamento
         </h1>
@@ -30,7 +30,7 @@
         </button>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/distrato"> Controle de Distrato</a> </li>
         </ol>
