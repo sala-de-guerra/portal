@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\GestaoImoveisCaixa\DistratoDemanda;
 use App\Models\GestaoImoveisCaixa\DistratoRelacaoDespesas;
 use App\Models\HistoricoPortalGilie;
 use App\Models\BaseSimov;
 use App\Models\PropostasSimov;
-use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
 use App\Models\ControleMensageria;
 use App\Models\RelacaoAgSrComEmail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DistratoDemandaController extends Controller
 {
@@ -481,7 +482,7 @@ class DistratoDemandaController extends Controller
                     $historico->save();
                 }
                 $controleMensageriaDistrato->save();
-                $demandaDistrato->statusAnaliseDistrato = 'ENCAMINHADO AGENCIA';
+                $demandaDistrato->statusAnaliseDistrato = 'ENCAMINHADA AGENCIA';
 
                 // RETORNA A FLASH MESSAGE
                 $request->session()->flash('corMensagem', 'success');
@@ -531,8 +532,7 @@ class DistratoDemandaController extends Controller
             $tmaDemanda = $dataCadastroDemanda->diffInDays($dataConclusaoDemanda);
             array_push($arrayDemandasConcluidas, $tmaDemanda);
         }
-        $arrayDistratoMapeado = array_filter($arrayDemandasConcluidas);
-        $tmaDemandasDistratoConcluidas = array_sum($arrayDistratoMapeado) / count($arrayDistratoMapeado);
+        $tmaDemandasDistratoConcluidas = array_sum($arrayDemandasConcluidas) / count($arrayDemandasConcluidas);
         
         $arrayIndicadoresDistrato = [
             // QUANTIDADE DEMANDAS NÃO INICIADAS
@@ -540,7 +540,7 @@ class DistratoDemandaController extends Controller
             // QUANTIDADE DEMANDAS NA GILIE
             'quantidadeDemandasEmTratamentoGilie' => DistratoDemanda::where('statusAnaliseDistrato', 'EM ANALISE')->count(),
             // QUANTIDADE DEMANDAS NA AGÊNCIA
-            'quantidadeDemandasEmTratamentoAgencia' => DistratoDemanda::where('statusAnaliseDistrato', 'AGUARDA DOCUMENTOS CLIENTE')->orWhere('statusAnaliseDistrato', 'ENCAMINHADO AGENCIA')->orWhere('statusAnaliseDistrato', 'AVERBACAO DISTRATO')->count(),
+            'quantidadeDemandasEmTratamentoAgencia' => DistratoDemanda::where('statusAnaliseDistrato', 'AGUARDA DOCUMENTOS CLIENTE')->orWhere('statusAnaliseDistrato', 'ENCAMINHADA AGENCIA')->orWhere('statusAnaliseDistrato', 'AVERBACAO DISTRATO')->count(),
             // QUANTIDADE DEMANDAS PENDENTES JURIR/EMGEA
             'quantidadeDemandasPendentesJurirEmgea' => DistratoDemanda::where('statusAnaliseDistrato', 'AGUARDA AUTORIZACAO EMGEA')->orWhere('statusAnaliseDistrato', 'CONSULTA JURIR')->count(),
             // QUANTIDADE DEMANDAS CONCLUÍDAS

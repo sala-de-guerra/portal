@@ -13,6 +13,8 @@ use App\Models\PropostasSimov;
 use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
 use App\Models\ControleMensageria;
 use App\Models\RelacaoAgSrComEmail;
+use App\Exports\PlanilhaDespesasDistratoDle;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DistratoRelacaoDespesasController extends Controller
 {
@@ -182,5 +184,15 @@ class DistratoRelacaoDespesasController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a atualização da despesa. Tente novamente");
         }
         return redirect("/estoque-imoveis/distrato/tratar/" . $dadosDistrato->contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  int  $idDistrato
+     * @return \Illuminate\Http\Response
+     */
+    public static function emitePlanilhaDleDespesas($idDistrato)
+    {
+        return Excel::download(new PlanilhaDespesasDistratoDle($idDistrato), 'DLE.xls');
     }
 }
