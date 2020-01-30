@@ -29,7 +29,7 @@ class CadastraAcessoPortal
         'c066241', // João Marcel
         'c072452', // Fernanda Mendonça
         'c090120', // Marcelo Barboza
-        'c079436',  // Vladimir
+        'c079436', // Vladimir
         /* DESENVOLVIMENTO */
         'c142765', // Carlos
         'c111710', // Chuman

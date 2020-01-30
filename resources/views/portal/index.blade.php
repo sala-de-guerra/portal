@@ -38,7 +38,6 @@
                     <div class="carousel-item active">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <i class="fas fa-lg fa-directions "></i>
                                 Orientações
                             </h3>
                         </div>
@@ -51,7 +50,6 @@
                     <div class="carousel-item">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <i class="fas fa-lg fa-question-circle "></i>
                                 Dúvidas Frequentes
                             </h3>
                         </div>
@@ -91,19 +89,28 @@
         <div class="card card-default">
             <div class="card-header">
                 <h3 class="card-title">
-                    <i class="fa fa-files-o"></i> Funcionalidades
+                    Funcionalidades
                 </h3>
             </div>
             <div class="card-body">
                 <h4> 
                     <a href="/pesquisar">
-                        <i class="fa fa-lg fa-search"></i> Pesquisar Bem Imóvel
+                        <i class="fa fa-search"></i> Pesquisar Bem Imóvel
                     </a>
                     <br>
-                    <small>Pesquise os imóveis administrados pela GILIE SP por número do bem ou endereço. </small>
+                    <small>Pesquise os imóveis administrados pela GILIE SP por CHB, Endereço, Nome e CPF do Proponente. </small>
                 </h4>
                 
                 <hr class="pontilhado">
+
+                <h4> 
+                    <a href="/area">
+                        <i class="fa fa-map-marked-alt"></i> Pesquisar Área de Atuação
+                    </a>
+                    <br>
+                    <small>Pesquise a região de atendimento das GILIE SP e BU. </small>
+                </h4>
+
             </div>
         </div>
     </div>

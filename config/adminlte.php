@@ -209,7 +209,11 @@ return [
         //     'route' => 'admin.password',
         //     'icon' => 'fas fa-fw fa-lock'
         // ],
-
+        // [
+        //     'text' => 'Notificações',
+            // 'route' => 'admin.password',
+        //     'icon' => 'fas fa-flag'
+        // ],
         // [
         //     'text'        => 'Sobre a GILIE',
         //     'url'         => '/sobre',
@@ -307,7 +311,7 @@ return [
         [
             'text'    => 'Contratação',
             'icon'    => 'fas fa-lg fa-fw fa-file-contract',
-            'perfil_acesso' => [env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => [env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
             'submenu' => [
                 // [
                 //     'text' => 'Controle de Conformidade',
@@ -316,7 +320,7 @@ return [
                 [
                     'text' => 'Controle de Distrato',
                     'url'  => '/estoque-imoveis/distrato',
-                    'perfil_acesso' => [env('NOME_NOSSA_UNIDADE')]
+                    'perfil_acesso' => [env('NOME_NOSSA_UNIDADE'), 'GESTOR']
                 ],
                 // [
                 //     'text' => 'level_two',
