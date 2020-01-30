@@ -198,17 +198,17 @@ return [
         //     'url'         => '/index',
         //     'icon'        => 'fas fa-fw fa-home',
         // ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'route' => 'admin.profile',
-            'icon' => 'fas fa-fw fa-user'
-        ],
-        [
-            'text' => 'Change Password',
-            'route' => 'admin.password',
-            'icon' => 'fas fa-fw fa-lock'
-        ],
+        // 'ACCOUNT SETTINGS',
+        // [
+        //     'text' => 'Profile',
+        //     'route' => 'admin.profile',
+        //     'icon' => 'fas fa-fw fa-user'
+        // ],
+        // [
+        //     'text' => 'Change Password',
+        //     'route' => 'admin.password',
+        //     'icon' => 'fas fa-fw fa-lock'
+        // ],
 
         // [
         //     'text'        => 'Sobre a GILIE',
