@@ -117,6 +117,29 @@
                         </li>
                     @endif
 
+
+                    <li class="nav-item dropdown user-menu">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <i class="far fa-lg fa-bell"></i>
+                            <span class="badge badge-warning navbar-badge">0</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
+                            <li class="bg-info"> <!-- class user-header -->
+                                <p>
+                                    {{ session()->get('nomeCompleto') }}
+                                </p>
+                            </li>
+                            <li class="bg-info"> <!-- class user-header -->
+                                <small>
+                                    {{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}								
+                                    UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}
+                                    {{ session()->get('acessoEmpregadoEsteiraComex') }}
+                                </small>
+
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <!-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
@@ -126,25 +149,21 @@
                             <!-- {{-- backup <img src="http://tedx.caixa/lib/asp/foto.asp?Matricula={{session()->get('matricula')}}" class="user-image" alt="User Image" onerror="this.src='{{ asset('images/userSemFoto.jpg') }}';">  --}} -->
                             <span class="d-none d-md-inline">{{ session()->get('primeiroNome') }}</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
 
-                            <!-- User image -->
-                            <li class="user-header bg-primary">
-                                <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="img-circle elevation-2" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
-                                <p>
-                                    {{ session()->get('nomeCompleto') }}<br/>
-                                    <small>
-                                        {{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}<br/>								
-                                        UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}<br/>
-                                        {{ session()->get('acessoEmpregadoEsteiraComex') }}
-                                    </small>
-                                </p>
-                            </li>
-
-                            <!-- Menu Body -->
-
-                            <!-- Menu Footer-->
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
+                            <a class="dropdown-item">
+                                <div class="media">
+                                    <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="img-size-50 mr-3 img-circle" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">{{ session()->get('nomeCompleto') }}</h3>
+                                        <p class="text-sm">{{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}</p>
+                                        <p class="text-sm">UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}</p>
+                                        <p class="text-sm">{{ session()->get('acessoEmpregadoEsteiraComex') }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
                     </li>
 
                     <!-- <li class="nav-item dropdown user-menu">
