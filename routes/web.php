@@ -12,57 +12,57 @@
 */
 
 //index
-Route::get('/', function () {
+Route::get('', function () {
     return view('portal.index');
-});    
+});
 
 // route 404
 Route::fallback(function(){return response()->view('errors.404', [], 404);});
 
 //teste
-Route::get('/teste', function () {
+Route::get('teste', function () {
     return view('teste');
 });    
 
 // sobre
-Route::get('/sobre', function () {
+Route::get('sobre', function () {
     return view('portal.informativas.sobre');
 });
 
 // area de atuação
-Route::get('/area', function () {
+Route::get('area', function () {
     return view('portal.informativas.area');
 });
 
 // duvidas frequentes
-Route::get('/faq', function () {
+Route::get('faq', function () {
     return view('portal.informativas.faq');
 });
 
 // orientações
-Route::get('/orientacoes', function () {
+Route::get('orientacoes', function () {
     return view('portal.informativas.orientacoes');
 });
 
 // conheca o projeto
-Route::get('/projeto', function () {
+Route::get('projeto', function () {
     return view('portal.informativas.projeto');
 });
 
 
 // Controle de Contratação
-Route::get('/controle-conformidade', function () {
+Route::get('controle-conformidade', function () {
     return view('portal.imoveis.contratacao.controle-conformidade');
 });
 
 // Pesquisar
 
-Route::get('/pesquisar', function () {
+Route::get('pesquisar', function () {
     return view('portal.imoveis.pesquisar');
 });
 
 // Consulta de bem imóvel
-Route::get('/consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show');
+Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show');
 
 
 //  ROTAS WEB DOS PROCESSOS PERTINENTES AO ESTOQUE DE IMÓVEIS

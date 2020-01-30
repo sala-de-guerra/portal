@@ -17,7 +17,7 @@
             </form>
         </li>
     @else
-        @if (in_array(session()->get('acessoEmpregadoPortal'), $item['perfil_acesso']))
+        {{-- @if (in_array(session()->get('acessoEmpregadoPortal'), $item['perfil_acesso'])) --}}
             <li class="nav-item @if (isset($item['submenu'])){{ $item['submenu_class'] }}@endif">
                 <a class="nav-link {{ $item['class'] }}" href="{{ $item['href'] }}"
                 @if (isset($item['target'])) target="{{ $item['target'] }}" @endif
@@ -40,6 +40,6 @@
                     </ul>
                 @endif
             </li>
-        @endif
+        {{-- @endif --}}
     @endif
 @endif
