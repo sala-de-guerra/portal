@@ -5,12 +5,12 @@ namespace App\Http\Controllers\GestaoImoveisCaixa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Models\GestaoImoveisCaixa\DistratoDemanda;
 use App\Models\GestaoImoveisCaixa\DistratoRelacaoDespesas;
 use App\Models\HistoricoPortalGilie;
 use App\Models\BaseSimov;
 use App\Models\PropostasSimov;
-use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
 use App\Models\ControleMensageria;
 use App\Models\RelacaoAgSrComEmail;
 use App\Exports\PlanilhaDespesasDistratoDle;
@@ -51,8 +51,9 @@ class DistratoRelacaoDespesasController extends Controller
 
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session()->has('matricula', ''));
             DB::rollback();
+            
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Cadastro de despesa não foi efetuada");
@@ -193,6 +194,10 @@ class DistratoRelacaoDespesasController extends Controller
      */
     public static function emitePlanilhaDleDespesas($idDistrato)
     {
+        // dd('parou');
+        ob_end_clean(); // this
+        ob_start(); // and this
+        // dd($planilha);
         return Excel::download(new PlanilhaDespesasDistratoDle($idDistrato), 'DLE.xls');
     }
 }
