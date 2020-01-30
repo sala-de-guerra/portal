@@ -35,7 +35,7 @@ class DistratoRelacaoDespesasController extends Controller
             
             // CADASTRA NOVA DESPESA            
             $novaDespesa = new DistratoRelacaoDespesas;
-            // $novaDespesa->idDistrato = $idDistrato;
+            $novaDespesa->idDistrato = $idDistrato;
             $novaDespesa->tipoDespesa = $request->tipoDespesa;
             $novaDespesa->valorDespesa = str_replace(',', '.', str_replace('.', '', $request->valorDespesa));
             $novaDespesa->dataEfetivaDaDespesa = $dataEfetivaDaDespesa;
