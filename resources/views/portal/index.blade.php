@@ -95,7 +95,7 @@
             <div class="card-body">
                 <h4> 
                     <a href="/pesquisar">
-                        <i class="fa fa-search"></i> Pesquisar Bem Imóvel
+                        <i class="fa fa-search m-2"></i> Pesquisar Bem Imóvel
                     </a>
                     <br>
                     <small>Pesquise os imóveis administrados pela GILIE SP por CHB, Endereço, Nome e CPF do Proponente. </small>
@@ -105,10 +105,18 @@
 
                 <h4> 
                     <a href="/area">
-                        <i class="fa fa-map-marked-alt"></i> Pesquisar Área de Atuação
+                        <i class="fa fa-map-marked-alt m-2"></i> Pesquisar Área de Atuação
                     </a>
                     <br>
                     <small>Pesquise a região de atendimento das GILIE SP e BU. </small>
+                </h4>
+
+                <h4> 
+                    <a href="/orientacoes">
+                        <i class="fas fa-directions m-2"></i> Orientações
+                    </a>
+                    <br>
+                    <small>Consulte cartilhas sobre venda de Imóveis Caixa e links úteis. </small>
                 </h4>
 
             </div>

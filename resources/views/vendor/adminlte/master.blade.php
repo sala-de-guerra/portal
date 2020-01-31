@@ -43,7 +43,6 @@
 <script src="{{ asset('plugins/jquery-ui/ui.datepicker-pt-BR.js') }}"></script>
 <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
 
-
 @include('adminlte::plugins', ['type' => 'js'])
 
 @yield('adminlte_js')
