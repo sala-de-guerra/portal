@@ -51,7 +51,7 @@ class DistratoRelacaoDespesasController extends Controller
 
             DB::commit();
         } catch (\Throwable $th) {
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session()->has('matricula', ''));
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             
             // RETORNA A FLASH MESSAGE
@@ -94,7 +94,7 @@ class DistratoRelacaoDespesasController extends Controller
             $despesa->save();
             DB::commit();
         } catch (\Throwable $th) {
-            // dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
@@ -141,7 +141,7 @@ class DistratoRelacaoDespesasController extends Controller
             $despesa->save();
             DB::commit();
         } catch (\Throwable $th) {
-            // dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
@@ -178,7 +178,7 @@ class DistratoRelacaoDespesasController extends Controller
             $despesa->save();
             DB::commit();
         } catch (\Throwable $th) {
-            // dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');

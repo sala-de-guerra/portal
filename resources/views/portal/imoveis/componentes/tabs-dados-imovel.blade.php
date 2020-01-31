@@ -380,12 +380,39 @@
                                     <p id="quantidadeParcelasProposta"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Total Recebido:</label>
                                     <p id="valorTotalRecebido"></p>
                                 </div>
+                            </div> -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Sigla Comissão:</label>
+                                    <p id="siglaComissao"></p>
+                                </div>
                             </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Agrupamento:</label>
+                                    <p id="agrupamento"></p>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Número de Parcelas:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Total Recebido:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div> -->
                         </div>
 
                         <hr class="pontilhado">

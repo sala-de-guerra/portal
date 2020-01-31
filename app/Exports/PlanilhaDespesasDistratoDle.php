@@ -2,7 +2,9 @@
 
 namespace App\Exports;
 
+use App\Models\BaseSimov;
 use App\Models\GestaoImoveisCaixa\DistratoRelacaoDespesas;
+use App\Models\GestaoImoveisCaixa\DistratoDemanda;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -28,12 +30,72 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
 
     public function map($relacaoDespesasDistrato): array
     {        
-        $finalidade = [
-            'Para Finalização no SINAF', 'Para Autenticação em CAIXA'
-        ];
-        $tipoMovimento = [
-            'Normal', 'Prévia Normal', 'Movimento Futuro'
-        ];
+        $dadosDemandaDistrato = DistratoDemanda::where('idDistrato', $this->idDistrato)->first();
+        $dadosSimov = BaseSimov::where('BEM_FORMATADO', $dadosDemandaDistrato->contratoFormatado)->first();
+        $relacaoDespesas = DistratoRelacaoDespesas::where('idDistrato',  $this->idDistrato)->where('devolucaoPertinente', 'SIM')->get();
+        dd(['dadosSimov' => $dadosSimov, 'dadosDemandaDistrato' => $dadosDemandaDistrato]);
+        // REALIZAR O LEVANTAMENTO DAS DESPESAS RELACIONADA AOS RECURSOS PROPRIOS, FGTS, FINANCIAMENTO, MULTA E PARCELAMENTO
+        foreach ($relacaoDespesas as $despesa) {
+            switch ($despesa->tipoDespesa) {
+                case 'RECURSOS PROPRIOS':
+                    $dataEfetivaLevantamento = Carbon::parse($despesa->dataEfetivaDaDespesa)->format('d/m/Y');
+                    $valorTotalLevantamento += $despesa->valorDespesa;
+                    break;
+                // case 'FGTS':
+                case 'MULTA':
+                case 'FINANCIAMENTO':
+                case 'PARCELAMENTO':
+                    $valorTotalLevantamento += $despesa->valorDespesa;
+                    break;
+                default:
+                break;
+
+            }
+        }
+
+        switch ($despesa->tipoDespesa) {
+            case 'AUTORIZADAS REEMBOLSO EMGEA':
+                $evento = '';
+                break;
+            // case 'FGTS':
+            case 'BENFEITORIAS':
+                $evento = '';
+                break;
+            case 'COMISSAO DE LEILOEIRO':
+                $evento = '0223-2';
+                break;
+            case 'CONDOMINIO':
+                $evento = '';
+                break;
+            case 'CUSTAS CARTORARIAS':
+                $evento = '';
+                break;
+            case 'FGTS':
+                $evento = '';
+                break;
+            case 'FINANCIAMENTO':
+                $evento = '';
+                break;
+            case 'IPTU':
+                $evento = '';
+                break;
+            case 'ITBI':
+                $evento = '';
+                break;
+            case 'MULTA':
+                $evento = '';
+                break;
+            case 'PARCELAMENTO':
+                $evento = '';
+                break;
+            case 'PARCELAS E TAXAS DE FINANCIAMENTO':
+                $evento = '';
+                break;
+            case 'RECURSOS PROPRIOS':
+                $evento = '';
+                break;
+        }
+        
         $situacaoLancamento = [
             '1 - Normal', '2 - Estorno'
         ];
@@ -43,15 +105,15 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
         
         return [
             // "FINALIDADE"
-            $relacaoDespesasDistrato->tipoDespesa == 'BENFEITORIAS' ? 'Para Finalização no SINAF' : 'Para Autenticação em CAIXA',
+            'Para Autenticação em CAIXA',
             // "ENTIDADE"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "UNIDADE MOVIMENTO"
             $relacaoDespesasDistrato->tipoDespesa,
             // "TIPO DE MOVIMENTO"
-            $relacaoDespesasDistrato->tipoDespesa == 'BENFEITORIAS' ? 'Normal' : 'Movimento Futuro',
+            'Normal',
             // "DATA DE MOVIMENTO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "HISTÓRICO"
             $relacaoDespesasDistrato->tipoDespesa,
             // "EVENTO"
@@ -59,13 +121,13 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "PRODUTO"
             $relacaoDespesasDistrato->tipoDespesa,
             // "UNIDADE DESTINO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "SITUAÇÃO LANCAMENTO"
             $relacaoDespesasDistrato->tipoDespesa == 'BENFEITORIAS' ? '1 - Normal' : '2 - Estorno',
             // "DATA EFETIVA"
-            Carbon::parse($relacaoDespesasDistrato->dataEfetivaDaDespesa)->format('d/m/Y'),
+            $dataEfetivaLevantamento == null ? '' : Carbon::parse($dataEfetivaLevantamento)->format('d/m/Y'),
             // "NÚMERO DE AVISO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "CENTRO DE CUSTO"
             $relacaoDespesasDistrato->tipoDespesa == 'BENFEITORIAS' ? '7257' : '3191',
             // "VALOR"
@@ -74,19 +136,19 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "QUANTIDADE"
             $relacaoDespesasDistrato->tipoDespesa,
             // "TIPO ANALÍTICO"
-            $relacaoDespesasDistrato->tipoDespesa == 'BENFEITORIAS' ? 'Pessoa Física' : 'Sequêncial',
+            '',
             // "ANALÍTICO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "PROJETO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "EMPENHO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "SEGMENTO/CARTEIRA"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "NÚMERO DE CONCILIAÇÃO"
             $relacaoDespesasDistrato->tipoDespesa,
             // "OBJETO CUSTEIO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
         ];
     }
 
