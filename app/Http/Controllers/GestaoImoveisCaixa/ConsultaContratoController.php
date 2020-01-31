@@ -44,7 +44,6 @@ class ConsultaContratoController extends Controller
      */
     static public function capturaDadosBaseSimov($numeroContrato)
     {
-        
         // CAPTURA OS DADOS SIMOV DO CONTRATO
         $contrato = BaseSimov::where('BEM_FORMATADO', $numeroContrato)->first();
         // RETORNA JSON VAZIO NO CASO DO CONTRATO NÃO ESTAR NA BASE DE DADOS
@@ -109,15 +108,15 @@ class ConsultaContratoController extends Controller
             'statusImovel' => $contrato->STATUS_IMOVEL,
             'descricaoImovel' => $contrato->DESCRICAO_IMOVEL,
             'descricaoAdicionalImovel' => $contrato->DESCRICAO_ADIC_IMOVEL,
-            'valorAvaliacao' => number_format($contrato->VALOR_AVALIACAO, 2, ',', '.'),
+            'valorAvaliacao' => $contrato->VALOR_AVALIACAO,
             'matriculaImovel' => $contrato->MATRICULA . " / " . $contrato->OFICIO . " Cartório",
             'origemMatricula' => $contrato->ORIGEM_MATRICULA,
 
             // LEILÕES
-            'valorPrimeiroLeilao' => number_format($contrato->VALOR_PRIMEIRO_LEILAO, 2, ',', '.'),
-            'valorSegundoLeilao' => number_format($contrato->VALOR_SEGUNDO_LEILAO, 2, ',', '.'),
-            'valorVenda' => number_format($contrato->VALOR_VENDA, 2, ',', '.'),
-            'valorContabil' => number_format($contrato->VALOR_CONTABIL, 2, ',', '.'),
+            'valorPrimeiroLeilao' => $contrato->VALOR_PRIMEIRO_LEILAO,
+            'valorSegundoLeilao' => $contrato->VALOR_SEGUNDO_LEILAO,
+            'valorVenda' => $contrato->VALOR_VENDA,
+            'valorContabil' => $contrato->VALOR_CONTABIL,
             'dataConsolidacao' => $contrato->DATA_CONSOLIDACAO,
             'agrupamentoLeilao' => $contrato->AGRUPAMENTO,
             'numeroItem' => $contrato->NUMERO_ITEM,
@@ -129,22 +128,24 @@ class ConsultaContratoController extends Controller
             'tipoVenda' => $contrato->TIPO_VENDA,
             'nomeProponente' => $contrato->NOME_PROPONENTE,
             'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
-            'telefoneProponente' => '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
-            'emailProponente' => $emailProponente,
+            'telefoneProponente' => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
+            'emailProponente' => $emailProponente == null ? 'sem e-mail cadastrado' : $emailProponente,
             'nomeCorretor' => $contrato->NO_CORRETOR,
             'numeroCreciCorretor' => $contrato->NU_CRECI,
-            'telefoneCorretor' => $telefoneCorretor,
-            'emailCorretor' => $contrato->EMAIL_CORRETOR,
+            'telefoneCorretor' => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : $telefoneCorretor,
+            'emailCorretor' =>  $contrato->EMAIL_CORRETOR == null ? 'sem e-mail cadastrado' : $contrato->EMAIL_CORRETOR,
             'dataProposta' => $contrato->DATA_PROPOSTA,
-            'valorTotalProposta' => number_format($contrato->VALOR_TOTAL_PROPOSTA, 2, ',', '.'),
-            'valorRecursosPropriosProposta' => number_format($contrato->VALOR_REC_PROPRIOS_PROPOSTA, 2, ',', '.'),
-            'valorFgtsProposta' => number_format($contrato->VALOR_FGTS_PROPOSTA, 2, ',', '.'),
-            'valorFinanciamentoProposta' => number_format($contrato->VALOR_FINANCIADO_PROPOSTA, 2, ',', '.'),
-            'valorParceladoProposta' => number_format($contrato->VALOR_PARCELADO_PROPOSTA, 2, ',', '.'),
+            'valorTotalProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
+            'valorRecursosPropriosProposta' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+            'valorFgtsProposta' => $contrato->VALOR_FGTS_PROPOSTA,
+            'valorFinanciamentoProposta' => $contrato->VALOR_FINANCIADO_PROPOSTA,
+            'valorParceladoProposta' => $contrato->VALOR_PARCELADO_PROPOSTA,
             'quantidadeParcelasProposta' => $contrato->QTDE_PARCELAS_PROPOSTA,
             'codigoAgContratacaoProposta' => str_pad($codigoAgenciaContratacao, 4, '0', STR_PAD_LEFT),
             'nomeAgContratacaoProposta' => $nomeAgenciaContratacao,
             'emailAgContratacaoProposta' => $emailAgenciaContratacao,
+            'siglaComissao' => $contrato->SIGLA_COMISSAO,
+            'agrupamento' => $contrato->AGRUPAMENTO,
             // 'tipoContratacao'
             'cardAgrupamento' => $cardDeAgrupamento,
             'nomeStatusDossie' => $nomeStatusDoDossie,

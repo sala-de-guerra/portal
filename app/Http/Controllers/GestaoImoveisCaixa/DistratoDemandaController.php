@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
 use App\Http\Controllers\Controller;
 use App\Models\GestaoImoveisCaixa\DistratoDemanda;
@@ -117,7 +118,7 @@ class DistratoDemandaController extends Controller
 
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
 
             // RETORNA A FLASH MESSAGE
@@ -278,7 +279,7 @@ class DistratoDemandaController extends Controller
             $demandaDistrato->save();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
@@ -332,7 +333,7 @@ class DistratoDemandaController extends Controller
             $demandaDistrato->save();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
@@ -380,7 +381,7 @@ class DistratoDemandaController extends Controller
             }
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
@@ -510,7 +511,7 @@ class DistratoDemandaController extends Controller
             $demandaDistrato->save();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
