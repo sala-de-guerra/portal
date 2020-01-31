@@ -4,13 +4,19 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
 
             var corIconeDespesa;
             var sentidoIconeDespesa;
+            var title;
+            var hidden;
 
             if (item.devolucaoPertinente == "SIM" ) {
                 corIconeDespesa = "success";
                 sentidoIconeDespesa = "up";
+                title = "Válida"
+                hidden = "";
             } else {
                 corIconeDespesa = "danger";
                 sentidoIconeDespesa = "down";
+                title = "Inválida"
+                hidden = "";
             };
 
             if (item.observacaoDespesa === null) {
@@ -24,11 +30,14 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                     '<td class="formata-valores">' + item.valorDespesa + '</td>' +
                     '<td class="formata-data-sem-hora">' + item.dataEfetivaDaDespesa + '</td>' +
                     '<td>' + item.observacaoDespesa + '</td>' +
-                    '<td>' +
-                        '<div class="m-2">' +
-                            '<span class="btn btn-' + corIconeDespesa + '">' +
+                    '<td class="details-control">' +
+                        '<div class="row">' +
+                            '<button class="btn btn-' + corIconeDespesa + ' m-2" title="' + title + '">' +
                                 '<i class="far fa-thumbs-' + sentidoIconeDespesa + '"></i>' +
-                            '</span>' +
+                            '</button>' +
+                            '<button class="btn btn-primary m-2" data-toggle="tooltip" data-placement="top" title="Motivo da Invalidação"' + hidden + '>' +
+                                '<i class="fas fa-info-circle"></i>' +
+                            '</button>' +
                         '</div>' +
                     '</td>' +
                     '<td class="col-sm-2">' +
@@ -40,6 +49,15 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                             '<div id="btnExcluiDespesaDistrato' + item.idDespesa + '" class="m-2"> </div>' +
                         '</div>' +
                     '</td>' +
+                '</tr>' +
+                '<tr class="child-tr" hidden>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td>Motivo da Invalidação: ' + item.motivoAlteracaoDespesa + '</td>'+
+                    '<td></td>'+
                 '</tr>';
 
             $(linha).appendTo('#tblDespesasDistrato' + item.idDistrato +'>tbody');
@@ -47,7 +65,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
             if (view == "operacional") {
                 var btnAlteraDespesa = 
 
-                    '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAlteraDespesaDistrato' + item.idDespesa + '">' +
+                    '<button type="button" class="btn btn-info" title="Alterar Despesa" data-toggle="modal" data-target="#modalAlteraDespesaDistrato' + item.idDespesa + '">' +
                         '<i class="far fa-edit"></i>' +
                     '</button>' +
 
@@ -120,7 +138,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
 
                 var btnInvalidaDespesaDistrato =
 
-                    '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalInvalidaDespesaDistrato' + item.idDespesa + '">' +
+                    '<button type="button" class="btn btn-warning" title="Invalidar Despesa" data-toggle="modal" data-target="#modalInvalidaDespesaDistrato' + item.idDespesa + '">' +
                         '<i class="far fa-thumbs-down"></i>' +
                     '</button>' +
 
@@ -171,7 +189,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
 
                 var btnExcluiDespesaDistrato =
 
-                    '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalExcluiDespesaDistrato' + item.idDespesa + '">' +
+                    '<button type="button" class="btn btn-danger" title="Excluir Despesa" data-toggle="modal" data-target="#modalExcluiDespesaDistrato' + item.idDespesa + '">' +
                         '<i class="fas fa-trash-alt"></i>' +
                     '</button>' +
 
@@ -211,12 +229,31 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
 
                 $(btnExcluiDespesaDistrato).appendTo('#btnExcluiDespesaDistrato' + item.idDespesa);
             };
+
         });
     
         _formataData();
         _formataValores();
         _formataDatatableComId ('tblDespesasDistrato' + idDistrato);
 
+        //FORMATA CHILD ROW DO DATATABLE
+
+        // $('[id^="tblDespesasDistrato"] tbody').on('click', 'td.details-control', function () {
+        //     var tr = $(this).closest('tr');
+        //     var row = table.row( tr );
+    
+        //     if ( row.child.isShown() ) {
+        //         // This row is already open - close it
+        //         row.child.hide();
+        //         tr.removeClass('shown');
+        //     }
+        //     else {
+        //         // Open this row
+        //         row.child( format(row.data()) ).show();
+        //         tr.addClass('shown');
+        //     }
+        // });
+        
 
         // RESETAR CAMPOS DOS FORM AO FECHAR O MODAL
     

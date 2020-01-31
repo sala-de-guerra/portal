@@ -222,19 +222,19 @@ return [
         [
             'text'        => 'Área de Atuação',
             'url'         => '/area',
-            'icon'        => 'fas fa-lg fa-map-marked-alt',
+            'icon'        => 'fas fa-lg fa-map-marked-alt mx-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
         [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
-            'icon'        => 'fas fa-lg fa-question-circle',
+            'icon'        => 'fas fa-lg fa-question-circle mx-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
         [
             'text'        => 'Orientações',
             'url'         => '/orientacoes',
-            'icon'        => 'fas fa-lg fa-directions',
+            'icon'        => 'fas fa-lg fa-directions mx-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
 
@@ -249,7 +249,7 @@ return [
         [
             'text' => 'Pesquisar Imóvel',
             'url'  => '/pesquisar',
-            'icon' => 'fas fa-lg fa-fw fa-search',
+            'icon' => 'fas fa-lg fa-fw fa-search mx-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
 
         ],
@@ -310,7 +310,7 @@ return [
         // ],
         [
             'text'    => 'Contratação',
-            'icon'    => 'fas fa-lg fa-fw fa-file-contract',
+            'icon'    => 'fas fa-lg fa-fw fa-file-contract mx-2',
             'perfil_acesso' => [env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
             'submenu' => [
                 // [

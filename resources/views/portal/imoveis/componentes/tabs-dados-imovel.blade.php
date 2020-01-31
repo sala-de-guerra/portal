@@ -388,7 +388,7 @@
                             </div>
                         </div>
 
-                        <hr>
+                        <hr class="pontilhado">
 
                         <h2 class="card-title"><b>Conformidade</b></h2>
 
@@ -409,7 +409,7 @@
                             </div>
                         </div>
 
-                        <hr>
+                        <hr class="pontilhado">
 
                         <h2 class="card-title"><b>Agência Responsável</b></h2>
 

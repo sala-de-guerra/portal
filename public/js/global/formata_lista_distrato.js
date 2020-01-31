@@ -157,20 +157,20 @@ function _formataListaDistrato (numeroContrato, view) {
 
                     '<div class="row">' +
 
-                        '<div id="btnAnalisarDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+                        '<div id="btnAnalisarDistrato' + item.idDistrato + '" class="col"></div>' +
 
-                        '<div id="btnCadastrarDespesaDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+                        '<div id="btnCadastrarDespesaDistrato' + item.idDistrato + '" class="col"></div>' +
 
-                        '<div id="btnParecerAnalistaDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+                        '<div id="btnParecerAnalistaDistrato' + item.idDistrato + '" class="col"></div>' +
 
-                        '<div id="btnParecerGerenteDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+                        '<div id="btnParecerGerenteDistrato' + item.idDistrato + '" class="col"></div>' +
 
-                        '<div id="btnAlterarDemandaDistrato' + item.idDistrato + '" class="col-sm-2"></div>' +
+                        '<div id="btnAlterarDemandaDistrato' + item.idDistrato + '" class="col"></div>' +
 
                     '</div>' +
 
                 '</li>' +
-                '<hr>';
+                '<hr class="pontilhado">';
                 
             $(li).appendTo('#listaDistratos');    
             
