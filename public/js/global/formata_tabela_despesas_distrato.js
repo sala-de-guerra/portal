@@ -50,16 +50,7 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                         '</div>' +
                     '</td>' +
                 '</tr>';
-                // '<tr id="child-tr-'+ item.idDespesa + '" class="child-tr" style="display: none;">' +
-                //     '<td></td>' +
-                //     '<td></td>' +
-                //     '<td></td>' +
-                //     '<td></td>' +
-                //     '<td></td>' +
-                //     '<td>Motivo da Invalidação: ' + item.motivoAlteracaoDespesa + '</td>'+
-                //     '<td></td>'+
-                // '</tr>';
-
+                
             $(linha).appendTo('#tblDespesasDistrato' + item.idDistrato +'>tbody');
 
             if (view == "operacional") {
