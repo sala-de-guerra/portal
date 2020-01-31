@@ -61,6 +61,51 @@ class ImoveisCaixaPhpMailer
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
         
+        switch (env('APP_ENV')) {
+            case 'DESENVOLVIMENTO':
+                $mail->addAddress('c111710@mail.caixa');
+                $mail->addAddress('c142765@mail.caixa');
+                break;
+            case 'HOMOLOGACAO':
+                if (isset($objRelacaoEmailUnidades->emailAgencia)) {
+                    $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                    // $mail->addCC($objRelacaoEmailUnidades->emailSr);
+                } else {
+                    $mail->addAddress($objRelacaoEmailUnidades->emailSr);
+                }
+                if ($request->emailProponente) {
+                    $mail->addCC($request->emailProponente);
+                }
+                if ($request->emailCorretor) {
+                    $mail->addCC($request->emailCorretor);
+                }
+                $mail->addBCC('GILIESP09@caixa.gov.br');
+                $mail->addBCC('c111710@mail.caixa');
+                $mail->addBCC('c098453@mail.caixa');
+                $mail->addBCC('c141203@mail.caixa');
+                $mail->addBCC('c079436@mail.caixa');
+                break;
+            case 'PRODUCAO':
+                if (isset($objRelacaoEmailUnidades->emailAgencia)) {
+                    $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                    // $mail->addCC($objRelacaoEmailUnidades->emailSr);
+                } else {
+                    $mail->addAddress($objRelacaoEmailUnidades->emailSr);
+                }
+                if ($request->emailProponente) {
+                    $mail->addCC($request->emailProponente);
+                }
+                if ($request->emailCorretor) {
+                    $mail->addCC($request->emailCorretor);
+                }
+                $mail->addBCC('GILIESP09@caixa.gov.br');
+                $mail->addBCC('c111710@mail.caixa');
+                $mail->addBCC('c098453@mail.caixa');
+                $mail->addBCC('c141203@mail.caixa');
+                $mail->addBCC('c079436@mail.caixa');
+                break;
+        }
+
         /* DESTINATÁRIOS PILOTO */
         // if (session()->get('codigoLotacaoAdministrativa') == '7257' || session()->get('codigoLotacaoFisica') == '7257') {
             // $mail->addAddress('c111710@mail.caixa');
@@ -75,26 +120,9 @@ class ImoveisCaixaPhpMailer
         /* FIM DESTINATÁRIOS PILOTO */
 
         /* DESTINATÁRIOS PRODUÇÃO */
-        if (isset($objRelacaoEmailUnidades->emailAgencia)) {
-            $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
-            // $mail->addCC($objRelacaoEmailUnidades->emailSr);
-        } else {
-            $mail->addAddress($objRelacaoEmailUnidades->emailSr);
-        }
-        if ($request->emailProponente) {
-            $mail->addCC($request->emailProponente);
-        }
-        if ($request->emailCorretor) {
-            $mail->addCC($request->emailCorretor);
-        }
-        $mail->addBCC('GILIESP09@caixa.gov.br');
-        $mail->addBCC('c111710@mail.caixa');
-        $mail->addBCC('c098453@mail.caixa');
-        $mail->addBCC('c141203@mail.caixa');
-        $mail->addBCC('c079436@mail.caixa');
+        
   
         // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
-
         $mail->Subject = $assunto;
 
         $mensagemAutomatica = file_get_contents(("MensagensAutorizacaoContratacao/{$modeloMensagem}.php"), dirname(__FILE__));

@@ -518,6 +518,19 @@
                     <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
                         <div class="row">
                             <div class="col-sm-12">
+
+                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato }}">
+                                                            
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="far fa-lg fa-envelope m-2"></i>
+                                        Enviar Autorização de Contratação
+                                    </button>
+
+                                </form>
+
+                                <br>
+                                <br>
+
                                 <table id="tblMensagensEnviadas" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>

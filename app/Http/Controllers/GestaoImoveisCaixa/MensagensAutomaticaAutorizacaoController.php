@@ -592,7 +592,6 @@ class MensagensAutomaticaAutorizacaoController extends Controller
     {
         /* IMOVEIS CAIXA E EMGEA */ 
         $contratosCaixaEmgea = self::envioManualDeAutorizacaoContratacao($contratoFormatado); 
-        echo "<h1>Imóveis Caixa/EMGEA</h1>";
         foreach ($contratosCaixaEmgea as $contratos => $contrato) {
             if ($contrato->grupoClassificacao == 'EMGEA') {
                 self::setClassificacaoImovel('EMGEA');
@@ -607,8 +606,6 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             }
             
             self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
-            echo "numero Bem: $contrato->numeroBem <br>";
-            // echo "Proposta CCA: $contrato->existeCca <br>";
             switch ($contrato->grupoClassificacao) {
                 case 'CAIXA':
                     // echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
@@ -621,5 +618,10 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             }
             self::defineTipoDeMensageria($contrato);
         }
+        // RETORNA A FLASH MESSAGE
+        session()->flash('corMensagem', 'success');
+        session()->flash('tituloMensagem', "Autorização enviada!");
+        session()->flash('corpoMensagem', "O e-mail de orientações para prosseguimento da contratação foi enviado com sucesso.");
+        return redirect("/consulta-bem-imovel/$contratoFormatado");
     }
 }

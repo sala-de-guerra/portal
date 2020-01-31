@@ -111,6 +111,8 @@
                     <small>Pesquise a região de atendimento das GILIE SP e BU. </small>
                 </h4>
 
+                <hr class="pontilhado">
+
                 <h4> 
                     <a href="/orientacoes">
                         <i class="fas fa-directions m-2"></i> Orientações

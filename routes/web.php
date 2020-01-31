@@ -61,6 +61,12 @@ Route::get('pesquisar', function () {
     return view('portal.imoveis.pesquisar');
 });
 
+Route::prefix('indicadores')->group(function () {
+    Route::get('distrato', function () {
+        return view('portal.imoveis.distrato.indicadores-distrato');
+    });    
+});
+
 // Consulta de bem imóvel
 Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show');
 
