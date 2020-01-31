@@ -444,9 +444,6 @@
 
                         <hr>
 
-
-
-
                         <!-- <h2 class="card-title"><b>CIOPE</b></h2>
 
                         <br>
@@ -490,12 +487,84 @@
                             </div>
                         </div>
 
-
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-historico" role="tabpanel" aria-labelledby="custom-tabs-one-historico-tab">
                         <div class="row">
                             <div class="col-sm-12">
+
+                                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCadastraAtendimento">
+                                    <i class="fas fa-lg fa-headset m-2"></i>
+                                    Cadastrar Atendimento
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method='post' action='/estoque-imoveis/cadastrar-atendimento/{{ $numeroContrato }}' id="formCadastraAtendimento">
+                                                {{ csrf_field() }}
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Atedndimento</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <label>Tipo de Atendimento:</label>
+                                                    <select name="tipoAtendimento" class="form-control" required>
+                                                        <option value="">Selecione</option>
+                                                        <option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>
+                                                        <option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>
+                                                        <option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>
+                                                        <option value="DESISTENCIA">DESISTÊNCIA</option>
+                                                        <option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>
+                                                        <option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
+                                                        <option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>
+                                                        <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
+                                                        <option value="LEILOES NEGATIVOS">LEILÕES NEGATIVOS</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Atividade:</label>
+                                                    <select name="atividadeAtendimento" class="form-control" required>
+                                                        <option value="">Selecione</option>
+                                                        <option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>
+                                                        <option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>
+                                                        <option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>
+                                                        <option value="DESISTENCIA">DESISTÊNCIA</option>
+                                                        <option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>
+                                                        <option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
+                                                        <option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>
+                                                        <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
+                                                        <option value="LEILOES NEGATIVOS">LEILÕES NEGATIVOS</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Observações:</label>
+                                                    <textarea rows="10" name="observacaoAtendimento" class="form-control"></textarea>
+                                                </div>
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <br>
+                                <br>
+                        
+
                                 <table id="tblHistorico" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
