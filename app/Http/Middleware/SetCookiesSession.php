@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Classes\Ldap;
 use App\Classes\CadastraAcessoPortal;
 use App\Models\Empregado;
+use App\Models\BaseSimov;
+use Illuminate\Support\Carbon;
 
 
 class SetCookiesSession
@@ -47,6 +49,7 @@ class SetCookiesSession
                 $empregado = Empregado::find($usuario->getMatricula());
                 $urlBaseSistemaInova = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '/')+1));
                 $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
+                $baseSimov = BaseSimov::select('DATA_ULTIMA_ALTERACAO')->orderBy('DATA_ULTIMA_ALTERACAO', 'desc')->first();
 
                 $request->session()->put([
                     'matricula' => $empregado->matricula,
@@ -58,7 +61,8 @@ class SetCookiesSession
                     'codigoLotacaoFisica' => $empregado->codigoLotacaoFisica,
                     'nomeLotacaoFisica' => $empregado->nomeLotacaoFisica,
                     'acessoEmpregadoPortal' => $empregado->acessaPortal->nivelAcesso,
-                    'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade
+                    'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade,
+                    'dataAtualizacaoBaseSimov' => Carbon::parse($baseSimov->DATA_ULTIMA_ALTERACAO)->format('d/m/Y')
                 ]); 
             }
         }

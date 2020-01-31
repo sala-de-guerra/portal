@@ -229,12 +229,16 @@
 
         <footer class="main-footer">
 
-            <a href="/" class="">
-                <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" class="brand-image" style="max-height: 50px;">
-            </a>
+            <div class="col">
+                <a href="/" class="">
+                    <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" class="brand-image" style="max-height: 50px;">
+                </a>
 
-            <b>2020 - GILIE/SP - Gerência de Alienar de Bens Móveis e Imóveis de São Paulo</b>
+                <b>2020 - GILIE/SP - Gerência de Alienar de Bens Móveis e Imóveis de São Paulo</b>
 
+            </div>
+                <small class="float-right align-bottom mb-2">Data da atualização: <b>{{ session('dataAtualizacaoBaseSimov') }}</b></small>
+            
         </footer>
 
 

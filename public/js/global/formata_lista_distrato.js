@@ -130,7 +130,19 @@ function _formataListaDistrato (numeroContrato, view) {
                                     '<div class="row">' +    
                                         '<div class="col-sm-12 table-responsive">' +
                                             '<div class="form-group">' +
+
+                                                '<form method="GET" class="float-right" action="/estoque-imoveis/distrato/emite-dle-despesas/' + item.idDistrato + '">' +
+                                                        
+                                                    '<button type="submit" class="btn btn-success">' +
+                                                        '<i class="far fa-lg fa-file-excel m-2"></i>' +
+                                                        'Baixar Planilha de Despesas' +
+                                                    '</button>' +
+
+                                                '</form>' +
+
                                                 '<label>Despesas de Distrato Cadastradas:</label>' +
+                                                '<br>' +
+                                                '<br>' +
                                                 '<table id="tblDespesasDistrato' + item.idDistrato + '" class="table table-bordered table-striped dataTable">' +
                                                     '<thead>' +
                                                         '<tr>' +
@@ -172,7 +184,7 @@ function _formataListaDistrato (numeroContrato, view) {
                 '</li>' +
                 '<hr class="pontilhado">';
                 
-            $(li).appendTo('#listaDistratos');    
+            $(li).appendTo('#listaDistratos');
             
             if (view == "operacional") {
 

@@ -57,3 +57,15 @@ function _formataDatatableComId (idTabela){
         }
     });
 };
+
+    //FORMATA CHILD ROW DO DATATABLE
+
+function childTr (idDespesa) {
+    var childTr = $('#child-tr-' + idDespesa).closest('tr.child-tr');
+    if ((childTr).is(":hidden")) {
+        $(childTr).show();
+    } else {
+        $(childTr).hide();
+    };
+
+};

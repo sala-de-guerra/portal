@@ -127,6 +127,7 @@ class DistratoRelacaoDespesasController extends Controller
             DB::beginTransaction();
             // ATUALIZA DEMANDA          
             $despesa = DistratoRelacaoDespesas::where('idDespesa', $idDespesa)->first();
+            $despesa->devolucaoPertinente = 'NAO';
             $despesa->excluirDespesa = 'SIM';
 
             // RETORNA A FLASH MESSAGE

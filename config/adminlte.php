@@ -222,19 +222,19 @@ return [
         [
             'text'        => 'Área de Atuação',
             'url'         => '/area',
-            'icon'        => 'fas fa-lg fa-map-marked-alt mx-2',
+            'icon'        => 'fas fa-lg fa-map-marked-alt mr-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
         [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
-            'icon'        => 'fas fa-lg fa-question-circle mx-2',
+            'icon'        => 'fas fa-lg fa-question-circle mr-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
         [
             'text'        => 'Orientações',
             'url'         => '/orientacoes',
-            'icon'        => 'fas fa-lg fa-directions mx-2',
+            'icon'        => 'fas fa-lg fa-directions mr-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
         ],
 
@@ -249,7 +249,7 @@ return [
         [
             'text' => 'Pesquisar Imóvel',
             'url'  => '/pesquisar',
-            'icon' => 'fas fa-lg fa-fw fa-search mx-2',
+            'icon' => 'fas fa-lg fa-fw fa-search mr-2',
             'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')]
 
         ],
@@ -310,7 +310,7 @@ return [
         // ],
         [
             'text'    => 'Contratação',
-            'icon'    => 'fas fa-lg fa-fw fa-file-contract mx-2',
+            'icon'    => 'fas fa-lg fa-fw fa-file-contract mr-2',
             'perfil_acesso' => [env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
             'submenu' => [
                 // [
@@ -337,14 +337,15 @@ return [
             ],
         ],
 
-        // [
-        //     'text'    => 'Indicadores',
-        //     'icon'    => 'fas fa-lg fa-fw fa-chart-bar',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
+        [
+            'text'    => 'Indicadores',
+            'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
+            'submenu' => [
+                [
+                    'text' => 'Indicadores de Distrato',
+                    'url'  => '/indicadores/distrato',
+                    'perfil_acesso' => [env('NOME_NOSSA_UNIDADE'), 'GESTOR']
+                ],
         //         [
         //             'text' => 'level_one',
         //             'url'  => '#',
@@ -361,8 +362,8 @@ return [
         //             'text' => 'level_one',
         //             'url'  => '#',
         //         ],
-        //     ],
-        // ],
+            ],
+        ],
 
 
         // ['header' => 'PENHOR'],
