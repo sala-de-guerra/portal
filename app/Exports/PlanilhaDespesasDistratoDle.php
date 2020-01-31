@@ -96,13 +96,6 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                 break;
         }
         
-        $situacaoLancamento = [
-            '1 - Normal', '2 - Estorno'
-        ];
-        $tipoAnalitico = [
-            'Sequêncial', 'Pessoa Física', 'Pessoa Jurídica', 'Depósito Judicial'
-        ];
-        
         return [
             // "FINALIDADE"
             'Para Autenticação em CAIXA',
