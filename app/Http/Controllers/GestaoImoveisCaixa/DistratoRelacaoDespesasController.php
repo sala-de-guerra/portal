@@ -165,6 +165,8 @@ class DistratoRelacaoDespesasController extends Controller
             // ATUALIZA DESPESA
             $despesa = DistratoRelacaoDespesas::find($idDespesa);
             $despesa->devolucaoPertinente = $request->input('devolucaoPertinente') == null ? $despesa->devolucaoPertinente : $request->input('devolucaoPertinente');
+            $despesa->responsavelAlteracaoDespesa = session('matricula');
+            $despesa->motivoAlteracaoDespesa = $request->input('motivoAlteracaoDespesa');
 
             // CAPTURA DADOS DISTRATO
             $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first();

@@ -527,7 +527,7 @@
                                 <div class="modal fade" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <form method='post' action='/estoque-imoveis/cadastrar-atendimento/{{ $numeroContrato }}' id="formCadastraAtendimento">
+                                            <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato }}' id="formCadastraAtendimento">
                                                 {{ csrf_field() }}
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Cadastrar Atedndimento</h5>
@@ -541,15 +541,10 @@
                                                     <label>Tipo de Atendimento:</label>
                                                     <select name="tipoAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
-                                                        <option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>
-                                                        <option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>
-                                                        <option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>
-                                                        <option value="DESISTENCIA">DESISTÊNCIA</option>
-                                                        <option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>
-                                                        <option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
-                                                        <option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>
-                                                        <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
-                                                        <option value="LEILOES NEGATIVOS">LEILÕES NEGATIVOS</option>
+                                                        <option value="EMAIL">E-MAIL</option>
+                                                        <option value="PRESENCIAL">PRESENCIAL</option>
+                                                        <option value="SKYPE">SKYPE/LYNC</option>
+                                                        <option value="TELEFONE">TELEFONE</option>
                                                     </select>
                                                 </div>
 
@@ -557,15 +552,9 @@
                                                     <label>Atividade:</label>
                                                     <select name="atividadeAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
-                                                        <option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>
-                                                        <option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>
-                                                        <option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>
-                                                        <option value="DESISTENCIA">DESISTÊNCIA</option>
-                                                        <option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>
-                                                        <option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>
-                                                        <option value="ERRO FORMAL DE EDITAL">ERRO FORMAL DE EDITAL</option>
-                                                        <option value="IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO">IMPOSSIBILIDADE DE REGISTRO DE AQUISIÇÃO</option>
-                                                        <option value="LEILOES NEGATIVOS">LEILÕES NEGATIVOS</option>
+                                                        <option value="CONTRATACAO">CONTRATAÇÃO</option>
+                                                        <option value="PAGAMENTO">PAGAMENTO</option>
+                                                        <option value="PREPARACAO">PREPARAÇÃO</option>
                                                     </select>
                                                 </div>
 

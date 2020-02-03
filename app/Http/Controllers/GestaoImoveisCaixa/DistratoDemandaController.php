@@ -176,6 +176,7 @@ class DistratoDemandaController extends Controller
                 'motivoDistrato' => $demanda->motivoDistrato,
                 'statusAnaliseDistrato' => $demanda->statusAnaliseDistrato,
                 'observacaoDistrato' => $demanda->observacaoDistrato == null ? '' : $demanda->observacaoDistrato,
+                'codigoAgenciaContratacao' => str_pad($demanda->codigoAgenciaContratacao, 4, '0', STR_PAD_LEFT),
                 'parecerAnalista' => $demanda->parecerAnalista,
                 'matriculaAnalista' => $demanda->matriculaAnalista,
                 'valorTotalProposta' => $demanda->valorTotalProposta,
