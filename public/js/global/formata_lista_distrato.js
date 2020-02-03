@@ -9,7 +9,7 @@ function _formataListaDistrato (numeroContrato, view) {
 
                     '<div class="row">' +
                         '<div class="col-sm-12">' +
-                            '<h2 class="card-title"><b>Trajetória do Distrato</b></h2>' +
+                            '<h2 class="card-title"><b>Trajetória do Distrato - Protocolo ' + item.idDistrato + '</b></h2>' +
                             '<br>' +
                             '<div class="card-body pb-0" id="progressBarDistrato' + item.idDistrato + '"></div>' +
                         '</div>' +
@@ -18,8 +18,8 @@ function _formataListaDistrato (numeroContrato, view) {
                     '<div class="row">' +
                         '<div class="col-sm-3">' +
                             '<div class="form-group">' +
-                                '<label>Protocolo:</label>' +
-                                '<p>' + item.idDistrato + '</p>' +
+                                '<label>Agência de Contratação:</label>' +
+                                '<p>' + item.agenciaContratacaoDistrato + '</p>' +
                             '</div>' +
                         '</div>' +
                         '<div class="col-sm-3">' +
@@ -284,12 +284,11 @@ function _formataListaDistrato (numeroContrato, view) {
                                                     '<option value="COMISSAO DE LEILOEIRO">Comissão de Leiloeiro</option>' +
                                                     '<option value="CONDOMINIO">Condomínio</option>' +
                                                     '<option value="CUSTAS CARTORARIAS">Custas Cartorárias</option>' +
-                                                    '<option value="FGTS">FGTS</option>' +
-                                                    '<option value="FINANCIAMENTO">Financiamento</option>' +
+                                                    '<option value="FINANCIAMENTO E FGTS">Financiamento e/ou FGTS</option>' +
                                                     '<option value="IPTU">IPTU</option>' +
                                                     '<option value="ITBI">ITBI</option>' +
                                                     '<option value="MULTA">Multa</option>' +
-                                                    '<option value="PARCELAMENTO">Parcelamento</option>' +
+                                                    '<option value="PARCELAMENTO E FGTS">Parcelamento e/ou FGTS</option>' +
                                                     '<option value="PARCELAS E TAXAS DE FINANCIAMENTO">Parcelas e Taxas de Financiamento</option>' +
                                                     '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
                                                 '</select>' +

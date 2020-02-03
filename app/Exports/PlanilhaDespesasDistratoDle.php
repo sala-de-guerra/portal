@@ -33,6 +33,8 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
         $dadosDemandaDistrato = DistratoDemanda::where('idDistrato', $this->idDistrato)->first();
         $dadosSimov = BaseSimov::where('BEM_FORMATADO', $dadosDemandaDistrato->contratoFormatado)->first();
         $relacaoDespesas = DistratoRelacaoDespesas::where('idDistrato',  $this->idDistrato)->where('devolucaoPertinente', 'SIM')->get();
+        $situacaoLancamento = '1 - Normal';
+        
         dd(['dadosSimov' => $dadosSimov, 'dadosDemandaDistrato' => $dadosDemandaDistrato]);
         // REALIZAR O LEVANTAMENTO DAS DESPESAS RELACIONADA AOS RECURSOS PROPRIOS, FGTS, FINANCIAMENTO, MULTA E PARCELAMENTO
         foreach ($relacaoDespesas as $despesa) {
@@ -43,8 +45,8 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     break;
                 // case 'FGTS':
                 case 'MULTA':
-                case 'FINANCIAMENTO':
-                case 'PARCELAMENTO':
+                case 'FINANCIAMENTO E FGTS':
+                case 'PARCELAMENTO E FGTS':
                     $valorTotalLevantamento += $despesa->valorDespesa;
                     break;
                 default:
@@ -53,55 +55,85 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             }
         }
 
+        // DEFINE O EVENTO DA DLE DE LEVANTAMENTO DE RECURSOS
+        switch ($objBaseSimov->CLASSIFICACAO) {
+            // PATRIMONIAL
+            case 'Patrimonial':
+            case 'Patrimonial - Alienação Fiduciária':
+            case 'Patrimonial -Realização de Garantia':
+                $eventoLevantamento = '28246-4';
+                $situacaoLancamentoLevantamento = '1 - Normal';
+                break;
+            //CAIXA OU EMGEA
+            case 'EMGEA':
+            case 'EMGEA - Realização de Garantia':
+            case 'EMGEA- Alienação Fiduciária':
+            case 'PANAMERICANO':
+            case 'Oriundo do Crédito Imobiliário':
+            case 'Oriundos SFI-Gar. Fiduciária':
+            case 'SFI - Gar.Fid.Reg.Créd.Imob':
+                $eventoLevantamento = '1295-5';
+                $situacaoLancamentoLevantamento = '2 - Estorno';
+                break;
+        }
+
         switch ($despesa->tipoDespesa) {
             case 'AUTORIZADAS REEMBOLSO EMGEA':
-                $evento = '';
+                $evento = '02534-8';
+                $numeroConciliacao = $dadosSimov->NU_BEM;
                 break;
             // case 'FGTS':
             case 'BENFEITORIAS':
-                $evento = '';
+                $evento = '08679-7';
+                $produto = '0427-6';
+                $numeroConciliacao = $dadosSimov->NU_BEM;
                 break;
             case 'COMISSAO DE LEILOEIRO':
-                $evento = '0223-2';
+                $evento = '08679-7';
+                $produto = '0427-6';
+                $numeroConciliacao = $dadosSimov->NU_BEM;
                 break;
             case 'CONDOMINIO':
-                $evento = '';
+                $evento = '08679-7';
+                $produto = '0427-6';
+                $numeroConciliacao = $dadosSimov->NU_BEM;
                 break;
             case 'CUSTAS CARTORARIAS':
-                $evento = '';
+                $evento = '08679-7';
+                $produto = '0427-6';
+                $numeroConciliacao = $dadosSimov->NU_BEM;
                 break;
-            case 'FGTS':
-                $evento = '';
-                break;
-            case 'FINANCIAMENTO':
-                $evento = '';
+            case 'FINANCIAMENTO E FGTS':
+                $evento = '0223-2';
                 break;
             case 'IPTU':
-                $evento = '';
+                $evento = '08679-7';
+                $produto = '0427-6';
+                $numeroConciliacao = $dadosSimov->NU_BEM;
                 break;
             case 'ITBI':
-                $evento = '';
+                $evento = '08679-7';
+                $produto = '0427-6';
+                $numeroConciliacao = $dadosSimov->NU_BEM;
                 break;
             case 'MULTA':
-                $evento = '';
+                $evento = '22361-4';
                 break;
-            case 'PARCELAMENTO':
-                $evento = '';
+            case 'PARCELAMENTO E FGTS':
+                $evento = '0223-2';
                 break;
             case 'PARCELAS E TAXAS DE FINANCIAMENTO':
-                $evento = '';
+                $evento = '0203-8';
                 break;
             case 'RECURSOS PROPRIOS':
-                $evento = '';
+                $evento = $eventoLevantamento;
+                $situacaoLancamento = $situacaoLancamentoLevantamento;
                 break;
         }
         
-        $situacaoLancamento = [
-            '1 - Normal', '2 - Estorno'
-        ];
-        $tipoAnalitico = [
-            'Sequêncial', 'Pessoa Física', 'Pessoa Jurídica', 'Depósito Judicial'
-        ];
+        // $tipoAnalitico = [
+        //     'Sequêncial', 'Pessoa Física', 'Pessoa Jurídica', 'Depósito Judicial'
+        // ];
         
         return [
             // "FINALIDADE"
@@ -109,17 +141,17 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "ENTIDADE"
             '',
             // "UNIDADE MOVIMENTO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            $dadosDemandaDistrato->agenciaContratacaoDistrato,
             // "TIPO DE MOVIMENTO"
             'Normal',
             // "DATA DE MOVIMENTO"
             '',
             // "HISTÓRICO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '',
             // "EVENTO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            $evento,
             // "PRODUTO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            $produto,
             // "UNIDADE DESTINO"
             '',
             // "SITUAÇÃO LANCAMENTO"
@@ -134,7 +166,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // number_format($relacaoDespesasDistrato->valorDespesa, 2, ',', '.'),
             $relacaoDespesasDistrato->valorDespesa,
             // "QUANTIDADE"
-            $relacaoDespesasDistrato->tipoDespesa,
+            '1',
             // "TIPO ANALÍTICO"
             '',
             // "ANALÍTICO"
@@ -146,7 +178,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "SEGMENTO/CARTEIRA"
             '',
             // "NÚMERO DE CONCILIAÇÃO"
-            $relacaoDespesasDistrato->tipoDespesa,
+            $numeroConciliacao,
             // "OBJETO CUSTEIO"
             '',
         ];

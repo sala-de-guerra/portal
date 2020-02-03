@@ -123,13 +123,12 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
                                                 '<option value="COMISSAO DE LEILOEIRO">Comissão de Leiloeiro</option>' +
                                                 '<option value="CONDOMINIO">Condomínio</option>' +
                                                 '<option value="CUSTAS CARTORARIAS">Custas Cartorárias</option>' +
-                                                '<option value="FGTS">FGTS</option>' +
-                                                '<option value="FINANCIAMENTO">Financiamento</option>' +
+                                                '<option value="FINANCIAMENTO E FGTS">Financiamento e/ou FGTS</option>' +
                                                 '<option value="IPTU">IPTU</option>' +
                                                 '<option value="ITBI">ITBI</option>' +
                                                 '<option value="MULTA">Multa</option>' +
                                                 '<option value="PARCELA DE FINANCIAMENTO">Prcela de Financiamento</option>' +
-                                                '<option value="PARCELAMENTO">Parcelamento</option>' +
+                                                '<option value="PARCELAMENTO E FGTS">Parcelamento e/ou FGTS</option>' +
                                                 '<option value="PARCELAS E TAXAS DE FINANCIAMENTO">Parcelas e Taxas de Financiamento</option>' +
                                                 '<option value="RECURSOS PROPRIOS">Recursos Próprios</option>' +
                                             '</select>' +
