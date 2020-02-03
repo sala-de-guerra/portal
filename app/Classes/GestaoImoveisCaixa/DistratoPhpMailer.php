@@ -354,8 +354,8 @@ class DistratoPhpMailer
                             </td>
                         </tr>";
                     break;
-                case 'FINANCIAMENTO':
-                case 'PARCELAMENTO':
+                case 'FINANCIAMENTO E FGTS':
+                case 'PARCELAMENTO E FGTS':
                     $corpoMensagemOrientacaoAgencia .= "
                         <tr>
                             <td class='pl-40px'>
@@ -386,7 +386,18 @@ class DistratoPhpMailer
                                 -> após este procedimento as prestações (TP 310) e a taxa à vista recebida (TP 319) ficarão pendentes no CAR, bem como será gerado um TP 025 no CAC; <br>
                                 -> comandar o pedido 025 com sinal C;
                             </td>
+                        </tr>
+
+                        <tr>
+                            <td class='pl-40px'>
+                                <b>•</b>
+                            </td>
+                            <td class='pl-20px'>
+                                <b>Devolução do FGTS para a conta vinculada (se houver) - CHB: $objDistrato->contratoFormatado</b> <br>
+                                -> no  caso  de  utilização  de  FGTS,  efetuar  o  cancelamento  total  do  DAMP,  solicitando  à  GIFUG  o  retorno  à  conta vinculada do FGTS.
+                            </td>
                         </tr>";
+
                     break;
                 case 'PARCELAS E TAXAS DE FINANCIAMENTO':
                     $corpoMensagemOrientacaoAgencia .= "
@@ -405,18 +416,6 @@ class DistratoPhpMailer
                                 -> Centro de Custo: 7257; <br>
                                 -> Número de conciliação: $objBaseSimov->NU_BEM; <br>
                                 -> Histórico: atualização monetária apurada sobre o valor pago em taxa e prestações do financiamento.
-                            </td>
-                        </tr>";
-                    break;
-                case 'FGTS':
-                    $corpoMensagemOrientacaoAgencia .= "
-                        <tr>
-                            <td class='pl-40px'>
-                                <b>•</b>
-                            </td>
-                            <td class='pl-20px'>
-                                <b>Devolução do FGTS para a conta vinculada - CHB: $objDistrato->contratoFormatado</b> <br>
-                                -> no  caso  de  utilização  de  FGTS,  efetuar  o  cancelamento  total  do  DAMP,  solicitando  à  GIFUG  o  retorno  à  conta vinculada do FGTS.
                             </td>
                         </tr>";
                     break;

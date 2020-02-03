@@ -469,8 +469,6 @@
                             </div>
                         </div>
 
-                        <hr>
-
                         <!-- <h2 class="card-title"><b>CIOPE</b></h2>
 
                         <br>
