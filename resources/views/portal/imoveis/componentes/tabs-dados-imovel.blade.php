@@ -517,12 +517,12 @@
                     <div class="tab-pane fade" id="custom-tabs-one-historico" role="tabpanel" aria-labelledby="custom-tabs-one-historico-tab">
                         <div class="row">
                             <div class="col-sm-12">
-
+                                @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
                                 <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCadastraAtendimento">
                                     <i class="fas fa-lg fa-headset m-2"></i>
                                     Cadastrar Atendimento
                                 </button>
-
+                                @endIf
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -530,7 +530,7 @@
                                             <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato }}' id="formCadastraAtendimento">
                                                 {{ csrf_field() }}
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Atedndimento</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Atendimento</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -601,16 +601,14 @@
                     <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
                         <div class="row">
                             <div class="col-sm-12">
-
-                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato }}">
-                                                            
+                                @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
+                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato }}">         
                                     <button type="submit" class="btn btn-primary">
                                         <i class="far fa-lg fa-envelope m-2"></i>
                                         Enviar Autorização de Contratação
                                     </button>
-
                                 </form>
-
+                                @endIf
                                 <br>
                                 <br>
 

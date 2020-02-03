@@ -26,14 +26,17 @@ class CadastraAcessoPortal
     ];
     public $arrayGestor = [
         /* GESTORES */
-        'c066241', // João Marcel
-        'c072452', // Fernanda Mendonça
-        'c090120', // Marcelo Barboza
-        'c079436', // Vladimir
+        'c066241',  // João Marcel
+        'c072452',  // Fernanda Mendonça
+        'c090120',  // Marcelo Barboza
+        'c079436'   // Vladimir
+    ];
+    public $arrayDesenvolvedores = [
         /* DESENVOLVIMENTO */
-        'c142765', // Carlos
-        'c111710', // Chuman
-        'c098453'  // Rafael 
+        'c142765',  // Carlos
+        'c111710',  // Chuman
+        'c098453',  // Rafael
+        'c079436'   // Vladimir 
     ];
 
     /**
@@ -82,6 +85,8 @@ class CadastraAcessoPortal
             //     $this->nivelAcesso = 'MIDDLE';
             if (in_array($this->getMatricula(), $this->arrayGestor)) {
                 $this->nivelAcesso = 'GESTOR';
+            } elseif(in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
+                $this->nivelAcesso = 'DESENVOLVEDOR';
             } else {
                 $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
             }

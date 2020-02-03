@@ -117,23 +117,23 @@
                         </li>
                     @endif
 
-
+                    @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             <i class="far fa-lg fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">0</span>
+                            <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">0 Notificações</span>
+                            <span class="dropdown-item dropdown-header">Notificações</span>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="estoque-imoveis/distrato">
+                            <a class="dropdown-item" href="/estoque-imoveis/distrato">
                                 <i class="fas fa-envelope mr-2"></i>
-                                0 distratos para enviar.
+                                {{ session()->get('demandasDistratoPendentesParecerGestor') }} distratos para enviar.
                             </a>
                         </div>
-
                     </li>
+                    @endIf
 
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
