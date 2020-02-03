@@ -7,7 +7,7 @@ function _formataTabelaHistorico (numeroContrato) {
                     '<td>' + item.matriculaResponsavel + '</td>' +
                     '<td>' + item.tipo + '</td>' +
                     '<td>' + item.atividade + '</td>' +
-                    '<td class="col-sm-2 overflow-auto">' + 
+                    '<td class="col-sm-4 overflow-auto">' + 
                         '<div class="row">' +
                             '<div class="col">' +
                                item.observacao + 
@@ -43,7 +43,7 @@ function _formataTabelaHistorico (numeroContrato) {
             
                                         '</div>' +
                                     '</div>' +
-                                '</div>';
+                                '</div>' +
     
                             '</div>' +
                             
