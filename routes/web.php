@@ -99,6 +99,9 @@ Route::prefix('estoque-imoveis')->group(function () {
 
     });
 
+    // ROTA PARA REGISTRO DE HISTÓRICO
+    Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\RegistroAtendimentoController@registrarHistorico');
+
     // ROTAS DO PROJETO DE MENSAGENS AUTOMÁTICAS
     Route::prefix('mensagens-automaticas')->group(function () {
         Route::get('autorizacao-contratacao', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarMensageriasAutorizacaoContratacao');

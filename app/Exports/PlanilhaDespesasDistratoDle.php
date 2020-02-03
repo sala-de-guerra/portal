@@ -25,7 +25,8 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
     
     public function query()
     {
-        return DistratoRelacaoDespesas::query()->where('idDistrato', $this->idDistrato);
+        // dd(DistratoDemanda::query()->where('idDistrato', $this->idDistrato));
+        return DistratoDemanda::query()->where('idDistrato', $this->idDistrato);
     }
 
     public function map($relacaoDespesasDistrato): array
@@ -33,9 +34,26 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
         $dadosDemandaDistrato = DistratoDemanda::where('idDistrato', $this->idDistrato)->first();
         $dadosSimov = BaseSimov::where('BEM_FORMATADO', $dadosDemandaDistrato->contratoFormatado)->first();
         $relacaoDespesas = DistratoRelacaoDespesas::where('idDistrato',  $this->idDistrato)->where('devolucaoPertinente', 'SIM')->get();
-        $situacaoLancamento = '1 - Normal';
+        $arrayDleDemanda = [];
         
-        dd(['dadosSimov' => $dadosSimov, 'dadosDemandaDistrato' => $dadosDemandaDistrato]);
+        $arrayDleDemanda = self::montaDleLevantamentoRecursos($arrayDleDemanda, $dadosDemandaDistrato, $dadosSimov, $relacaoDespesas);
+        $arrayDleDemanda = self::montaDleAlocacaoRecursos($arrayDleDemanda, $dadosDemandaDistrato, $dadosSimov, $relacaoDespesas);
+        // dd($arrayDleDemanda);
+        return $arrayDleDemanda;
+    }
+
+    public function headings(): array
+    {
+        return [
+            ['CAIXA'], 
+            ["FINALIDADE", "ENTIDADE", "UNIDADE MOVIMENTO", "TIPO DE MOVIMENTO", "DATA DE MOVIMENTO", "HISTÓRICO", "EVENTO", "PRODUTO", "UNIDADE DESTINO", "SITUAÇÃO LANCAMENTO", "DATA EFETIVA", "NÚMERO DE AVISO", "CENTRO DE CUSTO", "VALOR", "QUANTIDADE", "TIPO ANALÍTICO", "ANALÍTICO", "PROJETO", "EMPENHO", "SEGMENTO/CARTEIRA", "NÚMERO DE CONCILIAÇÃO", "OBJETO CUSTEIO"],
+        ];
+    }
+
+    public static function montaDleLevantamentoRecursos($arrayDleDemanda, $dadosDemandaDistrato, $dadosSimov, $relacaoDespesas)
+    {
+        $valorTotalLevantamento = 0;
+        
         // REALIZAR O LEVANTAMENTO DAS DESPESAS RELACIONADA AOS RECURSOS PROPRIOS, FGTS, FINANCIAMENTO, MULTA E PARCELAMENTO
         foreach ($relacaoDespesas as $despesa) {
             switch ($despesa->tipoDespesa) {
@@ -51,12 +69,11 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     break;
                 default:
                 break;
-
             }
         }
 
         // DEFINE O EVENTO DA DLE DE LEVANTAMENTO DE RECURSOS
-        switch ($objBaseSimov->CLASSIFICACAO) {
+        switch ($dadosSimov->CLASSIFICACAO) {
             // PATRIMONIAL
             case 'Patrimonial':
             case 'Patrimonial - Alienação Fiduciária':
@@ -77,65 +94,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                 break;
         }
 
-        switch ($despesa->tipoDespesa) {
-            case 'AUTORIZADAS REEMBOLSO EMGEA':
-                $evento = '02534-8';
-                $numeroConciliacao = $dadosSimov->NU_BEM;
-                break;
-            // case 'FGTS':
-            case 'BENFEITORIAS':
-                $evento = '08679-7';
-                $produto = '0427-6';
-                $numeroConciliacao = $dadosSimov->NU_BEM;
-                break;
-            case 'COMISSAO DE LEILOEIRO':
-                $evento = '08679-7';
-                $produto = '0427-6';
-                $numeroConciliacao = $dadosSimov->NU_BEM;
-                break;
-            case 'CONDOMINIO':
-                $evento = '08679-7';
-                $produto = '0427-6';
-                $numeroConciliacao = $dadosSimov->NU_BEM;
-                break;
-            case 'CUSTAS CARTORARIAS':
-                $evento = '08679-7';
-                $produto = '0427-6';
-                $numeroConciliacao = $dadosSimov->NU_BEM;
-                break;
-            case 'FINANCIAMENTO E FGTS':
-                $evento = '0223-2';
-                break;
-            case 'IPTU':
-                $evento = '08679-7';
-                $produto = '0427-6';
-                $numeroConciliacao = $dadosSimov->NU_BEM;
-                break;
-            case 'ITBI':
-                $evento = '08679-7';
-                $produto = '0427-6';
-                $numeroConciliacao = $dadosSimov->NU_BEM;
-                break;
-            case 'MULTA':
-                $evento = '22361-4';
-                break;
-            case 'PARCELAMENTO E FGTS':
-                $evento = '0223-2';
-                break;
-            case 'PARCELAS E TAXAS DE FINANCIAMENTO':
-                $evento = '0203-8';
-                break;
-            case 'RECURSOS PROPRIOS':
-                $evento = $eventoLevantamento;
-                $situacaoLancamento = $situacaoLancamentoLevantamento;
-                break;
-        }
-        
-        // $tipoAnalitico = [
-        //     'Sequêncial', 'Pessoa Física', 'Pessoa Jurídica', 'Depósito Judicial'
-        // ];
-        
-        return [
+        array_push($arrayDleDemanda, [
             // "FINALIDADE"
             'Para Autenticação em CAIXA',
             // "ENTIDADE"
@@ -147,24 +106,23 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "DATA DE MOVIMENTO"
             '',
             // "HISTÓRICO"
-            '',
+            'Distrato do imóvel CHB ' . $dadosSimov->NU_BEM,
             // "EVENTO"
-            $evento,
+            $eventoLevantamento,
             // "PRODUTO"
-            $produto,
+            '',
             // "UNIDADE DESTINO"
             '',
             // "SITUAÇÃO LANCAMENTO"
-            $relacaoDespesasDistrato->tipoDespesa == 'BENFEITORIAS' ? '1 - Normal' : '2 - Estorno',
+            $situacaoLancamentoLevantamento,
             // "DATA EFETIVA"
-            $dataEfetivaLevantamento == null ? '' : Carbon::parse($dataEfetivaLevantamento)->format('d/m/Y'),
+            $dataEfetivaLevantamento,
             // "NÚMERO DE AVISO"
             '',
             // "CENTRO DE CUSTO"
-            $relacaoDespesasDistrato->tipoDespesa == 'BENFEITORIAS' ? '7257' : '3191',
+            '',
             // "VALOR"
-            // number_format($relacaoDespesasDistrato->valorDespesa, 2, ',', '.'),
-            $relacaoDespesasDistrato->valorDespesa,
+            $valorTotalLevantamento,
             // "QUANTIDADE"
             '1',
             // "TIPO ANALÍTICO"
@@ -178,17 +136,105 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "SEGMENTO/CARTEIRA"
             '',
             // "NÚMERO DE CONCILIAÇÃO"
-            $numeroConciliacao,
+            '',
             // "OBJETO CUSTEIO"
             '',
-        ];
+        ]);
+
+        return $arrayDleDemanda;
     }
 
-    public function headings(): array
+    public static function montaDleAlocacaoRecursos($arrayDleDemanda, $dadosDemandaDistrato, $dadosSimov, $relacaoDespesas)
     {
-        return [
-            ['CAIXA'], 
-            ["FINALIDADE", "ENTIDADE", "UNIDADE MOVIMENTO", "TIPO DE MOVIMENTO", "DATA DE MOVIMENTO", "HISTÓRICO", "EVENTO", "PRODUTO", "UNIDADE DESTINO", "SITUAÇÃO LANCAMENTO", "DATA EFETIVA", "NÚMERO DE AVISO", "CENTRO DE CUSTO", "VALOR", "QUANTIDADE", "TIPO ANALÍTICO", "ANALÍTICO", "PROJETO", "EMPENHO", "SEGMENTO/CARTEIRA", "NÚMERO DE CONCILIAÇÃO", "OBJETO CUSTEIO"],
-        ];
+        $produto = '';
+        $centroCusto = '';
+        $numeroConciliacao = '';
+        foreach ($relacaoDespesas as $despesa) {
+            switch ($despesa->tipoDespesa) {
+                case 'AUTORIZADAS REEMBOLSO EMGEA':
+                    $evento = '02534-8';
+                    $numeroConciliacao = $dadosSimov->NU_BEM;
+                    $historico = "Reembolso autorizado pela EMGEA do Distrato CHB $dadosSimov->NU_BEM";
+                    break;
+                case 'BENFEITORIAS':
+                case 'COMISSAO DE LEILOEIRO':
+                case 'CONDOMINIO':
+                case 'CUSTAS CARTORARIAS':
+                case 'IPTU':
+                case 'ITBI':
+                    $evento = '08679-7';
+                    $produto = '0427-6';
+                    $numeroConciliacao = $dadosSimov->NU_BEM;
+                    $historico = "Reembolso de $despesa->tipoDespesa do Distrato CHB $dadosSimov->NU_BEM";
+                    $centroCusto = '7257';
+                    break;
+                case 'FINANCIAMENTO E FGTS':
+                    $evento = '0223-2';
+                    $historico = "Estorno de financiamento do distrato CHB $dadosSimov->NU_BEM";
+                    break;
+                case 'MULTA':
+                    $evento = '22361-4';
+                    $historico = "Reversão em multa do processo de distrato CHB $dadosSimov->NU_BEM";
+                    break;
+                case 'PARCELAMENTO E FGTS':
+                    $evento = '0223-2';
+                    $historico = "Estorno de parcelamento do distrato CHB $dadosSimov->NU_BEM";
+                    break;
+                case 'PARCELAS E TAXAS DE FINANCIAMENTO':
+                    $evento = '0203-8';
+                    $historico = "Devolução de parcelas de financiamento do distrato CHB $dadosSimov->NU_BEM";
+                    break;
+            }
+            
+            if ($despesa->tipoDespesa !== 'RECURSOS PROPRIOS') {
+                array_push($arrayDleDemanda, [
+                    // "FINALIDADE"
+                    'Para Autenticação em CAIXA',
+                    // "ENTIDADE"
+                    '',
+                    // "UNIDADE MOVIMENTO"
+                    $dadosDemandaDistrato->agenciaContratacaoDistrato,
+                    // "TIPO DE MOVIMENTO"
+                    'Normal',
+                    // "DATA DE MOVIMENTO"
+                    '',
+                    // "HISTÓRICO"
+                    $historico,
+                    // "EVENTO"
+                    $evento,
+                    // "PRODUTO"
+                    $produto == null ? '' : $produto,
+                    // "UNIDADE DESTINO"
+                    '',
+                    // "SITUAÇÃO LANCAMENTO"
+                    '1 - Normal',
+                    // "DATA EFETIVA"
+                    '',
+                    // "NÚMERO DE AVISO"
+                    '',
+                    // "CENTRO DE CUSTO"
+                    $centroCusto == null ? '' : $centroCusto,
+                    // "VALOR"
+                    $despesa->valorDespesa,
+                    // "QUANTIDADE"
+                    '1',
+                    // "TIPO ANALÍTICO"
+                    '',
+                    // "ANALÍTICO"
+                    '',
+                    // "PROJETO"
+                    '',
+                    // "EMPENHO"
+                    '',
+                    // "SEGMENTO/CARTEIRA"
+                    '',
+                    // "NÚMERO DE CONCILIAÇÃO"
+                    $numeroConciliacao == null ? '' : $numeroConciliacao,
+                    // "OBJETO CUSTEIO"
+                    '',
+                ]);
+            }
+        }
+        return $arrayDleDemanda;
     }
 }

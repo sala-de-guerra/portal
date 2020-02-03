@@ -19,7 +19,7 @@ function _formataListaDistrato (numeroContrato, view) {
                         '<div class="col-sm-3">' +
                             '<div class="form-group">' +
                                 '<label>Agência de Contratação:</label>' +
-                                '<p>' + item.agenciaContratacaoDistrato + '</p>' +
+                                '<p>' + item.codigoAgenciaContratacao + '</p>' +
                             '</div>' +
                         '</div>' +
                         '<div class="col-sm-3">' +
