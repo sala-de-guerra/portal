@@ -37,7 +37,9 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\SetCookiesSession::class,
-            \App\Http\Middleware\PortalLogAcessoMiddleware::class
+            \App\Http\Middleware\PortalLogAcessoMiddleware::class,
+            \App\Http\Middleware\ValidaAcessoRotaPortal::class,
+            \App\Http\Middleware\ControleNotificacoesNavBar::class
         ],
 
         'api' => [
