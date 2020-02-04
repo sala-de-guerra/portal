@@ -27,21 +27,13 @@ class DistratoPhpMailer
 
     public static function validaUnidadeDemandanteEmail($objDistrato) 
     {
-        // if ($objDistrato->agResponsavel == null || $objDistrato->agResponsavel === "NULL") {
-        //     $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('nomeAgencia', $objDistrato->srResponsavel)->first();
-        //     $arrayDadosEmailUnidade = [
-        //         'nomeSr' => $objRelacaoEmailUnidades->nomeSr,
-        //         'emailSr' => $objRelacaoEmailUnidades->emailsr
-        //     ];
-        // } else {
-            $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objDistrato->codigoAgenciaContratacao)->first();
-            $arrayDadosEmailUnidade = [
-                'nomeAgencia' => $objRelacaoEmailUnidades->nomeAgencia,
-                'emailAgencia' => $objRelacaoEmailUnidades->emailAgencia,
-                'nomeSr' => $objRelacaoEmailUnidades->nomeSr,
-                'emailSr' => $objRelacaoEmailUnidades->emailsr
-            ];
-        // }
+        $objRelacaoEmailUnidades = RelacaoAgSrComEmail::where('codigoAgencia', $objDistrato->codigoAgenciaContratacao)->first();
+        $arrayDadosEmailUnidade = [
+            'nomeAgencia' => $objRelacaoEmailUnidades->nomeAgencia,
+            'emailAgencia' => $objRelacaoEmailUnidades->emailAgencia,
+            'nomeSr' => $objRelacaoEmailUnidades->nomeSr,
+            'emailSr' => $objRelacaoEmailUnidades->emailsr
+        ];
         return json_decode(json_encode($arrayDadosEmailUnidade), FALSE);
     }
 
@@ -70,47 +62,15 @@ class DistratoPhpMailer
                 $mail->addAddress('c142765@mail.caixa');
                 break;
             case 'HOMOLOGACAO':
-                $mail->addAddress('c111710@mail.caixa');
-                $mail->addAddress('c142765@mail.caixa');
+                $mail->addBCC('c111710@mail.caixa');
+                $mail->addBCC('c142765@mail.caixa');
+                $mail->addAddress(session('matricula') . '@mail.caixa');
                 break;
             case 'PRODUCAO':
-                $mail->addAddress('c111710@mail.caixa');
-                $mail->addAddress('c142765@mail.caixa');
-                $mail->addAddress('c079436@mail.caixa');
+                $mail->addBCC(session('matricula') . '@mail.caixa');
+                $mail->addBCC('GILIESP01@mail.caixa');
                 break;
         }
-        
-        /* DESTINATÁRIOS PILOTO */
-        // if (session()->get('codigoLotacaoAdministrativa') == '7257' || session()->get('codigoLotacaoFisica') == '7257') {
-            // $mail->addAddress('c111710@mail.caixa');
-            // $mail->addAddress('c142765@mail.caixa');
-            // $mail->addAddress('c098453@mail.caixa');
-        // } else {
-        //     $mail->addAddress(session()->get('matricula') . '@mail.caixa');
-        // }
-        // $mail->addBCC('c111710@mail.caixa'); 
-        // $mail->addBCC('c142765@mail.caixa');
-        // $mail->addBCC('c079436@mail.caixa');
-        /* FIM DESTINATÁRIOS PILOTO */
-
-        /* DESTINATÁRIOS PRODUÇÃO */
-        // if (isset($objRelacaoEmailUnidades->emailAgencia)) {
-        //     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
-        //     // $mail->addCC($objRelacaoEmailUnidades->emailSr);
-        // } else {
-        //     $mail->addAddress($objRelacaoEmailUnidades->emailSr);
-        // }
-        // if ($request->emailProponente) {
-        //     $mail->addCC($request->emailProponente);
-        // }
-        // if ($request->emailCorretor) {
-        //     $mail->addCC($request->emailCorretor);
-        // }
-        // $mail->addBCC('GILIESP09@caixa.gov.br');
-        // $mail->addBCC('c111710@mail.caixa');
-        // $mail->addBCC('c142765@mail.caixa');
-        // $mail->addBCC('c141203@mail.caixa');
-        // $mail->addBCC('c079436@mail.caixa');
   
         // CAPTURA OS DADOS DO CONTRATO
         $dadosContrato = BaseSimov::where('BEM_FORMATADO', $request->contratoFormatado)->first();
@@ -143,6 +103,17 @@ class DistratoPhpMailer
         // REALIZA O REPLACE DAS VARIAVEIS COM OS DADOS DO JSON
         switch ($modeloMensagem) {
             case 'notificacaoCadastroDistrato':
+                // INSERE DESTINATARIOS
+                // if (env('APP_ENV') == 'PRODUCAO') {
+                //     if ($request->emailProponente) {
+                //         $mail->addCC($request->emailProponente);
+                //     }
+                //     if ($request->emailCorretor) {
+                //         $mail->addCC($request->emailCorretor);
+                //     }
+                //     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                // }
+
                 // CONVERT A STRING DATA PROPOSTA EM DATETIME E ASSIM MUDAR O FORMATO DELA
                 $dataConvertida = strtotime($request->dataProposta);
                 $dataProposta = date('d/m/Y', $dataConvertida);
@@ -158,6 +129,13 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%DATA_PROPOSTA%", $dataProposta, $mensagemAutomatica);
                 break;
             case 'notificacaoGestorParecerAnalista':
+                // INSERE DESTINATARIOS
+                // if (env('APP_ENV') == 'PRODUCAO') {
+                //     $mail->addAddress('c072452@mail.caixa');
+                //     $mail->addAddress('c090120@mail.caixa');
+                //     $mail->addAddress('c079436@mail.caixa');
+                // }
+
                 $mail->Subject = "Notificação de Parecer do Analista de Distrato - Imóvel $request->contratoFormatado";
 
                 // SUBSTITUI AS VARIAVÉIS DO MODELO DE E-MAIL COM OS DADOS DA OPERAÇÃO
@@ -166,6 +144,17 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
                 break;
             case 'orientacaoClienteDistratoComMulta':
+                // INSERE DESTINATARIOS
+                // if (env('APP_ENV') == 'PRODUCAO') {
+                //     if ($request->emailProponente) {
+                //         $mail->addAddress($request->emailProponente);
+                //     }
+                //     if ($request->emailCorretor) {
+                //         $mail->addCC($request->emailCorretor);
+                //     }
+                //     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                // }
+
                 $valorMulta = $request->valorTotalProposta * 0.05;
 
                 $mail->Subject = "Orientações para processo de distrato - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
@@ -182,6 +171,17 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);               
                 break;
             case 'orientacaoClienteDistratoSemMulta':
+                // INSERE DESTINATARIOS
+                // if (env('APP_ENV') == 'PRODUCAO') {
+                //     if ($request->emailProponente) {
+                //         $mail->addAddress($request->emailProponente);
+                //     }
+                //     if ($request->emailCorretor) {
+                //         $mail->addCC($request->emailCorretor);
+                //     }
+                //     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                // }
+
                 $mail->Subject = "Orientações para processo de distrato - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
 
                 // SUBSTITUI AS VARIAVÉIS DO MODELO DE E-MAIL COM OS DADOS DA OPERAÇÃO
@@ -194,6 +194,11 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);
                 break;
             case 'pedidoAutorizacaoEmgea':
+                // INSERE DESTINATARIOS
+                // if (env('APP_ENV') == 'PRODUCAO') {
+                //     $mail->addAddress('geipt@mail.caixa');
+                // }
+
                 $mail->Subject = "Solicitação de autorização de distrato - Imóvel EMGEA - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
 
                 // SUBSTITUI AS VARIAVÉIS DO MODELO DE E-MAIL COM OS DADOS DA OPERAÇÃO
@@ -201,6 +206,17 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%CONTRATO_BEM%", $request->contratoFormatado, $mensagemAutomatica);
                 break;
             case 'solicitacaoDocumentosReembolso':
+                // INSERE DESTINATARIOS
+                // if (env('APP_ENV') == 'PRODUCAO') {
+                //     if ($request->emailProponente) {
+                //         $mail->addAddress($request->emailProponente);
+                //     }
+                //     if ($request->emailCorretor) {
+                //         $mail->addCC($request->emailCorretor);
+                //     }
+                //     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                // }
+
                 $mail->Subject = "Solicitação de documentos para processo de distrato - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
 
                 // SUBSTITUI AS VARIAVÉIS DO MODELO DE E-MAIL COM OS DADOS DA OPERAÇÃO
@@ -213,6 +229,11 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%MOTIVO_DISTRATO%", $request->motivoDistrato, $mensagemAutomatica);
                 break;
             case 'orientacaoAgenciaDistrato':
+                // INSERE DESTINATARIOS
+                // if (env('APP_ENV') == 'PRODUCAO') {
+                //     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                // }
+
                 $mail->Subject = "Orientação para contabilização de Distrato - Comprador $request->nomeProponente - CHB $request->contratoFormatado";
 
                 $valorMulta = $request->valorTotalProposta * 0.05;
@@ -248,7 +269,6 @@ class DistratoPhpMailer
     {
         try {
             $mail->send();
-            // echo 'Mensagem enviada com sucesso';
         } catch (Exception $e) {
             // echo "Mensagem não pode ser enviada. Erro: {$mail->ErrorInfo}";
         }

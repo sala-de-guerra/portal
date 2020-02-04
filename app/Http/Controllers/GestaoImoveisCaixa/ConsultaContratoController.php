@@ -10,6 +10,7 @@ use App\Models\HistoricoPortalGilie;
 use App\Models\PropostasSimov;
 use App\Models\RelacaoAgSrComEmail;
 use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
+use Illuminate\Support\Carbon;
 
 
 class ConsultaContratoController extends Controller
@@ -134,7 +135,7 @@ class ConsultaContratoController extends Controller
             'numeroCreciCorretor' => $contrato->NU_CRECI,
             'telefoneCorretor' => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : $telefoneCorretor,
             'emailCorretor' =>  $contrato->EMAIL_CORRETOR == null ? 'sem e-mail cadastrado' : $contrato->EMAIL_CORRETOR,
-            'dataProposta' => $contrato->DATA_PROPOSTA,
+            'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
             'valorTotalProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
             'valorRecursosPropriosProposta' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
             'valorFgtsProposta' => $contrato->VALOR_FGTS_PROPOSTA,
