@@ -431,7 +431,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Card Agrupamento:</label>
-                                    <p id="cardAgrupamentoConformidade"></p>
+                                    <p id="cardAgrupamento"></p>
                                 </div>
                             </div>
                         </div>
