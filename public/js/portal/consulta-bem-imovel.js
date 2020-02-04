@@ -5,15 +5,17 @@ $(document).ready(function(){
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
     _formataListaDistrato (numeroContrato);
+    setTimeout(function() {
+        _formataData();
+        _formataValores();
+    }, 1500);
+
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
 
-
         var numeroBem = dados.numeroBem;
         // var dossieDigital = dados.dossieDigital;
-
         // _formataTabelaDocumentos (numeroBem, dossieDigital);
-
         // _formataTabelaLaudos (numeroBem);
 
 
@@ -30,10 +32,9 @@ $(document).ready(function(){
         };
 
         _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, dados.statusImovel);
-        // _formataDatatable();
-        _formataData();
     
     });
+
 
     // var tamanhoMaximoView = 8;
     // var tamanhoMaximo = 8388608;

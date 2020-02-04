@@ -1,10 +1,15 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
 $(document).ready(function(){
+
     $("#custom-tabs-one-distrato-tab").click();
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
-    _formataListaDistrato (numeroContrato, "operacional"); // NO FINAL DESTA FUNÇÃO É CHAMADA A FUNÇÃO _formataTabelaDespesasDistrato
+    _formataListaDistrato (numeroContrato, "operacional") // NO FINAL DESTA FUNÇÃO É CHAMADA A FUNÇÃO _formataTabelaDespesasDistrato
+    setTimeout(function() {
+        _formataData();
+        _formataValores();
+    }, 1500);
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
         var numeroBem = dados.numeroBem;
@@ -28,9 +33,7 @@ $(document).ready(function(){
     // var tamanhoMaximoView = 8;
     // var tamanhoMaximo = 8388608;
     // _animaInputFile();
-    // setTimeout(function(){
-    //     _formataDatatable();
-    // },1000);
+
 });
 
 function copyToClipboard(element) {

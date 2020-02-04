@@ -256,8 +256,8 @@ function _formataTabelaDespesasDistrato (idDistrato, view) {
 
         });
     
-        _formataData();
-        _formataValores();
+        // _formataData();
+        // _formataValores();
         _formataDatatableComId ('tblDespesasDistrato' + idDistrato);
     
         $(".modal").on('hidden.bs.modal', function(e){
