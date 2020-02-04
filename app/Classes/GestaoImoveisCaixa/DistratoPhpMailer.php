@@ -451,6 +451,7 @@ class DistratoPhpMailer
                                 -> Valor: R$ " . number_format($despesa->valorDespesa, 2, ',', '.') . "; <br>
                                 -> Centro de Custo: 7257; <br>
                                 -> Produto: 0427-6 Imóveis adjudicados/arrematados; <br>
+                                -> Projeto: 990630; <br>
                                 -> Número de conciliação: $objBaseSimov->NU_BEM; <br>
                                 -> Histórico: Valor do $despesa->tipoDespesa + atualização monetária apurada sobre o valor pago.
                             </td>
