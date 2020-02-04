@@ -23,12 +23,12 @@ class SetCookiesSession
      */
     public function handle($request, Closure $next)
     {
-        if (env('DB_CONNECTION') === 'sqlite') {
+        if (env('DB_CONNECTION') === 'sqlsrv') {
             if (!$request->session()->has('matricula')) {
                 // $empregado = Empregado::find('c112346'); // Luciano
-                // $empregado = Empregado::find('c032579'); // Euclidio
+                $empregado = Empregado::find('c032579'); // Euclidio
                 // $empregado = Empregado::find('c058725'); // Thais
-                $empregado = Empregado::find('c142765'); // Carlos
+                // $empregado = Empregado::find('c142765'); // Carlos
 
                 $request->session()->put([
                     'matricula' => $empregado->matricula,

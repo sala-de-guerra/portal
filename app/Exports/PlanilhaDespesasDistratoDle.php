@@ -149,6 +149,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
         $produto = '';
         $centroCusto = '';
         $numeroConciliacao = '';
+        $projeto = '';
         foreach ($relacaoDespesas as $despesa) {
             switch ($despesa->tipoDespesa) {
                 case 'AUTORIZADAS REEMBOLSO EMGEA':
@@ -167,6 +168,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     $numeroConciliacao = $dadosSimov->NU_BEM;
                     $historico = "Reembolso de $despesa->tipoDespesa do Distrato CHB $dadosSimov->NU_BEM";
                     $centroCusto = '7257';
+                    $projeto = '990630';
                     break;
                 case 'FINANCIAMENTO E FGTS':
                     $evento = '0223-2';
@@ -223,7 +225,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     // "ANALÍTICO"
                     '',
                     // "PROJETO"
-                    '',
+                    $projeto,
                     // "EMPENHO"
                     '',
                     // "SEGMENTO/CARTEIRA"

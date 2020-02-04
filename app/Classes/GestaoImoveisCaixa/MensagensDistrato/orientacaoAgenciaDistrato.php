@@ -333,6 +333,7 @@
                     -> Valor: %SOMA_DEPESA_E_ATUALIZACAO%
                     -> Centro de Custo: 7257; <br>
                     -> Produto: 0427-6 Imóveis adjudicados/arrematados; <br>
+                    -> Projeto: 990630; <br>
                     -> Número de conciliação: %NUMERO_CONTRATO%; <br>
                     -> Histórico: Valor do %TIPO DESPESA% + atualização monetária apurada sobre o valor pago.
                 </td>
