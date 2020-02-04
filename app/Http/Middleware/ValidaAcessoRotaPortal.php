@@ -39,7 +39,7 @@ class ValidaAcessoRotaPortal
             case 'estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/':
             case 'estoque-imoveis/registrar-historico/':
             case 'indicadores/distrato':
-                if (!in_array($request->session()->get('unidadeEmpregadoEsteiraComex'), [env('CODIGO_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR'])) {
+                if (!in_array(session()->get('acessoEmpregadoPortal'), [env('CODIGO_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR'])) {
                     $request->session()->flash('corMensagem', 'warning');
                     $request->session()->flash('tituloMensagem', "Acesso negado!");
                     $request->session()->flash('corpoMensagem', "Você não tem perfil para acessar essa página.");
