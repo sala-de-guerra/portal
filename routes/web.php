@@ -96,7 +96,11 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::put('excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@excluirDespesa');
         Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@validarDespesa');
         Route::get('emite-dle-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@emitePlanilhaDleDespesas');
+    });
 
+    // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO
+    Route::prefix('conformidade-contratacao')->group(function () {
+        Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
     });
 
     // ROTA PARA REGISTRO DE HISTÓRICO
