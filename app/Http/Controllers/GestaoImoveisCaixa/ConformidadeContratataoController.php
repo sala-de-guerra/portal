@@ -53,6 +53,7 @@ class ConformidadeContratataoController extends Controller
                                             ->join('ALITB075_VENDA_VL_OL37', 'ADJTBL_imoveisCaixa.numeroContrato', '=', 'ALITB075_VENDA_VL_OL37.NU_BEM')
                                             ->join('ALITB001_Imovel_Completo', 'ADJTBL_imoveisCaixa.numeroContrato', '=', 'ALITB001_Imovel_Completo.NU_BEM')
                                             ->select(DB::raw('
+                                                ALITB001_Imovel_Completo.[BEM_FORMATADO] as contratoFormatado,
                                                 ALITB001_Imovel_Completo.[ACEITA_CCA] as aceitaCca, 
                                                 ALITB001_Imovel_Completo.[CLASSIFICACAO] as classificacaoImovel, 
                                                 ADJTBL_imoveisCaixa.numeroContrato, 
@@ -118,6 +119,7 @@ class ConformidadeContratataoController extends Controller
             }
             
             array_push($arrayContratosConformidade, [
+                'contratoFormatado' => $contrato->contratoFormatado,
                 'numeroContrato' => $contrato->numeroContrato,
                 'fluxoContratacao' => $fluxoContratacao, 
                 'codigoAgencia' => $contrato->codigoAgencia,
