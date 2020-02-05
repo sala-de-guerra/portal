@@ -313,10 +313,11 @@ return [
             'icon'    => 'fas fa-lg fa-fw fa-file-contract mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
             'submenu' => [
-                // [
-                //     'text' => 'Controle de Conformidade',
-                //     'url'  => '/controle-conformidade',
-                // ],
+                [
+                    'text' => 'Controle de Conformidade',
+                    'url'  => '/controle-conformidade',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
                 [
                     'text' => 'Controle de Distrato',
                     'url'  => '/estoque-imoveis/distrato',

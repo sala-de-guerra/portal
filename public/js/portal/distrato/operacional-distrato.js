@@ -9,7 +9,7 @@ $(document).ready(function(){
     setTimeout(function() {
         _formataData();
         _formataValores();
-    }, 1500);
+    }, 3000);
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
         var numeroBem = dados.numeroBem;

@@ -11340,7 +11340,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   background: #ffffff;
   border-top: 1px solid #dee2e6;
   color: #869099;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 .text-sm .main-footer, .main-footer.text-sm {
