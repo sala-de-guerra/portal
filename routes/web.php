@@ -49,12 +49,6 @@ Route::get('projeto', function () {
     return view('portal.informativas.projeto');
 });
 
-
-// Controle de Contratação
-Route::get('controle-conformidade', function () {
-    return view('portal.imoveis.contratacao.controle-conformidade');
-});
-
 // Pesquisar
 
 Route::get('pesquisar', function () {
@@ -100,6 +94,7 @@ Route::prefix('estoque-imoveis')->group(function () {
 
     // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO
     Route::prefix('conformidade-contratacao')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\ConformidadeContratataoController@index');
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
     });
 
