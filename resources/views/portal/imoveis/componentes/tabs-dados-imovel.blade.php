@@ -197,25 +197,25 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor no Primeiro Leilão:</label>
-                                    <p id="valorPrimeiroLeilao"></p>
+                                    <p class="formata-valores" id="valorPrimeiroLeilao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor no Segundo Leilão:</label>
-                                    <p id="valorSegundoLeilao"></p>
+                                    <p class="formata-valores" id="valorSegundoLeilao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor de Venda:</label>
-                                    <p id="valorVenda"></p>
+                                    <p class="formata-valores" id="valorVenda"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor Contábil:</label>
-                                    <p id="valorContabil"></p>
+                                    <p class="formata-valores" id="valorContabil"></p>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +224,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data de Consolidação:</label>
-                                    <p id="dataConsolidacao"></p>
+                                    <p class="formata-data-sem-hora" id="dataConsolidacao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -242,7 +242,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data Arremate:</label>
-                                    <p id="dataArremate" class="formata-data-sem-hora"></p>
+                                    <p class="formata-data-sem-hora" id="dataArremate"></p>
                                 </div>
                             </div>
                         </div>
@@ -251,13 +251,13 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data Primeiro Leilão:</label>
-                                    <p id="dataPrimeiroLeilao" class="formata-data-sem-hora"></p>
+                                    <p class="formata-data-sem-hora" id="dataPrimeiroLeilao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data Segundo Leilão:</label>
-                                    <p id="dataSegundoLeilao" class="formata-data-sem-hora"></p>
+                                    <p class="formata-data-sem-hora" id="dataSegundoLeilao"></p>
                                 </div>
                             </div>
                             <!-- <div class="col-sm-3">
