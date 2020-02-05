@@ -127,7 +127,7 @@ class ConsultaContratoController extends Controller
 
             // CONTRATAÇÃO
             'tipoVenda' => $contrato->TIPO_VENDA,
-            'nomeProponente' => $contrato->NOME_PROPONENTE,
+            'nomeProponente' => strtoupper($contrato->NOME_PROPONENTE),
             'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
             'telefoneProponente' => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
             'emailProponente' => $emailProponente == null ? 'sem e-mail cadastrado' : $emailProponente,
