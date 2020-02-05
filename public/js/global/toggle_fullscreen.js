@@ -1,3 +1,30 @@
+$(document).keyup(function(e){
+    if(e.which==122){
+        e.preventDefault();//kill anything that browser may have assigned to it by default
+        //do what ever you wish here :)
+        if ($("#btnFullscreen").is(':visible') === true) {
+            $("#btnFullscreen").hide();
+            $("#btnFullscreenOff").show();
+        } else {
+            $("#btnFullscreen").show();
+            $("#btnFullscreenOff").hide();
+        };
+    }
+ });
+
+document.addEventListener('fullscreenchange', exitHandler);
+document.addEventListener('webkitfullscreenchange', exitHandler);
+document.addEventListener('mozfullscreenchange', exitHandler);
+document.addEventListener('MSFullscreenChange', exitHandler);
+
+function exitHandler() {
+    if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+        $("#btnFullscreen").show();
+        $("#btnFullscreenOff").hide();
+    }
+}  
+
+
 $("#btnFullscreen").click(function() {
     toggleFullScreen();
     $("#btnFullscreen").hide();
