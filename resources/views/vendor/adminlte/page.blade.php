@@ -117,20 +117,20 @@
                         </li>
                     @endif
 
-                    <li class="nav-item">
+                    <li class="nav-item mx-1">
                         <a href="#" id="btnFullscreen" class="nav-link" title="Modo tela cheia">
                             <i class="fas fa-lg fa-expand"></i>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item mx-1">
                         <a href="#" id="btnFullscreenOff" class="nav-link" title="Sair do modo tela cheia" style="display:none;">
                             <i class="fas fa-lg fa-compress-arrows-alt"></i>
                         </a>
                     </li>
 
                     @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
-                        <li class="nav-item dropdown user-menu">
+                        <li class="nav-item mx-1 dropdown user-menu">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <i class="far fa-lg fa-bell"></i>
                                 <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
@@ -215,9 +215,9 @@
                     </ul>
                 </nav>
             </div>
-            <div class="d-flex justify-content-center" style="position:relative; bottom:3rem;">
-                <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 60px;">
-            </div>
+            <!-- <div class="d-flex justify-content-center" style="position:relative; bottom:3rem;">
+                <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 50px;">
+            </div> -->
         </aside>
         @endif
 
@@ -245,11 +245,15 @@
         <footer class="main-footer">
 
             <div class="row">
-                <div class="col-sm-8">
-                    <b>2020 - GILIE/SP - Gerência de Alienar Bens Móveis e Imóveis</b>
+                <div class="col-sm-2 d-flex justify-content-center">
+                    <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 40px;">
                 </div>
-                <div class="col-sm-4">
-                    <b class="float-right mb-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
+
+                <div class="col-sm-7">
+                    <b class="float-left m-2">2020 - GILIE/SP - Gerência de Alienar Bens Móveis e Imóveis</b>
+                </div>
+                <div class="col-sm-3">
+                    <b class="float-right m-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
                 </div>
             </div>
 
