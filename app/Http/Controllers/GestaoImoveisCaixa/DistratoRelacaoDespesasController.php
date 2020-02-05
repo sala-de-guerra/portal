@@ -192,15 +192,27 @@ class DistratoRelacaoDespesasController extends Controller
 
     /**
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $idDistrato
      * @return \Illuminate\Http\Response
      */
-    public static function emitePlanilhaDleDespesas($idDistrato)
+    public static function emitePlanilhaDleDespesas(Request  $request, $idDistrato)
     {
-        // dd('parou');
-        ob_end_clean(); // this
-        ob_start(); // and this
-        // dd($planilha);
-        return Excel::download(new PlanilhaDespesasDistratoDle($idDistrato), 'DLE.xls');
+        try {
+            // VALIDA SE EXISTEM DESPESAS CADASTRADAS NA DEMANDA PARA EMITIR A DLE
+            if (DistratoRelacaoDespesas::where('idDistrato',  $idDistrato)->where('devolucaoPertinente', 'SIM')->count() >= 1) {
+                ob_end_clean();
+                ob_start();
+                return Excel::download(new PlanilhaDespesasDistratoDle($idDistrato), 'DLE.xls');
+            } else {
+                // RETORNA A FLASH MESSAGE
+                $request->session()->flash('corMensagem', 'warning');
+                $request->session()->flash('tituloMensagem', "Planilha sem despesas");
+                $request->session()->flash('corpoMensagem', "A demanda está sem despesas cadastradas, não é possível emitir a planilha de DLE.");
+                return redirect()->back();
+            }
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+        }
     }
 }
