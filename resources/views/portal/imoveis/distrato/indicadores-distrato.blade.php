@@ -80,7 +80,6 @@
 
 @section('js')
 
-    <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/portal/distrato/indicadores-distrato.js') }}"></script>
 
