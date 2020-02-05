@@ -117,22 +117,34 @@
                         </li>
                     @endif
 
-                    @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
-                    <li class="nav-item dropdown user-menu">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <i class="far fa-lg fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
+                    <li class="nav-item">
+                        <a href="#" id="btnFullscreen" class="nav-link" title="Modo tela cheia">
+                            <i class="fas fa-lg fa-expand"></i>
                         </a>
-
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">Notificações</span>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/estoque-imoveis/distrato">
-                                <i class="fas fa-envelope mr-2"></i>
-                                {{ session()->get('demandasDistratoPendentesParecerGestor') }} distratos para enviar.
-                            </a>
-                        </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="#" id="btnFullscreenOff" class="nav-link" title="Sair do modo tela cheia" style="display:none;">
+                            <i class="fas fa-lg fa-compress-arrows-alt"></i>
+                        </a>
+                    </li>
+
+                    @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
+                        <li class="nav-item dropdown user-menu">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                <i class="far fa-lg fa-bell"></i>
+                                <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <span class="dropdown-item dropdown-header">Notificações</span>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/estoque-imoveis/distrato">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    {{ session()->get('demandasDistratoPendentesParecerGestor') }} distratos para enviar.
+                                </a>
+                            </div>
+                        </li>
                     @endIf
 
                     <li class="nav-item dropdown user-menu">
@@ -203,6 +215,9 @@
                     </ul>
                 </nav>
             </div>
+            <div class="d-flex justify-content-center" style="position:relative; bottom:3rem;">
+                <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 60px;">
+            </div>
         </aside>
         @endif
 
@@ -229,16 +244,15 @@
 
         <footer class="main-footer">
 
-            <div class="col">
-                <a href="/" class="">
-                    <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" class="brand-image" style="max-height: 50px;">
-                </a>
-
-                <b>2020 - GILIE/SP - Gerência de Alienar de Bens Móveis e Imóveis de São Paulo</b>
-
+            <div class="row">
+                <div class="col-sm-8">
+                    <b>2020 - GILIE/SP - Gerência de Alienar Bens Móveis e Imóveis</b>
+                </div>
+                <div class="col-sm-4">
+                    <b class="float-right mb-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
+                </div>
             </div>
-                <small class="float-right align-bottom mb-2">Data da atualização: <b>{{ session('dataAtualizacaoBaseSimov') }}</b></small>
-            
+
         </footer>
 
 
@@ -265,12 +279,13 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
-
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('plugins/DataTables/dataTables.min.js') }}"></script>
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
+    <script src="{{ asset('js/global/toggle_fullscreen.js') }}"></script>
+
     @stack('js')
     @yield('js')
 @stop

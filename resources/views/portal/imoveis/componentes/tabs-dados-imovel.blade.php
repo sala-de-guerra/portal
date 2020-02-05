@@ -67,7 +67,16 @@
                                     <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Anúncio X Imóveis:</label>
+                                    <br>
+                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel" onclick="window.open('https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel={{ $numeroContrato ?? '' }}')" ><i class="fas fa-external-link-alt"></i></button>
+                                    <a href="https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel={{ $numeroContrato ?? '' }}" id="linkXimoveis">https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel={{ $numeroContrato ?? '' }}</a>
+                                </div>
+                            </div>
                         </div>
+
 
                         <div class="row">
                             <!-- <div class="col-sm-3">

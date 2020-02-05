@@ -24,6 +24,7 @@ class ValidaAcessoRotaPortal
         switch(preg_replace('/[0-9]+/', '', $request->path())) {
             
             // ROTAS DE ACESSO EXCLUSIVO PARA NOSSA UNIDADE
+            // case 'controle-conformidade':
             case 'estoque-imoveis/distrato':
             case 'estoque-imoveis/distrato/alterar-demanda-distrato':
             case 'estoque-imoveis/distrato/atualizar-despesa':
