@@ -17,7 +17,7 @@ class ConformidadeContratataoController extends Controller
      */
     public function index()
     {
-        //
+        return view('portal.imoveis.contratacao.controle-conformidade');
     }
 
     /**

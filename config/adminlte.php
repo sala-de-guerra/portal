@@ -315,7 +315,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Controle de Conformidade',
-                    'url'  => '/controle-conformidade',
+                    'url'  => '/estoque-imoveis/conformidade-contratacao',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 [
