@@ -341,12 +341,12 @@ return [
         [
             'text'    => 'Indicadores',
             'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
             'submenu' => [
                 [
                     'text' => 'Indicadores de Distrato',
                     'url'  => '/indicadores/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
                 ],
         //         [
         //             'text' => 'level_one',
