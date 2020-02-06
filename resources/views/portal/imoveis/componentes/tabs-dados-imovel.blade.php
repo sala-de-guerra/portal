@@ -71,8 +71,7 @@
                                 <div class="form-group">
                                     <label>Anúncio X Imóveis:</label>
                                     <br>
-                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel" onclick="window.open('https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel={{ $numeroContrato ?? '' }}')" ><i class="fas fa-external-link-alt"></i></button>
-                                    <a href="https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel={{ $numeroContrato ?? '' }}" id="linkXimoveis">https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel={{ $numeroContrato ?? '' }}</a>
+                                    <button id="linkXimoveis" onClick="" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel"><i class="fas fa-external-link-alt"></i> Anúncio no X-Imóveis</button>
                                 </div>
                             </div>
                         </div>
