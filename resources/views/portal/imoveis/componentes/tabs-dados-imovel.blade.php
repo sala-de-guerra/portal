@@ -64,14 +64,14 @@
                                     <label>Dossiê Digital:</label>
                                     <br>
                                     <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy"></i></button>
-                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor">\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
+                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Anúncio X Imóveis:</label>
                                     <br>
-                                    <button id="linkXimoveis" onClick="" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel"><i class="fas fa-external-link-alt"></i> Anúncio no X-Imóveis</button>
+                                    <button id="linkXimoveis" onClick="" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel"><i class="fas fa-globe-americas"></i></button>
                                 </div>
                             </div>
                         </div>
