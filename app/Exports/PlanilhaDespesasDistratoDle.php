@@ -100,7 +100,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "ENTIDADE"
             '50',
             // "UNIDADE MOVIMENTO"
-            $dadosDemandaDistrato->agenciaContratacaoDistrato,
+            $dadosDemandaDistrato->codigoAgenciaContratacao,
             // "TIPO DE MOVIMENTO"
             'Normal',
             // "DATA DE MOVIMENTO"
@@ -136,7 +136,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "SEGMENTO/CARTEIRA"
             '',
             // "NÚMERO DE CONCILIAÇÃO"
-            $dadosSimov->NU_BEM,
+            '',
             // "OBJETO CUSTEIO"
             '',
         ]);
@@ -146,14 +146,20 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
 
     public static function montaDleAlocacaoRecursos($arrayDleDemanda, $dadosDemandaDistrato, $dadosSimov, $relacaoDespesas)
     {
-        $produto = '';
-        $centroCusto = '';
-        $numeroConciliacao = '';
-        $projeto = '';
         foreach ($relacaoDespesas as $despesa) {
+
+            $dataEfetivaDaDespesa = Carbon::parse($despesa->dataEfetivaDaDespesa)->format('d/m/Y');
+            $produto = '';
+            $unidadeDestino = '';
+            $centroCusto = '';
+            $numeroConciliacao = '';
+            $projeto = '';    
+
             switch ($despesa->tipoDespesa) {
                 case 'AUTORIZADAS REEMBOLSO EMGEA':
-                    $evento = '02534';
+                    $evento = '2534';
+                    $produto = '682';
+                    $unidadeDestino = '7684';
                     $numeroConciliacao = $dadosSimov->NU_BEM;
                     $historico = "Reembolso autorizado pela EMGEA do Distrato CHB $dadosSimov->NU_BEM";
                     break;
@@ -163,15 +169,15 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                 case 'CUSTAS CARTORARIAS':
                 case 'IPTU':
                 case 'ITBI':
-                    $evento = '08679';
-                    $produto = '0427';
+                    $evento = '8679';
+                    $produto = '427';
                     $numeroConciliacao = $dadosSimov->NU_BEM;
                     $historico = "Reembolso de $despesa->tipoDespesa do Distrato CHB $dadosSimov->NU_BEM";
                     $centroCusto = '7257';
                     $projeto = '990630';
                     break;
                 case 'FINANCIAMENTO E FGTS':
-                    $evento = '0223';
+                    $evento = '223';
                     $historico = "Estorno de financiamento do distrato CHB $dadosSimov->NU_BEM";
                     break;
                 case 'MULTA':
@@ -179,11 +185,11 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     $historico = "Reversão em multa do processo de distrato CHB $dadosSimov->NU_BEM";
                     break;
                 case 'PARCELAMENTO E FGTS':
-                    $evento = '0223';
+                    $evento = '223';
                     $historico = "Estorno de parcelamento do distrato CHB $dadosSimov->NU_BEM";
                     break;
                 case 'PARCELAS E TAXAS DE FINANCIAMENTO':
-                    $evento = '0203';
+                    $evento = '203';
                     $historico = "Devolução de parcelas de financiamento do distrato CHB $dadosSimov->NU_BEM";
                     break;
             }
@@ -195,7 +201,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     // "ENTIDADE"
                     '50',
                     // "UNIDADE MOVIMENTO"
-                    $dadosDemandaDistrato->agenciaContratacaoDistrato,
+                    $dadosDemandaDistrato->codigoAgenciaContratacao,
                     // "TIPO DE MOVIMENTO"
                     'Normal',
                     // "DATA DE MOVIMENTO"
@@ -207,11 +213,11 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     // "PRODUTO"
                     $produto == null ? '' : $produto,
                     // "UNIDADE DESTINO"
-                    '',
+                    $unidadeDestino,
                     // "SITUAÇÃO LANCAMENTO"
                     '1 - Normal',
                     // "DATA EFETIVA"
-                    $despesa->dataEfetiva,
+                    $dataEfetivaDaDespesa,
                     // "NÚMERO DE AVISO"
                     '',
                     // "CENTRO DE CUSTO"
@@ -225,13 +231,13 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     // "ANALÍTICO"
                     '',
                     // "PROJETO"
-                    $projeto,
+                    $projeto == null ? '' : $projeto,
                     // "EMPENHO"
                     '',
                     // "SEGMENTO/CARTEIRA"
                     '',
                     // "NÚMERO DE CONCILIAÇÃO"
-                    $numeroConciliacao == null ? '' : $numeroConciliacao,
+                    '',
                     // "OBJETO CUSTEIO"
                     '',
                 ]);
