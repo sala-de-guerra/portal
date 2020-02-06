@@ -23,7 +23,8 @@ $(document).ready(function(){
             $('#' + key).html(item);
         });
 
-        $('#linkXimoveis').attr('onClick','https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel=');
+        $('#linkServidor').attr('onClick',"window.open('\\sp7257sr001/PUBLIC/EstoqueImoveis/" + numeroContrato + "')");
+        $('#linkXimoveis').attr('onClick','window.open("https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel=' + numeroBem + '")');
 
         var arrayPorcentagemEStatus = {
             0: "Preparaçâo",
