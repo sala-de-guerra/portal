@@ -104,7 +104,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
             // "TIPO DE MOVIMENTO"
             'Normal',
             // "DATA DE MOVIMENTO"
-            '',
+            Carbon::now()->format('d/m/Y'),
             // "HISTÓRICO"
             'Distrato do imóvel CHB ' . $dadosSimov->NU_BEM,
             // "EVENTO"
@@ -199,7 +199,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
                     // "TIPO DE MOVIMENTO"
                     'Normal',
                     // "DATA DE MOVIMENTO"
-                    '',
+                    Carbon::now()->format('d/m/Y'),
                     // "HISTÓRICO"
                     $historico,
                     // "EVENTO"
