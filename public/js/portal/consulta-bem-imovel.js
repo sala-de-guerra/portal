@@ -23,6 +23,8 @@ $(document).ready(function(){
             $('#' + key).html(item);
         });
 
+        $('#linkXimoveis').attr('onClick','https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel=');
+
         var arrayPorcentagemEStatus = {
             0: "Preparaçâo",
             25: "Leilão",
