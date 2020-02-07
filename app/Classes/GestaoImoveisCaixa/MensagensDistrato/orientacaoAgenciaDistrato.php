@@ -121,7 +121,7 @@
                     pelo email: %EMAIL_PROPONENTE%. 
                 </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>
                     2
                 </td>
@@ -165,7 +165,7 @@
                 <td class="pl-20px">
                     Ainda no SINAF WEB, clique na aba "Consulta" - "Meus Documentos" e gere as DLE.
                 </td>
-            </tr>
+            </tr> -->
             <tr>
                 <td>
                     3

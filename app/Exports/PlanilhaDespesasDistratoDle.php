@@ -47,7 +47,7 @@ class PlanilhaDespesasDistratoDle implements FromQuery, WithMapping, WithHeading
         // $objPHPExcel->getActiveSheet()->mergeCells('A1:IV1');
         // $sheet->mergeCells('A1:IV1');
         return [
-            ["blank"], 
+            ["CAIXA"], 
             ["FINALIDADE", "ENTIDADE", "UNIDADE MOVIMENTO", "TIPO DE MOVIMENTO", "DATA DE MOVIMENTO", "HISTÓRICO", "EVENTO", "PRODUTO", "UNIDADE DESTINO", "SITUAÇÃO LANCAMENTO", "DATA EFETIVA", "NÚMERO DE AVISO", "CENTRO DE CUSTO", "VALOR", "QUANTIDADE", "TIPO ANALÍTICO", "ANALÍTICO", "PROJETO", "EMPENHO", "SEGMENTO/CARTEIRA", "NÚMERO DE CONCILIAÇÃO", "OBJETO CUSTEIO"],
         ];
     }

@@ -69,8 +69,8 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
                 statusAtual = 'Em Análise';
                 break;
             case 'AVERBACAO DISTRATO':
-            case 'ENCAMINHADO AGENCIA':
-                statusAtual = 'Encaminhado Agência';
+            case 'ENCAMINHADA AGENCIA':
+                statusAtual = 'Encaminhada Agência';
                 break;
             case 'CONCLUIDA':
                 statusAtual = 'Concluída';

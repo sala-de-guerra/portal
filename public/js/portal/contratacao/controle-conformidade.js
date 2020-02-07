@@ -9,7 +9,6 @@ $(document).ready(function(){
             var linha =
             '<tr>' +
                 '<td>' + item.numeroContrato + '</td>' +
-                '<td>' + item.fluxoContratacao + '</td>' +
                 '<td>' + item.codigoAgencia + '</td>' +
                 '<td>' + item.tipoVenda + '</td>' +
                 '<td>' + item.tipoProposta + '</td>' +
@@ -25,13 +24,17 @@ $(document).ready(function(){
                     '</div>' +
                 '</td>' +
             '</tr>';
-            
-            $(linha).appendTo('#tblConformidadeFluxoAgencia>tbody');
-
+            if (item.cardAgrupamento == "Agência") {
+                $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
+            } else if (item.fluxoContratacao == "AG") {
+                $(linha).appendTo('#tblConformidadeFluxoAgencia>tbody');
+            } else {
+                $(linha).appendTo('#tblConformidadeFluxoCca>tbody');
+            }
         });
 
         _formataValores();
-        _formataDatatable ();
+        _formataDatatable();
     });
 
 }); 

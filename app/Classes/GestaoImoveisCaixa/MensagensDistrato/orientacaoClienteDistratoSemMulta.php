@@ -109,6 +109,7 @@
                     pelo(a) senhor(a), a venda será cancelada e os valores pagos serão devolvidos.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     2
@@ -118,6 +119,7 @@
                     %NOME_AGENCIA%, para qual já enviamos autorização e orientações necessárias.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     3
@@ -183,6 +185,7 @@
                     <b>honorários Advocatícios</b>
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     4
@@ -192,6 +195,7 @@
                     remuneração básica e juros da poupança, e será calculada da data do pagamento até a data da devolução.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     5
