@@ -8,7 +8,7 @@ $(document).ready(function(){
     setTimeout(function() {
         _formataData();
         _formataValores();
-    }, 3000);
+    }, 4000);
 
 
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
