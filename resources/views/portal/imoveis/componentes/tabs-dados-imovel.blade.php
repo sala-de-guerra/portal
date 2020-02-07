@@ -551,6 +551,7 @@
                                                         <option value="">Selecione</option>
                                                         <option value="EMAIL">E-MAIL</option>
                                                         <option value="PRESENCIAL">PRESENCIAL</option>
+                                                        <option value="OUVIDORIA">SAC/OUVIDORIA</option>
                                                         <option value="SKYPE">SKYPE/LYNC</option>
                                                         <option value="TELEFONE">TELEFONE</option>
                                                     </select>
