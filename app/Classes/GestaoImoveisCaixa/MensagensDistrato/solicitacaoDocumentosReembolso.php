@@ -108,6 +108,7 @@
                     pelo senhores, a venda será cancelada e os valores pagos serão devolvidos.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     2
@@ -118,6 +119,7 @@
                     de pagamento e autorização da GILIE.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     3
@@ -183,6 +185,7 @@
                     <b>honorários Advocatícios</b>
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     4
@@ -209,6 +212,7 @@
                         Econômica Federal, caso a venda tenha sido averbada.</b>
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     5
@@ -219,6 +223,7 @@
                     os comprovantes de pagamento, para análise.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     6
@@ -228,6 +233,7 @@
                     remuneração básica e juros da poupança, e será calculada da data do pagamento até a data da devolução.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     7
@@ -240,6 +246,7 @@
                     Edifício Eluma, 01310-915 – São Paulo – SP, horário de atendimento das 10:00 às 16:00 horas.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     8
@@ -248,6 +255,7 @@
                     Aguardamos o envio dos documentos para iniciarmos os procedimentos para o distrato.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     9
@@ -256,7 +264,7 @@
                     Eventuais dúvidas poderão ser sanadas em resposta à presente mensagem.
                 </td>
             </tr>
-
+        <br>
             <tr>
                 <td>
                     10

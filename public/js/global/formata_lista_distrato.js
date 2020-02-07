@@ -505,7 +505,7 @@ function _formataListaDistrato (numeroContrato, view) {
                 0: "Cadastrada",
                 25: "Aguarda Docs.",
                 50: "Em Análise",
-                75: "Encaminhado Agência",
+                75: "Encaminhada Agência",
                 99: "Concluída",
             };
     

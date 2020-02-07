@@ -110,6 +110,7 @@
                     desistência, com multa revertida em favor da CAIXA
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     2
@@ -119,6 +120,7 @@
                     agência %NOME_AGENCIA%, para qual já enviamos autorização e orientações necessárias.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     3
@@ -126,7 +128,7 @@
                 <td class="pl-20px">
                     Os valores passíveis de devolução pela Caixa são os que seguem:
                 </td>
-            </tr>
+            </tr>        
             <tr>
                 <td class="pl-40px">
                     <b>•</b>
@@ -136,6 +138,7 @@
                     financiamento e tarifa de concessão de financiamento;</b>
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     4
@@ -186,7 +189,7 @@
                     descumprimento de quaisquer outras condições estabelecidas nas presentes regras.
                 </td>
             </tr>
-
+        <br>
             <tr>
                 <td>
                     5
@@ -198,6 +201,7 @@
                     R$ %VALOR_MULTA_DISTRATO% de multa.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     6
@@ -207,6 +211,7 @@
                     arremate, a qual solicitamos informar através desse e-mail.
                 </td>
             </tr>
+        <br>
             <tr>
                 <td>
                     7

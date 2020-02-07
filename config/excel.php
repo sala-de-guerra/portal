@@ -33,7 +33,6 @@ return [
         |
         */
         'csv'                    => [
-            'ignoreEmpty'            => false,
             'delimiter'              => ',',
             'enclosure'              => '"',
             'line_ending'            => PHP_EOL,
