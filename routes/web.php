@@ -72,6 +72,11 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
     Route::get('consulta-historico-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaHistorico');
 
+    // ROTAS DO PROJETO DE CONSULTA COM WHERE VARIAVEL (GOOGLE 2.0)
+    Route::prefix('consultar-imovel')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\ConsultaContratoController@consultaImovelComWhereVariavel');
+    });
+
     // ROTAS DO PROJETO DE DISTRATO
     Route::prefix('distrato')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\DistratoDemandaController@index');

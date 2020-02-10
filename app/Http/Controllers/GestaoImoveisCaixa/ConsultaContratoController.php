@@ -250,4 +250,33 @@ class ConsultaContratoController extends Controller
     //     $result = json_decode($content);
     //     echo ($content);
     // } 
+
+    public static function pesquisaContratoComWhereVariavel($tipoVariavel, $valorVariavel)
+    {
+        switch ($tipoVariavel) {
+            case 'cpfCnpjProponente':
+                # code...
+                break;
+            case 'nomeProponente':
+                # code...
+                break;
+            case 'numeroContrato':
+                # code...
+                break;
+            case 'enderecoImovel':
+                # code...
+                break;
+            case 'cpfCnpjExMutuario':
+                # code...
+                break;
+            case 'nomeExMutuario':
+                # code...
+                break;
+        }
+    }
+
+    public static function consultaImovelComWhereVariavel()
+    {
+        return view('portal.imoveis.consultar.consultar-imovel');
+    }
 }
