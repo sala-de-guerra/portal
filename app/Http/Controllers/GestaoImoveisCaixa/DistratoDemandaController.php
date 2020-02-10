@@ -204,7 +204,7 @@ class DistratoDemandaController extends Controller
             $demandaDistrato = DistratoDemanda::find($idDistrato);
             // VALIDA SE OS INPUTS ESTÃO VINDO NULL, CASO POSITIVO MANTER O STATUS ANTERIOR
             $demandaDistrato->motivoDistrato = $request->input('motivoDistrato') == null ? $demandaDistrato->motivoDistrato : $request->input('motivoDistrato');
-            $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
+            $demandaDistrato->observacaoDistrato = strip_tags($request->input('observacaoDistrato'));
             $demandaDistrato->matriculaAnalista = session('matricula');
             
             // RESGATA DADOS DO CONTRATO
@@ -305,7 +305,7 @@ class DistratoDemandaController extends Controller
             // VALIDA SE OS INPUTS ESTÃO VINDO NULL, CASO POSITIVO MANTER O STATUS ANTERIOR
             $demandaDistrato->motivoDistrato = $request->input('motivoDistrato') == null ? $demandaDistrato->motivoDistrato : $request->input('motivoDistrato');
             $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato') == null ? $demandaDistrato->statusAnaliseDistrato : $request->input('statusAnaliseDistrato');
-            $demandaDistrato->observacaoDistrato = $request->input('observacaoDistrato');
+            $demandaDistrato->observacaoDistrato = strip_tags($request->input('observacaoDistrato'));
             $demandaDistrato->matriculaAnalista = session('matricula');
 
             // CASO O STATUS ANALISE FOR IGUAL A "CADASTRADA", ALTERAR O MOTIVO PARA "A CLASSIFICAR"
@@ -365,7 +365,7 @@ class DistratoDemandaController extends Controller
                 $request->session()->flash('tituloMensagem', "Parecer não efetuado");
                 $request->session()->flash('corpoMensagem', "Não existe nenhuma despesa cadastrada, o parecer não pode ser emitido.");
             } else {
-                $demandaDistrato->parecerAnalista = $request->input('parecerAnalista');
+                $demandaDistrato->parecerAnalista = strip_tags($request->input('parecerAnalista'));
                 $demandaDistrato->matriculaAnalista = session('matricula');
                 
                 // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA ANALISE DO GESTOR
@@ -405,7 +405,7 @@ class DistratoDemandaController extends Controller
             // ATUALIZA DEMANDA
             $demandaDistrato = DistratoDemanda::find($idDistrato);
             if ($request->decisaoGerenteDistrato == 'SIM') {
-                $demandaDistrato->parecerGestor = $request->input('observacaoDistrato');
+                $demandaDistrato->parecerGestor = strip_tags($request->input('observacaoDistrato'));
                 $demandaDistrato->matriculaGestor = session('matricula');
                 // $demandaDistrato->isentarMulta = input('isentarMulta');
                 

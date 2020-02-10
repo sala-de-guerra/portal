@@ -48,7 +48,7 @@ class RegistroAtendimentoController extends Controller
             $historico->numeroContrato = $numeroContratoFormatado;
             $historico->tipo = $request->tipoAtendimento;
             $historico->atividade = $request->atividadeAtendimento;
-            $historico->observacao = $request->observacaoAtendimento;
+            $historico->observacao = strip_tags($request->observacaoAtendimento);
             $historico->save();
 
             // RETORNA A FLASH MESSAGE

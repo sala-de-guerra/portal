@@ -205,7 +205,7 @@ class ConsultaContratoController extends Controller
                 'matriculaResponsavel' => $historico->matricula,
                 'tipo' => $historico->tipo,
                 'atividade' => $historico->atividade,
-                'observacao' => $historico->observacao,
+                'observacao' => nl2br($historico->observacao),
                 'data' => $historico->created_at,
             ];
             array_push($jsonHistoricoContrato, $arrayDadosHistorico);
