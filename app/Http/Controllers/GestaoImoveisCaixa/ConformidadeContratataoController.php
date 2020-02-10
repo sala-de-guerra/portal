@@ -72,67 +72,73 @@ class ConformidadeContratataoController extends Controller
                                             '))
                                             ->where('ADJTBL_imoveisCaixa.codigoGilie', '7257')
                                             ->where('ADJTBL_imoveisCaixa.cardDeAgrupamento', '!=', 'Negócios Realizados')
+                                            ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Em Contratação')
+                                            ->orWhere('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Contratação pendente')
                                             ->get();
-
+        $arrayContratosParaRemoverRepetidos = [];
         foreach ($consultaContratosConformidade as $contrato) {
-            switch ($contrato->aceitaCca) {
-                case 'Sim':
-                case 'SIM':
-                    $fluxoContratacao = 'CCA';
-                    break;
-                default:
-                    $fluxoContratacao = 'AG';
-                    break;
-            }
-            switch ($contrato->classificacaoImovel) {
-                case 'Em Cadastramento EMGEA':
-                case 'EMGEA':
-                case 'EMGEA - Realização de Garantia':
-                case 'EMGEA- Alienação Fiduciária': 
-                    $classificacaoImovel = 'EMGEA';
-                    break;
-                case 'Oriundo do Crédito Imobiliário':
-                case 'Oriundos SFI-Gar. Fiduciária':
-                case 'SFI - Gar.Fid.Reg.Créd.Imob':
-                    $classificacaoImovel = 'CAIXA';
-                    break;
-                case 'Patrimonial':
-                case 'Patrimonial - Alienação Fiduciária':
-                case 'Patrimonial -Realização de Garantia':
-                    $classificacaoImovel = 'PATRIMONIAL';
-                    break;
-                default:
-                    $classificacaoImovel = $contrato->classificacaoImovel;
-                    break;
-            }
-            if ($contrato->valorRecursosPropriosProposta == $contrato->valorTotalProposta) {
-                $tipoProposta = 'A vista com recursos proprios';
-            } elseif (($contrato->valorFgtsProposta + $contrato->valorRecursosPropriosProposta) == $contrato->valorTotalProposta) {
-                $tipoProposta = 'A vista com FGTS';
-            } else {
-                $tipoProposta = 'Financiado';
-            }
+            if (!in_array($contrato->numeroContrato, $arrayContratosParaRemoverRepetidos)) {
+                switch ($contrato->aceitaCca) {
+                    case 'Sim':
+                    case 'SIM':
+                        $fluxoContratacao = 'CCA';
+                        break;
+                    default:
+                        $fluxoContratacao = 'AG';
+                        break;
+                }
+                switch ($contrato->classificacaoImovel) {
+                    case 'Em Cadastramento EMGEA':
+                    case 'EMGEA':
+                    case 'EMGEA - Realização de Garantia':
+                    case 'EMGEA- Alienação Fiduciária': 
+                        $classificacaoImovel = 'EMGEA';
+                        break;
+                    case 'Oriundo do Crédito Imobiliário':
+                    case 'Oriundos SFI-Gar. Fiduciária':
+                    case 'SFI - Gar.Fid.Reg.Créd.Imob':
+                        $classificacaoImovel = 'CAIXA';
+                        break;
+                    case 'Patrimonial':
+                    case 'Patrimonial - Alienação Fiduciária':
+                    case 'Patrimonial -Realização de Garantia':
+                        $classificacaoImovel = 'PATRIMONIAL';
+                        break;
+                    default:
+                        $classificacaoImovel = $contrato->classificacaoImovel;
+                        break;
+                }
 
-            if ($contrato->valorTotalRecebido >= $contrato->valorRecursosPropriosProposta) {
-                $sinalPago = 'SIM';
-            } else {
-                $sinalPago = 'NAO';
+                if ($contrato->valorRecursosPropriosProposta == $contrato->valorTotalProposta) {
+                    $tipoProposta = 'A vista com recursos proprios';
+                } elseif (($contrato->valorFgtsProposta + $contrato->valorRecursosPropriosProposta) == $contrato->valorTotalProposta) {
+                    $tipoProposta = 'A vista com FGTS';
+                } else {
+                    $tipoProposta = 'Financiado';
+                }
+    
+                if ($contrato->valorTotalRecebido >= $contrato->valorRecursosPropriosProposta) {
+                    $sinalPago = 'SIM';
+                } else {
+                    $sinalPago = 'NAO';
+                }
+                
+                array_push($arrayContratosConformidade, [
+                    'contratoFormatado' => $contrato->contratoFormatado,
+                    'numeroContrato' => $contrato->numeroContrato,
+                    'fluxoContratacao' => $fluxoContratacao, 
+                    'codigoAgencia' => $contrato->codigoAgencia,
+                    'tipoVenda' => $contrato->tipoVenda,
+                    'tipoProposta' => $tipoProposta,
+                    'valorRecursosProprios' => $contrato->valorRecursosPropriosProposta,
+                    'valorTotalRecebido' => $contrato->valorTotalRecebido,
+                    'sinalPago' => $sinalPago,
+                    'statusContratacao' => $contrato->statusContratacao,
+                    'cardAgrupamento' => $contrato->cardAgrupamento,
+                    'dataEntradaConformidade' => $contrato->dataStatus,
+                ]);
+                array_push($arrayContratosParaRemoverRepetidos, $contrato->numeroContrato);
             }
-            
-            array_push($arrayContratosConformidade, [
-                'contratoFormatado' => $contrato->contratoFormatado,
-                'numeroContrato' => $contrato->numeroContrato,
-                'fluxoContratacao' => $fluxoContratacao, 
-                'codigoAgencia' => $contrato->codigoAgencia,
-                'tipoVenda' => $contrato->tipoVenda,
-                'tipoProposta' => $tipoProposta,
-                'valorRecursosProprios' => $contrato->valorRecursosPropriosProposta,
-                'valorTotalRecebido' => $contrato->valorTotalRecebido,
-                'sinalPago' => $sinalPago,
-                'statusContratacao' => $contrato->statusContratacao,
-                'cardAgrupamento' => $contrato->cardAgrupamento,
-                'dataEntradaConformidade' => $contrato->dataStatus,
-            ]);
         }
         return json_encode($arrayContratosConformidade, JSON_UNESCAPED_UNICODE);
     }
