@@ -76,6 +76,7 @@ class ConformidadeContratataoController extends Controller
 
         foreach ($consultaContratosConformidade as $contrato) {
             switch ($contrato->aceitaCca) {
+                case 'Sim':
                 case 'SIM':
                     $fluxoContratacao = 'CCA';
                     break;
