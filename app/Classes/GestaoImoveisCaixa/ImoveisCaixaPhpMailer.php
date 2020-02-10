@@ -103,6 +103,7 @@ class ImoveisCaixaPhpMailer
                 $mail->addBCC('c098453@mail.caixa');
                 $mail->addBCC('c141203@mail.caixa');
                 $mail->addBCC('c079436@mail.caixa');
+                $mail->addBCC(session('matricula') . '@mail.caixa');
                 break;
         }
 
