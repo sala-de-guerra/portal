@@ -72,8 +72,10 @@ class ConformidadeContratataoController extends Controller
                                             '))
                                             ->where('ADJTBL_imoveisCaixa.codigoGilie', '7257')
                                             ->where('ADJTBL_imoveisCaixa.cardDeAgrupamento', '!=', 'Negócios Realizados')
-                                            ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Em Contratação')
-                                            ->orWhere('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Contratação pendente')
+                                            ->where(function($query) {
+                                                $query->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Em Contratação')
+                                                        ->orWhere('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Contratação pendente');
+                                            })
                                             ->get();
         $arrayContratosParaRemoverRepetidos = [];
         foreach ($consultaContratosConformidade as $contrato) {
