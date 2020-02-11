@@ -1,4 +1,4 @@
-
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <div class="row">
     <div class="col-md-12">
@@ -582,16 +582,30 @@
                                 <table id="tblHistorico" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th><input type="checkbox" onclick="checkAll(this)"></th>
                                             <th>Matrícula</th>
                                             <th>Tipo</th>
                                             <th>Atividade</th>
-                                            <th>Observação</th>
+                                            <th class="obs">Observação</th>
                                             <th>Data</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
+                                    <tr>
+                        <td><input type="checkbox" name=""></td>
+                        <td>Rafael</td>
+                        <td>c098453</td>
+                        <td class="obs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae inventore neque reiciendis reprehenderit. Quos ipsa accusantium porro atque aliquid, quaerat consequatur officia soluta ratione, nihil facilis! Nemo modi eligendi nisi.
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, ducimus expedita incidunt dolore consectetur est laudantium unde dolorum. Necessitatibus sapiente expedita odio tenetur, quis vitae iste consequuntur sunt reprehenderit
+                            repellat. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente minus fugit officiis nesciunt, ut eligendi laborum, fuga perspiciatis esse ad repellat quibusdam recusandae corrupti impedit amet sint deserunt velit.
+                            Mollitia!
+                        </td>
+                        <td>blablabla</td>
+                        <td>10/02/2020</td>
+
+                    </tr>
+                    
                                     </tbody>
                                 </table>
                             </div>
@@ -624,6 +638,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
 
                                     </tbody>
                                 </table>
@@ -636,6 +651,28 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+    
+ $('table').find('td.obs').each(function() {
+    
+    $(this).html($(this).html().substring(0, 40) + '[...]');
+    }); 
+    
+        });
+
+
+        function checkAll(bx) {
+            var cbs = document.getElementsByTagName('input');
+            for (var i = 0; i < cbs.length; i++) {
+                if (cbs[i].type == 'checkbox') {
+                    cbs[i].checked = bx.checked;
+                }
+            }
+        }
+    </script>
 
 <!-- 
 <div class="row">
