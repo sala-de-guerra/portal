@@ -18,4 +18,9 @@ class BaseSimov extends Model
     {
         return $this->hasMany('App\Models\PropostasSimov', 'contratoFormatado', 'BEM_FORMATADO');
     }
+
+    public function painelVendas()
+    {
+        return $this->hasMany('App\Models\GestaoImoveisCaixa\PainelDeVendasGeipt', 'contratoFormatado', 'BEM_FORMATADO');
+    }
 }

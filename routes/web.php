@@ -97,6 +97,12 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('emite-dle-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@emitePlanilhaDleDespesas');
     });
 
+    // ROTAS DO PROJETO MONITORA PAGAMENTO SINAL (5% DA PROPOSTA)
+    Route::prefix('monitora-pagamento-sinal')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@index');
+        Route::get('listar-contratos-sem-pagamento-sinal', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@listarContratosSemPagamentoSinal');
+    });
+
     // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO
     Route::prefix('conformidade-contratacao')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\ConformidadeContratataoController@index');
