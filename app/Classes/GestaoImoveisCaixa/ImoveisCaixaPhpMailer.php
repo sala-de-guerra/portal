@@ -86,17 +86,19 @@ class ImoveisCaixaPhpMailer
                 $mail->addBCC('c079436@mail.caixa');
                 break;
             case 'PRODUCAO':
-                if (isset($objRelacaoEmailUnidades->emailAgencia)) {
-                    $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
-                    // $mail->addCC($objRelacaoEmailUnidades->emailSr);
-                } else {
-                    $mail->addAddress($objRelacaoEmailUnidades->emailSr);
-                }
-                if ($request->emailProponente) {
-                    $mail->addCC($request->emailProponente);
-                }
-                if ($request->emailCorretor) {
-                    $mail->addCC($request->emailCorretor);
+                if ($modeloMensagem !== 'erroNoEnvioDeMensageria') {
+                    if (isset($objRelacaoEmailUnidades->emailAgencia)) {
+                        $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
+                        // $mail->addCC($objRelacaoEmailUnidades->emailSr);
+                    } else {
+                        $mail->addAddress($objRelacaoEmailUnidades->emailSr);
+                    }
+                    if ($request->emailProponente) {
+                        $mail->addCC($request->emailProponente);
+                    }
+                    if ($request->emailCorretor) {
+                        $mail->addCC($request->emailCorretor);
+                    }
                 }
                 $mail->addBCC('GILIESP09@caixa.gov.br');
                 $mail->addBCC('c111710@mail.caixa');
