@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css');</style>
+    <title>Trabalhando com gráficos</title>
+</head>
+<body>
+    <canvas id="myChart" height="80pt"></canvas>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <Script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></Script>
+
+  
+  <script>
+$('document').ready(function() {
+
+    $.ajax({
+    type: "POST",
+    url: 'indicadores-distrato.blade.php',
+    dataType: "json",
+    success: function (data) {
+        alert('ok');
+  }
+    });
+});
+</script>
+  
+  
+  
+  <script> 
+     var ctx = document.getElementById('myChart').getContext('2d');
+   
+   var chart = new Chart(ctx, {
+   
+    type: 'polarArea',
+
+   
+    data: {
+        labels: ['GILIESP', 'AGENCIA', 'CIOPE'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: ['red', 'yellow', 'blue'],
+            borderColor: 'black',
+            data: [30, 10, 5,]
+          
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+   
+</script>
+</body>
+</html>

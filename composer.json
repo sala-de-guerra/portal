@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "cmixin/business-day": "^1.7",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "hisorange/browser-detect": "^4.0",

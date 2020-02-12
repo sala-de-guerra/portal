@@ -534,7 +534,12 @@ class DistratoDemandaController extends Controller
             $tmaDemanda = $dataCadastroDemanda->diffInDays($dataConclusaoDemanda);
             array_push($arrayDemandasConcluidas, $tmaDemanda);
         }
-        $tmaDemandasDistratoConcluidas = array_sum($arrayDemandasConcluidas) / count($arrayDemandasConcluidas);
+        if (count($arrayDemandasConcluidas) > 0) {
+            $tmaDemandasDistratoConcluidas = array_sum($arrayDemandasConcluidas) / count($arrayDemandasConcluidas);
+        } else {
+            $tmaDemandasDistratoConcluidas = 0;
+        }
+        
         
         $arrayIndicadoresDistrato = [
             // QUANTIDADE DEMANDAS NÃO INICIADAS
