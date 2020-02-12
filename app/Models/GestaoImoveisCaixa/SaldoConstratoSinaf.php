@@ -4,9 +4,9 @@ namespace App\Models\GestaoImoveisCaixa;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ConformidadeContratacao extends Model
+class SaldoConstratoSinaf extends Model
 {
-    protected $table = 'ADJTBL_imoveisCaixa';
+    protected $table = 'TBL_SALDO_ATUALIZADO_CONTRATOS_SINAF';
 
     public function simov()
     {
