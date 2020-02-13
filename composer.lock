@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bbc573622d682ec68903768dd312021",
+    "content-hash": "2193645ea210e62aeabe03004efc7f1b",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -44,6 +44,54 @@
                 "web"
             ],
             "time": "2020-01-17T08:05:37+00:00"
+        },
+        {
+            "name": "cmixin/business-day",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kylekatarnls/business-day.git",
+                "reference": "b280cd5dbdff50aaae4a1a10dc16ee9ca7c48819"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kylekatarnls/business-day/zipball/b280cd5dbdff50aaae4a1a10dc16ee9ca7c48819",
+                "reference": "b280cd5dbdff50aaae4a1a10dc16ee9ca7c48819",
+                "shasum": ""
+            },
+            "require": {
+                "ext-calendar": "*",
+                "nesbot/carbon": "^1.26.2 || ^2.0",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cmixin\\BusinessDay\\Laravel\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cmixin\\": "src/Cmixin/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KyleKatarn",
+                    "email": "carbon@selfbuild.fr"
+                }
+            ],
+            "description": "Carbon mixin to handle business days",
+            "time": "2019-09-10T17:58:11+00:00"
         },
         {
             "name": "composer/ca-bundle",

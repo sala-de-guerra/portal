@@ -1,3 +1,5 @@
+<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css');</style>
+
 @extends('adminlte::page')
 
 @section('title', 'Portal GILIE/SP')
@@ -30,6 +32,7 @@
         </div>
     </div>
 
+   
 @stop
 
 
@@ -42,7 +45,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">
-                            <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
+                        <canvas id="myChart" height="80pt"></canvas>
+                            <!-- <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
                                         <th>Não Iniciadas</th>
@@ -55,17 +59,19 @@
                                 </thead>
 
                                 <tbody>
-
+                                    
                                 </tbody>
                                 
-                            </table>
+                            </table> -->
                         </div> <!-- /.col-sm-12 -->
                     </div> <!-- /.row -->
-                </div> <!-- /.card-body -->
+                                   </div> <!-- /.card-body -->
             </div> <!-- /.card -->
         </div> <!-- /.col -->
     </div> <!-- /.row -->
-
+    
+    
+    
 @stop
 
 @section('footer')
@@ -79,6 +85,58 @@
 
 
 @section('js')
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<Script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></Script>
+
+<script>$('document').ready(function() {
+
+$.ajax({
+type: "GET",
+url: '/estoque-imoveis/distrato/indicadores-distrato ',
+dataType: "json",
+success: function (data) {
+   console.log(data.quantidadeDemandasNaoIniciadas)
+
+   var nomearray = [];
+   var quantidadearray = [];
+
+   for (var i in data){
+
+    nomearray.push(data[i]);
+    quantidadearray.push(data[i])
+
+   }
+   grafico(nomearray, quantidadearray);
+}
+});
+});</script>
+
+<script> 
+function grafico(nome, quantidade){
+     var ctx = document.getElementById('myChart').getContext('2d');
+   
+   var chart = new Chart(ctx, {
+   
+    type: 'horizontalBar',
+
+   
+    data: {
+        labels: ['Não Iniciadas', 'GILIE', 'Agência', 'JURIR/EMGEA'],
+        datasets: [{
+            backgroundColor: ['CornflowerBlue', 'CornflowerBlue', 'CornflowerBlue', 'CornflowerBlue'],
+            borderColor: 'white',
+            data: quantidade,
+            label: 'Grafico'
+          
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+}
+</script>
 
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/portal/distrato/indicadores-distrato.js') }}"></script>

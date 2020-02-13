@@ -72,6 +72,11 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
     Route::get('consulta-historico-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaHistorico');
 
+    // ROTAS DO PROJETO DE CONSULTA COM WHERE VARIAVEL (GOOGLE 2.0)
+    Route::prefix('consultar-imovel')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\ConsultaContratoController@consultaImovelComWhereVariavel');
+    });
+
     // ROTAS DO PROJETO DE DISTRATO
     Route::prefix('distrato')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\DistratoDemandaController@index');
@@ -86,10 +91,16 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::put('atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@atualizarDespesa');
         Route::put('emitir-parecer-analista/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@emitirParecerAnalista');
         Route::put('emitir-parecer-gestor/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@emitirParecerGestor');
-        Route::get('indicadores-distrato/', 'GestaoImoveisCaixa\DistratoDemandaController@indicadoresDistrato');
+        Route::get('indicadores-distrato', 'GestaoImoveisCaixa\DistratoDemandaController@indicadoresDistrato');
         Route::put('excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@excluirDespesa');
         Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@validarDespesa');
         Route::get('emite-dle-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@emitePlanilhaDleDespesas');
+    });
+
+    // ROTAS DO PROJETO MONITORA PAGAMENTO SINAL (5% DA PROPOSTA)
+    Route::prefix('monitora-pagamento-sinal')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@index');
+        Route::get('listar-contratos-sem-pagamento-sinal', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@listarContratosSemPagamentoSinal');
     });
 
     // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO
