@@ -590,38 +590,46 @@ class MensagensAutomaticaAutorizacaoController extends Controller
 
     public static function enviarAutorizacaoContratacaoViaPortal($contratoFormatado)
     {
-        /* IMOVEIS CAIXA E EMGEA */ 
-        $contratosCaixaEmgea = self::envioManualDeAutorizacaoContratacao($contratoFormatado); 
-        foreach ($contratosCaixaEmgea as $contratos => $contrato) {
-            if ($contrato->grupoClassificacao == 'EMGEA') {
-                self::setClassificacaoImovel('EMGEA');
-                if ($contrato->origemMatricula == 'Emgea') {
-                    self::setOrigemMatricula('EMGEA/EMGEA');
+        try {
+            $contratoParaEnviarAutorizacao = self::envioManualDeAutorizacaoContratacao($contratoFormatado); 
+            foreach ($contratoParaEnviarAutorizacao as $contratos => $contrato) {
+                if ($contrato->grupoClassificacao == 'EMGEA') {
+                    self::setClassificacaoImovel('EMGEA');
+                    if ($contrato->origemMatricula == 'Emgea') {
+                        self::setOrigemMatricula('EMGEA/EMGEA');
+                    } else {
+                        self::setOrigemMatricula('EMGEA/CAIXA');
+                    }
                 } else {
-                    self::setOrigemMatricula('EMGEA/CAIXA');
+                    self::setOrigemMatricula('CAIXA');
+                    self::setClassificacaoImovel('CAIXA');
                 }
-            } else {
-                self::setOrigemMatricula('CAIXA');
-                self::setClassificacaoImovel('CAIXA');
+                
+                self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
+                switch ($contrato->grupoClassificacao) {
+                    case 'CAIXA':
+                        // echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
+                        self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+                        break;
+                    case 'EMGEA':
+                        // echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
+                        self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
+                        break;
+                }
+                self::defineTipoDeMensageria($contrato);
             }
-            
-            self::setPropostaMaiorQueTrintaSalariosMinimos($contrato->maiorQueTrintaSalariosMinimos);
-            switch ($contrato->grupoClassificacao) {
-                case 'CAIXA':
-                    // echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
-                    self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
-                    break;
-                case 'EMGEA':
-                    // echo "Tipo imóvel: $contrato->grupoClassificacao <br>";
-                    self::validarTipoDeVendaLeilaoOuVendaDireta($contrato);
-                    break;
-            }
-            self::defineTipoDeMensageria($contrato);
+            // RETORNA A FLASH MESSAGE
+            session()->flash('corMensagem', 'success');
+            session()->flash('tituloMensagem', "Autorização enviada!");
+            session()->flash('corpoMensagem', "O e-mail de orientações para prosseguimento da contratação foi enviado com sucesso.");
+        } catch (\Throwable $th) {
+            dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            // RETORNA A FLASH MESSAGE
+            session()->flash('corMensagem', 'warning');
+            session()->flash('tituloMensagem', "Autorização não enviada!");
+            session()->flash('corpoMensagem', "Aconteceu algum erro ao tentar enviar o e-mail de autorização. Tente novamente mais tarde.");
         }
-        // RETORNA A FLASH MESSAGE
-        session()->flash('corMensagem', 'success');
-        session()->flash('tituloMensagem', "Autorização enviada!");
-        session()->flash('corpoMensagem', "O e-mail de orientações para prosseguimento da contratação foi enviado com sucesso.");
         return redirect("/consulta-bem-imovel/$contratoFormatado");
     }
 }
