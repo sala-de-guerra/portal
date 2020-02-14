@@ -78,16 +78,25 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <form class="form-inline tt-responsive" id="formPesquisa">
+                    <li class="nav-item">
+                        <form class="form-inline tt-responsive" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                            {{ csrf_field() }}
                             <div class="input-group">
-                                <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Pesquise um imóvel pelo CHB, endereço, dados do proponente ou do ex-mutuário.">
+                                <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar">
+                                    <option value="numeroContrato">Contrato</option>
+                                    <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                                    <option value="nomeProponente">Nome proponente</option>
+                                    <option value="enderecoImovel">Endereço imóvel</option>
+                                    <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
+                                    <option value="nomeExMutuario">Nome ex-mutuário</option>
+                                </select>
+                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" name="valorVariavel" placeholder="Pesquise um termo para pesquisa.">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
                         </form>
-                    </li> -->
+                    </li>
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
                 </ul>

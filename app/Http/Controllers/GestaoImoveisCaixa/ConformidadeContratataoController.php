@@ -71,9 +71,12 @@ class ConformidadeContratataoController extends Controller
                                                 ALITB075_VENDA_VL_OL37.[VL_TOTAL_RECEBIDO] as valorTotalRecebido
                                             '))
                                             ->where('ADJTBL_imoveisCaixa.codigoGilie', '7257')
-                                            ->where('ADJTBL_imoveisCaixa.cardDeAgrupamento', '!=', 'Negócios Realizados')
-                                            ->where(function($query) {
-                                                $query->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Em Contratação')
+                                            ->where(function($cardAgrupamento) {
+                                                $cardAgrupamento->where('ADJTBL_imoveisCaixa.cardDeAgrupamento', '!=', 'Negócios Realizados')
+                                                        ->where('ADJTBL_imoveisCaixa.cardDeAgrupamento', '!=', 'CICOB');
+                                            })
+                                            ->where(function($statusSimov) {
+                                                $statusSimov->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Em Contratação')
                                                         ->orWhere('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Contratação pendente');
                                             })
                                             ->get();

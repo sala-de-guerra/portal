@@ -50,7 +50,6 @@ class MonitoraPagamentoSinalController extends Controller
      */
     public function listarContratosSemPagamentoSinal()
     {
-        
         $consultaContratosSemPagamentoSinal = BaseSimov::where('DATA_PROPOSTA', '<=', Carbon::now()->sub('7 day')->format('Y-m-d'))
                                                         ->where('UNA', 'GILIE/SP')
                                                         ->where(function($query) {
@@ -59,14 +58,14 @@ class MonitoraPagamentoSinalController extends Controller
                                                         ->get();
         $listaContratosSemPagamentoSinal = [];                                              
         foreach ($consultaContratosSemPagamentoSinal as $contrato) {
-            dd(['dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('d/m/Y'), 'dataVencimento' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA)]);
+            // dd(['dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('d/m/Y'), 'dataVencimento' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA)]);
             
             if ($contrato->saldoContratoSinaf) {
                 if ($contrato->saldoContratoSinaf->saldoAtualContrato < $contrato->VALOR_REC_PROPRIOS_PROPOSTA) {
                     array_push($listaContratosSemPagamentoSinal, [
                         'numeroContrato' => $contrato->NU_BEM,
                         'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                        // 'vencimentoPp15' => 
+                        'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
                         'statusSimov' => $contrato->STATUS_IMOVEL,
                         'classificacaoImovel' =>$contrato->CLASSIFICACAO
                     ]);
@@ -74,7 +73,8 @@ class MonitoraPagamentoSinalController extends Controller
             } else {
                 array_push($listaContratosSemPagamentoSinal, [
                     'numeroContrato' => $contrato->NU_BEM,
-                    'dataProposta' => $contrato->DATA_PROPOSTA,
+                    'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                    'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
                     'statusSimov' => $contrato->STATUS_IMOVEL,
                     'classificacaoImovel' =>$contrato->CLASSIFICACAO
                 ]);
@@ -119,7 +119,8 @@ class MonitoraPagamentoSinalController extends Controller
 
     public static function calculaVencimentoPp15($dataProposta) 
     {
-        $dataProposta = Carbon::parse($dataProposta)->addDays(5);
+        $dataProposta = Carbon::parse($dataProposta);
+        $diasUteis = 0;
 
         $feriados = array(
             'dia-mundial-da-paz' => '01-01',
@@ -139,11 +140,13 @@ class MonitoraPagamentoSinalController extends Controller
         
         BusinessDay::enable('Illuminate\Support\Carbon', 'br-national', $feriados);
         Carbon::setHolidaysRegion('br-national');
-        if ($dataProposta->isBusinessDay()) {
-            return $dataProposta->format('d/m/Y');
-        } else {
-            $data = $dataProposta->nextBusinessDay();
-            return $dataProposta->format('d/m/Y');
+        while ($diasUteis < 5) {
+            $dataProposta->addDay();
+            if (!$dataProposta->isBusinessDay()) {
+                $dataProposta = $dataProposta->nextBusinessDay();
+            }
+            $diasUteis++;
         }
+        return $dataProposta->format('Y-m-d');
     }
 }
