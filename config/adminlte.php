@@ -245,14 +245,14 @@ return [
         // ],
 
 
-        ['header' => 'IMÓVEIS CAIXA'],
-        [
-            'text' => 'Pesquisar Imóvel',
-            'url'  => '/pesquisar',
-            'icon' => 'fas fa-lg fa-fw fa-search mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+        // ['header' => 'IMÓVEIS CAIXA'],
+        // [
+        //     'text' => 'Pesquisar Imóvel',
+        //     'url'  => '/pesquisar',
+        //     'icon' => 'fas fa-lg fa-fw fa-search mr-2',
+        //     'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
 
-        ],
+        // ],
         // [
         //     'text' => 'Preparar e Ofertar',
         //     'url'  => 'admin/settings',
@@ -315,12 +315,20 @@ return [
             'submenu' => [
                 [
                     'text' => 'Controle de Conformidade',
+                    'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 [
                     'text' => 'Controle de Distrato',
+                    'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
                     'url'  => '/estoque-imoveis/distrato',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
+                [
+                    'text' => 'Controla Pagamento Sinal',
+                    'icon'    => 'fas fa-lg fa-fw fa-search-dollar mr-2',
+                    'url'  => '/estoque-imoveis/monitora-pagamento-sinal',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 // [

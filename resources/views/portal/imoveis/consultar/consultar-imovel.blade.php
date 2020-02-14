@@ -16,18 +16,7 @@
     </div>
 @endif
 
-<div class="row mb-2">
-    <div class="col-sm-6">
-        <h1 class="m-0 text-dark">
-            Pesquisar Bem Imóvel
-        </h1>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/consultar"> Pesquisar Bem Imóvel</a> </li>
-        </ol>
-    </div>
-</div>
+
 
 
 @stop
@@ -36,35 +25,100 @@
 @section('content')
 
 
-<div class="row">
+<!-- <div class="row">
 
     <div class="col-md-12">
         <div class="card card-default">
 
             <div class="card-header">
                 <h3 class="card-title">
-                    Pesquisa por CHB ou Endereço
+                    Resultado da Pesquisa
                 </h3>
-            </div><!-- /.card-header -->
+            </div>
 
-            <div class="card-body">
-                <form class="form-inline tt-responsive" id="formPesquisa">
-                    <div class="input-group">
-                        <input class="form-control typeahead tt-responsive" type="text" name="" placeholder="Carregando..." disabled>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary search-button" type="submit"> <i class="fas fa-search"></i> </button>
-                            <div class="Typeahead-spinner spinner-border text-primary" role="status" style="display: none;">
-                                <span class="sr-only"></span>
+            
+
+        </div>
+    </div>
+</div> /.row -->
+
+@if (is_array($resultadoPesquisa))
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h3 class="m-0 text-dark">
+                @if (count($resultadoPesquisa) == 1)
+                    Foi encontrato {{ count($resultadoPesquisa) }} resultado:
+                @else
+                    Foram encontratos {{ count($resultadoPesquisa) }} resultados:
+                @endif
+            </h3>
+        </div>
+    </div>
+
+    <div class="card card-solid">
+        <div class="card-body pb-0">
+            @foreach ($resultadoPesquisa as $resultado)
+            <a href="/consulta-bem-imovel/{{ $resultado['contratoFormatado'] }}" >
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <p class="text-muted"><b>CHB:</b> {{ $resultado['numeroContrato'] }}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <p class='text-muted'><span><i class='fas fa-lg fa-building'></i></span> <b>ENDEREÇO:</b> {{ $resultado['enderecoImovel'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <p class='text-muted text-sm'><b>FILIAL:</b> {{ $resultado['gilieResponsavel'] }}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <p class='text-muted text-sm'><b>TIPO VENDA:</b> {{ $resultado['tipoVenda'] }} </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <p class='text-muted text-sm'><b>CPF/CNPJ EX-MUTUÁRIO:</b> {{ $resultado['cpfCnpjExMutuario'] }}</p>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <p class='text-muted text-sm'><b>NOME EX-MUTUÁRIO:</b> {{ $resultado['nomeExMutuario'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <p class='text-muted text-sm'><b>CPF/CNPJ PROPONENTE:</b> {{ $resultado['cpfCnpjProponente'] }}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <p class='text-muted text-sm'><b>NOME PROPONENTE:</b> {{ $resultado['nomeProponente'] }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </form> 
-            </div><!-- /.card-body -->
-
-        </div><!-- /.card -->
-    </div><!-- /.col -->
-</div> <!-- /.row -->
-
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+@else
+    <h4>{{ $resultadoPesquisa }}</h4>
+@endIf
 
 @stop
 
@@ -78,7 +132,5 @@
 
 
 @section('js')
-    <script src="{{ asset('plugins/typeahead/typeahead.bundle.js') }}"></script>
-    <script src="{{ asset('plugins/typeahead/handlebars.js') }}"></script>
-    <script src="{{ asset('js/global/configura_typeahead.js') }}"></script>
+
 @stop

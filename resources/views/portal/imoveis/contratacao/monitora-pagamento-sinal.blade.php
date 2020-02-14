@@ -19,7 +19,7 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Titulo da página
+            Controle de pagamento de sinal
         </h1>
     </div>
     <div class="col-sm-6">
@@ -36,22 +36,39 @@
 @section('content')
 
 
-<div class="row">
-
-    <div class="col-md-12">
-        <div class="card card-default">
-
-            <div class="card-header">
-                <h3 class="card-title">
-                    Sub titulo da página
-                </h3>
-            </div><!-- /.card-header -->
+@section('content')
 
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive p-0">
+                            <table id="tblDistrato" class="table table-bordered table-striped hover dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>CHB</th>
+                                        <th>Data da proposta</th>
+                                        <th>Data de vencimento (PP15)</th>
+                                        <th>Status</th>
+                                        <th>Classificação do imóvel</th>
+                                        <!-- <th>Vencimento</th> -->
+                                    </tr>
+                                </thead>
 
-        </div><!-- /.card -->
-    </div><!-- /.col -->
-</div> <!-- /.row -->
+                                <tbody>
+
+                                </tbody>
+                                
+                            </table>
+                        </div> <!-- /.col-sm-12 -->
+                    </div> <!-- /.row -->
+                </div> <!-- /.card-body -->
+            </div> <!-- /.card -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
 
 
 @stop
@@ -66,5 +83,6 @@
 
 
 @section('js')
+
 
 @stop

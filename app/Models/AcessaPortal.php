@@ -9,6 +9,7 @@ class AcessaPortal extends Model
     protected $table = 'TBL_PERFIS_ACESSO_PORTAL';
     protected $primaryKey = 'matricula';
     public $incrementing = false;
+    public $timestamps = true;
     protected $fillable = ['matricula', 'nivelAcesso', 'unidade'];
 
     public function empregados()

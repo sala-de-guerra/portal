@@ -75,6 +75,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     // ROTAS DO PROJETO DE CONSULTA COM WHERE VARIAVEL (GOOGLE 2.0)
     Route::prefix('consultar-imovel')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\ConsultaContratoController@consultaImovelComWhereVariavel');
+        Route::post('resultado', 'GestaoImoveisCaixa\ConsultaContratoController@pesquisaContratoComWhereVariavel');
     });
 
     // ROTAS DO PROJETO DE DISTRATO

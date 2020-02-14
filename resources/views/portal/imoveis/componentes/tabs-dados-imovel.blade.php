@@ -591,7 +591,7 @@
                                 <table id="tblHistorico" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
-                                            <th><input type="checkbox" onclick="checkAll(this)"></th>
+                                            <th><input type="checkbox"></th>
                                             <th>Matrícula</th>
                                             <th>Tipo</th>
                                             <th>Atividade</th>
@@ -602,18 +602,8 @@
                                     <tbody>
 
                                     <tr>
-                        <td><input type="checkbox" name=""></td>
-                        <td>Rafael</td>
-                        <td>c098453</td>
-                        <td class="obs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae inventore neque reiciendis reprehenderit. Quos ipsa accusantium porro atque aliquid, quaerat consequatur officia soluta ratione, nihil facilis! Nemo modi eligendi nisi.
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, ducimus expedita incidunt dolore consectetur est laudantium unde dolorum. Necessitatibus sapiente expedita odio tenetur, quis vitae iste consequuntur sunt reprehenderit
-                            repellat. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente minus fugit officiis nesciunt, ut eligendi laborum, fuga perspiciatis esse ad repellat quibusdam recusandae corrupti impedit amet sint deserunt velit.
-                            Mollitia!
-                        </td>
-                        <td>blablabla</td>
-                        <td>10/02/2020</td>
-
-                    </tr>
+                                    
+                                    </tr>
                     
                                     </tbody>
                                 </table>

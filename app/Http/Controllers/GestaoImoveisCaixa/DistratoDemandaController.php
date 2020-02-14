@@ -357,29 +357,38 @@ class DistratoDemandaController extends Controller
             // CAPTURA A DEMANDA DE DISTRATO E RELAÇÃO DE DESPESAS
             $demandaDistrato = DistratoDemanda::find($idDistrato);
             $relacaoDespesasDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->get();
-            
-            // VALIDA SE EXISTE DESPESA CADASTRADA - CASO EXISTA SEGUE COM A EMISSÃO DO PARECER - CASO NEGATIVO VOLTA PRA TELA COM ERRO
-            if ($relacaoDespesasDistrato->count() == 0) {
+
+            // VALIDA PARECER, CASO ESTIVER EM BRANCO, DEVOLVER PARA O ANALISTA COM FLASH MESSAGE
+            if (is_null($request->input('parecerAnalista'))) {
                 // FLASH MESSAGE
-                $request->session()->flash('corMensagem', 'danger');
+                $request->session()->flash('corMensagem', 'warning');
                 $request->session()->flash('tituloMensagem', "Parecer não efetuado");
-                $request->session()->flash('corpoMensagem', "Não existe nenhuma despesa cadastrada, o parecer não pode ser emitido.");
+                $request->session()->flash('corpoMensagem', "O parecer não pode ser enviado em branco.");
             } else {
-                $demandaDistrato->parecerAnalista = strip_tags($request->input('parecerAnalista'));
-                $demandaDistrato->matriculaAnalista = session('matricula');
-                
-                // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA ANALISE DO GESTOR
-                DistratoPhpMailer::enviarMensageria($demandaDistrato, 'notificacaoGestorParecerAnalista');
-                $demandaDistrato->statusAnaliseDistrato = 'AGUARDA PARECER GESTOR';
+                // VALIDA SE EXISTE DESPESA CADASTRADA - CASO EXISTA SEGUE COM A EMISSÃO DO PARECER - CASO NEGATIVO VOLTA PRA TELA COM ERRO
+                if ($relacaoDespesasDistrato->count() == 0) {
+                    // FLASH MESSAGE
+                    $request->session()->flash('corMensagem', 'danger');
+                    $request->session()->flash('tituloMensagem', "Parecer não efetuado");
+                    $request->session()->flash('corpoMensagem', "Não existe nenhuma despesa cadastrada, o parecer não pode ser emitido.");
+                } else {
+                    $demandaDistrato->parecerAnalista = strip_tags($request->input('parecerAnalista'));
+                    $demandaDistrato->matriculaAnalista = session('matricula');
+                    
+                    // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA ANALISE DO GESTOR
+                    DistratoPhpMailer::enviarMensageria($demandaDistrato, 'notificacaoGestorParecerAnalista');
+                    $demandaDistrato->statusAnaliseDistrato = 'AGUARDA PARECER GESTOR';
 
-                // RETORNA A FLASH MESSAGE
-                $request->session()->flash('corMensagem', 'success');
-                $request->session()->flash('tituloMensagem', "Parecer emitido!");
-                $request->session()->flash('corpoMensagem', "O parecer da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi enviado para apreciação do gestor.");
+                    // RETORNA A FLASH MESSAGE
+                    $request->session()->flash('corMensagem', 'success');
+                    $request->session()->flash('tituloMensagem', "Parecer emitido!");
+                    $request->session()->flash('corpoMensagem', "O parecer da demanda #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " foi enviado para apreciação do gestor.");
 
-                // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
-                $demandaDistrato->save();
+                    // SÓ PERSISTE OS DADOS NO BANCO QUANDO ACABAREM TODAS AS AÇÕES DO MÉTODO
+                    $demandaDistrato->save();
+                }
             }
+            
             DB::commit();
         } catch (\Throwable $th) {
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));

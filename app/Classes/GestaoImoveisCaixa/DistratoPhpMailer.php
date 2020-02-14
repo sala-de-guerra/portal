@@ -131,11 +131,11 @@ class DistratoPhpMailer
                 break;
             case 'notificacaoGestorParecerAnalista':
                 // INSERE DESTINATARIOS
-                // if (env('APP_ENV') == 'PRODUCAO') {
-                //     $mail->addAddress('c072452@mail.caixa');
-                //     $mail->addAddress('c090120@mail.caixa');
-                //     $mail->addAddress('c079436@mail.caixa');
-                // }
+                if (env('APP_ENV') == 'PRODUCAO') {
+                    $mail->addAddress('c072452@mail.caixa');
+                    $mail->addAddress('c090120@mail.caixa');
+                    $mail->addAddress('c079436@mail.caixa');
+                }
 
                 $mail->Subject = "Notificação de Parecer do Analista de Distrato - Imóvel $request->contratoFormatado";
 
