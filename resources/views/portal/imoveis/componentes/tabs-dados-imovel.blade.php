@@ -591,7 +591,7 @@
                                 <table id="tblHistorico" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
-                                            <th><input type="checkbox"></th>
+                                            <th>ID</th>
                                             <th>Matrícula</th>
                                             <th>Tipo</th>
                                             <th>Atividade</th>
