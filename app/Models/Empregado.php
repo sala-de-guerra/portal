@@ -9,7 +9,7 @@ class Empregado extends Model
     protected $table = 'TBL_EMPREGADOS';
     protected $primaryKey = 'matricula';
     public $incrementing = false;
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = 
         [
             'nomeCompleto',

@@ -1,5 +1,3 @@
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">
@@ -67,7 +65,7 @@
                                     <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div id="anuncioSiteCaixa"class="col-sm-6">
                                 <div class="form-group">
                                     <label>Anúncio X Imóveis:</label>
                                     <br>
@@ -75,7 +73,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="row">
                             <!-- <div class="col-sm-3">
@@ -132,6 +129,49 @@
                         </div>
                         
                         <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Status SIMOV:</label>
+                                    <p id="statusImovel"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Classificação:</label>
+                                    <p id="classificacao"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Matrícula do Imóvel:</label>
+                                    <p id="matriculaImovel"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Origem da Matrícula:</label>
+                                    <p id="origemMatricula"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"> 
+                                <div class="form-group">
+                                    <label>Data Laudo de Avaliação:</label>
+                                    <p class="formata-data-sem-hora" id="dataLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Data Validade do Laudo:</label>
+                                    <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                        </div>
+                        
+                        <!-- <div class="row">
+                            
+                        </div>  -->
+                        
+                        <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Descrição do Imóvel:</label>
@@ -145,48 +185,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Status SIMOV:</label>
-                                    <p id="statusImovel"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Classificação:</label>
-                                    <p id="classificacao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Matrícula do Imóvel:</label>
-                                    <p id="matriculaImovel"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Origem da Matrícula:</label>
-                                    <p id="origemMatricula"></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- <div class="row"> -->
-                            <!-- <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Valor de Avaliação:</label>
-                                    <p id="valorAvaliacao"></p>
-                                </div>
-                            </div> -->
-                            <!-- <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Origem do Imóvel:</label>
-                                    <p id="origemImovel"></p>
-                                </div>
-                            </div> -->
-                        <!-- </div> -->
 
                     </div>
 
@@ -599,12 +597,7 @@
                                             <th>Data</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-
-                                    <tr>
-                                    
-                                    </tr>
-                    
+                                    <tbody>                    
                                     </tbody>
                                 </table>
                             </div>
@@ -651,27 +644,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-        $(document).ready(function() {
-            $('#example').DataTable();
-    
- $('table').find('td.obs').each(function() {
-    
-    $(this).html($(this).html().substring(0, 40) + '[...]');
-    }); 
-    
-        });
-
-
-        function checkAll(bx) {
-            var cbs = document.getElementsByTagName('input');
-            for (var i = 0; i < cbs.length; i++) {
-                if (cbs[i].type == 'checkbox') {
-                    cbs[i].checked = bx.checked;
-                }
-            }
-        }
-    </script>
 
 <!-- 
 <div class="row">

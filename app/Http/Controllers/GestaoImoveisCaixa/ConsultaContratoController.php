@@ -113,6 +113,8 @@ class ConsultaContratoController extends Controller
             'valorAvaliacao' => $contrato->VALOR_AVALIACAO,
             'matriculaImovel' => $contrato->MATRICULA . " / " . $contrato->OFICIO . " Cartório",
             'origemMatricula' => $contrato->ORIGEM_MATRICULA,
+            'dataLaudoAvaliacao' => Carbon::parse($contrato->DATA_LAUDO)->format('Y-m-d'),
+            'dataValidadeLaudoAvaliacao' => Carbon::parse($contrato->DATA_VENCIMENTO_LAUDO)->format('Y-m-d'),
 
             // LEILÕES
             'valorPrimeiroLeilao' => $contrato->VALOR_PRIMEIRO_LEILAO,
@@ -240,7 +242,7 @@ class ConsultaContratoController extends Controller
             case 'cpfCnpjProponente':
                 $termoPesquisaTratado = self::trataVariavelCpfCnpj($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO')->where('CPF_CNPJ_PROPONENTE', 'like', "%$termo%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('CPF_CNPJ_PROPONENTE', 'like', "%$termo%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                     }
@@ -249,7 +251,7 @@ class ConsultaContratoController extends Controller
             case 'nomeProponente':
                 $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO')->where('NOME_PROPONENTE', 'like', "%$termo[0]%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NOME_PROPONENTE', 'like', "%$termo[0]%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
                             $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
@@ -260,14 +262,14 @@ class ConsultaContratoController extends Controller
                 break;
             case 'numeroContrato':
                 $termoPesquisaTratado = self::trataVariavelContrato($request->valorVariavel);
-                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO')->where('NU_BEM', 'like', "%$termoPesquisaTratado%")->get();
+                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_BEM', 'like', "%$termoPesquisaTratado%")->get();
                 foreach ($resultadoConsulta as $cadaResultado) {
                     $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                 }
                 break;
             case 'enderecoImovel':
                 $termoPesquisaTratado = self::trataVariavelEndereco($request->valorVariavel);
-                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO')->where('ENDERECO_IMOVEL', 'like', "%$termoPesquisaTratado%")->get();
+                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('ENDERECO_IMOVEL', 'like', "%$termoPesquisaTratado%")->get();
                 foreach ($resultadoConsulta as $cadaResultado) {
                     $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                 }
@@ -275,7 +277,7 @@ class ConsultaContratoController extends Controller
             case 'cpfCnpjExMutuario':
                 $termoPesquisaTratado = self::trataVariavelCpfCnpj($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO')->where('NU_DOC_EX_MUTUARIO', 'like', "%$termo%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_DOC_EX_MUTUARIO', 'like', "%$termo%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                     }
@@ -284,7 +286,7 @@ class ConsultaContratoController extends Controller
             case 'nomeExMutuario':
                 $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO')->where('NO_EX_MUTUARIO', 'like', "%$termo[0]%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NO_EX_MUTUARIO', 'like', "%$termo[0]%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
                             $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
@@ -292,6 +294,18 @@ class ConsultaContratoController extends Controller
                         }
                     }
                 }
+                break;
+            case 'matriculaImovel':
+                // $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
+                // foreach ($termoPesquisaTratado as $termo) {
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('MATRICULA', 'like', "%$request->valorVariavel%")->get();
+                    foreach ($resultadoConsulta as $cadaResultado) {
+                        if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
+                            $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                            array_push($arrayParaEvitarContratosDuplicados, $cadaResultado->NU_BEM);
+                        }
+                    }
+                // }
                 break;
         }
 
@@ -389,6 +403,7 @@ class ConsultaContratoController extends Controller
             'tipoVenda' => mb_strtoupper($objetoSimov->TIPO_VENDA, 'UTF-8'),
             'cpfCnpjExMutuario' => $objetoSimov->NU_DOC_EX_MUTUARIO,
             'nomeExMutuario' => $objetoSimov->NO_EX_MUTUARIO == null ? 'NÃO EXISTE EX-MUTUÁRIO' : mb_strtoupper($objetoSimov->NO_EX_MUTUARIO, 'UTF-8'),
+            'matriculaImovel' => $objetoSimov->MATRICULA . " / " . $objetoSimov->OFICIO . "º CARTÓRIO"
         ]);
         return $arrayConsultaConsolidada;
     }

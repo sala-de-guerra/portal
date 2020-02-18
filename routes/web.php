@@ -131,3 +131,10 @@ Route::prefix('portal')->group(function () {
 Route::get('/equipes', function () {
     return view('portal.gerencial.equipes');
 });
+
+// TESTE DE TIMEZONE
+Route::get('/teste-timezone', function(){
+    // echo date('Y-m-d H:i:s');
+    // dd( new \DateTime());
+    dd(Config::get('app.timezone'));
+});

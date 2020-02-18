@@ -87,6 +87,8 @@ class DistratoDemandaController extends Controller
             $novoDistrato->nomeCorretor = $dadosSimov->NO_CORRETOR;
             $novoDistrato->emailCorretor = $dadosSimov->EMAIL_CORRETOR;
             $novoDistrato->demandaAtiva = 'SIM';
+            $novoDistrato->created_at = date("Y-m-d H:i:s", time());
+            $novoDistrato->updated_at = date("Y-m-d H:i:s", time());
 
             // ENVIA E-MAIL DE CONFIRMAÇÃO DE CADASTRO DE DEMANDA
             DistratoPhpMailer::enviarMensageria($novoDistrato, 'notificacaoCadastroDistrato');
@@ -97,6 +99,8 @@ class DistratoDemandaController extends Controller
             $controleMensageriaDistrato->codigoAgencia = $novoDistrato->codigoAgenciaContratacao;
             $controleMensageriaDistrato->emailCorretor = $novoDistrato->emailCorretor;
             $controleMensageriaDistrato->emailProponente = $novoDistrato->emailProponente;
+            $controleMensageriaDistrato->created_at = date("Y-m-d H:i:s", time());
+            $controleMensageriaDistrato->updated_at = date("Y-m-d H:i:s", time());
             $controleMensageriaDistrato->save();
 
             // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
@@ -109,6 +113,8 @@ class DistratoDemandaController extends Controller
             $historico->tipo = "CADASTRO";
             $historico->atividade = "DISTRATO";
             $historico->observacao = "CADASTRO DE DISTRATO - PROTOCOLO: #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - PROPONENTE: " . $request->nomeProponente;
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
 
             // RETORNA A FLASH MESSAGE
@@ -172,7 +178,7 @@ class DistratoDemandaController extends Controller
                 'telefoneProponente' => $demanda->telefoneProponente,
                 'emailProponente' => $demanda->emailProponente,
                 'modalidadeProposta' => $demanda->tipoVendaProposta,
-                'dataCadastro' => $demanda->created_at == null ? '' : $demanda->created_at->format('yy-m-d h:i:s'),
+                'dataCadastro' => $demanda->created_at == null ? '' : Carbon::parse($demanda->created_at)->format('yy-m-d h:i:s'),
                 'motivoDistrato' => $demanda->motivoDistrato,
                 'statusAnaliseDistrato' => $demanda->statusAnaliseDistrato,
                 'observacaoDistrato' => $demanda->observacaoDistrato == null ? '' : $demanda->observacaoDistrato,
@@ -221,6 +227,8 @@ class DistratoDemandaController extends Controller
                 $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
                 $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                 $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                $controleMensageriaDistrato->created_at = date("Y-m-d H:i:s", time());
+                $controleMensageriaDistrato->updated_at = date("Y-m-d H:i:s", time());
                 $controleMensageriaDistrato->save();
 
                 $demandaDistrato->statusAnaliseDistrato = 'AGUARDA AUTORIZACAO EMGEA';
@@ -253,6 +261,8 @@ class DistratoDemandaController extends Controller
                         $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
                         $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                         $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                        $controleMensageriaDistrato->created_at = date("Y-m-d H:i:s", time());
+                        $controleMensageriaDistrato->updated_at = date("Y-m-d H:i:s", time());
                         $controleMensageriaDistrato->save();
                     }
                     $demandaDistrato->statusAnaliseDistrato = 'AGUARDA DOCUMENTOS CLIENTE';
@@ -269,6 +279,8 @@ class DistratoDemandaController extends Controller
             $historico->tipo = "ANALISE";
             $historico->atividade = "DISTRATO";
             $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - STATUS: $demandaDistrato->statusAnaliseDistrato - MOTIVO: $demandaDistrato->motivoDistrato - OBSERVAÇÃO: $request->observacaoDistrato";
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
 
             // RETORNA A FLASH MESSAGE
@@ -307,6 +319,7 @@ class DistratoDemandaController extends Controller
             $demandaDistrato->statusAnaliseDistrato = $request->input('statusAnaliseDistrato') == null ? $demandaDistrato->statusAnaliseDistrato : $request->input('statusAnaliseDistrato');
             $demandaDistrato->observacaoDistrato = strip_tags($request->input('observacaoDistrato'));
             $demandaDistrato->matriculaAnalista = session('matricula');
+            $demandaDistrato->updated_at = date("Y-m-d H:i:s", time());
 
             // CASO O STATUS ANALISE FOR IGUAL A "CADASTRADA", ALTERAR O MOTIVO PARA "A CLASSIFICAR"
             if ($demandaDistrato->statusAnaliseDistrato == 'CADASTRADA') {
@@ -323,6 +336,8 @@ class DistratoDemandaController extends Controller
             $historico->tipo = "ALTERAÇÃO";
             $historico->atividade = "DISTRATO";
             $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - STATUS: $demandaDistrato->statusAnaliseDistrato - MOTIVO: $demandaDistrato->motivoDistrato - OBSERVAÇÃO: $request->observacaoDistrato";
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
 
             // RETORNA A FLASH MESSAGE
@@ -356,6 +371,7 @@ class DistratoDemandaController extends Controller
             DB::beginTransaction();
             // CAPTURA A DEMANDA DE DISTRATO E RELAÇÃO DE DESPESAS
             $demandaDistrato = DistratoDemanda::find($idDistrato);
+            $demandaDistrato->updated_at = date("Y-m-d H:i:s", time());
             $relacaoDespesasDistrato = DistratoRelacaoDespesas::where('idDistrato', $idDistrato)->get();
 
             // VALIDA PARECER, CASO ESTIVER EM BRANCO, DEVOLVER PARA O ANALISTA COM FLASH MESSAGE
@@ -388,7 +404,6 @@ class DistratoDemandaController extends Controller
                     $demandaDistrato->save();
                 }
             }
-            
             DB::commit();
         } catch (\Throwable $th) {
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
@@ -416,6 +431,7 @@ class DistratoDemandaController extends Controller
             if ($request->decisaoGerenteDistrato == 'SIM') {
                 $demandaDistrato->parecerGestor = strip_tags($request->input('observacaoDistrato'));
                 $demandaDistrato->matriculaGestor = session('matricula');
+                $demandaDistrato->updated_at = date("Y-m-d H:i:s", time());
                 // $demandaDistrato->isentarMulta = input('isentarMulta');
                 
                 // ENVIA DE FORMA AUTOMÁTICA O PARECER PARA O CLIENTE/CORRETOR/AGÊNCIA
@@ -441,6 +457,9 @@ class DistratoDemandaController extends Controller
                     $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
                     $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                     $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                    $controleMensageriaDistrato->created_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->updated_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->save();
 
                     // ENVIAR MENSAGEM DE ORIENTAÇÃO PARA A REDE
                     DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistrato');
@@ -452,6 +471,9 @@ class DistratoDemandaController extends Controller
                     $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
                     $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                     $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                    $controleMensageriaDistrato->created_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->updated_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->save();
 
                     // CADASTRA HISTÓRICO
                     $historico = new HistoricoPortalGilie;
@@ -460,6 +482,8 @@ class DistratoDemandaController extends Controller
                     $historico->tipo = "PARECER EMITIDO";
                     $historico->atividade = "DISTRATO";
                     $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " SEGUIRÁ COM COBRANÇA DE MULTA";
+                    $historico->created_at = date("Y-m-d H:i:s", time());
+                    $historico->updated_at = date("Y-m-d H:i:s", time());
                     $historico->save();
                 } else {
                     // ENVIAR MENSAGEM DE ORIENTAÇÃO SEM MULTA PARA O CLIENTE
@@ -471,6 +495,9 @@ class DistratoDemandaController extends Controller
                     $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
                     $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                     $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                    $controleMensageriaDistrato->created_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->updated_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->save();
 
                     // ENVIAR MENSAGEM DE ORIENTAÇÃO PARA A REDE
                     DistratoPhpMailer::enviarMensageria($demandaDistrato, 'orientacaoAgenciaDistrato');
@@ -482,6 +509,9 @@ class DistratoDemandaController extends Controller
                     $controleMensageriaDistrato->codigoAgencia = $demandaDistrato->codigoAgenciaContratacao;
                     $controleMensageriaDistrato->emailCorretor = $demandaDistrato->emailCorretor;
                     $controleMensageriaDistrato->emailProponente = $demandaDistrato->emailProponente;
+                    $controleMensageriaDistrato->created_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->updated_at = date("Y-m-d H:i:s", time());
+                    $controleMensageriaDistrato->save();
 
                     // CADASTRA HISTÓRICO
                     $historico = new HistoricoPortalGilie;
@@ -490,9 +520,10 @@ class DistratoDemandaController extends Controller
                     $historico->tipo = "PARECER EMITIDO";
                     $historico->atividade = "DISTRATO";
                     $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " SEGUIRÁ SEM COBRANÇA MULTA";
+                    $historico->created_at = date("Y-m-d H:i:s", time());
+                    $historico->updated_at = date("Y-m-d H:i:s", time());
                     $historico->save();
                 }
-                $controleMensageriaDistrato->save();
                 $demandaDistrato->statusAnaliseDistrato = 'ENCAMINHADA AGENCIA';
 
                 // RETORNA A FLASH MESSAGE
@@ -507,6 +538,8 @@ class DistratoDemandaController extends Controller
                 $historico->tipo = "DEMANDA CANCELADA";
                 $historico->atividade = "DISTRATO";
                 $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " FOI CANCELADO POR DETERMINAÇÃO DO GESTOR";
+                $historico->created_at = date("Y-m-d H:i:s", time());
+                $historico->updated_at = date("Y-m-d H:i:s", time());
                 $historico->save();
 
                 // RETORNA A FLASH MESSAGE

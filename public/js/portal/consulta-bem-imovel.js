@@ -35,7 +35,36 @@ $(document).ready(function(){
         };
 
         _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, dados.statusImovel);
-    
+        
+        // VERIFICA O STATUS NO SIMOV PARA REMOVER O ANUNCIO NO X IMÓVEIS
+        switch (dados.statusImovel) {
+            case 'Em Análise':
+            case 'Em Cadastramento':
+            case 'Aguarda Justif. Avaliação':
+            case 'Em Pendência':
+            case 'Em Reavaliação':
+            case 'Aguarda Licitação':
+            case 'Arrendado':
+            case 'Devolvido':
+            case 'Excluído':
+            case 'Indício de Fraude':
+            case 'Laudo Vencido':
+            case 'Venda Direta Ocupante':
+            case 'Venda por credenciado':
+            case 'Montagem de Licitação':
+            case 'Aguarda 1º Leilão SFI':
+            case 'Aguarda 2º Leilão SFI':
+            case 'Em Homologação':
+            case 'Em Contratação':
+            case 'Contratação pendente':
+            case 'Vendido':
+            case 'Venda Direito Preferência':
+            case 'Venda Direta Beneficiário':      
+            default:      
+                var anuncioSiteCaixa = document.getElementById('anuncioSiteCaixa');
+                anuncioSiteCaixa.remove(); 
+                break;
+        }
     });
 
 
