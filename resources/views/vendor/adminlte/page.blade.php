@@ -83,10 +83,12 @@
                             {{ csrf_field() }}
                             <div class="input-group">
                                 <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar">
+                                    <option disabled selected>Selecione</option>
                                     <option value="numeroContrato">Contrato</option>
                                     <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
                                     <option value="nomeProponente">Nome proponente</option>
                                     <option value="enderecoImovel">Endereço imóvel</option>
+                                    <option value="matriculaImovel">Matrícula do imóvel</option>
                                     <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
                                     <option value="nomeExMutuario">Nome ex-mutuário</option>
                                 </select>

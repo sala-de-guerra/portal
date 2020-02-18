@@ -8,7 +8,7 @@ class DistratoDemanda extends Model
 {
     protected $table = 'TBL_DISTRATOS_DEMANDAS';
     protected $primaryKey = 'idDistrato';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = [
             'contratoFormatado',
             'nomeProponente',

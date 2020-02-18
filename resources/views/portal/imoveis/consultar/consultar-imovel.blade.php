@@ -23,7 +23,7 @@
 
 
 @section('content')
-
+<!-- <iframe src="http://habitacao.caixa/index.asp" style="height:200px;width:300px"></iframe> -->
 
 <!-- <div class="row">
 
@@ -79,9 +79,14 @@
                                     <p class='text-muted text-sm'><b>FILIAL:</b> {{ $resultado['gilieResponsavel'] }}</p>
                                 </div>
                             </div>
-                            <div class="col-sm-9">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <p class='text-muted text-sm'><b>TIPO VENDA:</b> {{ $resultado['tipoVenda'] }} </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <p class='text-muted text-sm'><b>MATRICULA:</b> {{ $resultado['matriculaImovel'] }} </p>
                                 </div>
                             </div>
                         </div>

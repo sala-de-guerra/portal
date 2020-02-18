@@ -43,6 +43,8 @@ class DistratoRelacaoDespesasController extends Controller
             $novaDespesa->devolucaoPertinente = 'SIM';
             $novaDespesa->excluirDespesa = 'NAO';
             $novaDespesa->observacaoDespesa = strip_tags($request->observacaoDespesa);
+            $novaDespesa->created_at = date("Y-m-d H:i:s", time());
+            $novaDespesa->updated_at = date("Y-m-d H:i:s", time());
             $novaDespesa->save();
 
             // RETORNA A FLASH MESSAGE
@@ -82,6 +84,7 @@ class DistratoRelacaoDespesasController extends Controller
             $despesa->valorDespesa = str_replace(',', '.', str_replace('.', '', $request->valorDespesa));
             $despesa->dataEfetivaDaDespesa =  $dataEfetivaDaDespesa;
             $despesa->observacaoDespesa = $request->observacaoDespesa != null ? strip_tags($request->observacaoDespesa) : $despesa->observacaoDespesa;
+            $despesa->updated_at = date("Y-m-d H:i:s", time());
 
             // CARREGA OS DADOS DA DEMANDA DE DISTRATO PARA USAR O NUMERO DO CONTRATO NO REDIRECT
             $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first(); 
@@ -130,6 +133,7 @@ class DistratoRelacaoDespesasController extends Controller
             $despesa = DistratoRelacaoDespesas::where('idDespesa', $idDespesa)->first();
             $despesa->devolucaoPertinente = 'NAO';
             $despesa->excluirDespesa = 'SIM';
+            $despesa->updated_at = date("Y-m-d H:i:s", time());
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
@@ -168,6 +172,7 @@ class DistratoRelacaoDespesasController extends Controller
             $despesa->devolucaoPertinente = $request->input('devolucaoPertinente') == null ? $despesa->devolucaoPertinente : $request->input('devolucaoPertinente');
             $despesa->responsavelAlteracaoDespesa = session('matricula');
             $despesa->motivoAlteracaoDespesa = strip_tags($request->input('motivoAlteracaoDespesa'));
+            $despesa->updated_at = date("Y-m-d H:i:s", time());
 
             // CAPTURA DADOS DISTRATO
             $dadosDistrato = DistratoDemanda::where('idDistrato', $despesa->idDistrato)->first();

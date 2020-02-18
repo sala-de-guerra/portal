@@ -214,6 +214,8 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             $historico->tipo = "MENSAGERIA";
             $historico->atividade = "CONTRATACAO";
             $historico->observacao = "ENVIO DE MENSAGERIA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
 
             $controleMensageria = new ControleMensageria;
@@ -222,6 +224,8 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             $controleMensageria->codigoAgencia = $dadosEmail->codigoAgencia;
             $controleMensageria->emailCorretor = $dadosEmail->emailCorretor;
             $controleMensageria->emailProponente = $dadosEmail->emailProponente;
+            $controleMensageria->created_at = date("Y-m-d H:i:s", time());
+            $controleMensageria->updated_at = date("Y-m-d H:i:s", time());
             $controleMensageria->save();
         } else {
             echo "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente<br>";
@@ -235,6 +239,8 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             $historico->tipo = "ERRO MENSAGERIA";
             $historico->atividade = "CONTRATACAO";
             $historico->observacao = "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
         }
 

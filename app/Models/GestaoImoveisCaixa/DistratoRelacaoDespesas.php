@@ -8,7 +8,7 @@ class DistratoRelacaoDespesas extends Model
 {
     protected $table = 'TBL_DISTRATO_RELACAO_DESPESAS';
     protected $primaryKey = 'idDespesa';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = [
             'idDistrato',
             'tipoDespesa',
