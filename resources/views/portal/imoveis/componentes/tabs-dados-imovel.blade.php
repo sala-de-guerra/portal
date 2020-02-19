@@ -4,37 +4,37 @@
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                   
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-dados-imovel">
                         <a class="nav-link active" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="true">
                             <h5>Dados do Imóvel</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-leiloes">
                         <a class="nav-link" id="custom-tabs-one-leiloes-tab" data-toggle="pill" href="#custom-tabs-one-leiloes" role="tab" aria-controls="custom-tabs-one-leiloes" aria-selected="false">
                             <h5>Leilões</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-contratacao">
                         <a class="nav-link" id="custom-tabs-one-contratacao-tab" data-toggle="pill" href="#custom-tabs-one-contratacao" role="tab" aria-controls="custom-tabs-one-contratacao" aria-selected="false">
                             <h5>Contratação</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-distrato">
                         <a class="nav-link" id="custom-tabs-one-distrato-tab" data-toggle="pill" href="#custom-tabs-one-distrato" role="tab" aria-controls="custom-tabs-one-distrato" aria-selected="false">
                             <h5>Distrato</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-historico">
                         <a class="nav-link" id="custom-tabs-one-historico-tab" data-toggle="pill" href="#custom-tabs-one-historico" role="tab" aria-controls="custom-tabs-one-historico" aria-selected="false">
                             <h5>Histórico</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-mensagens">
                         <a class="nav-link" id="custom-tabs-one-mensagens-tab" data-toggle="pill" href="#custom-tabs-one-mensagens" role="tab" aria-controls="custom-tabs-one-mensagens" aria-selected="false">
                             <h5>Mensagens</h5>
                         </a>
@@ -407,6 +407,13 @@
                                     <p id="agrupamento"></p>
                                 </div>
                             </div>
+                            <!-- <div id="anuncioSiteCaixa"class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Consulta CIWEB:</label>
+                                    <br>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConsultaCiweb" title="Ir para tela de consulta do CIWEB"><i class="fas fa-globe-americas"></i></button>
+                                </div>
+                            </div> -->
                             <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Número de Parcelas:</label>
@@ -420,6 +427,26 @@
                                 </div>
                             </div> -->
                         </div>
+
+                        <!-- <div class="modal fade" id="modalConsultaCiweb" tabindex="-1" role="dialog" aria-labelledby="modalConsultaCiweb" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <embed src="https://ciweb4.extranet.caixa/ciweb2.0/Contrato/PesquisarContrato/" width=200 height=200 />
+                                        <object type="text/html" data="https://ciweb4.extranet.caixa/ciweb2.0/Contrato/PesquisarContrato/" width="800px" height="600px" style="overflow:auto;border:1px ridge #ccc"></object>
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
 
                         <hr class="pontilhado">
 
@@ -530,7 +557,7 @@
                                 </button>
                                 @endIf
                                 <!-- Modal -->
-                                <div class="modal fade" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato }}' id="formCadastraAtendimento">
@@ -597,7 +624,8 @@
                                             <th>Data</th>
                                         </tr>
                                     </thead>
-                                    <tbody>                    
+                                    <tbody>  
+
                                     </tbody>
                                 </table>
                             </div>

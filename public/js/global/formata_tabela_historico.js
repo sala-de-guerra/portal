@@ -7,9 +7,9 @@ function _formataTabelaHistorico (numeroContrato) {
                     '<td>' + item.matriculaResponsavel + '</td>' +
                     '<td>' + item.tipo + '</td>' +
                     '<td>' + item.atividade + '</td>' +
-                    '<td class="col-sm-4 overflow-auto">' + 
+                    '<td class="col-sm-4 overflow-auto" =>' + 
                         '<div class="row">' +
-                            '<div class="col">' +
+                            '<div class="col" id="obs'+ item.idHistorico +'">' +
                                item.observacao + 
                             '</div>' +
 
@@ -19,7 +19,7 @@ function _formataTabelaHistorico (numeroContrato) {
                                 '</button>' +
             
                                 '<div class="modal fade" id="modalConsultaObservacaoHistorico' + item.idHistorico + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                                    '<div class="modal-dialog" role="document">' +
+                                    '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">' +
                                         '<div class="modal-content">' +
             
                                             '<div class="modal-header">' +
@@ -51,8 +51,14 @@ function _formataTabelaHistorico (numeroContrato) {
                     '</td>' +
                     '<td class="formata-data">' + item.data + '</td>' +
                 '</tr>';
-            $(linha).appendTo('#tblHistorico>tbody');
+                // console.log("obs" + item.idHistorico)
+                $(linha).appendTo('#tblHistorico>tbody');
+                formata_observacao ("obs" + item.idHistorico);
         }) 
         _formataDatatableComId ("tblHistorico");
     });
 };
+
+function formata_observacao(idobs){
+    $('#' + idobs).html($('#' + idobs).html().substring(0, 40) + '[...]');
+}

@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     $.getJSON('/estoque-imoveis/distrato/listar-protocolos', function(dados){
-
         $.each(dados, function(key, item) {          
 
             var linha = 
@@ -16,8 +15,8 @@ $(document).ready(function(){
             $(linha).appendTo('#tblDistrato>tbody'); 
         })
 
-        _formataDatatable();
         _formataData();
+        _formataDatatable();
 
         $('#tblDistrato tbody').on('click', 'tr', function () {
             var href = $(this).attr("href");            

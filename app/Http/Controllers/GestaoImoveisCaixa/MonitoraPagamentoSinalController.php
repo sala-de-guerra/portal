@@ -58,8 +58,7 @@ class MonitoraPagamentoSinalController extends Controller
                                                         ->get();
         $listaContratosSemPagamentoSinal = [];                                              
         foreach ($consultaContratosSemPagamentoSinal as $contrato) {
-            // dd(['dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('d/m/Y'), 'dataVencimento' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA)]);
-            
+            // VERIFICA SE EXISTE PAGAMENTO DO SINAL
             if ($contrato->saldoContratoSinaf) {
                 if ($contrato->saldoContratoSinaf->saldoAtualContrato < $contrato->VALOR_REC_PROPRIOS_PROPOSTA) {
                     array_push($listaContratosSemPagamentoSinal, [
