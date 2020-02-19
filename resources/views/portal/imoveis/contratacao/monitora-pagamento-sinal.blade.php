@@ -38,30 +38,23 @@
 
 @section('content')
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">
-                            <table id="tblDistrato" class="table table-bordered table-striped hover dataTable">
+                            <table id="tblContratosSemPagamentoSinal" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>CHB</th>
                                         <th>Data da proposta</th>
                                         <th>Data de vencimento (PP15)</th>
                                         <th>Status</th>
                                         <th>Classificação do imóvel</th>
-                                        <!-- <th>Vencimento</th> -->
                                     </tr>
                                 </thead>
-
-                                <tbody>
-
-                                </tbody>
-                                
+                                <tbody></tbody>
                             </table>
                         </div> <!-- /.col-sm-12 -->
                     </div> <!-- /.row -->
@@ -69,7 +62,6 @@
             </div> <!-- /.card -->
         </div> <!-- /.col -->
     </div> <!-- /.row -->
-
 
 @stop
 
@@ -83,6 +75,25 @@
 
 
 @section('js')
-
-
+    <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
+    <script src="{{ asset('js/global/formata_data.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON('/estoque-imoveis/monitora-pagamento-sinal/listar-contratos-sem-pagamento-sinal', function(dados){
+                $.each(dados, function(key, item) {          
+                    var linha = 
+                        '<tr class="cursor-pointer">' +
+                            '<td>' + item.numeroContrato + '</td>' +
+                            '<td class="formata-data-sem-hora">' + item.dataProposta + '</td>' +
+                            '<td class="formata-data-sem-hora">' + item.vencimentoPp15 + '</td>' +
+                            '<td>' + item.statusSimov + '</td>' +
+                            '<td>' + item.classificacaoImovel + '</td>' +
+                        '</tr>';
+                    $(linha).appendTo('#tblContratosSemPagamentoSinal>tbody'); 
+                })
+                _formataData();
+                _formataDatatable();
+            });
+        });
+    </script>
 @stop

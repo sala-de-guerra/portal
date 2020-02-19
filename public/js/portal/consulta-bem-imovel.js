@@ -35,7 +35,6 @@ $(document).ready(function(){
         };
 
         _formataProgressBar ("progressBarGeral", arrayPorcentagemEStatus, dados.statusImovel);
-        
         // VERIFICA O STATUS NO SIMOV PARA REMOVER O ANUNCIO NO X IMÓVEIS
         switch (dados.statusImovel) {
             case 'Em Análise':
@@ -59,11 +58,18 @@ $(document).ready(function(){
             case 'Contratação pendente':
             case 'Vendido':
             case 'Venda Direito Preferência':
-            case 'Venda Direta Beneficiário':      
-            default:      
+            case 'Venda Direta Beneficiário':          
                 var anuncioSiteCaixa = document.getElementById('anuncioSiteCaixa');
                 anuncioSiteCaixa.remove(); 
                 break;
+        }
+
+        // CASO NÃO EXISTA DADOS DE PROPONENTE E LEILÃO, REMOVER AS RESPECTIVAS ABAS DA CONSULTA
+        if ($('#nomeProponente').html() == '' || $('#nomeProponente').html() == null) {
+            $('#custon-tabs-li-contratacao').remove();
+        }
+        if ($('#dataPrimeiroLeilao').html() == '' || $('#dataPrimeiroLeilao').html() == null) {
+            $('#custon-tabs-li-leiloes').remove();
         }
     });
 
