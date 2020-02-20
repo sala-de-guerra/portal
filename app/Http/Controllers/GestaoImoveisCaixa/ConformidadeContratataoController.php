@@ -141,6 +141,7 @@ class ConformidadeContratataoController extends Controller
                     'statusContratacao' => $contrato->statusContratacao,
                     'cardAgrupamento' => $contrato->cardAgrupamento,
                     'dataEntradaConformidade' => $contrato->dataStatus,
+                    'classificacaoImovel' => $classificacaoImovel,
                 ]);
                 array_push($arrayContratosParaRemoverRepetidos, $contrato->numeroContrato);
             }
