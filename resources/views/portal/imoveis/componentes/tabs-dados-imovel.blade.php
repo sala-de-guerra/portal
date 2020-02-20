@@ -553,7 +553,7 @@
                                 @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
                                 <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCadastraAtendimento">
                                     <i class="fas fa-lg fa-headset m-2"></i>
-                                    Cadastrar Atendimento
+                                    Cadastrar Historico
                                 </button>
                                 @endIf
                                 <!-- Modal -->
@@ -563,7 +563,7 @@
                                             <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato }}' id="formCadastraAtendimento">
                                                 {{ csrf_field() }}
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Atendimento</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Histórico</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -571,9 +571,10 @@
                                                 <div class="modal-body">
 
                                                 <div class="form-group">
-                                                    <label>Tipo de Atendimento:</label>
+                                                    <label>Tipo de Histórico:</label>
                                                     <select name="tipoAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
+                                                        <option value="ANALISE">ANÁLISE</option>
                                                         <option value="EMAIL">E-MAIL</option>
                                                         <option value="PRESENCIAL">PRESENCIAL</option>
                                                         <option value="OUVIDORIA">SAC/OUVIDORIA</option>
@@ -583,7 +584,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Atividade:</label>
+                                                    <label>Coordenação:</label>
                                                     <select name="atividadeAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
                                                         <option value="CONTRATACAO">CONTRATAÇÃO</option>

@@ -1,6 +1,11 @@
 @extends('adminlte::page')
 
 @section('title', 'Portal GILIE/SP')
+<style>
+  
+
+    
+</style>
 
 @section('content_header')
 
@@ -21,7 +26,7 @@
 </div>
 
 @if (session('tituloMensagem'))
-    <div class="card text-white bg-{{ session('corMensagem') }}">
+    <div class="card text-white bg-{{ session('corMensagem') }} hidden" >
         <div class="card-header">
             <div class="card-body">
                 <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
