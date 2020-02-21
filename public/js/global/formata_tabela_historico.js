@@ -60,5 +60,5 @@ function _formataTabelaHistorico (numeroContrato) {
 };
 
 function formata_observacao(idobs){
-    $('#' + idobs).html($('#' + idobs).html().substring(0, 40) + '[...]');
+    $('#' + idobs).html($('#' + idobs).html().substring(0, 62) + ' [...]');
 }
