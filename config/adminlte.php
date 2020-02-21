@@ -338,34 +338,34 @@ return [
             ],
         ],
 
-        [
-            'text'    => 'Indicadores',
-            'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
-            'submenu' => [
-                [
-                    'text' => 'Indicadores de Distrato',
-                    'url'  => '/indicadores/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
-                ],
+        // [
+        //     'text'    => 'Indicadores',
+        //     'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
+        //     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+        //     'submenu' => [
         //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
+        //             'text' => 'Indicadores de Distrato',
+        //             'url'  => '/indicadores/distrato',
+        //             'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
         //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-            ],
-        ],
+        // //         [
+        // //             'text' => 'level_one',
+        // //             'url'  => '#',
+        // //         ],
+        // //         [
+        // //             'text' => 'level_two',
+        // //             'url'  => '#',
+        // //         ],
+        // //         [
+        // //             'text' => 'level_two',
+        // //             'url'  => '#',
+        // //         ],
+        // //         [
+        // //             'text' => 'level_one',
+        // //             'url'  => '#',
+        // //         ],
+        //     ],
+        // ],
 
 
         // ['header' => 'PENHOR'],

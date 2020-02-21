@@ -109,7 +109,7 @@
                         <i class="fa fa-search m-2"></i> Pesquisar Bem Imóvel
                     </a>
                     <br>
-                    <small>Pesquise os imóveis administrados pela GILIE SP por CHB, Endereço, Nome e CPF do Proponente. </small>
+                    <small>Pesquise os imóveis administrados pela GILIE/SP por número do contrato, endereço, nome e CPF do Proponente.</small>
                 </h4>
                 
                 <hr class="pontilhado">
@@ -119,7 +119,7 @@
                         <i class="fa fa-map-marked-alt m-2"></i> Pesquisar Área de Atuação
                     </a>
                     <br>
-                    <small>Pesquise a região de atendimento das GILIE SP e BU. </small>
+                    <small>Pesquise a região de atendimento das GILIE São Paulo e Bauru. </small>
                 </h4>
 
                 <hr class="pontilhado">

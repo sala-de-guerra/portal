@@ -241,7 +241,7 @@ class DistratoDemandaController extends Controller
                 case 'DIREITO DE PREFERENCIA DO EX-MUTUARIO':
                 case 'ERRO FORMAL DE EDITAL':
                 case 'LEILOES NEGATIVOS':
-                case 'IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO LEILOES NEGATIVOS':
+                case 'IMPOSSIBILIDADE DE REGISTRO DE AQUISICAO':
                     // ENVIAR MENSAGEM SOLICITANDO DOCUMENTOS
                     if ($demandaDistrato->emailSolicitandoDocumentacaoParaPagamento != 'SIM') {
                         # ENVIAR MENSAGEM PEDINDO COMPROVANTES DE PAGAMENTO PARA ANÁLISE DE REEMBOLSO
