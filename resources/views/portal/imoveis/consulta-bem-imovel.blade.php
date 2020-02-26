@@ -26,7 +26,7 @@
 </div>
 
 @if (session('tituloMensagem'))
-    <div class="card text-white bg-{{ session('corMensagem') }} hidden" >
+    <div id="fadeOut" class="card text-white bg-{{ session('corMensagem') }} hidden" >
         <div class="card-header">
             <div class="card-body">
                 <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
@@ -71,4 +71,9 @@
     <script src="{{ asset('js/global/formata_lista_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
     <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
+    <script>
+                setTimeout(function(){
+                $('#fadeOut').fadeOut("slow");
+                }, 4000);
+    </script>
 @stop

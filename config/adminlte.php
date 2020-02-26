@@ -314,6 +314,12 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
             'submenu' => [
                 [
+                    'text' => 'Acompanhar Contratação',
+                    'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                    'url'  => '/estoque-imoveis/acompanha-contratacao',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
+                [
                     'text' => 'Controle de Conformidade',
                     'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
@@ -326,7 +332,7 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 [
-                    'text' => 'Controla Pagamento Sinal',
+                    'text' => 'Controle Pagamento Sinal',
                     'icon'    => 'fas fa-lg fa-fw fa-search-dollar mr-2',
                     'url'  => '/estoque-imoveis/monitora-pagamento-sinal',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],

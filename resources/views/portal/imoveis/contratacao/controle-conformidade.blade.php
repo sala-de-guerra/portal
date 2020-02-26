@@ -54,10 +54,11 @@
                                     <th>Tipo de Proposta</th>
                                     <th>Recursos Próprios</th>
                                     <th>Total Recebido</th>
-                                    <th>Status CIOPE</th>
+                                    <th>Status</th>
                                     <th>Card Agrupamento</th>
                                     <th>Data Entrada</th>
-                                    <th>Copiar Link do Servidor</th>
+                                    <th>Link</th>
+                                    <th>Observações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,6 +70,33 @@
             </div>
         </div>
     </div>
+</div>
+<!-- Modal de Observação -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Observação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <textarea class="form-control" rows="10" id="message-text"></textarea>
+          </div>
+          <INPUT TYPE="RADIO" NAME="OPCAO" VALUE="op1"> A tratar <br><br>
+          <INPUT TYPE="RADIO" NAME="OPCAO" VALUE="op2"> Em tratamento
+          </form>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">

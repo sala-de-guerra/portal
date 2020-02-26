@@ -635,7 +635,7 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             session()->flash('tituloMensagem', "Autorização enviada!");
             session()->flash('corpoMensagem', "O e-mail de orientações para prosseguimento da contratação foi enviado com sucesso.");
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             // RETORNA A FLASH MESSAGE
             session()->flash('corMensagem', 'warning');
