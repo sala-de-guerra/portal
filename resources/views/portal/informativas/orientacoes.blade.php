@@ -1,6 +1,11 @@
 @extends('adminlte::page')
 
 @section('title', 'Portal GILIE/SP')
+<style>
+.hover {
+    background: #e5e5e5 !important; 
+}
+</style>
 
 @section('content_header')
 
@@ -137,54 +142,33 @@
             <!-- /.card-header -->
 
             <div class="card-body">
-                <table class="table table-hover table-borderless">
-                
-                <tbody>
-                    <tr>
-                    <td>
-                        1.   Portal da GEIPT com indicadores e ferramentas de gestão estratégica :
-                        <a href="http://alienar.caixa/" target="_blank"><br>
-                        http://alienar.caixa/</a>
-                        
-                    </td>
-                    </tr>
-                <tr>
-                <td>
-                        2.   Consulta de ações judiciais e demais demandas jurídicas :
-                        <a href="http://www.portal.dijur.caixa/" target="_blank"><br>
-                        http://www.portal.dijur.caixa/</a>
-                    </td>
-                </tr>
+            <ul class="row" style="list-style: none;">   
 
-                <td>
-                        3.   Acompanhamento do processo de contratação:
+            <li class="col-6">    Acompanhamento do processo de contratação:
                         <a href="http://imagem.caixa/imoveiscaixa/" target="_blank"><br>
-                        http://imagem.caixa/imoveiscaixa/</a>
-                    </td>
-                </tr>
+                        http://imagem.caixa/imoveiscaixa/</a></li><br><br><br>
 
-                <td>
-                        4.  Dúvidas sobre o envio e tratamento da conformidade (ATENDE):
-                        <a href="http://inovacao.suban.caixa/apps/atende/#/login" target="_blank"><br>
-                        http://inovacao.suban.caixa/apps/atende/#/login</a>
-                    </td>
-                </tr>
-                <td>
-                        5.   Gestão de ativos e contratos:
-                        <a href="http://siga.caixa/" target="_blank"><br>
-                        http://siga.caixa/</a>
-                    </td>
-                </tr>
+                        <li class="col-6">    Consulta de ações judiciais e demais demandas jurídicas :
+                        <a href="http://www.portal.dijur.caixa/" target="_blank"><br>
+                        http://www.portal.dijur.caixa/</a></li><br><br><br>
 
-                <td>
-                        6.   Criação de DLE com código de barras:
+                        <li class="col-6">    Criação de DLE com código de barras:
                         <a href="http://sinafweb.caixa/" target="_blank"><br>
-                        http://sinafweb.caixa/</a>
-                    </td>
-                </tr>
-                    
-                </table>
- 
+                        http://sinafweb.caixa/</a></li><br><br><br>
+
+                        <li class="col-6">    Dúvidas sobre o envio e tratamento da conformidade (ATENDE):
+                        <a href="http://inovacao.suban.caixa/apps/atende/#/login" target="_blank"><br>
+                        http://inovacao.suban.caixa/apps/atende/#/login</a></li><br><br><br> 
+
+                        <li class="col-6">    Gestão de ativos e contratos:
+                        <a href="http://siga.caixa/" target="_blank"><br>
+                        http://siga.caixa/</a></li><br><br><br>
+                
+                    <li class="col-6">    Portal da GEIPT com indicadores e ferramentas de gestão estratégica :
+                        <a href="http://alienar.caixa/" target="_blank"><br>
+                        http://alienar.caixa/</a></li><br><br><br>
+                        
+            </ul>
             </div>
             <!-- /.card-body -->
 
@@ -210,5 +194,13 @@
 
 
 @section('js')
+<script>
+$('li').mouseover(function(){
+$(this).addClass('hover');
+});
+$('li').mouseout(function(){
+$(this).removeClass('hover');
+});
+</script>
 
 @stop

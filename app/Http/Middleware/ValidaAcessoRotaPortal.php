@@ -39,6 +39,9 @@ class ValidaAcessoRotaPortal
             case 'estoque-imoveis/mensagens-automaticas/autorizacao-contratacao':
             case 'estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/':
             case 'estoque-imoveis/registrar-historico/':
+            case 'estoque-imoveis/conformidade-contratacao':
+            case 'estoque-imoveis/acompanha-contratacao':
+            case 'estoque-imoveis/monitora-pagamento-sinal':
             case 'indicadores/distrato':
                 if (!in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', env('NOME_NOSSA_UNIDADE'), 'DESENVOLVEDOR'])) {
                     $request->session()->flash('corMensagem', 'warning');

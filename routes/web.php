@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 //index
 Route::get('', function () {
     return view('portal.index');
@@ -104,6 +93,12 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('listar-contratos-sem-pagamento-sinal', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@listarContratosSemPagamentoSinal');
     });
 
+    // ROTAS DO PROJETO ACOMPANHA CONTRATACAO
+    Route::prefix('acompanha-contratacao')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\ConformidadeContratataoController@consultaContratosContratacaoSessentaDias');
+        Route::get('listar-contratos-em-contratacao-ultimos-sessenta-dias', 'GestaoImoveisCaixa\ConformidadeContratataoController@acompanhaContratacao');
+    });
+
     // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO
     Route::prefix('conformidade-contratacao')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\ConformidadeContratataoController@index');
@@ -130,11 +125,4 @@ Route::prefix('portal')->group(function () {
 // equipes
 Route::get('/equipes', function () {
     return view('portal.gerencial.equipes');
-});
-
-// TESTE DE TIMEZONE
-Route::get('/teste-timezone', function(){
-    // echo date('Y-m-d H:i:s');
-    // dd( new \DateTime());
-    dd(Config::get('app.timezone'));
 });
