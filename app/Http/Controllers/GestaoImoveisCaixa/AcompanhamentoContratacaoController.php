@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Http\Controllers\Controller;
 use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
 use App\Models\BaseSimov;
@@ -78,11 +79,13 @@ class AcompanhamentoContratacaoController extends Controller
         // $contadorFalso = 0;
         // $contadorVerdadeiro = 0;
         foreach ($universoContratosContratacao as $contrato) {
-            if (Carbon::parse($contrato->DATA_PROPOSTA)->diffInDays(Carbon::now()) <= 60) {
+            if (Carbon::parse($contrato->DATA_PROPOSTA)->diffInDays(Carbon::now()) > 10 && Carbon::parse($contrato->DATA_PROPOSTA)->diffInDays(Carbon::now()) <= 60) {
 
                 // VALIDA SE JA EXISTE ANALISE NA TABELA AUXILIAR, CASO POSITIVO RECUPERA OS DADOS, CASO NEGATIVO CRIA UM NOVO REGISTRO PENDENTE
                 $demandaAcompanhamentoContratacao = AcompanhamentoContratacao::firstOrCreate(['numeroContrato' => $contrato->NU_BEM, 'nomeProponente' => $contrato->NOME_PROPONENTE, 'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE]);
                 $demandaAcompanhamentoContratacao->statusAcompanhamentoContratacao = isset($demandaAcompanhamentoContratacao->statusAcompanhamentoContratacao) ? $demandaAcompanhamentoContratacao->statusAcompanhamentoContratacao : 'PENDENTE';
+                $demandaAcompanhamentoContratacao->created_at = date("Y-m-d H:i:s", time());
+                $demandaAcompanhamentoContratacao->updated_at = date("Y-m-d H:i:s", time());
 
                 array_push($arrayContratosContratacaoUltimosSessentaDias, [
                     'idAcompanhamentoContratacao' => $demandaAcompanhamentoContratacao->idAcompanhamentoContratacao,
@@ -93,7 +96,7 @@ class AcompanhamentoContratacaoController extends Controller
                     'statusImovel' => $contrato->STATUS_IMOVEL,
                     'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
                     'quantidadeDiasAposProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->diffInDays(Carbon::now()),
-                    'nomeProponente' => $contrato->NOME_PROPONENTE,
+                    'nomeProponente' => strtoupper($contrato->NOME_PROPONENTE),
                     'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
                     'tipoVenda' => $contrato->TIPO_VENDA,
                     'cardAgrupamentoContratacao' => isset($contrato->conformidadeContratacao->cardDeAgrupamento) ? $contrato->conformidadeContratacao->cardDeAgrupamento : '', 
@@ -143,9 +146,10 @@ class AcompanhamentoContratacaoController extends Controller
     {
         try {
             DB::beginTransaction();
-            $constratoAnalisado = AcompanhamentoContratacao::where('idAcompanhamentoContratacao', $id)->get();
+            $constratoAnalisado = AcompanhamentoContratacao::find($id);
             $constratoAnalisado->statusAcompanhamentoContratacao = $request->statusAcompanhamentoContratacao;
             $constratoAnalisado->matriculaAnalista = session('matricula');
+            $constratoAnalisado->updated_at = date("Y-m-d H:i:s", time());
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
