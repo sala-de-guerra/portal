@@ -56,7 +56,12 @@ class AvisoErroPortalPhpMailer
         }
   
         $mail->Subject = "Falha Portal - Ambiente: " . env('APP_ENV') . " - Rota: $urlAcessada - Usuário: $usuario";       
-        $mail->Body = $request;
+        $mail->Body = 
+            "<p>Arquivo: " . $request->getFile() . "</p>
+            <p>Linha: " . $request->getLine() . "</p>
+            <p>Mensagem: " . $request->getMessage() . "</p>
+            <p>Código: " . $request->getCode() . "</p>
+            ";
 
         return $mail; 
     }
