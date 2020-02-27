@@ -87,16 +87,17 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('emite-dle-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@emitePlanilhaDleDespesas');
     });
 
-    // ROTAS DO PROJETO MONITORA PAGAMENTO SINAL (5% DA PROPOSTA)
-    Route::prefix('monitora-pagamento-sinal')->group(function () {
-        Route::get('/', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@index');
-        Route::get('listar-contratos-sem-pagamento-sinal', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@listarContratosSemPagamentoSinal');
-    });
-
+    // // ROTAS DO PROJETO MONITORA PAGAMENTO SINAL (5% DA PROPOSTA)
+    // Route::prefix('monitora-pagamento-sinal')->group(function () {
+    //     Route::get('/', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@index');
+    // });
+    
     // ROTAS DO PROJETO ACOMPANHA CONTRATACAO
     Route::prefix('acompanha-contratacao')->group(function () {
-        Route::get('/', 'GestaoImoveisCaixa\ConformidadeContratataoController@consultaContratosContratacaoSessentaDias');
-        Route::get('listar-contratos-em-contratacao-ultimos-sessenta-dias', 'GestaoImoveisCaixa\ConformidadeContratataoController@acompanhaContratacao');
+        Route::get('/', 'GestaoImoveisCaixa\AcompanhamentoContratacaoController@consultaContratosContratacaoSessentaDias');
+        Route::get('listar-contratos-em-contratacao-ultimos-sessenta-dias', 'GestaoImoveisCaixa\AcompanhamentoContratacaoController@listarContratosContratacaoUltimosSessentaDias');
+        Route::get('listar-contratos-sem-pagamento-sinal', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@listarContratosSemPagamentoSinal');
+        Route::put('/acompanha-contratacao/atualizar/{idAcompanhamentoContratacao}', 'GestaoImoveisCaixa\AcompanhamentoContratacaoController@atualizaAcompanhamentoContratacao');
     });
 
     // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO

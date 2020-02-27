@@ -16,7 +16,7 @@ class CreateTableAcompanhaContratacao extends Migration
         Schema::create('TBL_ACOMPANHAMENTO_CONTRATACAO', function (Blueprint $table) {
             $table->bigIncrements('idAcompanhamentoContratacao');
             $table->string('numeroContrato', 50);
-            $table->string('nomeProponente', 250)->nullable();
+            $table->string('nomeProponente', 250);
             $table->string('cpfCnpjProponente', 150)->nullable();
             $table->string('statusAcompanhamentoContratacao', 150)->nullable();
             $table->string('matriculaAnalista', 7)->nullable();
