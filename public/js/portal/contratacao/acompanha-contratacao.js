@@ -8,6 +8,7 @@ $(document).ready(function(){
 
             var linha =
             '<tr>' +
+                '<td>' + item.idAcompanhamentoContratacao + '</td>' +
                 '<td>' + item.numeroContrato + '</td>' +
                 '<td>' + item.classificacaoImovel + '</td>' +
                 '<td>' + item.tipoVenda + '</td>' +
@@ -17,6 +18,7 @@ $(document).ready(function(){
                 '<td>' + item.quantidadeDiasAposProposta + '</td>' +
                 '<td>' + item.cardAgrupamentoContratacao + '</td>' +
                 '<td>' + item.statusConformidadeContratacao + '</td>' +
+                '<td>' + item.statusAcompanhamentoContratacao + '</td>' +
                 '<td class="justify-content-center align-items-center">' +
                     // '<div class="row">' +
                     //     '<div class="col-sm">' +
@@ -36,11 +38,24 @@ $(document).ready(function(){
 
             $(linha).appendTo('#tblContratosContratacaoUltimoSessentaDias>tbody');
             montaModal(item);
-        });
-        _formataData();  
+        }); 
+    });
+    $.getJSON('/estoque-imoveis/monitora-pagamento-sinal/listar-contratos-sem-pagamento-sinal', function(dados){
+        $.each(dados, function(key, item) {          
+            var linha = 
+                '<tr class="cursor-pointer">' +
+                    '<td>' + item.numeroContrato + '</td>' +
+                    '<td class="formata-data-sem-hora">' + item.dataProposta + '</td>' +
+                    '<td class="formata-data-sem-hora">' + item.vencimentoPp15 + '</td>' +
+                    '<td>' + item.statusSimov + '</td>' +
+                    '<td>' + item.classificacaoImovel + '</td>' +
+                '</tr>';
+            $(linha).appendTo('#tblContratosSemPagamentoSinal>tbody'); 
+        })
     });
     setTimeout(function() {
-        _formataDatatableComId('tblContratosContratacaoUltimoSessentaDias');
+        _formataData(); 
+        _formataDatatable();;
     }, 2000);
 }); 
 
@@ -48,7 +63,7 @@ function montaModal(objetoContratacao)
 {
     _token = $('meta[name="csrf-token"]').attr('content');
     
-    modal = '<div class="modal fade" id="modalAcompanhaContratacao' + objetoContratacao.numeroContrato + '" tabindex="-1" role="dialog" aria-labelledby="modalAcompanhaContratacaoLabel" aria-hidden="true">' +
+    modal = '<div class="modal fade" id="modalAcompanhaContratacao' + objetoContratacao.idAcompanhamentoContratacao + '" tabindex="-1" role="dialog" aria-labelledby="modalAcompanhaContratacaoLabel" aria-hidden="true">' +
                 '<div class="modal-dialog" role="document">' +
                     '<div class="modal-content">' +
                         '<div class="modal-header">' +
@@ -57,16 +72,17 @@ function montaModal(objetoContratacao)
                                 '<span aria-hidden="true">&times;</span>' +
                             '</button>' +
                         '</div>' +
-                        '<form class="col-md-12" action="/estoque-imoveis/acompanha-contratacao/atualizar/' + objetoContratacao.numeroContrato + '" method="POST"></form>' +
+                        '<form class="col-md-12" action="/estoque-imoveis/acompanha-contratacao/atualizar/' + objetoContratacao.idAcompanhamentoContratacao + '" method="POST"></form>' +
                         '<div class="modal-body">' +
                             '<input type="hidden" name="_method" value="PUT"></input>' +
                             '<input type="hidden" name="_token" value="' + _token + '">' +
+                            '<input type="hidden" name="contratoFormatado" value="' + objetoContratacao.contratoFormatado + '">' +
                             '<div class="row">' +
                                 '<label>Status:' +    
-                                    '<select name="tratado" class="form-control">' +
+                                    '<select name="statusAcompanhamentoContratacao" class="form-control">' +
                                         '<option disabled selected>Selecione</option>' +
-                                        '<option value="tratado">Tratado</option>' +
-                                        '<option value="pendente">Pendente</option>' +
+                                        '<option value="TRATADO">Tratado</option>' +
+                                        '<option value="PENDENTE">Pendente</option>' +
                                     '</select>' +
                                 '</label>' +
                             '</div>' +

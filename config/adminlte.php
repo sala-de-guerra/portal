@@ -331,12 +331,12 @@ return [
                     'url'  => '/estoque-imoveis/distrato',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
-                [
-                    'text' => 'Controle Pagamento Sinal',
-                    'icon'    => 'fas fa-lg fa-fw fa-search-dollar mr-2',
-                    'url'  => '/estoque-imoveis/monitora-pagamento-sinal',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
-                ],
+                // [
+                //     'text' => 'Controle Pagamento Sinal',
+                //     'icon'    => 'fas fa-lg fa-fw fa-search-dollar mr-2',
+                //     'url'  => '/estoque-imoveis/monitora-pagamento-sinal',
+                //     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                // ],
                 // [
                 //     'text' => 'level_two',
                 //     'url'  => '#',

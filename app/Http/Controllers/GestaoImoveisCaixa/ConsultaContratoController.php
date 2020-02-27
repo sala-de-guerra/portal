@@ -224,7 +224,6 @@ class ConsultaContratoController extends Controller
         } else {
             $fluxoAgenciaOuCca = 'CCA';
         }
-
         return $fluxoAgenciaOuCca;
     }
 
