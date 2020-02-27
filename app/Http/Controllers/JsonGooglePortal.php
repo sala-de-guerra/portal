@@ -43,10 +43,10 @@ class JsonGooglePortal extends Controller
                 'bemFormatado' = [BEM_FORMATADO]
                 ,'numeroBem' = [NU_BEM]
                 ,'enderecoCompleto' = CONCAT([ENDERECO_IMOVEL], ' - ', [BAIRRO], ' - ', [CIDADE])
-                ,'nomeExMutuario' = [NO_EX_MUTUARIO]
-                ,'cpfCnpjExMutuatio' = [NU_DOC_EX_MUTUARIO]
-                ,'nomeProponente' = [NOME_PROPONENTE]
-                ,'cpfCnpjProponente' = [CPF_CNPJ_PROPONENTE]
+                --,'nomeExMutuario' = [NO_EX_MUTUARIO]
+                --,'cpfCnpjExMutuatio' = [NU_DOC_EX_MUTUARIO]
+                --,'nomeProponente' = [NOME_PROPONENTE]
+                --,'cpfCnpjProponente' = [CPF_CNPJ_PROPONENTE]
             FROM [ALITB001_Imovel_Completo]
             WHERE
                 [UNA] = 'GILIE/SP'

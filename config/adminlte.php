@@ -246,13 +246,13 @@ return [
 
 
         // ['header' => 'IMÓVEIS CAIXA'],
-        // [
-        //     'text' => 'Pesquisar Imóvel',
-        //     'url'  => '/pesquisar',
-        //     'icon' => 'fas fa-lg fa-fw fa-search mr-2',
-        //     'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+        [
+            'text' => 'Pesquisar Imóvel',
+            'url'  => '/pesquisar',
+            'icon' => 'fas fa-lg fa-fw fa-search mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
 
-        // ],
+        ],
         // [
         //     'text' => 'Preparar e Ofertar',
         //     'url'  => 'admin/settings',

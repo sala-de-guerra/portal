@@ -79,7 +79,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <form class="form-inline tt-responsive" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                        <form class="m-0" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <div class="input-group">
                                 <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar">

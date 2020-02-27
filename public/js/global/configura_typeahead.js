@@ -8,16 +8,16 @@ $(document).ready(function(){
       var bemFormatadoTokens = Bloodhound.tokenizers.whitespace(datum.bemFormatado);
       var numeroBemTokens = Bloodhound.tokenizers.whitespace(datum.numeroBem);
       var enderecoCompletoTokens = Bloodhound.tokenizers.whitespace(datum.enderecoCompleto);
-      var nomeProponenteTokens = Bloodhound.tokenizers.whitespace(datum.nomeProponente);
-      var cpfCnpjProponenteTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjProponente);
+      // var nomeProponenteTokens = Bloodhound.tokenizers.whitespace(datum.nomeProponente);
+      // var cpfCnpjProponenteTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjProponente);
       // var nomeExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.nomeExMutuario);
       // var cpfCnpjExMutuarioTokens = Bloodhound.tokenizers.whitespace(datum.cpfCnpjExMutuario);
       
       return numeroBemTokens
         .concat(bemFormatadoTokens)
         .concat(enderecoCompletoTokens)
-        .concat(nomeProponenteTokens)
-        .concat(cpfCnpjProponenteTokens)
+        // .concat(nomeProponenteTokens)
+        // .concat(cpfCnpjProponenteTokens)
         // .concat(nomeExMutuarioTokens)
         // .concat(cpfCnpjExMutuarioTokens);
         
@@ -36,19 +36,28 @@ $(document).ready(function(){
         $(".tt-input").attr("disabled", false);
       
         return $.map(data.bens, function (bem) {
-            return {
-              bemFormatado: bem.bemFormatado,
-              numeroBem: bem.numeroBem,
-              enderecoCompleto: bem.enderecoCompleto,
-              nomeProponente: bem.nomeProponente,
-              cpfCnpjProponente: bem.cpfCnpjProponente,
-              // nomeExMutuario: bem.nomeExMutuario,
-              // cpfCnpjExMutuario: bem.cpfCnpjExMutuario
-            };
-          });
+          return {
+            bemFormatado: bem.bemFormatado,
+            numeroBem: bem.numeroBem,
+            enderecoCompleto: bem.enderecoCompleto,
+            // nomeProponente: bem.nomeProponente,
+            // cpfCnpjProponente: bem.cpfCnpjProponente,
+            // nomeExMutuario: bem.nomeExMutuario,
+            // cpfCnpjExMutuario: bem.cpfCnpjExMutuario
+          };
+        });
+      },
+      remote: {
+        wildcard: '%QUERY',
+        url: "searchbyrestaurant/%QUERY",
+        transform: function(response) {
+            return $.map(response, function(restaurant) {
+                return { value: restaurant.name };
+            });
         }
       }
-    });
+    }
+  });
     
 
 
@@ -81,22 +90,22 @@ $(document).ready(function(){
           suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}}</li>')
       }
     },
-    {
-      name: 'proponente',
-      limit: 10,
-      display: 'bemFormatado',
-      source: imoveis.ttAdapter(),
-      templates: {
-          header: '<h4 class="source-name">Pesquisa por Proponente</h4>',
-          empty: [
-            '<h4 class="source-name">Pesquisa por Proponente</h4>' +
-            '<div class="empty-message">' +
-              'Nenhum resultado encontrado.' +
-            '</div>'
-          ].join('\n'),
-          suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</li>')
-      }
-    },
+    // {
+    //   name: 'proponente',
+    //   limit: 10,
+    //   display: 'bemFormatado',
+    //   source: imoveis.ttAdapter(),
+    //   templates: {
+    //       header: '<h4 class="source-name">Pesquisa por Proponente</h4>',
+    //       empty: [
+    //         '<h4 class="source-name">Pesquisa por Proponente</h4>' +
+    //         '<div class="empty-message">' +
+    //           'Nenhum resultado encontrado.' +
+    //         '</div>'
+    //       ].join('\n'),
+    //       suggestion: Handlebars.compile('<li>CHB: {{numeroBem}} - Endereço: {{enderecoCompleto}} - Nome: {{nomeProponente}} - CPF/CNPJ: {{cpfCnpjProponente}}</li>')
+    //   }
+    // },
     // {
     //   name: 'ex-mutuario',
     //   limit: 10,

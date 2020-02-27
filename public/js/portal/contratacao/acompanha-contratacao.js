@@ -28,7 +28,7 @@ $(document).ready(function(){
                     // '</div>'+
                     '<div class="row">' + 
                         '<div class="col-sm">' +
-                            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAcompanhaContratacao' + item.numeroContrato + '" ><i class="fas fa-edit"></i></button>' +
+                            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAcompanhaContratacao' + item.idAcompanhamentoContratacao + '" ><i class="fas fa-edit"></i></button>' +
                         '</div>'+
                     '</div>'+
                     
@@ -40,7 +40,7 @@ $(document).ready(function(){
             montaModal(item);
         }); 
     });
-    $.getJSON('/estoque-imoveis/monitora-pagamento-sinal/listar-contratos-sem-pagamento-sinal', function(dados){
+    $.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pagamento-sinal', function(dados){
         $.each(dados, function(key, item) {          
             var linha = 
                 '<tr class="cursor-pointer">' +
@@ -56,7 +56,7 @@ $(document).ready(function(){
     setTimeout(function() {
         _formataData(); 
         _formataDatatable();;
-    }, 2000);
+    }, 4000);
 }); 
 
 function montaModal(objetoContratacao)
@@ -72,7 +72,7 @@ function montaModal(objetoContratacao)
                                 '<span aria-hidden="true">&times;</span>' +
                             '</button>' +
                         '</div>' +
-                        '<form class="col-md-12" action="/estoque-imoveis/acompanha-contratacao/atualizar/' + objetoContratacao.idAcompanhamentoContratacao + '" method="POST"></form>' +
+                        '<form class="col-md-12" action="/estoque-imoveis/acompanha-contratacao/atualizar/' + objetoContratacao.idAcompanhamentoContratacao + '" method="POST">' +
                         '<div class="modal-body">' +
                             '<input type="hidden" name="_method" value="PUT"></input>' +
                             '<input type="hidden" name="_token" value="' + _token + '">' +
@@ -88,10 +88,10 @@ function montaModal(objetoContratacao)
                             '</div>' +
                         '</div>' +
                         '<div class="modal-footer">' +
-                            '<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>' +
-                            '<button type="button" class="btn btn-primary">Salvar</button>' +
+                            // '<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>' +
+                            '<button type="submit" class="btn btn-primary">Salvar</button>' +
                         '</div>' +
-                        '</form>'
+                        '</form>' +
                     '</div>' +
                 '</div>' +
             '</div>';
