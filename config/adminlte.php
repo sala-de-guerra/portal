@@ -250,8 +250,7 @@ return [
             'text' => 'Pesquisar Imóvel',
             'url'  => '/pesquisar',
             'icon' => 'fas fa-lg fa-fw fa-search mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
-
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')
         ],
         // [
         //     'text' => 'Preparar e Ofertar',
@@ -355,12 +354,12 @@ return [
         [
             'text'    => 'Indicadores',
             'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
             'submenu' => [
                 [
                     'text' => 'Indicadores de Distrato',
                     'url'  => '/indicadores/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
         //         [
         //             'text' => 'level_one',
@@ -468,13 +467,13 @@ return [
         [
             'text'       => 'Gerencial',
             'icon'       => 'fas fa-lg fa-fw fa-portrait mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
             'submenu' => [
                 [
                     'text' => 'Gestão de Equipes',
                     'icon'       => 'fas fa-lg fa-users-cog',
                     'url'  => '/gerencial/equipes',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
     
             ],

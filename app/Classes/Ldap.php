@@ -7,8 +7,9 @@ use Exception;
 
 class Ldap
 {
-    private $simularMatricula;  //= 'c142765'; // Charles - GILIE
-    // private $simularMatricula = 'c070499'; // Euclidio - AG
+    // private $simularMatricula;  //= 'c142765'; // Charles - GILIE
+    private $simularMatricula = 'c070499'; // Euclidio - AG
+    // private $simularMatricula = 'c090120'; // Marcelo Barboza - GILIE
     private $matricula;
     private $nomeCompleto;
     private $cpf;

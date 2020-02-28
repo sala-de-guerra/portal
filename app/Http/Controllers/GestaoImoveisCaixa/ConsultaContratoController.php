@@ -56,6 +56,7 @@ class ConsultaContratoController extends Controller
         
         // CAPTURA DADOS DE CONFORMIDADE
         $dadosConformidade = ConformidadeContratacao::where('numeroContrato', $contrato->NU_BEM)->first();
+        // dd($dadosConformidade);
         // CAPTURA OS DADOS DA PROPOSTA DO PROPONENTE ATUAL
         $dadosProposta = PropostasSimov::where('NU_BEM', $contrato->NU_BEM)->where('VALOR RECURSOS PRÓPRIOS', $contrato->VALOR_REC_PROPRIOS_CONTRATO)->where('VALOR FGTS', $contrato->VALOR_FGTS_PROPOSTA)->where('VALOR FINANCIADO', $contrato->VALOR_FINANCIADO_PROPOSTA)->where('NOME PROPONENTE', $contrato->NOME_PROPONENTE)->first();
 
@@ -81,9 +82,11 @@ class ConsultaContratoController extends Controller
         if ($dadosConformidade == null || $dadosConformidade == 'NULL') {
             $cardDeAgrupamento = null;
             $nomeStatusDoDossie =  null;
+            $dataParecerConformidade = null;
         } else {
             $cardDeAgrupamento = $dadosConformidade->cardDeAgrupamento;
             $nomeStatusDoDossie =  $dadosConformidade->nomeStatusDoDossie;
+            $dataParecerConformidade = $dadosConformidade->dataStatus;
         }
 
         // VALIDA SE O PROPONENTE TEM E-MAIL CADASTRADO
@@ -150,10 +153,13 @@ class ConsultaContratoController extends Controller
             'emailAgContratacaoProposta' => $emailAgenciaContratacao,
             'siglaComissao' => $contrato->SIGLA_COMISSAO,
             'agrupamento' => $contrato->AGRUPAMENTO,
+            'dataAssinaturaContrato' => $contrato->DATA_CONTRATO == null ? $contrato->DATA_CONTRATO : Carbon::parse($contrato->DATA_CONTRATO)->format('Y-m-d'),
             // 'tipoContratacao'
             'cardAgrupamento' => $cardDeAgrupamento,
             'nomeStatusDossie' => $nomeStatusDoDossie,
             'tipoFluxoContratacao' => $fluxoAgenciaOuCca,
+            'dataParecerConformidade' => $dataParecerConformidade == null ? $dataParecerConformidade : Carbon::parse($dataParecerConformidade)->format('Y-m-d'),
+            
 
         ];
         return json_encode($dadosContrato);
@@ -310,8 +316,12 @@ class ConsultaContratoController extends Controller
 
         // SETTA UMA FLAG PARA DIZER SE EXISTE RESULTADO OU NÃO
         if (count($arrayConsultaConsolidada) > 0) {
-            $request->session()->flash('pesquisaComResultados');
-            return view('portal.imoveis.consultar.consultar-imovel')->with('resultadoPesquisa', $arrayConsultaConsolidada);
+            if (count($arrayConsultaConsolidada) == 1) {
+                return redirect()->route('consulta-bem-imovel', $arrayConsultaConsolidada[0]['contratoFormatado']);
+            } else {
+                $request->session()->flash('pesquisaComResultados');
+                return view('portal.imoveis.consultar.consultar-imovel')->with('resultadoPesquisa', $arrayConsultaConsolidada);
+            }
         } else {
             $request->session()->flash('pesquisaSemResultados');
             return view('portal.imoveis.consultar.consultar-imovel')->with('resultadoPesquisa', 'Não foram encontratos resultados para a pesquisa. Tente novamente.');

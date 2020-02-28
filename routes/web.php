@@ -8,11 +8,6 @@ Route::get('', function () {
 // route 404
 Route::fallback(function(){return response()->view('errors.404', [], 404);});
 
-//teste
-Route::get('teste', function () {
-    return view('teste');
-});    
-
 // sobre
 Route::get('sobre', function () {
     return view('portal.informativas.sobre');
@@ -51,7 +46,7 @@ Route::prefix('indicadores')->group(function () {
 });
 
 // Consulta de bem imóvel
-Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show');
+Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');;
 
 
 //  ROTAS WEB DOS PROCESSOS PERTINENTES AO ESTOQUE DE IMÓVEIS
@@ -126,4 +121,10 @@ Route::prefix('portal')->group(function () {
 // equipes
 Route::get('/gerencial/equipes', function () {
     return view('portal.gerencial.equipes');
+});
+
+// ROTA DE TESTE TROCA EMPREGADO CELULA
+Route::match(['get', 'post'], 'url', function () {
+    $resultado = rand(0, 1);
+    return $resultado == 0 ? response('error', 500) : response('success', 200);
 });
