@@ -1,0 +1,26 @@
+[ 
+    {
+    "matricula":"c142765",
+    "nomeCompleto":"Carlos",
+    "nomeFuncao":"Júnior",
+    "nomeEquipe": "Celula Gerencial"
+    },
+    {
+    "matricula":"c111710",
+    "nomeCompleto":"Eduardo",
+    "nomeFuncao":"Pleno",
+    "nomeEquipe": "Celula Contratacao"
+    },
+    {
+    "matricula":"c098453",
+    "nomeCompleto":"Rafael",
+    "nomeFuncao":"TBN",
+    "nomeEquipe": "Celula Contratacao"
+    },
+    {
+    "matricula":"c079436",
+    "nomeCompleto":"Vladimir",
+    "nomeFuncao":"Coordenador",
+    "nomeEquipe": "Celula Contratacao"
+    }
+]
