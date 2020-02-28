@@ -124,6 +124,6 @@ Route::prefix('portal')->group(function () {
 // Gerencial
 
 // equipes
-Route::get('/equipes', function () {
+Route::get('/gerencial/equipes', function () {
     return view('portal.gerencial.equipes');
 });

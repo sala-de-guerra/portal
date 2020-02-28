@@ -465,14 +465,20 @@ return [
         //     ],
         // ],
 
-        // ['header' => 'GERENCIAL'],
-        // [
-        //     'text'       => 'Perfis de Acesso',
-        //     'url'        => '/equipes',
-        //     'icon'       => 'fas fa-lg fa-users-cog',
-        // ],
-        
-
+        [
+            'text'       => 'Gerencial',
+            'icon'       => 'fas fa-lg fa-fw fa-portrait mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+            'submenu' => [
+                [
+                    'text' => 'Gestão de Equipes',
+                    'icon'       => 'fas fa-lg fa-users-cog',
+                    'url'  => '/gerencial/equipes',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+                ],
+    
+            ],
+        ],
 
         // [
         //     'text'       => 'information',

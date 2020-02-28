@@ -8,12 +8,13 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Alteração de Equipes
+            Gestão de Equipes
         </h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Alteração de Equipes</a> </li>
+            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Gerencial</li>
+            <li class="breadcrumb-item active"><a href="/"> Gestão de Equipes</a> </li>
         </ol>
     </div>
 </div>
@@ -26,9 +27,8 @@
 
 
 
-<div class="row">
-    <!-- <form> -->
-
+<form>
+    <div class="row">
         <div class="col-md-3">
             <div class="card card-default">
                 <div class="card-header">
@@ -38,28 +38,13 @@
                         Gestor: Joao Marcel Quintiliano
                     </h3>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
+                    <ul id="listaCelulaAdministrar" class="connectedSortable list-unstyled">
 
-                    <ul id="sortable1" class="connectedSortable list-unstyled" id="listaCelulaAdministrar">
-                        <li>
-                            <div class="callout callout-danger row padding0">
-                                <div class="col-md-3">
-                                    <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=c142765" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
-                                </div>
-                                <div class="col-md-9">
-                                    <h5 class="card-title">Carlos Alberto Dalcin David</h5>
-                                    <p class="card-text"><small class="text-muted">Assist. Júnior</small></p>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
-        <!-- /.col -->
 
         <div class="col-md-3">
             <div class="card card-default">
@@ -70,23 +55,13 @@
                         Gestor: Marcelo Barboza Fernandes
                     </h3>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
-                    <ul id="sortable2" class="connectedSortable list-unstyled" id="listaCelulaGerencia">
-                        <li>
-                            <div class="callout callout-info">
-                                <h5>I am a danger callout!</h5>
-                                <p>
-                                </p>
-                            </div>
-                        </li>
+                    <ul id="listaCelulaGerencia" class="connectedSortable list-unstyled">
+
                     </ul>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
-        <!-- /.col -->
 
         <div class="col-md-3">
             <div class="card card-default">
@@ -97,23 +72,13 @@
                         Gestor: Fernanda Pereira Mendonça
                     </h3>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
-                    <ul id="sortable3" class="connectedSortable list-unstyled" id="listaCelulaPreparar">
-                        <li>
-                            <div class="callout callout-warning">
-                                <h5>I am a danger callout!</h5>
-                                <p>
-                                </p>
-                            </div>
-                        </li>
+                    <ul id="listaCelulaPreparar" class="connectedSortable list-unstyled">
+                        
                     </ul>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
-        <!-- /.col -->
 
         <div class="col-md-3">
             <div class="card card-default">
@@ -125,29 +90,17 @@
                     </h3>
 
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
-                    <ul id="sortable4" class="connectedSortable list-unstyled" id="listaCelulaContratacao">
-                        <li>
-                            <div class="callout callout-success">
-                                <h5>I am a danger callout!</h5>
-                                <p>
-                                </p>
-                            </div>
-                        </li>
+                    <ul id="listaCelulaContratacao" class="connectedSortable list-unstyled">
+                        
                     </ul>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
-        <!-- /.col -->
     
-    
-    <!-- </form> -->
-    <!-- /.form -->
-</div> 
-<!-- /.row -->
+    </div> 
+</form>
+
 
 @section('footer')
 
@@ -163,17 +116,5 @@
 
 
 @section('js')
-@section('js')
-    <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
-
-    <script>
-        
-        $( function() {
-            $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
-            connectWith: ".connectedSortable"
-            }).disableSelection();
-        } );
-    </script>
-
-@stop
+    <script src="{{ asset('js/portal/gerencial/equipes.js') }}"></script>
 @stop
