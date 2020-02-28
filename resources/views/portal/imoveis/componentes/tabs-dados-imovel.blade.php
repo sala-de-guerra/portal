@@ -386,12 +386,12 @@
                                     <p id="quantidadeParcelasProposta"></p>
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-3">
+                            <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Total Recebido:</label>
-                                    <p id="valorTotalRecebido"></p>
+                                    <label>Data Assinatura Contrato:</label>
+                                    <p id="dataAssinaturaContrato" class="formata-data-sem-hora"></p>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <div class="row">
@@ -450,11 +450,11 @@
 
                         <hr class="pontilhado">
 
-                        <h2 class="card-title"><b>Conformidade</b></h2>
+                        <h2 class="card-title" id="cardTitleConformidade"><b>Conformidade</b></h2>
 
-                        <br>
+                        <br id="brConformidade">
 
-                        <div class="row">
+                        <div class="row" id="rowConformidade">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Status Conformidade:</label>
@@ -467,9 +467,15 @@
                                     <p id="cardAgrupamento"></p>
                                 </div>
                             </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Parecer Conformidade:</label>
+                                    <p id="dataParecerConformidade" class="formata-data-sem-hora"></p>
+                                </div>
+                            </div>
                         </div>
 
-                        <hr class="pontilhado">
+                        <hr class="pontilhado" id="pontilhadoConformidade">
 
                         <h2 class="card-title"><b>Agência Responsável</b></h2>
 

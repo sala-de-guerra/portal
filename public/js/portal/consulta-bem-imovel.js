@@ -21,6 +21,13 @@ $(document).ready(function(){
 
         $.each(dados, function(key, item) {
             $('#' + key).html(item);
+            // REMOVE O BLOCO DE CONFORMIDADE CASO NÃO EXISTA DADOS DE CONFORMIDADE NO IMAGEM.CAIXA
+            if (key == 'nomeStatusDossie' && item == null) {
+                $('#cardTitleConformidade').remove();
+                $('#brConformidade').remove();
+                $('#rowConformidade').remove();
+                $('#pontilhadoConformidade').remove();
+            }
         });
 
         $('#linkServidor').attr('onClick',"window.open('\\sp7257sr001/PUBLIC/EstoqueImoveis/" + numeroContrato + "')");
