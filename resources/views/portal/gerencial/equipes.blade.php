@@ -25,8 +25,8 @@
 
 @section('content')
 
-<div class="row">
-    <div class="col-md-3">
+<div id="equipes" class="row">
+    <!-- <div class="col-md-3">
         <div class="card card-default">
             <div class="card-header">
                 <h3 class="card-title">
@@ -47,7 +47,7 @@
         <div class="card card-default">
             <div class="card-header">
                 <h3 class="card-title">
-                    Célula Gerência
+                    Célula Administrativo / RH
                     <br>
                     Gestor: Marcelo Barboza Fernandes
                 </h3>
@@ -81,7 +81,7 @@
         <div class="card card-default">
             <div class="card-header">
                 <h3 class="card-title">
-                    Célula Contratação e Inovação
+                    Célula Contratação e TI
                     <br>
                     Gestor: Vladimir Pereira de Lemos
                 </h3>
@@ -93,7 +93,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div> 
 
