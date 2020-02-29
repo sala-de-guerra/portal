@@ -32,14 +32,14 @@ $(document).ready( function () {
                     calloutColor = 'info';
                     break;
                 case 'Celula Preparar':
-                    calloutColor = 'success ';
+                    calloutColor = 'success';
                     break;
                 case 'Celula Contratacao':
                     calloutColor = 'danger';
                     break;
                 default:
                     calloutColor = 'info';
-            }
+            };
 
             let card =
                 `<li id="` + item.matricula + `">` +
@@ -75,16 +75,40 @@ $(document).ready( function () {
         });
         
     });
+    
+});
 
-    /***************************************************\
-    | Animação de clicar e arrastar e salvar alterações |
-    \***************************************************/
+/*****************************************************\
+| Função que troca a cor do toast se o POST der certo |
+\*****************************************************/
 
-    $( '#listaCelulaAdministrar, #listaCelulaGerencia, #listaCelulaPreparar, #listaCelulaContratacao' )
-        .sortable({
-            connectWith: '.connectedSortable',
-        })
-        .on( 'sortstop', function( event, ui ) {
+function trocarCor(celula, callout) {
+    $(callout).removeClass('callout-warning callout-info callout-success callout-danger');
+
+    switch (celula) {
+        case 'listaCelulaAdministrar':
+            $(callout).addClass('callout-warning');
+            break;
+        case 'listaCelulaGerencia':
+            $(callout).addClass('callout-info');
+            break;
+        case 'listaCelulaPreparar':
+            $(callout).addClass('callout-success');
+            break;
+        case 'listaCelulaContratacao':
+            $(callout).addClass('callout-danger');
+            break;
+    }
+}
+
+/***************************************************\
+| Animação de clicar & arrastar e salvar alterações |
+\***************************************************/
+
+$( '#listaCelulaAdministrar, #listaCelulaGerencia, #listaCelulaPreparar, #listaCelulaContratacao' )
+    .sortable({
+        connectWith: '.connectedSortable',
+        receive: function( event, ui ) {
             // console.log(ui);
             // console.log(ui.item);
             // console.log(ui.item[0].id);
@@ -107,36 +131,15 @@ $(document).ready( function () {
             })
             .fail(function () {
                 
-                $('#listaCelulaAdministrar, #listaCelulaGerencia, #listaCelulaPreparar, #listaCelulaContratacao').sortable('cancel');
+                $(ui.sender).sortable('cancel');
 
                 Toast.fire({
                     icon: 'error',
                     title: 'Erro: alteração Não efetuada!'
                 });
             });
-        
 
-            function trocarCor(celula, callout) {
-                $(callout).removeClass('callout-warning callout-info callout-success callout-danger');
-
-                switch (celula) {
-                    case 'listaCelulaAdministrar':
-                        $(callout).addClass('callout-warning');
-                        break;
-                    case 'listaCelulaGerencia':
-                        $(callout).addClass('callout-info');
-                        break;
-                    case 'listaCelulaPreparar':
-                        $(callout).addClass('callout-success');
-                        break;
-                    case 'listaCelulaContratacao':
-                        $(callout).addClass('callout-danger');
-                        break;
-                }
-            }
-
-        })
-        .disableSelection()
-    ;
-
-});
+        }
+    })
+    .disableSelection()
+;
