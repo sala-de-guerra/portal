@@ -82,8 +82,8 @@
                         <form class="m-0" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <div class="input-group">
-                                <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar">
-                                    <option disabled selected>Selecione</option>
+                                <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar" required>
+                                    <option value="" disabled selected>Selecione</option>
                                     <option value="numeroContrato">Contrato</option>
                                     <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
                                     <option value="nomeProponente">Nome proponente</option>
@@ -92,9 +92,9 @@
                                     <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
                                     <option value="nomeExMutuario">Nome ex-mutuário</option>
                                 </select>
-                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" name="valorVariavel" placeholder="Pesquise um termo para pesquisa.">
+                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" onkeyup="stoppedTyping()" placeholder="Pesquise um termo para pesquisa.">
                                 <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit"> <i class="fas fa-search"></i> </button>
+                                    <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
                         </form>
@@ -294,6 +294,23 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+
+        function stoppedTyping(){
+            if(this.value.length > 3) { 
+                document.getElementById('botaoPesquisar').disabled = false; 
+            } else { 
+                document.getElementById('botaoPesquisar').disabled = true;
+            }
+        }
+        function verify(){
+            if myText is empty {
+                alert "Você precisa digitar um termo para pesquisa"
+                return
+            }
+            else{
+                do button functionality
+            }
+        }
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
