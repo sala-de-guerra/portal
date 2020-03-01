@@ -12,13 +12,57 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
+/*************************************************\
+| Limpar campos do modal ao clicar fora ou fechar |
+\*************************************************/
+
+$(".modal").on('hidden.bs.modal', function(e){
+    $(this).find("form")[0].reset();       
+});
+
+/********************************************************\
+| Função mostra as equipes da regiao do usuario da seção |
+\********************************************************/
+
+let lotacaoUsuario = $('#lotacao').html();
+let regiaoUnidadeSecao = '';
+
+$(document).ready( function () {
+
+
+    console.log(lotacaoUsuario);
+
+    switch (lotacaoUsuario) {
+        case '7257':
+            regiaoUnidadeSecao = 'SP';
+            break;
+    };
+
+    $('#selectGilie').val(regiaoUnidadeSecao);
+
+    montaCardsEquipes(regiaoUnidadeSecao);
+    
+});
+
+/**********************************************************\
+| Limpar cards e criar cards ao trocar o select de regiões |
+\**********************************************************/
+
+$('#selectGilie').change(function() {
+    let regiaoUnidade = $(this).val();
+    $('#equipes').empty();
+    $('#selectGestorCriar').empty();
+    montaCardsEquipes(regiaoUnidade);
+
+});
+
 /*********************************************************************\
 | Função que cria uma lista para cada equipe com empregados populados |
 \*********************************************************************/
 
-$(document).ready( function () {
+function montaCardsEquipes (regiaoUnidade) {
 
-    $.getJSON('../js/equipes.json', function(dados) {
+    $.getJSON('../js/equipes' + regiaoUnidade + '.json', function(dados) {
         // console.log(dados);
         $.each(dados, function(key, item) {
             
@@ -28,7 +72,7 @@ $(document).ready( function () {
                 
                 let card =
                     `<li id="` + item.matricula + `">` +
-                        `<div class="callout callout-primary row p-0">` +
+                        `<div class="callout callout-info row p-0">` +
                             `<div class="col-md-12" id="eventual` + item.matricula + `" style="display:none;">` +
                                 `<i class="fas fa-fw fa-crown px-1"></i>` +
                             `</div>` +
@@ -74,52 +118,89 @@ $(document).ready( function () {
 
             $('#eventual' + item.matriculaEventualCelula).show();
 
+            /*******************************************\
+            | Monta options do select de excluir equipe |
+            \*******************************************/
+
+            let optionExcluir =
+                `<option value="` + item.nomeCelula + `">` + item.nomeCelula + `</option>`
+            ;
+
+            $(optionExcluir).appendTo('#selectExcluirEquipe');
+
+
+            /***************************************************\
+            | Animação de clicar & arrastar e salvar alterações |
+            \***************************************************/
+
+            $( '.connectedSortable' )
+            .sortable({
+                connectWith: '.connectedSortable',
+                receive: function( event, ui ) {
+                    // console.log(ui);
+                    // console.log(ui.item);
+                    // console.log(ui.item[0].id);
+                    // console.log(ui.item[0].parentElement.id);
+                    // console.log(ui.item[0].children);
+
+                    let matricula = ui.item[0].id;
+                    let celula = ui.item[0].parentElement.id;
+                    let callout = ui.item[0].children;
+
+                    // console.log({matricula, celula, _token});
+
+                    $.post('/url', {matricula, celula, _token}, function (){
+                        // trocarCor(celula, callout);
+                        $('#eventual' + item.matriculaEventualCelula).hide();
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Alteração salva!'
+                        });
+                    })
+                    .fail(function () {
+                        
+                        $(ui.sender).sortable('cancel');
+
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Erro: alteração Não efetuada!'
+                        });
+                    });
+
+                }
+            })
+            .disableSelection()
+            ;
+
         });
 
-        /***************************************************\
-        | Animação de clicar & arrastar e salvar alterações |
-        \***************************************************/
-
-        $( '.connectedSortable' )
-        .sortable({
-            connectWith: '.connectedSortable',
-            receive: function( event, ui ) {
-                // console.log(ui);
-                // console.log(ui.item);
-                // console.log(ui.item[0].id);
-                // console.log(ui.item[0].parentElement.id);
-                // console.log(ui.item[0].children);
-
-                let matricula = ui.item[0].id;
-                let celula = ui.item[0].parentElement.id;
-                let callout = ui.item[0].children;
-
-                // console.log({matricula, celula, _token});
-
-                $.post('/url', {matricula, celula, _token}, function (){
-                    // trocarCor(celula, callout);
-
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Alteração salva!'
-                    });
-                })
-                .fail(function () {
-                    
-                    $(ui.sender).sortable('cancel');
-
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Erro: alteração Não efetuada!'
-                    });
-                });
-
-            }
-        })
-        .disableSelection()
-        ;
-        
     });
 
+    /***********************************************************************\
+    | Função que pega a lista de gestores e popula o select de criar equipe |
+    \***********************************************************************/
     
-});
+    $.getJSON('../js/gestores' + regiaoUnidade + '.json', function(dados) {
+        // console.log(dados);
+
+        $.each(dados, function(key, item) {
+            
+            let option =
+                `<option value="` + item.matriculaGestor + `" selected>` + item.nomeGestor + `</option>`
+            ;
+
+            $(option).appendTo('#selectGestorCriar');
+
+        });
+
+        let selectedVazio = 
+            `<option value="" selected>Selecione</option>`
+        ;
+
+        $(selectedVazio).appendTo('#selectGestorCriar');
+    
+    });
+
+};
+
