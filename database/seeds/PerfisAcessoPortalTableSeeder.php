@@ -18,5 +18,6 @@ class PerfisAcessoPortalTableSeeder extends Seeder
         DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c142765','nivelAcesso' => 'DESENVOLVEDOR','unidade' => '7257',]);
         DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c098453','nivelAcesso' => 'DESENVOLVEDOR','unidade' => '7257',]);
         DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c141203','nivelAcesso' => 'GILIE','unidade' => '7257',]);
+        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c032579','nivelAcesso' => 'AGENCIA','unidade' => '457',]);
     }
 }

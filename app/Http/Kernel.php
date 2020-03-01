@@ -39,7 +39,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetCookiesSession::class,
             \App\Http\Middleware\PortalLogAcessoMiddleware::class,
             \App\Http\Middleware\ValidaAcessoRotaPortal::class,
-            \App\Http\Middleware\ControleNotificacoesNavBar::class
+            \App\Http\Middleware\ControleNotificacoesNavBar::class,
+            \App\Http\Middleware\GestaoEquipesEmpregadosMiddleware::class
         ],
 
         'api' => [
