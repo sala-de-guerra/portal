@@ -3,24 +3,28 @@
     "matricula":"c142765",
     "nomeCompleto":"Carlos",
     "nomeFuncao":"Júnior",
-    "nomeEquipe": "Celula Gerencial"
+    "nomeEquipe": "Celula Gerencial",
+    "eventual": "sim"
     },
     {
     "matricula":"c111710",
     "nomeCompleto":"Eduardo",
     "nomeFuncao":"Pleno",
-    "nomeEquipe": "Celula Contratacao"
+    "nomeEquipe": "Celula Contratacao",
+    "eventual": "não"
     },
     {
     "matricula":"c098453",
     "nomeCompleto":"Rafael",
     "nomeFuncao":"TBN",
-    "nomeEquipe": "Celula Contratacao"
+    "nomeEquipe": "Celula Contratacao",
+    "eventual": "não"
     },
     {
     "matricula":"c079436",
     "nomeCompleto":"Vladimir",
     "nomeFuncao":"Coordenador",
-    "nomeEquipe": "Celula Contratacao"
+    "nomeEquipe": "Celula Contratacao",
+    "eventual": "não"
     }
 ]
