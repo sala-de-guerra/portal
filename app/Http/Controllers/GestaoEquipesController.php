@@ -16,7 +16,35 @@ class GestaoEquipesController extends Controller
      */
     public function index()
     {
-        //
+        // VALIDA NOS CASOS DE GERENTE A EXISTENCIA DE EQUIPES CRIADAS, CASO NEGATIVO CRIA A PRIMEIRA PARA GESTÃO DO GESTOR
+        $usuarioGestor = Empregado::find(session('matricula'));
+
+        if($usuarioGestor->codigoFuncao == '2066') {
+            $quantidadeEquipes = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $usuarioGestor->codigoLotacaoAdministrativa)->get();
+            if ($quantidadeEquipes->count() == 0) {
+                $primeiraEquipeUnidade = new GestaoEquipesCelulas;
+                $primeiraEquipeUnidade->codigoUnidadeEquipe = $usuarioGestor->codigoLotacaoAdministrativa;
+                $primeiraEquipeUnidade->nomeEquipe = 'Gerencial';
+                $primeiraEquipeUnidade->matriculaGestor = $usuarioGestor->matricula;
+                $primeiraEquipeUnidade->nomeGestor = $usuarioGestor->nomeCompleto;
+                $primeiraEquipeUnidade->created_at = date("Y-m-d H:i:s", time());
+                $primeiraEquipeUnidade->updated_at = date("Y-m-d H:i:s", time());
+                $primeiraEquipeUnidade->save();
+            }
+        }
+        return view('portal.gerencial.equipes');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listarEquipesUnidade()
+    {
+        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $usuarioGestor->codigoLotacaoAdministrativa)->get();
+
+        return json_encode($relacaoEquipesUnidade);
     }
 
     /**
