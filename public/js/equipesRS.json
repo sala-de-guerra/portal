@@ -1,6 +1,6 @@
 [ 
     {
-        "nomeCelula":"Administrar PAR / ADJ",
+        "nomeCelula":"Administrar",
         "nomeGestorCelula":"Joao Marcel",
         "matriculaGestorCelula":"c738787",
         "nomeEventualCelula": "Carlos",
@@ -8,7 +8,7 @@
         "equipe": []
     },
     {
-        "nomeCelula":"Administrativo / RH",
+        "nomeCelula":"Gerir",
         "nomeGestorCelula":"Marcelo",
         "matriculaGestorCelula":"c888787",
         "nomeEventualCelula": "Fernanda",
@@ -22,7 +22,7 @@
         ]
     },
     {
-        "nomeCelula":"Preparar e Ofertar",
+        "nomeCelula":"Coordenar",
         "nomeGestorCelula":"Fernanda",
         "matriculaGestorCelula":"c728727",
         "nomeEventualCelula": "Camila",
@@ -30,7 +30,7 @@
         "equipe": []
     },
     {
-        "nomeCelula":"Contratação e TI",
+        "nomeCelula":"Supervisionar",
         "nomeGestorCelula":"Vladimir",
         "matriculaGestorCelula":"c111828",
         "nomeEventualCelula": "Eduardo",

@@ -82,9 +82,9 @@
                         <form class="m-0" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <div class="input-group">
-                                <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar" required>
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option value="numeroContrato">Contrato</option>
+                                <select name="tipoVariavel" id="tipoVariavel" style="color:white;" class="form-control form-control-navbar" required>
+                                    <option style="color:black;" value="" disabled selected>Selecione</option>
+                                    <option style="color:black;" value="numeroContrato">Contrato</option>
                                     <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
                                     <option value="nomeProponente">Nome proponente</option>
                                     <option value="enderecoImovel">Endereço imóvel</option>
@@ -92,7 +92,7 @@
                                     <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
                                     <option value="nomeExMutuario">Nome ex-mutuário</option>
                                 </select>
-                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" onkeyup="stoppedTyping()" placeholder="Pesquise um termo para pesquisa.">
+                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" onkeyup="stoppedTyping()" placeholder="Digite um termo para pesquisa.">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
@@ -175,7 +175,7 @@
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title ">{{ session()->get('nomeCompleto') }}</h3>
                                         <p class="text-sm">{{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}</p>
-                                        <p class="text-sm">UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}</p>
+                                        <p class="text-sm">UNIDADE: </p> <p class="text-sm" id="lotacao">{{ session()->get('codigoLotacaoAdministrativa') }}</p>
                                         <p class="text-sm">{{ session()->get('acessoEmpregadoPortal') }}</p>
                                     </div>
                                 </div>
@@ -303,7 +303,7 @@
             }
         }
         function verify(){
-            if myText is empty {
+            if (myText == '') {
                 alert "Você precisa digitar um termo para pesquisa"
                 return
             }
