@@ -12,6 +12,21 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
+/************************************************************\
+| Função que limpa os cards da tela e recria, a.k.a. refresh |
+\************************************************************/
+
+let regiaoUnidade = $('#selectGilie').val();
+
+function refresh(regiaoUnidade) {
+    $('#equipes').empty();
+    $('#selectCriarEquipe').empty();
+    $('#selectAlterarEquipe').empty();
+    $('#selectAlterarGestor').empty();
+    $('#selectExcluirEquipe').empty();
+    montaCardsEquipes(regiaoUnidade);
+};
+
 /*************************************************\
 | Limpar campos do modal ao clicar fora ou fechar |
 \*************************************************/
@@ -50,10 +65,7 @@ $(document).ready( function () {
 
 $('#selectGilie').change(function() {
     let regiaoUnidade = $(this).val();
-    $('#equipes').empty();
-    $('#selectGestorCriar').empty();
-    montaCardsEquipes(regiaoUnidade);
-
+    refresh(regiaoUnidade);
 });
 
 /*********************************************************************\
@@ -96,7 +108,7 @@ function montaCardsEquipes (regiaoUnidade) {
             let stringEmpregados = arrayEmpregados.join(' ').trim();
 
             let lista =
-                `<div class="col-md-3">` +
+                `<div id="cardLista` + item.id + `" class="col-md-3">` +
                     `<div class="card card-default">` +
                         `<div class="card-header">` +
                             `<h3 class="card-title">` +
@@ -118,16 +130,16 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $('#eventual' + item.matriculaEventualCelula).show();
 
-            /*******************************************\
-            | Monta options do select de excluir equipe |
-            \*******************************************/
+            /*****************************************************\
+            | Monta options do select de alterar e excluir equipe |
+            \*****************************************************/
 
-            let optionExcluir =
+            let optionNomeCelula =
                 `<option value="` + item.nomeCelula + `">` + item.nomeCelula + `</option>`
             ;
 
-            $(optionExcluir).appendTo('#selectExcluirEquipe');
-
+            $(optionNomeCelula).appendTo('#selectAlterarEquipe');
+            $(optionNomeCelula).appendTo('#selectExcluirEquipe');
 
             /***************************************************\
             | Animação de clicar & arrastar e salvar alterações |
@@ -145,7 +157,7 @@ function montaCardsEquipes (regiaoUnidade) {
 
                     let matricula = ui.item[0].id;
                     let celula = ui.item[0].parentElement.id;
-                    let callout = ui.item[0].children;
+                    // let callout = ui.item[0].children;
 
                     // console.log({matricula, celula, _token});
 
@@ -164,7 +176,7 @@ function montaCardsEquipes (regiaoUnidade) {
 
                         Toast.fire({
                             icon: 'error',
-                            title: 'Erro: alteração Não efetuada!'
+                            title: 'Erro: alteração não efetuada!'
                         });
                     });
 
@@ -190,7 +202,9 @@ function montaCardsEquipes (regiaoUnidade) {
                 `<option value="` + item.matriculaGestor + `" selected>` + item.nomeGestor + `</option>`
             ;
 
-            $(option).appendTo('#selectGestorCriar');
+            $(option).appendTo('#selectCriarEquipe');
+            $(option).appendTo('#selectAlterarGestor');
+
 
         });
 
@@ -198,9 +212,111 @@ function montaCardsEquipes (regiaoUnidade) {
             `<option value="" selected>Selecione</option>`
         ;
 
-        $(selectedVazio).appendTo('#selectGestorCriar');
-    
+        $(selectedVazio).appendTo('#selectCriarEquipe');
+        $(selectedVazio).appendTo('#selectAlterarEquipe');
+        $(selectedVazio).appendTo('#selectAlterarGestor');
+        $(selectedVazio).appendTo('#selectExcluirEquipe');
     });
 
 };
 
+/*********************************************************\
+| Função que cria uma nova equipe sem dar refresh na tela |
+\*********************************************************/
+
+function criarEquipe() {
+
+    let nomeCriarEquipe = $('#nomeCriarEquipe').val();
+    let selectCriarEquipe = $('#selectCriarEquipe').val();
+    console.log(nomeCriarEquipe);
+    console.log(selectCriarEquipe);
+
+    $.post('/url', {nomeCriarEquipe, selectCriarEquipe, _token}, function (){
+
+        $('.modal').modal('hide');
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Alteração salva!'
+        });
+
+        refresh(regiaoUnidade);
+    })
+    .fail(function () {
+        
+        $('.modal').modal('hide');
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Erro: alteração não efetuada!'
+        });
+    });
+};
+
+/***********************************************************\
+| Função que altera uma nova equipe sem dar refresh na tela |
+\***********************************************************/
+
+function alterarEquipe() {
+
+    let nomeAtualEquipe = $('#selectAlterarEquipe').val();
+    let nomeNovoEquipe = $('#nomeAlterarEquipe').val();
+    let selectAlterarGestor = $('#selectAlterarGestor').val();
+
+    console.log(nomeAtualEquipe);
+    console.log(nomeNovoEquipe);
+    console.log(selectAlterarGestor);
+
+    $.post('/url', {nomeAtualEquipe, nomeNovoEquipe, selectAlterarGestor, _token}, function (){
+
+        $('.modal').modal('hide');
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Alteração salva!'
+        });
+
+        refresh(regiaoUnidade);
+    })
+    .fail(function () {
+        
+        $('.modal').modal('hide');
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Erro: alteração não efetuada!'
+        });
+    });
+};
+
+/******************************************************\
+| Função que exclui uma equipe sem dar refresh na tela |
+\******************************************************/
+
+function excluirEquipe() {
+
+    let selectExcluirEquipe = $('#selectExcluirEquipe').val();
+
+    console.log(selectExcluirEquipe);
+
+    $.post('/url', {selectExcluirEquipe, _token}, function (){
+
+        $('.modal').modal('hide');
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Alteração salva!'
+        });
+
+        refresh(regiaoUnidade);
+    })
+    .fail(function () {
+        
+        $('.modal').modal('hide');
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Erro: alteração não efetuada!'
+        });
+    });
+};

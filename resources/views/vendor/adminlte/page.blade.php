@@ -292,7 +292,7 @@
 
     <script>
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
         })
 
         function stoppedTyping(){
@@ -304,11 +304,11 @@
         }
         function verify(){
             if (myText == '') {
-                alert "Você precisa digitar um termo para pesquisa"
+                alert ("Você precisa digitar um termo para pesquisa");
                 return
             }
             else{
-                do button functionality
+                do button functionality;
             }
         }
     </script>
