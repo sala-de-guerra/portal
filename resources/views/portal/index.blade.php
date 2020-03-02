@@ -105,11 +105,11 @@
             </div>
             <div class="card-body">
                 <h4> 
-                    <a href="/pesquisar">
+                    <a href="#tipoVariavel">
                         <i class="fa fa-search m-2"></i> Pesquisar Bem Imóvel
                     </a>
                     <br>
-                    <small>Pesquise os imóveis administrados pela GILIE/SP por número do contrato, endereço, nome e CPF do Proponente.</small>
+                    <small>Pesquise os imóveis administrados pelas filiais por número de contrato, endereço, nome e CPF do proponente ou ex-mutuário. </small>
                 </h4>
                 
                 <hr class="pontilhado">

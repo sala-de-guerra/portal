@@ -56,8 +56,20 @@ class AvisoErroPortalPhpMailer
         }
   
         $mail->Subject = "Falha Portal - Ambiente: " . env('APP_ENV') . " - Rota: $urlAcessada - Usuário: $usuario";       
-        $mail->Body = $request;
-
+        $mail->Body = 
+            "<h3>Arquivo: </h3>
+            <p>"    . $request->getFile()           . "</p>
+            <h3>Linha: </h3>
+            <p>"    . $request->getLine()           . "</p>
+            <h3>Mensagem: </h3>
+            <p>"    . $request->getMessage()        . "</p>
+            <h3>Código: </h3>
+            <p>"    . $request->getCode()           . "</p>
+            <h3>Rastro: </h3>
+            <p>"    . $request->getTraceAsString()  . "</p>
+            <h3>ToString: </h3>
+            <p>       $request                         </p>
+            ";
         return $mail; 
     }
 
@@ -70,5 +82,4 @@ class AvisoErroPortalPhpMailer
             // echo "Mensagem não pode ser enviada. Erro: {$mail->ErrorInfo}";
         }
     }
-
 }

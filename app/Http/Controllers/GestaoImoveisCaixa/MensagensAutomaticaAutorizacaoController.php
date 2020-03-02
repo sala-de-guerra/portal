@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Classes\GestaoImoveisCaixa\ImoveisCaixaPhpMailer;
 use App\Models\RelacaoAgSrComEmail;
 use App\Models\HistoricoPortalGilie;
@@ -213,6 +214,8 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             $historico->tipo = "MENSAGERIA";
             $historico->atividade = "CONTRATACAO";
             $historico->observacao = "ENVIO DE MENSAGERIA - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
 
             $controleMensageria = new ControleMensageria;
@@ -221,14 +224,23 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             $controleMensageria->codigoAgencia = $dadosEmail->codigoAgencia;
             $controleMensageria->emailCorretor = $dadosEmail->emailCorretor;
             $controleMensageria->emailProponente = $dadosEmail->emailProponente;
+            $controleMensageria->created_at = date("Y-m-d H:i:s", time());
+            $controleMensageria->updated_at = date("Y-m-d H:i:s", time());
             $controleMensageria->save();
         } else {
+            echo "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente<br>";
+
+            $assunto = "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            ImoveisCaixaPhpMailer::enviarMensageria($dadosEmail, $assunto, 'erroNoEnvioDeMensageria');
+
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
             $historico->numeroContrato = $dadosEmail->contratoBem;
             $historico->tipo = "ERRO MENSAGERIA";
             $historico->atividade = "CONTRATACAO";
             $historico->observacao = "ERRO DE ENVIO DE AUTORIZAÇÃO - CONTRATO: $dadosEmail->contratoBem - PROPONENTE: $dadosEmail->nomeProponente";
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
         }
 
@@ -623,7 +635,7 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             session()->flash('tituloMensagem', "Autorização enviada!");
             session()->flash('corpoMensagem', "O e-mail de orientações para prosseguimento da contratação foi enviado com sucesso.");
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             // RETORNA A FLASH MESSAGE
             session()->flash('corMensagem', 'warning');

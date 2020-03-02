@@ -4,7 +4,7 @@ $(document).ready( function () {
     $.getJSON('js/relacao_cidades_por_gilie.json', function(dados){
 
         $.each(dados, function(key, item) {
-            var linha =
+            let linha =
                 '<tr>' +
                     '<td>' + item.GILIE + '</td>' +
                     '<td>' + item.MUNICIPIO + '</td>' +

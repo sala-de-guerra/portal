@@ -11,12 +11,13 @@ class PerfisAcessoPortalTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c111710','nivelAcesso' => 'GILIE','unidade' => '2622',]);
-        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c079436','nivelAcesso' => 'GILIE','unidade' => '1925',]);
+        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c111710','nivelAcesso' => 'DESENVOLVEDOR','unidade' => '7257',]);
+        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c079436','nivelAcesso' => 'GESTOR','unidade' => '7257',]);
         DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c116299','nivelAcesso' => 'AGENCIA','unidade' => '1351',]);
         DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c084794','nivelAcesso' => 'MATRIZ','unidade' => '5530',]);
-        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c142765','nivelAcesso' => 'GILIE','unidade' => '242',]);
-        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c098453','nivelAcesso' => 'GILIE','unidade' => '5459',]);
-        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c141203','nivelAcesso' => 'GILIE','unidade' => '5459',]);
+        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c142765','nivelAcesso' => 'DESENVOLVEDOR','unidade' => '7257',]);
+        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c098453','nivelAcesso' => 'DESENVOLVEDOR','unidade' => '7257',]);
+        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c141203','nivelAcesso' => 'GILIE','unidade' => '7257',]);
+        DB::table('TBL_PERFIS_ACESSO_PORTAL')->insert(['matricula' => 'c032579','nivelAcesso' => 'AGENCIA','unidade' => '457',]);
     }
 }

@@ -245,13 +245,12 @@ return [
         // ],
 
 
-        ['header' => 'IMÓVEIS CAIXA'],
+        // ['header' => 'IMÓVEIS CAIXA'],
         [
             'text' => 'Pesquisar Imóvel',
             'url'  => '/pesquisar',
             'icon' => 'fas fa-lg fa-fw fa-search mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
-
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')
         ],
         // [
         //     'text' => 'Preparar e Ofertar',
@@ -314,15 +313,29 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
             'submenu' => [
                 [
+                    'text' => 'Acompanhar Contratação',
+                    'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                    'url'  => '/estoque-imoveis/acompanha-contratacao',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
+                [
                     'text' => 'Controle de Conformidade',
+                    'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 [
                     'text' => 'Controle de Distrato',
+                    'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
                     'url'  => '/estoque-imoveis/distrato',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
+                // [
+                //     'text' => 'Controle Pagamento Sinal',
+                //     'icon'    => 'fas fa-lg fa-fw fa-search-dollar mr-2',
+                //     'url'  => '/estoque-imoveis/monitora-pagamento-sinal',
+                //     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                // ],
                 // [
                 //     'text' => 'level_two',
                 //     'url'  => '#',
@@ -338,11 +351,30 @@ return [
             ],
         ],
 
-        // [
-        //     'text'    => 'Indicadores',
-        //     'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
-        //     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
-        //     'submenu' => [
+        [
+            'text'    => 'Indicadores',
+            'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+            'submenu' => [
+                [
+                    'text' => 'Indicadores de Distrato',
+                    'url'  => '/indicadores/distrato',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
+            ],
+        ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_two',
+        //             'url'  => '#',
+        //         ],
         //         [
         //             'text' => 'Indicadores de Distrato',
         //             'url'  => '/indicadores/distrato',
@@ -451,14 +483,20 @@ return [
         //     ],
         // ],
 
-        // ['header' => 'GERENCIAL'],
-        // [
-        //     'text'       => 'Perfis de Acesso',
-        //     'url'        => '/equipes',
-        //     'icon'       => 'fas fa-lg fa-users-cog',
-        // ],
-        
-
+        [
+            'text'       => 'Gerencial',
+            'icon'       => 'fas fa-lg fa-fw fa-portrait mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+            'submenu' => [
+                [
+                    'text' => 'Gestão de Equipes',
+                    'icon'       => 'fas fa-lg fa-users-cog',
+                    'url'  => '/gerencial/equipes',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
+    
+            ],
+        ],
 
         // [
         //     'text'       => 'information',

@@ -6,148 +6,118 @@
 
 
 <div class="row mb-2">
-    <div class="col-sm-6">
+    <div class="col-sm-3">
         <h1 class="m-0 text-dark">
-            Alteração de Equipes
+            Gestão de Equipes
         </h1>
+    </div>
+    <div class="col-sm-3">
+        <select name="selectGilie" id="selectGilie" class="form-control form-control-navbar">
+            <option value="" selected>Selecione</option>
+            <option value="BU">GILIE BU</option>
+            <option value="SP">GILIE SP</option>
+            <option value="RS">GILIE RS</option>
+            <option value="SA">GILIE SA</option>
+        </select>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Alteração de Equipes</a> </li>
+            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Gerencial</li>
+            <li class="breadcrumb-item active"><a href="/"> Gestão de Equipes</a> </li>
         </ol>
     </div>
 </div>
-
 
 @stop
 
 
 @section('content')
-
-
+<hr class="pontilhado">
 
 <div class="row">
-    <!-- <form> -->
+    <div class="col-md-12" id="buttons">
 
-        <div class="col-md-3">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Célula Administrar PAR / ADJ
-                        <br>
-                        Gestor: Joao Marcel Quintiliano
-                    </h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
+        <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalCriarEquipe">
+            <i class="fas fa-plus mx-2"></i>Criar Equipe
+        </button>
 
-                    <ul id="sortable1" class="connectedSortable list-unstyled" id="listaCelulaAdministrar">
-                        <li>
-                            <div class="callout callout-danger row padding0">
-                                <div class="col-md-3">
-                                    <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=c142765" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
-                                </div>
-                                <div class="col-md-9">
-                                    <h5 class="card-title">Carlos Alberto Dalcin David</h5>
-                                    <p class="card-text"><small class="text-muted">Assist. Júnior</small></p>
-                                </div>
+        <div class="modal fade" id="modalCriarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <form method="post" action="#" id="formCriarEquipe">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Criar Equipe</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
+
+                            <div class="form-group">
+                                <label>Nome da Célula:</label>
+                                <input type="text" name="nomeCelula" class="form-control" id="nomeCelula" required>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
 
-        <div class="col-md-3">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Célula Gerência
-                        <br>
-                        Gestor: Marcelo Barboza Fernandes
-                    </h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <ul id="sortable2" class="connectedSortable list-unstyled" id="listaCelulaGerencia">
-                        <li>
-                            <div class="callout callout-info">
-                                <h5>I am a danger callout!</h5>
-                                <p>
-                                </p>
+                            <div class="form-group">
+                                <label>Gestor da Célula:</label>
+                                <select name="gestorCriar" id="selectGestorCriar" class="form-control" required></select>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
-        <!-- /.col -->
 
-        <div class="col-md-3">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Célula Preparar e Ofertar
-                        <br>
-                        Gestor: Fernanda Pereira Mendonça
-                    </h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <ul id="sortable3" class="connectedSortable list-unstyled" id="listaCelulaPreparar">
-                        <li>
-                            <div class="callout callout-warning">
-                                <h5>I am a danger callout!</h5>
-                                <p>
-                                </p>
+        &nbsp
+
+        <button type="button" class="btn btn-danger p-1 m-1" data-toggle="modal" data-target="#modalExcluirEquipe">
+            <i class="fas fa-times mx-2"></i>Excluir Equipe
+        </button>
+
+        <div class="modal fade" id="modalExcluirEquipe" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <form method="post" action="#" id="formExcluirEquipe">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Excluir Equipe</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
+                            
+                            <div class="form-group">
+                                <label>Selecione e Equipe:</label>
+                                <select name="excluirEquipe" id="selectExcluirEquipe" class="form-control" required></select>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
-        <!-- /.col -->
 
-        <div class="col-md-3">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Célula Contratação e Inovação
-                        <br>
-                        Gestor: Vladimir Pereira de Lemos
-                    </h3>
 
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <ul id="sortable4" class="connectedSortable list-unstyled" id="listaCelulaContratacao">
-                        <li>
-                            <div class="callout callout-success">
-                                <h5>I am a danger callout!</h5>
-                                <p>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
-    
-    
-    <!-- </form> -->
-    <!-- /.form -->
+    </div>
+</div>
+
+<hr class="pontilhado">
+
+<div id="equipes" class="row">
+
 </div> 
-<!-- /.row -->
+
 
 @section('footer')
 
@@ -163,17 +133,5 @@
 
 
 @section('js')
-@section('js')
-    <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
-
-    <script>
-        
-        $( function() {
-            $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
-            connectWith: ".connectedSortable"
-            }).disableSelection();
-        } );
-    </script>
-
-@stop
+    <script src="{{ asset('js/portal/gerencial/equipes.js') }}"></script>
 @stop

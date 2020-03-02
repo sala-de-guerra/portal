@@ -8,4 +8,5 @@ class HistoricoPortalGilie extends Model
 {
     protected $table = 'TBL_HISTORICO_PORTAL_GILIE';
     protected $primaryKey = 'idHistorico';
+    public $timestamps = false;
 }

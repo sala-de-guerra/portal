@@ -49,6 +49,10 @@ class RegistroAtendimentoController extends Controller
             $historico->tipo = $request->tipoAtendimento;
             $historico->atividade = $request->atividadeAtendimento;
             $historico->observacao = strip_tags($request->observacaoAtendimento);
+            // dd(date("Y-m-d H:i:s", time()));
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
+            
             $historico->save();
 
             // RETORNA A FLASH MESSAGE
@@ -58,6 +62,7 @@ class RegistroAtendimentoController extends Controller
 
             DB::commit();
         } catch (\Throwable $th) {
+            // dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             // RETORNA A FLASH MESSAGE

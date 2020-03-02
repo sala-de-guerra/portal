@@ -18,4 +18,14 @@ class BaseSimov extends Model
     {
         return $this->hasMany('App\Models\PropostasSimov', 'contratoFormatado', 'BEM_FORMATADO');
     }
+
+    public function conformidadeContratacao()
+    {
+        return $this->hasOne('App\Models\GestaoImoveisCaixa\ConformidadeContratacao', 'numeroContrato', 'NU_BEM');
+    }
+
+    public function saldoContratoSinaf()
+    {
+        return $this->hasOne('App\Models\GestaoImoveisCaixa\SaldoConstratoSinaf', 'numeroContrato', 'NU_BEM');
+    }
 }

@@ -78,16 +78,27 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <form class="form-inline tt-responsive" id="formPesquisa">
+                    <li class="nav-item">
+                        <form class="m-0" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                            {{ csrf_field() }}
                             <div class="input-group">
-                                <input class="form-control form-control-navbar typeahead tt-responsive" type="text" name="" placeholder="Pesquise um imóvel pelo CHB, endereço, dados do proponente ou do ex-mutuário.">
+                                <select name="tipoVariavel" id="tipoVariavel" style="color:white;" class="form-control form-control-navbar" required>
+                                    <option style="color:black;" value="" disabled selected>Selecione</option>
+                                    <option value="numeroContrato">Número Contrato</option>
+                                    <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                                    <option value="nomeProponente">Nome proponente</option>
+                                    <option value="enderecoImovel">Endereço imóvel</option>
+                                    <option value="matriculaImovel">Matrícula do imóvel</option>
+                                    <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
+                                    <option value="nomeExMutuario">Nome ex-mutuário</option>
+                                </select>
+                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" onkeyup="stoppedTyping()" placeholder="Digite um termo para pesquisa.">
                                 <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit"> <i class="fas fa-search"></i> </button>
+                                    <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
                         </form>
-                    </li> -->
+                    </li>
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
                 </ul>
@@ -164,8 +175,8 @@
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title ">{{ session()->get('nomeCompleto') }}</h3>
                                         <p class="text-sm">{{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}</p>
-                                        <p class="text-sm">UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}</p>
-                                        <p class="text-sm">{{ session()->get('acessoEmpregadoEsteiraComex') }}</p>
+                                        <p class="text-sm">UNIDADE: </p> <p class="text-sm" id="lotacao">{{ session()->get('codigoLotacaoAdministrativa') }}</p>
+                                        <p class="text-sm">{{ session()->get('acessoEmpregadoPortal') }}</p>
                                     </div>
                                 </div>
                             </a>
@@ -283,6 +294,23 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+
+        function stoppedTyping(){
+            if(this.value.length > 3) { 
+                document.getElementById('botaoPesquisar').disabled = false; 
+            } else { 
+                document.getElementById('botaoPesquisar').disabled = true;
+            }
+        }
+        // function verify(){
+        //     if (myText == '') {
+        //         alert ("Você precisa digitar um termo para pesquisa");
+        //         return
+        //     }
+        //     else{
+        //         do button functionality
+        //     }
+        // }
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>

@@ -30,6 +30,7 @@
         </div>
     </div>
 
+   
 @stop
 
 
@@ -42,7 +43,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">
-                            <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
+                        <canvas id="myChart" height="80pt"></canvas>
+                            <!-- <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
                                         <th>Não Iniciadas</th>
@@ -55,17 +57,19 @@
                                 </thead>
 
                                 <tbody>
-
+                                    
                                 </tbody>
                                 
-                            </table>
+                            </table> -->
                         </div> <!-- /.col-sm-12 -->
                     </div> <!-- /.row -->
-                </div> <!-- /.card-body -->
+                                   </div> <!-- /.card-body -->
             </div> <!-- /.card -->
         </div> <!-- /.col -->
     </div> <!-- /.row -->
-
+    
+    
+    
 @stop
 
 @section('footer')
@@ -80,7 +84,10 @@
 
 @section('js')
 
-    <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/portal/distrato/indicadores-distrato.js') }}"></script>
+<script src="{{ asset('js/global/insere_grafico.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<Script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></Script>
+<script src="{{ asset('js/global/formata_data.js') }}"></script>
+<script src="{{ asset('js/portal/distrato/indicadores-distrato.js') }}"></script>
 
 @stop

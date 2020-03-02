@@ -1,6 +1,11 @@
 @extends('adminlte::page')
 
 @section('title', 'Portal GILIE/SP')
+<style>
+  
+
+    
+</style>
 
 @section('content_header')
 
@@ -8,9 +13,6 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">Consultar Bem Imóvel - CHB <p class="d-inline" id="numeroBem"></p></h1>
-        <!-- <div>
-            <input class="typeahead" type="text" placeholder="States of USA">
-        </div> -->
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -21,7 +23,7 @@
 </div>
 
 @if (session('tituloMensagem'))
-    <div class="card text-white bg-{{ session('corMensagem') }}">
+    <div id="fadeOut" class="card text-white bg-{{ session('corMensagem') }} hidden" >
         <div class="card-header">
             <div class="card-body">
                 <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
@@ -57,7 +59,8 @@
     <script>
         var numeroContrato = '{{ $numeroContrato }}';
     </script>
-   
+    
+    <!-- <script src="{{ asset('js/global/formata_observacoes.js') }}"></script> -->
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
@@ -65,4 +68,9 @@
     <script src="{{ asset('js/global/formata_lista_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
     <script src="{{ asset('js/portal/consulta-bem-imovel.js') }}"></script>
+    <script>
+                setTimeout(function(){
+                $('#fadeOut').fadeOut("slow");
+                }, 4000);
+    </script>
 @stop

@@ -22,6 +22,11 @@ $(document).ready(function(){
                         '<button id="btnLinkServidor" onclick="copyToClipboard(' + elementoLinkServidor + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
                         '<a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>ALO</a>' +
                     '</div>' +
+                '<td>' +
+                    '<div class="row">' +
+                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-info-circle"></i></button>' +
+                    '</div>' +
+                '</td>' +
                 '</td>' +
             '</tr>';
             if (item.cardAgrupamento == "Agência") {

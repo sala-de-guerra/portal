@@ -1,42 +1,40 @@
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                   
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-dados-imovel">
                         <a class="nav-link active" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="true">
                             <h5>Dados do Imóvel</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-leiloes">
                         <a class="nav-link" id="custom-tabs-one-leiloes-tab" data-toggle="pill" href="#custom-tabs-one-leiloes" role="tab" aria-controls="custom-tabs-one-leiloes" aria-selected="false">
                             <h5>Leilões</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-contratacao">
                         <a class="nav-link" id="custom-tabs-one-contratacao-tab" data-toggle="pill" href="#custom-tabs-one-contratacao" role="tab" aria-controls="custom-tabs-one-contratacao" aria-selected="false">
                             <h5>Contratação</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-distrato">
                         <a class="nav-link" id="custom-tabs-one-distrato-tab" data-toggle="pill" href="#custom-tabs-one-distrato" role="tab" aria-controls="custom-tabs-one-distrato" aria-selected="false">
                             <h5>Distrato</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-historico">
                         <a class="nav-link" id="custom-tabs-one-historico-tab" data-toggle="pill" href="#custom-tabs-one-historico" role="tab" aria-controls="custom-tabs-one-historico" aria-selected="false">
                             <h5>Histórico</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="custon-tabs-li-mensagens">
                         <a class="nav-link" id="custom-tabs-one-mensagens-tab" data-toggle="pill" href="#custom-tabs-one-mensagens" role="tab" aria-controls="custom-tabs-one-mensagens" aria-selected="false">
                             <h5>Mensagens</h5>
                         </a>
@@ -67,7 +65,7 @@
                                     <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div id="anuncioSiteCaixa"class="col-sm-6">
                                 <div class="form-group">
                                     <label>Anúncio X Imóveis:</label>
                                     <br>
@@ -75,7 +73,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="row">
                             <!-- <div class="col-sm-3">
@@ -132,6 +129,49 @@
                         </div>
                         
                         <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Status SIMOV:</label>
+                                    <p id="statusImovel"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Classificação:</label>
+                                    <p id="classificacao"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Matrícula do Imóvel:</label>
+                                    <p id="matriculaImovel"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Origem da Matrícula:</label>
+                                    <p id="origemMatricula"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"> 
+                                <div class="form-group">
+                                    <label>Data Laudo de Avaliação:</label>
+                                    <p class="formata-data-sem-hora" id="dataLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Data Validade do Laudo:</label>
+                                    <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                        </div>
+                        
+                        <!-- <div class="row">
+                            
+                        </div>  -->
+                        
+                        <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Descrição do Imóvel:</label>
@@ -145,48 +185,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Status SIMOV:</label>
-                                    <p id="statusImovel"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Classificação:</label>
-                                    <p id="classificacao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Matrícula do Imóvel:</label>
-                                    <p id="matriculaImovel"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Origem da Matrícula:</label>
-                                    <p id="origemMatricula"></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- <div class="row"> -->
-                            <!-- <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Valor de Avaliação:</label>
-                                    <p id="valorAvaliacao"></p>
-                                </div>
-                            </div> -->
-                            <!-- <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Origem do Imóvel:</label>
-                                    <p id="origemImovel"></p>
-                                </div>
-                            </div> -->
-                        <!-- </div> -->
 
                     </div>
 
@@ -388,12 +386,12 @@
                                     <p id="quantidadeParcelasProposta"></p>
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-3">
+                            <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Total Recebido:</label>
-                                    <p id="valorTotalRecebido"></p>
+                                    <label>Data Assinatura Contrato:</label>
+                                    <p id="dataAssinaturaContrato" class="formata-data-sem-hora"></p>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <div class="row">
@@ -409,6 +407,13 @@
                                     <p id="agrupamento"></p>
                                 </div>
                             </div>
+                            <!-- <div id="anuncioSiteCaixa"class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Consulta CIWEB:</label>
+                                    <br>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConsultaCiweb" title="Ir para tela de consulta do CIWEB"><i class="fas fa-globe-americas"></i></button>
+                                </div>
+                            </div> -->
                             <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Número de Parcelas:</label>
@@ -423,13 +428,33 @@
                             </div> -->
                         </div>
 
+                        <!-- <div class="modal fade" id="modalConsultaCiweb" tabindex="-1" role="dialog" aria-labelledby="modalConsultaCiweb" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <embed src="https://ciweb4.extranet.caixa/ciweb2.0/Contrato/PesquisarContrato/" width=200 height=200 />
+                                        <object type="text/html" data="https://ciweb4.extranet.caixa/ciweb2.0/Contrato/PesquisarContrato/" width="800px" height="600px" style="overflow:auto;border:1px ridge #ccc"></object>
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
                         <hr class="pontilhado">
 
-                        <h2 class="card-title"><b>Conformidade</b></h2>
+                        <h2 class="card-title" id="cardTitleConformidade"><b>Conformidade</b></h2>
 
-                        <br>
+                        <br id="brConformidade">
 
-                        <div class="row">
+                        <div class="row" id="rowConformidade">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Status Conformidade:</label>
@@ -442,9 +467,15 @@
                                     <p id="cardAgrupamento"></p>
                                 </div>
                             </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Parecer Conformidade:</label>
+                                    <p id="dataParecerConformidade" class="formata-data-sem-hora"></p>
+                                </div>
+                            </div>
                         </div>
 
-                        <hr class="pontilhado">
+                        <hr class="pontilhado" id="pontilhadoConformidade">
 
                         <h2 class="card-title"><b>Agência Responsável</b></h2>
 
@@ -528,17 +559,17 @@
                                 @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
                                 <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCadastraAtendimento">
                                     <i class="fas fa-lg fa-headset m-2"></i>
-                                    Cadastrar Atendimento
+                                    Cadastrar Historico
                                 </button>
                                 @endIf
                                 <!-- Modal -->
-                                <div class="modal fade" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato }}' id="formCadastraAtendimento">
                                                 {{ csrf_field() }}
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Atendimento</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Histórico</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -546,9 +577,10 @@
                                                 <div class="modal-body">
 
                                                 <div class="form-group">
-                                                    <label>Tipo de Atendimento:</label>
+                                                    <label>Tipo de Histórico:</label>
                                                     <select name="tipoAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
+                                                        <option value="ANALISE">ANÁLISE</option>
                                                         <option value="EMAIL">E-MAIL</option>
                                                         <option value="PRESENCIAL">PRESENCIAL</option>
                                                         <option value="OUVIDORIA">SAC/OUVIDORIA</option>
@@ -558,7 +590,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Atividade:</label>
+                                                    <label>Coordenação:</label>
                                                     <select name="atividadeAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
                                                         <option value="CONTRATACAO">CONTRATAÇÃO</option>
@@ -591,15 +623,15 @@
                                 <table id="tblHistorico" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>ID</th>
                                             <th>Matrícula</th>
                                             <th>Tipo</th>
                                             <th>Atividade</th>
-                                            <th>Observação</th>
+                                            <th class="obs">Observação</th>
                                             <th>Data</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody>  
 
                                     </tbody>
                                 </table>
@@ -633,6 +665,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
 
                                     </tbody>
                                 </table>
@@ -645,6 +678,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- 
 <div class="row">

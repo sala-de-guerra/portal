@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 //index
 Route::get('', function () {
     return view('portal.index');
@@ -18,11 +7,6 @@ Route::get('', function () {
 
 // route 404
 Route::fallback(function(){return response()->view('errors.404', [], 404);});
-
-//teste
-Route::get('teste', function () {
-    return view('teste');
-});    
 
 // sobre
 Route::get('sobre', function () {
@@ -62,7 +46,7 @@ Route::prefix('indicadores')->group(function () {
 });
 
 // Consulta de bem imóvel
-Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show');
+Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');;
 
 
 //  ROTAS WEB DOS PROCESSOS PERTINENTES AO ESTOQUE DE IMÓVEIS
@@ -71,6 +55,12 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::get('consulta-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@capturaDadosBaseSimov');
     Route::get('consulta-mensagens-enviadas/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaMensagensEnviadas');
     Route::get('consulta-historico-contrato/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@consultaHistorico');
+
+    // ROTAS DO PROJETO DE CONSULTA COM WHERE VARIAVEL (GOOGLE 2.0)
+    Route::prefix('consultar-imovel')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\ConsultaContratoController@consultaImovelComWhereVariavel');
+        Route::post('resultado', 'GestaoImoveisCaixa\ConsultaContratoController@pesquisaContratoComWhereVariavel');
+    });
 
     // ROTAS DO PROJETO DE DISTRATO
     Route::prefix('distrato')->group(function () {
@@ -86,10 +76,23 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::put('atualizar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@atualizarDespesa');
         Route::put('emitir-parecer-analista/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@emitirParecerAnalista');
         Route::put('emitir-parecer-gestor/{distrato}', 'GestaoImoveisCaixa\DistratoDemandaController@emitirParecerGestor');
-        Route::get('indicadores-distrato/', 'GestaoImoveisCaixa\DistratoDemandaController@indicadoresDistrato');
+        Route::get('indicadores-distrato', 'GestaoImoveisCaixa\DistratoDemandaController@indicadoresDistrato');
         Route::put('excluir-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@excluirDespesa');
         Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@validarDespesa');
         Route::get('emite-dle-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@emitePlanilhaDleDespesas');
+    });
+
+    // // ROTAS DO PROJETO MONITORA PAGAMENTO SINAL (5% DA PROPOSTA)
+    // Route::prefix('monitora-pagamento-sinal')->group(function () {
+    //     Route::get('/', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@index');
+    // });
+    
+    // ROTAS DO PROJETO ACOMPANHA CONTRATACAO
+    Route::prefix('acompanha-contratacao')->group(function () {
+        Route::get('/', 'GestaoImoveisCaixa\AcompanhamentoContratacaoController@consultaContratosContratacaoSessentaDias');
+        Route::get('listar-contratos-em-contratacao-ultimos-sessenta-dias', 'GestaoImoveisCaixa\AcompanhamentoContratacaoController@listarContratosContratacaoUltimosSessentaDias');
+        Route::get('listar-contratos-sem-pagamento-sinal', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@listarContratosSemPagamentoSinal');
+        Route::put('/atualizar/{idAcompanhamentoContratacao}', 'GestaoImoveisCaixa\AcompanhamentoContratacaoController@atualizaAcompanhamentoContratacao');
     });
 
     // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO
@@ -116,6 +119,12 @@ Route::prefix('portal')->group(function () {
 // Gerencial
 
 // equipes
-Route::get('/equipes', function () {
+Route::get('/gerencial/equipes', function () {
     return view('portal.gerencial.equipes');
+});
+
+// ROTA DE TESTE TROCA EMPREGADO CELULA
+Route::match(['get', 'post'], 'url', function () {
+    $resultado = rand(0, 1);
+    return $resultado == 0 ? response('error', 500) : response('success', 200);
 });
