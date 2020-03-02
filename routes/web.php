@@ -119,9 +119,7 @@ Route::prefix('portal')->group(function () {
 // Gerencial
 
 // equipes
-Route::get('/gerencial/equipes', function () {
-    return view('portal.gerencial.equipes');
-});
+Route::get('gerencial/equipes', 'GestaoEquipesController@index');
 
 // ROTA DE TESTE TROCA EMPREGADO CELULA
 Route::match(['get', 'post'], 'url', function () {
