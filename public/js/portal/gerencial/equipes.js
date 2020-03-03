@@ -43,10 +43,7 @@ let lotacaoUsuario = $('#lotacao').html();
 let regiaoUnidadeSecao = '';
 
 $(document).ready( function () {
-
-
-    console.log(lotacaoUsuario);
-
+    // console.log(lotacaoUsuario);
     switch (lotacaoUsuario) {
         case '7257':
             regiaoUnidadeSecao = 'SP';
@@ -85,15 +82,18 @@ function montaCardsEquipes (regiaoUnidade) {
                 let card =
                     `<li id="` + item.matricula + `">` +
                         `<div class="callout callout-info row p-0">` +
-                            `<div class="col-md-12" id="eventual` + item.matricula + `" style="display:none;">` +
-                                `<i class="fas fa-fw fa-crown px-1"></i>` +
-                            `</div>` +
                             `<div class="col-md-3">` +
                                 `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">` +
                             `</div>` +
                             `<div class="col-md-9">` +
                                 `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
-                                `<p class="card-text"><small class="text-muted">` + item.nomeFuncao + `</small></p>` +
+                                `<br>` +
+                                `<div class="row">` +
+                                    `<p class="card-text col"><small class="text-muted">` + item.nomeFuncao + `</small></p>` +
+                                    `<div class="float-right col" id="eventual` + item.matricula + `" style="display:none;">` +
+                                        `<span class="badge bg-primary">Eventual</span>` +
+                                    `</div>` +
+                                `</div>` +
                             `</div>` +
                         `</div>` +
                     `</li>`
@@ -163,7 +163,7 @@ function montaCardsEquipes (regiaoUnidade) {
 
                     $.post('/url', {matricula, celula, _token}, function (){
                         // trocarCor(celula, callout);
-                        $('#eventual' + item.matriculaEventualCelula).hide();
+                        $('#eventual' + matricula).hide();
 
                         Toast.fire({
                             icon: 'success',
@@ -224,82 +224,28 @@ function montaCardsEquipes (regiaoUnidade) {
 | Função que cria uma nova equipe sem dar refresh na tela |
 \*********************************************************/
 
-function criarEquipe() {
 
-    let nomeCriarEquipe = $('#nomeCriarEquipe').val();
-    let selectCriarEquipe = $('#selectCriarEquipe').val();
-    console.log(nomeCriarEquipe);
-    console.log(selectCriarEquipe);
-
-    $.post('/url', {nomeCriarEquipe, selectCriarEquipe, _token}, function (){
-
-        $('.modal').modal('hide');
-
-        Toast.fire({
-            icon: 'success',
-            title: 'Alteração salva!'
-        });
-
-        refresh(regiaoUnidade);
-    })
-    .fail(function () {
-        
-        $('.modal').modal('hide');
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Erro: alteração não efetuada!'
-        });
-    });
-};
 
 /***********************************************************\
 | Função que altera uma nova equipe sem dar refresh na tela |
 \***********************************************************/
 
-function alterarEquipe() {
 
-    let nomeAtualEquipe = $('#selectAlterarEquipe').val();
-    let nomeNovoEquipe = $('#nomeAlterarEquipe').val();
-    let selectAlterarGestor = $('#selectAlterarGestor').val();
-
-    console.log(nomeAtualEquipe);
-    console.log(nomeNovoEquipe);
-    console.log(selectAlterarGestor);
-
-    $.post('/url', {nomeAtualEquipe, nomeNovoEquipe, selectAlterarGestor, _token}, function (){
-
-        $('.modal').modal('hide');
-
-        Toast.fire({
-            icon: 'success',
-            title: 'Alteração salva!'
-        });
-
-        refresh(regiaoUnidade);
-    })
-    .fail(function () {
-        
-        $('.modal').modal('hide');
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Erro: alteração não efetuada!'
-        });
-    });
-};
 
 /******************************************************\
 | Função que exclui uma equipe sem dar refresh na tela |
 \******************************************************/
 
-function excluirEquipe() {
 
-    let selectExcluirEquipe = $('#selectExcluirEquipe').val();
 
-    console.log(selectExcluirEquipe);
 
-    $.post('/url', {selectExcluirEquipe, _token}, function (){
+
+function noRefreshPost(form) {
+
+    let dados = $(form).serialize();
+    let route = $(form).attr('action');
+
+    $.post(route, {dados, _token}, function (){
 
         $('.modal').modal('hide');
 
