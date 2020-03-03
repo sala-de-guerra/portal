@@ -33,15 +33,6 @@
         "equipe": []
     },
     {
-        "id":4,
-        "nomeCelula":"Distrato",
-        "nomeGestorCelula":"Carlos",
-        "matriculaGestorCelula":"c058309",
-        "nomeEventualCelula": "Rafael",
-        "matriculaEventualCelula": "c992090",
-        "equipe": []
-    },
-    {
         "id":5,
         "nomeCelula":"Contratação e TI",
         "nomeGestorCelula":"Vladimir",

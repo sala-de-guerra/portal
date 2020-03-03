@@ -78,30 +78,30 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <form class="m-0" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
-                            {{ csrf_field() }}
-                            <div class="input-group">
-                                <select name="tipoVariavel" id="tipoVariavel" style="color:white;" class="form-control form-control-navbar" required>
-                                    <option style="color:black;" value="" disabled selected>Selecione</option>
-                                    <option style="color:black;" value="numeroContrato">Contrato</option>
-                                    <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
-                                    <option value="nomeProponente">Nome proponente</option>
-                                    <option value="enderecoImovel">Endereço imóvel</option>
-                                    <option value="matriculaImovel">Matrícula do imóvel</option>
-                                    <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
-                                    <option value="nomeExMutuario">Nome ex-mutuário</option>
-                                </select>
-                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" onkeyup="stoppedTyping()" placeholder="Digite um termo para pesquisa.">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
-                                </div>
-                            </div>
-                        </form>
-                    </li>
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
                 </ul>
+
+                <form class="form-inline" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                    {{ csrf_field() }}
+                    <select name="tipoVariavel" id="tipoVariavel" style="color:white;" class="form-control form-control-navbar mr-3" required>
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="numeroContrato">Contrato</option>
+                        <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                        <option value="nomeProponente">Nome proponente</option>
+                        <option value="enderecoImovel">Endereço imóvel</option>
+                        <option value="matriculaImovel">Matrícula do imóvel</option>
+                        <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
+                        <option value="nomeExMutuario">Nome ex-mutuário</option>
+                    </select>
+                    <div class="input-group nav-search-bar">
+                        <input class="form-control form-control-navbar" type="text" id="valorVariavel" minlength="5" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." oninvalid="setCustomValidity('Digite no mínimo 5 caracteres para pesquisar.')" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
+                        </div>
+                    </div>
+                </form>
+
             @endif
                 <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
                     @yield('content_top_nav_right')
@@ -294,23 +294,6 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         })
-
-        function stoppedTyping(){
-            if(this.value.length > 3) { 
-                document.getElementById('botaoPesquisar').disabled = false; 
-            } else { 
-                document.getElementById('botaoPesquisar').disabled = true;
-            }
-        }
-        function verify(){
-            if (myText == '') {
-                alert ("Você precisa digitar um termo para pesquisa");
-                return
-            }
-            else{
-                do button functionality;
-            }
-        }
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>

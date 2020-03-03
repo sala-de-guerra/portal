@@ -475,6 +475,12 @@ return [
                     'url'  => '/gerencial/equipes',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
+                [
+                    'text' => 'Gestão de Atividades',
+                    'icon'       => 'fas fa-lg fa-tasks',
+                    'url'  => '/gerencial/atividades',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ]
     
             ],
         ],

@@ -60,6 +60,11 @@
 .navbar {
     background-image: linear-gradient(to right, #247cb4 , #54bbab );
 }
+
+.nav-search-bar {
+    min-width: 30vw;
+}
+
 .min-width-95{
     min-width: 95%;
 }

@@ -46,8 +46,7 @@ Route::prefix('indicadores')->group(function () {
 });
 
 // Consulta de bem imóvel
-Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');;
-
+Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');
 
 //  ROTAS WEB DOS PROCESSOS PERTINENTES AO ESTOQUE DE IMÓVEIS
 Route::prefix('estoque-imoveis')->group(function () {
@@ -81,11 +80,6 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@validarDespesa');
         Route::get('emite-dle-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@emitePlanilhaDleDespesas');
     });
-
-    // // ROTAS DO PROJETO MONITORA PAGAMENTO SINAL (5% DA PROPOSTA)
-    // Route::prefix('monitora-pagamento-sinal')->group(function () {
-    //     Route::get('/', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@index');
-    // });
     
     // ROTAS DO PROJETO ACOMPANHA CONTRATACAO
     Route::prefix('acompanha-contratacao')->group(function () {
@@ -111,18 +105,44 @@ Route::prefix('estoque-imoveis')->group(function () {
     });
 });
 
-// ROTA QUE ATUALIZA O JSON DA CONSULTA DE IMÓVEIS
-Route::prefix('portal')->group(function () {
-    Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
+// GERENCIAL
+Route::prefix('gerencial')->group(function () {
+    // GESTÃO DE EQUIPES
+    Route::prefix('gestao-equipes')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
+        Route::get('/', 'GestaoEquipesController@index');
+        // LISTA AS EQUIPES DE DETERMINADA UNIDADE
+        Route::get('listar-equipes', 'GestaoEquipesController@listarEquipesUnidade');
+        // LISTA AS EMPREGADOS DE DETERMINADA UNIDADE
+        Route::get('listar-empregados', 'GestaoEquipesController@listarEmpregadosUnidade');
+        // DESIGNA O EMPREGADO PARA UMA EQUIPE
+        Route::post('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
+        
+        // DESIGNA EVENTUALIDADE PARA UM EMPREGADO
+
+        // CRIAR NOVA EQUIPE
+
+        // EDITAR EQUIPE
+
+        // DESABILITA EQUIPE
+
+        // LISTAR UNIDADES COM EQUIPES CADASTRADAS
+        
+        // GESTÃO DE ATIVIDADES
+        Route::get('atividades', function () {
+            return view('portal.gerencial.atividades');
+        });
+    });
 });
 
-// Gerencial
-
-// equipes
-Route::get('gerencial/equipes', 'GestaoEquipesController@index');
+// // ROTA QUE ATUALIZA O JSON DA CONSULTA DE IMÓVEIS
+// Route::prefix('portal')->group(function () {
+//     Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
+// });
 
 // ROTA DE TESTE TROCA EMPREGADO CELULA
-Route::match(['get', 'post'], 'url', function () {
+Route::match(['get', 'post'], 'url', function (\Illuminate\Http\Request $request) {
+    dd($request);
     $resultado = rand(0, 1);
     return $resultado == 0 ? response('error', 500) : response('success', 200);
 });

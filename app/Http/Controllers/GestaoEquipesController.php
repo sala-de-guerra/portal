@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Empregado;
 use App\Models\GestaoEquipesEmpregados;
 use App\Models\GestaoEquipesCelulas;
+use App\Models\GestaoEquipesAlocarEmpregado;
+use Illuminate\Support\Facades\DB;
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 
 class GestaoEquipesController extends Controller
 {
@@ -16,7 +19,11 @@ class GestaoEquipesController extends Controller
      */
     public function index()
     {
-        // VALIDA NOS CASOS DE GERENTE A EXISTENCIA DE EQUIPES CRIADAS, CASO NEGATIVO CRIA A PRIMEIRA PARA GESTÃO DO GESTOR
+        /* 
+            VALIDA O CODIGO DA FUNÇÃO DO EMPREGADO DA SESSÃO SE É GERENTE
+            CASO POSITIVO VERIFICA SE EXISTE ALGUMA EQUIPE EXISTENTE NA UNIDADE OU 
+            CASO NEGATIVO CRIA A PRIMEIRA PARA GESTÃO DO GESTOR
+        */
         $usuarioGestor = Empregado::find(session('matricula'));
 
         if($usuarioGestor->codigoFuncao == '2066') {
@@ -36,36 +43,40 @@ class GestaoEquipesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function listarEquipesUnidade()
     {
-        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $usuarioGestor->codigoLotacaoAdministrativa)->get();
-
+        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->get();
         return json_encode($relacaoEquipesUnidade);
     }
 
     /**
-     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function listarEmpregadosUnidade()
     {
-        //
+        $relacaoEmpregadosUnidade = GestaoEquipesEmpregados::where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))->get();
+        return json_encode($relacaoEmpregadosUnidade);
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function alocarEmpregadoEquipe(Request $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
 
     /**
