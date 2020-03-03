@@ -92,7 +92,7 @@
                                     <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
                                     <option value="nomeExMutuario">Nome ex-mutuário</option>
                                 </select>
-                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" onkeyup="stoppedTyping()" placeholder="Digite um termo para pesquisa.">
+                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" placeholder="Digite um termo para pesquisa." required>
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
@@ -294,23 +294,6 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
-
-        function stoppedTyping(){
-            if(this.value.length > 3) { 
-                document.getElementById('botaoPesquisar').disabled = false; 
-            } else { 
-                document.getElementById('botaoPesquisar').disabled = true;
-            }
-        }
-        // function verify(){
-        //     if (myText == '') {
-        //         alert ("Você precisa digitar um termo para pesquisa");
-        //         return
-        //     }
-        //     else{
-        //         do button functionality
-        //     }
-        // }
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
