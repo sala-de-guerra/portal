@@ -44,7 +44,7 @@
         <div class="modal fade" id="modalCriarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="post" action="#" id="formCriarEquipe">
+                    <form action="#" id="formCriarEquipe" onsubmit="criarEquipe();return false">
                         <div class="modal-header">
                             <h5 class="modal-title">Criar Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -57,13 +57,58 @@
 
                             <div class="form-group">
                                 <label>Nome da Célula:</label>
-                                <input type="text" name="nomeCelula" class="form-control" id="nomeCelula" required>
+                                <input type="text" name="nomeCriarEquipe" class="form-control" id="nomeCriarEquipe" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Gestor da Célula:</label>
-                                <select name="gestorCriar" id="selectGestorCriar" class="form-control" required></select>
+                                <select name="selectCriarEquipe" id="selectCriarEquipe" class="form-control" required></select>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        &nbsp
+
+        <button type="button" class="btn btn-warning p-1 m-1" data-toggle="modal" data-target="#modalAlterarEquipe">
+            <i class="fas fa-times mx-2"></i>Alterar Equipe
+        </button>
+
+        <div class="modal fade" id="modalAlterarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <form action="#" id="formAlterarEquipe" onsubmit="alterarEquipe();return false">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Alterar Equipe</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
+                            
+                            <div class="form-group">
+                                <label>Selecione e Equipe:</label>
+                                <select name="selectAlterarEquipe" id="selectAlterarEquipe" class="form-control" required></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nome da Célula:</label>
+                                <input type="text" name="nomeAlterarEquipe" class="form-control" id="nomeAlterarEquipe" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gestor da Célula:</label>
+                                <select name="gestorAlterar" id="selectAlterarGestor" class="form-control" required></select>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -83,7 +128,7 @@
         <div class="modal fade" id="modalExcluirEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="post" action="#" id="formExcluirEquipe">
+                    <form action="#" id="formExcluirEquipe" onsubmit="excluirEquipe();return false">
                         <div class="modal-header">
                             <h5 class="modal-title">Excluir Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -96,7 +141,7 @@
                             
                             <div class="form-group">
                                 <label>Selecione e Equipe:</label>
-                                <select name="excluirEquipe" id="selectExcluirEquipe" class="form-control" required></select>
+                                <select name="selectExcluirEquipe" id="selectExcluirEquipe" class="form-control" required></select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -127,7 +172,6 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('plugins/jquery-ui/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
 @stop
 

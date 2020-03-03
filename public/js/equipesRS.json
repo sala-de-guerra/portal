@@ -1,5 +1,6 @@
 [ 
     {
+        "id":1,
         "nomeCelula":"Administrar",
         "nomeGestorCelula":"Joao Marcel",
         "matriculaGestorCelula":"c738787",
@@ -8,6 +9,7 @@
         "equipe": []
     },
     {
+        "id":2,
         "nomeCelula":"Gerir",
         "nomeGestorCelula":"Marcelo",
         "matriculaGestorCelula":"c888787",
@@ -22,6 +24,7 @@
         ]
     },
     {
+        "id":3,
         "nomeCelula":"Coordenar",
         "nomeGestorCelula":"Fernanda",
         "matriculaGestorCelula":"c728727",
@@ -30,6 +33,7 @@
         "equipe": []
     },
     {
+        "id":4,
         "nomeCelula":"Supervisionar",
         "nomeGestorCelula":"Vladimir",
         "matriculaGestorCelula":"c111828",
