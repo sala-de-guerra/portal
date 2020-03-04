@@ -141,8 +141,8 @@ Route::prefix('gerencial')->group(function () {
 // });
 
 // ROTA DE TESTE TROCA EMPREGADO CELULA
-Route::match(['get', 'post'], 'url', function (\Illuminate\Http\Request $request) {
-    dd($request);
+Route::match(['get', 'post', 'put', 'delete'], 'url', function (\Illuminate\Http\Request $request) {
+    // dd($request);
     $resultado = rand(0, 1);
     return $resultado == 0 ? response('error', 500) : response('success', 200);
 });

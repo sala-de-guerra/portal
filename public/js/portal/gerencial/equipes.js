@@ -24,8 +24,6 @@ $(".modal").on('hidden.bs.modal', function(e){
 | Função que limpa os cards da tela e recria, a.k.a. refresh |
 \************************************************************/
 
-let regiaoUnidade = $('#selectGilie').val();
-
 function refresh(regiaoUnidade) {
     $('#equipes').empty();
     $('#selectCriarEquipe').empty();
@@ -118,7 +116,7 @@ function montaCardsEquipes (regiaoUnidade) {
                             `</h3>` +
                         `</div>` +
                         `<div class="card-body">` +
-                            `<ul class="connectedSortable list-unstyled">` +
+                            `<ul id="` + item.id + `" class="connectedSortable list-unstyled">` +
                                 stringEmpregados +
                             `</ul>` +
                         `</div>` +
@@ -156,30 +154,33 @@ function montaCardsEquipes (regiaoUnidade) {
                     // console.log(ui.item[0].children);
 
                     let matricula = ui.item[0].id;
-                    let celula = ui.item[0].parentElement.id;
-                    // let callout = ui.item[0].children;
+                    let equipe = ui.item[0].parentElement.id;    
 
-                    // console.log({matricula, celula, _token});
+                    $.ajax({
+                        type: 'put',
+                        url: '/url',
+                        data: {matricula, equipe, _token},
+                        success: function (result){
+                            console.log(result);
+                            $('#eventual' + matricula).hide();
 
-                    $.post('/url', {matricula, celula, _token}, function (){
-                        // trocarCor(celula, callout);
-                        $('#eventual' + matricula).hide();
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Alteração salva!'
+                            });
+                                
+                        },
+                      
+                        error: function () {
+                            
+                            $(ui.sender).sortable('cancel');
 
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Alteração salva!'
-                        });
-                    })
-                    .fail(function () {
-                        
-                        $(ui.sender).sortable('cancel');
-
-                        Toast.fire({
-                            icon: 'error',
-                            title: 'Erro: alteração não efetuada!'
-                        });
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Erro: alteração não efetuada!'
+                            });                        }
                     });
-
+                
                 }
             })
             .disableSelection()
@@ -219,31 +220,17 @@ function montaCardsEquipes (regiaoUnidade) {
 
 };
 
-/*********************************************************\
-| Função que cria uma nova equipe sem dar refresh na tela |
-\*********************************************************/
+/****************************************************************\
+| Função que cria, edita e exclui equipe sem dar refresh na tela |
+\****************************************************************/
 
+$('form').submit( function(e) {
 
+    e.preventDefault();
 
-/***********************************************************\
-| Função que altera uma nova equipe sem dar refresh na tela |
-\***********************************************************/
-
-
-
-/******************************************************\
-| Função que exclui uma equipe sem dar refresh na tela |
-\******************************************************/
-
-
-
-
-
-function noRefreshPost(form) {
-
-    let data = JSON.stringify( $(form).serializeArray() );
-    let url = $(form).attr('action');
-    let method = $(form).attr('method');
+    let data = JSON.stringify( $(this).serializeArray() );
+    let url = $(this).attr('action');
+    let method = $(this).attr('method');
 
     console.log(data);
     console.log(url);
@@ -252,9 +239,8 @@ function noRefreshPost(form) {
     $.ajax({
         type: method,
         url: url,
-        data: data,
-        dataType: JSON,
-        success: function (){
+        data: {data, _token},
+        success: function (result){
 
             $('.modal').modal('hide');
     
@@ -262,17 +248,21 @@ function noRefreshPost(form) {
                 icon: 'success',
                 title: 'Alteração salva!'
             });
-    
-            refresh(regiaoUnidade);
-        },
-      })
-    .fail(function () {
-        
-        $('.modal').modal('hide');
 
-        Toast.fire({
-            icon: 'error',
-            title: 'Erro: alteração não efetuada!'
-        });
+            let regiaoUnidade = $('#selectGilie').val();
+            console.log(regiaoUnidade);
+            refresh(regiaoUnidade);
+            
+        },
+      
+        error: function () {
+            
+            $('.modal').modal('hide');
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Erro: alteração não efetuada!'
+            });
+        }
     });
-};
+});
