@@ -26,4 +26,9 @@ class Empregado extends Model
     {
         return $this->hasOne('App\Models\AcessaPortal', 'matricula', 'matricula');
     }
+
+    public function gestaoEquipeEmpregados()
+    {
+        return $this->hasOne('App\Models\GestaoEquipesEmpregados', 'matricula', 'matricula');
+    }
 }

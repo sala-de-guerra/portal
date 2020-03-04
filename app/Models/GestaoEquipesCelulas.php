@@ -27,9 +27,4 @@ class GestaoEquipesCelulas extends Model
     {
         return $this->hasMany('App\Models\GestaoEquipesEmpregados', 'idEquipe', 'idEquipe');
     }
-
-    public function GestaoEquipesAlocarEmpregado()
-    {
-        return $this->hasMany('App\Models\GestaoEquipesAlocarEmpregado', 'idEquipe', 'idEquipe');
-    }
 }
