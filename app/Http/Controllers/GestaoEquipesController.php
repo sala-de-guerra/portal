@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Empregado;
+use App\Models\GestaoEquipesLogHistorico;
 use App\Models\GestaoEquipesEmpregados;
 use App\Models\GestaoEquipesCelulas;
 use App\Models\GestaoEquipesAlocarEmpregado;
@@ -49,40 +50,164 @@ class GestaoEquipesController extends Controller
     public function listarEquipesUnidade()
     {
         $arrayTratadoEquipes = [];
-        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->orWhere('codigoUnidadeEquipe', null)->get();
+        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->orWhere('codigoUnidadeEquipe', null)->get();
         foreach ($relacaoEquipesUnidade as $equipe) {
             if (is_null($equipe->codigoUnidadeEquipe)) {
-                // dd()
                 $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::where('idEquipe', null)->where(function($lotacao) {
                     $lotacao->where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))
                             ->orWhere('codigoUnidadeLotacao', session('codigoLotacaoFisica'));
                     })->get();
+                $arrayEmpregadosNaoAlocados = [];
                 foreach ($relacaoEmpregadosNaoAlocados as $empregadoNaoAlocado) {
-                    // $empregadoNaoAlocado->idEquipe = $equipe->idEquipe;
-                    // $empregadoNaoAlocado->updated_at = date("Y-m-d H:i:s", time());
-                    // $empregadoNaoAlocado->save();
-                    $dadosEmpregadoNaoAlocado = [
-                        'matricula' => $empregadoNaoAlocado->matricula,
-                        'nomeCompleto' => $empregadoNaoAlocado->dadosEmpregadosLdap->nomeCompleto,
-                        'nomeFuncao' => $empregadoNaoAlocado->dadosEmpregadosLdap->nomeFuncao,
-                    ];
+                    array_push($arrayEmpregadosNaoAlocados, [
+                        'matricula'     => $empregadoNaoAlocado->matricula,
+                        'nomeCompleto'  => $empregadoNaoAlocado->dadosEmpregadoLdap->nomeCompleto,
+                        'nomeFuncao'    => $empregadoNaoAlocado->dadosEmpregadoLdap->nomeFuncao,
+                    ]);
                 }
+                array_push($arrayTratadoEquipes, array('empregadosParaAlocar' => [
+                    'idEquipe'          => (string) $equipe->idEquipe,
+                    'nomeEquipe'        => $equipe->nomeEquipe,
+                    'empregadosEquipe'  => $arrayEmpregadosNaoAlocados
+                ]));
+            } else {
+                $relacaoEmpregadosEquipe = GestaoEquipesEmpregados::where('idEquipe', $equipe->idEquipe)->get();
+                $arrayEmpregadosEquipe = [];
+                foreach ($relacaoEmpregadosEquipe as $empregadoEquipe) {
+                    array_push($arrayEmpregadosEquipe, [
+                        'matricula'     => $empregadoEquipe->matricula,
+                        'nomeCompleto'  => $empregadoEquipe->dadosEmpregadoLdap->nomeCompleto,
+                        'nomeFuncao'    => $empregadoEquipe->dadosEmpregadoLdap->nomeFuncao,
+                    ]);
+                }
+                array_push($arrayTratadoEquipes, array((string) $equipe->codigoUnidadeEquipe => [
+                    'idEquipe'                  => (string) $equipe->idEquipe,
+                    'nomeEquipe'                => $equipe->nomeEquipe,
+                    'nomeGestorEquipe'          => $equipe->nomeGestor,
+                    'matriculaGestorEquipe'     => $equipe->matriculaGestor,
+                    'nomeEventualEquipe'        => $equipe->nomeEventual,
+                    'matriculaEventualEquipe'   => $equipe->matriculaEventual,
+                    'empregadosEquipe'          => $arrayEmpregadosEquipe
+                ]));
             }
-            $arrayEquipes = [
-                
-            ];
         }
-        return json_encode([session('codigoLotacaoAdministrativa') => $relacaoEquipesUnidade]);
+        return json_encode($arrayTratadoEquipes);
     }
 
     /**
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function listarEmpregadosUnidade()
+    public function cadastrarEquipe(Request $request)
     {
-        $relacaoEmpregadosUnidade = GestaoEquipesEmpregados::where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))->get();
-        return json_encode($relacaoEmpregadosUnidade);
+        try {
+            DB::beginTransaction();
+            // CRIA A NOVA EQUIPE
+            $novaEquipe = new GestaoEquipesCelulas;
+            $novaEquipe->codigoUnidadeEquipe    = !in_array(session('codigoLotacaoFisica'), [null, 'NULL']) ? session('codigoLotacaoFisica') : session('codigoLotacaoAdministrativa');
+            $novaEquipe->nomeEquipe             = strtoupper($request->nomeEquipe);
+            $novaEquipe->matriculaGestor        = isset($request->matriculaGestor) ? $request->matriculaGestor : null;
+            $novaEquipe->nomeGestor             = isset($request->nomeGestor) ? $request->nomeGestor : null;
+            $novaEquipe->matriculaEventual      = isset($request->matriculaEventual) ? $request->matriculaEventual : null;
+            $novaEquipe->nomeEventual           = isset($request->nomeEventual) ? $request->nomeEventual : null;
+            $novaEquipe->responsavelEdicao      = session('matricula');
+            $novaEquipe->created_at             = date("Y-m-d H:i:s", time());
+            $novaEquipe->updated_at             = date("Y-m-d H:i:s", time());
+            $novaEquipe->save();
+
+            // REGISTRA O LOG DE HISTORICO DA AÇÃO
+            $registroLogHistorico = new GestaoEquipesLogHistorico;
+            $registroLogHistorico->idEquipe                 = $novaEquipe->idEquipe;
+            $registroLogHistorico->matriculaResponsavel     = session('matricula');
+            $registroLogHistorico->tipo                     = 'CADASTRO';
+            $registroLogHistorico->observacao               = "CADASTRO DA EQUIPE " . strtoupper($request->nomeEquipe);
+            $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+            $registroLogHistorico->save();
+
+            DB::commit();
+            return response('equipe cadastrada com sucesso', 200);
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            return response('Não foi possível cadastrar a equipe', 500);
+        }
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function editarCadastroEquipe(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
+            $editarEquipe = GestaoEquipesCelulas::find($request->idEquipe);
+            if (isset($request->matriculaEventual)) {
+                $matriculaAntigoEventual = $editarEquipe->matriculaEventual;
+                if (!is_null($matriculaAntigoEventual)) {
+                    // REMOVE O ANTIGO EVENTUAL
+                    $antigoEventual = GestaoEquipesEmpregados::find($matriculaAntigoEventual);
+                    $antigoEventual->eventualEquipe = false;
+                    $antigoEventual->updated_at = date("Y-m-d H:i:s", time());
+
+                    // REGISTRA O LOG DE HISTORICO DA AÇÃO
+                    $registroLogHistorico = new GestaoEquipesLogHistorico;
+                    $registroLogHistorico->idEquipe                 = $request->idEquipe;
+                    $registroLogHistorico->matriculaResponsavel     = session('matricula');
+                    $registroLogHistorico->tipo                     = 'EDIÇÃO';
+                    $registroLogHistorico->observacao               = "REMOÇÃO DA EVENTUALIDADE - " . $antigoEventual->dadosEmpregadoLdap->nomeCompleto;
+                    $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+                    $registroLogHistorico->save();
+
+                    $antigoEventual->save();
+
+                    // DESIGNA O ANTIGO EVENTUAL
+                    $novoEventual = GestaoEquipesEmpregados::find($request->matriculaEventual);
+                    $novoEventual->eventualEquipe = true;
+                    $novoEventual->updated_at = date("Y-m-d H:i:s", time());
+                    
+                    // REGISTRA O LOG DE HISTORICO DA AÇÃO
+                    $registroLogHistorico = new GestaoEquipesLogHistorico;
+                    $registroLogHistorico->idEquipe                 = $request->idEquipe;
+                    $registroLogHistorico->matriculaResponsavel     = session('matricula');
+                    $registroLogHistorico->tipo                     = 'EDIÇÃO';
+                    $registroLogHistorico->observacao               = "DESIGNAÇÃO DE EVENTUALIDADE - " . $novoEventual->dadosEmpregadoLdap->nomeCompleto;
+                    $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+                    $registroLogHistorico->save();
+
+                    $novoEventual->save();
+                }
+            }
+
+            // EDITAR EQUIPE
+            $editarEquipe->nomeEquipe             = !in_array($request->nomeEquipe, [null, 'NULL']) ? strtoupper($request->nomeEquipe) : $editarEquipe->nomeEquipe;
+            $editarEquipe->matriculaGestor        = !in_array($request->matriculaGestor, [null, 'NULL']) ? strtoupper($request->matriculaGestor) : $editarEquipe->matriculaGestor;
+            $editarEquipe->nomeGestor             = !in_array($request->nomeGestor, [null, 'NULL']) ? strtoupper($request->nomeGestor) : $editarEquipe->nomeGestor;
+            $editarEquipe->matriculaEventual      = !in_array($request->matriculaEventual, [null, 'NULL']) ? strtoupper($request->matriculaEventual) : $editarEquipe->matriculaEventual;
+            $editarEquipe->nomeEventual           = !in_array($request->nomeEventual, [null, 'NULL']) ? strtoupper($request->nomeEventual) : $editarEquipe->nomeEventual;
+            $editarEquipe->responsavelEdicao      = session('matricula');
+            $editarEquipe->updated_at             = date("Y-m-d H:i:s", time());
+
+            // REGISTRA O LOG DE HISTORICO DA AÇÃO
+            $registroLogHistorico = new GestaoEquipesLogHistorico;
+            $registroLogHistorico->idEquipe                 = $editarEquipe->idEquipe;
+            $registroLogHistorico->matriculaResponsavel     = session('matricula');
+            $registroLogHistorico->tipo                     = 'EDIÇÃO';
+            $registroLogHistorico->observacao               = "EDIÇÃO DOS DADOS DA EQUIPE " . strtoupper($editarEquipe->nomeEquipe);
+            $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+            $registroLogHistorico->save();
+
+            $editarEquipe->save();
+            DB::commit();
+            return response('equipe editada com sucesso', 200);
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            return response('Não foi possível editar a equipe', 500);
+        }
     }
 
     /**
@@ -94,11 +219,27 @@ class GestaoEquipesController extends Controller
     {
         try {
             DB::beginTransaction();
+            // ALOCAR EMPREGADO
+            $empregadoAlocado = GestaoEquipesEmpregados::find($request->matricula);
+            $empregadoAlocado->idEquipe     = $request->idEquipe;
+            $empregadoAlocado->updated_at   = date("Y-m-d H:i:s", time());
 
+            // REGISTRA O LOG DE HISTORICO DA AÇÃO
+            $registroLogHistorico = new GestaoEquipesLogHistorico;
+            $registroLogHistorico->idEquipe                 = $request->idEquipe;
+            $registroLogHistorico->matriculaResponsavel     = session('matricula');
+            $registroLogHistorico->tipo                     = 'ALOCAÇÃO';
+            $registroLogHistorico->observacao               = "ALOCAÇÃO DO EMPREGADO " . $empregadoAlocado->dadosEmpregadoLdap->nomeCompleto;
+            $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+            $registroLogHistorico->save();
 
+            $empregadoAlocado->save();
             DB::commit();
+            return response('empregado alocado com sucesso', 200);
         } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
+            return response('Não foi possível alocar o empregado', 500);
         }
     }
 

@@ -25,8 +25,8 @@ class GestaoEquipesEmpregados extends Model
     {
         return $this->belongsTo('App\Models\GestaoEquipesCelulas', 'idEquipe', 'idEquipe');
     }
-    
-    public function dadosEmpregadosLdap()
+
+    public function dadosEmpregadoLdap()
     {
         return $this->belongsTo('App\Models\Empregado', 'matricula', 'matricula');
     }
