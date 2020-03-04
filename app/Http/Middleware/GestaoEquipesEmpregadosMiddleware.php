@@ -20,6 +20,7 @@ class GestaoEquipesEmpregadosMiddleware
     public function handle($request, Closure $next)
     {
         $arrayUnidadesAutorizadasParaCadastrarEquipes = [
+            '5530', // GEIPT
             '7257', // GILIE/SP
             '7244', // GILIE/BH
             '7243', // GILIE/BE

@@ -19,26 +19,26 @@ class GestaoEquipesController extends Controller
      */
     public function index()
     {
-        /* 
-            VALIDA O CODIGO DA FUNÇÃO DO EMPREGADO DA SESSÃO SE É GERENTE
-            CASO POSITIVO VERIFICA SE EXISTE ALGUMA EQUIPE EXISTENTE NA UNIDADE OU 
-            CASO NEGATIVO CRIA A PRIMEIRA PARA GESTÃO DO GESTOR
-        */
-        $usuarioGestor = Empregado::find(session('matricula'));
+        // /* 
+        //     VALIDA O CODIGO DA FUNÇÃO DO EMPREGADO DA SESSÃO SE É GERENTE
+        //     CASO POSITIVO VERIFICA SE EXISTE ALGUMA EQUIPE EXISTENTE NA UNIDADE OU 
+        //     CASO NEGATIVO CRIA A PRIMEIRA PARA GESTÃO DO GESTOR
+        // */
+        // $usuarioGestor = Empregado::find(session('matricula'));
 
-        if($usuarioGestor->codigoFuncao == '2066') {
-            $quantidadeEquipes = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $usuarioGestor->codigoLotacaoAdministrativa)->get();
-            if ($quantidadeEquipes->count() == 0) {
-                $primeiraEquipeUnidade = new GestaoEquipesCelulas;
-                $primeiraEquipeUnidade->codigoUnidadeEquipe = $usuarioGestor->codigoLotacaoAdministrativa;
-                $primeiraEquipeUnidade->nomeEquipe = 'Gerencial';
-                $primeiraEquipeUnidade->matriculaGestor = $usuarioGestor->matricula;
-                $primeiraEquipeUnidade->nomeGestor = $usuarioGestor->nomeCompleto;
-                $primeiraEquipeUnidade->created_at = date("Y-m-d H:i:s", time());
-                $primeiraEquipeUnidade->updated_at = date("Y-m-d H:i:s", time());
-                $primeiraEquipeUnidade->save();
-            }
-        }
+        // if($usuarioGestor->codigoFuncao == '2066') {
+        //     $quantidadeEquipes = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $usuarioGestor->codigoLotacaoAdministrativa)->get();
+        //     if ($quantidadeEquipes->count() == 0) {
+        //         $primeiraEquipeUnidade = new GestaoEquipesCelulas;
+        //         $primeiraEquipeUnidade->codigoUnidadeEquipe = $usuarioGestor->codigoLotacaoAdministrativa;
+        //         $primeiraEquipeUnidade->nomeEquipe = 'Gerencial';
+        //         $primeiraEquipeUnidade->matriculaGestor = $usuarioGestor->matricula;
+        //         $primeiraEquipeUnidade->nomeGestor = $usuarioGestor->nomeCompleto;
+        //         $primeiraEquipeUnidade->created_at = date("Y-m-d H:i:s", time());
+        //         $primeiraEquipeUnidade->updated_at = date("Y-m-d H:i:s", time());
+        //         $primeiraEquipeUnidade->save();
+        //     }
+        // }
         return view('portal.gerencial.equipes');
     }
 
@@ -49,14 +49,23 @@ class GestaoEquipesController extends Controller
     public function listarEquipesUnidade()
     {
         $arrayTratadoEquipes = [];
-        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->get();
+        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->orWhere('codigoUnidadeEquipe', null)->get();
         foreach ($relacaoEquipesUnidade as $equipe) {
-            if ($equipe->nomeEquipe = "Gerencial") {
-                $relacaoEmpregadosSemVinculacao = GestaoEquipesEmpregados::where('idEquipe', null)->where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))->get();
-                foreach ($relacaoEmpregadosSemVinculacao as $empregadoSemVinculacao) {
-                    $empregadoSemVinculacao->idEquipe = $equipe->idEquipe;
-                    $empregadoSemVinculacao->updated_at = date("Y-m-d H:i:s", time());
-                    $empregadoSemVinculacao->save();
+            if (is_null($equipe->codigoUnidadeEquipe)) {
+                // dd()
+                $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::where('idEquipe', null)->where(function($lotacao) {
+                    $lotacao->where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))
+                            ->orWhere('codigoUnidadeLotacao', session('codigoLotacaoFisica'));
+                    })->get();
+                foreach ($relacaoEmpregadosNaoAlocados as $empregadoNaoAlocado) {
+                    // $empregadoNaoAlocado->idEquipe = $equipe->idEquipe;
+                    // $empregadoNaoAlocado->updated_at = date("Y-m-d H:i:s", time());
+                    // $empregadoNaoAlocado->save();
+                    $dadosEmpregadoNaoAlocado = [
+                        'matricula' => $empregadoNaoAlocado->matricula,
+                        'nomeCompleto' => $empregadoNaoAlocado->dadosEmpregadosLdap->nomeCompleto,
+                        'nomeFuncao' => $empregadoNaoAlocado->dadosEmpregadosLdap->nomeFuncao,
+                    ];
                 }
             }
             $arrayEquipes = [
