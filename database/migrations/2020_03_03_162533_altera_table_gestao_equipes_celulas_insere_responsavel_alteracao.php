@@ -26,7 +26,7 @@ class AlteraTableGestaoEquipesCelulasInsereResponsavelAlteracao extends Migratio
      */
     public function down()
     {
-        Schema::table('TBL_DISTRATO_RELACAO_DESPESAS', function (Blueprint $table) {
+        Schema::table('TBL_GESTAO_EQUIPES_CELULAS', function (Blueprint $table) {
             $table->dropColumn('responsavelExclusao');
             $table->dropColumn('responsavelEdicao');
         });

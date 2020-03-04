@@ -14,10 +14,10 @@
 
     <div class="col-sm-2">
         <select name="selectGilie" id="selectGilie" class="form-control">
-            <option value="BU">GILIE BU</option>
-            <option value="SP">GILIE SP</option>
-            <option value="RS">GILIE RS</option>
-            <option value="SA">GILIE SA</option>
+            <option value="5050">GILIE BU</option>
+            <option value="7257">GILIE SP</option>
+            <option value="1010">GILIE RS</option>
+            <option value="2020">GILIE SA</option>
         </select>
     </div>
 
@@ -30,7 +30,7 @@
         <div class="modal fade" id="modalCriarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/url" id="formCriarEquipe" onsubmit="noRefreshPost(this);return false">
+                    <form method="post" action="/url" id="formCriarEquipe" onsubmit="noRefreshPost(this);return false">
                         <div class="modal-header">
                             <h5 class="modal-title">Criar Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -69,7 +69,7 @@
         <div class="modal fade" id="modalAlterarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/url" id="formAlterarEquipe" onsubmit="noRefreshPost(this);return false">
+                    <form method="put" action="/url" id="formAlterarEquipe" onsubmit="noRefreshPost(this);return false">
                         <div class="modal-header">
                             <h5 class="modal-title">Alterar Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -114,7 +114,7 @@
         <div class="modal fade" id="modalExcluirEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/url" id="formExcluirEquipe" onsubmit="noRefreshPost(this);return false">
+                    <form method="delete" action="/url" id="formExcluirEquipe" onsubmit="noRefreshPost(this);return false">
                         <div class="modal-header">
                             <h5 class="modal-title">Excluir Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

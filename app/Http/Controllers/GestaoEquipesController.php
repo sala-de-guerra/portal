@@ -48,8 +48,22 @@ class GestaoEquipesController extends Controller
      */
     public function listarEquipesUnidade()
     {
+        $arrayTratadoEquipes = [];
         $relacaoEquipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->get();
-        return json_encode($relacaoEquipesUnidade);
+        foreach ($relacaoEquipesUnidade as $equipe) {
+            if ($equipe->nomeEquipe = "Gerencial") {
+                $relacaoEmpregadosSemVinculacao = GestaoEquipesEmpregados::where('idEquipe', null)->where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))->get();
+                foreach ($relacaoEmpregadosSemVinculacao as $empregadoSemVinculacao) {
+                    $empregadoSemVinculacao->idEquipe = $equipe->idEquipe;
+                    $empregadoSemVinculacao->updated_at = date("Y-m-d H:i:s", time());
+                    $empregadoSemVinculacao->save();
+                }
+            }
+            $arrayEquipes = [
+                
+            ];
+        }
+        return json_encode([session('codigoLotacaoAdministrativa') => $relacaoEquipesUnidade]);
     }
 
     /**

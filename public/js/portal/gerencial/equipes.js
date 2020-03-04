@@ -12,6 +12,14 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
+/*************************************************\
+| Limpar campos do modal ao clicar fora ou fechar |
+\*************************************************/
+
+$(".modal").on('hidden.bs.modal', function(e){
+    $(this).find("form")[0].reset();       
+});
+
 /************************************************************\
 | Função que limpa os cards da tela e recria, a.k.a. refresh |
 \************************************************************/
@@ -27,14 +35,6 @@ function refresh(regiaoUnidade) {
     montaCardsEquipes(regiaoUnidade);
 };
 
-/*************************************************\
-| Limpar campos do modal ao clicar fora ou fechar |
-\*************************************************/
-
-$(".modal").on('hidden.bs.modal', function(e){
-    $(this).find("form")[0].reset();       
-});
-
 /********************************************************\
 | Função mostra as equipes da regiao do usuario da seção |
 \********************************************************/
@@ -44,11 +44,13 @@ let regiaoUnidadeSecao = '';
 
 $(document).ready( function () {
     // console.log(lotacaoUsuario);
-    switch (lotacaoUsuario) {
-        case '7257':
-            regiaoUnidadeSecao = 'SP';
-            break;
-    };
+
+    regiaoUnidadeSecao = lotacaoUsuario;
+    // switch (lotacaoUsuario) {
+    //     case '7257':
+    //         regiaoUnidadeSecao = 'SP';
+    //         break;
+    // };
 
     $('#selectGilie').val(regiaoUnidadeSecao);
 
@@ -70,14 +72,12 @@ $('#selectGilie').change(function() {
 \*********************************************************************/
 
 function montaCardsEquipes (regiaoUnidade) {
+    $.getJSON('../js/equipes.json', function(dados) {
 
-    $.getJSON('../js/equipes' + regiaoUnidade + '.json', function(dados) {
-        // console.log(dados);
-        $.each(dados, function(key, item) {
-            
+        $.each(dados[regiaoUnidade], function(key, item) {
             let arrayEmpregados = [];
 
-            $.each(item.equipe, function(key, item) {
+            $.each(item.empregadosEquipe, function(key, item) {
                 
                 let card =
                     `<li id="` + item.matricula + `">` +
@@ -112,14 +112,14 @@ function montaCardsEquipes (regiaoUnidade) {
                     `<div class="card card-default">` +
                         `<div class="card-header">` +
                             `<h3 class="card-title">` +
-                                `<b>Célula ` + item.nomeCelula + `</b>` +
+                                `<b>Equipe ` + item.nomeEquipe + `</b>` +
                                 `<br>` +
-                                `Gestor: ` + item.nomeGestorCelula +
+                                `Gestor: ` + item.nomeGestorEquipe +
                             `</h3>` +
                         `</div>` +
                         `<div class="card-body">` +
                             `<ul class="connectedSortable list-unstyled">` +
-                            stringEmpregados +
+                                stringEmpregados +
                             `</ul>` +
                         `</div>` +
                     `</div>` +
@@ -128,14 +128,14 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $(lista).appendTo('#equipes');
 
-            $('#eventual' + item.matriculaEventualCelula).show();
+            $('#eventual' + item.matriculaEventualEquipe).show();
 
             /*****************************************************\
             | Monta options do select de alterar e excluir equipe |
             \*****************************************************/
 
             let optionNomeCelula =
-                `<option value="` + item.nomeCelula + `">` + item.nomeCelula + `</option>`
+                `<option value="` + item.id + `">` + item.nomeEquipe + `</option>`
             ;
 
             $(optionNomeCelula).appendTo('#selectAlterarEquipe');
@@ -193,7 +193,7 @@ function montaCardsEquipes (regiaoUnidade) {
     | Função que pega a lista de gestores e popula o select de criar equipe |
     \***********************************************************************/
     
-    $.getJSON('../js/gestores' + regiaoUnidade + '.json', function(dados) {
+    $.getJSON('../js/gestoresSP.json', function(dados) {
         // console.log(dados);
 
         $.each(dados, function(key, item) {
@@ -204,7 +204,6 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $(option).appendTo('#selectCriarEquipe');
             $(option).appendTo('#selectAlterarGestor');
-
 
         });
 
@@ -242,20 +241,31 @@ function montaCardsEquipes (regiaoUnidade) {
 
 function noRefreshPost(form) {
 
-    let dados = $(form).serialize();
-    let route = $(form).attr('action');
+    let data = JSON.stringify( $(form).serializeArray() );
+    let url = $(form).attr('action');
+    let method = $(form).attr('method');
 
-    $.post(route, {dados, _token}, function (){
+    console.log(data);
+    console.log(url);
+    console.log(method);
 
-        $('.modal').modal('hide');
+    $.ajax({
+        type: method,
+        url: url,
+        data: data,
+        dataType: JSON,
+        success: function (){
 
-        Toast.fire({
-            icon: 'success',
-            title: 'Alteração salva!'
-        });
-
-        refresh(regiaoUnidade);
-    })
+            $('.modal').modal('hide');
+    
+            Toast.fire({
+                icon: 'success',
+                title: 'Alteração salva!'
+            });
+    
+            refresh(regiaoUnidade);
+        },
+      })
     .fail(function () {
         
         $('.modal').modal('hide');
