@@ -14,6 +14,7 @@
 
      <div class="col-sm-2">
         <select name="selectEquipe" id="selectEquipe" class="form-control">
+            <option value="" selected>Selecione</option>
         </select>
     </div>
 
@@ -62,7 +63,7 @@
             <i class="far fa-edit mx-2"></i>Alterar Atividade
         </button>
 
-        <div class="modal fade" id="modalAlterarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="modalAlterarAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form action="/url" id="formAlterarAtividade" onsubmit="noRefreshPost(this);return false">
@@ -149,7 +150,7 @@
 
 @section('content')
 
-<div id="equipes" class="row">
+<div id="equipe" class="row">
 
 </div> 
 

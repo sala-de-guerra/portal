@@ -1,0 +1,125 @@
+{
+    "7257":[ 
+        {
+            "id":1,
+            "nomeEquipe":"Administrar PAR / ADJ",
+            "nomeGestorEquipe":"Joao Marcel",
+            "matriculaGestorEquipe":"c738787",
+            "nomeEventualEquipe": "Carlos",
+            "matriculaEventualEquipe": "c888188",
+            "empregadosEquipe": []
+        },
+        {
+            "id":2,
+            "nomeEquipe":"Administrativo / RH",
+            "nomeGestorEquipe":"Marcelo",
+            "matriculaGestorEquipe":"c888787",
+            "nomeEventualEquipe": "Fernanda",
+            "matriculaEventualEquipe": "c222128",
+            "empregadosEquipe": [
+                {
+                    "matricula":"c142765",
+                    "nomeCompleto":"Carlos",
+                    "nomeFuncao":"Júnior"
+                }
+            ]
+        },
+        {
+            "id":3,
+            "nomeEquipe":"Preparar e Ofertar",
+            "nomeGestorEquipe":"Fernanda",
+            "matriculaGestorEquipe":"c728727",
+            "nomeEventualEquipe": "Camila",
+            "matriculaEventualEquipe": "c889898",
+            "empregadosEquipe": []
+        },
+        {
+            "id":5,
+            "nomeEquipe":"Contratação e TI",
+            "nomeGestorEquipe":"Vladimir",
+            "matriculaGestorEquipe":"c111828",
+            "nomeEventualEquipe": "Eduardo",
+            "matriculaEventualEquipe": "c111710",
+            "empregadosEquipe": [
+                {
+                    "matricula":"c111710",
+                    "nomeCompleto":"Eduardo",
+                    "nomeFuncao":"Pleno"
+                },
+                {
+                    "matricula":"c098453",
+                    "nomeCompleto":"Rafael",
+                    "nomeFuncao":"TBN"
+                },
+                {
+                    "matricula":"c079436",
+                    "nomeCompleto":"Vladimir",
+                    "nomeFuncao":"Coordenador"
+                }
+                
+            ]
+        }
+    ],
+    "1010":[ 
+        {
+            "id":1,
+            "nomeEquipe":"Administrar",
+            "nomeGestorEquipe":"Joao Marcel",
+            "matriculaGestorEquipe":"c738787",
+            "nomeEventualEquipe": "Carlos",
+            "matriculaEventualEquipe": "c888188",
+            "equipe": []
+        },
+        {
+            "id":2,
+            "nomeEquipe":"Gerir",
+            "nomeGestorEquipe":"Marcelo",
+            "matriculaGestorEquipe":"c888787",
+            "nomeEventualEquipe": "Fernanda",
+            "matriculaEventualEquipe": "c222128",
+            "equipe": [
+                {
+                    "matricula":"c142765",
+                    "nomeCompleto":"Carlos",
+                    "nomeFuncao":"Júnior"
+                }
+            ]
+        },
+        {
+            "id":3,
+            "nomeEquipe":"Coordenar",
+            "nomeGestorEquipe":"Fernanda",
+            "matriculaGestorEquipe":"c728727",
+            "nomeEventualEquipe": "Camila",
+            "matriculaEventualEquipe": "c889898",
+            "equipe": []
+        },
+        {
+            "id":4,
+            "nomeEquipe":"Supervisionar",
+            "nomeGestorEquipe":"Vladimir",
+            "matriculaGestorEquipe":"c111828",
+            "nomeEventualEquipe": "Eduardo",
+            "matriculaEventualEquipe": "c111710",
+            "equipe": [
+                {
+                    "matricula":"c111710",
+                    "nomeCompleto":"Eduardo",
+                    "nomeFuncao":"Pleno"
+                },
+                {
+                    "matricula":"c098453",
+                    "nomeCompleto":"Rafael",
+                    "nomeFuncao":"TBN"
+                },
+                {
+                    "matricula":"c079436",
+                    "nomeCompleto":"Vladimir",
+                    "nomeFuncao":"Coordenador"
+                }
+                
+            ]
+        }
+    ]    
+
+}
