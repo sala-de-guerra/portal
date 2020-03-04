@@ -111,10 +111,10 @@ Route::prefix('gerencial')->group(function () {
     Route::prefix('gestao-equipes')->group(function () {
         // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
         Route::get('/', 'GestaoEquipesController@index');
-        // LISTA AS EQUIPES DE DETERMINADA UNIDADE
+        // MÉTODO PARA CADASTRAR NOVA EQUIPE
+        Route::post('/', 'GestaoEquipesController@cadastrarEquipe');
+        // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
         Route::get('listar-equipes', 'GestaoEquipesController@listarEquipesUnidade');
-        // LISTA AS EMPREGADOS DE DETERMINADA UNIDADE
-        Route::get('listar-empregados', 'GestaoEquipesController@listarEmpregadosUnidade');
         // DESIGNA O EMPREGADO PARA UMA EQUIPE
         Route::post('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
         

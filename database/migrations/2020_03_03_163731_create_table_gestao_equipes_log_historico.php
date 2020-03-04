@@ -13,12 +13,13 @@ class CreateTableGestaoEquipesLogHistorico extends Migration
      */
     public function up()
     {
-        Schema::create('table_gestao_equipes_log_historico', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('TBL_GESTAO_EQUIPES_LOG_HISTORICO', function (Blueprint $table) {
+            $table->bigIncrements('idLog');
+            $table->integer('idEquipe');
             $table->string('matriculaResponsavel');
             $table->string('tipo', 255);
             $table->text('observacao');
-            $table->timestamps();
+            $table->dateTime('dataLog');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateTableGestaoEquipesLogHistorico extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_gestao_equipes_log_historico');
+        Schema::dropIfExists('TBL_GESTAO_EQUIPES_LOG_HISTORICO');
     }
 }
