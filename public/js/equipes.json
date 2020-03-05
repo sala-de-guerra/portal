@@ -1,52 +1,81 @@
 [
     {
         "empregadosParaAlocar": {
-        "idEquipe": "1",
-        "nomeEquipe": "ALOCAR EMPREGADOS",
-        "nomeGestorEquipe": null,
-        "matriculaGestorEquipe": null,
-        "nomeEventualEquipe": null,
-        "matriculaEventualEquipe": null,
-        "empregadosEquipe": [
-        {
-        "matricula": "c142765",
-        "nomeCompleto": "CARLOS ALBERTO DALCIN DAVID",
-        "nomeFuncao": "ASSISTENTE JUNIOR"
-        },
-        {
-        "matricula": "c098453",
-        "nomeCompleto": "RAFAEL PIMENTEL GONCALVES",
-        "nomeFuncao": null
-        }
-        ]
+            "idEquipe": "1",
+            "nomeEquipe": "ALOCAR EMPREGADOS",
+            "nomeGestorEquipe": null,
+            "matriculaGestorEquipe": null,
+            "nomeEventualEquipe": null,
+            "matriculaEventualEquipe": null,
+            "empregadosEquipe": [
+                {
+                    "matricula": "c142765",
+                    "nomeCompleto": "CARLOS ALBERTO DALCIN DAVID",
+                    "nomeFuncao": "ASSISTENTE JUNIOR"
+                },
+                {
+                    "matricula": "c098453",
+                    "nomeCompleto": "RAFAEL PIMENTEL GONCALVES",
+                    "nomeFuncao": null
+                }
+            ]
         }
     },
     {
         "7257": [
-        {
-        "idEquipe": "2",
-        "nomeEquipe": "ADMINISTRATIVO",
-        "nomeGestorEquipe": "MARCELO BARBOZA FERNANDES",
-        "matriculaGestorEquipe": "c090120",
-        "nomeEventualEquipe": "FERNANDA PEREIRA MENDONCA",
-        "matriculaEventualEquipe": "c072452",
-        "empregadosEquipe": []
-        },
-        {
-        "idEquipe": "3",
-        "nomeEquipe": "CONTRATA\u00c7\u00c3O E INOVA\u00c7\u00c3O",
-        "nomeGestorEquipe": "VLADIMIR PEREIRA DE LEMOS",
-        "matriculaGestorEquipe": "c079436",
-        "nomeEventualEquipe": "EDUARDO CHIAKI CHUMAN",
-        "matriculaEventualEquipe": "c111710",
-        "empregadosEquipe": [
-        {
-        "matricula": "c111710",
-        "nomeCompleto": "EDUARDO CHIAKI CHUMAN",
-        "nomeFuncao": "ASSISTENTE PLENO"
-        }
+            {
+                "idEquipe": "2",
+                "nomeEquipe": "ADMINISTRATIVO",
+                "nomeGestorEquipe": "MARCELO BARBOZA FERNANDES",
+                "matriculaGestorEquipe": "c090120",
+                "nomeEventualEquipe": "FERNANDA PEREIRA MENDONCA",
+                "matriculaEventualEquipe": "c072452",
+                "empregadosEquipe": []
+            },
+            {
+                "idEquipe": "3",
+                "nomeEquipe": "CONTRATA\u00c7\u00c3O E INOVA\u00c7\u00c3O",
+                "nomeGestorEquipe": "VLADIMIR PEREIRA DE LEMOS",
+                "matriculaGestorEquipe": "c079436",
+                "nomeEventualEquipe": "EDUARDO CHIAKI CHUMAN",
+                "matriculaEventualEquipe": "c111710",
+                "empregadosEquipe": [
+                    {
+                        "matricula": "c111710",
+                        "nomeCompleto": "EDUARDO CHIAKI CHUMAN",
+                        "nomeFuncao": "ASSISTENTE PLENO"
+                    }
+                ]
+            }
         ]
-        }
+    },
+    {
+        "1010": [
+            {
+                "idEquipe": "2",
+                "nomeEquipe": "ADMINISTRATIVO",
+                "nomeGestorEquipe": "MARCELO BARBOZA FERNANDES",
+                "matriculaGestorEquipe": "c090120",
+                "nomeEventualEquipe": "FERNANDA PEREIRA MENDONCA",
+                "matriculaEventualEquipe": "c072452",
+                "empregadosEquipe": []
+            },
+            {
+                "idEquipe": "3",
+                "nomeEquipe": "CONTRATA\u00c7\u00c3O E INOVA\u00c7\u00c3O",
+                "nomeGestorEquipe": "VLADIMIR PEREIRA DE LEMOS",
+                "matriculaGestorEquipe": "c079436",
+                "nomeEventualEquipe": "EDUARDO CHIAKI CHUMAN",
+                "matriculaEventualEquipe": "c111710",
+                "empregadosEquipe": [
+                    {
+                        "matricula": "c111710",
+                        "nomeCompleto": "EDUARDO CHIAKI CHUMAN",
+                        "nomeFuncao": "ASSISTENTE PLENO"
+                    }
+                ]
+            }
         ]
     }
+
 ]

@@ -56,22 +56,18 @@ $('#selectGilie').change(function() {
 \*********************************************************************/
 
 function montaCardsEquipes (regiaoUnidade) {
+    // $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
     $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
-        
-        console.log(dados);
-        console.log(regiaoUnidade);
+        // console.log(dados[regiaoUnidade]);
 
         // $.each(dados[regiaoUnidade], function(key, item) {
-        $.each(dados, function(key, item) {
-
-            console.log(item);
-
-            
+        $.each(dados[regiaoUnidade], function(key, item) {
+            // console.log(item);
 
             let arrayEmpregados = [];
 
             $.each(item.empregadosEquipe, function(key, item) {
-                
+                // console.log(item);
                 let card =
                     `<li id="` + item.matricula + `">` +
                         `<div class="callout callout-info row p-0">` +
@@ -80,13 +76,10 @@ function montaCardsEquipes (regiaoUnidade) {
                             `</div>` +
                             `<div class="col-md-9">` +
                                 `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
-                                `<br>` +
-                                `<div class="row">` +
-                                    `<p class="card-text col"><small class="text-muted">` + item.nomeFuncao + `</small></p>` +
-                                    `<div class="float-right col" id="eventual` + item.matricula + `" style="display:none;">` +
-                                        `<span class="badge bg-primary">Eventual</span>` +
-                                    `</div>` +
-                                `</div>` +
+                                `<p class="card-text m-0">` +
+                                    `<small class="text-muted">` + item.nomeFuncao + `</small>` +
+                                    `<span class="badge bg-primary float-right" id="eventual` + item.matricula + `" style="display:none;">Eventual</span>` +
+                                `</p>` +
                             `</div>` +
                         `</div>` +
                     `</li>`
@@ -101,7 +94,7 @@ function montaCardsEquipes (regiaoUnidade) {
             let stringEmpregados = arrayEmpregados.join(' ').trim();
 
             let lista =
-                `<div id="cardLista` + item.id + `" class="col-md-3">` +
+                `<div id="cardLista` + item.idEquipe + `" class="col-md-3">` +
                     `<div class="card card-default">` +
                         `<div class="card-header">` +
                             `<h3 class="card-title">` +
@@ -111,7 +104,7 @@ function montaCardsEquipes (regiaoUnidade) {
                             `</h3>` +
                         `</div>` +
                         `<div class="card-body">` +
-                            `<ul id="` + item.id + `" class="connectedSortable list-unstyled">` +
+                            `<ul id="` + item.idEquipe + `" class="connectedSortable list-unstyled">` +
                                 stringEmpregados +
                             `</ul>` +
                         `</div>` +
@@ -128,7 +121,7 @@ function montaCardsEquipes (regiaoUnidade) {
             \*****************************************************/
 
             let optionNomeCelula =
-                `<option value="` + item.id + `">` + item.nomeEquipe + `</option>`
+                `<option value="` + item.idEquipe + `">` + item.nomeEquipe + `</option>`
             ;
 
             $(optionNomeCelula).appendTo('#selectAlterarEquipe');
@@ -165,7 +158,7 @@ function montaCardsEquipes (regiaoUnidade) {
                             });
                                 
                         },
-                      
+                    
                         error: function () {
                             
                             $(ui.sender).sortable('cancel');
@@ -189,13 +182,13 @@ function montaCardsEquipes (regiaoUnidade) {
     | Função que pega a lista de gestores e popula o select de criar equipe |
     \***********************************************************************/
     
-    $.getJSON('../js/gestoresSP.json', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
         // console.log(dados);
 
         $.each(dados, function(key, item) {
             
             let option =
-                `<option value="` + item.matriculaGestor + `" selected>` + item.nomeGestor + `</option>`
+                `<option value="` + item.matricula + `" selected>` + item.nomeCompleto + `</option>`
             ;
 
             $(option).appendTo('#selectCriarEquipe');
