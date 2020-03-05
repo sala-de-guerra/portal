@@ -117,8 +117,12 @@ Route::prefix('gerencial')->group(function () {
         Route::put('/', 'GestaoEquipesController@editarCadastroEquipe');
         // MÉTODO PARA DESATIVAR UMA EQUIPE
         Route::delete('/', 'GestaoEquipesController@desativarEquipe');
+        // LISTAR GESTORES DA UNIDADE
+        Route::get('listar-gestores', 'GestaoEquipesController@listaGestoresUnidade');
         // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
         Route::get('listar-equipes', 'GestaoEquipesController@listarEquipesUnidade');
+        // LISTA DE UNIDADES
+        Route::get('listar-unidades', 'GestaoEquipesController@listarUnidades');
         // DESIGNA O EMPREGADO PARA UMA EQUIPE
         Route::put('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
         // GESTÃO DE ATIVIDADES

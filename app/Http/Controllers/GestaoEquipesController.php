@@ -14,7 +14,6 @@ use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 class GestaoEquipesController extends Controller
 {
     /**
-     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,10 +28,15 @@ class GestaoEquipesController extends Controller
      */
     public function listarEquipesUnidade()
     {
-        $arrayEquipesParaJson = [];
+        // $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::with(
+        //     ['dadosEmpregadoLdap' => function($dadosEmpregadoLdap) use($arrayCodigoGestores) {
+        //     json_encode($dadosEmpregadoLdap->whereNotIn('codigoFuncao', self::listarCodigoGestores()), JSON_UNESCAPED_SLASHES);
+        // }])->get();
+        // dd($relacaoEmpregadosNaoAlocados);
         $arrayEquipesUnidade = [];
         $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->orWhere('codigoUnidadeEquipe', null)->get();
         foreach ($relacaoEquipesUnidade as $equipe) {
+            $codigoUnidade = $equipe->codigoUnidadeEquipe;
             if (is_null($equipe->codigoUnidadeEquipe)) {
                 $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::where('idEquipe', null)->where(function($lotacao) {
                     $lotacao->where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))
@@ -42,34 +46,17 @@ class GestaoEquipesController extends Controller
                 foreach ($relacaoEmpregadosNaoAlocados as $empregadoNaoAlocado) {
                     $arrayEmpregadosNaoAlocados = self::incluirEmpregadoNaEquipe($arrayEmpregadosNaoAlocados, $empregadoNaoAlocado);
                 }
-                array_push($arrayEquipesParaJson, array('empregadosParaAlocar' => [
-                    'idEquipe'                  => (string) $equipe->idEquipe,
-                    'nomeEquipe'                => $equipe->nomeEquipe,
-                    'nomeGestorEquipe'          => $equipe->nomeGestor,
-                    'matriculaGestorEquipe'     => $equipe->matriculaGestor,
-                    'nomeEventualEquipe'        => $equipe->nomeEventual,
-                    'matriculaEventualEquipe'   => $equipe->matriculaEventual,
-                    'empregadosEquipe'          => $arrayEmpregadosNaoAlocados
-                ]));
+                $arrayEquipesUnidade = self::incluirEquipeNoArray($arrayEquipesUnidade, $equipe, $arrayEmpregadosNaoAlocados);
             } else {
                 $relacaoEmpregadosEquipe = GestaoEquipesEmpregados::where('idEquipe', $equipe->idEquipe)->get();
                 $arrayEmpregadosEquipe = [];
                 foreach ($relacaoEmpregadosEquipe as $empregadoEquipe) {
                     $arrayEmpregadosEquipe = self::incluirEmpregadoNaEquipe($arrayEmpregadosEquipe, $empregadoEquipe);
                 }
-                array_push($arrayEquipesUnidade, [
-                    'idEquipe'                  => (string) $equipe->idEquipe,
-                    'nomeEquipe'                => $equipe->nomeEquipe,
-                    'nomeGestorEquipe'          => $equipe->nomeGestor,
-                    'matriculaGestorEquipe'     => $equipe->matriculaGestor,
-                    'nomeEventualEquipe'        => $equipe->nomeEventual,
-                    'matriculaEventualEquipe'   => $equipe->matriculaEventual,
-                    'empregadosEquipe'          => $arrayEmpregadosEquipe
-                ]);
+                $arrayEquipesUnidade = self::incluirEquipeNoArray($arrayEquipesUnidade, $equipe, $arrayEmpregadosEquipe);
             }
         }
-        array_push($arrayEquipesParaJson, array((string) $equipe->codigoUnidadeEquipe => $arrayEquipesUnidade));
-        return json_encode($arrayEquipesParaJson);
+        return json_encode(array((string) $codigoUnidade => $arrayEquipesUnidade));
     }
 
     /**
@@ -197,7 +184,6 @@ class GestaoEquipesController extends Controller
      */
     public function alocarEmpregadoEquipe(Request $request)
     {
-        dd($request);
         try {
             DB::beginTransaction();
             // ALOCAR EMPREGADO
@@ -262,8 +248,87 @@ class GestaoEquipesController extends Controller
         array_push($arrayEmpregadosEquipe, [
             'matricula'     => $objetoGestaoEquipesEmpregados->matricula,
             'nomeCompleto'  => $objetoGestaoEquipesEmpregados->dadosEmpregadoLdap->nomeCompleto,
-            'nomeFuncao'    => $objetoGestaoEquipesEmpregados->dadosEmpregadoLdap->nomeFuncao,
+            'nomeFuncao'    => is_null($objetoGestaoEquipesEmpregados->dadosEmpregadoLdap->nomeFuncao) ? 'TECNICO BANCARIO NOVO' : $objetoGestaoEquipesEmpregados->dadosEmpregadoLdap->nomeFuncao,
         ]);
         return $arrayEmpregadosEquipe;
+    }
+
+    public static function incluirEquipeNoArray($arrayEquipes, $objGestaoEquipesCelulas, $arrayEmpregadosEquipe){
+        array_push($arrayEquipes, [
+            'idEquipe'                  => (string) $objGestaoEquipesCelulas->idEquipe,
+            'nomeEquipe'                => $objGestaoEquipesCelulas->nomeEquipe,
+            'nomeGestorEquipe'          => $objGestaoEquipesCelulas->nomeGestor,
+            'matriculaGestorEquipe'     => $objGestaoEquipesCelulas->matriculaGestor,
+            'nomeEventualEquipe'        => $objGestaoEquipesCelulas->nomeEventual,
+            'matriculaEventualEquipe'   => $objGestaoEquipesCelulas->matriculaEventual,
+            'empregadosEquipe'          => $arrayEmpregadosEquipe
+        ]);
+        return $arrayEquipes;
+    }
+
+    public static function listaGestoresUnidade()
+    {
+        $listaGestoresUnidade = Empregado::where(function($lotacao) {
+            $lotacao->where('codigoLotacaoAdministrativa', session('codigoLotacaoAdministrativa'))
+                    ->orWhere('codigoLotacaoFisica', session('codigoLotacaoFisica'));   
+        })->whereIn('codigoFuncao', self::listarCodigoGestores())->select('matricula', 'nomeCompleto', 'nomeFuncao')->get();
+
+        return json_encode($listaGestoresUnidade);
+    }
+
+    public function listarUnidades()
+    {
+        return json_encode(array('unidades' => [
+            '5530' => 'GEIPT',
+            '7257' => 'GILIE/SP',
+            '7244' => 'GILIE/BH',
+            '7243' => 'GILIE/BE',
+            '7109' => 'GILIE/BR',
+            '7247' => 'GILIE/CT',
+            '7248' => 'GILIE/FO',
+            '7249' => 'GILIE/GO',
+            '7251' => 'GILIE/PO',
+            '7254' => 'GILIE/RJ',
+            '7253' => 'GILIE/RE',
+            '7255' => 'GILIE/SA',
+            '7242' => 'GILIE/BU'
+        ]));
+    }
+
+    public static function listarCodigoGestores()
+    {
+        return [
+            '2030' // COORDENADOR DE PROJETOS MATRIZ
+            ,'2031' // COORDENADOR DE PROJETOS TI
+            ,'2061' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 1
+            ,'2062' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 2
+            ,'2063' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 3
+            ,'2064' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 4
+            ,'2079' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 5 
+            ,'2080' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 6
+            ,'2111' // COORDENADOR DE TI - PORTE 1
+            ,'2112' // COORDENADOR DE TI - PORTE 2
+            ,'2113' // COORDENADOR DE TI - PORTE 3
+            ,'2114' // COORDENADOR DE TI - PORTE 4
+            ,'2115' // COORDENADOR DE TI - PORTE 5
+            ,'2141' // GERENTE DE CENTRALIZADORA - PORTE 1
+            ,'2142' // GERENTE DE CENTRALIZADORA - PORTE 2
+            ,'2143' // GERENTE DE CENTRALIZADORA - PORTE 3
+            ,'2145' // GERENTE DE CENTRALIZADORA - PORTE 4
+            ,'2066' // GERENTE DE FILIAL - PORTE 1
+            ,'2067' // GERENTE DE FILIAL - PORTE 2
+            ,'2068' // GERENTE DE FILIAL - PORTE 3
+            ,'2069' // GERENTE DE FILIAL - PORTE 4
+            ,'2070' // GERENTE DE FILIAL - PORTE 5
+            ,'2038' // GERENTE NACIONAL
+            ,'2241' // GERENTE REGIONAL - PORTE 1
+            ,'2242' // GERENTE REGIONAL - PORTE 2
+            ,'2243' // GERENTE REGIONAL - PORTE 3
+            ,'2244' // GERENTE REGIONAL - PORTE 4
+            ,'2245' // GERENTE REGIONAL - PORTE 5
+            ,'2246' // GERENTE REGIONAL - PORTE 6
+            ,'2060' // SUPERVISOR - CENTRALIZADORA/FILIAL
+            ,'2037' // GERENTE EXECUTIVO
+        ];
     }
 }
