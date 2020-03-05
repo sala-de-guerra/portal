@@ -29,7 +29,7 @@ $(document).ready( function () {
     | GET dados do banco e monta tabela |
     \***********************************/
 
-    $.when($.ajax( '../../js/equipes.json' ), $.ajax( '../../js/atividades.json'))
+    $.when($.ajax( '../../js/equipes2.json' ), $.ajax( '../../js/atividades.json'))
     .done(function(a1, a2) {
 
         equipes = a1[0];
@@ -44,8 +44,11 @@ $(document).ready( function () {
 
         regiaoUnidadeSecao = $('#lotacao').html();
         $.each(equipes[regiaoUnidadeSecao], function(key, item) {
+
+            if (item.idEquipe)
+            console.log(item);
             let option = 
-                `<option value="` + item.id + `">` + item.nomeEquipe + `</option>`
+                `<option value="` + item.idEquipe + `">` + item.nomeEquipe + `</option>`
             ;
             $(option).appendTo('#selectEquipe');
         });
@@ -79,9 +82,9 @@ $(document).ready( function () {
 
             $.each(equipes[regiaoUnidadeSecao], function(key, item) {
 
-                console.log(item.id);
+                console.log(item.idEquipe);
 
-                if (item.id == equipe) {
+                if (item.idEquipe == equipe) {
 
                     $.each(item.empregadosEquipe, function(key, item) {
 
@@ -98,13 +101,10 @@ $(document).ready( function () {
                                         `</div>` +
                                         `<div class="col-md-9">` +
                                             `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
-                                            `<br>` +
-                                            `<div class="row">` +
-                                                `<p class="card-text col"><small class="text-muted">` + item.nomeFuncao + `</small></p>` +
-                                                `<div class="float-right col" id="eventual` + item.matricula + `" style="display:none;">` +
-                                                    `<span class="badge bg-primary">Eventual</span>` +
-                                                `</div>` +
-                                            `</div>` +
+                                            `<p class="card-text m-0">` +
+                                                `<small class="text-muted">` + item.nomeFuncao + `</small>` +
+                                                `<span class="badge bg-primary float-right" id="eventual` + item.matricula + `" style="display:none;">Eventual</span>` +
+                                            `</p>` +
                                         `</div>` +
                                     `</div>` +
                                 '</td>' +
