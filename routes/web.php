@@ -113,21 +113,14 @@ Route::prefix('gerencial')->group(function () {
         Route::get('/', 'GestaoEquipesController@index');
         // MÉTODO PARA CADASTRAR NOVA EQUIPE
         Route::post('/', 'GestaoEquipesController@cadastrarEquipe');
+        // MÉTODO PARA EDITAR UMA EQUIPE
+        Route::put('/', 'GestaoEquipesController@editarCadastroEquipe');
+        // MÉTODO PARA DESATIVAR UMA EQUIPE
+        Route::delete('/', 'GestaoEquipesController@desativarEquipe');
         // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
         Route::get('listar-equipes', 'GestaoEquipesController@listarEquipesUnidade');
         // DESIGNA O EMPREGADO PARA UMA EQUIPE
-        Route::post('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
-        
-        // DESIGNA EVENTUALIDADE PARA UM EMPREGADO
-
-        // CRIAR NOVA EQUIPE
-
-        // EDITAR EQUIPE
-
-        // DESABILITA EQUIPE
-
-        // LISTAR UNIDADES COM EQUIPES CADASTRADAS
-        
+        Route::put('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
         // GESTÃO DE ATIVIDADES
         Route::get('atividades', function () {
             return view('portal.gerencial.atividades');

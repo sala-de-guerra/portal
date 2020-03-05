@@ -3,7 +3,13 @@
         "id":1,
         "nomeAtividade":"Distrato",
         "empregadosNaAtividade": [
-            "c142765"
+            {
+                "matricula":"c142765"
+            },
+            {
+                "matricula":"c111710"
+            }
+
         ]
 
     },

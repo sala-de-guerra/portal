@@ -153,9 +153,9 @@
 <div class="row">
     <div class="col-md-12">
         <table id="tabelaEquipe" class="table table-bordered table-stripedy dataTable">
-            <thead>
+            <thead id="headEquipe">
             </thead>
-            <tbody>
+            <tbody id="bodyEquipe">
             </tbody>
         </table>
     </div>

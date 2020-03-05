@@ -20,26 +20,6 @@ class GestaoEquipesController extends Controller
      */
     public function index()
     {
-        // /* 
-        //     VALIDA O CODIGO DA FUNÇÃO DO EMPREGADO DA SESSÃO SE É GERENTE
-        //     CASO POSITIVO VERIFICA SE EXISTE ALGUMA EQUIPE EXISTENTE NA UNIDADE OU 
-        //     CASO NEGATIVO CRIA A PRIMEIRA PARA GESTÃO DO GESTOR
-        // */
-        // $usuarioGestor = Empregado::find(session('matricula'));
-
-        // if($usuarioGestor->codigoFuncao == '2066') {
-        //     $quantidadeEquipes = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $usuarioGestor->codigoLotacaoAdministrativa)->get();
-        //     if ($quantidadeEquipes->count() == 0) {
-        //         $primeiraEquipeUnidade = new GestaoEquipesCelulas;
-        //         $primeiraEquipeUnidade->codigoUnidadeEquipe = $usuarioGestor->codigoLotacaoAdministrativa;
-        //         $primeiraEquipeUnidade->nomeEquipe = 'Gerencial';
-        //         $primeiraEquipeUnidade->matriculaGestor = $usuarioGestor->matricula;
-        //         $primeiraEquipeUnidade->nomeGestor = $usuarioGestor->nomeCompleto;
-        //         $primeiraEquipeUnidade->created_at = date("Y-m-d H:i:s", time());
-        //         $primeiraEquipeUnidade->updated_at = date("Y-m-d H:i:s", time());
-        //         $primeiraEquipeUnidade->save();
-        //     }
-        // }
         return view('portal.gerencial.equipes');
     }
 
@@ -49,7 +29,8 @@ class GestaoEquipesController extends Controller
      */
     public function listarEquipesUnidade()
     {
-        $arrayTratadoEquipes = [];
+        $arrayEquipesParaJson = [];
+        $arrayEquipesUnidade = [];
         $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->orWhere('codigoUnidadeEquipe', null)->get();
         foreach ($relacaoEquipesUnidade as $equipe) {
             if (is_null($equipe->codigoUnidadeEquipe)) {
@@ -59,28 +40,24 @@ class GestaoEquipesController extends Controller
                     })->get();
                 $arrayEmpregadosNaoAlocados = [];
                 foreach ($relacaoEmpregadosNaoAlocados as $empregadoNaoAlocado) {
-                    array_push($arrayEmpregadosNaoAlocados, [
-                        'matricula'     => $empregadoNaoAlocado->matricula,
-                        'nomeCompleto'  => $empregadoNaoAlocado->dadosEmpregadoLdap->nomeCompleto,
-                        'nomeFuncao'    => $empregadoNaoAlocado->dadosEmpregadoLdap->nomeFuncao,
-                    ]);
+                    $arrayEmpregadosNaoAlocados = self::incluirEmpregadoNaEquipe($arrayEmpregadosNaoAlocados, $empregadoNaoAlocado);
                 }
-                array_push($arrayTratadoEquipes, array('empregadosParaAlocar' => [
-                    'idEquipe'          => (string) $equipe->idEquipe,
-                    'nomeEquipe'        => $equipe->nomeEquipe,
-                    'empregadosEquipe'  => $arrayEmpregadosNaoAlocados
+                array_push($arrayEquipesParaJson, array('empregadosParaAlocar' => [
+                    'idEquipe'                  => (string) $equipe->idEquipe,
+                    'nomeEquipe'                => $equipe->nomeEquipe,
+                    'nomeGestorEquipe'          => $equipe->nomeGestor,
+                    'matriculaGestorEquipe'     => $equipe->matriculaGestor,
+                    'nomeEventualEquipe'        => $equipe->nomeEventual,
+                    'matriculaEventualEquipe'   => $equipe->matriculaEventual,
+                    'empregadosEquipe'          => $arrayEmpregadosNaoAlocados
                 ]));
             } else {
                 $relacaoEmpregadosEquipe = GestaoEquipesEmpregados::where('idEquipe', $equipe->idEquipe)->get();
                 $arrayEmpregadosEquipe = [];
                 foreach ($relacaoEmpregadosEquipe as $empregadoEquipe) {
-                    array_push($arrayEmpregadosEquipe, [
-                        'matricula'     => $empregadoEquipe->matricula,
-                        'nomeCompleto'  => $empregadoEquipe->dadosEmpregadoLdap->nomeCompleto,
-                        'nomeFuncao'    => $empregadoEquipe->dadosEmpregadoLdap->nomeFuncao,
-                    ]);
+                    $arrayEmpregadosEquipe = self::incluirEmpregadoNaEquipe($arrayEmpregadosEquipe, $empregadoEquipe);
                 }
-                array_push($arrayTratadoEquipes, array((string) $equipe->codigoUnidadeEquipe => [
+                array_push($arrayEquipesUnidade, [
                     'idEquipe'                  => (string) $equipe->idEquipe,
                     'nomeEquipe'                => $equipe->nomeEquipe,
                     'nomeGestorEquipe'          => $equipe->nomeGestor,
@@ -88,10 +65,11 @@ class GestaoEquipesController extends Controller
                     'nomeEventualEquipe'        => $equipe->nomeEventual,
                     'matriculaEventualEquipe'   => $equipe->matriculaEventual,
                     'empregadosEquipe'          => $arrayEmpregadosEquipe
-                ]));
+                ]);
             }
         }
-        return json_encode($arrayTratadoEquipes);
+        array_push($arrayEquipesParaJson, array((string) $equipe->codigoUnidadeEquipe => $arrayEquipesUnidade));
+        return json_encode($arrayEquipesParaJson);
     }
 
     /**
@@ -101,6 +79,7 @@ class GestaoEquipesController extends Controller
      */
     public function cadastrarEquipe(Request $request)
     {
+        dd($request);
         try {
             DB::beginTransaction();
             // CRIA A NOVA EQUIPE
@@ -141,6 +120,7 @@ class GestaoEquipesController extends Controller
      */
     public function editarCadastroEquipe(Request $request)
     {
+        dd($request);
         try {
             DB::beginTransaction();
             // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
@@ -217,6 +197,7 @@ class GestaoEquipesController extends Controller
      */
     public function alocarEmpregadoEquipe(Request $request)
     {
+        dd($request);
         try {
             DB::beginTransaction();
             // ALOCAR EMPREGADO
@@ -244,47 +225,45 @@ class GestaoEquipesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function desativarEquipe(Request $request)
     {
-        //
+        dd($request);
+        try {
+            DB::beginTransaction();
+            // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
+            $desativarEquipe = GestaoEquipesCelulas::find($request->idEquipe);
+            $desativarEquipe->ativa        = $request->ativa;
+            $desativarEquipe->updated_at   = date("Y-m-d H:i:s", time());
+
+            // REGISTRA O LOG DE HISTORICO DA AÇÃO
+            $registroLogHistorico = new GestaoEquipesLogHistorico;
+            $registroLogHistorico->idEquipe                 = $request->idEquipe;
+            $registroLogHistorico->matriculaResponsavel     = session('matricula');
+            $registroLogHistorico->tipo                     = 'DESATIVAR';
+            $registroLogHistorico->observacao               = "DESATIVAÇÃO DA EQUIPE " . $request->nomeEquipe;
+            $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+            $registroLogHistorico->save();
+
+            $desativarEquipe->save();
+            DB::commit();
+            return response('equipe apagada com sucesso', 200);
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            return response('Não foi possível apagar a equipe', 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public static function incluirEmpregadoNaEquipe($arrayEmpregadosEquipe, $objetoGestaoEquipesEmpregados) {
+        array_push($arrayEmpregadosEquipe, [
+            'matricula'     => $objetoGestaoEquipesEmpregados->matricula,
+            'nomeCompleto'  => $objetoGestaoEquipesEmpregados->dadosEmpregadoLdap->nomeCompleto,
+            'nomeFuncao'    => $objetoGestaoEquipesEmpregados->dadosEmpregadoLdap->nomeFuncao,
+        ]);
+        return $arrayEmpregadosEquipe;
     }
 }
