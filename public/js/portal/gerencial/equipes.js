@@ -57,7 +57,7 @@ $('#selectGilie').change(function() {
 
 function montaCardsEquipes (regiaoUnidade) {
     // $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
-    $.getJSON('../js/equipes2.json', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
         // console.log(dados[regiaoUnidade]);
 
         // $.each(dados[regiaoUnidade], function(key, item) {
@@ -182,13 +182,13 @@ function montaCardsEquipes (regiaoUnidade) {
     | Função que pega a lista de gestores e popula o select de criar equipe |
     \***********************************************************************/
     
-    $.getJSON('../js/gestoresSP.json', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
         // console.log(dados);
 
         $.each(dados, function(key, item) {
             
             let option =
-                `<option value="` + item.matriculaGestor + `" selected>` + item.nomeGestor + `</option>`
+                `<option value="` + item.matricula + `" selected>` + item.nomeCompleto + `</option>`
             ;
 
             $(option).appendTo('#selectCriarEquipe');
