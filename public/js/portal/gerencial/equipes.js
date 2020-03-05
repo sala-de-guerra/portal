@@ -15,7 +15,7 @@ const Toast = Swal.mixin({
 | Limpar campos do modal ao clicar fora ou fechar |
 \*************************************************/
 
-$(".modal").on('hidden.bs.modal', function(e){
+$('.modal').on('hidden.bs.modal', function(e){
     $(this).find("form")[0].reset();       
 });
 
@@ -56,9 +56,18 @@ $('#selectGilie').change(function() {
 \*********************************************************************/
 
 function montaCardsEquipes (regiaoUnidade) {
-    $.getJSON('gerencial/gestao-equipes/', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
+        
+        console.log(dados);
+        console.log(regiaoUnidade);
 
-        $.each(dados[regiaoUnidade], function(key, item) {
+        // $.each(dados[regiaoUnidade], function(key, item) {
+        $.each(dados, function(key, item) {
+
+            console.log(item);
+
+            
+
             let arrayEmpregados = [];
 
             $.each(item.empregadosEquipe, function(key, item) {
