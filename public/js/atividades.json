@@ -1,0 +1,34 @@
+[ 
+    {
+        "id":1,
+        "nomeAtividade":"Distrato",
+        "empregadosNaAtividade": [
+            "c142765"
+        ]
+
+    },
+    {
+        "id":2,
+        "nomeAtividade":"Baixa",
+        "empregadosNaAtividade": [
+            "c142765"
+        ]
+
+    },
+    {
+        "id":3,
+        "nomeAtividade":"Conformidade",
+        "empregadosNaAtividade": [
+            "c142765"
+        ]
+
+    },
+    {
+        "id":4,
+        "nomeAtividade":"Desenvolvimento TI",
+        "empregadosNaAtividade": [
+            "c142765"
+        ]
+
+    }
+]

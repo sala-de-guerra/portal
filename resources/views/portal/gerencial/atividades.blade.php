@@ -14,7 +14,7 @@
 
      <div class="col-sm-2">
         <select name="selectEquipe" id="selectEquipe" class="form-control">
-            <option value="" selected>Selecione</option>
+            <option value="" selected disabled>Selecione</option>
         </select>
     </div>
 
@@ -150,8 +150,15 @@
 
 @section('content')
 
-<div id="equipe" class="row">
-
+<div class="row">
+    <div class="col-md-12">
+        <table id="tabelaEquipe" class="table table-bordered table-stripedy dataTable">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div> 
 
 

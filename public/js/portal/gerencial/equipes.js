@@ -1,4 +1,3 @@
-
 var _token = $('meta[name="csrf-token"]').attr('content');
 
 /**********************\
@@ -37,23 +36,10 @@ function refresh(regiaoUnidade) {
 | Função mostra as equipes da regiao do usuario da seção |
 \********************************************************/
 
-let lotacaoUsuario = $('#lotacao').html();
-let regiaoUnidadeSecao = '';
-
 $(document).ready( function () {
-    // console.log(lotacaoUsuario);
-
-    regiaoUnidadeSecao = lotacaoUsuario;
-    // switch (lotacaoUsuario) {
-    //     case '7257':
-    //         regiaoUnidadeSecao = 'SP';
-    //         break;
-    // };
-
+    let regiaoUnidadeSecao = $('#lotacao').html();
     $('#selectGilie').val(regiaoUnidadeSecao);
-
     montaCardsEquipes(regiaoUnidadeSecao);
-    
 });
 
 /**********************************************************\
@@ -70,7 +56,7 @@ $('#selectGilie').change(function() {
 \*********************************************************************/
 
 function montaCardsEquipes (regiaoUnidade) {
-    $.getJSON('../js/equipes.json', function(dados) {
+    $.getJSON('gerencial/gestao-equipes/', function(dados) {
 
         $.each(dados[regiaoUnidade], function(key, item) {
             let arrayEmpregados = [];
@@ -158,7 +144,7 @@ function montaCardsEquipes (regiaoUnidade) {
 
                     $.ajax({
                         type: 'put',
-                        url: '/url',
+                        url: '/gerencial/gestao-equipes/alocar-empregado',
                         data: {matricula, equipe, _token},
                         success: function (result){
                             console.log(result);

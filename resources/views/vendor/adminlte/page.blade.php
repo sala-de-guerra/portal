@@ -80,27 +80,29 @@
                     </li>
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
-                </ul>
 
-                <form class="form-inline" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
-                    {{ csrf_field() }}
-                    <select name="tipoVariavel" id="tipoVariavel" style="color:white;" class="form-control form-control-navbar mr-3" required>
-                        <option value="" disabled selected>Selecione</option>
-                        <option value="numeroContrato">Contrato</option>
-                        <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
-                        <option value="nomeProponente">Nome proponente</option>
-                        <option value="enderecoImovel">Endereço imóvel</option>
-                        <option value="matriculaImovel">Matrícula do imóvel</option>
-                        <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
-                        <option value="nomeExMutuario">Nome ex-mutuário</option>
-                    </select>
-                    <div class="input-group nav-search-bar">
-                        <input class="form-control form-control-navbar" type="text" id="valorVariavel" minlength="5" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." oninvalid="setCustomValidity('Digite no mínimo 5 caracteres para pesquisar.')" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
-                        </div>
-                    </div>
-                </form>
+                    <li class="nav-item">
+                        <form class="form-inline" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                            {{ csrf_field() }}
+                            <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar mr-3 text-white" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option class="text-dark" value="numeroContrato">Contrato</option>
+                                <option class="text-dark" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                                <option class="text-dark" value="nomeProponente">Nome proponente</option>
+                                <option class="text-dark" value="enderecoImovel">Endereço imóvel</option>
+                                <option class="text-dark" value="matriculaImovel">Matrícula do imóvel</option>
+                                <option class="text-dark" value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
+                                <option class="text-dark" value="nomeExMutuario">Nome ex-mutuário</option>
+                            </select>
+                            <div class="input-group nav-search-bar">
+                                <input class="form-control form-control-navbar text-white" type="text" id="valorVariavel" minlength="5" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." oninvalid="setCustomValidity('Digite no mínimo 5 caracteres para pesquisar.')" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
 
             @endif
                 <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
@@ -128,20 +130,20 @@
                         </li>
                     @endif
 
-                    <li class="nav-item mx-1">
+                    <li class="nav-item">
                         <a href="#" id="btnFullscreen" class="nav-link" title="Modo tela cheia">
                             <i class="fas fa-lg fa-expand"></i>
                         </a>
                     </li>
 
-                    <li class="nav-item mx-1">
+                    <li class="nav-item">
                         <a href="#" id="btnFullscreenOff" class="nav-link" title="Sair do modo tela cheia" style="display:none;">
                             <i class="fas fa-lg fa-compress-arrows-alt"></i>
                         </a>
                     </li>
 
                     @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
-                        <li class="nav-item mx-1 dropdown user-menu">
+                        <li class="nav-item dropdown user-menu">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <i class="far fa-lg fa-bell"></i>
                                 <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
