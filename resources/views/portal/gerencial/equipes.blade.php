@@ -30,7 +30,7 @@
         <div class="modal fade" id="modalCriarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="post" action="/url" id="formCriarEquipe">
+                    <form method="post" action="/" id="formCriarEquipe">
                         <div class="modal-header">
                             <h5 class="modal-title">Criar Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -68,7 +68,7 @@
         <div class="modal fade" id="modalAlterarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="put" action="/url" id="formAlterarEquipe">
+                    <form method="put" action="/" id="formAlterarEquipe">
                         <div class="modal-header">
                             <h5 class="modal-title">Alterar Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -112,7 +112,7 @@
         <div class="modal fade" id="modalExcluirEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="delete" action="/url" id="formExcluirEquipe">
+                    <form method="delete" action="/" id="formExcluirEquipe">
                         <div class="modal-header">
                             <h5 class="modal-title">Excluir Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
