@@ -142,12 +142,12 @@ function montaCardsEquipes (regiaoUnidade) {
                     // console.log(ui.item[0].children);
 
                     let matricula = ui.item[0].id;
-                    let equipe = ui.item[0].parentElement.id;    
+                    let idEquipe = ui.item[0].parentElement.id;    
 
                     $.ajax({
                         type: 'put',
                         url: '/gerencial/gestao-equipes/alocar-empregado',
-                        data: {matricula, equipe, _token},
+                        data: {matricula, idEquipe, _token},
                         success: function (result){
                             console.log(result);
                             $('#eventual' + matricula).hide();
