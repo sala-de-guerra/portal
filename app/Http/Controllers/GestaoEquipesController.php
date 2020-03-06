@@ -261,8 +261,8 @@ class GestaoEquipesController extends Controller
      */
     public function desativarEquipe(Request $request)
     {
-        dd($request);
         try {
+            dd($request);
             DB::beginTransaction();
             // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
             $desativarEquipe = GestaoEquipesCelulas::find($request->idEquipe);
