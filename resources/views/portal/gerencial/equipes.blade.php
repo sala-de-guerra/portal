@@ -14,10 +14,6 @@
 
     <div class="col-sm-2">
         <select name="selectGilie" id="selectGilie" class="form-control">
-            <option value="5050">GILIE BU</option>
-            <option value="7257">GILIE SP</option>
-            <option value="1010">GILIE RS</option>
-            <option value="2020">GILIE SA</option>
         </select>
     </div>
 

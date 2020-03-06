@@ -19,6 +19,19 @@ $('.modal').on('hidden.bs.modal', function(e){
     $(this).find("form")[0].reset();       
 });
 
+/*************************************************\
+| Cria options do select de unidade conforme json |
+\*************************************************/
+
+$.getJSON('/gerencial/gestao-equipes/listar-unidades', function(dados) {
+    $.each(dados.unidades, function(key, item) {
+        let option =
+            `<option value="` + key + `" selected>` + item + `</option>`
+        ;
+        $(option).appendTo('#selectGilie');
+    });
+});
+
 /************************************************************\
 | Função que limpa os cards da tela e recria, a.k.a. refresh |
 \************************************************************/
@@ -57,7 +70,7 @@ $('#selectGilie').change(function() {
 
 function montaCardsEquipes (regiaoUnidade) {
     // $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
-    $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
+    $.getJSON('../js/equipes2.json', function(dados) {
         // console.log(dados[regiaoUnidade]);
 
         // $.each(dados[regiaoUnidade], function(key, item) {
@@ -182,7 +195,9 @@ function montaCardsEquipes (regiaoUnidade) {
     | Função que pega a lista de gestores e popula o select de criar equipe |
     \***********************************************************************/
     
-    $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
+    // $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
+    $.getJSON('../js/gestoresSP.json', function(dados) {
+
         // console.log(dados);
 
         $.each(dados, function(key, item) {
@@ -216,7 +231,7 @@ $('form').submit( function(e) {
 
     e.preventDefault();
 
-    let data = JSON.stringify( $(this).serializeArray() );
+    let data = JSON.stringify( $(this).serialize() );
     let url = $(this).attr('action');
     let method = $(this).attr('method');
 
