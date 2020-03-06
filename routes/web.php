@@ -143,3 +143,6 @@ Route::match(['get', 'post', 'put', 'delete'], 'url', function (\Illuminate\Http
     $resultado = rand(0, 1);
     return $resultado == 0 ? response('error', 500) : response('success', 200);
 });
+
+// ROTA PARA CADASTRAR TODOS OS EMPREGADOS DA UNIDADE (RELACIONADOS NO ARRAY) NAS TABELAS DE EMPREGADOS E GESTAO EQUIPES EMPREGADOS
+Route::get('cadastra-empregados-unidade', 'CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController@CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController');

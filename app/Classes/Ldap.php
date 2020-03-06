@@ -157,13 +157,18 @@ class Ldap
         return $this->simularMatricula;
     }
 
-    public function __construct()
+    public function __construct($arrayMatriculas = null)
     {
-        if ($this->getSimularMatricula() != "") {
-            $this->setMatricula(str_replace('C', 'c', $this->getSimularMatricula()));
+        if (!is_null($arrayMatriculas)) {
+            $this->setMatricula(str_replace('C', 'c', $arrayMatriculas));
         } else {
-            $this->setMatricula(str_replace('C', 'c', substr($_SERVER["AUTH_USER"], 10)));
+            if ($this->getSimularMatricula() != "") {
+                $this->setMatricula(str_replace('C', 'c', $this->getSimularMatricula()));
+            } else {
+                $this->setMatricula(str_replace('C', 'c', substr($_SERVER["AUTH_USER"], 10)));
+            }
         }
+        
         $ldapAtivo = $this->settaDadosEmpregado();
         if ($ldapAtivo == true) {
             $this->updateBaseEmpregados();
@@ -231,6 +236,8 @@ class Ldap
         $empregado->nomeLotacaoAdministrativa = $this->getNomeLotacaoAdministrativa();
         $empregado->codigoLotacaoFisica = $this->getCodicoLotacaoFisica();
         $empregado->nomeLotacaoFisica = $this->getNomeLotacaoFisica();
+        $empregado->created_at = is_null($empregado->created_at) ? date("Y-m-d H:i:s", time()) : $empregado->created_at;
+        $empregado->updated_at = date("Y-m-d H:i:s", time());
         $empregado->save();
     }
 }

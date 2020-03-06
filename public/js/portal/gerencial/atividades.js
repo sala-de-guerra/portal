@@ -25,6 +25,7 @@ $('.modal').on('hidden.bs.modal', function(e){
 
 $(document).ready( function () {
 
+    $(".menu-hamburguer").click();
     /***********************************\
     | GET dados do banco e monta tabela |
     \***********************************/
@@ -107,13 +108,13 @@ $(document).ready( function () {
                                 '<td class="col-md-2">' +
                                     `<div class="callout callout-info row p-0 m-0">` +
                                         `<div class="col-md-3">` +
-                                            `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">` +
+                                            `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px my-1" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">` +
+                                            `<span class="badge bg-primary my-1" id="eventual` + item.matricula + `" style="display:none;">Eventual</span>` +
                                         `</div>` +
                                         `<div class="col-md-9">` +
                                             `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
                                             `<p class="card-text m-0">` +
                                                 `<small class="text-muted">` + item.nomeFuncao + `</small>` +
-                                                `<span class="badge bg-primary float-right" id="eventual` + item.matricula + `" style="display:none;">Eventual</span>` +
                                             `</p>` +
                                         `</div>` +
                                     `</div>` +
