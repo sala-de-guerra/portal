@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {    
-        if (env('APP_ENV') == 'LOCAL') {
+        if (env('APP_ENV') == 'local') {
             $this->call([
                 EmpregadosTableSeeder::class,
                 DistratoDemandasTableSeeder::class,

@@ -15,7 +15,7 @@ class CreateTableGestaoEquipesCelulas extends Migration
     {
         Schema::create('TBL_GESTAO_EQUIPES_CELULAS', function (Blueprint $table) {
             $table->increments('idEquipe');
-            $table->smallInteger('codigoUnidadeEquipe');
+            $table->smallInteger('codigoUnidadeEquipe')->nullable();
             $table->string('nomeEquipe', 255);
             $table->string('matriculaGestor', 7)->nullable();
             $table->string('nomeGestor', 50)->nullable();
