@@ -123,7 +123,7 @@ class GestaoEquipesController extends Controller
      */
     public function editarCadastroEquipe(Request $request)
     {
-        $objDados = explode("&", str_replace('"', '', $request->data));
+        $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
         foreach ($objDados as $dado) {
             $dado = explode("=", $dado);
             switch ($dado[0]) {
@@ -131,13 +131,13 @@ class GestaoEquipesController extends Controller
                     $codigoUnidadeEquipe = $dado[1];
                     break;
                 case 'nomeEquipe':
-                    $nomeEquipe = $dado[1];
+                    $nomeEquipe = utf8_encode($dado[1]);
                     break;
                 case 'matriculaGestor':
                     $matriculaGestor = $dado[1];
                     break;
                 case 'nomeGestor':
-                    $nomeGestor = $dado[1];
+                    $nomeGestor = utf8_encode($dado[1]);
                     break;
                 case 'idEquipe':
                     $idEquipe = $dado[1];
@@ -150,16 +150,21 @@ class GestaoEquipesController extends Controller
                     break;
             }
         }
-
+        if (!isset($nomeEventual)) {
+            $eventual = Empregado::find($matriculaEventual);
+            $nomeEventual = $eventual->nomeCompleto;
+        }
         try {
             DB::beginTransaction();
             // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
             $editarEquipe = GestaoEquipesCelulas::find($idEquipe);
             if (isset($matriculaEventual)) {
                 $matriculaAntigoEventual = $editarEquipe->matriculaEventual;
-                if (!is_null($matriculaAntigoEventual)) {
+                if (!is_null($matriculaAntigoEventual && $matriculaAntigoEventual != $matriculaEventual)) {
+                    // dd(array($matriculaAntigoEventual, $matriculaEventual, strtoupper($matriculaAntigoEventual) != strtoupper($matriculaEventual)));
                     // REMOVE O ANTIGO EVENTUAL
                     $antigoEventual = GestaoEquipesEmpregados::find($matriculaAntigoEventual);
+                    // dd($antigoEventual);
                     $antigoEventual->eventualEquipe = false;
                     $antigoEventual->updated_at = date("Y-m-d H:i:s", time());
 
@@ -214,6 +219,7 @@ class GestaoEquipesController extends Controller
             DB::commit();
             return response('equipe editada com sucesso', 200);
         } catch (\Throwable $th) {
+            dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             return response('Não foi possível editar a equipe', 500);
@@ -247,7 +253,6 @@ class GestaoEquipesController extends Controller
             DB::commit();
             return response('empregado alocado com sucesso', 200);
         } catch (\Throwable $th) {
-            dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             return response('Não foi possível alocar o empregado', 500);
@@ -261,20 +266,35 @@ class GestaoEquipesController extends Controller
      */
     public function desativarEquipe(Request $request)
     {
+        $objDados = explode("&", str_replace('"', '', $request->data));
+        foreach ($objDados as $dado) {
+            $dado = explode("=", $dado);
+            switch ($dado[0]) {
+                case 'idEquipe':
+                    $idEquipe = $dado[1];
+                    break;
+                case 'ativa':
+                    $ativa = $dado[1];
+                    break;
+                case 'nomeEquipe':
+                    $nomeEquipe = $dado[1];
+                    break;
+            }
+        }
+        
         try {
-            dd($request);
             DB::beginTransaction();
             // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
-            $desativarEquipe = GestaoEquipesCelulas::find($request->idEquipe);
-            $desativarEquipe->ativa        = $request->ativa;
+            $desativarEquipe = GestaoEquipesCelulas::find($idEquipe);
+            $desativarEquipe->ativa        = $ativa;
             $desativarEquipe->updated_at   = date("Y-m-d H:i:s", time());
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
             $registroLogHistorico = new GestaoEquipesLogHistorico;
-            $registroLogHistorico->idEquipe                 = $request->idEquipe;
+            $registroLogHistorico->idEquipe                 = $idEquipe;
             $registroLogHistorico->matriculaResponsavel     = session('matricula');
             $registroLogHistorico->tipo                     = 'DESATIVAR';
-            $registroLogHistorico->observacao               = "DESATIVAÇÃO DA EQUIPE " . $request->nomeEquipe;
+            $registroLogHistorico->observacao               = "DESATIVAÇÃO DA EQUIPE " . $nomeEquipe;
             $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
             $registroLogHistorico->save();
 
