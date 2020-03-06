@@ -29,28 +29,34 @@ $(document).ready( function () {
     | GET dados do banco e monta tabela |
     \***********************************/
 
-    $.when($.ajax( '../../js/equipes2.json' ), $.ajax( '../../js/atividades.json'))
+    regiaoUnidadeSecao = $('#lotacao').html();
+
+    $.when($.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
     .done(function(a1, a2) {
+
+        // console.log(a1);
 
         equipes = a1[0];
         atividades = a2[0];
 
-        console.log(equipes);
-        console.log(atividades);
+        // console.log(equipes[regiaoUnidadeSecao]);
+        // console.log(atividades);
 
         /********************************************************\
         | Função mostra as equipes da regiao do usuario da seção |
         \********************************************************/
 
-        regiaoUnidadeSecao = $('#lotacao').html();
         $.each(equipes[regiaoUnidadeSecao], function(key, item) {
 
-            if (item.idEquipe)
-            console.log(item);
-            let option = 
-                `<option value="` + item.idEquipe + `">` + item.nomeEquipe + `</option>`
-            ;
-            $(option).appendTo('#selectEquipe');
+            // console.log(item);
+
+            if (item.idEquipe) {
+                // console.log(item);
+                let option =
+                    `<option value="` + item.idEquipe + `">` + item.nomeEquipe + `</option>`
+                ;
+                $(option).appendTo('#selectEquipe');
+            }
         });
 
         /************************************************************\
@@ -82,15 +88,19 @@ $(document).ready( function () {
 
             $.each(equipes[regiaoUnidadeSecao], function(key, item) {
 
-                console.log(item.idEquipe);
+                // console.log(item.idEquipe);
 
                 if (item.idEquipe == equipe) {
 
                     $.each(item.empregadosEquipe, function(key, item) {
 
-                        console.log(item);
+                        // console.log(item);
 
-                        let header = '';
+                        let header =
+                            '<tr class="row">' +
+                                '<td>' + item.nomeCompleto + '</td>' +
+                            '</tr>'
+                        ;
                 
                         let linha = 
                             '<tr class="cursor-pointer row">' +
@@ -109,7 +119,8 @@ $(document).ready( function () {
                                     `</div>` +
                                 '</td>' +
                                 '<td>' + item.nomeCompleto + '</td>' +
-                            '</tr>';
+                            '</tr>'
+                        ;
 
                         $(linha).appendTo('#bodyEquipe'); 
                     
