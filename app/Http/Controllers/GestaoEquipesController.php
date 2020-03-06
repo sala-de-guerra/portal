@@ -66,17 +66,33 @@ class GestaoEquipesController extends Controller
      */
     public function cadastrarEquipe(Request $request)
     {
-        dd($request);
+        $objDados = explode("&", str_replace('"', '', $request->data));
+        foreach ($objDados as $dado) {
+            $dado = explode("=", $dado);
+            switch ($dado[0]) {
+                case 'codigoUnidadeEquipe':
+                    $codigoUnidadeEquipe = $dado[1];
+                    break;
+                case 'nomeEquipe':
+                    $nomeEquipe = $dado[1];
+                    break;
+                case 'matriculaGestor':
+                    $matriculaGestor = $dado[1];
+                    break;
+                case 'nomeGestor':
+                    $nomeGestor = $dado[1];
+                    break;
+            }
+        }
+
         try {
             DB::beginTransaction();
             // CRIA A NOVA EQUIPE
             $novaEquipe = new GestaoEquipesCelulas;
             $novaEquipe->codigoUnidadeEquipe    = !in_array(session('codigoLotacaoFisica'), [null, 'NULL']) ? session('codigoLotacaoFisica') : session('codigoLotacaoAdministrativa');
-            $novaEquipe->nomeEquipe             = strtoupper($request->nomeEquipe);
-            $novaEquipe->matriculaGestor        = isset($request->matriculaGestor) ? $request->matriculaGestor : null;
-            $novaEquipe->nomeGestor             = isset($request->nomeGestor) ? $request->nomeGestor : null;
-            $novaEquipe->matriculaEventual      = isset($request->matriculaEventual) ? $request->matriculaEventual : null;
-            $novaEquipe->nomeEventual           = isset($request->nomeEventual) ? $request->nomeEventual : null;
+            $novaEquipe->nomeEquipe             = strtoupper($nomeEquipe);
+            $novaEquipe->matriculaGestor        = isset($matriculaGestor) ? $matriculaGestor : null;
+            $novaEquipe->nomeGestor             = isset($nomeGestor) ? $nomeGestor : null;
             $novaEquipe->responsavelEdicao      = session('matricula');
             $novaEquipe->created_at             = date("Y-m-d H:i:s", time());
             $novaEquipe->updated_at             = date("Y-m-d H:i:s", time());
@@ -87,7 +103,7 @@ class GestaoEquipesController extends Controller
             $registroLogHistorico->idEquipe                 = $novaEquipe->idEquipe;
             $registroLogHistorico->matriculaResponsavel     = session('matricula');
             $registroLogHistorico->tipo                     = 'CADASTRO';
-            $registroLogHistorico->observacao               = "CADASTRO DA EQUIPE " . strtoupper($request->nomeEquipe);
+            $registroLogHistorico->observacao               = "CADASTRO DA EQUIPE " . strtoupper($nomeEquipe);
             $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
             $registroLogHistorico->save();
 
@@ -107,12 +123,39 @@ class GestaoEquipesController extends Controller
      */
     public function editarCadastroEquipe(Request $request)
     {
-        dd($request);
+        $objDados = explode("&", str_replace('"', '', $request->data));
+        foreach ($objDados as $dado) {
+            $dado = explode("=", $dado);
+            switch ($dado[0]) {
+                case 'codigoUnidadeEquipe':
+                    $codigoUnidadeEquipe = $dado[1];
+                    break;
+                case 'nomeEquipe':
+                    $nomeEquipe = $dado[1];
+                    break;
+                case 'matriculaGestor':
+                    $matriculaGestor = $dado[1];
+                    break;
+                case 'nomeGestor':
+                    $nomeGestor = $dado[1];
+                    break;
+                case 'idEquipe':
+                    $idEquipe = $dado[1];
+                    break;
+                case 'matriculaEventual':
+                    $matriculaEventual = $dado[1];
+                    break;
+                case 'nomeEventual':
+                    $nomeEventual = $dado[1];
+                    break;
+            }
+        }
+
         try {
             DB::beginTransaction();
             // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
-            $editarEquipe = GestaoEquipesCelulas::find($request->idEquipe);
-            if (isset($request->matriculaEventual)) {
+            $editarEquipe = GestaoEquipesCelulas::find($idEquipe);
+            if (isset($matriculaEventual)) {
                 $matriculaAntigoEventual = $editarEquipe->matriculaEventual;
                 if (!is_null($matriculaAntigoEventual)) {
                     // REMOVE O ANTIGO EVENTUAL
@@ -122,7 +165,7 @@ class GestaoEquipesController extends Controller
 
                     // REGISTRA O LOG DE HISTORICO DA AÇÃO
                     $registroLogHistorico = new GestaoEquipesLogHistorico;
-                    $registroLogHistorico->idEquipe                 = $request->idEquipe;
+                    $registroLogHistorico->idEquipe                 = $idEquipe;
                     $registroLogHistorico->matriculaResponsavel     = session('matricula');
                     $registroLogHistorico->tipo                     = 'EDIÇÃO';
                     $registroLogHistorico->observacao               = "REMOÇÃO DA EVENTUALIDADE - " . $antigoEventual->dadosEmpregadoLdap->nomeCompleto;
@@ -132,13 +175,13 @@ class GestaoEquipesController extends Controller
                     $antigoEventual->save();
 
                     // DESIGNA O ANTIGO EVENTUAL
-                    $novoEventual = GestaoEquipesEmpregados::find($request->matriculaEventual);
+                    $novoEventual = GestaoEquipesEmpregados::find($matriculaEventual);
                     $novoEventual->eventualEquipe = true;
                     $novoEventual->updated_at = date("Y-m-d H:i:s", time());
                     
                     // REGISTRA O LOG DE HISTORICO DA AÇÃO
                     $registroLogHistorico = new GestaoEquipesLogHistorico;
-                    $registroLogHistorico->idEquipe                 = $request->idEquipe;
+                    $registroLogHistorico->idEquipe                 = $idEquipe;
                     $registroLogHistorico->matriculaResponsavel     = session('matricula');
                     $registroLogHistorico->tipo                     = 'EDIÇÃO';
                     $registroLogHistorico->observacao               = "DESIGNAÇÃO DE EVENTUALIDADE - " . $novoEventual->dadosEmpregadoLdap->nomeCompleto;
@@ -150,11 +193,11 @@ class GestaoEquipesController extends Controller
             }
 
             // EDITAR EQUIPE
-            $editarEquipe->nomeEquipe             = !in_array($request->nomeEquipe, [null, 'NULL']) ? strtoupper($request->nomeEquipe) : $editarEquipe->nomeEquipe;
-            $editarEquipe->matriculaGestor        = !in_array($request->matriculaGestor, [null, 'NULL']) ? strtoupper($request->matriculaGestor) : $editarEquipe->matriculaGestor;
-            $editarEquipe->nomeGestor             = !in_array($request->nomeGestor, [null, 'NULL']) ? strtoupper($request->nomeGestor) : $editarEquipe->nomeGestor;
-            $editarEquipe->matriculaEventual      = !in_array($request->matriculaEventual, [null, 'NULL']) ? strtoupper($request->matriculaEventual) : $editarEquipe->matriculaEventual;
-            $editarEquipe->nomeEventual           = !in_array($request->nomeEventual, [null, 'NULL']) ? strtoupper($request->nomeEventual) : $editarEquipe->nomeEventual;
+            $editarEquipe->nomeEquipe             = !in_array($nomeEquipe, [null, 'NULL']) ? strtoupper($nomeEquipe) : $editarEquipe->nomeEquipe;
+            $editarEquipe->matriculaGestor        = !in_array($matriculaGestor, [null, 'NULL']) ? strtoupper($matriculaGestor) : $editarEquipe->matriculaGestor;
+            $editarEquipe->nomeGestor             = !in_array($nomeGestor, [null, 'NULL']) ? strtoupper($nomeGestor) : $editarEquipe->nomeGestor;
+            $editarEquipe->matriculaEventual      = !in_array($matriculaEventual, [null, 'NULL']) ? strtoupper($matriculaEventual) : $editarEquipe->matriculaEventual;
+            $editarEquipe->nomeEventual           = !in_array($nomeEventual, [null, 'NULL']) ? strtoupper($nomeEventual) : $editarEquipe->nomeEventual;
             $editarEquipe->responsavelEdicao      = session('matricula');
             $editarEquipe->updated_at             = date("Y-m-d H:i:s", time());
 
@@ -204,6 +247,7 @@ class GestaoEquipesController extends Controller
             DB::commit();
             return response('empregado alocado com sucesso', 200);
         } catch (\Throwable $th) {
+            dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             return response('Não foi possível alocar o empregado', 500);
@@ -330,5 +374,28 @@ class GestaoEquipesController extends Controller
             ,'2060' // SUPERVISOR - CENTRALIZADORA/FILIAL
             ,'2037' // GERENTE EXECUTIVO
         ];
+    }
+
+    public static function trataDadosAjax($dadosRequest)
+    {
+        $objDados = explode("&", str_replace('"', '', $request->data));
+        foreach ($objDados as $dado) {
+            $dado = explode("=", $dado);
+            switch ($dado[0]) {
+                case 'codigoUnidadeEquipe':
+                    $codigoUnidadeEquipe = $dado[1];
+                    break;
+                case 'nomeEquipe':
+                    $nomeEquipe = $dado[1];
+                    break;
+                case 'matriculaGestor':
+                    $matriculaGestor = $dado[1];
+                    break;
+                case 'nomeGestor':
+                    $nomeGestor = $dado[1];
+                    break;
+            }
+        }
+        return ;
     }
 }

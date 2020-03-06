@@ -26,7 +26,7 @@
         <div class="modal fade" id="modalCriarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="post" action="https://portal.gilie.des.sp.caixa/gerencial/gestao-equipes" id="formCriarEquipe">
+                    <form method="post" action="/gerencial/gestao-equipes" id="formCriarEquipe">
                         <div class="modal-header">
                             <h5 class="modal-title">Criar Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -67,7 +67,7 @@
         <div class="modal fade" id="modalAlterarEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="put" action="https://portal.gilie.des.sp.caixa/gerencial/gestao-equipes" id="formAlterarEquipe">
+                    <form method="put" action="/gerencial/gestao-equipes" id="formAlterarEquipe">
                         <div class="modal-header">
                             <h5 class="modal-title">Alterar Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -121,7 +121,7 @@
         <div class="modal fade" id="modalExcluirEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="post" action="https://portal.gilie.des.sp.caixa/gerencial/gestao-equipes" id="formExcluirEquipe">
+                    <form method="post" action="/gerencial/gestao-equipes" id="formExcluirEquipe">
                         <div class="modal-header">
                             <h5 class="modal-title">Excluir Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
