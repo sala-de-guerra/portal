@@ -12,7 +12,7 @@
         </h1>
     </div>
 
-    <div class="col-sm-2">
+    <div class="col">
         <select name="selectGilie" id="selectGilie" class="form-control">
         </select>
     </div>
@@ -34,17 +34,20 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
+                            <input type="hidden" name="codigoUnidadeEquipe" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
 
                             <div class="form-group">
                                 <label>Nome da Célula:</label>
-                                <input type="text" name="nomeCriarEquipe" class="form-control" id="nomeCriarEquipe" required>
+                                <input type="text" name="nomeEquipe" class="form-control" id="nomeCriarEquipe" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Gestor da Célula:</label>
-                                <select name="selectCriarEquipe" id="selectCriarEquipe" class="form-control" required></select>
+                                <select name="matriculaGestor" id="selectCriarEquipe" class="form-control" required></select>
                             </div>
+
+                            <!-- <input type="hidden" name="nomeGestor" id="nomeGestorCriar"> -->
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -76,18 +79,28 @@
                             
                             <div class="form-group">
                                 <label>Selecione e Equipe:</label>
-                                <select name="selectAlterarEquipe" id="selectAlterarEquipe" class="form-control" required></select>
+                                <select name="idEquipe" id="selectAlterarEquipe" class="form-control" required></select>
                             </div>
 
                             <div class="form-group">
-                                <label>Nome da Célula:</label>
-                                <input type="text" name="nomeAlterarEquipe" class="form-control" id="nomeAlterarEquipe" required>
+                                <label>Novo nome da Célula:</label>
+                                <input type="text" name="nomeEquipe" class="form-control" id="nomeAlterarEquipe">
                             </div>
 
                             <div class="form-group">
                                 <label>Gestor da Célula:</label>
-                                <select name="gestorAlterar" id="selectAlterarGestor" class="form-control" required></select>
+                                <select name="matriculaGestor" id="selectAlterarGestor" class="form-control"></select>
                             </div>
+
+                            <!-- <input type="hidden" name="nomeGestor" id="nomeGestorAlterar"> -->
+
+                            <div class="form-group">
+                                <label>Eventual do Gestor:</label>
+                                <select name="matriculaEventual" id="selectAlterarEventual" class="form-control"></select>
+                            </div>
+
+                                <!-- <input type="hidden" name="eventualAlterar" id="eventualAlterar"> -->
+
 
                         </div>
                         <div class="modal-footer">
@@ -121,7 +134,7 @@
                             
                             <div class="form-group">
                                 <label>Selecione e Equipe:</label>
-                                <select name="selectExcluirEquipe" id="selectExcluirEquipe" class="form-control" required></select>
+                                <select name="idEquipe" id="selectExcluirEquipe" class="form-control" required></select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -141,6 +154,7 @@
             <li class="breadcrumb-item active"><a href="/"> Gestão de Equipes</a> </li>
         </ol>
     </div>
+    
 </div>
 
 @stop
