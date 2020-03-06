@@ -100,6 +100,25 @@ function montaCardsEquipes (regiaoUnidade) {
 
                 arrayEmpregados.push(card);
 
+                let optionEventual =
+                    `<option value="` + item.matricula + `" selected>` + item.nomeCompleto + `</option>`
+                ;
+                
+                $(optionEventual).appendTo('#selectAlterarEventual');
+
+                $('#selectAlterarEventual').on('change', function() {
+                    if ($(this).val() === item.matricula) {
+    
+                        $('#nomeEventualAlterar').remove();
+    
+                        let inputHiddenNome =
+                            `<input type="hidden" name="nomeEventual" value="` + item.nomeCompleto + `" id="nomeEventualAlterar">`
+                        ;
+    
+                        $(inputHiddenNome).appendTo('#formAlterarEquipe');
+                    }
+                });
+    
             });
 
             // console.log(arrayEmpregados);
@@ -208,6 +227,34 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $(option).appendTo('#selectCriarEquipe');
             $(option).appendTo('#selectAlterarGestor');
+
+            $('#selectCriarEquipe').on('change', function() {
+                if ($(this).val() === item.matricula) {
+
+                    $('#nomeGestorCriar').remove();
+
+                    let inputHiddenNome =
+                        `<input type="hidden" name="nomeGestor" value="` + item.nomeCompleto + `" id="nomeGestorCriar">`
+                    ;
+
+                    $(inputHiddenNome).appendTo('#formCriarEquipe');
+                
+                }
+            });
+
+            $('#selectAlterarGestor').on('change', function() {
+                if ($(this).val() === item.matricula) {
+
+                    $('#nomeGestorAlterar').remove();
+
+                    let inputHiddenNome =
+                        `<input type="hidden" name="nomeGestor" value="` + item.nomeCompleto + `" id="nomeGestorAlterar">`
+                    ;
+
+                    $(inputHiddenNome).appendTo('#formAlterarEquipe');
+                }
+            });
+
 
         });
 
