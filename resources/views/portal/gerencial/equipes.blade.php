@@ -92,14 +92,14 @@
                                 <select name="matriculaGestor" id="selectAlterarGestor" class="form-control"></select>
                             </div>
 
-                            <!-- <input type="hidden" name="nomeGestor" id="nomeGestorAlterar"> -->
+                            <input type="hidden" value="" name="nomeGestor" id="nomeGestorAlterar">
 
                             <div class="form-group">
                                 <label>Eventual do Gestor:</label>
                                 <select name="matriculaEventual" id="selectAlterarEventual" class="form-control"></select>
                             </div>
 
-                                <!-- <input type="hidden" name="eventualAlterar" id="eventualAlterar"> -->
+                            <input type="hidden" value="" name="nomeEventual" id="eventualAlterar">
 
 
                         </div>
@@ -162,11 +162,8 @@
 
 
 @section('content')
-
 <div id="equipes" class="row">
-
 </div> 
-
 
 @section('footer')
 

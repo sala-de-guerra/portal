@@ -50,6 +50,7 @@ function refresh(regiaoUnidade) {
 \********************************************************/
 
 $(document).ready( function () {
+    $(".menu-hamburguer").click();
     let regiaoUnidadeSecao = $('#lotacao').html();
     $('#selectGilie').val(regiaoUnidadeSecao);
     montaCardsEquipes(regiaoUnidadeSecao);
@@ -82,34 +83,29 @@ function montaCardsEquipes (regiaoUnidade) {
             $.each(item.empregadosEquipe, function(key, item) {
                 // console.log(item);
                 let card =
-                    `<li id="` + item.matricula + `">` +
-                        `<div class="callout callout-info row p-0">` +
-                            `<div class="col-md-3">` +
-                                `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='/img/question-mark.png';">` +
-                            `</div>` +
-                            `<div class="col-md-9">` +
-                                `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
-                                `<p class="card-text m-0">` +
-                                    `<small class="text-muted">` + item.nomeFuncao + `</small>` +
-                                    `<span class="badge bg-primary float-right" id="eventual` + item.matricula + `" style="display:none;">Eventual</span>` +
+                    `<li id="` + item.matricula + `" class="col-md-3">` +
+                        `<div class="callout callout-info row p-0 m-1">` +
+                            // `<div class="col-md-3">` +
+                            // `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px my-1" alt="User Image" onerror="this.src='/img/question-mark.png';">` +
+                            // `</div>` +
+                            `<div class="col-md-12">` +
+                            `<p class="card-title">` + item.nomeCompleto + `</p>` +
+                            `<p class="card-text m-0">` +
+                            
+                            `<span class="badge bg-primary my-1" id="eventual` + item.matricula + `" style="display:none;">Eventual</span>` +
+                                `<small class="text-muted">&nbsp;&nbsp;&nbsp;` + item.nomeFuncao + `  </small>` +
                                 `</p>` +
                             `</div>` +
                         `</div>` +
                     `</li>`
                 ;
 
-                arrayEmpregados.push(card);
+                arrayEmpregados.push(card);                
 
-                let optionEventual =
-                    `<option value="` + item.matricula + `" selected>` + item.nomeCompleto + `</option>`
-                ;
-                
-                $(optionEventual).appendTo('#selectAlterarEventual');
+                $('#selectAlterarEventual').change( function() {
+                    $('#nomeEventualAlterar').remove();
 
-                $('#selectAlterarEventual').on('change', function() {
                     if ($(this).val() === item.matricula) {
-    
-                        $('#nomeEventualAlterar').remove();
     
                         let inputHiddenNome =
                             `<input type="hidden" name="nomeEventual" value="` + item.nomeCompleto + `" id="nomeEventualAlterar">`
@@ -123,20 +119,39 @@ function montaCardsEquipes (regiaoUnidade) {
 
             // console.log(arrayEmpregados);
 
+            $('#selectAlterarEquipe').change( function() {
+                if ($(this).val() === item.idEquipe) {
+                    $('#selectAlterarEventual').empty();
+        
+                    $.each(item.empregadosEquipe, function(key, item) {
+                        let optionEventual =
+                            `<option value="` + item.matricula + `" selected>` + item.nomeCompleto + `</option>`
+                        ;                
+                        $(optionEventual).appendTo('#selectAlterarEventual');
+                    });
+                    let selectedVazio = 
+                        `<option value="" selected>Selecione</option>`
+                    ;
+
+                    $(selectedVazio).appendTo('#selectAlterarEventual');
+                }
+
+            });
+
             let stringEmpregados = arrayEmpregados.join(' ').trim();
 
             let lista =
-                `<div id="cardLista` + item.idEquipe + `" class="col-md-3">` +
+                `<div id="cardLista` + item.idEquipe + `" class="col-md-12">` +
                     `<div class="card card-default">` +
                         `<div class="card-header">` +
                             `<h3 class="card-title">` +
-                                `<b>Equipe ` + item.nomeEquipe + `</b>` +
+                                `<b>EQUIPE ` + item.nomeEquipe + `</b>` +
                                 `<br>` +
                                 `Gestor: ` + item.nomeGestorEquipe +
                             `</h3>` +
                         `</div>` +
                         `<div class="card-body">` +
-                            `<ul id="` + item.idEquipe + `" class="connectedSortable list-unstyled">` +
+                            `<ul id="` + item.idEquipe + `" class="connectedSortable list-unstyled row m-1">` +
                                 stringEmpregados +
                             `</ul>` +
                         `</div>` +
@@ -148,7 +163,7 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $('#eventual' + item.matriculaEventualEquipe).show();
 
-            $('#selectExcluirEquipe').on('change', function() {
+            $('#selectExcluirEquipe').change( function() {
                 if ($(this).val() === item.idEquipe) {
 
                     $('#nomeEquipeExcluir').remove();
@@ -164,13 +179,13 @@ function montaCardsEquipes (regiaoUnidade) {
             /*****************************************************\
             | Monta options do select de alterar e excluir equipe |
             \*****************************************************/
-
-            let optionNomeCelula =
-                `<option value="` + item.idEquipe + `">` + item.nomeEquipe + `</option>`
-            ;
-
-            $(optionNomeCelula).appendTo('#selectAlterarEquipe');
-            $(optionNomeCelula).appendTo('#selectExcluirEquipe');
+            if (item.idEquipe !== "1") {
+                let optionNomeCelula =
+                    `<option value="` + item.idEquipe + `">` + item.nomeEquipe + `</option>`
+                ;
+                $(optionNomeCelula).appendTo('#selectAlterarEquipe');
+                $(optionNomeCelula).appendTo('#selectExcluirEquipe');
+            }
 
             /***************************************************\
             | Animação de clicar & arrastar e salvar alterações |
@@ -196,6 +211,7 @@ function montaCardsEquipes (regiaoUnidade) {
                         success: function (result){
                             console.log(result);
                             $('#eventual' + matricula).hide();
+                            refresh(regiaoUnidade);
 
                             Toast.fire({
                                 icon: 'success',
@@ -245,7 +261,7 @@ function montaCardsEquipes (regiaoUnidade) {
             | Criar input hidden ao trocar valor do select |
             \**********************************************/
 
-            $('#selectCriarEquipe').on('change', function() {
+            $('#selectCriarEquipe').change( function() {
                 if ($(this).val() === item.matricula) {
 
                     $('#nomeGestorCriar').remove();
@@ -259,7 +275,7 @@ function montaCardsEquipes (regiaoUnidade) {
                 }
             });
 
-            $('#selectAlterarGestor').on('change', function() {
+            $('#selectAlterarGestor').change( function() {
                 if ($(this).val() === item.matricula) {
 
                     $('#nomeGestorAlterar').remove();
