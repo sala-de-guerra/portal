@@ -449,6 +449,6 @@ class GestaoEquipesController extends Controller
                     break;
             }
         }
-        return array_merge(isset);
+        // return array_merge(isset);
     }
 }
