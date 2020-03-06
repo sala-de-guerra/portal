@@ -69,8 +69,8 @@ $('#selectGilie').change(function() {
 \*********************************************************************/
 
 function montaCardsEquipes (regiaoUnidade) {
-    // $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
-    $.getJSON('../js/equipes2.json', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
+    // $.getJSON('../js/equipes2.json', function(dados) {
         // console.log(dados[regiaoUnidade]);
 
         // $.each(dados[regiaoUnidade], function(key, item) {
@@ -85,7 +85,7 @@ function montaCardsEquipes (regiaoUnidade) {
                     `<li id="` + item.matricula + `">` +
                         `<div class="callout callout-info row p-0">` +
                             `<div class="col-md-3">` +
-                                `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">` +
+                                `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='/img/question-mark.png';">` +
                             `</div>` +
                             `<div class="col-md-9">` +
                                 `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
@@ -148,6 +148,19 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $('#eventual' + item.matriculaEventualEquipe).show();
 
+            $('#selectExcluirEquipe').on('change', function() {
+                if ($(this).val() === item.idEquipe) {
+
+                    $('#nomeEquipeExcluir').remove();
+
+                    let inputHiddenNome =
+                        `<input type="hidden" name="nomeEquipe" value="` + item.nomeEquipe + `" id="nomeEquipeExcluir">`
+                    ;
+
+                    $(inputHiddenNome).appendTo('#formExcluirEquipe');
+                }
+            });
+
             /*****************************************************\
             | Monta options do select de alterar e excluir equipe |
             \*****************************************************/
@@ -197,7 +210,7 @@ function montaCardsEquipes (regiaoUnidade) {
 
                             Toast.fire({
                                 icon: 'error',
-                                title: 'Erro: alteração não efetuada!'
+                                title: 'Erro: alteração não efetuada.'
                             });                        }
                     });
                 
@@ -214,8 +227,8 @@ function montaCardsEquipes (regiaoUnidade) {
     | Função que pega a lista de gestores e popula o select de criar equipe |
     \***********************************************************************/
     
-    // $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
-    $.getJSON('../js/gestoresSP.json', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
+    // $.getJSON('../js/gestoresSP.json', function(dados) {
 
         // console.log(dados);
 
@@ -227,6 +240,10 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $(option).appendTo('#selectCriarEquipe');
             $(option).appendTo('#selectAlterarGestor');
+
+            /**********************************************\
+            | Criar input hidden ao trocar valor do select |
+            \**********************************************/
 
             $('#selectCriarEquipe').on('change', function() {
                 if ($(this).val() === item.matricula) {

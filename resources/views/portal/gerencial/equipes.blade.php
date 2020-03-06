@@ -121,7 +121,7 @@
         <div class="modal fade" id="modalExcluirEquipe" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="post" action="/gerencial/gestao-equipes" id="formExcluirEquipe">
+                    <form method="delete" action="/gerencial/gestao-equipes" id="formExcluirEquipe">
                         <div class="modal-header">
                             <h5 class="modal-title">Excluir Equipe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,7 +131,8 @@
                         <div class="modal-body">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
-                            
+                            <input type="hidden" name="ativa" value="0">
+
                             <div class="form-group">
                                 <label>Selecione e Equipe:</label>
                                 <select name="idEquipe" id="selectExcluirEquipe" class="form-control" required></select>
