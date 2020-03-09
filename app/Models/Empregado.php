@@ -31,4 +31,9 @@ class Empregado extends Model
     {
         return $this->hasOne('App\Models\GestaoEquipesEmpregados', 'matricula', 'matricula');
     }
+
+    public function GestaoEquipesAtividadesResponsaveis()
+    {
+        return $this->belongsTo('App\Models\GestaoEquipesAtividadesResponsaveis', 'matriculaResponsavelAtividade', 'matricula');
+    }
 }
