@@ -26,17 +26,14 @@ class GestaoEquipesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listarEquipesUnidade()
+    public function listarEquipesUnidade($codigoUnidade)
     {
         $arrayEquipesUnidade = [];
-        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', session('codigoLotacaoAdministrativa'))->orWhere('codigoUnidadeEquipe', null)->get();
+        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', $codigoUnidade)->orWhere('codigoUnidadeEquipe', null)->get();
         foreach ($relacaoEquipesUnidade as $equipe) {
             $codigoUnidade = $equipe->codigoUnidadeEquipe;
             if (is_null($equipe->codigoUnidadeEquipe)) {
-                $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::where('idEquipe', null)->orWhere('idEquipe', 1)->where(function($lotacao) {
-                    $lotacao->where('codigoUnidadeLotacao', session('codigoLotacaoAdministrativa'))
-                            ->orWhere('codigoUnidadeLotacao', session('codigoLotacaoFisica'));
-                    })->get();
+                $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::where('idEquipe', null)->orWhere('idEquipe', 1)->where('codigoUnidadeLotacao', $codigoUnidade)->get();
                 $arrayEmpregadosNaoAlocados = [];
                 foreach ($relacaoEmpregadosNaoAlocados as $empregadoNaoAlocado) {
                     $arrayEmpregadosNaoAlocados = self::incluirEmpregadoNoArrayDaEquipe($arrayEmpregadosNaoAlocados, $empregadoNaoAlocado);
@@ -51,7 +48,7 @@ class GestaoEquipesController extends Controller
                 $arrayEquipesUnidade = self::incluirEquipeNoArray($arrayEquipesUnidade, $equipe, $arrayEmpregadosEquipe);
             }
         }
-        return json_encode(array(session('codigoLotacaoAdministrativa') => $arrayEquipesUnidade));
+        return json_encode($arrayEquipesUnidade);
     }
 
     /**

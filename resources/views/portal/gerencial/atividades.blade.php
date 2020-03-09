@@ -152,7 +152,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <table id="tabelaEquipe" class="table table-bordered table-stripedy dataTable">
+        <table id="tabelaEquipe" class="table">
             <thead id="headEquipe">
             </thead>
             <tbody id="bodyEquipe">

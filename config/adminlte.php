@@ -478,7 +478,7 @@ return [
                 [
                     'text' => 'Gestão de Atividades',
                     'icon'       => 'fas fa-lg fa-tasks',
-                    'url'  => '/gerencial/gestao-equipes/atividades',
+                    'url'  => '/gerencial/gestao-atividades',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ]
     

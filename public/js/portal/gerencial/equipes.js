@@ -70,12 +70,12 @@ $('#selectGilie').change(function() {
 \*********************************************************************/
 
 function montaCardsEquipes (regiaoUnidade) {
-    $.getJSON('/gerencial/gestao-equipes/listar-equipes', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidade, function(dados) {
     // $.getJSON('../js/equipes2.json', function(dados) {
-        // console.log(dados[regiaoUnidade]);
+        console.log(dados);
 
         // $.each(dados[regiaoUnidade], function(key, item) {
-        $.each(dados[regiaoUnidade], function(key, item) {
+        $.each(dados, function(key, item) {
             // console.log(item);
 
             let arrayEmpregados = [];

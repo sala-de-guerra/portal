@@ -120,15 +120,18 @@ Route::prefix('gerencial')->group(function () {
         // LISTAR GESTORES DA UNIDADE
         Route::get('listar-gestores', 'GestaoEquipesController@listaGestoresUnidade');
         // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
-        Route::get('listar-equipes', 'GestaoEquipesController@listarEquipesUnidade');
+        Route::get('listar-equipes/{codigoUnidade}', 'GestaoEquipesController@listarEquipesUnidade');
         // LISTA DE UNIDADES
         Route::get('listar-unidades', 'GestaoEquipesController@listarUnidades');
         // DESIGNA O EMPREGADO PARA UMA EQUIPE
         Route::put('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
-        // GESTÃO DE ATIVIDADES
-        Route::get('atividades', function () {
-            return view('portal.gerencial.atividades');
-        });
+    });
+    // GESTÃO DE ATIVIDADES
+    Route::prefix('gestao-atividades')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CADASTRAR ATIVIDADES
+        Route::get('/', 'GestaoEquipesAtividadesController@index');
+        // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
+        Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });
 });
 
