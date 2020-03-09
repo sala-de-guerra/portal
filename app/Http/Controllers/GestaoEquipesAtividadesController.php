@@ -50,18 +50,19 @@ class GestaoEquipesAtividadesController extends Controller
                     }
                 }
             }
-            array_push($arrayEquipesComAtividadesResponsaveis, $arrayAtividadesEquipe);
+            if (count($arrayAtividadesEquipe) > 0) {
+                array_push($arrayEquipesComAtividadesResponsaveis, array((string) $equipe->idEquipe, $arrayAtividadesEquipe));
+            }
         }
         return json_encode($arrayEquipesComAtividadesResponsaveis);
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function cadastrarAtividade(Request $request)
     {
         try {
             DB::beginTransaction();
