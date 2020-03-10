@@ -21,6 +21,7 @@ class CreateTableGestaoEquipesAtividades extends Migration
             $table->boolean('atividadeSubordinada');
             $table->integer('idAtividadeSubordinante')->nullable();
             $table->boolean('atividadeAtiva')->default(true);
+            $table->string('responsavelEdicao', 7);
             $table->dateTime('dataCriacaoAtividade');
             $table->dateTime('dataAtualizacaoAtividade');
         });

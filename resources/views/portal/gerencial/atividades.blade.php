@@ -27,7 +27,6 @@
         <div class="modal fade" id="modalCriarAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/url" id="formCriarAtividade" onsubmit="noRefreshPost(this);return false">
                         <div class="modal-header">
                             <h5 class="modal-title">Criar Atividade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -35,24 +34,35 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
-
-                            <!-- <div class="form-group">
-                                <label>Nome da Célula:</label>
-                                <input type="text" name="nomeCriarEquipe" class="form-control" id="nomeCriarEquipe" required>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="" id="" value="checkedValue" required> Display value
+                                    <input class="form-check-input" type="radio" name="" id="" value="checkedValue"> Display value
+                                </label>
                             </div>
 
-                            <div class="form-group">
-                                <label>Gestor da Célula:</label>
-                                <select name="selectCriarEquipe" id="selectCriarEquipe" class="form-control" required></select>
-                            </div> -->
+                            <form method="post" action="/url" id="formCriarAtividade">
+
+                                <input type="hidden" name="codigoUnidadeEquipe" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
+
+                                <div class="form-group">
+                                    <label>Nome da Atividade:</label>
+                                    <input type="text" name="nomeAtividade" class="form-control" id="nomeAtividadeCriar" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Gestor da Célula:</label>
+                                    <select name="matriculaGestor" id="selectCriarEquipe" class="form-control" required></select>
+                                </div>
+
+                                <!-- <input type="hidden" name="nomeGestor" id="nomeGestorCriar"> -->
+
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -151,7 +161,7 @@
 @section('content')
 
 <div class="card">
-    <div class="card-body p-0 m-0">
+    <div class="card-body p-0 m-0 overflow-auto">
         <table id="tabelaEquipe" class="table table-bordered p-0">
             <thead id="headEquipe">
             </thead>

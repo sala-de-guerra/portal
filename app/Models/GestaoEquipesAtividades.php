@@ -16,6 +16,7 @@ class GestaoEquipesAtividades extends Model
             'sinteseAtividade',
             'atividadeSubordinada',
             'idAtividadeSubordinante',
+            'responsavelEdicao',
             'dataCriacaoAtividade',
             'dataAtualizacaoAtividade',
             'atividadeAtiva',
