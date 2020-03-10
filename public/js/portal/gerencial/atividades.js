@@ -31,8 +31,8 @@ $(document).ready( function () {
     \***********************************/
 
     regiaoUnidadeSecao = $('#lotacao').html();
-
-    $.when($.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
+    $.when($.getJSON('../../js/equipes2.json', function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
+    // $.when($.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
     .done(function(a1, a2) {
 
         // console.log(a1);
@@ -50,7 +50,7 @@ $(document).ready( function () {
 
             // console.log(item);
 
-            if (item.idEquipe !== "1") {
+            if (item.idEquipe != "1") {
                 // console.log(item);
                 let option =
                     `<option value="` + item.idEquipe + `">` + item.nomeEquipe + `</option>`
@@ -82,82 +82,124 @@ $(document).ready( function () {
             refresh(equipe);
         });
 
+        /*******************************************************\
+        | Função que cria a tabela de atividades e responsáveis |
+        \*******************************************************/
+
         function montaCardsAtividades(equipe) {
 
-            // console.log (equipe);
+            /***************************************\
+            | Criar headers da tabela de atividades |
+            \***************************************/
+
+            let arrayHeadersMacroatividades = [];
+
+            $.each(atividades[equipe], function(key, item) {
+
+                let arrayHeadersMicroatividades = [];
+
+                if (item.atividadesSubordinadas == null) {
+
+                } else {
+                    $.each(item.atividadesSubordinadas, function(key, item) {
+                        let th =
+                            `<th>` + item.nomeAtividade + `</th>`
+                        ;
+
+                        arrayHeadersMicroatividades.push(th);
+
+                    });
+                }
+
+                let colunaHeader =
+                    `<td class="p-0">` +
+                        `<table class="table table-bordered p-0 m-0">` +
+                            `<tr>` +
+                                `<th>` + item.nomeAtividade + `</th>` +
+                            `</tr>` +
+                            `<tr>` +
+                                arrayHeadersMicroatividades.join(' ').trim() +
+                            `</tr>` +
+                        `</table>` +
+                    `</td>`
+                ;
+
+                arrayHeadersMacroatividades.push(colunaHeader);
+
+            });
+
+            let header =
+                `<tr class="row">` +
+                    `<td class="col-md-3 p-0">` +
+                        `<table class="table table-bordered p-0 m-0">` +
+                            `<tr>` +
+                                `<th>Macro-Atividade</th>` +
+                            `</tr>` +
+                            `<tr>` +
+                                `<th>Micro-Atividade</th>` +
+                            `</tr>` +
+                        `</table>` +
+                    `</td>` +
+                    arrayHeadersMacroatividades.join(' ').trim() +
+                `</tr>`
+            ;
+
+            $(header).appendTo('#headEquipe');
+
+            /**************************************\
+            | Criar linhas da tabela de atividades |
+            \**************************************/
 
             $.each(equipes, function(key, item) {
 
                 // console.log(item.idEquipe);
 
-                if (item.idEquipe == equipe) {
-
-                    let arrayHeadersMacroatividades = [];
-
-                    // console.log(atividades);
-
-                    $.each(atividades[equipe], function(key, item) {
-                        console.log(item);
-
-                        let arrayHeadersMicroatividades = [];
-
-                        if (item.atividadesSubordinadas === null) {
-
-                        } else {
-                            $.each(item.atividadesSubordinadas, function(key, item) {
-                                console.log(item);
-                                let th =
-                                    `<th>` + item.nomeAtividade + `</th>`
-                                ;
-    
-                                arrayHeadersMicroatividades.push(th);
-    
-                            });
-                        }
-
-                        let colunaHeader =
-                            `<td>` +
-                                `<table>` +
-                                    `<tr class="">` +
-                                        `<th>` + item.nomeAtividade + `</th>` +
-                                    `</tr>` +
-                                    `<tr class="">` +
-                                        arrayHeadersMicroatividades.join(' ').trim() +
-                                    `</tr>` +
-                                `</table>` +
-                            `</td>`
-                        ;
-
-                        arrayHeadersMacroatividades.push(colunaHeader);
-
-                    });
-
-                    let header =
-                        `<tr class="row">` +
-                            `<td>` +
-                                `<table>` +
-                                    `<tr>` +
-                                        `<th>` + item.nomeEquipe + `</th>` +
-                                    `</tr>` +
-                                    `<tr>` +
-                                        `<th>` + item.nomeGestorEquipe + `</th>` +
-                                    `</tr>` +
-                                `</table>` +
-                            `</td>` +
-                            arrayHeadersMacroatividades.join(' ').trim() +
-                        `</tr>`
-                    ;
-
-                    $(header).appendTo('#headEquipe'); 
+                if (item.idEquipe === equipe) {
 
                     $.each(item.empregadosEquipe, function(key, item) {
 
-                        // console.log(item);
+                        let matricula = item.matricula;
 
+                        /*******************************************\
+                        | Criar form com checkbox preenchido ou não |
+                        \*******************************************/
+
+                        function criaFormCheckbox (item) {
+
+                        };
+            
+                        let arrayLinhaTabelaAtividade = [];
+            
+                        $.each(atividades[equipe], function(key, item) {
+                            
+                            let checkbox;
+            
+            
+                            checkbox = `<input type="checkbox" checked="false" title="">`;
+            
+            
+                            if (item.atividadesSubordinadas == null) {
+                                criaFormCheckbox(item);
+                            } else {
+                                $.each(item.atividadesSubordinadas, function(key, item) {
+                                    criaFormCheckbox(item);
+                                });
+                            };
+            
+                            let td =
+                                `<td class="p-0">` +
+            
+                                `</td>`
+                            ;
+            
+                            arrayLinhaTabelaAtividade.push(td);
+            
+                        });
+            
                 
                         let linha = 
                             `<tr class="row">` +
-                                `<td class="col-md-2">` +
+                                `<td class="col-md-3 p-0">` +
                                     `<div class="callout callout-info row p-0 m-0">` +
                                         `<div class="col-md-12">` +
                                             `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
@@ -167,7 +209,7 @@ $(document).ready( function () {
                                         `</div>` +
                                     `</div>` +
                                 `</td>` +
-                                `<td>` + item.nomeCompleto + `</td>` +
+                                arrayLinhaTabelaAtividade.join(' ').trim() +
                             `</tr>`
                         ;
 
@@ -181,7 +223,6 @@ $(document).ready( function () {
 
     });
 
-    
 });
 
 
