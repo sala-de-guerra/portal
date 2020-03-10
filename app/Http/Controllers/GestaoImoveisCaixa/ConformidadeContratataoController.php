@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\Ldap;
 use App\Http\Controllers\Controller;
 use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
 use App\Models\BaseSimov;
@@ -51,6 +52,8 @@ class ConformidadeContratataoController extends Controller
      */
     public function listarContratosConformidade()
     {
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        
         $arrayContratosConformidade = [];
         $consultaContratosConformidade = DB::table('ADJTBL_imoveisCaixa')
                                             ->join('ALITB075_VENDA_VL_OL37', 'ADJTBL_imoveisCaixa.numeroContrato', '=', 'ALITB075_VENDA_VL_OL37.NU_BEM')
@@ -73,7 +76,7 @@ class ConformidadeContratataoController extends Controller
                                                 CONVERT(VARCHAR, ADJTBL_imoveisCaixa.[dataSimov], 103) as dataSimov,
                                                 ALITB075_VENDA_VL_OL37.[VL_TOTAL_RECEBIDO] as valorTotalRecebido
                                             '))
-                                            ->where('ADJTBL_imoveisCaixa.codigoGilie', '7257')
+                                            ->where('ADJTBL_imoveisCaixa.codigoGilie', $codigoUnidade)
                                             ->where(function($cardAgrupamento) {
                                                 $cardAgrupamento->where('ADJTBL_imoveisCaixa.cardDeAgrupamento', '!=', 'Negócios Realizados')
                                                         ->where('ADJTBL_imoveisCaixa.cardDeAgrupamento', '!=', 'CICOB');
