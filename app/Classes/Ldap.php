@@ -7,9 +7,11 @@ use Exception;
 
 class Ldap
 {
-    private $simularMatricula;  //= 'c142765'; // Charles - GILIE
+    private $simularMatricula; //= 'c142765'; // Charles - GILIE
     // private $simularMatricula = 'c070499'; // Euclidio - AG
     // private $simularMatricula = 'c090120'; // Marcelo Barboza - GILIE
+    // private $simularMatricula = 'c066241'; // João Marcel - GILIE
+    // private $simularMatricula = 'c072452'; // Fernanda Pereira Mendonça - GILIE
     private $matricula;
     private $nomeCompleto;
     private $cpf;
@@ -155,13 +157,18 @@ class Ldap
         return $this->simularMatricula;
     }
 
-    public function __construct()
+    public function __construct($arrayMatriculas = null)
     {
-        if ($this->getSimularMatricula() != "") {
-            $this->setMatricula(str_replace('C', 'c', $this->getSimularMatricula()));
+        if (!is_null($arrayMatriculas)) {
+            $this->setMatricula(str_replace('C', 'c', $arrayMatriculas));
         } else {
-            $this->setMatricula(str_replace('C', 'c', substr($_SERVER["AUTH_USER"], 10)));
+            if ($this->getSimularMatricula() != "") {
+                $this->setMatricula(str_replace('C', 'c', $this->getSimularMatricula()));
+            } else {
+                $this->setMatricula(str_replace('C', 'c', substr($_SERVER["AUTH_USER"], 10)));
+            }
         }
+        
         $ldapAtivo = $this->settaDadosEmpregado();
         if ($ldapAtivo == true) {
             $this->updateBaseEmpregados();
@@ -229,6 +236,8 @@ class Ldap
         $empregado->nomeLotacaoAdministrativa = $this->getNomeLotacaoAdministrativa();
         $empregado->codigoLotacaoFisica = $this->getCodicoLotacaoFisica();
         $empregado->nomeLotacaoFisica = $this->getNomeLotacaoFisica();
+        $empregado->created_at = is_null($empregado->created_at) ? date("Y-m-d H:i:s", time()) : $empregado->created_at;
+        $empregado->updated_at = date("Y-m-d H:i:s", time());
         $empregado->save();
     }
 }

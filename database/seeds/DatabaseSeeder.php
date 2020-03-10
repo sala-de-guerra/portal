@@ -11,10 +11,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {    
+        if (env('APP_ENV') == 'local') {
+            $this->call([
+                EmpregadosTableSeeder::class,
+                DistratoDemandasTableSeeder::class,
+                PerfisAcessoPortalTableSeeder::class,
+            ]);
+        }
         $this->call([
-            EmpregadosTableSeeder::class,
-            DistratoDemandasTableSeeder::class,
-            PerfisAcessoPortalTableSeeder::class,
+            GestaoEquipesCelulasTableSeeder::class,
         ]);
     }
 }

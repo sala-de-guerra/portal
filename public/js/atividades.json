@@ -1,0 +1,244 @@
+{
+    "5":[
+        {
+            "idAtividade":1,
+            "nomeAtividade":"Distrato",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":2,
+            "nomeAtividade":"Baixa",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":3,
+            "nomeAtividade":"Conformidade",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [
+                {
+                    "idAtividade":8,
+                    "nomeAtividade": "Fluxo CCA",
+                    "sinteseAtividade": "",
+                    "responsaveisAtividade": [
+                        {
+                            "matricula": "c142765"
+                        }
+                    ]
+                },
+                {
+                    "idAtividade":9,
+                    "nomeAtividade": "Fluxo Agencia",
+                    "sinteseAtividade": "",
+                    "responsaveisAtividade": [
+                        {
+                            "matricula": "c111710"
+                        }
+                    ]
+                }
+            ],
+            "responsaveisAtividade": []
+
+        },
+        {
+            "idAtividade":52,
+            "nomeAtividade":"Desenvolvimento TI",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":53,
+            "nomeAtividade":"Desenvolvimento TI",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":54,
+            "nomeAtividade":"Desenvolvimento TI",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":543,
+            "nomeAtividade":"Desenvolvimento TI",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":542,
+            "nomeAtividade":"Desenvolvimento TI",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":541,
+            "nomeAtividade":"Desenvolvimento TI",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":55,
+            "nomeAtividade":"Desenvolvimento TI",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        }
+    ],
+    "6":[
+        {
+            "idAtividade":10,
+            "nomeAtividade":"Preparação",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":11,
+            "nomeAtividade":"Laudos",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        },
+        {
+            "idAtividade":12,
+            "nomeAtividade":"IPTU",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [
+                {
+                    "idAtividade":18,
+                    "nomeAtividade": "Fluxo CCA",
+                    "sinteseAtividade": "",
+                    "responsaveisAtividade": [
+                        {
+                            "matricula": "c142765"
+                        }
+                    ]
+                },
+                {
+                    "idAtividade":19,
+                    "nomeAtividade": "Fluxo Agencia",
+                    "sinteseAtividade": "",
+                    "responsaveisAtividade": [
+                        {
+                            "matricula": "c111710"
+                        }
+                    ]
+                }
+            ],
+            "responsaveisAtividade": []
+
+        },
+        {
+            "idAtividade":13,
+            "nomeAtividade":"Condomínios",
+            "sinteseAtividade": "",
+            "atividadesSubordinadas": [],
+            "responsaveisAtividade": [
+                {
+                    "matricula":"c142765"
+                },
+                {
+                    "matricula":"c111710"
+                }
+            ]
+
+        }
+    ]
+}

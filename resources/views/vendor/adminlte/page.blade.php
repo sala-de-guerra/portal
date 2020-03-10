@@ -78,30 +78,32 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
+                    @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
+                    @yield('content_top_nav_left')
+
                     <li class="nav-item">
-                        <form class="m-0" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                        <form class="form-inline" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
-                            <div class="input-group">
-                                <select name="tipoVariavel" id="tipoVariavel" style="color:white;" class="form-control form-control-navbar" required>
-                                    <option style="color:black;" value="" disabled selected>Selecione</option>
-                                    <option style="color:black;" value="numeroContrato">Número Contrato</option>
-                                    <option style="color:black;" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
-                                    <option style="color:black;" value="nomeProponente">Nome proponente</option>
-                                    <option style="color:black;" value="enderecoImovel">Endereço imóvel</option>
-                                    <option style="color:black;" value="matriculaImovel">Matrícula do imóvel</option>
-                                    <option style="color:black;" value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
-                                    <option style="color:black;" value="nomeExMutuario">Nome ex-mutuário</option>
-                                </select>
-                                <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" placeholder="Digite um termo para pesquisa." required>
+                            <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar mr-3 text-white" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option class="text-dark" value="numeroContrato">Contrato</option>
+                                <option class="text-dark" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                                <option class="text-dark" value="nomeProponente">Nome proponente</option>
+                                <option class="text-dark" value="enderecoImovel">Endereço imóvel</option>
+                                <option class="text-dark" value="matriculaImovel">Matrícula do imóvel</option>
+                                <option class="text-dark" value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
+                                <option class="text-dark" value="nomeExMutuario">Nome ex-mutuário</option>
+                            </select>
+                            <div class="input-group nav-search-bar">
+                                <input class="form-control form-control-navbar text-white" type="text" id="valorVariavel" minlength="5" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." oninvalid="setCustomValidity('Digite no mínimo 5 caracteres para pesquisar.')" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
                         </form>
                     </li>
-                    @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
-                    @yield('content_top_nav_left')
                 </ul>
+
             @endif
                 <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
                     @yield('content_top_nav_right')
@@ -128,20 +130,20 @@
                         </li>
                     @endif
 
-                    <li class="nav-item mx-1">
+                    <li class="nav-item">
                         <a href="#" id="btnFullscreen" class="nav-link" title="Modo tela cheia">
                             <i class="fas fa-lg fa-expand"></i>
                         </a>
                     </li>
 
-                    <li class="nav-item mx-1">
+                    <li class="nav-item">
                         <a href="#" id="btnFullscreenOff" class="nav-link" title="Sair do modo tela cheia" style="display:none;">
                             <i class="fas fa-lg fa-compress-arrows-alt"></i>
                         </a>
                     </li>
 
                     @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
-                        <li class="nav-item mx-1 dropdown user-menu">
+                        <li class="nav-item dropdown user-menu">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <i class="far fa-lg fa-bell"></i>
                                 <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
@@ -292,7 +294,7 @@
 
     <script>
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
         })
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>

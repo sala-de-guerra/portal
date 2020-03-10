@@ -3,10 +3,12 @@
 namespace App\Classes;
 
 use App\Models\AcessaPortal;
+use App\Models\GestaoEquipesEmpregados;
 
 class CadastraAcessoPortal
 {
     private $matricula;
+    private $eventual;
     private $nivelAcesso;
     private $unidade;
     public $arraySr = [
@@ -60,6 +62,32 @@ class CadastraAcessoPortal
     }
 
     /**
+     * Get the value of eventual
+     */ 
+    public function getEventual()
+    {
+        return $this->eventual;
+    }
+
+    /**
+     * Set the value of eventual
+     *
+     * @return  self
+     */ 
+    public function setEventual($matricula)
+    {
+        $eventualidade = GestaoEquipesEmpregados::find($matricula);
+        $this->eventual = false;
+        if (!is_null($eventualidade)) {
+            if($eventualidade->eventualEquipe) {
+                $this->eventual = true;
+            } 
+        } 
+
+        return $this;
+    }
+
+    /**
      * Get the value of nivelAcesso
      */ 
     public function getNivelAcesso()
@@ -81,12 +109,12 @@ class CadastraAcessoPortal
         } elseif (in_array($this->getUnidade(), $this->arrayMatriz)) {
             $this->nivelAcesso = 'MATRIZ';
         } elseif ($this->getUnidade() == '7257') {
-            // if (in_array($this->getMatricula(), $this->arrayMiddle)) {
-            //     $this->nivelAcesso = 'MIDDLE';
             if (in_array($this->getMatricula(), $this->arrayGestor)) {
                 $this->nivelAcesso = 'GESTOR';
             } elseif(in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
                 $this->nivelAcesso = 'DESENVOLVEDOR';
+            } elseif($this->getEventual()) {
+                $this->nivelAcesso = 'EVENTUAL';
             } else {
                 $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
             }
@@ -122,6 +150,7 @@ class CadastraAcessoPortal
     public function __construct($objEmpregado)
     {
         $this->setMatricula($objEmpregado->matricula);
+        $this->setEventual($objEmpregado->matricula);
         $this->setUnidade($objEmpregado);
         $this->setNivelAcesso();
         $this->atualizaPerfilAcessoEsteira();

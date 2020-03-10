@@ -14,7 +14,7 @@ class CreateTableGestaoEquipeEmpregados extends Migration
     public function up()
     {
         Schema::create('TBL_GESTAO_EQUIPES_EMPREGADOS', function (Blueprint $table) {
-            $table->string('matricula', 7);
+            $table->string('matricula', 7)->unique();
             $table->smallInteger('codigoUnidadeLotacao');
             $table->integer('idEquipe')->nullable();
             $table->boolean('disponivel')->default(true);

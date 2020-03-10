@@ -29,13 +29,14 @@ class SetCookiesSession
                 // $empregado = Empregado::find('c032579'); // Euclidio
                 // $empregado = Empregado::find('c058725'); // Thais
                 // $empregado = Empregado::find('c142765'); // Carlos
-                // $empregado = Empregado::find('c111710'); // Chuman
-                $empregado = Empregado::find('c079436'); // Vladimir
+                $empregado = Empregado::find('c111710'); // Chuman
+                // $empregado = Empregado::find('c079436'); // Vladimir
 
                 $request->session()->put([
                     'matricula' => $empregado->matricula,
                     'nomeCompleto' => $empregado->nomeCompleto,
                     'primeiroNome' => $empregado->primeiroNome,
+                    'codigoFuncao' => $empregado->codigoFuncao,
                     'nomeFuncao' => $empregado->nomeFuncao,
                     'codigoLotacaoAdministrativa' => $empregado->codigoLotacaoAdministrativa,
                     'nomeLotacaoAdministrativa' => $empregado->nomeLotacaoAdministrativa,
@@ -57,6 +58,7 @@ class SetCookiesSession
                     'matricula' => $empregado->matricula,
                     'nomeCompleto' => $empregado->nomeCompleto,
                     'primeiroNome' => $empregado->primeiroNome,
+                    'codigoFuncao' => $empregado->codigoFuncao,
                     'nomeFuncao' => $empregado->nomeFuncao,
                     'codigoLotacaoAdministrativa' => $empregado->codigoLotacaoAdministrativa,
                     'nomeLotacaoAdministrativa' => $empregado->nomeLotacaoAdministrativa,
