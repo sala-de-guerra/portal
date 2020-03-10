@@ -205,7 +205,7 @@ class ConsultaContratoController extends Controller
         return json_encode($jsonHistoricoContrato);
     }
 
-    public static function validatelefoneCorretor($contrato)
+    public static function validaTelefoneCorretor($contrato)
     {
         if ($contrato->TEL_COM_CORRETOR == null || $contrato->TEL_COM_CORRETOR == 'NULL') {
             if ($contrato->TEL_CEL_CORRETOR == null || $contrato->TEL_CEL_CORRETOR == 'NULL') {
