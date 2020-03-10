@@ -12,7 +12,7 @@
         </h1>
     </div>
 
-     <div class="col-sm-2">
+     <div class="col-sm-3">
         <select name="selectEquipe" id="selectEquipe" class="form-control">
             <option value="" selected disabled>Selecione</option>
         </select>
@@ -150,9 +150,9 @@
 
 @section('content')
 
-<div class="row">
-    <div class="col-md-12">
-        <table id="tabelaEquipe" class="table">
+<div class="card">
+    <div class="card-body p-0 m-0">
+        <table id="tabelaEquipe" class="table table-bordered p-0">
             <thead id="headEquipe">
             </thead>
             <tbody id="bodyEquipe">
