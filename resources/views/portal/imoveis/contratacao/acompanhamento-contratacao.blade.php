@@ -54,7 +54,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>CHB</th>
-                                                    <th>Data da proposta</th>
+                                                    <th>Valor</th>
                                                     <th>Data de vencimento (PP15)</th>
                                                     <th>Status</th>
                                                     <th>Classificação do imóvel</th>

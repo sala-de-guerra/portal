@@ -126,19 +126,17 @@ Route::prefix('gerencial')->group(function () {
         // DESIGNA O EMPREGADO PARA UMA EQUIPE
         Route::put('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
     });
+    
     // GESTÃO DE ATIVIDADES
     Route::prefix('gestao-atividades')->group(function () {
         // RETORNA A VIEW DO PROJETO PARA CADASTRAR ATIVIDADES
         Route::get('/', 'GestaoEquipesAtividadesController@index');
+        // MÉTODO PARA CADASTRAR NOVA ATIVIDADE
+        Route::post('/', 'GestaoEquipesAtividadesController@cadastrarAtividade');
         // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });
 });
-
-// // ROTA QUE ATUALIZA O JSON DA CONSULTA DE IMÓVEIS
-// Route::prefix('portal')->group(function () {
-//     Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
-// });
 
 // ROTA DE TESTE TROCA EMPREGADO CELULA
 Route::match(['get', 'post', 'put', 'delete'], 'url', function (\Illuminate\Http\Request $request) {

@@ -18,6 +18,7 @@ class CreateTableGestaoEquipesAtividadesResponsaveis extends Migration
             $table->integer('idAtividade');
             $table->string('matriculaResponsavelAtividade', 7);
             $table->boolean('atuandoAtividade')->default(true);
+            $table->string('matriculaResponsavelDesignacao', 7);
             $table->dateTime('dataCadastro');
             $table->dateTime('dataAtualizacao');
         });

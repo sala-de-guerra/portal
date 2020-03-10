@@ -57,6 +57,10 @@
     padding-right: 15px!important;
 }
 
+.min-width-20vw {
+    min-width: 20vw!important;
+}
+
 .navbar {
     background-image: linear-gradient(to right, #247cb4 , #54bbab );
 }

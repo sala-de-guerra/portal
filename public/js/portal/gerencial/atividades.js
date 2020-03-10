@@ -31,13 +31,9 @@ $(document).ready( function () {
     \***********************************/
 
     regiaoUnidadeSecao = $('#lotacao').html();
-    $.when($.getJSON('../../js/equipes2.json', function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
-    // $.when($.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
+    // $.when($.getJSON('../../js/equipes2.json', function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
+    $.when($.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
     .done(function(a1, a2) {
-
-        // console.log(a1);
-        console.log(a2[0]);
-
 
         equipes = a1[0];
         atividades = a2[0];
@@ -96,41 +92,48 @@ $(document).ready( function () {
 
             $.each(atividades[equipe], function(key, item) {
 
-                let arrayHeadersMicroatividades = [];
+                let colunaHeader;
 
-                if (item.atividadesSubordinadas == null) {
+                if (item.atividadesSubordinadas.length === 0) {
+
+                    colunaHeader =
+                        `<td class="min-width-20vw p-0">` +
+                            `<table class="table table-bordered p-0 m-0">` +
+                                `<tr>` +
+                                    `<th>` + item.nomeAtividade + `</th>` +
+                                `</tr>` +
+                            `</table>` +
+                        `</td>`
+                    ;
+
+                    arrayHeadersMacroatividades.push(colunaHeader);
 
                 } else {
+
+                    let nomeMacroAtividade = item.nomeAtividade;
+
                     $.each(item.atividadesSubordinadas, function(key, item) {
-                        let th =
-                            `<th>` + item.nomeAtividade + `</th>`
+                        colunaHeader =
+                            `<td class="min-width-20vw p-0">` +
+                                `<table class="table table-bordered p-0 m-0">` +
+                                    `<tr>` +
+                                        `<th>` + nomeMacroAtividade + `</th>` +
+                                    `</tr>` +
+                                    `<tr>` +
+                                        `<th>` + item.nomeAtividade + `</th>` +
+                                    `</tr>` +
+                                `</table>` +
+                            `</td>`
                         ;
 
-                        arrayHeadersMicroatividades.push(th);
-
+                        arrayHeadersMacroatividades.push(colunaHeader);
                     });
                 }
-
-                let colunaHeader =
-                    `<td class="p-0">` +
-                        `<table class="table table-bordered p-0 m-0">` +
-                            `<tr>` +
-                                `<th>` + item.nomeAtividade + `</th>` +
-                            `</tr>` +
-                            `<tr>` +
-                                arrayHeadersMicroatividades.join(' ').trim() +
-                            `</tr>` +
-                        `</table>` +
-                    `</td>`
-                ;
-
-                arrayHeadersMacroatividades.push(colunaHeader);
-
             });
 
             let header =
-                `<tr class="row">` +
-                    `<td class="col-md-3 p-0">` +
+                `<tr>` +
+                    `<td class="min-width-20vw p-0" style="position:absolute!important;background-color:white;">` +
                         `<table class="table table-bordered p-0 m-0">` +
                             `<tr>` +
                                 `<th>Macro-Atividade</th>` +
@@ -158,50 +161,55 @@ $(document).ready( function () {
 
                     $.each(item.empregadosEquipe, function(key, item) {
 
-                        let matricula = item.matricula;
-
                         /*******************************************\
                         | Criar form com checkbox preenchido ou não |
                         \*******************************************/
 
-                        function criaFormCheckbox (item) {
-
-                        };
-            
                         let arrayLinhaTabelaAtividade = [];
+
+                        let matriculaLinha = item.matricula;
             
                         $.each(atividades[equipe], function(key, item) {
                             
-                            let checkbox;
-            
-            
-                            checkbox = `<input type="checkbox" checked="false" title="">`;
-            
-            
-                            if (item.atividadesSubordinadas == null) {
+                            function criaFormCheckbox (item) {
+                                let arrayResponsaveisAtividade = item.responsaveisAtividade;
+                                let checkbox;
+
+                                    if (arrayResponsaveisAtividade.findIndex(x => x.matricula === matriculaLinha) === -1) {
+                                        checkbox = `<input class="form-control" type="checkbox" title="Clique para salvar">`;
+                                    } else {
+                                        checkbox = `<input class="form-control" type="checkbox" checked="checked" title="Clique para salvar">`;
+                                    };
+
+
+                                let form =
+                                    `<td class="p-0">` +
+                                        `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="" method="PUT" class="">` +
+                                            checkbox +
+                                        `</form>` +
+                                    `</td>`
+                                ;
+
+                                arrayLinhaTabelaAtividade.push(form);
+
+                            };
+                            
+                            if (item.atividadesSubordinadas.length === 0) {
                                 criaFormCheckbox(item);
+
                             } else {
                                 $.each(item.atividadesSubordinadas, function(key, item) {
                                     criaFormCheckbox(item);
                                 });
                             };
-            
-                            let td =
-                                `<td class="p-0">` +
-            
-                                `</td>`
-                            ;
-            
-                            arrayLinhaTabelaAtividade.push(td);
-            
+                                    
                         });
-            
                 
                         let linha = 
-                            `<tr class="row">` +
-                                `<td class="col-md-3 p-0">` +
-                                    `<div class="callout callout-info row p-0 m-0">` +
-                                        `<div class="col-md-12">` +
+                            `<tr class="p-4 m-4">` +
+                                `<td class="min-width-20vw p-0 m-0" style="position:absolute!important;background-color:white;">` +
+                                    `<div class="callout callout-info p-0 m-0">` +
+                                        `<div class="">` +
                                             `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
                                             `<p class="card-text m-0">` +
                                                 `<small class="text-muted">` + item.nomeFuncao + `</small>` +
@@ -219,65 +227,7 @@ $(document).ready( function () {
                 };
                     
             });
-        };    
-
+        };
     });
 
 });
-
-
-    /********************************************************\
-    | Função mostra as equipes da regiao do usuario da seção |
-    \********************************************************/
-
-
-    // let regiaoUnidadeSecao = $('#lotacao').html();
-
-    // $.getJSON('../../js/equipes.json', function(dados) {
-    //     equipes.push(dados);
-        
-    //     $.each(equipes[regiaoUnidadeSecao], function(key, item) {
-    //         let option = 
-    //             `<option value="` + item.id + `">` + item.nomeEquipe + `</option>`
-    //         ;
-
-    //         $(option).appendTo('#selectEquipe');
-            
-    //     });
-    // });
-    
-    // console.log(equipes);
-
-    /*********************************************************\
-    | Função que cria uma linha da tabela para cada empregado |
-    \*********************************************************/
-
-    // function montaCardsAtividades(equipe) {
-
-    //     alert('oi');
-
-    //     $.getJSON('../js/atividades.json', function(atividades) {
-
-
-    //         let cardEmpregado =
-    //         `<li id="` + item.matricula + `">` +
-    //             `<div class="callout callout-info row p-0">` +
-    //                 `<div class="col-md-3">` +
-    //                     `<img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula=` + item.matricula + `" class="img-circle elevation-2 user-image-resize-50px" alt="User Image" onerror="this.src='{{ asset('/img/question-mark.png') }}';">` +
-    //                 `</div>` +
-    //                 `<div class="col-md-9">` +
-    //                     `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
-    //                     `<br>` +
-    //                     `<div class="row">` +
-    //                         `<p class="card-text col"><small class="text-muted">` + item.nomeFuncao + `</small></p>` +
-    //                         `<div class="float-right col" id="eventual` + item.matricula + `" style="display:none;">` +
-    //                             `<span class="badge bg-primary">Eventual</span>` +
-    //                         `</div>` +
-    //                     `</div>` +
-    //                 `</div>` +
-    //             `</div>` +
-    //         `</li>`
-    //     ;
-    
-    //     });
-    // };

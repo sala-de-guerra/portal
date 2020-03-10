@@ -64,6 +64,7 @@ class MonitoraPagamentoSinalController extends Controller
                     array_push($listaContratosSemPagamentoSinal, [
                         'numeroContrato' => $contrato->NU_BEM,
                         'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                        'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
                         'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
                         'statusSimov' => $contrato->STATUS_IMOVEL,
                         'classificacaoImovel' =>$contrato->CLASSIFICACAO
@@ -73,6 +74,7 @@ class MonitoraPagamentoSinalController extends Controller
                 array_push($listaContratosSemPagamentoSinal, [
                     'numeroContrato' => $contrato->NU_BEM,
                     'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                    'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
                     'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
                     'statusSimov' => $contrato->STATUS_IMOVEL,
                     'classificacaoImovel' =>$contrato->CLASSIFICACAO

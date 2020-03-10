@@ -14,6 +14,7 @@ class GestaoEquipesAtividadesResponsaveis extends Model
             'idAtividade',
             'matriculaResponsavelAtividade',
             'atuandoAtividade',
+            'matriculaResponsavelDesignacao',
             'dataCadastro',
             'dataAtualizacao',
         ];
