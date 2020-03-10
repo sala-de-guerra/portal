@@ -84,13 +84,13 @@
                             <div class="input-group">
                                 <select name="tipoVariavel" id="tipoVariavel" style="color:white;" class="form-control form-control-navbar" required>
                                     <option style="color:black;" value="" disabled selected>Selecione</option>
-                                    <option value="numeroContrato">Número Contrato</option>
-                                    <option value="cpfCnpjProponente">CPF/CNPJ proponente</option>
-                                    <option value="nomeProponente">Nome proponente</option>
-                                    <option value="enderecoImovel">Endereço imóvel</option>
-                                    <option value="matriculaImovel">Matrícula do imóvel</option>
-                                    <option value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
-                                    <option value="nomeExMutuario">Nome ex-mutuário</option>
+                                    <option style="color:black;" value="numeroContrato">Número Contrato</option>
+                                    <option style="color:black;" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                                    <option style="color:black;" value="nomeProponente">Nome proponente</option>
+                                    <option style="color:black;" value="enderecoImovel">Endereço imóvel</option>
+                                    <option style="color:black;" value="matriculaImovel">Matrícula do imóvel</option>
+                                    <option style="color:black;" value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
+                                    <option style="color:black;" value="nomeExMutuario">Nome ex-mutuário</option>
                                 </select>
                                 <input class="form-control form-control-navbar tt-responsive" type="text" id="valorVariavel" minlength="3" name="valorVariavel" placeholder="Digite um termo para pesquisa." required>
                                 <div class="input-group-append">

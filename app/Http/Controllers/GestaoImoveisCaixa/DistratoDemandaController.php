@@ -56,7 +56,7 @@ class DistratoDemandaController extends Controller
                 $telefone = 'telefone não cadastrado';
                 $emailProponente = 'e-mail não cadastrado';
             } else {
-                if ($dadosProposta->{'DDD PROPONENTE'} == null || $dadosProposta->{'DDD PROPONENTE'} == 'NULL') {
+                if ($dadosProposta->{'TELEFONE PROPONENTE'} == null || $dadosProposta->{'TELEFONE PROPONENTE'} == 'NULL') {
                     $telefone = 'telefone não cadastrado';
                 } else {
                     $telefone = "(" . $dadosProposta->{'DDD PROPONENTE'} . ") " . $dadosProposta->{'TELEFONE PROPONENTE'};
@@ -69,9 +69,9 @@ class DistratoDemandaController extends Controller
             }
             
             $novoDistrato = new DistratoDemanda;
-            $novoDistrato->contratoFormatado = $request->contratoFormatado;
-            $novoDistrato->nomeProponente = strtoupper ($request->nomeProponente);
-            $novoDistrato->cpfCnpjProponente = $request->cpfCnpjProponente;
+            $novoDistrato->contratoFormatado = $dadosSimov->BEM_FORMATADO;
+            $novoDistrato->nomeProponente = strtoupper ($dadosSimov->NOME_PROPONENTE);
+            $novoDistrato->cpfCnpjProponente = $dadosSimov->CPF_CNPJ_PROPONENTE;
             $novoDistrato->statusAnaliseDistrato = 'CADASTRADA';
             $novoDistrato->motivoDistrato = 'A CLASSIFICAR';
             $novoDistrato->telefoneProponente = $telefone;
@@ -109,10 +109,10 @@ class DistratoDemandaController extends Controller
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
             $historico->matricula = session('matricula');
-            $historico->numeroContrato = $request->contratoFormatado;
+            $historico->numeroContrato = $dadosSimov->contratoFormatado;
             $historico->tipo = "CADASTRO";
             $historico->atividade = "DISTRATO";
-            $historico->observacao = "CADASTRO DE DISTRATO - PROTOCOLO: #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - PROPONENTE: " . $request->nomeProponente;
+            $historico->observacao = "CADASTRO DE DISTRATO - PROTOCOLO: #" . str_pad($novoDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " - PROPONENTE: " . $dadosSimov->nomeProponente;
             $historico->created_at = date("Y-m-d H:i:s", time());
             $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
