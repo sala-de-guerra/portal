@@ -45,13 +45,13 @@ class SetCookiesSession
                     'acessoEmpregadoPortal' => $empregado->acessaPortal->nivelAcesso,
                     'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade
                 ]);
+
+                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
             }
         } else {   
             if (!$request->session()->has('matricula')) {
                 $usuario = new Ldap;
                 $empregado = Empregado::find($usuario->getMatricula());
-                $urlBaseSistemaInova = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '/')+1));
-                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
                 $baseSimov = BaseSimov::select('DATA_ULTIMA_ALTERACAO')->orderBy('DATA_ULTIMA_ALTERACAO', 'desc')->first();
 
                 $request->session()->put([
@@ -68,6 +68,8 @@ class SetCookiesSession
                     'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade,
                     'dataAtualizacaoBaseSimov' => Carbon::parse($baseSimov->DATA_ULTIMA_ALTERACAO)->format('d/m/Y')
                 ]); 
+
+                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
             }
         }
         return $next($request);

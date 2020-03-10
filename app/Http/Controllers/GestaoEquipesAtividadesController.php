@@ -57,6 +57,35 @@ class GestaoEquipesAtividadesController extends Controller
         return json_encode($arrayEquipesComAtividadesResponsaveis);
     }
 
+    public static function listaAtividadesSubordinadas($idAtividadeSubordinante) {
+        $arrayAtividadesSubordinadas = [];
+        $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->get();
+        foreach ($listaAtividadesSubordinadas as $atividadeSubordinada) {
+            $listaResponsaveisAtividade = self::listarResponsaveisAtividade($atividadeSubordinada->idAtividade);
+            array_push($arrayAtividadesSubordinadas, [
+                'idAtividade'           => $atividadeSubordinada->idAtividade,
+                'nomeAtividade'         => $atividadeSubordinada->nomeAtividade,
+                'sinteseAtividade'      => $atividadeSubordinada->sinteseAtividade,
+                'responsaveisAtividade' => $listaResponsaveisAtividade,
+            ]);
+        }
+        return $arrayAtividadesSubordinadas;
+    }
+
+    public static function listarResponsaveisAtividade($idAtividade) {
+        $listaResponsaveisAtividade = [];
+        $arrayResponsaveisAtividade = GestaoEquipesAtividadesResponsaveis::where('idAtividade', $idAtividade)->where('atuandoAtividade', true)->get();
+        foreach ($arrayResponsaveisAtividade as $responsavelAtividade) {
+            // $nomeCompleto = is_null($responsavelAtividade->dadosEmpregadoLdap->nomeCompleto) ? '' : ucwords(strtolower((string) $responsavelAtividade->dadosEmpregadoLdap->nomeCompleto));
+            array_push($listaResponsaveisAtividade, [
+                'matricula'     => $responsavelAtividade->matricula,
+                // 'nomeCompleto'  => $nomeCompleto,
+                // 'nomeFuncao'    => is_null($responsavelAtividade->dadosEmpregadoLdap->nomeFuncao) ? 'TECNICO BANCARIO NOVO' : $responsavelAtividade->dadosEmpregadoLdap->nomeFuncao,
+            ]);
+        }
+        return $listaResponsaveisAtividade;
+    }
+
     /**
      *
      * @param  \Illuminate\Http\Request  $request
@@ -161,8 +190,52 @@ class GestaoEquipesAtividadesController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $idAtividade
+     * @return \Illuminate\Http\Response
+     */
+    public function desativarAtividade($idAtividade)
+    {        
+        try {
+            DB::beginTransaction();
+            // DESABILITA A ATIVIDADE
+            $desativarAtividade = GestaoEquipesAtividades::find($idAtividade);
+            $desativarAtividade->ativa                      = false;
+            $desativarAtividade->responsavelEdicao          = session('matricula');
+            $desativarAtividade->dataAtualizacaoAtividade   = date("Y-m-d H:i:s", time());
+
+            // DESATIVA TODOS OS EMPREGADOS DA ATIVIDADE DESABILITADA 
+            $empregadosAtividadeDesativada = GestaoEquipesAtividadesResponsaveis::where('idAtividade', $idAtividade)->get();
+            foreach ($empregadosAtividadeDesativada as $empregado) {
+                $empregado->atuandoAtividade                = false;
+                $empregado->matriculaResponsavelDesignacao  = session('matricula');
+                $empregado->dataAtualizacao                 = date("Y-m-d H:i:s", time());
+                $empregado->save();
+            }
+
+            // REGISTRA O LOG DE HISTORICO DA AÇÃO
+            $registroLogHistorico = new GestaoEquipesLogHistorico;
+            $registroLogHistorico->idEquipe                 = $idEquipe;
+            $registroLogHistorico->matriculaResponsavel     = session('matricula');
+            $registroLogHistorico->tipo                     = 'DESATIVAR';
+            $registroLogHistorico->observacao               = "DESATIVAÇÃO DA ATIVIDADE " . $request->nomeAtividade;
+            $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+            $registroLogHistorico->save();
+
+            $desativarAtividade->save();
+            DB::commit();
+            return response('atividade apagada com sucesso', 200);
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            return response('Não foi possível apagar a atividade', 500);
+        }
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request $request
      * @param  int  $idResponsavelAtividade
      * @return \Illuminate\Http\Response
      */
@@ -196,45 +269,5 @@ class GestaoEquipesAtividadesController extends Controller
             DB::rollback();
             return response('Não foi possível designar o empregado', 500);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function desativarAtividade($id)
-    {
-        //
-    }
-
-    public static function listaAtividadesSubordinadas($idAtividadeSubordinante) {
-        $arrayAtividadesSubordinadas = [];
-        $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->get();
-        foreach ($listaAtividadesSubordinadas as $atividadeSubordinada) {
-            $listaResponsaveisAtividade = self::listarResponsaveisAtividade($atividadeSubordinada->idAtividade);
-            array_push($arrayAtividadesSubordinadas, [
-                'idAtividade'           => $atividadeSubordinada->idAtividade,
-                'nomeAtividade'         => $atividadeSubordinada->nomeAtividade,
-                'sinteseAtividade'      => $atividadeSubordinada->sinteseAtividade,
-                'responsaveisAtividade' => $listaResponsaveisAtividade,
-            ]);
-        }
-        return $arrayAtividadesSubordinadas;
-    }
-
-    public static function listarResponsaveisAtividade($idAtividade) {
-        $listaResponsaveisAtividade = [];
-        $arrayResponsaveisAtividade = GestaoEquipesAtividadesResponsaveis::where('idAtividade', $idAtividade)->where('atuandoAtividade', true)->get();
-        foreach ($arrayResponsaveisAtividade as $responsavelAtividade) {
-            // $nomeCompleto = is_null($responsavelAtividade->dadosEmpregadoLdap->nomeCompleto) ? '' : ucwords(strtolower((string) $responsavelAtividade->dadosEmpregadoLdap->nomeCompleto));
-            array_push($listaResponsaveisAtividade, [
-                'matricula'     => $responsavelAtividade->matricula,
-                // 'nomeCompleto'  => $nomeCompleto,
-                // 'nomeFuncao'    => is_null($responsavelAtividade->dadosEmpregadoLdap->nomeFuncao) ? 'TECNICO BANCARIO NOVO' : $responsavelAtividade->dadosEmpregadoLdap->nomeFuncao,
-            ]);
-        }
-        return $listaResponsaveisAtividade;
     }
 }

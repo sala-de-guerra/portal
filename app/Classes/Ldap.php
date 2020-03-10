@@ -12,6 +12,7 @@ class Ldap
     // private $simularMatricula = 'c090120'; // Marcelo Barboza - GILIE
     // private $simularMatricula = 'c066241'; // João Marcel - GILIE
     // private $simularMatricula = 'c072452'; // Fernanda Pereira Mendonça - GILIE
+    // private $simularMatricula = 'c076457'; // FRANCISCO DE ASSIS DE SOUZA AMARAL - GILIE/RE
     private $matricula;
     private $nomeCompleto;
     private $cpf;
@@ -239,5 +240,29 @@ class Ldap
         $empregado->created_at = is_null($empregado->created_at) ? date("Y-m-d H:i:s", time()) : $empregado->created_at;
         $empregado->updated_at = date("Y-m-d H:i:s", time());
         $empregado->save();
+    }
+
+    public static function defineUnidadeUsuarioSessao()
+    {
+        return in_array(session('codigoLotacaoFisica'), [null, 'NULL']) ? session('codigoLotacaoAdministrativa') : session('codigoLotacaoFisica');
+    }
+
+    public static function defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao)
+    {
+        $arraySiglasUnidadesGilie = [
+            'GILIE/SP' => '7257',
+            'GILIE/BH' => '7244',
+            'GILIE/BE' => '7243',
+            'GILIE/BR' => '7109',
+            'GILIE/CT' => '7247',
+            'GILIE/FO' => '7248',
+            'GILIE/GO' => '7249',
+            'GILIE/PO' => '7251',
+            'GILIE/RJ' => '7254',
+            'GILIE/RE' => '7253',
+            'GILIE/SA' => '7255',
+            'GILIE/BU' => '7242'
+        ];
+        return array_search($codigoUnidadeUsuarioSessao, $arraySiglasUnidadesGilie);
     }
 }
