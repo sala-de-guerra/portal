@@ -105,7 +105,7 @@
             </div>
             <div class="card-body">
                 <h4> 
-                    <a href="#valorVariavel">
+                    <a href="#tipoVariavel">
                         <i class="fa fa-search m-2"></i> Pesquisar Bem Imóvel
                     </a>
                     <br>
