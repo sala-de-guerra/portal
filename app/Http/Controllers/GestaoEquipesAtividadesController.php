@@ -94,7 +94,29 @@ class GestaoEquipesAtividadesController extends Controller
      */
     public function cadastrarAtividade(Request $request)
     {
-        dd($request);
+        $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
+        foreach ($objDados as $dado) {
+            $dado = explode("=", $dado);
+            switch ($dado[0]) {
+                case 'idEquipe':
+                    $idEquipe = $dado[1];
+                case 'atividadeSubordinada':
+                    $atividadeSubordinada = $dado[1];
+                    break;
+                case 'nomeAtividade':
+                    $encoding = mb_internal_encoding();
+                    $nomeAtividade = mb_strtoupper($dado[1], $encoding);
+                    break;
+                case 'sinteseAtividade':
+                    $encoding = mb_internal_encoding();
+                    $sinteseAtividade = mb_strtoupper($dado[1], $encoding);
+                    break;
+                case 'prazoAtendimento':
+                    $prazoAtendimento = $dado[1];
+                    break;
+            }
+        }
+
         try {
             DB::beginTransaction();
             // CRIA A NOVA ATIVIDADE
