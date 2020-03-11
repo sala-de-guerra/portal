@@ -27,7 +27,7 @@
         <div class="modal fade" id="modalCriarAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form method="post" action="/gerencial/gestao-atividades/" id="formCriarAtividade">
+                    <form method="post" action="/gerencial/gestao-atividades" id="formCriarAtividade">
                         <div class="modal-header">
                             <h5 class="modal-title">Criar Atividade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -88,7 +88,7 @@
         <div class="modal fade" id="modalAlterarAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/gerencial/gestao-atividades/" method="put" id="formAlterarAtividade">
+                    <form action="/gerencial/gestao-atividades" method="put" id="formAlterarAtividade">
                         <div class="modal-header">
                             <h5 class="modal-title">Alterar Atividade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -136,7 +136,7 @@
         <div class="modal fade" id="modalExcluirAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/gerencial/gestao-atividades/" method="delete" id="formExcluirAtividade">
+                    <form action="/gerencial/gestao-atividades" method="delete" id="formExcluirAtividade">
                         <div class="modal-header">
                             <h5 class="modal-title">Excluir Atividade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
