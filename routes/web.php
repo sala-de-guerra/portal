@@ -133,7 +133,13 @@ Route::prefix('gerencial')->group(function () {
         Route::get('/', 'GestaoEquipesAtividadesController@index');
         // MÉTODO PARA CADASTRAR NOVA ATIVIDADE
         Route::post('/', 'GestaoEquipesAtividadesController@cadastrarAtividade');
-        // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
+        // MÉTODO PARA EDITAR ATIVIDADE
+        Route::put('/{idAtividade}', 'GestaoEquipesAtividadesController@editarAtividade');
+        // MÉTODO PARA DESATIVAR ATIVIDADE
+        Route::delete('/{idAtividade}', 'GestaoEquipesAtividadesController@desativarAtividade');
+        // MÉTODO DESIGNAR EMPREGADO NA ATIVIDADE
+        Route::post('/designar-empregado-atividade/{idResponsavelAtividade}', 'GestaoEquipesAtividadesController@designarEmpregadoAtividade');
+        // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });
 });

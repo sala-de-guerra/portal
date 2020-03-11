@@ -14,7 +14,7 @@
 
      <div class="col-sm-3">
         <select name="selectEquipe" id="selectEquipe" class="form-control">
-            <option value="" selected disabled>Selecione</option>
+            <option value="" selected>Selecione</option>
         </select>
     </div>
 
@@ -27,42 +27,54 @@
         <div class="modal fade" id="modalCriarAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
+                    <form method="post" action="/gerencial/gestao-atividades/" id="formCriarAtividade">
                         <div class="modal-header">
                             <h5 class="modal-title">Criar Atividade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                         <div class="modal-body">
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="" id="" value="checkedValue" required> Display value
-                                    <input class="form-check-input" type="radio" name="" id="" value="checkedValue"> Display value
-                                </label>
+                            <input type="hidden" name="idEquipe" class="form-control" id="idEquipeCriar" value="">
+                            <div class="form-group">
+                                <label>Selecione o tipo de atividade:</label>
+                                <select name="atividadeSubordinada" id="selectTipoAtividadeCriar" class="form-control" required>
+                                    <option value="" selected disabled>Selecione</option>
+                                    <option value="false">Macroatividade</option>
+                                    <option value="true">Microatividade</option>
+                                </select>
                             </div>
 
-                            <form method="post" action="/url" id="formCriarAtividade">
+                            <div class="form-group" id="divMacroatividadeVinculacaoCriar" style="display:none;">
+                                <label>Selecione a Macroatividade de vinculação:</label>
+                                <select name="idAtividadeSubordinante" id="selectMacroatividadeVinculacaoCriar" class="form-control">
 
-                                <input type="hidden" name="codigoUnidadeEquipe" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
+                                </select>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Nome da Atividade:</label>
-                                    <input type="text" name="nomeAtividade" class="form-control" id="nomeAtividadeCriar" required>
-                                </div>
+                            <div class="form-group">
+                                <label>Nome da Atividade:</label>
+                                <input type="text" name="nomeAtividade" class="form-control" id="nomeAtividadeCriar" required>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Gestor da Célula:</label>
-                                    <select name="matriculaGestor" id="selectCriarEquipe" class="form-control" required></select>
-                                </div>
+                            <div class="form-group">
+                                <label>Síntese da Atividade:</label>
+                                <input type="text" name="sinteseAtividade" class="form-control" id="sinteseAtividadeCriar" required>
+                            </div>
 
-                                <!-- <input type="hidden" name="nomeGestor" id="nomeGestorCriar"> -->
+                            <div class="form-group">
+                                <label>Prazo de Atendimento:</label>
+                                <input type="number" name="prazoAtendimento" class="form-control" id="prazoAtendimentoCriar" required>
+                            </div>
 
-                            </form>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -76,7 +88,7 @@
         <div class="modal fade" id="modalAlterarAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/url" id="formAlterarAtividade" onsubmit="noRefreshPost(this);return false">
+                    <form action="/gerencial/gestao-atividades/" method="put" id="formAlterarAtividade">
                         <div class="modal-header">
                             <h5 class="modal-title">Alterar Atividade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -84,23 +96,27 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
+
+                            <div class="form-group">
+                                <label>Atividade a Alterar:</label>
+                                <select name="idAtividade" id="idAtividadeAlterar" class="form-control" required>
+                                </select>
+                            </div>
                             
-                            <!-- <div class="form-group">
-                                <label>Selecione e Equipe:</label>
-                                <select name="selectAlterarEquipe" id="selectAlterarEquipe" class="form-control" required></select>
+                            <div class="form-group">
+                                <label>Nome da Atividade:</label>
+                                <input type="text" name="nomeAtividade" class="form-control" id="nomeAtividadeAlterar">
                             </div>
 
                             <div class="form-group">
-                                <label>Nome da Célula:</label>
-                                <input type="text" name="nomeAlterarEquipe" class="form-control" id="nomeAlterarEquipe" required>
+                                <label>Síntese da Atividade:</label>
+                                <input type="text" name="sinteseAtividade" class="form-control" id="sinteseAtividadeAlterar">
                             </div>
 
                             <div class="form-group">
-                                <label>Gestor da Célula:</label>
-                                <select name="gestorAlterar" id="selectAlterarGestor" class="form-control" required></select>
-                            </div> -->
+                                <label>Prazo de Atendimento:</label>
+                                <input type="number" name="prazoAtendimento" class="form-control" id="prazoAtendimentoAlterar">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -120,7 +136,7 @@
         <div class="modal fade" id="modalExcluirAtividade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="/url" id="formExcluirAtividade" onsubmit="noRefreshPost(this);return false">
+                    <form action="/gerencial/gestao-atividades/" method="delete" id="formExcluirAtividade">
                         <div class="modal-header">
                             <h5 class="modal-title">Excluir Atividade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -128,13 +144,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{ csrf_field() }}
-                            <!-- <input type="hidden" name="unidade" class="form-control" id="unidade" value="{{ session()->get('codigoLotacaoAdministrativa') }}">
-                            
+
                             <div class="form-group">
-                                <label>Selecione e Atividade:</label>
-                                <select name="selectExcluirEquipe" id="selectExcluirEquipe" class="form-control" required></select>
-                            </div> -->
+                                <label>Atividade a Excluir:</label>
+                                <select name="idAtividade" id="idAtividadeExcluir" class="form-control" required>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
