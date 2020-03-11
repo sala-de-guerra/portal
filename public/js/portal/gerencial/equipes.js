@@ -209,7 +209,7 @@ function montaCardsEquipes (regiaoUnidade) {
                         url: '/gerencial/gestao-equipes/alocar-empregado',
                         data: {matricula, idEquipe, _token},
                         success: function (result){
-                            console.log(result);
+                            // console.log(result);
                             $('#eventual' + matricula).hide();
                             refresh(regiaoUnidade);
 
@@ -315,9 +315,9 @@ $('form').submit( function(e) {
     let url = $(this).attr('action');
     let method = $(this).attr('method');
 
-    console.log(data);
-    console.log(url);
-    console.log(method);
+    // console.log(data);
+    // console.log(url);
+    // console.log(method);
 
     $.ajax({
         type: method,
@@ -333,7 +333,7 @@ $('form').submit( function(e) {
             });
 
             let regiaoUnidade = $('#selectGilie').val();
-            console.log(regiaoUnidade);
+            // console.log(regiaoUnidade);
             refresh(regiaoUnidade);
             
         },

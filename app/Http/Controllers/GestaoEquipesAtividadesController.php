@@ -78,7 +78,8 @@ class GestaoEquipesAtividadesController extends Controller
         foreach ($arrayResponsaveisAtividade as $responsavelAtividade) {
             // $nomeCompleto = is_null($responsavelAtividade->dadosEmpregadoLdap->nomeCompleto) ? '' : ucwords(strtolower((string) $responsavelAtividade->dadosEmpregadoLdap->nomeCompleto));
             array_push($listaResponsaveisAtividade, [
-                'matricula'     => $responsavelAtividade->matricula,
+                'idResponsavelAtividade'    => $responsavelAtividade->idResponsavelAtividade,
+                'matricula'                 => $responsavelAtividade->matricula,
                 // 'nomeCompleto'  => $nomeCompleto,
                 // 'nomeFuncao'    => is_null($responsavelAtividade->dadosEmpregadoLdap->nomeFuncao) ? 'TECNICO BANCARIO NOVO' : $responsavelAtividade->dadosEmpregadoLdap->nomeFuncao,
             ]);
@@ -93,6 +94,7 @@ class GestaoEquipesAtividadesController extends Controller
      */
     public function cadastrarAtividade(Request $request)
     {
+        dd($request);
         try {
             DB::beginTransaction();
             // CRIA A NOVA ATIVIDADE
@@ -102,6 +104,7 @@ class GestaoEquipesAtividadesController extends Controller
             $novaAtividade->sinteseAtividade            = $request->sinteseAtividade;
             $novaAtividade->atividadeSubordinada        = $request->atividadeSubordinada;
             $novaAtividade->idAtividadeSubordinante     = isset($request->atividadeSubordinada) ? $request->atividadeSubordinada : null;
+            $novaAtividade->prazoAtendimento            = $request->prazoAtendimento;
             $novaAtividade->responsavelEdicao           = session('matricula');
             $novaAtividade->dataCriacaoAtividade        = date("Y-m-d H:i:s", time());
             $novaAtividade->dataAtualizacaoAtividade    = date("Y-m-d H:i:s", time());
@@ -131,43 +134,37 @@ class GestaoEquipesAtividadesController extends Controller
      * @param  int  $idAtividade
      * @return \Illuminate\Http\Response
      */
-    public function editarAtividade(Request $request, $id)
+    public function editarAtividade(Request $request, $idAtividade)
     {
         $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
         foreach ($objDados as $dado) {
             $dado = explode("=", $dado);
             switch ($dado[0]) {
-                case 'idEquipe':
-                    $idEquipe = $dado[1];
+                case 'prazoAtendimento':
+                    $prazoAtendimento = $dado[1];
                 case 'nomeAtividade':
                     $nomeAtividade = $dado[1];
                     break;
                 case 'sinteseAtividade':
                     $sinteseAtividade = $dado[1];
                     break;
-                case 'atividadeSubordinada':
-                    $atividadeSubordinada = $dado[1];
-                    break;
-                case 'idAtividadeSubordinante':
-                    $idAtividadeSubordinante = $dado[1];
-                    break;
             }
-        }
-        if ($idEquipe == '1') {
-            return response('Não é possível cadastrar atividade para essa equipe', 500);
         }
 
         try {
             DB::beginTransaction();
-            // SENSIBILIZA A EVENTUALIDADE NAS TABELAS ANTES DE PERSISTIR NA TABELA DE EQUIPE
-            $editarAtividade = GestaoEquipesAtividades::find($idEquipe);
+            $editarAtividade = GestaoEquipesAtividades::find($idAtividade);
+
+            // VALIDA SE EXISTEM DADOS PARA SEREM ALTERADOS, CASO NEGATIVO RETORNA COM ERRO PARA A VIEW
+            if ($editarAtividade->nomeAtividade == $nomeAtividade && $editarAtividade->sinteseAtividade == $sinteseAtividade && $editarAtividade->prazoAtendimento == $prazoAtendimento) {
+                return response('Não existem dados para serem alterados', 500);
+            }
 
             // EDITAR EQUIPE
             $editarAtividade->nomeAtividade             = !in_array($nomeAtividade, [null, 'NULL', '']) ? strtoupper($nomeAtividade) : $editarAtividade->nomeAtividade;
             $editarAtividade->sinteseAtividade          = !in_array($sinteseAtividade, [null, 'NULL', '']) ? $sinteseAtividade : $editarAtividade->sinteseAtividade;
-            $editarAtividade->atividadeSubordinada      = !in_array($atividadeSubordinada, [null, 'NULL', '']) ? strtoupper($atividadeSubordinada) : $editarAtividade->atividadeSubordinada;
-            $editarAtividade->idAtividadeSubordinante   = !in_array($idAtividadeSubordinante, [null, 'NULL', '']) ? $idAtividadeSubordinante : $editarAtividade->idAtividadeSubordinante;
             $editarAtividade->responsavelEdicao         = session('matricula');
+            $editarAtividade->prazoAtendimento          = !in_array($prazoAtendimento, [null, 'NULL', '']) ? $prazoAtendimento : $editarAtividade->prazoAtendimento;
             $editarAtividade->dataAtualizacaoAtividade  = date("Y-m-d H:i:s", time());
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
@@ -196,7 +193,7 @@ class GestaoEquipesAtividadesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function desativarAtividade($idAtividade)
-    {        
+    {               
         try {
             DB::beginTransaction();
             // DESABILITA A ATIVIDADE
@@ -236,15 +233,29 @@ class GestaoEquipesAtividadesController extends Controller
     /**
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int  $idResponsavelAtividade
      * @return \Illuminate\Http\Response
      */
-    public function designarEmpregadoAtividade(Request $request, $idResponsavelAtividade)
+    public function designarEmpregadoAtividade(Request $request)
     {
+        // $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
+        // foreach ($objDados as $dado) {
+        //     $dado = explode("=", $dado);
+        //     switch ($dado[0]) {
+        //         case 'idAtividade':
+        //             $idAtividade = $dado[1];
+        //         case 'matriculaResponsavelAtividade':
+        //             $matriculaResponsavelAtividade = $dado[1];
+        //             break;
+        //         case 'atuandoAtividade':
+        //             $atuandoAtividade = $dado[1];
+        //             break;
+        //     }
+        // }
+        
         try {
             DB::beginTransaction();
             // DESIGNAR EMPREGADO
-            $empregadoDesignado = GestaoEquipesAtividadesResponsaveis::firstOrNew(array('idResponsavelAtividade' => $idResponsavelAtividade));
+            $empregadoDesignado = GestaoEquipesAtividadesResponsaveis::firstOrNew(array('idAtividade' => $request->idAtividade, 'matriculaResponsavelAtividade', $request->matriculaResponsavelAtividade))->first();
             $empregadoDesignado->idAtividade                        = $request->idAtividade;
             $empregadoDesignado->matriculaResponsavelAtividade      = $request->matriculaResponsavelAtividade;
             $empregadoDesignado->atuandoAtividade                   = $request->atuandoAtividade;
