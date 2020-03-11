@@ -9,6 +9,7 @@ class GestaoEquipesAtividadesResponsaveis extends Model
     protected $table = 'TBL_GESTAO_EQUIPES_ATIVIDADES_RESPONSAVEIS';
     protected $primaryKey = 'idResponsavelAtividade';
     public $incrementing = true;
+    public $timestamps = false;
     protected $fillable = 
         [
             'idAtividade',
