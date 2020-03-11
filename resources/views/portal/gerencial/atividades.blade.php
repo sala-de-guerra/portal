@@ -162,7 +162,7 @@
 
 <div class="card">
     <div class="card-body p-0 m-0 overflow-auto">
-        <table id="tabelaEquipe" class="table table-bordered p-0">
+        <table id="tabelaEquipe" class="table table-bordered p-0 dataTable">
             <thead id="headEquipe">
             </thead>
             <tbody id="bodyEquipe">

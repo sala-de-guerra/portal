@@ -31,8 +31,8 @@ $(document).ready( function () {
     \***********************************/
 
     regiaoUnidadeSecao = $('#lotacao').html();
-    // $.when($.getJSON('../../js/equipes2.json', function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
-    $.when($.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
+    $.when($.getJSON('../../js/equipes2.json', function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
+    // $.when($.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {} ), $.getJSON( '../../js/atividades.json', function(dados) {}))
     .done(function(a1, a2) {
 
         equipes = a1[0];
@@ -62,6 +62,7 @@ $(document).ready( function () {
         function refresh(equipe) {
             $('#headEquipe').empty();
             $('#bodyEquipe').empty();
+            $('.dataTable').dataTable().fnDestroy();
             // $('#selectCriarEquipe').empty();
             // $('#selectAlterarEquipe').empty();
             // $('#selectAlterarGestor').empty();
@@ -133,7 +134,7 @@ $(document).ready( function () {
 
             let header =
                 `<tr>` +
-                    `<td class="min-width-20vw p-0" style="position:absolute!important;background-color:white;">` +
+                    `<td class="min-width-20vw p-0">` +
                         `<table class="table table-bordered p-0 m-0">` +
                             `<tr>` +
                                 `<th>Macro-Atividade</th>` +
@@ -183,7 +184,7 @@ $(document).ready( function () {
 
 
                                 let form =
-                                    `<td class="p-0">` +
+                                    `<td class="">` +
                                         `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="" method="PUT" class="">` +
                                             checkbox +
                                         `</form>` +
@@ -206,9 +207,9 @@ $(document).ready( function () {
                         });
                 
                         let linha = 
-                            `<tr class="p-4 m-4">` +
-                                `<td class="min-width-20vw p-0 m-0" style="position:absolute!important;background-color:white;">` +
-                                    `<div class="callout callout-info p-0 m-0">` +
+                            `<tr>` +
+                                `<td class="min-width-20vw p-0">` +
+                                    `<div class="callout callout-info p-1 m-1">` +
                                         `<div class="">` +
                                             `<h5 class="card-title">` + item.nomeCompleto + `</h5>` +
                                             `<p class="card-text m-0">` +
@@ -226,8 +227,25 @@ $(document).ready( function () {
                     });
                 };
                     
+            });        
+            $('.dataTable').dataTable({
+                ordering: false,
+                paging: false,
+                searching: false,
+                info: false,
+                scrollY:        "400px",
+                scrollX:        true,
+                scrollCollapse: true,
+                paging:         false,
+                fixedColumns:   {
+                    leftColumns: 1,
+                    rightColumns: 1,
+                },
             });
+            
         };
+        
+        
     });
 
 });
