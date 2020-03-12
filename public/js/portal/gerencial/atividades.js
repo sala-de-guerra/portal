@@ -1,6 +1,6 @@
 var _token = $('meta[name="csrf-token"]').attr('content');
 var equipes;
-var atividades;
+var atividades = [];
 var equipe;
 var regiaoUnidadeSecao = $('#lotacao').html();
 
@@ -23,8 +23,8 @@ const Toast = Swal.mixin({
 | Função mostra as equipes da regiao do usuario da seção no select |
 \******************************************************************/
 
-$.getJSON('../../js/equipes2.json', function(dados) {
-// $.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
+// $.getJSON('../../js/equipes2.json', function(dados) {
+$.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
     equipes = dados;
 
     $.each(equipes, function(key, item) {
@@ -107,7 +107,7 @@ $('form').submit( function(e) {
     }
 
     // console.log(data);
-    console.log(url);
+    // console.log(url);
     // console.log(method);
 
     $.ajax({
@@ -151,11 +151,17 @@ function montaCardsAtividades(equipe) {
     | GET dados do banco e monta tabela |
     \***********************************/
 
-    $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
-    // $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
+    // $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
+    $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
     .done(function(a1) {
+        console.log(a1);
 
-        atividades = a1;
+        $.each(a1, function(key, item) {
+
+            atividades = item.equipe;
+        });
+        
+        console.log(atividades);
 
         /***********************************************************************\
         | Criar options da selecao de macroatividade do form de criar atividade |
@@ -190,7 +196,7 @@ function montaCardsAtividades(equipe) {
 
                 colunaHeader =
                     `<td class="min-width-20vw p-0">` +
-                        `<table class="table table-bordered p-0 m-0">` +
+                        `<table class="table p-0 m-0">` +
                             `<tr>` +
                                 `<th>` + item.nomeAtividade + `</th>` +
                             `</tr>` +
@@ -214,7 +220,7 @@ function montaCardsAtividades(equipe) {
                 $.each(item.atividadesSubordinadas, function(key, item) {
                     colunaHeader =
                         `<td class="min-width-20vw p-0">` +
-                            `<table class="table table-bordered p-0 m-0">` +
+                            `<table class="table p-0 m-0">` +
                                 `<tr>` +
                                     `<th>` + nomeMacroAtividade + `</th>` +
                                 `</tr>` +
@@ -241,7 +247,7 @@ function montaCardsAtividades(equipe) {
         let header =
             `<tr>` +
                 `<td class="min-width-20vw p-0">` +
-                    `<table class="table table-bordered p-0 m-0">` +
+                    `<table class="table p-0 m-0">` +
                         `<tr>` +
                             `<th>Macro-Atividade</th>` +
                         `</tr>` +
@@ -293,7 +299,7 @@ function montaCardsAtividades(equipe) {
 
                             let form =
                                 `<td class="">` +
-                                    `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/gerencial/gestao-atividades/designar-empregado-atividade" method="PUT" class="form-checkbox">` +
+                                    `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/url" method="PUT" class="form-checkbox">` +
                                         checkbox +
                                         // `<input type="hidden" name="atuandoAtividade" value="off"></input>` +
                                         `<input type="hidden" name="idAtividade" value="` + item.idAtividade + `">` +
@@ -341,7 +347,7 @@ function montaCardsAtividades(equipe) {
         });
 
         let table =
-            `<table id="tabelaEquipe" class="table table-bordered p-0 dataTable">` +
+            `<table id="tabelaEquipe" class="table p-0 m-0 dataTable">` +
                 `<thead id="headEquipe">` +
                     header +
                 `</thead>` +
@@ -370,13 +376,13 @@ function montaCardsAtividades(equipe) {
                 $(checkboxHidden).appendTo(form);
             } 
                 
-            let data = JSON.stringify( $(form).serialize() );
+            let data = $(form).serializeArray();
             let url = $(form).attr('action');
             let method = $(form).attr('method');
 
-            // console.log(data);
-            // console.log(url);
-            // console.log(method);
+            console.log(data);
+            console.log(url);
+            console.log(method);
 
             $.ajax({
                 type: method,
@@ -393,6 +399,7 @@ function montaCardsAtividades(equipe) {
                         icon: 'error',
                         title: 'Erro: alteração não efetuada!'
                     });
+                    refresh(equipe);
                 }
             });
         });
@@ -406,8 +413,7 @@ function montaCardsAtividades(equipe) {
             paging:         false,
             searching:      false,
             info:           false,
-            bDestroy:       true,
-            scrollY:        400,
+            scrollY:        500,
             scrollX:        true,
             scrollCollapse: true,
             paging:         false,

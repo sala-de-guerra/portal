@@ -177,7 +177,7 @@
 @section('content')
 
 <div class="card">
-    <div class="card-body p-0 m-0 overflow-auto" id="cardTabela">
+    <div class="card-body p-0 m-0" id="cardTabela">
     </div>
 </div> 
 
