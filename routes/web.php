@@ -3,7 +3,7 @@
 //index
 Route::get('', function () {
     return view('portal.index');
-});
+})->name('index');
 
 // route 404
 Route::fallback(function(){return response()->view('errors.404', [], 404);});
