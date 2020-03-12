@@ -491,9 +491,15 @@ return [
                 [
                     'text' => 'Gestão de Equipes',
                     'icon'       => 'fas fa-lg fa-users-cog',
-                    'url'  => '/gerencial/equipes',
+                    'url'  => '/gerencial/gestao-equipes/',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
+                [
+                    'text' => 'Gestão de Atividades',
+                    'icon'       => 'fas fa-lg fa-tasks',
+                    'url'  => '/gerencial/gestao-atividades',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ]
     
             ],
         ],

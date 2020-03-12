@@ -46,8 +46,7 @@ Route::prefix('indicadores')->group(function () {
 });
 
 // Consulta de bem imóvel
-Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');;
-
+Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');
 
 //  ROTAS WEB DOS PROCESSOS PERTINENTES AO ESTOQUE DE IMÓVEIS
 Route::prefix('estoque-imoveis')->group(function () {
@@ -81,11 +80,6 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::put('validar-despesa/{despesa}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@validarDespesa');
         Route::get('emite-dle-despesas/{distrato}', 'GestaoImoveisCaixa\DistratoRelacaoDespesasController@emitePlanilhaDleDespesas');
     });
-
-    // // ROTAS DO PROJETO MONITORA PAGAMENTO SINAL (5% DA PROPOSTA)
-    // Route::prefix('monitora-pagamento-sinal')->group(function () {
-    //     Route::get('/', 'GestaoImoveisCaixa\MonitoraPagamentoSinalController@index');
-    // });
     
     // ROTAS DO PROJETO ACOMPANHA CONTRATACAO
     Route::prefix('acompanha-contratacao')->group(function () {
@@ -111,20 +105,45 @@ Route::prefix('estoque-imoveis')->group(function () {
     });
 });
 
-// ROTA QUE ATUALIZA O JSON DA CONSULTA DE IMÓVEIS
-Route::prefix('portal')->group(function () {
-    Route::get('cria-json-google', 'JsonGooglePortal@criaJsonParaAbastecerBarraPesquisaGoogle');
-});
-
-// Gerencial
-
-// equipes
-Route::get('/gerencial/equipes', function () {
-    return view('portal.gerencial.equipes');
+// GERENCIAL
+Route::prefix('gerencial')->group(function () {
+    // GESTÃO DE EQUIPES
+    Route::prefix('gestao-equipes')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
+        Route::get('/', 'GestaoEquipesController@index');
+        // MÉTODO PARA CADASTRAR NOVA EQUIPE
+        Route::post('/', 'GestaoEquipesController@cadastrarEquipe');
+        // MÉTODO PARA EDITAR UMA EQUIPE
+        Route::put('/', 'GestaoEquipesController@editarCadastroEquipe');
+        // MÉTODO PARA DESATIVAR UMA EQUIPE
+        Route::delete('/', 'GestaoEquipesController@desativarEquipe');
+        // LISTAR GESTORES DA UNIDADE
+        Route::get('listar-gestores', 'GestaoEquipesController@listaGestoresUnidade');
+        // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
+        Route::get('listar-equipes/{codigoUnidade}', 'GestaoEquipesController@listarEquipesUnidade');
+        // LISTA DE UNIDADES
+        Route::get('listar-unidades', 'GestaoEquipesController@listarUnidades');
+        // DESIGNA O EMPREGADO PARA UMA EQUIPE
+        Route::put('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
+    });
+    
+    // GESTÃO DE ATIVIDADES
+    Route::prefix('gestao-atividades')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CADASTRAR ATIVIDADES
+        Route::get('/', 'GestaoEquipesAtividadesController@index');
+        // MÉTODO PARA CADASTRAR NOVA ATIVIDADE
+        Route::post('/', 'GestaoEquipesAtividadesController@cadastrarAtividade');
+        // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
+        Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
+    });
 });
 
 // ROTA DE TESTE TROCA EMPREGADO CELULA
-Route::match(['get', 'post'], 'url', function () {
+Route::match(['get', 'post', 'put', 'delete'], 'url', function (\Illuminate\Http\Request $request) {
+    // dd($request);
     $resultado = rand(0, 1);
     return $resultado == 0 ? response('error', 500) : response('success', 200);
 });
+
+// ROTA PARA CADASTRAR TODOS OS EMPREGADOS DA UNIDADE (RELACIONADOS NO ARRAY) NAS TABELAS DE EMPREGADOS E GESTAO EQUIPES EMPREGADOS
+Route::get('cadastra-empregados-unidade', 'CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController@CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController');

@@ -50,7 +50,8 @@
                     
                         <div class="row">
                             <div class="col-sm-12">
-                                <h2 class="card-title"><b>Trajetória do Imóvel</b></h2>
+                                <h2 class="card-title"><b>Trajetória do Imóvel - </b><b id="numeroContratoFormatado">{{ $numeroContrato }}</b></h2>
+                                <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar CHB" onclick="copyToClipboard('#numeroContratoFormatado')"><i class="far fa-copy"></i></button>
                                 <br>
                                 <div class="card-body pb-0" id="progressBarGeral"></div>
                             </div>

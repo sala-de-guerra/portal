@@ -45,7 +45,7 @@ $(document).ready(function(){
             var linha = 
                 '<tr class="cursor-pointer">' +
                     '<td>' + item.numeroContrato + '</td>' +
-                    '<td class="formata-data-sem-hora">' + item.dataProposta + '</td>' +
+                    '<td class="formata-valores">' + item.valorProposta + '</td>' +
                     '<td class="formata-data-sem-hora">' + item.vencimentoPp15 + '</td>' +
                     '<td>' + item.statusSimov + '</td>' +
                     '<td>' + item.classificacaoImovel + '</td>' +
@@ -55,6 +55,7 @@ $(document).ready(function(){
     });
     setTimeout(function() {
         _formataData(); 
+        _formataValores();
         _formataDatatable();;
     }, 4000);
 }); 
