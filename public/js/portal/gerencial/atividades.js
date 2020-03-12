@@ -26,7 +26,7 @@ const Toast = Swal.mixin({
 // $.getJSON('../../js/equipes2.json', function(dados) {
 $.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
     equipes = dados;
-
+    console.log(equipes);
     $.each(equipes, function(key, item) {
         if (item.idEquipe != "1") {
             let option =
@@ -154,24 +154,27 @@ function montaCardsAtividades(equipe) {
     // $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
     $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
     .done(function(a1) {
-        console.log(a1);
+        // console.log(a1);
 
         $.each(a1, function(key, item) {
-
-            atividades = item.equipe;
+            let idEquipe = Object.getOwnPropertyNames(item);
+            // console.log(idEquipe[0]);
+            atividades = idEquipe[0];
         });
-        
-        console.log(atividades);
 
         /***********************************************************************\
         | Criar options da selecao de macroatividade do form de criar atividade |
         \***********************************************************************/
 
-        $.each(atividades[equipe], function(key, item) {
-            let optionMacroatividade =
-                `<option value="` + item.idAtividade + `" selected>` + item.nomeAtividade + `</option>`
-            ;                
-            $(optionMacroatividade).appendTo('#selectMacroatividadeVinculacaoCriar');
+        $.each(a1, function(key, item) {
+            let idEquipe = Object.getOwnPropertyNames(item);
+            atividades = idEquipe[0];
+            if (atividades == equipe) {
+                $.each(item[atividades], function(key, item) {
+                    let optionMacroatividade = `<option value="` + item.idAtividade + `" selected>` + item.nomeAtividade + `</option>`;                
+                    $(optionMacroatividade).appendTo('#selectMacroatividadeVinculacaoCriar');
+                });
+            }
         });
 
         let selectedVazio = 
@@ -188,58 +191,63 @@ function montaCardsAtividades(equipe) {
 
         let arrayHeadersMacroatividades = [];
 
-        $.each(atividades[equipe], function(key, item) {
+        $.each(a1, function(key, item) {
+            let idEquipe = Object.getOwnPropertyNames(item);
+            atividades = idEquipe[0];
+            if (atividades == equipe) {
+                $.each(item[atividades], function(key, item) {
+                    let colunaHeader;
 
-            let colunaHeader;
+                    if (item.atividadesSubordinadas.length === 0) {
 
-            if (item.atividadesSubordinadas.length === 0) {
+                        colunaHeader =
+                            `<td class="min-width-20vw p-0">` +
+                                `<table class="table p-0 m-0">` +
+                                    `<tr>` +
+                                        `<th>` + item.nomeAtividade + `</th>` +
+                                    `</tr>` +
+                                `</table>` +
+                            `</td>`
+                        ;
 
-                colunaHeader =
-                    `<td class="min-width-20vw p-0">` +
-                        `<table class="table p-0 m-0">` +
-                            `<tr>` +
-                                `<th>` + item.nomeAtividade + `</th>` +
-                            `</tr>` +
-                        `</table>` +
-                    `</td>`
-                ;
+                        arrayHeadersMacroatividades.push(colunaHeader);
 
-                arrayHeadersMacroatividades.push(colunaHeader);
+                        let optionMacroatividadeAlterar =
+                            `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
+                        ;
 
-                let optionMacroatividadeAlterar =
-                    `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
-                ;
+                        $(optionMacroatividadeAlterar).appendTo('#idAtividadeAlterar');
+                        $(optionMacroatividadeAlterar).appendTo('#idAtividadeExcluir');
 
-                $(optionMacroatividadeAlterar).appendTo('#idAtividadeAlterar');
-                $(optionMacroatividadeAlterar).appendTo('#idAtividadeExcluir');
+                    } else {
 
-            } else {
+                        let nomeMacroAtividade = item.nomeAtividade;
 
-                let nomeMacroAtividade = item.nomeAtividade;
+                        $.each(item.atividadesSubordinadas, function(key, item) {
+                            colunaHeader =
+                                `<td class="min-width-20vw p-0">` +
+                                    `<table class="table p-0 m-0">` +
+                                        `<tr>` +
+                                            `<th>` + nomeMacroAtividade + `</th>` +
+                                        `</tr>` +
+                                        `<tr>` +
+                                            `<th>` + item.nomeAtividade + `</th>` +
+                                        `</tr>` +
+                                    `</table>` +
+                                `</td>`
+                            ;
 
-                $.each(item.atividadesSubordinadas, function(key, item) {
-                    colunaHeader =
-                        `<td class="min-width-20vw p-0">` +
-                            `<table class="table p-0 m-0">` +
-                                `<tr>` +
-                                    `<th>` + nomeMacroAtividade + `</th>` +
-                                `</tr>` +
-                                `<tr>` +
-                                    `<th>` + item.nomeAtividade + `</th>` +
-                                `</tr>` +
-                            `</table>` +
-                        `</td>`
-                    ;
+                            arrayHeadersMacroatividades.push(colunaHeader);
 
-                    arrayHeadersMacroatividades.push(colunaHeader);
+                            let optionMicroatividadeAlterar =
+                                `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
+                            ;
 
-                    let optionMicroatividadeAlterar =
-                        `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
-                    ;
+                            $(optionMicroatividadeAlterar).appendTo('#idAtividadeAlterar');
+                            $(optionMicroatividadeAlterar).appendTo('#idAtividadeExcluir');
 
-                    $(optionMicroatividadeAlterar).appendTo('#idAtividadeAlterar');
-                    $(optionMicroatividadeAlterar).appendTo('#idAtividadeExcluir');
-
+                        });
+                    }
                 });
             }
         });
@@ -270,7 +278,7 @@ function montaCardsAtividades(equipe) {
 
         $.each(equipes, function(key, item) {
 
-            // console.log(item.idEquipe);
+            // console.log(item);
 
             if (item.idEquipe === equipe) {
 
@@ -284,44 +292,51 @@ function montaCardsAtividades(equipe) {
 
                     let matriculaLinha = item.matricula;
         
-                    $.each(atividades[equipe], function(key, item) {
-                        
-                        function criaFormCheckbox (item) {
-                            let arrayResponsaveisAtividade = item.responsaveisAtividade;
-                            let checkbox;
-
-                                if (arrayResponsaveisAtividade.findIndex(x => x.matricula === matriculaLinha) === -1) {
-                                    checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar">`;
-                                } else {
-                                    checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar" checked>`;
-                                };
-
-
-                            let form =
-                                `<td class="">` +
-                                    `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/url" method="PUT" class="form-checkbox">` +
-                                        checkbox +
-                                        // `<input type="hidden" name="atuandoAtividade" value="off"></input>` +
-                                        `<input type="hidden" name="idAtividade" value="` + item.idAtividade + `">` +
-                                        `<input type="hidden" name="matriculaResponsavelAtividade" value="` + matriculaLinha + `">` +
-                                    `</form>` +
-                                `</td>`
-                            ;
-
-                            arrayLinhaTabelaAtividade.push(form);
-
-                        };
-                        
-                        if (item.atividadesSubordinadas.length === 0) {
-                            criaFormCheckbox(item);
-
-                        } else {
-                            $.each(item.atividadesSubordinadas, function(key, item) {
-                                criaFormCheckbox(item);
-                            });
-                        };
+                    $.each(a1, function(key, item) {
+                        let idEquipe = Object.getOwnPropertyNames(item);
+                        atividades = idEquipe[0];
+                        if (atividades == equipe) {
+                            $.each(item[atividades], function(key, item) {
                                 
+                                function criaFormCheckbox (item) {
+                                    let arrayResponsaveisAtividade = item.responsaveisAtividade;
+                                    let checkbox;
+
+                                        if (arrayResponsaveisAtividade.findIndex(x => x.matricula === matriculaLinha) === -1) {
+                                            checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar">`;
+                                        } else {
+                                            checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar" checked>`;
+                                        };
+
+
+                                    let form =
+                                        `<td class="">` +
+                                            `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/url" method="PUT" class="form-checkbox">` +
+                                                checkbox +
+                                                // `<input type="hidden" name="atuandoAtividade" value="off"></input>` +
+                                                `<input type="hidden" name="idAtividade" value="` + item.idAtividade + `">` +
+                                                `<input type="hidden" name="matriculaResponsavelAtividade" value="` + matriculaLinha + `">` +
+                                            `</form>` +
+                                        `</td>`
+                                    ;
+
+                                    arrayLinhaTabelaAtividade.push(form);
+
+                                };
+                                
+                                if (item.atividadesSubordinadas.length === 0) {
+                                    criaFormCheckbox(item);
+
+                                } else {
+                                    $.each(item.atividadesSubordinadas, function(key, item) {
+                                        criaFormCheckbox(item);
+                                    });
+                                };
+                                        
+                            });
+                        }
                     });
+                    
             
                     let linha = 
                         `<tr>` +

@@ -57,7 +57,7 @@ class GestaoEquipesAtividadesController extends Controller
 
     public static function listaAtividadesSubordinadas($idAtividadeSubordinante) {
         $arrayAtividadesSubordinadas = [];
-        $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->get();
+        $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->where('atividadeAtiva', true)->get();
         foreach ($listaAtividadesSubordinadas as $atividadeSubordinada) {
             $listaResponsaveisAtividade = self::listarResponsaveisAtividade($atividadeSubordinada->idAtividade);
             array_push($arrayAtividadesSubordinadas, [
@@ -166,19 +166,22 @@ class GestaoEquipesAtividadesController extends Controller
             switch ($dado[0]) {
                 case 'prazoAtendimento':
                     $prazoAtendimento = $dado[1];
+                    break;
                 case 'nomeAtividade':
-                    $nomeAtividade = $dado[1];
+                    $encoding = mb_internal_encoding();
+                    $nomeAtividade = mb_strtoupper($dado[1], $encoding);
                     break;
                 case 'sinteseAtividade':
-                    $sinteseAtividade = $dado[1];
+                    $encoding = mb_internal_encoding();
+                    $sinteseAtividade = mb_strtoupper($dado[1], $encoding);
                     break;
             }
         }
-
+        // dd(['objDados' => $objDados, 'prazoAtendimento' => $prazoAtendimento, 'nomeAtividade' => $nomeAtividade, 'sinteseAtividade' => $sinteseAtividade]);
         try {
             DB::beginTransaction();
             $editarAtividade = GestaoEquipesAtividades::find($idAtividade);
-
+            
             // VALIDA SE EXISTEM DADOS PARA SEREM ALTERADOS, CASO NEGATIVO RETORNA COM ERRO PARA A VIEW
             if ($editarAtividade->nomeAtividade == $nomeAtividade && $editarAtividade->sinteseAtividade == $sinteseAtividade && $editarAtividade->prazoAtendimento == $prazoAtendimento) {
                 return response('Não existem dados para serem alterados', 500);
@@ -199,7 +202,7 @@ class GestaoEquipesAtividadesController extends Controller
             $registroLogHistorico->observacao               = "EDIÇÃO DOS DADOS DA ATIVIDADE " . strtoupper($editarAtividade->nomeAtividade);
             $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
             $registroLogHistorico->save();
-
+            
             $editarAtividade->save();
             DB::commit();
             return response('Atividade editada com sucesso', 200);
@@ -222,7 +225,7 @@ class GestaoEquipesAtividadesController extends Controller
             DB::beginTransaction();
             // DESABILITA A ATIVIDADE
             $desativarAtividade = GestaoEquipesAtividades::find($idAtividade);
-            $desativarAtividade->ativa                      = false;
+            $desativarAtividade->atividadeAtiva             = false;
             $desativarAtividade->responsavelEdicao          = session('matricula');
             $desativarAtividade->dataAtualizacaoAtividade   = date("Y-m-d H:i:s", time());
 
@@ -237,10 +240,10 @@ class GestaoEquipesAtividadesController extends Controller
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
             $registroLogHistorico = new GestaoEquipesLogHistorico;
-            $registroLogHistorico->idEquipe                 = $idEquipe;
+            $registroLogHistorico->idEquipe                 = $desativarAtividade->GestaoEquipesCelulas->idEquipe;
             $registroLogHistorico->matriculaResponsavel     = session('matricula');
             $registroLogHistorico->tipo                     = 'DESATIVAR';
-            $registroLogHistorico->observacao               = "DESATIVAÇÃO DA ATIVIDADE " . $request->nomeAtividade;
+            $registroLogHistorico->observacao               = "DESATIVAÇÃO DA ATIVIDADE " . $desativarAtividade->nomeAtividade;
             $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
             $registroLogHistorico->save();
 
@@ -248,6 +251,7 @@ class GestaoEquipesAtividadesController extends Controller
             DB::commit();
             return response('atividade apagada com sucesso', 200);
         } catch (\Throwable $th) {
+            dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             return response('Não foi possível apagar a atividade', 500);
