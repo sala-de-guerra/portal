@@ -28,32 +28,28 @@ class GestaoEquipesAtividadesController extends Controller
     public function listarAtividadesComResponsaveis($codigoUnidade)
     {
         $equipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $codigoUnidade)->where('ativa', true)->get();
+        // dd($equipesUnidade);
+        $arrayAtividadesEquipe = [];
+        $arrayEquipesComAtividadesResponsaveis = [];
         foreach ($equipesUnidade as $equipe) {
-            $arrayAtividadesEquipe = [];
             if ($equipe->GestaoEquipesAtividades->count() > 0) {
                 foreach ($equipe->GestaoEquipesAtividades as $atividade) {
-                    if ($atividade->atividadeSubordinada) {
-                        $arrayAtividadesSubordinadas = self::listaAtividadesSubordinadas($atividade->atividadeSubordinada->idAtividade);
-                        array_push($arrayAtividadesEquipe, [
-                            'idAtividade'               => $atividade->idAtividade,
-                            'nomeAtividade'             => $atividade->nomeAtividade,
-                            'sinteseAtividade'          => $atividade->sinteseAtividade,
-                            'atividadesSubordinadas'    => $arrayAtividadesSubordinadas,
-                        ]);
-                    } else {
+                    if ($atividade->atividadeSubordinada == false) {
+                        $arrayAtividadesSubordinadas = self::listaAtividadesSubordinadas($atividade->idAtividade);
                         $listaResponsaveisAtividade = self::listarResponsaveisAtividade($atividade->idAtividade);
                         array_push($arrayAtividadesEquipe, [
                             'idAtividade'               => $atividade->idAtividade,
                             'nomeAtividade'             => $atividade->nomeAtividade,
                             'sinteseAtividade'          => $atividade->sinteseAtividade,
-                            'atividadesSubordinadas'    => null,
+                            'atividadesSubordinadas'    => $arrayAtividadesSubordinadas,
                             'responsaveisAtividade'     => $listaResponsaveisAtividade,
                         ]);
                     }
                 }
-            }
-            if (count($arrayAtividadesEquipe) > 0) {
-                $arrayEquipesComAtividadesResponsaveis = [(string) $equipe->idEquipe => $arrayAtividadesEquipe];
+                if (count($arrayAtividadesEquipe) > 0) {
+                    array_push($arrayEquipesComAtividadesResponsaveis, [(string) $equipe->idEquipe => $arrayAtividadesEquipe]);
+                    $arrayAtividadesEquipe = [];
+                }
             }
         }
         return json_encode($arrayEquipesComAtividadesResponsaveis);
