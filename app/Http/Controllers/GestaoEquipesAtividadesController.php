@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Models\GestaoEquipesAtividades;
 use App\Models\GestaoEquipesAtividadesResponsaveis;
 use App\Models\GestaoEquipesCelulas;
+use App\Models\GestaoEquipesLogHistorico;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GestaoEquipesAtividadesController extends Controller
 {
@@ -24,7 +27,6 @@ class GestaoEquipesAtividadesController extends Controller
      */
     public function listarAtividadesComResponsaveis($codigoUnidade)
     {
-        $arrayEquipesComAtividadesResponsaveis = [];
         $equipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $codigoUnidade)->where('ativa', true)->get();
         foreach ($equipesUnidade as $equipe) {
             $arrayAtividadesEquipe = [];
@@ -51,7 +53,7 @@ class GestaoEquipesAtividadesController extends Controller
                 }
             }
             if (count($arrayAtividadesEquipe) > 0) {
-                array_push($arrayEquipesComAtividadesResponsaveis, array((string) $equipe->idEquipe, $arrayAtividadesEquipe));
+                $arrayEquipesComAtividadesResponsaveis = [(string) $equipe->idEquipe => $arrayAtividadesEquipe];
             }
         }
         return json_encode($arrayEquipesComAtividadesResponsaveis);
@@ -94,17 +96,42 @@ class GestaoEquipesAtividadesController extends Controller
      */
     public function cadastrarAtividade(Request $request)
     {
-        dd($request);
+        $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
+        foreach ($objDados as $dado) {
+            $dado = explode("=", $dado);
+            switch ($dado[0]) {
+                case 'idEquipe':
+                    $idEquipe = $dado[1];
+                case 'atividadeSubordinada':
+                    $atividadeSubordinada = $dado[1];
+                    break;
+                case 'nomeAtividade':
+                    $encoding = mb_internal_encoding();
+                    $nomeAtividade = mb_strtoupper($dado[1], $encoding);
+                    break;
+                case 'sinteseAtividade':
+                    $encoding = mb_internal_encoding();
+                    $sinteseAtividade = mb_strtoupper($dado[1], $encoding);
+                    break;
+                case 'prazoAtendimento':
+                    $prazoAtendimento = $dado[1];
+                    break;
+                case 'idAtividadeSubordinante':
+                    $idAtividadeSubordinante = $dado[1] == '' ? null : $dado[1];
+                    break;
+            }
+        }
+
         try {
             DB::beginTransaction();
             // CRIA A NOVA ATIVIDADE
             $novaAtividade = new GestaoEquipesAtividades;
-            $novaAtividade->idEquipe                    = $request->idEquipe;
-            $novaAtividade->nomeAtividade               = strtoupper($request->nomeAtividade);
-            $novaAtividade->sinteseAtividade            = $request->sinteseAtividade;
-            $novaAtividade->atividadeSubordinada        = $request->atividadeSubordinada;
-            $novaAtividade->idAtividadeSubordinante     = isset($request->atividadeSubordinada) ? $request->atividadeSubordinada : null;
-            $novaAtividade->prazoAtendimento            = $request->prazoAtendimento;
+            $novaAtividade->idEquipe                    = $idEquipe;
+            $novaAtividade->nomeAtividade               = strtoupper($nomeAtividade);
+            $novaAtividade->sinteseAtividade            = $sinteseAtividade;
+            $novaAtividade->atividadeSubordinada        = $atividadeSubordinada;
+            $novaAtividade->idAtividadeSubordinante     = isset($idAtividadeSubordinante) ? $idAtividadeSubordinante : null;
+            $novaAtividade->prazoAtendimento            = $prazoAtendimento;
             $novaAtividade->responsavelEdicao           = session('matricula');
             $novaAtividade->dataCriacaoAtividade        = date("Y-m-d H:i:s", time());
             $novaAtividade->dataAtualizacaoAtividade    = date("Y-m-d H:i:s", time());
@@ -112,16 +139,17 @@ class GestaoEquipesAtividadesController extends Controller
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
             $registroLogHistorico = new GestaoEquipesLogHistorico;
-            $registroLogHistorico->idEquipe                 = $request->idEquipe;
+            $registroLogHistorico->idEquipe                 = $idEquipe;
             $registroLogHistorico->matriculaResponsavel     = session('matricula');
             $registroLogHistorico->tipo                     = 'CADASTRO';
-            $registroLogHistorico->observacao               = "CADASTRO DA ATIVIDADE " . strtoupper($request->nomeAtividade);
+            $registroLogHistorico->observacao               = "CADASTRO DA ATIVIDADE " . strtoupper($nomeAtividade);
             $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
             $registroLogHistorico->save();
 
             DB::commit();
             return response('atividade cadastrada com sucesso', 200);
         } catch (\Throwable $th) {
+            dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
             return response('Não foi possível cadastrar a atividade', 500);
