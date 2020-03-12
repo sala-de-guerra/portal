@@ -23,8 +23,8 @@ const Toast = Swal.mixin({
 | Função mostra as equipes da regiao do usuario da seção no select |
 \******************************************************************/
 
-// $.getJSON('../../js/equipes2.json', function(dados) {
-$.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
+$.getJSON('../../js/equipes2.json', function(dados) {
+// $.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
     equipes = dados;
 
     $.each(equipes, function(key, item) {
@@ -65,6 +65,7 @@ $('.modal').on('hidden.bs.modal', function(e){
 \************************************************************/
 
 function refresh(equipe) {
+    $('#cardTabela').empty();
     $('#headEquipe').empty();
     $('#bodyEquipe').empty();
     $('#selectMacroatividadeVinculacaoCriar').empty();
@@ -98,7 +99,7 @@ $('form').submit( function(e) {
     if (method === 'delete') {
         let idAtividade = $('#idAtividadeExcluir').val();
         url = $(this).attr('action') + idAtividade;
-    } else if (method ==='put') {
+    } else if (method === 'put') {
         let idAtividade = $('#idAtividadeAlterar').val();
         url = $(this).attr('action') + idAtividade;
     } else {
@@ -150,8 +151,8 @@ function montaCardsAtividades(equipe) {
     | GET dados do banco e monta tabela |
     \***********************************/
 
-    // $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
-    $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
+    $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
+    // $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
     .done(function(a1) {
 
         atividades = a1;
@@ -253,11 +254,13 @@ function montaCardsAtividades(equipe) {
             `</tr>`
         ;
 
-        $(header).appendTo('#headEquipe');
+        // $(header).appendTo('#headEquipe');
 
         /**************************************\
         | Criar linhas da tabela de atividades |
         \**************************************/
+
+        let body = [];
 
         $.each(equipes, function(key, item) {
 
@@ -330,12 +333,25 @@ function montaCardsAtividades(equipe) {
                         `</tr>`
                     ;
 
-                    $(linha).appendTo('#bodyEquipe'); 
-                
+                    // $(linha).appendTo('#bodyEquipe');
+                    body.push(linha);
                 });
             };
                 
         });
+
+        let table =
+            `<table id="tabelaEquipe" class="table table-bordered p-0 dataTable">` +
+                `<thead id="headEquipe">` +
+                    header +
+                `</thead>` +
+                `<tbody id="bodyEquipe">` +
+                    body.join(' ').trim() +
+                `</tbody>` +
+            `</table>`
+        ;
+
+        $(table).appendTo('#cardTabela')
 
         /*********************************************************************\
         | Função que designa atividade para empregado sem dar refresh na tela |
@@ -380,21 +396,32 @@ function montaCardsAtividades(equipe) {
                 }
             });
         });
+
+        /******************\
+        | Config dataTable |
+        \******************/
+
+        $('.dataTable').dataTable({
+            ordering:       false,
+            paging:         false,
+            searching:      false,
+            info:           false,
+            bDestroy:       true,
+            scrollY:        400,
+            scrollX:        true,
+            scrollCollapse: true,
+            paging:         false,
+            fixedColumns:   {
+                leftColumns: 1,
+                heightMatch: 'none'
+            },
+            language: {
+                sEmptyTable: "Nenhum registro encontrado",
+                sLoadingRecords: "Carregando...",
+                sProcessing: "Processando...",
+            }
+        });
     
-        // $('.dataTable').dataTable({
-        //     ordering: false,
-        //     paging: false,
-        //     searching: false,
-        //     info: false,
-        //     scrollY:        "400px",
-        //     scrollX:        true,
-        //     scrollCollapse: true,
-        //     paging:         false,
-        //     fixedColumns:   {
-        //         leftColumns: 1,
-        //         rightColumns: 1,
-        //     },
-        // });
     });
 };
 

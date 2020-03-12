@@ -177,13 +177,7 @@
 @section('content')
 
 <div class="card">
-    <div class="card-body p-0 m-0 overflow-auto">
-        <table id="tabelaEquipe" class="table table-bordered p-0 dataTable">
-            <thead id="headEquipe">
-            </thead>
-            <tbody id="bodyEquipe">
-            </tbody>
-        </table>
+    <div class="card-body p-0 m-0 overflow-auto" id="cardTabela">
     </div>
 </div> 
 

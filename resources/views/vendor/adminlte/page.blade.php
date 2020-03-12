@@ -81,7 +81,7 @@
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
 
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-sm-block">
                         <form class="form-inline" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar mr-3 text-white" required>
@@ -130,13 +130,13 @@
                         </li>
                     @endif
 
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-sm-block">
                         <a href="#" id="btnFullscreen" class="nav-link" title="Modo tela cheia">
                             <i class="fas fa-lg fa-expand"></i>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-sm-block">
                         <a href="#" id="btnFullscreenOff" class="nav-link" title="Sair do modo tela cheia" style="display:none;">
                             <i class="fas fa-lg fa-compress-arrows-alt"></i>
                         </a>
@@ -256,20 +256,28 @@
         </div>
 
         <footer class="main-footer">
-
             <div class="row">
-                <div class="col-sm-2 d-flex justify-content-center">
+            <div class="col-sm-2">
+                <div class="d-inline justify-content-center">
                     <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 40px;">
                 </div>
+            </div>
+            <div class="col-sm-10">
 
-                <div class="col-sm-7">
-                    <b class="float-left m-2">2020 - GILIE/SP - Gerência de Alienar Bens Móveis e Imóveis</b>
+                <div class="d-inline justify-content-center">
+                    <b class="m-2">2020 - GILIE/SP - </b>
                 </div>
-                <div class="col-sm-3">
-                    <b class="float-right m-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
+
+                <div class="d-sm-inline d-none justify-content-center">
+                    <b class="m-2">Gerência de Alienar Bens Móveis e Imóveis</b>
+                </div>
+
+                <div class="d-inline justify-content-right">
+                    <b class="m-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
                 </div>
             </div>
 
+            </div>
         </footer>
 
 
@@ -299,7 +307,8 @@
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-    <script src="{{ asset('plugins/DataTables/dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/DataTables/dataTables.fixedColumns.min.js') }}"></script>
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/toggle_fullscreen.js') }}"></script>
 

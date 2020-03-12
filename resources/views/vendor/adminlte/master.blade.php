@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/jquery-ui/jquery-ui.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/DataTables/dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/typeahead/typeahead.css') }}">
 
