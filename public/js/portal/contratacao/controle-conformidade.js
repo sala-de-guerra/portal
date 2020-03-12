@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $(".menu-hamburguer").click();
 
-    $.getJSON('/estoque-imoveis/conformidade-contratacao/listar-contratos', function(dados){
+    $.when($.getJSON('/estoque-imoveis/conformidade-contratacao/listar-contratos', function(dados){
         $.each(dados, function(key, item) {
 
             elementoLinkServidor = "'#linkServidor" + item.numeroContrato + "'";
@@ -37,11 +37,10 @@ $(document).ready(function(){
                 $(linha).appendTo('#tblConformidadeFluxoCca>tbody');
             }
         });
-
+    })).done(function() { 
         _formataValores();
         _formataDatatable();
     });
-
 }); 
 
 function copyToClipboard(element) {

@@ -124,6 +124,7 @@
                                     <th>Card Agrupamento</th>
                                     <th>Data Entrada</th>
                                     <th>Copiar Link do Servidor</th>
+                                    <th>Observações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -162,6 +163,7 @@
                                     <th>Card Agrupamento</th>
                                     <th>Data Entrada</th>
                                     <th>Copiar Link do Servidor</th>
+                                    <th>Observações</th>
                                 </tr>
                             </thead>
                             <tbody>

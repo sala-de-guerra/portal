@@ -46,6 +46,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // REDIRECIONAMENTO EM CASO DE PAGE EXPIRED - HTTP 419
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect()->route('index');
+        }
+        
         return parent::render($request, $exception);
     }
 }

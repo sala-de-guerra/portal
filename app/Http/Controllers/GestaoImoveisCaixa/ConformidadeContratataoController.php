@@ -53,8 +53,8 @@ class ConformidadeContratataoController extends Controller
     {
         $arrayContratosConformidade = [];
         $consultaContratosConformidade = DB::table('ADJTBL_imoveisCaixa')
-                                            ->join('ALITB075_VENDA_VL_OL37', 'ADJTBL_imoveisCaixa.numeroContrato', '=', 'ALITB075_VENDA_VL_OL37.NU_BEM')
-                                            ->join('ALITB001_Imovel_Completo', 'ADJTBL_imoveisCaixa.numeroContrato', '=', 'ALITB001_Imovel_Completo.NU_BEM')
+                                            ->join('ALITB075_VENDA_VL_OL37', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'), '=', DB::raw('CONVERT(VARCHAR, ALITB075_VENDA_VL_OL37.NU_BEM)'))
+                                            ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'))
                                             ->select(DB::raw('
                                                 ALITB001_Imovel_Completo.[BEM_FORMATADO] as contratoFormatado,
                                                 ALITB001_Imovel_Completo.[ACEITA_CCA] as aceitaCca, 

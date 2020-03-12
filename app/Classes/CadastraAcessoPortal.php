@@ -81,8 +81,6 @@ class CadastraAcessoPortal
         } elseif (in_array($this->getUnidade(), $this->arrayMatriz)) {
             $this->nivelAcesso = 'MATRIZ';
         } elseif ($this->getUnidade() == '7257') {
-            // if (in_array($this->getMatricula(), $this->arrayMiddle)) {
-            //     $this->nivelAcesso = 'MIDDLE';
             if (in_array($this->getMatricula(), $this->arrayGestor)) {
                 $this->nivelAcesso = 'GESTOR';
             } elseif(in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
