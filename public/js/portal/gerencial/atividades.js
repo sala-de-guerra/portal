@@ -19,14 +19,29 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
+/*********************\
+| Form to JSON object |
+\*********************/
+
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
+}
+
 /******************************************************************\
 | Função mostra as equipes da regiao do usuario da seção no select |
 \******************************************************************/
 
-// $.getJSON('../../js/equipes2.json', function(dados) {
-$.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
+$.getJSON('../../js/equipes2.json', function(dados) {
+// $.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
     equipes = dados;
-    console.log(equipes);
+    // console.log(equipes);
     $.each(equipes, function(key, item) {
         if (item.idEquipe != "1") {
             let option =
@@ -58,6 +73,8 @@ $('#selectTipoAtividadeCriar').change(function(){
 
 $('.modal').on('hidden.bs.modal', function(e){
     $(this).find("form")[0].reset();
+    $('#divMacroatividadeVinculacaoCriar').hide();
+    $('#selectMacroatividadeVinculacaoCriar').attr("required", false);
 });
 
 /************************************************************\
@@ -151,30 +168,27 @@ function montaCardsAtividades(equipe) {
     | GET dados do banco e monta tabela |
     \***********************************/
 
-    // $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
-    $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
+    $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
+    // $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
     .done(function(a1) {
         // console.log(a1);
 
-        $.each(a1, function(key, item) {
-            let idEquipe = Object.getOwnPropertyNames(item);
-            // console.log(idEquipe[0]);
-            atividades = idEquipe[0];
-        });
+        atividades = a1[0][equipe];
+        console.log(a1);
+        console.log(atividades);
+        // $.each(a1, function(key, item) {
+        //     let idEquipe = Object.getOwnPropertyNames(item);
+        //     // console.log(idEquipe);
+        //     atividades = idEquipe[0];
+        // });
 
         /***********************************************************************\
         | Criar options da selecao de macroatividade do form de criar atividade |
         \***********************************************************************/
 
-        $.each(a1, function(key, item) {
-            let idEquipe = Object.getOwnPropertyNames(item);
-            atividades = idEquipe[0];
-            if (atividades == equipe) {
-                $.each(item[atividades], function(key, item) {
-                    let optionMacroatividade = `<option value="` + item.idAtividade + `" selected>` + item.nomeAtividade + `</option>`;                
-                    $(optionMacroatividade).appendTo('#selectMacroatividadeVinculacaoCriar');
-                });
-            }
+        $.each(atividades, function(key, item) {
+            let optionMacroatividade = `<option value="` + item.idAtividade + `" selected>` + item.nomeAtividade + `</option>`;                
+            $(optionMacroatividade).appendTo('#selectMacroatividadeVinculacaoCriar');
         });
 
         let selectedVazio = 
@@ -191,63 +205,57 @@ function montaCardsAtividades(equipe) {
 
         let arrayHeadersMacroatividades = [];
 
-        $.each(a1, function(key, item) {
-            let idEquipe = Object.getOwnPropertyNames(item);
-            atividades = idEquipe[0];
-            if (atividades == equipe) {
-                $.each(item[atividades], function(key, item) {
-                    let colunaHeader;
+        $.each(atividades, function(key, item) {
+            let colunaHeader;
 
-                    if (item.atividadesSubordinadas.length === 0) {
+            if (item.atividadesSubordinadas.length === 0) {
 
-                        colunaHeader =
-                            `<td class="min-width-20vw p-0">` +
-                                `<table class="table p-0 m-0">` +
-                                    `<tr>` +
-                                        `<th>` + item.nomeAtividade + `</th>` +
-                                    `</tr>` +
-                                `</table>` +
-                            `</td>`
-                        ;
+                colunaHeader =
+                    `<td class="min-width-20vw p-0">` +
+                        `<table class="table p-0 m-0">` +
+                            `<tr>` +
+                                `<th>` + item.nomeAtividade + `</th>` +
+                            `</tr>` +
+                        `</table>` +
+                    `</td>`
+                ;
 
-                        arrayHeadersMacroatividades.push(colunaHeader);
+                arrayHeadersMacroatividades.push(colunaHeader);
 
-                        let optionMacroatividadeAlterar =
-                            `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
-                        ;
+                let optionMacroatividadeAlterar =
+                    `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
+                ;
 
-                        $(optionMacroatividadeAlterar).appendTo('#idAtividadeAlterar');
-                        $(optionMacroatividadeAlterar).appendTo('#idAtividadeExcluir');
+                $(optionMacroatividadeAlterar).appendTo('#idAtividadeAlterar');
+                $(optionMacroatividadeAlterar).appendTo('#idAtividadeExcluir');
 
-                    } else {
+            } else {
 
-                        let nomeMacroAtividade = item.nomeAtividade;
+                let nomeMacroAtividade = item.nomeAtividade;
 
-                        $.each(item.atividadesSubordinadas, function(key, item) {
-                            colunaHeader =
-                                `<td class="min-width-20vw p-0">` +
-                                    `<table class="table p-0 m-0">` +
-                                        `<tr>` +
-                                            `<th>` + nomeMacroAtividade + `</th>` +
-                                        `</tr>` +
-                                        `<tr>` +
-                                            `<th>` + item.nomeAtividade + `</th>` +
-                                        `</tr>` +
-                                    `</table>` +
-                                `</td>`
-                            ;
+                $.each(item.atividadesSubordinadas, function(key, item) {
+                    colunaHeader =
+                        `<td class="min-width-20vw p-0">` +
+                            `<table class="table p-0 m-0">` +
+                                `<tr>` +
+                                    `<th>` + nomeMacroAtividade + `</th>` +
+                                `</tr>` +
+                                `<tr>` +
+                                    `<th>` + item.nomeAtividade + `</th>` +
+                                `</tr>` +
+                            `</table>` +
+                        `</td>`
+                    ;
 
-                            arrayHeadersMacroatividades.push(colunaHeader);
+                    arrayHeadersMacroatividades.push(colunaHeader);
 
-                            let optionMicroatividadeAlterar =
-                                `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
-                            ;
+                    let optionMicroatividadeAlterar =
+                        `<option value="` + item.idAtividade + `">` + item.nomeAtividade + `</option>`
+                    ;
 
-                            $(optionMicroatividadeAlterar).appendTo('#idAtividadeAlterar');
-                            $(optionMicroatividadeAlterar).appendTo('#idAtividadeExcluir');
+                    $(optionMicroatividadeAlterar).appendTo('#idAtividadeAlterar');
+                    $(optionMicroatividadeAlterar).appendTo('#idAtividadeExcluir');
 
-                        });
-                    }
                 });
             }
         });
@@ -292,51 +300,44 @@ function montaCardsAtividades(equipe) {
 
                     let matriculaLinha = item.matricula;
         
-                    $.each(a1, function(key, item) {
-                        let idEquipe = Object.getOwnPropertyNames(item);
-                        atividades = idEquipe[0];
-                        if (atividades == equipe) {
-                            $.each(item[atividades], function(key, item) {
-                                
-                                function criaFormCheckbox (item) {
-                                    let arrayResponsaveisAtividade = item.responsaveisAtividade;
-                                    let checkbox;
+                    $.each(atividades, function(key, item) {
+                        
+                        function criaFormCheckbox (item) {
+                            let arrayResponsaveisAtividade = item.responsaveisAtividade;
+                            let checkbox;
 
-                                        if (arrayResponsaveisAtividade.findIndex(x => x.matricula === matriculaLinha) === -1) {
-                                            checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar">`;
-                                        } else {
-                                            checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar" checked>`;
-                                        };
-
-
-                                    let form =
-                                        `<td class="">` +
-                                            `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/url" method="PUT" class="form-checkbox">` +
-                                                checkbox +
-                                                // `<input type="hidden" name="atuandoAtividade" value="off"></input>` +
-                                                `<input type="hidden" name="idAtividade" value="` + item.idAtividade + `">` +
-                                                `<input type="hidden" name="matriculaResponsavelAtividade" value="` + matriculaLinha + `">` +
-                                            `</form>` +
-                                        `</td>`
-                                    ;
-
-                                    arrayLinhaTabelaAtividade.push(form);
-
-                                };
-                                
-                                if (item.atividadesSubordinadas.length === 0) {
-                                    criaFormCheckbox(item);
-
+                                if (arrayResponsaveisAtividade.findIndex(x => x.matricula === matriculaLinha) === -1) {
+                                    checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar">`;
                                 } else {
-                                    $.each(item.atividadesSubordinadas, function(key, item) {
-                                        criaFormCheckbox(item);
-                                    });
+                                    checkbox = `<input class="form-control" name="atuandoAtividade" value="true" type="checkbox" title="Clique para salvar" checked>`;
                                 };
-                                        
+
+
+                            let form =
+                                `<td class="">` +
+                                    `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/url" method="PUT" class="form-checkbox">` +
+                                        checkbox +
+                                        // `<input type="hidden" name="atuandoAtividade" value="off"></input>` +
+                                        `<input type="hidden" name="idAtividade" value="` + item.idAtividade + `">` +
+                                        `<input type="hidden" name="matriculaResponsavelAtividade" value="` + matriculaLinha + `">` +
+                                    `</form>` +
+                                `</td>`
+                            ;
+
+                            arrayLinhaTabelaAtividade.push(form);
+
+                        };
+                        
+                        if (item.atividadesSubordinadas.length === 0) {
+                            criaFormCheckbox(item);
+
+                        } else {
+                            $.each(item.atividadesSubordinadas, function(key, item) {
+                                criaFormCheckbox(item);
                             });
-                        }
-                    });
-                    
+                        };
+                                
+                    }); 
             
                     let linha = 
                         `<tr>` +
@@ -390,8 +391,8 @@ function montaCardsAtividades(equipe) {
                 ;
                 $(checkboxHidden).appendTo(form);
             } 
-                
-            let data = $(form).serializeArray();
+
+            let data = getFormData($(form));
             let url = $(form).attr('action');
             let method = $(form).attr('method');
 
