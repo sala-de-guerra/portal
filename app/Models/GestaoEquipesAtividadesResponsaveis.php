@@ -27,6 +27,6 @@ class GestaoEquipesAtividadesResponsaveis extends Model
 
     public function dadosEmpregadoLdap()
     {
-        return $this->belongsTo('App\Models\Empregado', 'matricula', 'matriculaResponsavelAtividade');
+        return $this->belongsTo('App\Models\Empregado', 'matriculaResponsavelAtividade', 'matricula');
     }
 }

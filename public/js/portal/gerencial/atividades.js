@@ -1,6 +1,5 @@
 var _token = $('meta[name="csrf-token"]').attr('content');
 var equipes;
-var atividades = [];
 var equipe;
 var regiaoUnidadeSecao = $('#lotacao').html();
 
@@ -38,8 +37,8 @@ function getFormData($form){
 | Função mostra as equipes da regiao do usuario da seção no select |
 \******************************************************************/
 
-$.getJSON('../../js/equipes2.json', function(dados) {
-// $.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
+// $.getJSON('../../js/equipes2.json', function(dados) {
+$.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidadeSecao, function(dados) {
     equipes = dados;
     // console.log(equipes);
     $.each(equipes, function(key, item) {
@@ -105,7 +104,7 @@ $('#selectEquipe').change(function() {
 | Função que cria, edita e exclui equipe sem dar refresh na tela |
 \****************************************************************/
 
-$('form').submit( function(e) {
+$('.form-gestao-atividades').submit( function(e) {
 
     e.preventDefault();
 
@@ -167,15 +166,23 @@ function montaCardsAtividades(equipe) {
     /***********************************\
     | GET dados do banco e monta tabela |
     \***********************************/
+    let atividades = [];
 
-    $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
-    // $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
+
+    // $.when($.getJSON( '../../js/atividades.json', function(dados) {}))
+    $.when($.getJSON( '/gerencial/gestao-atividades/listar-atividades/' + regiaoUnidadeSecao, function(dados) {}))
     .done(function(a1) {
         // console.log(a1);
+        
+        $.each(a1, function(key, item) {
+            if (item[equipe] !== undefined) {
+                // console.log(item[equipe]);
+                atividades = item[equipe];
+            }
+        });
+        
+        // console.log(atividades);
 
-        atividades = a1[0][equipe];
-        console.log(a1);
-        console.log(atividades);
         // $.each(a1, function(key, item) {
         //     let idEquipe = Object.getOwnPropertyNames(item);
         //     // console.log(idEquipe);
@@ -214,7 +221,7 @@ function montaCardsAtividades(equipe) {
                     `<td class="min-width-20vw p-0">` +
                         `<table class="table p-0 m-0">` +
                             `<tr>` +
-                                `<th>` + item.nomeAtividade + `</th>` +
+                                `<th class="text-center">` + item.nomeAtividade + `</th>` +
                             `</tr>` +
                         `</table>` +
                     `</td>`
@@ -238,10 +245,10 @@ function montaCardsAtividades(equipe) {
                         `<td class="min-width-20vw p-0">` +
                             `<table class="table p-0 m-0">` +
                                 `<tr>` +
-                                    `<th>` + nomeMacroAtividade + `</th>` +
+                                    `<th class="text-center">` + nomeMacroAtividade + `</th>` +
                                 `</tr>` +
                                 `<tr>` +
-                                    `<th>` + item.nomeAtividade + `</th>` +
+                                    `<th class="text-center">` + item.nomeAtividade + `</th>` +
                                 `</tr>` +
                             `</table>` +
                         `</td>`
@@ -315,7 +322,7 @@ function montaCardsAtividades(equipe) {
 
                             let form =
                                 `<td class="">` +
-                                    `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/url" method="PUT" class="form-checkbox">` +
+                                    `<form id="formAtividade` + item.idAtividade + `matricula` + matriculaLinha + `" action="/gerencial/gestao-atividades/designar-empregado-atividade" method="post" class="form-checkbox">` +
                                         checkbox +
                                         // `<input type="hidden" name="atuandoAtividade" value="off"></input>` +
                                         `<input type="hidden" name="idAtividade" value="` + item.idAtividade + `">` +

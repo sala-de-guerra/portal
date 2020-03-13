@@ -31,9 +31,10 @@ class GestaoEquipesController extends Controller
         $arrayEquipesUnidade = [];
         $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', $codigoUnidade)->orWhere('codigoUnidadeEquipe', null)->get();
         foreach ($relacaoEquipesUnidade as $equipe) {
-            $codigoUnidade = $equipe->codigoUnidadeEquipe;
             if (is_null($equipe->codigoUnidadeEquipe)) {
-                $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::where('idEquipe', null)->orWhere('idEquipe', 1)->where('codigoUnidadeLotacao', $codigoUnidade)->get();
+                $relacaoEmpregadosNaoAlocados = GestaoEquipesEmpregados::where(function($idEquipe){
+                    $idEquipe->whereNull('idEquipe')->orWhere('idEquipe', 1);
+                })->where('codigoUnidadeLotacao', $codigoUnidade)->get();
                 $arrayEmpregadosNaoAlocados = [];
                 foreach ($relacaoEmpregadosNaoAlocados as $empregadoNaoAlocado) {
                     $arrayEmpregadosNaoAlocados = self::incluirEmpregadoNoArrayDaEquipe($arrayEmpregadosNaoAlocados, $empregadoNaoAlocado);
@@ -124,7 +125,8 @@ class GestaoEquipesController extends Controller
                     $codigoUnidadeEquipe = $dado[1];
                     break;
                 case 'nomeEquipe':
-                    $nomeEquipe = $dado[1];
+                    $encoding = mb_internal_encoding();
+                    $nomeEquipe = mb_strtoupper($dado[1], $encoding);
                     break;
                 case 'matriculaGestor':
                     $matriculaGestor = $dado[1];
@@ -147,7 +149,7 @@ class GestaoEquipesController extends Controller
             return response('Não foi possível apagar a equipe alocação empregados', 500);
         }
 
-        if (!isset($nomeEventual)) {
+        if (!isset($nomeEventual) || $nomeEventual == "") {
             $eventual = Empregado::find($matriculaEventual);
             $nomeEventual = $eventual->nomeCompleto;
         }
@@ -173,23 +175,22 @@ class GestaoEquipesController extends Controller
                     $registroLogHistorico->save();
 
                     $antigoEventual->save();
-
-                    // DESIGNA O ANTIGO EVENTUAL
-                    $novoEventual = GestaoEquipesEmpregados::find($matriculaEventual);
-                    $novoEventual->eventualEquipe = true;
-                    $novoEventual->updated_at = date("Y-m-d H:i:s", time());
-                    
-                    // REGISTRA O LOG DE HISTORICO DA AÇÃO
-                    $registroLogHistorico = new GestaoEquipesLogHistorico;
-                    $registroLogHistorico->idEquipe                 = $idEquipe;
-                    $registroLogHistorico->matriculaResponsavel     = session('matricula');
-                    $registroLogHistorico->tipo                     = 'EDIÇÃO';
-                    $registroLogHistorico->observacao               = "DESIGNAÇÃO DE EVENTUALIDADE - " . $novoEventual->dadosEmpregadoLdap->nomeCompleto;
-                    $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
-                    $registroLogHistorico->save();
-
-                    $novoEventual->save();
                 }
+                // DESIGNA O EVENTUAL
+                $novoEventual = GestaoEquipesEmpregados::find($matriculaEventual);
+                $novoEventual->eventualEquipe = true;
+                $novoEventual->updated_at = date("Y-m-d H:i:s", time());
+                
+                // REGISTRA O LOG DE HISTORICO DA AÇÃO
+                $registroLogHistorico = new GestaoEquipesLogHistorico;
+                $registroLogHistorico->idEquipe                 = $idEquipe;
+                $registroLogHistorico->matriculaResponsavel     = session('matricula');
+                $registroLogHistorico->tipo                     = 'EDIÇÃO';
+                $registroLogHistorico->observacao               = "DESIGNAÇÃO DE EVENTUALIDADE - " . $novoEventual->dadosEmpregadoLdap->nomeCompleto;
+                $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+                $registroLogHistorico->save();
+
+                $novoEventual->save();
             }
 
             // EDITAR EQUIPE
@@ -232,8 +233,28 @@ class GestaoEquipesController extends Controller
             DB::beginTransaction();
             // ALOCAR EMPREGADO
             $empregadoAlocado = GestaoEquipesEmpregados::find($request->matricula);
-            $empregadoAlocado->idEquipe     = $request->idEquipe;
-            $empregadoAlocado->updated_at   = date("Y-m-d H:i:s", time());
+
+            // VERIFICA SE ELA É EVENTUAL DA EQUIPE ANTIGA
+            $antigaEquipe = GestaoEquipesCelulas::find($empregadoAlocado->idEquipe);
+            if (!is_null($antigaEquipe) && $antigaEquipe->matriculaEventual == $request->matricula) {
+                $antigaEquipe->matriculaEventual    = null;
+                $antigaEquipe->nomeEventual         = null;
+
+                // REGISTRA O LOG DE HISTORICO DA AÇÃO
+                $registroLogHistorico = new GestaoEquipesLogHistorico;
+                $registroLogHistorico->idEquipe                 = $request->idEquipe;
+                $registroLogHistorico->matriculaResponsavel     = session('matricula');
+                $registroLogHistorico->tipo                     = 'DESTITUIÇÃO';
+                $registroLogHistorico->observacao               = "DESTITUIÇÃO DA EVENTUALIDADE - EMPREGADO " . $empregadoAlocado->dadosEmpregadoLdap->nomeCompleto;
+                $registroLogHistorico->dataLog                  = date("Y-m-d H:i:s", time());
+                $registroLogHistorico->save();
+
+                $antigaEquipe->save();
+            }
+
+            $empregadoAlocado->idEquipe         = $request->idEquipe;
+            $empregadoAlocado->eventualEquipe   = false;
+            $empregadoAlocado->updated_at       = date("Y-m-d H:i:s", time());
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
             $registroLogHistorico = new GestaoEquipesLogHistorico;
@@ -272,7 +293,8 @@ class GestaoEquipesController extends Controller
                     $ativa = $dado[1];
                     break;
                 case 'nomeEquipe':
-                    $nomeEquipe = $dado[1];
+                    $encoding = mb_internal_encoding();
+                    $nomeEquipe = mb_strtoupper($dado[1], $encoding);
                     break;
             }
         }
@@ -340,11 +362,11 @@ class GestaoEquipesController extends Controller
         return $arrayEquipes;
     }
 
-    public static function listaGestoresUnidade()
+    public static function listaGestoresUnidade($codigoUnidade)
     {
-        $listaGestoresUnidade = Empregado::where(function($lotacao) {
-            $lotacao->where('codigoLotacaoAdministrativa', session('codigoLotacaoAdministrativa'))
-                    ->orWhere('codigoLotacaoFisica', session('codigoLotacaoFisica'));   
+        $listaGestoresUnidade = Empregado::where(function($lotacao) use($codigoUnidade) {
+            $lotacao->where('codigoLotacaoAdministrativa', $codigoUnidade)
+                    ->orWhere('codigoLotacaoFisica', $codigoUnidade);   
         })->whereIn('codigoFuncao', self::listarCodigoGestores())->select('matricula', 'nomeCompleto', 'nomeFuncao')->get();
 
         return json_encode($listaGestoresUnidade);
@@ -404,48 +426,5 @@ class GestaoEquipesController extends Controller
             ,'2060' // SUPERVISOR - CENTRALIZADORA/FILIAL
             ,'2037' // GERENTE EXECUTIVO
         ];
-    }
-
-    public static function trataDadosAjax($dadosRequest)
-    {
-        $objDados = explode("&", str_replace('"', '', $request->data));
-        foreach ($objDados as $dado) {
-            $dado = explode("=", $dado);
-            switch ($dado[0]) {
-                case 'codigoUnidadeEquipe':
-                    $codigoUnidadeEquipe = $dado[1];
-                    $codigoUnidadeEquipe = ['codigoUnidadeEquipe' => $dado[1]];
-                    break;
-                case 'nomeEquipe':
-                    $nomeEquipe = $dado[1];
-                    $nomeEquipe = ['nomeEquipe' => $dado[1]];
-                    break;
-                case 'matriculaGestor':
-                    $matriculaGestor = $dado[1];
-                    $matriculaGestor = ['matriculaGestor' => $dado[1]];
-                    break;
-                case 'nomeGestor':
-                    $nomeGestor = $dado[1];
-                    $nomeGestor = ['nomeGestor' => $dado[1]];
-                    break;
-                case 'idEquipe':
-                    $idEquipe = $dado[1];
-                    $idEquipe = ['idEquipe' => $dado[1]];
-                    break;
-                case 'ativa':
-                    $ativa = $dado[1];
-                    $ativa = ['ativa' => $dado[1]];
-                    break;
-                case 'matriculaEventual':
-                    $matriculaEventual = $dado[1];
-                    $matriculaEventual = ['matriculaEventual' => $dado[1]];
-                    break;
-                case 'nomeEventual':
-                    $nomeEventual = $dado[1];
-                    $nomeEventual = ['nomeEventual' => $dado[1]];
-                    break;
-            }
-        }
-        // return array_merge(isset);
     }
 }
