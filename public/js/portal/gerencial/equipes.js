@@ -243,7 +243,7 @@ function montaCardsEquipes (regiaoUnidade) {
     | Função que pega a lista de gestores e popula o select de criar equipe |
     \***********************************************************************/
     
-    $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-gestores/' + regiaoUnidade, function(dados) {
     // $.getJSON('../js/gestoresSP.json', function(dados) {
 
         // console.log(dados);

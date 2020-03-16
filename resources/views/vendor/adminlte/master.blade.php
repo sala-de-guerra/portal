@@ -35,13 +35,13 @@
 
 @if(! config('adminlte.enabled_laravel_mix'))
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery-ui/ui.datepicker-pt-BR.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('plugins/numeral/numeral.min.js') }}"></script>
 <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
 <script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-ui/ui.datepicker-pt-BR.js') }}"></script>
 <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
 
 @include('adminlte::plugins', ['type' => 'js'])

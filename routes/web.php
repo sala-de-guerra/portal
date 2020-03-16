@@ -118,7 +118,7 @@ Route::prefix('gerencial')->group(function () {
         // MÉTODO PARA DESATIVAR UMA EQUIPE
         Route::delete('/', 'GestaoEquipesController@desativarEquipe');
         // LISTAR GESTORES DA UNIDADE
-        Route::get('listar-gestores', 'GestaoEquipesController@listaGestoresUnidade');
+        Route::get('listar-gestores/{codigoUnidade}', 'GestaoEquipesController@listaGestoresUnidade');
         // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
         Route::get('listar-equipes/{codigoUnidade}', 'GestaoEquipesController@listarEquipesUnidade');
         // LISTA DE UNIDADES
@@ -138,7 +138,7 @@ Route::prefix('gerencial')->group(function () {
         // MÉTODO PARA DESATIVAR ATIVIDADE
         Route::delete('/{idAtividade}', 'GestaoEquipesAtividadesController@desativarAtividade');
         // MÉTODO DESIGNAR EMPREGADO NA ATIVIDADE
-        Route::post('/designar-empregado-atividade/{idResponsavelAtividade}', 'GestaoEquipesAtividadesController@designarEmpregadoAtividade');
+        Route::post('/designar-empregado-atividade', 'GestaoEquipesAtividadesController@designarEmpregadoAtividade');
         // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });

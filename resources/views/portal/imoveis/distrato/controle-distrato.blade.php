@@ -99,12 +99,12 @@
 
                         <div class="form-group">
                             <label>Nome do Proponente:</label>
-                            <input type="text" name="nomeProponente" class="form-control" readonly required>
+                            <input type="text" name="nomeProponente" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                             <label>CPF / CNPJ:</label>
-                            <input type="text" name="cpfCnpjProponente" class="form-control" readonly required>
+                            <input type="text" name="cpfCnpjProponente" class="form-control" required>
                         </div>
 
                     </div>

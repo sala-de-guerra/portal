@@ -82,7 +82,7 @@
                     @yield('content_top_nav_left')
 
                     <li class="nav-item d-none d-sm-block">
-                        <form class="form-inline" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                        <form class="form-inline m-0" id="formBarraBusca" onsubmit="validarBusca();" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar mr-3 text-white" required>
                                 <option value="" disabled selected>Selecione</option>
@@ -95,7 +95,7 @@
                                 <option class="text-dark" value="nomeExMutuario">Nome ex-mutuário</option>
                             </select>
                             <div class="input-group nav-search-bar">
-                                <input class="form-control form-control-navbar text-white" type="text" id="valorVariavel" minlength="5" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." oninvalid="setCustomValidity('Digite no mínimo 5 caracteres para pesquisar.')" required>
+                                <input class="form-control form-control-navbar text-white" type="text" id="inputBarraBusca" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." required>
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
@@ -303,7 +303,16 @@
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
-        })
+        });
+
+        function validarBusca() {
+            let inputBarraBuscaValue = $('#inputBarraBusca').val();
+            if (inputBarraBuscaValue.length < 5) {
+                alert('Digite no mínimo 5 caracteres para pesquisar.');
+            } else {
+                $('#formBarraBusca').submit();
+            };
+        };
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
