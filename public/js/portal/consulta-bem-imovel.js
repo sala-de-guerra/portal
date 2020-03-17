@@ -18,9 +18,11 @@ $(document).ready(function(){
         // _formataTabelaDocumentos (numeroBem, dossieDigital);
         // _formataTabelaLaudos (numeroBem);
 
-
         $.each(dados, function(key, item) {
             $('#' + key).html(item);
+            $('#statusImovelLeilao').html(dados.statusImovel);
+            $('#matriculaImovelLeilao').html(dados.matriculaImovel + ' / ' + dados.cidadeImovel);
+
             // REMOVE O BLOCO DE CONFORMIDADE CASO NÃO EXISTA DADOS DE CONFORMIDADE NO IMAGEM.CAIXA
             if (key == 'nomeStatusDossie' && item == null) {
                 $('#cardTitleConformidade').remove();

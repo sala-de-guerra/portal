@@ -58,19 +58,31 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Dossiê Digital:</label>
                                     <br>
-                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy"></i></button>
+                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy mx-1"></i>Servidor</button>
                                     <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
                                 </div>
                             </div>
-                            <div id="anuncioSiteCaixa"class="col-sm-6">
+                            <div id="anuncioSiteCaixa"class="col-sm-3">
                                 <div class="form-group">
                                     <label>Anúncio X Imóveis:</label>
                                     <br>
-                                    <button id="linkXimoveis" onClick="" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel"><i class="fas fa-globe-americas"></i></button>
+                                    <button id="linkXimoveis" onClick="" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel"><i class="fas fa-globe-americas mx-1"></i>X-Imóveis</button>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Nome Ex-Mutuário:</label>
+                                    <p id="nomeExMutuario"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>CPF Ex-Mutuário:</label>
+                                    <p id="cpfCnpjExMutuario"></p>
                                 </div>
                             </div>
                         </div>
@@ -130,42 +142,31 @@
                         </div>
                         
                         <div class="row">
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Status SIMOV:</label>
                                     <p id="statusImovel"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Classificação:</label>
                                     <p id="classificacao"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Matrícula do Imóvel:</label>
                                     <p id="matriculaImovel"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Origem da Matrícula:</label>
                                     <p id="origemMatricula"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-2"> 
-                                <div class="form-group">
-                                    <label>Data Laudo de Avaliação:</label>
-                                    <p class="formata-data-sem-hora" id="dataLaudoAvaliacao"></p>
-                                </div>
-                            </div> 
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label>Data Validade do Laudo:</label>
-                                    <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
-                                </div>
-                            </div> 
+                            
                         </div>
                         
                         <!-- <div class="row">
@@ -258,19 +259,35 @@
                                     <p class="formata-data-sem-hora" id="dataSegundoLeilao"></p>
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-3">
+                            <div class="col-sm-3"> 
                                 <div class="form-group">
-                                    <label>Número do Item:</label>
-                                    <p id="numeroItem"></p>
+                                    <label>Data Laudo de Avaliação:</label>
+                                    <p class="formata-data-sem-hora" id="dataLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Validade do Laudo:</label>
+                                    <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Status SIMOV:</label>
+                                    <p id="statusImovelLeilao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Data Arremate:</label>
-                                    <p id="dataArremate" class="formata-data-sem-hora"></p>
+                                    <label>Matrícula / RI:</label>
+                                    <p id="matriculaImovelLeilao"></p>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
+
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-contratacao" role="tabpanel" aria-labelledby="custom-tabs-one-contratacao-tab">
