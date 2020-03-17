@@ -103,6 +103,8 @@ class ConsultaContratoController extends Controller
             // DADOS DO IMÓVEL
             'numeroBem' => $contrato->NU_BEM,
             'classificacao' => $contrato->CLASSIFICACAO,
+            'nomeExMutuario' => $contrato->NO_EX_MUTUARIO,
+            'cpfCnpjExMutuario' => $contrato->NU_DOC_EX_MUTUARIO,
             'cep' => $contrato->CEP,
             'nomeEmpreendimento' => $contrato->NOME_EMPREENDIMENTO,
             'enderecoImovel' => $contrato->ENDERECO_IMOVEL,
