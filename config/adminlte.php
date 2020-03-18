@@ -252,33 +252,19 @@ return [
             'icon' => 'fas fa-lg fa-fw fa-search mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR'], // , 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')
         ],
-        // [
-        //     'text' => 'Preparar e Ofertar',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-lg fa-fw fa-sign',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
+        [
+            'text' => 'Preparar e Ofertar',
+            'icon' => 'fas fa-lg fa-fw fa-sign',
+            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+            'submenu' => [
+                [
+                    'text' => 'Leilôes Negativos',
+                    'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
+                    'url'  => '/estoque-imoveis/leiloes/leiloes-negativos',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ]
+            ],
+        ],
         // [
         //     'text' => 'Pagamentos',
         //     'url'  => 'admin/settings',

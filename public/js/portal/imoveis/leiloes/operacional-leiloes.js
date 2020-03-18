@@ -2,17 +2,17 @@ var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
 $(document).ready(function(){
 
-    $("#custom-tabs-one-distrato-tab").click();
+    $("#custom-tabs-one-leiloes-tab").click();
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
-    _formataListaDistrato (numeroContrato, "operacional") // NO FINAL DESTA FUNÇÃO É CHAMADA A FUNÇÃO _formataTabelaDespesasDistrato
+    _formataListaDistrato (numeroContrato) // NO FINAL DESTA FUNÇÃO É CHAMADA A FUNÇÃO _formataTabelaDespesasDistrato
     setTimeout(function() {
         _formataData();
         _formataValores();
     }, 3000);
 
-    $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
-    // $.getJSON('../js/imovel_mockado.json', function(dados){
+    // $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
+    $.getJSON('../js/imovel_mockado.json', function(dados){
 
         var numeroBem = dados.numeroBem;
         // var dossieDigital = dados.dossieDigital;

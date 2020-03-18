@@ -10,6 +10,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item" id="custon-tabs-li-laudos">
+                        <a class="nav-link" id="custom-tabs-one-laudos-tab" data-toggle="pill" href="#custom-tabs-one-laudos" role="tab" aria-controls="custom-tabs-one-laudos" aria-selected="false">
+                            <h5>Laudos</h5>
+                        </a>
+                    </li>
+
                     <li class="nav-item" id="custon-tabs-li-leiloes">
                         <a class="nav-link" id="custom-tabs-one-leiloes-tab" data-toggle="pill" href="#custom-tabs-one-leiloes" role="tab" aria-controls="custom-tabs-one-leiloes" aria-selected="false">
                             <h5>Leilões</h5>
@@ -50,7 +56,7 @@
                     
                         <div class="row">
                             <div class="col-sm-12">
-                                <h2 class="card-title"><b>Trajetória do Imóvel - </b><b id="numeroContratoFormatado">{{ $numeroContrato }}</b></h2>
+                                <h2 class="card-title"><b>Trajetória do Imóvel - </b><b id="numeroContratoFormatado">{{ $numeroContrato ?? '' }}</b></h2>
                                 <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar CHB" onclick="copyToClipboard('#numeroContratoFormatado')"><i class="far fa-copy"></i></button>
                                 <br>
                                 <div class="card-body pb-0" id="progressBarGeral"></div>
@@ -63,7 +69,7 @@
                                     <label>Dossiê Digital:</label>
                                     <br>
                                     <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy mx-1"></i>Servidor</button>
-                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' }}</a>
+                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' ?? '' }}</a>
                                 </div>
                             </div>
                             <div id="anuncioSiteCaixa"class="col-sm-3">
@@ -190,6 +196,25 @@
 
                     </div>
 
+                    <div class="tab-pane fade" id="custom-tabs-one-laudos" role="tabpanel" aria-labelledby="custom-tabs-one-laudos-tab">
+
+                        <div class="row">
+                            <div class="col-sm-3"> 
+                                <div class="form-group">
+                                    <label>Data Laudo de Avaliação:</label>
+                                    <p class="formata-data-sem-hora" id="dataLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Validade do Laudo:</label>
+                                    <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
+                                </div>
+                            </div> 
+                        </div>
+
+                    </div>
+
                     <div class="tab-pane fade" id="custom-tabs-one-leiloes" role="tabpanel" aria-labelledby="custom-tabs-one-leiloes-tab">
                         
                         <div class="row">
@@ -259,21 +284,6 @@
                                     <p class="formata-data-sem-hora" id="dataSegundoLeilao"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-3"> 
-                                <div class="form-group">
-                                    <label>Data Laudo de Avaliação:</label>
-                                    <p class="formata-data-sem-hora" id="dataLaudoAvaliacao"></p>
-                                </div>
-                            </div> 
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data Validade do Laudo:</label>
-                                    <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
-                                </div>
-                            </div> 
-                        </div>
-
-                        <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Status SIMOV:</label>
@@ -286,6 +296,87 @@
                                     <p id="matriculaImovelLeilao"></p>
                                 </div>
                             </div>
+                        </div>
+
+                        <hr class="pontilhado">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Situação Atual:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Observações:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Recebimento Kit Leiloeiro:</label>
+                                    <p class="formata-data-sem-hora" id="dataKitLeiloeiro"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Protocolo de Prenotação:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Senha de acompanhamento:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Dados do Leiloeiro:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Número da O.S.:</label>
+                                    <p id="dataKitLeiloeiro"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Retirada Despachante:</label>
+                                    <p class="formata-data-sem-hora" id=""></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Dados do Despachante:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Dados do Despachante:</label>
+                                    <p id=""></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div id="" class="col">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+                                    <i class="far fa-edit"></i> Analisar Distrato
+                                </button>
+                            </div>
+
+
                         </div>
 
                     </div>
@@ -584,7 +675,7 @@
                                 <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato }}' id="formCadastraAtendimento">
+                                            <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato ?? '' }}' id="formCadastraAtendimento">
                                                 {{ csrf_field() }}
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Cadastrar Histórico</h5>
@@ -661,7 +752,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
-                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato }}">         
+                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato ?? '' }}">         
                                     <button type="submit" class="btn btn-primary">
                                         <i class="far fa-lg fa-envelope m-2"></i>
                                         Enviar Autorização de Contratação

@@ -95,6 +95,16 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
     });
 
+    // ROTAS DO PROJETO DE LEILÕES
+    Route::prefix('leiloes')->group(function () {
+        Route::get('leiloes-negativos', function () {
+            return view('portal.imoveis.leiloes.leiloes-negativos');
+        });
+        Route::get('tratar', function () {
+            return view('portal.imoveis.leiloes.operacional-leiloes');
+        });
+    });
+
     // ROTA PARA REGISTRO DE HISTÓRICO
     Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\RegistroAtendimentoController@registrarHistorico');
 

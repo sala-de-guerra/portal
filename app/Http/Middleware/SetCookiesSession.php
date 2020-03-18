@@ -31,6 +31,7 @@ class SetCookiesSession
                 $empregado = Empregado::find('c142765'); // Carlos
                 // $empregado = Empregado::find('c111710'); // Chuman
                 // $empregado = Empregado::find('c079436'); // Vladimir
+                // $empregado = Empregado::find('c098453'); // Rafael
 
                 $request->session()->put([
                     'matricula' => $empregado->matricula,

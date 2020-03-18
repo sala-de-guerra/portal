@@ -153,13 +153,13 @@
                         </li>
                     @endif
 
-                    <li class="nav-item d-none d-sm-block">
+                    <li class="nav-item d-none d-sm-block mx-1">
                         <a href="#" id="btnFullscreen" class="nav-link px-0" title="Modo tela cheia">
                             <i class="fas fa-lg fa-expand"></i>
                         </a>
                     </li>
 
-                    <li class="nav-item d-none d-sm-block">
+                    <li class="nav-item d-none d-sm-block mx-1">
                         <a href="#" id="btnFullscreenOff" class="nav-link px-0" title="Sair do modo tela cheia" style="display:none;">
                             <i class="fas fa-lg fa-compress-arrows-alt"></i>
                         </a>
@@ -167,7 +167,7 @@
 
                     @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
                         <li class="nav-item dropdown user-menu mx-1">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle px-0" data-toggle="dropdown">
                                 <i class="far fa-lg fa-bell"></i>
                                 <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
                             </a>
