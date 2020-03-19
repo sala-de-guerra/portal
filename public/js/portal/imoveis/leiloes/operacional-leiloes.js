@@ -51,6 +51,18 @@ $(document).ready(function(){
 
 });
 
+/***************************************************\
+| Torna required campo do form de acordo com select |
+\***************************************************/
+
+$('#statusLeiloesNegativos').change(function () {
+    $('#dataRetiradaDespachante').val('');
+    if ($(this).val() === 'rede') {
+        
+    }
+})
+
+
 function copyToClipboard(element) {
     var $temp = $("<input>");
     $("body").append($temp);

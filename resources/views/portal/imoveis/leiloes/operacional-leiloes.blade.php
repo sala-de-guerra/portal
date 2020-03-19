@@ -17,10 +17,10 @@
 @endif
 
 <div class="row mb-2">
-    <div class="col-sm-6">
+    <div class="col">
         <h1 class="m-0 text-dark">Operacional Leilões - CHB <p class="d-inline" id="numeroBem"></p></h1>
     </div>
-    <div class="col-sm-6">
+    <div class="col">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/controle-distrato"> Controle de Leilões</a> </li>
             <li class="breadcrumb-item active"> <a href="/operacional-distrato"> Operacional Leilões</a> </li>

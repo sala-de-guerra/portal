@@ -17,7 +17,7 @@
 @endif
 
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col">
             <h1 class="m-0 text-dark">
                 Controle de Leilões Negativos
             </h1>

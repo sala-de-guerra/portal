@@ -300,11 +300,20 @@
 
                         <hr class="pontilhado">
 
+                        <h2 class="card-title"><b>Averbação de Leilões Negativos</b></h2>
+
+                        <br>
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Situação Atual:</label>
+                                    <label>Status Atual:</label>
                                     <p id=""></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Última atualização:</label>
+                                    <p class="formata-data-sem-hora" id=""></p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -370,10 +379,131 @@
 
                         <div class="row">
 
-                            <div id="" class="col">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
-                                    <i class="far fa-edit"></i> Analisar Distrato
+                            <div id="" class="col-auto">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalKitLeiloeiro">
+                                    <i class="fas fa-file-import"></i> Receber Kit Leiloeiro
                                 </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalKitLeiloeiro" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <form method='post' action='' id="formKitLeiloeiro">
+                                            {{ csrf_field() }}
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Receber Kit Leiloeiro</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <!-- <div class="form-group">
+                                                    <label>CHB Formatado:</label>
+                                                    <input type="text" name="contratoFormatado" class="form-control" id="inputChb" placeholder="00.0000.0000000-0" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="_validarCHB('#inputChb');">Validar CHB</button>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Nome do Proponente:</label>
+                                                    <input type="text" name="nomeProponente" class="form-control" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>CPF / CNPJ:</label>
+                                                    <input type="text" name="cpfCnpjProponente" class="form-control" required>
+                                                </div> -->
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="" class="col-auto">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+                                    <i class="fas fa-file-export"></i> Enviar Kit Despachante
+                                </button>
+                            </div>
+
+                            <div id="" class="col-auto">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAlterarStatus">
+                                    <i class="fas fa-file-export"></i> Alterar Status
+                                </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalAlterarStatus" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <form method='post' action='' id="formAlterarStatus">
+                                            {{ csrf_field() }}
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Alterar Status</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <label>Novo Status:</label>
+                                                    <select name="statusLeiloesNegativos" id="statusLeiloesNegativos" class="form-control" required>
+                                                        <option value="" selected>Selecione</option>
+                                                        <option value="NOTA DEVOLUTIVA EM TRATAMENTO">NOTA DEVOLUTIVA EM TRATAMENTO</option>
+                                                        <option value="NOTA DEVOLUTIVA TRATADA">NOTA DEVOLUTIVA TRATADA</option>
+                                                        <option value="AVERBADO">AVERBADO</option>
+                                                        <option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Data Retirada Despachante:</label>
+                                                    <input type="text" name="dataRetiradaDespachante" id="dataRetiradaDespachante" class="form-control mascaradata datepicker" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Observações:</label>
+                                                    <textarea rows="5" name="observacaoLeiloesNegativos" class="form-control"></textarea>
+                                                </div>
+
+
+                                                <!-- <div class="form-group">
+                                                    <label>CHB Formatado:</label>
+                                                    <input type="text" name="contratoFormatado" class="form-control" id="inputChb" placeholder="00.0000.0000000-0" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="_validarCHB('#inputChb');">Validar CHB</button>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Nome do Proponente:</label>
+                                                    <input type="text" name="nomeProponente" class="form-control" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>CPF / CNPJ:</label>
+                                                    <input type="text" name="cpfCnpjProponente" class="form-control" required>
+                                                </div> -->
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
 
 
