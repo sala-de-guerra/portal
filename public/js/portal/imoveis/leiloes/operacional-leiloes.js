@@ -11,8 +11,8 @@ $(document).ready(function(){
         _formataValores();
     }, 3000);
 
-    // $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
-    $.getJSON('../js/imovel_mockado.json', function(dados){
+    $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
+    // $.getJSON('../js/imovel_mockado.json', function(dados){
 
         var numeroBem = dados.numeroBem;
         // var dossieDigital = dados.dossieDigital;
@@ -61,25 +61,3 @@ $('#statusLeiloesNegativos').change(function () {
         
     }
 })
-
-
-function copyToClipboard(element) {
-    var $temp = $("<input>");
-    $("body").append($temp);
-    $temp.val($(element).text()).select();
-    document.execCommand("copy");
-    $temp.remove();
-
-    $(function() {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
-        Toast.fire({
-            icon: 'success',
-            title: 'Copiado com sucesso!'
-        })    
-    })
-}

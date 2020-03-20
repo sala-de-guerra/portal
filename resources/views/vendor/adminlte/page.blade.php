@@ -332,6 +332,7 @@
     <script src="{{ asset('plugins/DataTables/dataTables.fixedColumns.min.js') }}"></script>
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/toggle_fullscreen.js') }}"></script>
+    <script src="{{ asset('js/global/copy_to_clipboard.js') }}"></script>
 
     @stack('js')
     @yield('js')

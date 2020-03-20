@@ -134,6 +134,6 @@
 
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/distrato/controle-distrato.js') }}"></script>
 
 @stop

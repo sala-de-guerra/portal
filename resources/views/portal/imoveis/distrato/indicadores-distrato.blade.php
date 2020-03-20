@@ -88,6 +88,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <Script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></Script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
-<script src="{{ asset('js/portal/distrato/indicadores-distrato.js') }}"></script>
+<script src="{{ asset('js/portal/imoveis/distrato/indicadores-distrato.js') }}"></script>
 
 @stop

@@ -41,7 +41,7 @@
 
 @section('js')
 
-<script src="{{ asset('js/portal/sobre.js') }}"></script>
+<script src="{{ asset('js/portal/informativas/sobre.js') }}"></script>
 
 
 @stop
