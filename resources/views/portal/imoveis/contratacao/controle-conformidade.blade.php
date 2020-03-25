@@ -53,15 +53,22 @@
                                     <th>Tipo de Venda</th>
                                     <th>Tipo de Proposta</th>
                                     <th>Recursos Próprios</th>
-                                    <th>Total Recebido</th>
-                                    <th>Status</th>
-                                    <th>Card Agrupamento</th>
                                     <th>Data Entrada</th>
                                     <th>Link</th>
+                                    <th>Proposta</th>
                                     <th>Observações</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                    <td>CHB</td>
+                                    <td>Agência</th>
+                                    <td>Tipo de Venda</th>
+                                    <td>Tipo de Proposta</td>
+                                    <td>Recursos Próprios</td>
+                                    <td>Data Entrada</td>
+                                    <td>Link</td>
+                                    <td>Proposta</td>
+                                    <td>Observações</td>
 
                             </tbody>
                         </table>

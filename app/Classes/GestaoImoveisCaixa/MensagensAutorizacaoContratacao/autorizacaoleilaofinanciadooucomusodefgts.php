@@ -93,8 +93,8 @@
     </table>
 
     <p>
-        1.2  Os documentos referentes ao imóvel e aquisição encontram-se disponíveis para consulta, exclusivamente 
-        pela agência Caixa, no link: \\sp7257sr001\PUBLIC\EstoqueImoveis\%CONTRATO_BEM%
+        1.2  Os dados referentes ao imóvel e aquisição encontram-se disponíveis para consulta, exclusivamente 
+        pela agência Caixa, no portal: <a href="https://portal.gilie.sp.caixa/">https://portal.gilie.sp.caixa/</a>;
     </p>
 
     <p>
@@ -184,7 +184,8 @@
 <p class="destaque">
 Atenciosamente,
 <br><br>
-GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS 
+GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS<br>
+<a href="https://portal.gilie.sp.caixa/">https://portal.gilie.sp.caixa/</a>; 
 </P>
 
 
