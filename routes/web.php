@@ -115,6 +115,23 @@ Route::prefix('estoque-imoveis')->group(function () {
     });
 });
 
+// FORNECEDORES
+Route::prefix('fornecedores')->group(function () {
+    // DESPACHANTES
+    Route::prefix('controle-despachantes')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CONTROLAR DESPACHANTES
+        Route::get('/', 'Fornecedores\DespachanteController@index');
+        // MÉTODO PARA CADASTRAR NOVO DESPACHANTE
+        Route::post('/', 'Fornecedores\DespachanteController@cadastrarDespachante');
+        // MÉTODO PARA EDITAR UM DESPACHANTE
+        Route::put('/', 'Fornecedores\DespachanteController@editarCadastroDespachante');
+        // MÉTODO PARA DESATIVAR UM DESPACHANTE
+        Route::delete('/', 'Fornecedores\DespachanteController@desativarDespachante');
+        // LISTAR DESPACHANTES ATIVOS DA UNIDADE
+        Route::get('listar-despachantes/{codigoUnidade}', 'Fornecedores\DespachanteController@listarDespachantes');
+    });
+});
+
 // GERENCIAL
 Route::prefix('gerencial')->group(function () {
     // GESTÃO DE EQUIPES
