@@ -188,5 +188,5 @@
 
 @section('js')
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/portal/contratacao/controle-conformidade.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/contratacao/controle-conformidade.js') }}"></script>
 @stop

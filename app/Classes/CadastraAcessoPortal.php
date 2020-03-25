@@ -148,10 +148,10 @@ class CadastraAcessoPortal
             $this->nivelAcesso = 'AUDITOR';
         } elseif (in_array($this->getUnidade(), $this->arrayMatriz)) {
             $this->nivelAcesso = 'MATRIZ';
+        } elseif (in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
+            $this->nivelAcesso = 'DESENVOLVEDOR';
         } elseif (in_array($this->getUnidade(), $this->arrayCodigoUnidadesGilie)) {
-            if (in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
-                $this->nivelAcesso = 'DESENVOLVEDOR';
-            } elseif(in_array(session('codigoFuncao'), $this->arrayCodigoFuncaoGestao)) {
+            if(in_array(session('codigoFuncao'), $this->arrayCodigoFuncaoGestao)) {
                 $this->nivelAcesso = 'GESTOR';
             } elseif($this->getEventual()) {
                 $this->nivelAcesso = 'EVENTUAL';
