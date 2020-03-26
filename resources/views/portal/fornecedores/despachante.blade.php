@@ -20,6 +20,28 @@
     </div>
 </div>
 
+<div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="tblfornecedores" class="table table-bordered table-striped dataTable">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Despachante</th>
+                                    <th>Contrato</th>
+                                    <th>Data de vencimento do contrato</th>
+                                    <th>CNPJ</th>
+                                    <th>Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
 @stop 
 
 

@@ -60,16 +60,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    <td>CHB</td>
-                                    <td>Agência</th>
-                                    <td>Tipo de Venda</th>
-                                    <td>Tipo de Proposta</td>
-                                    <td>Recursos Próprios</td>
-                                    <td>Data Entrada</td>
-                                    <td>Link</td>
-                                    <td>Proposta</td>
-                                    <td>Observações</td>
-
+  
                             </tbody>
                         </table>
                     </div>
