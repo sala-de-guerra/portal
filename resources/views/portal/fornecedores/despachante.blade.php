@@ -20,27 +20,41 @@
     </div>
 </div>
 
-<div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="tblfornecedores" class="table table-bordered table-striped dataTable">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Despachante</th>
-                                    <th>Contrato</th>
-                                    <th>Data de vencimento do contrato</th>
-                                    <th>CNPJ</th>
-                                    <th>Nome</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                            </tbody>
-                        </table>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-default">       
+            <div class="card-body">
+                
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="tblfornecedores" class="table table-bordered table-striped dataTable">
+                                 <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Despachante</th>
+                                        <th>Contrato</th>
+                                        <th>Data de vencimento do contrato</th>
+                                        <th>CNPJ</th>
+                                        <th>Nome</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+
+                                    </tbody>
+                             </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.col -->
+
+
+</div> <!-- /.row -->
 
 @stop 
 
@@ -62,5 +76,24 @@
 
 
 @section('js')
-    
+<script>
+$(document).ready(function(){
+$.getJSON('/fornecedores/controle-despachantes/listar-despachantes/7257', function(dados){
+    $.each(dados, function(key, item) {
+    var linha =
+            '<tr>' +
+                '<td>' + item.idDespachante + '</td>' +
+                '<td>' + item.nomeDespachante + '</td>' +
+                '<td>' + item.numeroContrato + '</td>' +
+                '<td>' + item.dataVencimentoContrato + '</td>' +
+                '<td>' + item.cnpjDespachante + '</td>' +
+                '<td>' + item.nomePrimeiroResponsavelDespachante + '</td>' +
+                '</tr>';
+    $(linha).appendTo('#tblfornecedores>tbody');
+    })
+ }).done(function() { 
+    _formataDatatable();
+ })
+})
+</script>
 @stop
