@@ -11,6 +11,8 @@ class DistratoDemandasTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('TBL_DISTRATOS_DEMANDAS')->truncate();
+        
         DB::table('TBL_DISTRATOS_DEMANDAS')->insert([
             'contratoFormatado' => '00.0000.1000411-2',
             'nomeProponente' => 'DOUGLAS DOUGRAS DA SILVA',

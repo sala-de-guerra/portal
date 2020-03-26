@@ -11,6 +11,8 @@ class FornecedoresDadosDespachanteSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('TBL_FORNECEDORES_DADOS_DESPACHANTE')->truncate();
+
         DB::table('TBL_FORNECEDORES_DADOS_DESPACHANTE')->insert([
             'numeroContrato'                            => '8603/2019',
             'dataVencimentoContrato'                    => '2020-09-01',
