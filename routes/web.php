@@ -18,6 +18,11 @@ Route::get('area', function () {
     return view('portal.informativas.area');
 });
 
+ // App Mobile
+ Route::get('/app', function () {
+    return view('portal.informativas.app');
+});
+
 // duvidas frequentes
 Route::get('faq', function () {
     return view('portal.informativas.faq');
