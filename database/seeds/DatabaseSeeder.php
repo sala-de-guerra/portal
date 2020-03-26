@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
                 EmpregadosTableSeeder::class,
                 DistratoDemandasTableSeeder::class,
                 PerfisAcessoPortalTableSeeder::class,
+                FornecedoresDadosDespachanteSeeder::class,
             ]);
         }
         $this->call([
