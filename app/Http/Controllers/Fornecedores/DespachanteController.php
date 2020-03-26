@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Fornecedores;
 
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Fornecedores\Despachante;
+use Illuminate\Http\Request;
 
 class DespachanteController extends Controller
 {
@@ -34,9 +35,29 @@ class DespachanteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function cadastrarDespachante(Request $request)
     {
-        //
+        try {
+            $novoDespachante = new Despachante;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> $request->;
+            // $novoDespachante-> = date("Y-m-d H:i:s", time());
+            // $novoDespachante-> = date("Y-m-d H:i:s", time());
+        } catch (\Throwable $th) {
+            // dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            
+        }
+        return redirect('/fornecedores/controle-despachantes');
     }
 
     /**
