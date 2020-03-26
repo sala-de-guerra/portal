@@ -17,22 +17,22 @@
 @endif
 
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col">
             <h1 class="m-0 text-dark">
-                Controle de Distratos em Andamento
+                Controle de Leilões Negativos
             </h1>
         </div>
 
-        <div class="col-sm-3">
+        <!-- <div class="col-sm-3">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDistrato">
                 <i class="far fa-lg fa-edit"></i>
                 Cadastrar Pedido de Distrato
             </button>
-        </div>
+        </div> -->
 
         <div class="col-sm-3">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/distrato"> Controle de Distrato</a> </li>
+                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/distrato"> Controle de Leilões Negativos</a> </li>
             </ol>
         </div>
     </div>
@@ -75,7 +75,7 @@
     </div> <!-- /.row -->
 
     <!-- Modal -->
-    <div class="modal fade" id="modalCadastraDistrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="modalCadastraDistrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form method='post' action='/estoque-imoveis/distrato/cadastrar-demanda' id="formCadastraDemandaDistrato">
@@ -115,7 +115,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 @stop
@@ -134,6 +134,5 @@
 
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/portal/imoveis/distrato/controle-distrato.js') }}"></script>
 
 @stop

@@ -100,6 +100,16 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
     });
 
+    // ROTAS DO PROJETO DE LEILÕES
+    Route::prefix('leiloes')->group(function () {
+        Route::get('leiloes-negativos', function () {
+            return view('portal.imoveis.leiloes.leiloes-negativos');
+        });
+        Route::get('tratar', function () {
+            return view('portal.imoveis.leiloes.operacional-leiloes');
+        });
+    });
+
     // ROTA PARA REGISTRO DE HISTÓRICO
     Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\RegistroAtendimentoController@registrarHistorico');
 
@@ -107,6 +117,23 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::prefix('mensagens-automaticas')->group(function () {
         Route::get('autorizacao-contratacao', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarMensageriasAutorizacaoContratacao');
         Route::get('autorizacao-contratacao/{contrato}', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarAutorizacaoContratacaoViaPortal');
+    });
+});
+
+// FORNECEDORES
+Route::prefix('fornecedores')->group(function () {
+    // DESPACHANTES
+    Route::prefix('controle-despachantes')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CONTROLAR DESPACHANTES
+        Route::get('/', 'Fornecedores\DespachanteController@index');
+        // MÉTODO PARA CADASTRAR NOVO DESPACHANTE
+        Route::post('/', 'Fornecedores\DespachanteController@cadastrarDespachante');
+        // MÉTODO PARA EDITAR UM DESPACHANTE
+        Route::put('/', 'Fornecedores\DespachanteController@editarCadastroDespachante');
+        // MÉTODO PARA DESATIVAR UM DESPACHANTE
+        Route::delete('/', 'Fornecedores\DespachanteController@desativarDespachante');
+        // LISTAR DESPACHANTES ATIVOS DA UNIDADE
+        Route::get('listar-despachantes/{codigoUnidade}', 'Fornecedores\DespachanteController@listarDespachantes');
     });
 });
 

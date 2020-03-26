@@ -64,5 +64,5 @@
     <script src="{{ asset('js/global/formata_tabela_despesas_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_lista_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
-    <script src="{{ asset('js/portal/distrato/operacional-distrato.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/distrato/operacional-distrato.js') }}"></script>
 @stop
