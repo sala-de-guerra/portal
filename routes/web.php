@@ -129,9 +129,9 @@ Route::prefix('fornecedores')->group(function () {
         // MÉTODO PARA CADASTRAR NOVO DESPACHANTE
         Route::post('/', 'Fornecedores\DespachanteController@cadastrarDespachante');
         // MÉTODO PARA EDITAR UM DESPACHANTE
-        Route::put('/', 'Fornecedores\DespachanteController@editarCadastroDespachante');
+        Route::put('/{idDespachante}', 'Fornecedores\DespachanteController@editarCadastroDespachante');
         // MÉTODO PARA DESATIVAR UM DESPACHANTE
-        Route::delete('/', 'Fornecedores\DespachanteController@desativarDespachante');
+        Route::delete('/{idDespachante}', 'Fornecedores\DespachanteController@desativarDespachante');
         // LISTAR DESPACHANTES ATIVOS DA UNIDADE
         Route::get('listar-despachantes/{codigoUnidade}', 'Fornecedores\DespachanteController@listarDespachantes');
     });
