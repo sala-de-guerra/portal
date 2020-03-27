@@ -10,7 +10,14 @@
         <h1 class="m-0 text-dark">
             Controle Despachantes
         </h1>
-    </div><br>
+    </div>
+
+    <div class="col-sm-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespachante">
+                <i class="far fa-lg fa-edit"></i>
+                Cadastrar Despachante
+            </button>
+</div>
 
     <div class="col">
         <ol class="breadcrumb float-right">
@@ -18,15 +25,8 @@
             <li class="breadcrumb-item active"><a href="/fornecedores/controle-despachantes"> Controle Despachantes</a> </li>
         </ol>
     </div>
-</div>
 
-<div class="col-sm-3">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespachante">
-                <i class="far fa-lg fa-edit"></i>
-                Cadastrar Despachante
-            </button>
 </div><br>
-
 
 <div class="row">
     <div class="col-md-12">
@@ -66,7 +66,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form method='post' action='#####FALTACOLOCAR######' id="formCadastraDemandaDespachante">
-                    
+                {{ csrf_field() }}                 
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Cadastrar Despachante</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
