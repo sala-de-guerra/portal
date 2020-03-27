@@ -64,6 +64,7 @@
                         </div>
 
                         <div class="row">
+                            @if (session()->get('acessoEmpregadoPortal') !== 'AGENCIA')
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Dossiê Digital:</label>
@@ -72,6 +73,7 @@
                                     <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' ?? '' }}</a>
                                 </div>
                             </div>
+                            @endif
                             <div id="anuncioSiteCaixa"class="col-sm-3">
                                 <div class="form-group">
                                     <label>Anúncio X Imóveis:</label>
@@ -625,12 +627,12 @@
                                     <p id="quantidadeParcelasProposta"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data Assinatura Contrato:</label>
                                     <p id="dataAssinaturaContrato" class="formata-data-sem-hora"></p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="row">
@@ -646,25 +648,19 @@
                                     <p id="agrupamento"></p>
                                 </div>
                             </div>
-                            <!-- <div id="anuncioSiteCaixa"class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Consulta CIWEB:</label>
-                                    <br>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConsultaCiweb" title="Ir para tela de consulta do CIWEB"><i class="fas fa-globe-americas"></i></button>
-                                </div>
-                            </div> -->
-                            <!-- <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Número de Parcelas:</label>
-                                    <p id=""></p>
+                                    <label>Data de Assinatura do Contrato:</label>
+                                    <p id="dataAssinaturaContrato" class="formata-data-sem-hora"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Total Recebido:</label>
-                                    <p id=""></p>
+                                    <label>Data de Registro no Cartório:</label>
+                                    <br>
+                                    <p id="dataRegistroCartorio" class="formata-data-sem-hora"></p>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <!-- <div class="modal fade" id="modalConsultaCiweb" tabindex="-1" role="dialog" aria-labelledby="modalConsultaCiweb" aria-hidden="true">
