@@ -143,60 +143,61 @@
             <div class="card-body">
                 <ul class="row" style="list-style: none;">   
                     <li class="col-6 pb-4">
-                        <button class="col-12 btn btn-default">
+                        <a href="http://suban1.mz.caixa/painelimoveis/" target="_blank" class="col-12 btn btn-default">
                             Acompanhamento do processo de contratação:
                             <br>
-                            <a href="http://imagem.caixa/imoveiscaixa/" target="_blank">http://imagem.caixa/imoveiscaixa/</a>
-                        </button>
+                            <span class="text-primary">http://suban1.mz.caixa/painelimoveis/</span> 
+                        </a>
                     </li>
                     <li class="col-6 pb-4">
-                        <button class="col-12 btn btn-default">
-                            Consulta de ações judiciais e demais demandas jurídicas :
+                        <a href="http://www.portal.dijur.caixa/" target="_blank" class="col-12 btn btn-default">
+                            Consulta de ações judiciais e demais demandas jurídicas:
                             <br>
-                            <a href="http://www.portal.dijur.caixa/" target="_blank">http://www.portal.dijur.caixa/</a>
-                        </button>
+                            <span class="text-primary">http://www.portal.dijur.caixa/</span> 
+                        </a>
                     </li>
                     <li class="col-6 pb-4">
-                        <button class="col-12 btn btn-default">
+                        <a href="http://sinafweb.caixa/" target="_blank" class="col-12 btn btn-default">
                             Criação de DLE com código de barras:
                             <br>
-                            <a href="http://sinafweb.caixa/" target="_blank">http://sinafweb.caixa/</a>
-                        </button>
+                            <span class="text-primary">http://sinafweb.caixa/</span> 
+                        </a>
                     </li>
                     <li class="col-6 pb-4">
-                        <button class="col-12 btn btn-default">
+                        <a href="http://inovacao.suban.caixa/apps/atende/#/login" target="_blank" class="col-12 btn btn-default">
                             Dúvidas sobre o envio e tratamento da conformidade (ATENDE):
                             <br>
-                            <a href="http://inovacao.suban.caixa/apps/atende/#/login" target="_blank">http://inovacao.suban.caixa/apps/atende/#/login</a>
-                        </button>
+                            <span class="text-primary">http://inovacao.suban.caixa/apps/atende/#/login</span> 
+                        </a>
                     </li>
                     <li class="col-6 pb-4">
-                        <button class="col-12 btn btn-default">
+                        <a href="http://siga.caixa/" target="_blank" class="col-12 btn btn-default">
                             Gestão de ativos e contratos:
                             <br>
-                            <a href="http://siga.caixa/" target="_blank">http://siga.caixa/</a>
-                        </button>
+                            <span class="text-primary">http://siga.caixa/</span> 
+                        </a>
                     </li>
                     <li class="col-6 pb-4">
-                        <button class="col-12 btn btn-default">
-                            Portal da GEIPT com indicadores e ferramentas de gestão estratégica :
+                        <a href="http://alienar.caixa/" target="_blank" class="col-12 btn btn-default">
+                            Portal da GEIPT com indicadores e ferramentas de gestão estratégica:
                             <br>
-                            <a href="http://alienar.caixa/" target="_blank">http://alienar.caixa/</a>
-                        </button>
+                            <span class="text-primary">http://alienar.caixa/</span> 
+                        </a>
+                    </li>
+                    <li class="col-6 pb-4">
+                        <a href="http://www.giliego.go.caixa/geradoc/" target="_blank" class="col-12 btn btn-default">
+                            Portal da GILIE/GO com ferramenta de geração de MO's preenchidos:
+                            <br>
+                            <span class="text-primary">http://www.giliego.go.caixa/geradoc/</span> 
+                        </a>
                     </li>
                 </ul>
             </div>
-
-        </div>
-        
-    </div>
-    
+        </div>       
+    </div>    
 </div>
 
-
-
 @section('footer')
-
 
 @stop
 
@@ -204,9 +205,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
-        
 @stop
-
 
 @section('js')
 <!-- <script>

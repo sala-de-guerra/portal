@@ -69,98 +69,99 @@ class ConsultaContratoController extends Controller
         // VALIDA SE EXISTE AGÊNCIA DE CONTRATAÇÃO
         $dadosAgencia = RelacaoAgSrComEmail::where('nomeAgencia', $contrato->AGENCIA_CONTRATACAO_PROPOSTA)->first();
         if ($dadosAgencia == null || $dadosAgencia == 'NULL') {
-            $codigoAgenciaContratacao = null;
-            $nomeAgenciaContratacao = null;
-            $emailAgenciaContratacao = null;
+            $codigoAgenciaContratacao   = null;
+            $nomeAgenciaContratacao     = null;
+            $emailAgenciaContratacao    = null;
         } else {
-            $codigoAgenciaContratacao = $dadosAgencia->codigoAgencia;
-            $nomeAgenciaContratacao = $dadosAgencia->nomeAgencia;
-            $emailAgenciaContratacao = $dadosAgencia->emailAgencia;
+            $codigoAgenciaContratacao   = $dadosAgencia->codigoAgencia;
+            $nomeAgenciaContratacao     = $dadosAgencia->nomeAgencia;
+            $emailAgenciaContratacao    = $dadosAgencia->emailAgencia;
         }
 
         // VALIDA SE EXISTE CONFORMIDADE NO CONTRATO
         if ($dadosConformidade == null || $dadosConformidade == 'NULL') {
-            $cardDeAgrupamento = null;
-            $nomeStatusDoDossie =  null;
-            $dataParecerConformidade = null;
+            $cardDeAgrupamento          = null;
+            $nomeStatusDoDossie         =  null;
+            $dataParecerConformidade    = null;
         } else {
-            $cardDeAgrupamento = $dadosConformidade->cardDeAgrupamento;
-            $nomeStatusDoDossie =  $dadosConformidade->nomeStatusDoDossie;
-            $dataParecerConformidade = $dadosConformidade->dataStatus;
+            $cardDeAgrupamento          = $dadosConformidade->cardDeAgrupamento;
+            $nomeStatusDoDossie         =  $dadosConformidade->nomeStatusDoDossie;
+            $dataParecerConformidade    = $dadosConformidade->dataStatus;
         }
 
         // VALIDA SE O PROPONENTE TEM E-MAIL CADASTRADO
         if ($dadosProposta ==  null || $dadosProposta == 'NULL') {
-            $emailProponente = 'sem e-mail cadastrado';
+            $emailProponente            = 'sem e-mail cadastrado';
         } else {
-            $emailProponente = $dadosProposta->{'E-MAIL PROPONENTE'};
+            $emailProponente            = $dadosProposta->{'E-MAIL PROPONENTE'};
         }
         
         // MONTA O JSON QUE VAI PRA VIEW
         $dadosContrato = [
-            'bemFormatado' => $numeroContrato,
+            'bemFormatado'                      => $numeroContrato,
 
             // DADOS DO IMÓVEL
-            'numeroBem' => $contrato->NU_BEM,
-            'classificacao' => $contrato->CLASSIFICACAO,
-            'nomeExMutuario' => $contrato->NO_EX_MUTUARIO,
-            'cpfCnpjExMutuario' => $contrato->NU_DOC_EX_MUTUARIO,
-            'cep' => $contrato->CEP,
-            'nomeEmpreendimento' => $contrato->NOME_EMPREENDIMENTO,
-            'enderecoImovel' => $contrato->ENDERECO_IMOVEL,
-            'bairroImovel' => $contrato->BAIRRO,
-            'ufImovel' => $contrato->UF,
-            'cidadeImovel' => $contrato->CIDADE,
-            'tipoImovel' => $contrato->TIPO_IMOVEL,
-            'statusImovel' => $contrato->STATUS_IMOVEL,
-            'descricaoImovel' => $contrato->DESCRICAO_IMOVEL,
-            'descricaoAdicionalImovel' => $contrato->DESCRICAO_ADIC_IMOVEL,
-            'valorAvaliacao' => $contrato->VALOR_AVALIACAO,
-            'matriculaImovel' => $contrato->MATRICULA . " / " . $contrato->OFICIO . " Cartório",
-            'origemMatricula' => $contrato->ORIGEM_MATRICULA,
-            'dataLaudoAvaliacao' => Carbon::parse($contrato->DATA_LAUDO)->format('Y-m-d'),
-            'dataValidadeLaudoAvaliacao' => Carbon::parse($contrato->DATA_VENCIMENTO_LAUDO)->format('Y-m-d'),
+            'numeroBem'                         => $contrato->NU_BEM,
+            'classificacao'                     => $contrato->CLASSIFICACAO,
+            'nomeExMutuario'                    => $contrato->NO_EX_MUTUARIO,
+            'cpfCnpjExMutuario'                 => $contrato->NU_DOC_EX_MUTUARIO,
+            'cep'                               => $contrato->CEP,
+            'nomeEmpreendimento'                => $contrato->NOME_EMPREENDIMENTO,
+            'enderecoImovel'                    => $contrato->ENDERECO_IMOVEL,
+            'bairroImovel'                      => $contrato->BAIRRO,
+            'ufImovel'                          => $contrato->UF,
+            'cidadeImovel'                      => $contrato->CIDADE,
+            'tipoImovel'                        => $contrato->TIPO_IMOVEL,
+            'statusImovel'                      => $contrato->STATUS_IMOVEL,
+            'descricaoImovel'                   => $contrato->DESCRICAO_IMOVEL,
+            'descricaoAdicionalImovel'          => $contrato->DESCRICAO_ADIC_IMOVEL,
+            'valorAvaliacao'                    => $contrato->VALOR_AVALIACAO,
+            'matriculaImovel'                   => $contrato->MATRICULA . " / " . $contrato->OFICIO . " Cartório",
+            'origemMatricula'                   => $contrato->ORIGEM_MATRICULA,
+            'dataLaudoAvaliacao'                => Carbon::parse($contrato->DATA_LAUDO)->format('Y-m-d'),
+            'dataValidadeLaudoAvaliacao'        => Carbon::parse($contrato->DATA_VENCIMENTO_LAUDO)->format('Y-m-d'),
 
             // LEILÕES
-            'valorPrimeiroLeilao' => $contrato->VALOR_PRIMEIRO_LEILAO,
-            'valorSegundoLeilao' => $contrato->VALOR_SEGUNDO_LEILAO,
-            'valorVenda' => $contrato->VALOR_VENDA,
-            'valorContabil' => $contrato->VALOR_CONTABIL,
-            'dataConsolidacao' => $contrato->DATA_CONSOLIDACAO,
-            'agrupamentoLeilao' => $contrato->AGRUPAMENTO,
-            'numeroItem' => $contrato->NUMERO_ITEM,
-            'dataArremate' => $contrato->DATA_ARREMATE,
-            'dataPrimeiroLeilao' => $contrato->DT_PRIMEIRO_LEILAO,
-            'dataSegundoLeilao' => $contrato->DT_SEGUNDO_LEILAO,
+            'valorPrimeiroLeilao'               => $contrato->VALOR_PRIMEIRO_LEILAO,
+            'valorSegundoLeilao'                => $contrato->VALOR_SEGUNDO_LEILAO,
+            'valorVenda'                        => $contrato->VALOR_VENDA,
+            'valorContabil'                     => $contrato->VALOR_CONTABIL,
+            'dataConsolidacao'                  => $contrato->DATA_CONSOLIDACAO,
+            'agrupamentoLeilao'                 => $contrato->AGRUPAMENTO,
+            'numeroItem'                        => $contrato->NUMERO_ITEM,
+            'dataArremate'                      => $contrato->DATA_ARREMATE,
+            'dataPrimeiroLeilao'                => $contrato->DT_PRIMEIRO_LEILAO,
+            'dataSegundoLeilao'                 => $contrato->DT_SEGUNDO_LEILAO,
 
             // CONTRATAÇÃO
-            'tipoVenda' => $contrato->TIPO_VENDA,
-            'nomeProponente' => strtoupper($contrato->NOME_PROPONENTE),
-            'cpfCnpjProponente' => $contrato->CPF_CNPJ_PROPONENTE,
-            'telefoneProponente' => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
-            'emailProponente' => $emailProponente == null ? 'sem e-mail cadastrado' : $emailProponente,
-            'nomeCorretor' => $contrato->NO_CORRETOR,
-            'numeroCreciCorretor' => $contrato->NU_CRECI,
-            'telefoneCorretor' => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : $telefoneCorretor,
-            'emailCorretor' =>  $contrato->EMAIL_CORRETOR == null ? 'sem e-mail cadastrado' : $contrato->EMAIL_CORRETOR,
-            'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-            'valorTotalProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
-            'valorRecursosPropriosProposta' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
-            'valorFgtsProposta' => $contrato->VALOR_FGTS_PROPOSTA,
-            'valorFinanciamentoProposta' => $contrato->VALOR_FINANCIADO_PROPOSTA,
-            'valorParceladoProposta' => $contrato->VALOR_PARCELADO_PROPOSTA,
-            'quantidadeParcelasProposta' => $contrato->QTDE_PARCELAS_PROPOSTA,
-            'codigoAgContratacaoProposta' => str_pad($codigoAgenciaContratacao, 4, '0', STR_PAD_LEFT),
-            'nomeAgContratacaoProposta' => $nomeAgenciaContratacao,
-            'emailAgContratacaoProposta' => $emailAgenciaContratacao,
-            'siglaComissao' => $contrato->SIGLA_COMISSAO,
-            'agrupamento' => $contrato->AGRUPAMENTO,
-            'dataAssinaturaContrato' => $contrato->DATA_CONTRATO == null ? $contrato->DATA_CONTRATO : Carbon::parse($contrato->DATA_CONTRATO)->format('Y-m-d'),
+            'tipoVenda'                         => $contrato->TIPO_VENDA,
+            'nomeProponente'                    => strtoupper($contrato->NOME_PROPONENTE),
+            'cpfCnpjProponente'                 => $contrato->CPF_CNPJ_PROPONENTE,
+            'telefoneProponente'                => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
+            'emailProponente'                   => $emailProponente == null ? 'sem e-mail cadastrado' : $emailProponente,
+            'nomeCorretor'                      => $contrato->NO_CORRETOR,
+            'numeroCreciCorretor'               => $contrato->NU_CRECI,
+            'telefoneCorretor'                  => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : $telefoneCorretor,
+            'emailCorretor'                     => $contrato->EMAIL_CORRETOR == null ? 'sem e-mail cadastrado' : $contrato->EMAIL_CORRETOR,
+            'dataProposta'                      => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+            'valorTotalProposta'                => $contrato->VALOR_TOTAL_PROPOSTA,
+            'valorRecursosPropriosProposta'     => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+            'valorFgtsProposta'                 => $contrato->VALOR_FGTS_PROPOSTA,
+            'valorFinanciamentoProposta'        => $contrato->VALOR_FINANCIADO_PROPOSTA,
+            'valorParceladoProposta'            => $contrato->VALOR_PARCELADO_PROPOSTA,
+            'quantidadeParcelasProposta'        => $contrato->QTDE_PARCELAS_PROPOSTA,
+            'codigoAgContratacaoProposta'       => str_pad($codigoAgenciaContratacao, 4, '0', STR_PAD_LEFT),
+            'nomeAgContratacaoProposta'         => $nomeAgenciaContratacao,
+            'emailAgContratacaoProposta'        => $emailAgenciaContratacao,
+            'siglaComissao'                     => $contrato->SIGLA_COMISSAO,
+            'agrupamento'                       => $contrato->AGRUPAMENTO,
+            'dataAssinaturaContrato'            => $contrato->DATA_CONTRATO == null ? 'data não informada' : Carbon::parse($contrato->DATA_CONTRATO)->format('Y-m-d'),
+            'dataRegistroCartorio'              => $contrato->DT_REGISTRO_CARTORIO == null ? 'data não informada' : Carbon::parse($contrato->DT_REGISTRO_CARTORIO)->format('Y-m-d'),
             // 'tipoContratacao'
-            'cardAgrupamento' => $cardDeAgrupamento,
-            'nomeStatusDossie' => $nomeStatusDoDossie,
-            'tipoFluxoContratacao' => $fluxoAgenciaOuCca,
-            'dataParecerConformidade' => $dataParecerConformidade == null ? $dataParecerConformidade : Carbon::parse($dataParecerConformidade)->format('Y-m-d'),
+            'cardAgrupamento'                   => $cardDeAgrupamento,
+            'nomeStatusDossie'                  => $nomeStatusDoDossie,
+            'tipoFluxoContratacao'              => $fluxoAgenciaOuCca,
+            'dataParecerConformidade'           => $dataParecerConformidade == null ? $dataParecerConformidade : Carbon::parse($dataParecerConformidade)->format('Y-m-d'),
             
 
         ];
@@ -173,12 +174,12 @@ class ConsultaContratoController extends Controller
         $jsonMensagensEnviadas = [];
         foreach ($universoMensagensEnviadas as $mensagem) {
             $arrayDadosMensagem = [
-                'idMensagem' => $mensagem->id,
-                'tipoMensagem' => $mensagem->tipoMensagem,
-                'codigoAgencia' => $mensagem->codigoAgencia == null ? '' : $mensagem->codigoAgencia,
-                'emailProponente' => $mensagem->emailProponente == null ? '' : $mensagem->emailProponente,
-                'emailCorretor' => $mensagem->emailCorretor == null ? '' : $mensagem->emailCorretor,
-                'dataEnvio' => $mensagem->created_at,
+                'idMensagem'        => $mensagem->id,
+                'tipoMensagem'      => $mensagem->tipoMensagem,
+                'codigoAgencia'     => $mensagem->codigoAgencia == null ? '' : $mensagem->codigoAgencia,
+                'emailProponente'   => $mensagem->emailProponente == null ? '' : $mensagem->emailProponente,
+                'emailCorretor'     => $mensagem->emailCorretor == null ? '' : $mensagem->emailCorretor,
+                'dataEnvio'         => $mensagem->created_at,
             ];
             array_push($jsonMensagensEnviadas, $arrayDadosMensagem);
         }
@@ -193,12 +194,12 @@ class ConsultaContratoController extends Controller
         $jsonHistoricoContrato = [];
         foreach ($universoHistoricoContrato as $historico) {
             $arrayDadosHistorico = [
-                'idHistorico' => $historico->idHistorico,
-                'matriculaResponsavel' => $historico->matricula,
-                'tipo' => $historico->tipo,
-                'atividade' => $historico->atividade,
-                'observacao' => nl2br($historico->observacao),
-                'data' => $historico->created_at,
+                'idHistorico'           => $historico->idHistorico,
+                'matriculaResponsavel'  => $historico->matricula,
+                'tipo'                  => $historico->tipo,
+                'atividade'             => $historico->atividade,
+                'observacao'            => nl2br($historico->observacao),
+                'data'                  => $historico->created_at,
             ];
             array_push($jsonHistoricoContrato, $arrayDadosHistorico);
         }
@@ -249,7 +250,7 @@ class ConsultaContratoController extends Controller
             case 'cpfCnpjProponente':
                 $termoPesquisaTratado = self::trataVariavelCpfCnpj($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('CPF_CNPJ_PROPONENTE', 'like', "%$termo%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('CPF_CNPJ_PROPONENTE', 'like', "%$termo%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                     }
@@ -258,7 +259,7 @@ class ConsultaContratoController extends Controller
             case 'nomeProponente':
                 $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NOME_PROPONENTE', 'like', "%$termo[0]%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NOME_PROPONENTE', 'like', "%$termo[0]%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
                             $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
@@ -269,14 +270,14 @@ class ConsultaContratoController extends Controller
                 break;
             case 'numeroContrato':
                 $termoPesquisaTratado = self::trataVariavelContrato($request->valorVariavel);
-                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_BEM', 'like', "%$termoPesquisaTratado%")->get();
+                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_BEM', 'like', "%$termoPesquisaTratado%")->get();
                 foreach ($resultadoConsulta as $cadaResultado) {
                     $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                 }
                 break;
             case 'enderecoImovel':
                 $termoPesquisaTratado = self::trataVariavelEndereco($request->valorVariavel);
-                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('ENDERECO_IMOVEL', 'like', "%$termoPesquisaTratado%")->get();
+                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('ENDERECO_IMOVEL', 'like', "%$termoPesquisaTratado%")->get();
                 foreach ($resultadoConsulta as $cadaResultado) {
                     $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                 }
@@ -284,7 +285,7 @@ class ConsultaContratoController extends Controller
             case 'cpfCnpjExMutuario':
                 $termoPesquisaTratado = self::trataVariavelCpfCnpj($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_DOC_EX_MUTUARIO', 'like', "%$termo%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_DOC_EX_MUTUARIO', 'like', "%$termo%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
                     }
@@ -293,7 +294,7 @@ class ConsultaContratoController extends Controller
             case 'nomeExMutuario':
                 $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
                 foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NO_EX_MUTUARIO', 'like', "%$termo[0]%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NO_EX_MUTUARIO', 'like', "%$termo[0]%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
                             $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
@@ -305,7 +306,7 @@ class ConsultaContratoController extends Controller
             case 'matriculaImovel':
                 // $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
                 // foreach ($termoPesquisaTratado as $termo) {
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('MATRICULA', 'like', "%$request->valorVariavel%")->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('MATRICULA', 'like', "%$request->valorVariavel%")->get();
                     foreach ($resultadoConsulta as $cadaResultado) {
                         if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
                             $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
@@ -405,16 +406,17 @@ class ConsultaContratoController extends Controller
     public static function montaArrayResultado($arrayConsultaConsolidada, $objetoSimov)
     {
         array_push($arrayConsultaConsolidada, [
-            'contratoFormatado' => $objetoSimov->BEM_FORMATADO,
-            'numeroContrato' => $objetoSimov->NU_BEM,
-            'enderecoImovel' => strtoupper($objetoSimov->ENDERECO_IMOVEL),
-            'gilieResponsavel' => $objetoSimov->UNA,
-            'cpfCnpjProponente' => $objetoSimov->CPF_CNPJ_PROPONENTE,
-            'nomeProponente' => $objetoSimov->NOME_PROPONENTE == null ? 'NÃO EXISTE PROPONENTE' : mb_strtoupper($objetoSimov->NOME_PROPONENTE, 'UTF-8'),
-            'tipoVenda' => mb_strtoupper($objetoSimov->TIPO_VENDA, 'UTF-8'),
-            'cpfCnpjExMutuario' => $objetoSimov->NU_DOC_EX_MUTUARIO,
-            'nomeExMutuario' => $objetoSimov->NO_EX_MUTUARIO == null ? 'NÃO EXISTE EX-MUTUÁRIO' : mb_strtoupper($objetoSimov->NO_EX_MUTUARIO, 'UTF-8'),
-            'matriculaImovel' => $objetoSimov->MATRICULA . " / " . $objetoSimov->OFICIO . "º CARTÓRIO"
+            'contratoFormatado'     => $objetoSimov->BEM_FORMATADO,
+            'numeroContrato'        => $objetoSimov->NU_BEM,
+            'enderecoImovel'        => strtoupper($objetoSimov->ENDERECO_IMOVEL),
+            'cidadeImovel'          => $objetoSimov->CIDADE,
+            'gilieResponsavel'      => $objetoSimov->UNA,
+            'cpfCnpjProponente'     => $objetoSimov->CPF_CNPJ_PROPONENTE,
+            'nomeProponente'        => $objetoSimov->NOME_PROPONENTE == null ? 'NÃO EXISTE PROPONENTE' : mb_strtoupper($objetoSimov->NOME_PROPONENTE, 'UTF-8'),
+            'tipoVenda'             => mb_strtoupper($objetoSimov->TIPO_VENDA, 'UTF-8'),
+            'cpfCnpjExMutuario'     => $objetoSimov->NU_DOC_EX_MUTUARIO,
+            'nomeExMutuario'        => $objetoSimov->NO_EX_MUTUARIO == null ? 'NÃO EXISTE EX-MUTUÁRIO' : mb_strtoupper($objetoSimov->NO_EX_MUTUARIO, 'UTF-8'),
+            'matriculaImovel'       => $objetoSimov->MATRICULA . " / " . $objetoSimov->OFICIO . "º CARTÓRIO"
         ]);
         return $arrayConsultaConsolidada;
     }

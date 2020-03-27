@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <div class="form-group">
-                                    <p class='text-muted'><span><i class='fas fa-lg fa-building'></i></span> <b>ENDEREÇO:</b> {{ $resultado['enderecoImovel'] }}</p>
+                                    <p class='text-muted'><b>ENDEREÇO:</b> {{ $resultado['enderecoImovel'] }}</p>
                                 </div>
                             </div>
                         </div>
@@ -81,10 +81,15 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
+                                    <p class="text-muted"><b>CIDADE:</b> {{ $resultado['cidadeImovel'] }}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
                                     <p class='text-muted text-sm'><b>TIPO VENDA:</b> {{ $resultado['tipoVenda'] }} </p>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <p class='text-muted text-sm'><b>MATRICULA:</b> {{ $resultado['matriculaImovel'] }} </p>
                                 </div>
