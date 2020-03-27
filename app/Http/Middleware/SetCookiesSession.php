@@ -34,17 +34,17 @@ class SetCookiesSession
                 // $empregado = Empregado::find('c098453'); // Rafael
 
                 $request->session()->put([
-                    'matricula' => $empregado->matricula,
-                    'nomeCompleto' => $empregado->nomeCompleto,
-                    'primeiroNome' => $empregado->primeiroNome,
-                    'codigoFuncao' => $empregado->codigoFuncao,
-                    'nomeFuncao' => $empregado->nomeFuncao,
-                    'codigoLotacaoAdministrativa' => $empregado->codigoLotacaoAdministrativa,
-                    'nomeLotacaoAdministrativa' => $empregado->nomeLotacaoAdministrativa,
-                    'codigoLotacaoFisica' => $empregado->codigoLotacaoFisica,
-                    'nomeLotacaoFisica' => $empregado->nomeLotacaoFisica,
-                    'acessoEmpregadoPortal' => $empregado->acessaPortal->nivelAcesso,
-                    'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade
+                    'matricula'                     => $empregado->matricula,
+                    'nomeCompleto'                  => $empregado->nomeCompleto,
+                    'primeiroNome'                  => $empregado->primeiroNome,
+                    'codigoFuncao'                  => $empregado->codigoFuncao,
+                    'nomeFuncao'                    => $empregado->nomeFuncao,
+                    'codigoLotacaoAdministrativa'   => $empregado->codigoLotacaoAdministrativa,
+                    'nomeLotacaoAdministrativa'     => $empregado->nomeLotacaoAdministrativa,
+                    'codigoLotacaoFisica'           => $empregado->codigoLotacaoFisica,
+                    'nomeLotacaoFisica'             => $empregado->nomeLotacaoFisica,
+                    'acessoEmpregadoPortal'         => $empregado->acessaPortal->nivelAcesso,
+                    'unidadeEmpregadoPortal'        => $empregado->acessaPortal->unidade
                 ]);
 
                 $perfilAcessoPortal = new CadastraAcessoPortal($empregado);

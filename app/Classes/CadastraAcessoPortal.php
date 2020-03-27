@@ -179,7 +179,7 @@ class CadastraAcessoPortal
      */ 
     public function setUnidade($objEmpregado)
     {
-        if ($objEmpregado->codigoLotacaoFisica === null) {
+        if (in_array($objEmpregado->codigoLotacaoFisica, [null, 'null', 'NULL'])) {
             $this->unidade = $objEmpregado->codigoLotacaoAdministrativa;
         } else {
             $this->unidade = $objEmpregado->codigoLotacaoFisica;
