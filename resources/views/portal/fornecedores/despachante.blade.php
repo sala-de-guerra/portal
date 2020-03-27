@@ -10,7 +10,7 @@
         <h1 class="m-0 text-dark">
             Controle Despachantes
         </h1>
-    </div>
+    </div><br>
 
     <div class="col">
         <ol class="breadcrumb float-right">
@@ -20,6 +20,12 @@
     </div>
 </div>
 
+<div class="col-sm-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespachante">
+                <i class="far fa-lg fa-edit"></i>
+                Cadastrar Despachante
+            </button>
+</div><br>
 
 
 <div class="row">
@@ -38,7 +44,7 @@
                                         <th>Contrato</th>
                                         <th>Data de vencimento do contrato</th>
                                         <th>CNPJ</th>
-                                        <th>Nome</th>
+                                        <th>Responsavel</th>
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -55,6 +61,54 @@
 
 
 </div> <!-- /.row -->
+
+<div class="modal fade" id="modalCadastraDespachante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method='post' action='#####FALTACOLOCAR######' id="formCadastraDemandaDespachante">
+                    
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Despachante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>Despachante:</label>
+                            <input type="text" name="Despachante" class="form-control" id="inputDespachante" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contrato:</label>
+                            <input type="text" name="nomeProponente" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Data de vencimento do contrato:</label>
+                            <input type="text" name="cpfCnpjProponente" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>CNPJ:</label>
+                            <input type="text" name="cpfCnpjProponente" class="form-control" placeholder="00.000.000/0000-00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nome do responsavel:</label>
+                            <input type="text" name="cpfCnpjProponente" class="form-control" required>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 @stop 
 
@@ -91,7 +145,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/7257', functi
                 '</tr>';
     $(linha).appendTo('#tblfornecedores>tbody');
     })
- }).done(function() { 
+ }).done(function() { 
     _formataDatatable();
  })
 })
