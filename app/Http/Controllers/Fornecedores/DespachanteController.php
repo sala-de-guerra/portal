@@ -6,6 +6,7 @@ use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Http\Controllers\Controller;
 use App\Models\Fornecedores\Despachante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DespachanteController extends Controller
 {
