@@ -355,7 +355,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                 'Ação' + '</button>' + '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
                 '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaConsulta">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
                 '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">' + '<i class="far fa-edit">' + '</i>' + ' Editar' + '</a>' +
-                '<a class="dropdown-item" href="#" id="btn-apagar">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
+                '<a class="dropdown-item" type="button" class="btn btn-primary" id="btn-apagar">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
                 '</div>' + '</div>' + '</td>' +
                 '</tr>';
                 
@@ -388,6 +388,14 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
     $("#telefonePrimeiroResponsavelDespachante").mask("(00) 00000-0000");
     $("#dataVencimentoContrato").mask("0000-00-00");
 
+</script>
+
+<script>
+$(document).on("load", (function(){
+    $('#btn-apagar').click(function(){
+        console.log("cliquei")
+    })
+}))
 </script>
 
 @stop
