@@ -164,7 +164,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="modalConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -176,7 +176,9 @@
       <div class="modal-body">
       <div class="container">
     <div id="teste">
-    -----------------------------------------------------------------------------------------
+    
+        <p>MODAL 1</p> -->
+    <!-- -----------------------------------------------------------------------------------------
     <p><b>NOME:</b> <span class="pl-5" id="nome_despachante"></span></p>
     <p><b>Telefone:</b> <span class="pl-3" id="telefone_despachante"></span></p>
     <p><b>E-MAIL:</b> <span class="pl-3" id="email_despachante"></span></p>
@@ -195,8 +197,8 @@
     <p><b>Terceiro Responsável:</b> <span class="pl-3" id="nome_terceiro_responsavel"></span></p>
     <p><b>Telefone/Terceiro Responsável:</b> <span class="pl-3" id="telefone_terceiro_responsavel"></span></p>
     <p><b>E-mail/Terceiro Responsável:</b> <span class="pl-3" id="email_terceiro_responsavel"></span></p>
-    -----------------------------------------------------------------------------------------
-</div> 
+    ----------------------------------------------------------------------------------------- -->
+<!-- </div> 
 </div>
           
       </div>
@@ -205,7 +207,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
 
   
 
@@ -254,41 +257,57 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                             '<a class="dropdown-item" type="button" id="btn-consulta' + item.idDespachante +' "class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idDespachante +' ">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
                             '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">' + '<i class="far fa-edit">' + '</i>' + ' Editar' + '</a>' +
                             '<a class="dropdown-item" type="button" class="btn btn-primary" id="btn-apagar' + item.idDespachante + '" onclick="funcaoDeletar()">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
-                        '</div>' + 
-                    '</div>' + 
-                '</td>' +
-            '</tr>';
-    
-
-$(linha).appendTo('#tblfornecedores>tbody');
-$('#modalConsulta').prop('id', 'modalConsulta' + item.idDespachante)
-
-var consulta = 
-    '<div class="modal fade" id="modalConsulta' + item.idDespachante +' "tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal fade" id="modalConsulta' + item.idDespachante +  'tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
   '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
     '<div class="modal-content">' +
       '<div class="modal-header">' +
-        '<h5 class="modal-title" id="exampleModalLabel">Cadastro completo</h5>' +
+        '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
         '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-        '<span aria-hidden="true">&times;</span>' +
+          '<span aria-hidden="true">&times;</span>' +
         '</button>' +
       '</div>' +
       '<div class="modal-body">' +
       '<div class="container">' +
     '<div id="teste">' +
-
-
-    '</div>'+ 
-'</div>' +
-          
+     '<p>'+ 'MODAL' + item.idDespachante + '</p>' +
+     '</div>' +
+'</div>' +       
       '</div>' +
       '<div class="modal-footer">' +
         '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Close' + '</button>' +
       '</div>' +
     '</div>' +
   '</div>' +
-'</div>'
-$(consulta).appendTo('#btn-consulta'  + item.idDespachante);
+'</div>' +                            
+'</div>' + 
+'</div>' + 
+'</td>' +
+'</tr>';
+
+$(linha).appendTo('#tblfornecedores>tbody');
+
+// var modal =  '<div class="modal fade" id="modalConsulta' + item.idDespachante +  'tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+//   '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+//     '<div class="modal-content">' +
+//       '<div class="modal-header">' +
+//         '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
+//         '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+//           '<span aria-hidden="true">&times;</span>' +
+//         '</button>' +
+//       '</div>' +
+//       '<div class="modal-body">' +
+//       '<div class="container">' +
+//     '<div id="teste">' +
+//      '<p>'+ 'MODAL' + item.idDespachante + '</p>' +
+//      '</div>' +
+// '</div>' +       
+//       '</div>' +
+//       '<div class="modal-footer">' +
+//         '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Close' + '</button>' +
+//       '</div>' +
+//     '</div>' +
+//   '</div>' +
+// '</div>' 
 
 })
 }).done(function() { 
@@ -303,10 +322,7 @@ $(consulta).appendTo('#btn-consulta'  + item.idDespachante);
 
 
 function funcaoDeletar() {
-    var apagar = confirm('Deseja realmente excluir este registro?');
-    if (apagar){
-        
-    }
+    console.log("cliquei")
 }
 </script>
 
