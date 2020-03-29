@@ -164,7 +164,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 
+
+  <!-- Modal da ação consulta -->
+<div class="modal fade" id="modalConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -207,7 +210,110 @@
   </div>
 </div>
 
-  
+  <!-- Modal da ação editar -->
+  <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+  <div class="modal-content">
+                <form method='post' action='/fornecedores/controle-despachantes{ }' id="formEditarDemandaDespachante">
+                {{ csrf_field() }} 
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle">Editar Despachante - ID: <span id="id_despachante"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-0">
+                        <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
+                        <div class="px-2" style="overflow-y: auto; height: 100%;">
+                    
+                        <div class="form-group">
+                            <label>Contrato:</label>
+                            <input type="text" name="numeroContrato" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Data de vencimento do contrato:</label>
+                            <input type="text" name="dataVencimentoContrato" class="form-control" autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <label>CNPJ:</label>
+                            <input type="text" name="cnpjDespachante" class="form-control" placeholder="00.000.000/0000-00">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Despachante:</label>
+                            <input type="text" name="nomeDespachante" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telefone:</label>
+                            <input type="text" name="telefoneDespachante" class="form-control" placeholder="(xx) xxxx-xxxx">
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail:</label>
+                            <input type="email" name="emailDespachante" class="form-control" placeholder="exemplo@email.com.br">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nome do responsável:</label>
+                            <input type="text" name="nomePrimeiroResponsavelDespachante" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telefone do responsável:</label>
+                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail:</label>
+                            <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
+                        </div>
+                     
+                        <div class="form-group">
+                            <label>Nome do segundo responsável:</label>
+                            <input type="text" name="nomeSegundoResponsavelDespachante" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telefone do segundo responsável:</label>
+                            <input type="text" name="telefoneSegundoResponsavelDespachante" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail do seundo responsável:</label>
+                            <input type="email" name="emailSegundoResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nome do terceiro responsável:</label>
+                            <input type="text" name="nomeTerceiroResponsavelDespachante" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telefone do terceiro responsável:</label>
+                            <input type="text" name="telefoneTerceiroResponsavelDespachante" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail do terceiro responsável:</label>
+                            <input type="email" name="emailTerceiroResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+
+
 
 @stop 
 
@@ -251,47 +357,38 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                             'Ação' + 
                         '</button>' + 
                         '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-                            '<a class="dropdown-item" type="button" id="btn-consulta' + item.idDespachante +' "class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idDespachante +' ">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
+                            '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idDespachante +' ">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
                             '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">' + '<i class="far fa-edit">' + '</i>' + ' Editar' + '</a>' +
                             '<a class="dropdown-item" type="button" class="btn btn-primary" id="btn-apagar' + item.idDespachante + '" onclick="funcaoDeletar()">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
                         '</div>' + 
                     '</div>' + 
                 '</td>' +
-            '</tr>';
+            '</tr>' +
     
-
-$(linha).appendTo('#tblfornecedores>tbody');
-$('#modalConsulta').prop('id', 'modalConsulta' + item.idDespachante)
-
-var consulta = 
-    '<div class="modal fade" id="modalConsulta' + item.idDespachante +' "tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-  '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
-    '<div class="modal-content">' +
-      '<div class="modal-header">' +
-        '<h5 class="modal-title" id="exampleModalLabel">Cadastro completo</h5>' +
-        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-        '<span aria-hidden="true">&times;</span>' +
-        '</button>' +
-      '</div>' +
-      '<div class="modal-body">' +
-      '<div class="container">' +
-    '<div id="teste">' +
-
-
-    '</div>'+ 
-'</div>' +
-          
-      '</div>' +
-      '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Close' + '</button>' +
-      '</div>' +
-    '</div>' +
-  '</div>' +
-'</div>'
-$(consulta).appendTo('#btn-consulta'  + item.idDespachante);
-
+    $('#modalConsulta').prop('id', 'modalConsulta' + item.idDespachante)
+    $('#nome_despachante').text(item.nomeDespachante)
+    $('#numero_contrato').text(item.numeroContrato)
+    $('#vencimento_contrato').text(item.dataVencimentoContrato)
+    $('#vencimento_contrato').addClass("formata-data-sem-hora")
+    $('#cnpj_despachante').text(item.cnpjDespachante)
+    $('#telefone_despachante').text(item.telefoneDespachante)
+    $('#email_despachante').text(item.emailDespachante)
+    $('#nome_responsavel').text(item.nomePrimeiroResponsavelDespachante)
+    $('#telefone_responsavel').text(item.telefonePrimeiroResponsavelDespachante)
+    $('#email_responsavel').text(item.emailPrimeiroResponsavelDespachante)
+    $('#nome_segundo_responsavel').text(item.nomeSegundoResponsavelDespachante)
+    $('#telefone_segundo_responsavel').text(item.telefoneSegundoResponsavelDespachante)
+    $('#email_segundo_responsavel').text(item.emailSegundoResponsavelDespachante)
+    $('#nome_terceiro_responsavel').text(item.nomeTerceiroResponsavelDespachante)
+    $('#telefone_terceiro_responsavel').text(item.telefoneTerceiroResponsavelDespachante)
+    $('#email_terceiro_responsavel').text(item.emailTerceiroResponsavelDespachante)
+    $('#id_despachante').text(item.idDespachante)
+    
+    $(linha).appendTo('#tblfornecedores>tbody');
+    
 })
-}).done(function() { 
+    
+ }).done(function() { 
     _formataDatatable();
     _formataData();
  })
@@ -317,8 +414,6 @@ function funcaoDeletar() {
       });
   } );
   </script>
+  
 
-<script>
-
-</script>
 @stop
