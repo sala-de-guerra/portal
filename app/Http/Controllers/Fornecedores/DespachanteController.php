@@ -38,22 +38,23 @@ class DespachanteController extends Controller
      */
     public function cadastrarDespachante(Request $request)
     {
+        // dd($request);
         try {
             DB::beginTransaction();
             $novoDespachante = new Despachante;
             $novoDespachante->numeroContrato                            = $request->numeroContrato;
             $novoDespachante->dataVencimentoContrato                    = $request->dataVencimentoContrato;
             $novoDespachante->cnpjDespachante                           = $request->cnpjDespachante;
-            $novoDespachante->nomeDespachante                           = $request->nomeDespachante;
+            $novoDespachante->nomeDespachante                           = strtoupper($request->nomeDespachante);
             $novoDespachante->telefoneDespachante                       = $request->telefoneDespachante;
             $novoDespachante->emailDespachante                          = $request->emailDespachante;
-            $novoDespachante->nomePrimeiroResponsavelDespachante        = $request->nomePrimeiroResponsavelDespachante;
+            $novoDespachante->nomePrimeiroResponsavelDespachante        = strtoupper($request->nomePrimeiroResponsavelDespachante);
             $novoDespachante->telefonePrimeiroResponsavelDespachante    = $request->telefonePrimeiroResponsavelDespachante;
             $novoDespachante->emailPrimeiroResponsavelDespachante       = $request->emailPrimeiroResponsavelDespachante;
-            $novoDespachante->nomeSegundoResponsavelDespachante         = $request->nomeSegundoResponsavelDespachante;
+            $novoDespachante->nomeSegundoResponsavelDespachante         = strtoupper($request->nomeSegundoResponsavelDespachante);
             $novoDespachante->telefoneSegundoResponsavelDespachante     = $request->telefoneSegundoResponsavelDespachante;
             $novoDespachante->emailSegundoResponsavelDespachante        = $request->emailSegundoResponsavelDespachante;
-            $novoDespachante->nomeTerceiroResponsavelDespachante        = $request->nomeTerceiroResponsavelDespachante;
+            $novoDespachante->nomeTerceiroResponsavelDespachante        = strtoupper($request->nomeTerceiroResponsavelDespachante);
             $novoDespachante->telefoneTerceiroResponsavelDespachante    = $request->telefoneTerceiroResponsavelDespachante;
             $novoDespachante->emailTerceiroResponsavelDespachante       = $request->emailTerceiroResponsavelDespachante;
             $novoDespachante->unidadeGestora                            = !in_array(session('codigoLotacaoFisica'), [null, 'NULL']) ? session('codigoLotacaoFisica') : session('codigoLotacaoAdministrativa');

@@ -341,6 +341,7 @@
 <script>
 var gilie = $('#lotacao').text()
 $(document).ready(function(){
+    
 $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, function(dados){
     $.each(dados, function(key, item) {
     var linha =
@@ -350,14 +351,19 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                 '<td>' + item.numeroContrato + '</td>' +
                 '<td class="formata-data-sem-hora">' + item.dataVencimentoContrato + '</td>' +
                 '<td>' + item.cnpjDespachante + '</td>' +
-                '<td>' + '<div class="btn-group" role="group">' +
-                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                'Ação' + '</button>' + '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-                '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaConsulta">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
-                '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">' + '<i class="far fa-edit">' + '</i>' + ' Editar' + '</a>' +
-                '<a class="dropdown-item" type="button" class="btn btn-primary" id="btn-apagar">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
-                '</div>' + '</div>' + '</td>' +
-                '</tr>';
+                '<td>' + 
+                    '<div class="btn-group" role="group">' +
+                        '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                            'Ação' + 
+                        '</button>' + 
+                        '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                            '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaConsulta">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
+                            '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">' + '<i class="far fa-edit">' + '</i>' + ' Editar' + '</a>' +
+                            '<a class="dropdown-item" type="button" class="btn btn-primary" id="btn-apagar' + item.idDespachante + '" onclick="funcaoDeletar()">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
+                        '</div>' + 
+                    '</div>' + 
+                '</td>' +
+            '</tr>';
                 
     $(linha).appendTo('#tblfornecedores>tbody');
     $('#nome_despachante').text(item.nomeDespachante)
@@ -387,6 +393,12 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
     $("#cnpjDespachante").mask("99.999.999/9999-99");
     $("#telefonePrimeiroResponsavelDespachante").mask("(00) 00000-0000");
     $("#dataVencimentoContrato").mask("0000-00-00");
+
+
+function funcaoDeletar() {
+    return console.log("clicou")
+}
+
 
 </script>
 
