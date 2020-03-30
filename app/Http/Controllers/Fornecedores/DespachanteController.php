@@ -67,7 +67,6 @@ class DespachanteController extends Controller
 
             $novoDespachante->save();
             DB::commit();
-            //return response('Despachante cadastrado com sucesso', 200);
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
@@ -76,9 +75,6 @@ class DespachanteController extends Controller
             $request->session()->flash('tituloMensagem', "Cadastro não realizado");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o cadastro. Tente novamente");
             DB::rollback();
-            //return response('Despachante não cadastrado', 500);
-
-
         }
         return redirect('/fornecedores/controle-despachantes');
     }
@@ -118,7 +114,6 @@ class DespachanteController extends Controller
 
             $editarDespachante->save();
             DB::commit();
-            // return response('Despachante editado com sucesso', 200);
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
@@ -127,7 +122,6 @@ class DespachanteController extends Controller
             $request->session()->flash('tituloMensagem', "Edição não realizada");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a edição do cadastro. Tente novamente");
             DB::rollback();
-            // return response('Despachante não editado', 500);
         }
         return redirect('/fornecedores/controle-despachantes');
     }
@@ -140,7 +134,6 @@ class DespachanteController extends Controller
      */
     public function desativarDespachante(Request $request, $idDespachante)
     {
-        dd($request);
         try {
             DB::beginTransaction();
             $desativarDespachante = Despachante::find($idDespachante);
@@ -154,7 +147,6 @@ class DespachanteController extends Controller
 
             $desativarDespachante->save();
             DB::commit();
-            //return response('Despachante desativado com sucesso', 200);
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
@@ -163,7 +155,6 @@ class DespachanteController extends Controller
             $request->session()->flash('tituloMensagem', "Exclusão não realizada");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a exclusão do despachante. Tente novamente");
             DB::rollback();
-            //return response('Despachante não desativado', 500);
         }
         return redirect('/fornecedores/controle-despachantes');
     }
