@@ -80,77 +80,77 @@
                     
                         <div class="form-group">
                             <label>Contrato:</label>
-                            <input type="text" name="numeroContrato" class="form-control" required>
+                            <input type="text" name="numeroContrato" class="form-control" autocomplete="off" required>
                         </div>
                         
                         <div class="form-group">
                             <label>Data de vencimento do contrato:</label>
-                            <input type="text" name="dataVencimentoContrato" id="dataVencimentoContrato" class="form-control" required>
+                            <input type="text" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
                         </div>
 
                         <div class="form-group">
                             <label>CNPJ:</label>
-                            <input type="text" name="cnpjDespachante" class="form-control" id="cnpjDespachante" placeholder="00.000.000/0000-00" required>
+                            <input type="text" name="cnpjDespachante" class="form-control" id="cnpjDespachante" autocomplete="off" placeholder="00.000.000/0000-00" required>
                         </div>
                         
                         <div class="form-group">
                             <label>Despachante:</label>
-                            <input type="text" name="nomeDespachante" class="form-control" required>
+                            <input type="text" name="nomeDespachante" class="form-control" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label>Telefone:</label>
-                            <input type="text" name="telefoneDespachante" class="form-control" id="telefoneDespachante" placeholder="(xx) xxxx-xxxx" required>
+                            <input type="text" name="telefoneDespachante" class="form-control" id="telefoneDespachante" placeholder="(xx) xxxx-xxxx" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label>E-mail:</label>
-                            <input type="email" name="emailDespachante" class="form-control" placeholder="exemplo@email.com.br" required>
+                            <input type="email" name="emailDespachante" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label>Nome do responsável:</label>
-                            <input type="text" name="nomePrimeiroResponsavelDespachante" class="form-control" required>
+                            <input type="text" name="nomePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label>Telefone do responsável:</label>
-                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control" id="telefonePrimeiroResponsavelDespachante" placeholder="(xx) xxxxx-xxxx" required>
+                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" id="telefonePrimeiroResponsavelDespachante" placeholder="(xx) xxxxx-xxxx" required>
                         </div>
 
                         <div class="form-group">
                             <label>E-mail:</label>
-                            <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br" required>
+                            <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br" required>
                         </div>
                      
                         <div class="form-group">
                             <label>Nome do segundo responsável:</label>
-                            <input type="text" name="nomeSegundoResponsavelDespachante" class="form-control">
+                            <input type="text" name="nomeSegundoResponsavelDespachante" autocomplete="off" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label>Telefone do segundo responsável:</label>
-                            <input type="text" name="telefoneSegundoResponsavelDespachante" class="form-control" id="telefoneSegundoResponsavelDespachante" placeholder="(xx) xxxxx-xxxx">
+                            <input type="text" name="telefoneSegundoResponsavelDespachante" autocomplete="off" class="form-control" id="telefoneSegundoResponsavelDespachante" placeholder="(xx) xxxxx-xxxx">
                         </div>
 
                         <div class="form-group">
                             <label>E-mail do seundo responsável:</label>
-                            <input type="email" name="emailSegundoResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
+                            <input type="email" name="emailSegundoResponsavelDespachante"  autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">
                         </div>
 
                         <div class="form-group">
                             <label>Nome do terceiro responsável:</label>
-                            <input type="text" name="nomeTerceiroResponsavelDespachante" class="form-control">
+                            <input type="text" name="nomeTerceiroResponsavelDespachante" autocomplete="off" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label>Telefone do terceiro responsável:</label>
-                            <input type="text" name="telefoneTerceiroResponsavelDespachante" class="form-control" id="telefoneTerceiroResponsavelDespachante" placeholder="(xx) xxxxx-xxxx">
+                            <input type="text" name="telefoneTerceiroResponsavelDespachante" autocomplete="off" class="form-control" id="telefoneTerceiroResponsavelDespachante" placeholder="(xx) xxxxx-xxxx">
                         </div>
 
                         <div class="form-group">
                             <label>E-mail do terceiro responsável:</label>
-                            <input type="email" name="emailTerceiroResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
+                            <input type="email" name="emailTerceiroResponsavelDespachante" autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">
                         </div>
                     </div>
                     </div>
@@ -164,158 +164,9 @@
         </div>
     </div>
 
- 
-
-  <!-- Modal da ação consulta -->
-<div class="modal fade" id="modaConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastro completo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="container">
-    
-    -----------------------------------------------------------------------------------------
-    <p><b>NOME:</b> <span class="pl-5" id="nome_despachante"></span></p>
-    <p><b>Telefone:</b> <span class="pl-3" id="telefone_despachante"></span></p>
-    <p><b>E-MAIL:</b> <span class="pl-3" id="email_despachante"></span></p>
-    <p><b>CNPJ:</b> <span class="pl-3" id="cnpj_despachante"></span></p>
-    <p><b>Nº do contrato:</b> <span class="pl-3" id="numero_contrato"></span></p>
-    <p><b>Vencimento do contrato:</b> <span class="pl-3" id="vencimento_contrato"></span></p>
-    -----------------------------------------------------------------------------------------
-    <p><b>Responsável:</b> <span class="pl-3" id="nome_responsavel"></span></p>
-    <p><b>Telefone/Responsável:</b> <span class="pl-3" id="telefone_responsavel"></span></p>
-    <p><b>E-mail/Responsável:</b> <span class="pl-3" id="email_responsavel"></span></p>
-    -----------------------------------------------------------------------------------------
-    <p><b>Segundo Responsável:</b> <span class="pl-3" id="nome_segundo_responsavel"></span></p>
-    <p><b>Telefone/Segundo Responsável:</b> <span class="pl-3" id="telefone_segundo_responsavel"></span></p>
-    <p><b>E-mail/Segundo Responsável:</b> <span class="pl-3" id="email_segundo_responsavel"></span></p>
-    -----------------------------------------------------------------------------------------
-    <p><b>Terceiro Responsável:</b> <span class="pl-3" id="nome_terceiro_responsavel"></span></p>
-    <p><b>Telefone/Terceiro Responsável:</b> <span class="pl-3" id="telefone_terceiro_responsavel"></span></p>
-    <p><b>E-mail/Terceiro Responsável:</b> <span class="pl-3" id="email_terceiro_responsavel"></span></p>
-    -----------------------------------------------------------------------------------------
-    
-</div>
-          
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <!-- Modal da ação editar -->
-  <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-  <div class="modal-content">
-                <form method='post' action='/fornecedores/controle-despachantes{ }' id="formEditarDemandaDespachante">
-                {{ csrf_field() }} 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle">Editar Despachante - ID: <span id="id_despachante"></span></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body px-0">
-                        <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
-                        <div class="px-2" style="overflow-y: auto; height: 100%;">
-                    
-                        <div class="form-group">
-                            <label>Contrato:</label>
-                            <input type="text" name="numeroContrato" class="form-control">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Data de vencimento do contrato:</label>
-                            <input type="text" name="dataVencimentoContrato" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>CNPJ:</label>
-                            <input type="text" name="cnpjDespachante" class="form-control" placeholder="00.000.000/0000-00">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Despachante:</label>
-                            <input type="text" name="nomeDespachante" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Telefone:</label>
-                            <input type="text" name="telefoneDespachante" class="form-control" placeholder="(xx) xxxx-xxxx">
-                        </div>
-
-                        <div class="form-group">
-                            <label>E-mail:</label>
-                            <input type="email" name="emailDespachante" class="form-control" placeholder="exemplo@email.com.br">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Nome do responsável:</label>
-                            <input type="text" name="nomePrimeiroResponsavelDespachante" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Telefone do responsável:</label>
-                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control" placeholder="(xx) xxxxx-xxxx">
-                        </div>
-
-                        <div class="form-group">
-                            <label>E-mail:</label>
-                            <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
-                        </div>
-                     
-                        <div class="form-group">
-                            <label>Nome do segundo responsável:</label>
-                            <input type="text" name="nomeSegundoResponsavelDespachante" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Telefone do segundo responsável:</label>
-                            <input type="text" name="telefoneSegundoResponsavelDespachante" class="form-control" placeholder="(xx) xxxxx-xxxx">
-                        </div>
-
-                        <div class="form-group">
-                            <label>E-mail do seundo responsável:</label>
-                            <input type="email" name="emailSegundoResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Nome do terceiro responsável:</label>
-                            <input type="text" name="nomeTerceiroResponsavelDespachante" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Telefone do terceiro responsável:</label>
-                            <input type="text" name="telefoneTerceiroResponsavelDespachante" class="form-control" placeholder="(xx) xxxxx-xxxx">
-                        </div>
-
-                        <div class="form-group">
-                            <label>E-mail do terceiro responsável:</label>
-                            <input type="email" name="emailTerceiroResponsavelDespachante" class="form-control" placeholder="exemplo@email.com.br">
-                        </div>
-                    </div>
-                    </div>
-                    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
- 
 
 
-
-@stop 
+ @stop 
 
 
 @section('content')
@@ -340,11 +191,13 @@
 
 <script>
 var gilie = $('#lotacao').text()
+var csrfVar = $('meta[name="csrf-token"]').attr('content');
+
 $(document).ready(function(){
     
 $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, function(dados){
     $.each(dados, function(key, item) {
-    var linha =
+        var linha =
             '<tr>' +
                 '<td>' + item.idDespachante + '</td>' +
                 '<td>' + item.nomeDespachante + '</td>' +
@@ -356,35 +209,85 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                         '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                             'Ação' + 
                         '</button>' + 
+
+                        // botão dropdown
                         '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-                            '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaConsulta">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
+                            '<a class="dropdown-item" type="button" id="btn-consulta' + item.idDespachante +' "class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idDespachante + '">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
                             '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">' + '<i class="far fa-edit">' + '</i>' + ' Editar' + '</a>' +
-                            '<a class="dropdown-item" type="button" class="btn btn-primary" id="btn-apagar' + item.idDespachante + '" onclick="funcaoDeletar()">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
+                            '<a class="dropdown-item" type="button" id="btn-remove' + item.idDespachante +' "class="btn btn-primary" data-toggle="modal" data-target="#modalRemove' + item.idDespachante + '">'+ '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
                         '</div>' + 
+                       
+                        // Modal de consulta
+                        '<div class="modal fade" id="modalConsulta' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                                '<div class="modal-content">' +
+                                '<div class="modal-header">' +
+                                    '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
+                                    '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '</button>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                '<div class="container">' +
+                                '<div>' +
+                                '-----------------------------------------------------------------------------------------' +
+                                '<p>' + '<b>' + 'NOME:' + '</b>' + '<span class="pl-5" id="nome_despachante">' + item.nomeDespachante + '</span>' + '</p>' +
+                                '<p>'+'<b>'+'Telefone:'+'</b>'+ '<span class="pl-3" id="telefone_despachante">'+item.telefoneDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-MAIL:'+'</b>'+ '<span class="pl-3" id="email_despachante">'+item.emailDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato">'+item.dataVencimentoContrato+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+
+                                '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+
+                                '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+
+                                '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+                              
+                                '</div>' +'</div>' + '</div>' +
+                                '<div class="modal-footer">' +
+                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                '</div>' + '</div>' + '</div>' + '</div>' +
+                                
+                                // modal remover    
+                                '<div class="modal fade" id="modalRemove' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                                '<div class="modal-content">' +
+                                '<form method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante +'">' +
+                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                '<input type="hidden" class="form-control" name="_method" value="DELETE">' +
+                                '<div class="modal-header">' +
+                                    '<h5 class="modal-title" id="exampleModalLabel">' + 'Remover Despachante' + '</h5>' +
+                                    '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '</button>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                '<div class="container">' +  
+                                        '<p>'+'Tem certeza que deseja excluir:  '+'<b>'+ item.nomeDespachante + '</b>'+'?'+'</p>'
+                                +'</div>' + '</div>' +
+                                '<div class="modal-footer">' +
+                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                    '<button type="submit" class="btn btn-danger">'+'Excluir'+'</button>'+
+                                '</div>' + '</div>' + '</div>' + '</div>' +
+ 
+                            // fim do modal remover 
+                        '</div>'+                      
                     '</div>' + 
                 '</td>' +
-            '</tr>';
-                
-    $(linha).appendTo('#tblfornecedores>tbody');
-    $('#nome_despachante').text(item.nomeDespachante)
-    $('#numero_contrato').text(item.numeroContrato)
-    $('#vencimento_contrato').text(item.dataVencimentoContrato)
-    $('#vencimento_contrato').addClass("formata-data-sem-hora")
-    $('#cnpj_despachante').text(item.cnpjDespachante)
-    $('#telefone_despachante').text(item.telefoneDespachante)
-    $('#email_despachante').text(item.emailDespachante)
-    $('#nome_responsavel').text(item.nomePrimeiroResponsavelDespachante)
-    $('#telefone_responsavel').text(item.telefonePrimeiroResponsavelDespachante)
-    $('#email_responsavel').text(item.emailPrimeiroResponsavelDespachante)
-    $('#nome_segundo_responsavel').text(item.nomeSegundoResponsavelDespachante)
-    $('#telefone_segundo_responsavel').text(item.telefoneSegundoResponsavelDespachante)
-    $('#email_segundo_responsavel').text(item.emailSegundoResponsavelDespachante)
-    $('#nome_terceiro_responsavel').text(item.nomeTerceiroResponsavelDespachante)
-    $('#telefone_terceiro_responsavel').text(item.telefoneTerceiroResponsavelDespachante)
-    $('#email_terceiro_responsavel').text(item.emailTerceiroResponsavelDespachante)
-    $('#id_despachante').text(item.idDespachante)
-    })
- }).done(function() { 
+            '</tr>'
+        ;
+
+$(linha).appendTo('#tblfornecedores>tbody');
+
+})
+}).done(function() { 
     _formataDatatable();
     _formataData();
  })
@@ -392,22 +295,18 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
     $("#telefoneDespachante").mask("(00) 0000-0000");
     $("#cnpjDespachante").mask("99.999.999/9999-99");
     $("#telefonePrimeiroResponsavelDespachante").mask("(00) 00000-0000");
+    $("#telefoneSegundoResponsavelDespachante").mask("(00) 00000-0000");
+    $("#telefoneTerceiroResponsavelDespachante").mask("(00) 00000-0000");
     $("#dataVencimentoContrato").mask("0000-00-00");
-
-
-function funcaoDeletar() {
-    return console.log("clicou")
-}
-
 
 </script>
 
 <script>
-$(document).on("load", (function(){
-    $('#btn-apagar').click(function(){
-        console.log("cliquei")
-    })
-}))
-</script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd"
+      });
+  } );
+  </script>
 
 @stop
