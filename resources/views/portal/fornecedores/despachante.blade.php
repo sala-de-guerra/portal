@@ -186,6 +186,7 @@
 
 
 @section('js')
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 
@@ -193,8 +194,28 @@
 var gilie = $('#lotacao').text()
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
+// /**********************\
+// | Config inicial Toast |
+// \**********************/
+
+// const Toast = Swal.mixin({
+//     toast: true,
+//     position: 'top-end',
+//     showConfirmButton: false,
+//     timer: 3000
+// });
+
+
 $(document).ready(function(){
-    
+    montaLinhasFornecedores(gilie);
+});
+
+function refresh(gilie) {
+    $('#tblfornecedores>tbody').empty();
+    montaLinhasFornecedores(gilie);
+}
+
+function montaLinhasFornecedores(gilie){   
 $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, function(dados){
     $.each(dados, function(key, item) {
         var linha =
@@ -256,26 +277,31 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                 '</div>' + '</div>' + '</div>' + '</div>' +
                                 
                                 // modal remover    
-                                '<div class="modal fade" id="modalRemove' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                        '<div class="modal fade" id="modalRemove' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
                                 '<div class="modal-content">' +
-                                '<form method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante +'">' +
-                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                                '<input type="hidden" class="form-control" name="_method" value="DELETE">' +
-                                '<div class="modal-header">' +
-                                    '<h5 class="modal-title" id="exampleModalLabel">' + 'Remover Despachante' + '</h5>' +
-                                    '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
-                                    '<span aria-hidden="true">&times;</span>' +
-                                    '</button>' +
-                                '</div>' +
-                                '<div class="modal-body">' +
-                                '<div class="container">' +  
-                                        '<p>'+'Tem certeza que deseja excluir:  '+'<b>'+ item.nomeDespachante + '</b>'+'?'+'</p>'
-                                +'</div>' + '</div>' +
-                                '<div class="modal-footer">' +
-                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
-                                    '<button type="submit" class="btn btn-danger">'+'Excluir'+'</button>'+
-                                '</div>' + '</div>' + '</div>' + '</div>' +
+                                    '<form class="testeform" method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante +'">' +
+                                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                        '<input type="hidden" class="form-control" name="_method" value="DELETE">' +
+                                        '<div class="modal-header">' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">' + 'Remover Despachante' + '</h5>' +
+                                            '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                            '</button>' +
+                                        '</div>' +
+                                        '<div class="modal-body">' +
+                                            '<div class="container">' +  
+                                                    '<p>'+'Tem certeza que deseja excluir:  '+'<b>'+ item.nomeDespachante + '</b>'+'?'+'</p>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="modal-footer">' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                            '<button type="submit" class="btn btn-danger">'+'Excluir'+'</button>'+
+                                        '</div>' +
+                                    '</form>'  +
+                                '</div>' + 
+                            '</div>' + 
+                        '</div>' +
  
                             // fim do modal remover 
                         '</div>'+                      
@@ -290,14 +316,67 @@ $(linha).appendTo('#tblfornecedores>tbody');
 }).done(function() { 
     _formataDatatable();
     _formataData();
- })
+
+// $('.testeform').submit( function(e) {
+
+//     e.preventDefault();
+
+//     let data = JSON.stringify($(this).serialize());
+//     let method = $(this).attr('_method');
+//     let url = $(this).attr('action');
+
+//     // if (method === 'delete') {
+//     //     let idAtividade = $('#idAtividadeExcluir').val();
+//     //     url = $(this).attr('action') + idDespachante;
+//     // } else if (method === 'put') {
+//     //     let idAtividade = $('#idAtividadeAlterar').val();
+//     //     url = $(this).attr('action') + idDespachante;
+//     // } else {
+//     //     url = $(this).attr('action')
+//     // }z
+
+//     console.log(data);
+//     console.log(url);
+//     console.log(method);
+
+//     $.ajax({
+//         type: method,
+//         url: url,
+//         data: {data, csrfVar},
+//         success: function (result){
+
+//             $('.modal').modal('hide');
+
+//             Toast.fire({
+//                 icon: 'success',
+//                 title: 'Alteração salva!'
+//             });
+
+//             refresh(gilie);
+            
+//         },
+    
+//         error: function () {
+            
+//             $('.modal').modal('hide');
+
+//             Toast.fire({
+//                 icon: 'error',
+//                 title: 'Erro: alteração não efetuada!'
+//             });
+//         }
+//     });
+// });
 })
+}
     $("#telefoneDespachante").mask("(00) 0000-0000");
     $("#cnpjDespachante").mask("99.999.999/9999-99");
     $("#telefonePrimeiroResponsavelDespachante").mask("(00) 00000-0000");
     $("#telefoneSegundoResponsavelDespachante").mask("(00) 00000-0000");
     $("#telefoneTerceiroResponsavelDespachante").mask("(00) 00000-0000");
     $("#dataVencimentoContrato").mask("0000-00-00");
+
+
 
 </script>
 

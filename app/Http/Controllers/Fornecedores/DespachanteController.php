@@ -62,13 +62,14 @@ class DespachanteController extends Controller
             $novoDespachante->dataAlteracao                             = date("Y-m-d H:i:s", time());
             $novoDespachante->save();
             DB::commit();
+            return response('Despachante cadastrado com sucesso', 200);
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
-            
+            return response('Despachante não cadastrado', 500);
         }
-        return redirect('/fornecedores/controle-despachantes');
+        // return redirect('/fornecedores/controle-despachantes');
     }
 
     /**
@@ -112,12 +113,14 @@ class DespachanteController extends Controller
             $editarDespachante->dataAlteracao                           = date("Y-m-d H:i:s", time());
             $editarDespachante->save();
             DB::commit();
+            return response('Despachante editado com sucesso', 200);
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
+            return response('Despachante não editado', 500);
         }
-        return redirect('/fornecedores/controle-despachantes');
+        // return redirect('/fornecedores/controle-despachantes');
     }
 
     /**
@@ -128,6 +131,7 @@ class DespachanteController extends Controller
      */
     public function desativarDespachante($idDespachante)
     {
+        dd($request);
         try {
             DB::beginTransaction();
             $desativarDespachante = Despachante::find($idDespachante);
@@ -135,11 +139,13 @@ class DespachanteController extends Controller
             $desativarDespachante->dataAlteracao    = date("Y-m-d H:i:s", time());
             $desativarDespachante->save();
             DB::commit();
+            return response('Despachante desativado com sucesso', 200);
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             DB::rollback();
+            return response('Despachante não desativado', 500);
         }
-        return redirect('/fornecedores/controle-despachantes');
+        // return redirect('/fornecedores/controle-despachantes');
     }
 }
