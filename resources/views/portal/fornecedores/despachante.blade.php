@@ -85,7 +85,7 @@
                         
                         <div class="form-group">
                             <label>Data de vencimento do contrato:</label>
-                            <input type="text" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" required>
+                            <input type="text" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
                         </div>
 
                         <div class="form-group">
@@ -164,55 +164,9 @@
         </div>
     </div>
 
-  <!-- <div class="modal fade" id="modalConsulta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastro completo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="container">
-    <div id="teste">
-    
-        <p>MODAL 1</p> -->
-    <!-- -----------------------------------------------------------------------------------------
-    <p><b>NOME:</b> <span class="pl-5" id="nome_despachante"></span></p>
-    <p><b>Telefone:</b> <span class="pl-3" id="telefone_despachante"></span></p>
-    <p><b>E-MAIL:</b> <span class="pl-3" id="email_despachante"></span></p>
-    <p><b>CNPJ:</b> <span class="pl-3" id="cnpj_despachante"></span></p>
-    <p><b>Nº do contrato:</b> <span class="pl-3" id="numero_contrato"></span></p>
-    <p><b>Vencimento do contrato:</b> <span class="pl-3" id="vencimento_contrato"></span></p>
-    -----------------------------------------------------------------------------------------
-    <p><b>Responsável:</b> <span class="pl-3" id="nome_responsavel"></span></p>
-    <p><b>Telefone/Responsável:</b> <span class="pl-3" id="telefone_responsavel"></span></p>
-    <p><b>E-mail/Responsável:</b> <span class="pl-3" id="email_responsavel"></span></p>
-    -----------------------------------------------------------------------------------------
-    <p><b>Segundo Responsável:</b> <span class="pl-3" id="nome_segundo_responsavel"></span></p>
-    <p><b>Telefone/Segundo Responsável:</b> <span class="pl-3" id="telefone_segundo_responsavel"></span></p>
-    <p><b>E-mail/Segundo Responsável:</b> <span class="pl-3" id="email_segundo_responsavel"></span></p>
-    -----------------------------------------------------------------------------------------
-    <p><b>Terceiro Responsável:</b> <span class="pl-3" id="nome_terceiro_responsavel"></span></p>
-    <p><b>Telefone/Terceiro Responsável:</b> <span class="pl-3" id="telefone_terceiro_responsavel"></span></p>
-    <p><b>E-mail/Terceiro Responsável:</b> <span class="pl-3" id="email_terceiro_responsavel"></span></p>
-    ----------------------------------------------------------------------------------------- -->
-<!-- </div> 
-</div>
-          
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 
-  
-
-@stop 
+ @stop 
 
 
 @section('content')
@@ -237,6 +191,8 @@
 
 <script>
 var gilie = $('#lotacao').text()
+var csrfVar = $('meta[name="csrf-token"]').attr('content');
+
 $(document).ready(function(){
     
 $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, function(dados){
@@ -253,62 +209,82 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                         '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                             'Ação' + 
                         '</button>' + 
+
+                        // botão dropdown
                         '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
                             '<a class="dropdown-item" type="button" id="btn-consulta' + item.idDespachante +' "class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idDespachante + '">' + '<i class="fa fa-search" aria-hidden="true">' + '</i>' + ' Consultar' + '</a>' +
                             '<a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">' + '<i class="far fa-edit">' + '</i>' + ' Editar' + '</a>' +
-                            '<a class="dropdown-item" type="button" class="btn btn-primary" id="btn-apagar' + item.idDespachante + '" onclick="funcaoDeletar()">' + '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
+                            '<a class="dropdown-item" type="button" id="btn-remove' + item.idDespachante +' "class="btn btn-primary" data-toggle="modal" data-target="#modalRemove' + item.idDespachante + '">'+ '<i class="far fa-trash-alt">' + '</i>' + ' Remover</a>' +
                         '</div>' + 
+                       
+                        // Modal de consulta
                         '<div class="modal fade" id="modalConsulta' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
                                 '<div class="modal-content">' +
                                 '<div class="modal-header">' +
                                     '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
-                                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                    '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
                                     '<span aria-hidden="true">&times;</span>' +
                                     '</button>' +
                                 '</div>' +
                                 '<div class="modal-body">' +
                                 '<div class="container">' +
-                                '<div id="teste">' +
-                                '<p>'+ 'MODAL' + item.idDespachante + '</p>' +
-                                '</div>' +
-                            '</div>' +       
-                                '</div>' +
+                                '<div>' +
+                                '-----------------------------------------------------------------------------------------' +
+                                '<p>' + '<b>' + 'NOME:' + '</b>' + '<span class="pl-5" id="nome_despachante">' + item.nomeDespachante + '</span>' + '</p>' +
+                                '<p>'+'<b>'+'Telefone:'+'</b>'+ '<span class="pl-3" id="telefone_despachante">'+item.telefoneDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-MAIL:'+'</b>'+ '<span class="pl-3" id="email_despachante">'+item.emailDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato">'+item.dataVencimentoContrato+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+
+                                '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+
+                                '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+
+                                '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                '-----------------------------------------------------------------------------------------'+                              
+                                '</div>' +'</div>' + '</div>' +
                                 '<div class="modal-footer">' +
-                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Close' + '</button>' +
+                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                '</div>' + '</div>' + '</div>' + '</div>' +
+                                
+                                // modal remover    
+                                '<div class="modal fade" id="modalRemove' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                                '<div class="modal-content">' +
+                                '<form method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante +'">' +
+                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                '<input type="hidden" class="form-control" name="_method" value="DELETE">' +
+                                '<div class="modal-header">' +
+                                    '<h5 class="modal-title" id="exampleModalLabel">' + 'Remover Despachante' + '</h5>' +
+                                    '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                    '</button>' +
                                 '</div>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +                            
+                                '<div class="modal-body">' +
+                                '<div class="container">' +  
+                                        '<p>'+'Tem certeza que deseja excluir:  '+'<b>'+ item.nomeDespachante + '</b>'+'?'+'</p>'
+                                +'</div>' + '</div>' +
+                                '<div class="modal-footer">' +
+                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                    '<button type="submit" class="btn btn-danger">'+'Excluir'+'</button>'+
+                                '</div>' + '</div>' + '</div>' + '</div>' +
+ 
+                            // fim do modal remover 
+                        '</div>'+                      
                     '</div>' + 
                 '</td>' +
             '</tr>'
         ;
 
 $(linha).appendTo('#tblfornecedores>tbody');
-
-// var modal =  '<div class="modal fade" id="modalConsulta' + item.idDespachante +  'tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-//   '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
-//     '<div class="modal-content">' +
-//       '<div class="modal-header">' +
-//         '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
-//         '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-//           '<span aria-hidden="true">&times;</span>' +
-//         '</button>' +
-//       '</div>' +
-//       '<div class="modal-body">' +
-//       '<div class="container">' +
-//     '<div id="teste">' +
-//      '<p>'+ 'MODAL' + item.idDespachante + '</p>' +
-//      '</div>' +
-// '</div>' +       
-//       '</div>' +
-//       '<div class="modal-footer">' +
-//         '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Close' + '</button>' +
-//       '</div>' +
-//     '</div>' +
-//   '</div>' +
-// '</div>' 
 
 })
 }).done(function() { 
@@ -319,12 +295,10 @@ $(linha).appendTo('#tblfornecedores>tbody');
     $("#telefoneDespachante").mask("(00) 0000-0000");
     $("#cnpjDespachante").mask("99.999.999/9999-99");
     $("#telefonePrimeiroResponsavelDespachante").mask("(00) 00000-0000");
+    $("#telefoneSegundoResponsavelDespachante").mask("(00) 00000-0000");
+    $("#telefoneTerceiroResponsavelDespachante").mask("(00) 00000-0000");
     $("#dataVencimentoContrato").mask("0000-00-00");
 
-
-function funcaoDeletar() {
-    console.log("cliquei")
-}
 </script>
 
 <script>
@@ -335,7 +309,4 @@ function funcaoDeletar() {
   } );
   </script>
 
-<script>
-
-</script>
 @stop
