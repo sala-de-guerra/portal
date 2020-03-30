@@ -31,7 +31,6 @@ class DespachanteController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -60,30 +59,27 @@ class DespachanteController extends Controller
             $novoDespachante->unidadeGestora                            = !in_array(session('codigoLotacaoFisica'), [null, 'NULL']) ? session('codigoLotacaoFisica') : session('codigoLotacaoAdministrativa');
             $novoDespachante->dataCadastro                              = date("Y-m-d H:i:s", time());
             $novoDespachante->dataAlteracao                             = date("Y-m-d H:i:s", time());
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Despachante cadastrado!");
+            $request->session()->flash('corpoMensagem', "O despachante foi cadastrado com sucesso.");
+
             $novoDespachante->save();
             DB::commit();
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Cadastro não realizado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o cadastro. Tente novamente");
             DB::rollback();
-            
         }
         return redirect('/fornecedores/controle-despachantes');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $idDespachante
@@ -110,34 +106,54 @@ class DespachanteController extends Controller
             $editarDespachante->telefoneTerceiroResponsavelDespachante  = !in_array($request->telefoneTerceiroResponsavelDespachante, [null, 'NULL', '']) ? $request->telefoneTerceiroResponsavelDespachante : $editarDespachante->telefoneTerceiroResponsavelDespachante;
             $editarDespachante->emailTerceiroResponsavelDespachante     = !in_array($request->emailTerceiroResponsavelDespachante, [null, 'NULL', '']) ? $request->emailTerceiroResponsavelDespachante : $editarDespachante->emailTerceiroResponsavelDespachante;
             $editarDespachante->dataAlteracao                           = date("Y-m-d H:i:s", time());
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Cadastro editado!");
+            $request->session()->flash('corpoMensagem', "O cadastro do despachante foi editado com sucesso.");
+
             $editarDespachante->save();
             DB::commit();
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Edição não realizada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a edição do cadastro. Tente novamente");
             DB::rollback();
         }
         return redirect('/fornecedores/controle-despachantes');
     }
 
     /**
-     * Remove the specified resource from storage.
      *
      * @param  int  $idDespachante
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function desativarDespachante($idDespachante)
+    public function desativarDespachante(Request $request, $idDespachante)
     {
         try {
             DB::beginTransaction();
             $desativarDespachante = Despachante::find($idDespachante);
             $desativarDespachante->despachanteAtivo = false;
             $desativarDespachante->dataAlteracao    = date("Y-m-d H:i:s", time());
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Despachante excluído!");
+            $request->session()->flash('corpoMensagem', "O despachante foi removido com sucesso.");
+
             $desativarDespachante->save();
             DB::commit();
         } catch (\Throwable $th) {
             dd($th);
             AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Exclusão não realizada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a exclusão do despachante. Tente novamente");
             DB::rollback();
         }
         return redirect('/fornecedores/controle-despachantes');

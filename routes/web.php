@@ -135,6 +135,19 @@ Route::prefix('fornecedores')->group(function () {
         // LISTAR DESPACHANTES ATIVOS DA UNIDADE
         Route::get('listar-despachantes/{codigoUnidade}', 'Fornecedores\DespachanteController@listarDespachantes');
     });
+    // LEILOEIROS
+    Route::prefix('controle-leiloeiros')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CONTROLAR LEILOEIROS
+        Route::get('/', 'Fornecedores\LeiloeiroController@index');
+        // MÉTODO PARA CADASTRAR NOVO LEILOEIRO
+        Route::post('/', 'Fornecedores\LeiloeiroController@cadastrarLeiloeiro');
+        // MÉTODO PARA EDITAR UM LEILOEIRO
+        Route::put('/{idLeiloeiro}', 'Fornecedores\LeiloeiroController@editarCadastroLeiloeiro');
+        // MÉTODO PARA DESATIVAR UM LEILOEIRO
+        Route::delete('/{idLeiloeiro}', 'Fornecedores\LeiloeiroController@desativarLeiloeiro');
+        // LISTAR LEILOEIRO ATIVOS DA UNIDADE
+        Route::get('listar-leiloeiros/{codigoUnidade}', 'Fornecedores\LeiloeiroController@listarLeiloeiros');
+    });
 });
 
 // GERENCIAL
