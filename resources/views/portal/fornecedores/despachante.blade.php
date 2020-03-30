@@ -4,6 +4,17 @@
 
 @section('content_header')
 
+@if (session('tituloMensagem'))
+<div class="card text-white bg-{{ session('corMensagem') }}">
+    <div class="card-header">
+        <div class="card-body">
+            <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
+            <br>
+            <p class="card-text">{{ session('corpoMensagem') }}</p>
+        </div>
+    </div>
+</div>
+@endif
 
 <div class="row mb-2">
     <div class="col">
@@ -242,73 +253,74 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                         '<div class="modal fade" id="modalConsulta' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
                                 '<div class="modal-content">' +
-                                '<div class="modal-header">' +
-                                    '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
-                                    '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
-                                    '<span aria-hidden="true">&times;</span>' +
-                                    '</button>' +
-                                '</div>' +
-                                '<div class="modal-body">' +
-                                '<div class="container">' +
-                                '<div>' +
-                                '-----------------------------------------------------------------------------------------' +
-                                '<p>' + '<b>' + 'NOME:' + '</b>' + '<span class="pl-5" id="nome_despachante">' + item.nomeDespachante + '</span>' + '</p>' +
-                                '<p>'+'<b>'+'Telefone:'+'</b>'+ '<span class="pl-3" id="telefone_despachante">'+item.telefoneDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'E-MAIL:'+'</b>'+ '<span class="pl-3" id="email_despachante">'+item.emailDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato">'+item.dataVencimentoContrato+'</span>'+'</p>'+
-                                '-----------------------------------------------------------------------------------------'+
-                                '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                '-----------------------------------------------------------------------------------------'+
-                                '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                '-----------------------------------------------------------------------------------------'+
-                                '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                '-----------------------------------------------------------------------------------------'+                              
-                                '</div>' +'</div>' + '</div>' +
-                                '<div class="modal-footer">' +
-                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
-                                '</div>' + '</div>' + '</div>' + '</div>' +
-                                
-                                // modal remover    
+                                    '<div class="modal-header">' +
+                                        '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
+                                        '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                        '</button>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+                                        '<div class="container">' +
+                                            '<div>' +
+                                                '-----------------------------------------------------------------------------------------' +
+                                                '<p>' + '<b>' + 'NOME:' + '</b>' + '<span class="pl-5" id="nome_despachante">' + item.nomeDespachante + '</span>' + '</p>' +
+                                                '<p>'+'<b>'+'Telefone:'+'</b>'+ '<span class="pl-3" id="telefone_despachante">'+item.telefoneDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'E-MAIL:'+'</b>'+ '<span class="pl-3" id="email_despachante">'+item.emailDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato">'+item.dataVencimentoContrato+'</span>'+'</p>'+
+                                                '-----------------------------------------------------------------------------------------'+
+                                                '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '-----------------------------------------------------------------------------------------'+
+                                                '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                '-----------------------------------------------------------------------------------------'+
+                                                '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '-----------------------------------------------------------------------------------------'+                              
+                                            '</div>' +
+                                        '</div>' + 
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                    '</div>' + 
+                                '</div>' + 
+                            '</div>' + 
+                        '</div>' +
+                        // modal remover    
                         '<div class="modal fade" id="modalRemove' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
                                 '<div class="modal-content">' +
-                                    '<form class="testeform" method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante +'">' +
+                                    '<form method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante + '">' +
                                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                         '<input type="hidden" class="form-control" name="_method" value="DELETE">' +
                                         '<div class="modal-header">' +
-                                            '<h5 class="modal-title" id="exampleModalLabel">' + 'Remover Despachante' + '</h5>' +
+                                            '<h5 class="modal-title" id="exampleModalLabel">Remover Despachante</h5>' +
                                             '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
                                             '<span aria-hidden="true">&times;</span>' +
                                             '</button>' +
                                         '</div>' +
                                         '<div class="modal-body">' +
                                             '<div class="container">' +  
-                                                    '<p>'+'Tem certeza que deseja excluir:  '+'<b>'+ item.nomeDespachante + '</b>'+'?'+'</p>' +
-                                            '</div>' +
+                                                '<p>Tem certeza que deseja excluir: <b>' + item.nomeDespachante + '</b>?</p>' +
+                                            '</div>' + 
                                         '</div>' +
                                         '<div class="modal-footer">' +
-                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
-                                            '<button type="submit" class="btn btn-danger">'+'Excluir'+'</button>'+
-                                        '</div>' +
-                                    '</form>'  +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">sair</button>' +
+                                            '<button type="submit" class="btn btn-danger">Excluir</button>' +
+                                        '</div>' + 
+                                    '</form>' +
                                 '</div>' + 
                             '</div>' + 
-                        '</div>' +
- 
-                            // fim do modal remover 
-                        '</div>'+                      
+                        '</div>' +  
+                        // fim do modal remover 
                     '</div>' + 
                 '</td>' +
-            '</tr>'
-        ;
+            '</tr>';
 
 $(linha).appendTo('#tblfornecedores>tbody');
 
