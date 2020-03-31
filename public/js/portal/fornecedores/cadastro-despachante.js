@@ -37,40 +37,40 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                         '<div class="modal fade" id="modalConsulta' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
                                 '<div class="modal-content">' +
-                                    '<div class="modal-header">' +
-                                        '<h5 class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
-                                        '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                    '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                        '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Cadastro completo' + '</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                             '<span aria-hidden="true">&times;</span>' +
                                         '</button>' +
                                     '</div>' +
                                     '<div class="modal-body">' +
                                         '<div class="container">' +
                                             '<div>' +
-                                                '-----------------------------------------------------------------------------------------' +
-                                                '<p>' + '<b>' + 'NOME:' + '</b>' + '<span class="pl-5" id="nome_despachante">' + item.nomeDespachante + '</span>' + '</p>' +
-                                                '<p>'+'<b>'+'Telefone:'+'</b>'+ '<span class="pl-3" id="telefone_despachante">'+item.telefoneDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'E-MAIL:'+'</b>'+ '<span class="pl-3" id="email_despachante">'+item.emailDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato">'+item.dataVencimentoContrato+'</span>'+'</p>'+
-                                                '-----------------------------------------------------------------------------------------'+
-                                                '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '-----------------------------------------------------------------------------------------'+
-                                                '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                                '-----------------------------------------------------------------------------------------'+
-                                                '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '-----------------------------------------------------------------------------------------'+                              
+                                                '<hr>'+
+                                                    '<p>' + '<b>' + 'NOME:' + '</b>' + '<span class="pl-5" id="nome_despachante">' + item.nomeDespachante + '</span>' + '</p>' +
+                                                    '<p>'+'<b>'+'Telefone:'+'</b>'+ '<span class="pl-3" id="telefone_despachante">'+item.telefoneDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'E-MAIL:'+'</b>'+ '<span class="pl-3" id="email_despachante">'+item.emailDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato'+item.idDespachante+'">'+item.dataVencimentoContrato+'</span>'+'</p>'+
+                                                '<hr>'+
+                                                    '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '<hr>'+
+                                                    '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                '<hr>'+
+                                                    '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                '<hr>'+                           
                                             '</div>' +
                                         '</div>' + 
                                     '</div>' +
                                     '<div class="modal-footer">' +
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
                                     '</div>' + 
                                 '</div>' + 
                             '</div>' + 
@@ -82,19 +82,19 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                     '<form method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante + '">' +
                                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                         '<input type="hidden" class="form-control" name="_method" value="DELETE">' +
-                                        '<div class="modal-header">' +
-                                            '<h5 class="modal-title" id="exampleModalLabel">Remover Despachante</h5>' +
-                                            '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                        '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
+                                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">Remover Despachante</h5>' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                             '<span aria-hidden="true">&times;</span>' +
                                             '</button>' +
                                         '</div>' +
                                         '<div class="modal-body">' +
                                             '<div class="container">' +  
-                                                '<p>Tem certeza que deseja excluir: <b>' + item.nomeDespachante + '</b>?</p>' +
+                                                '<p>Tem certeza que deseja excluir: <b>' + item.nomeDespachante + '</b> ?</p>' +
                                             '</div>' + 
                                         '</div>' +
                                         '<div class="modal-footer">' +
-                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">sair</button>' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>' +
                                             '<button type="submit" class="btn btn-danger">Excluir</button>' +
                                         '</div>' + 
                                     '</form>' +
@@ -109,10 +109,10 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                     '<form method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante + '">' +
                                     '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-                                        '<div class="modal-header">' +
-                                            '<h5 class="modal-title" id="exampleModalLabel">' + 'Editar cadastro:' + 
+                                        '<div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">' +
+                                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Editar cadastro:' + 
                                             '<p>'+'Preencha os campos que deseja alterar e clique em salvar'+'</p>'+'</h5>' +
-                                            '<button type="button" class="Fechar" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                                 '<span aria-hidden="true">&times;</span>' +
                                             '</button>' +
                                         '</div>' +
@@ -135,7 +135,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<div class="form-group">'+
                                                         '<label class="pt-2" style="float: left;">'+'CNPJ: '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                                                    '<input style="width: 100%;" type="text" name="cnpjDespachante" class="form-control" autocomplete="off" placeholder="'+item.cnpjDespachante+'">'+'</span>'+
+                                                    '<input style="width: 100%;" type="text" name="cnpjDespachante" class="form-control cnpj" autocomplete="off" placeholder="'+item.cnpjDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
@@ -147,7 +147,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<div class="form-group">'+
                                                         '<label class="pt-2" style="float: left;">'+'Telefone: '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                                                    '<input style="width: 100%;" type="text" name="telefoneDespachante" class="form-control" autocomplete="off" placeholder="'+item.telefoneDespachante+'">'+'</span>'+
+                                                    '<input style="width: 100%;" type="text" name="telefoneDespachante" class="form-control telefoneComum" autocomplete="off" placeholder="'+item.telefoneDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
@@ -165,7 +165,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<div class="form-group">'+
                                                         '<label class="pt-2" style="float: left;">'+'Telefone/Responsável: '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                                                    '<input style="width: 100%;" type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.telefonePrimeiroResponsavelDespachante+'">'+'</span>'+
+                                                    '<input style="width: 100%;" type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefonePrimeiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
@@ -183,7 +183,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<div class="form-group">'+
                                                         '<label class="pt-2" style="float: left;">'+'Telefone/Segundo Responsável: '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                                                    '<input style="width: 100%;" type="text" name="telefoneSegundoResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.telefoneSegundoResponsavelDespachante+'">'+'</span>'+
+                                                    '<input style="width: 100%;" type="text" name="telefoneSegundoResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefoneSegundoResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
@@ -201,7 +201,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<div class="form-group">'+
                                                         '<label class="pt-2" style="float: left;">'+'Telefone/Terceiro Responsável: '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                                                    '<input style="width: 100%;" type="text" name="telefoneTerceiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.telefoneTerceiroResponsavelDespachante+'">'+'</span>'+
+                                                    '<input style="width: 100%;" type="text" name="telefoneTerceiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefoneTerceiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
@@ -214,7 +214,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                         '</div>' + 
                                     '</div>' +
                                     '<div class="modal-footer">' +
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'sair' + '</button>' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Cancelar' + '</button>' +
                                         '<button type="submit" class="btn btn-success">Salvar</button>' +
                                     '</div>' + 
                                  '</form>'+
@@ -227,6 +227,14 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
 
 $(linha).appendTo('#tblfornecedores>tbody');
 
+// altera a data do form para formato em portugues
+var data =$('#vencimento_contrato'+ item.idDespachante).text()
+var novaData = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
+$('#vencimento_contrato'+item.idDespachante).text(novaData)
+
+$(".telefoneComum").mask("(00) 0000-0000");
+$(".cnpj").mask("99.999.999/9999-99");
+$(".telefoneCelular").mask("(00) 00000-0000");
 
 })
 }).done(function() { 
@@ -234,22 +242,20 @@ $(linha).appendTo('#tblfornecedores>tbody');
     _formataData();
 })
 }
-    $("#telefoneDespachante").mask("(00) 0000-0000");
-    $("#cnpjDespachante").mask("99.999.999/9999-99");
-    $("#telefonePrimeiroResponsavelDespachante").mask("(00) 00000-0000");
-    $("#telefoneSegundoResponsavelDespachante").mask("(00) 00000-0000");
-    $("#telefoneTerceiroResponsavelDespachante").mask("(00) 00000-0000");
-    $("#dataVencimentoContrato").mask("0000-00-00");
+    $(".telefoneComum").mask("(00) 0000-0000");
+    $(".cnpj").mask("99.999.999/9999-99");
+    $(".telefoneCelular").mask("(00) 00000-0000");
 
 
 
-  $( function() {
-    $( "#datepicker" ).datepicker({
-        dateFormat: "yy-mm-dd"
-      });
-  } );
+//   $( function() {
+//     $( "#datepicker" ).datepicker({
+//         dateFormat: "dd/mm/yy"
+//       });
+//   } );
 
 
   setTimeout(function(){
     $('#fadeOut').fadeOut("slow");
     }, 3000);
+
