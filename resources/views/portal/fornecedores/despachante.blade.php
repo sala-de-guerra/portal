@@ -75,12 +75,12 @@
 </div> <!-- /.row -->
 
 <div class="modal fade" id="modalCadastraDespachante" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form method='post' action='/fornecedores/controle-despachantes' id="formCadastraDemandaDespachante">
                 {{ csrf_field() }} 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle">Cadastrar Despachante</h5>
+                    <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
+                        <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastrar Despachante</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -88,79 +88,79 @@
                     <div class="modal-body px-0">
                         <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
                         <div class="px-2" style="overflow-y: auto; height: 100%;">
-                    
+                            <p style="color: red;">Campos obrigatórios (*)</p>
                         <div class="form-group">
-                            <label>Contrato:</label>
+                            <label>Contrato <span style="color: red;"> *</span> </label>
                             <input type="text" name="numeroContrato" class="form-control" autocomplete="off" required>
                         </div>
                         
                         <div class="form-group">
-                            <label>Data de vencimento do contrato:</label>
-                            <input type="text" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
+                            <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
+                            <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
                         </div>
 
                         <div class="form-group">
-                            <label>CNPJ:</label>
-                            <input type="text" name="cnpjDespachante" class="form-control" id="cnpjDespachante" autocomplete="off" placeholder="00.000.000/0000-00" required>
+                            <label>CNPJ<span style="color: red;"> *</span> </label>
+                            <input type="text" name="cnpjDespachante" class="form-control cnpj" id="cnpjDespachante" autocomplete="off" placeholder="00.000.000/0000-00" required>
                         </div>
                         
                         <div class="form-group">
-                            <label>Despachante:</label>
+                            <label>Despachante<span style="color: red;"> *</span> </label>
                             <input type="text" name="nomeDespachante" class="form-control" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Telefone:</label>
-                            <input type="text" name="telefoneDespachante" class="form-control" id="telefoneDespachante" placeholder="(xx) xxxx-xxxx" autocomplete="off" required>
+                            <label>Telefone<span style="color: red;"> *</span> </label>
+                            <input type="text" name="telefoneDespachante" class="form-control telefoneComum" id="telefoneDespachante" placeholder="(11) 3277-9999" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label>E-mail:</label>
+                            <label>E-mail<span style="color: red;"> *</span> </label>
                             <input type="email" name="emailDespachante" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Nome do responsável:</label>
+                            <label>Nome do responsável<span style="color: red;"> *</span> </label>
                             <input type="text" name="nomePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Telefone do responsável:</label>
-                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" id="telefonePrimeiroResponsavelDespachante" placeholder="(xx) xxxxx-xxxx" required>
+                            <label>Telefone do responsável<span style="color: red;"> *</span> </label>
+                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" id="telefonePrimeiroResponsavelDespachante" placeholder="(11) 99599-9696" required>
                         </div>
 
                         <div class="form-group">
-                            <label>E-mail:</label>
+                            <label>E-mail<span style="color: red;"> *</span> </label>
                             <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br" required>
                         </div>
                      
                         <div class="form-group">
-                            <label>Nome do segundo responsável:</label>
+                            <label>Nome do segundo responsável</label>
                             <input type="text" name="nomeSegundoResponsavelDespachante" autocomplete="off" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label>Telefone do segundo responsável:</label>
-                            <input type="text" name="telefoneSegundoResponsavelDespachante" autocomplete="off" class="form-control" id="telefoneSegundoResponsavelDespachante" placeholder="(xx) xxxxx-xxxx">
+                            <label>Telefone do segundo responsável</label>
+                            <input type="text" name="telefoneSegundoResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneSegundoResponsavelDespachante" placeholder="(11) 99599-9696">
                         </div>
 
                         <div class="form-group">
-                            <label>E-mail do seundo responsável:</label>
+                            <label>E-mail do segundo responsável</label>
                             <input type="email" name="emailSegundoResponsavelDespachante"  autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">
                         </div>
 
                         <div class="form-group">
-                            <label>Nome do terceiro responsável:</label>
+                            <label>Nome do terceiro responsável</label>
                             <input type="text" name="nomeTerceiroResponsavelDespachante" autocomplete="off" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label>Telefone do terceiro responsável:</label>
-                            <input type="text" name="telefoneTerceiroResponsavelDespachante" autocomplete="off" class="form-control" id="telefoneTerceiroResponsavelDespachante" placeholder="(xx) xxxxx-xxxx">
+                            <label>Telefone do terceiro responsável</label>
+                            <input type="text" name="telefoneTerceiroResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneTerceiroResponsavelDespachante" placeholder="(11) 99599-9696">
                         </div>
 
                         <div class="form-group">
-                            <label>E-mail do terceiro responsável:</label>
+                            <label>E-mail do terceiro responsável</label>
                             <input type="email" name="emailTerceiroResponsavelDespachante" autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">
                         </div>
                     </div>
