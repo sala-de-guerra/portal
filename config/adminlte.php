@@ -337,35 +337,24 @@ return [
             ],
         ],
 
-        [
-            'text'    => 'Indicadores',
-            'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
-            'submenu' => [
-                [
-                    'text' => 'Indicadores de Distrato',
-                    'url'  => '/indicadores/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
-                ],
-            ],
-        ],
+        
         [
             'text'       => 'Fornecedores',
             'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
             'submenu' => [
                 [
-                    'text' => 'Controle Despachantes',
+                    'text' => 'Despachantes',
                     'icon'       => 'fas fa-lg fa-fw fa-id-card-alt mr-2',
                     'url'  => '/fornecedores/controle-despachantes/',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
-                // [
-                //     'text' => 'Gestão de Atividades',
-                //     'icon'       => 'fas fa-lg fa-tasks',
-                //     'url'  => '/gerencial/gestao-atividades',
-                //     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
-                // ]
+                [
+                    'text' => 'Leiloeiros',
+                    'icon'       => 'fas fa-lg fa-fw fa-gavel mr-2',
+                    'url'  => '/fornecedores/controle-leiloeiros/',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ]
     
             ],
         ],
@@ -472,6 +461,19 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ]
     
+            ],
+        ],
+
+        [
+            'text'    => 'Indicadores',
+            'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+            'submenu' => [
+                [
+                    'text' => 'Indicadores de Distrato',
+                    'url'  => '/indicadores/distrato',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
             ],
         ],
 
