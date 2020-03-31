@@ -140,7 +140,7 @@ class DespachanteController extends Controller
      */
     public function desativarDespachante(Request $request, $idDespachante)
     {
-        dd($request);
+        // dd($request);
         try {
             DB::beginTransaction();
             $desativarDespachante = Despachante::find($idDespachante);
