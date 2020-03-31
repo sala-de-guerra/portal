@@ -11,6 +11,8 @@ class EmpregadosTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('TBL_EMPREGADOS')->truncate();
+
         DB::table('TBL_EMPREGADOS')->insert(['matricula' => 'c111710','nomeCompleto' => 'EDUARDO CHIAKI CHUMAN','primeiroNome' => 'EDUARDO','dataNascimento' => '31484','codigoFuncao' => '2057','nomeFuncao' => 'ASSISTENTE PLENO','codigoLotacaoAdministrativa' => '7257','nomeLotacaoAdministrativa' => 'GI ALIENAR BENS MOVEIS IMOV SAO PAULO,SP','codigoLotacaoFisica' => 'NULL','nomeLotacaoFisica' => 'NULL','created_at' => '2019-03-18 20:57:11.240','updated_at' => '2019-04-16 11:46:02.380',]);
         DB::table('TBL_EMPREGADOS')->insert(['matricula' => 'c079436','nomeCompleto' => 'VLADIMIR PEREIRA DE LEMOS','primeiroNome' => 'VLADIMIR','dataNascimento' => '30416','codigoFuncao' => '2061','nomeFuncao' => 'COORDENADOR FILIAL','codigoLotacaoAdministrativa' => '7257','nomeLotacaoAdministrativa' => 'GI ALIENAR BENS MOVEIS IMOV SAO PAULO,SP','codigoLotacaoFisica' => 'NULL','nomeLotacaoFisica' => 'NULL','created_at' => '2019-03-18 21:38:08.663','updated_at' => '2019-05-21 13:34:57.553',]);
         DB::table('TBL_EMPREGADOS')->insert(['matricula' => 'c126768','nomeCompleto' => 'EDSON BERNARDO DIAS','primeiroNome' => 'EDSON','dataNascimento' => '27498','codigoFuncao' => '2322','nomeFuncao' => 'GER RELACION PJ PUB PRIV','codigoLotacaoAdministrativa' => '928','nomeLotacaoAdministrativa' => 'AG. RIBEIRAO PIRES, SP','codigoLotacaoFisica' => 'NULL','nomeLotacaoFisica' => 'NULL','created_at' => '2019-03-19 20:11:50.493','updated_at' => '2019-03-29 16:28:04.483',]);

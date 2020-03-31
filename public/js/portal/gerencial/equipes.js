@@ -72,7 +72,7 @@ $('#selectGilie').change(function() {
 function montaCardsEquipes (regiaoUnidade) {
     $.getJSON('/gerencial/gestao-equipes/listar-equipes/' + regiaoUnidade, function(dados) {
     // $.getJSON('../js/equipes2.json', function(dados) {
-        console.log(dados);
+        // console.log(dados);
 
         // $.each(dados[regiaoUnidade], function(key, item) {
         $.each(dados, function(key, item) {
@@ -209,7 +209,7 @@ function montaCardsEquipes (regiaoUnidade) {
                         url: '/gerencial/gestao-equipes/alocar-empregado',
                         data: {matricula, idEquipe, _token},
                         success: function (result){
-                            console.log(result);
+                            // console.log(result);
                             $('#eventual' + matricula).hide();
                             refresh(regiaoUnidade);
 
@@ -243,7 +243,7 @@ function montaCardsEquipes (regiaoUnidade) {
     | Função que pega a lista de gestores e popula o select de criar equipe |
     \***********************************************************************/
     
-    $.getJSON('/gerencial/gestao-equipes/listar-gestores', function(dados) {
+    $.getJSON('/gerencial/gestao-equipes/listar-gestores/' + regiaoUnidade, function(dados) {
     // $.getJSON('../js/gestoresSP.json', function(dados) {
 
         // console.log(dados);
@@ -315,9 +315,9 @@ $('form').submit( function(e) {
     let url = $(this).attr('action');
     let method = $(this).attr('method');
 
-    console.log(data);
-    console.log(url);
-    console.log(method);
+    // console.log(data);
+    // console.log(url);
+    // console.log(method);
 
     $.ajax({
         type: method,
@@ -333,7 +333,7 @@ $('form').submit( function(e) {
             });
 
             let regiaoUnidade = $('#selectGilie').val();
-            console.log(regiaoUnidade);
+            // console.log(regiaoUnidade);
             refresh(regiaoUnidade);
             
         },

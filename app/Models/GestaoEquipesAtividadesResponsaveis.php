@@ -9,6 +9,7 @@ class GestaoEquipesAtividadesResponsaveis extends Model
     protected $table = 'TBL_GESTAO_EQUIPES_ATIVIDADES_RESPONSAVEIS';
     protected $primaryKey = 'idResponsavelAtividade';
     public $incrementing = true;
+    public $timestamps = false;
     protected $fillable = 
         [
             'idAtividade',
@@ -26,6 +27,6 @@ class GestaoEquipesAtividadesResponsaveis extends Model
 
     public function dadosEmpregadoLdap()
     {
-        return $this->belongsTo('App\Models\Empregado', 'matricula', 'matriculaResponsavelAtividade');
+        return $this->belongsTo('App\Models\Empregado', 'matriculaResponsavelAtividade', 'matricula');
     }
 }

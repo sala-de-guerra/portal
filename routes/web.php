@@ -18,6 +18,11 @@ Route::get('area', function () {
     return view('portal.informativas.area');
 });
 
+ // App Mobile
+ Route::get('/app', function () {
+    return view('portal.informativas.app');
+});
+
 // duvidas frequentes
 Route::get('faq', function () {
     return view('portal.informativas.faq');
@@ -95,6 +100,16 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
     });
 
+    // ROTAS DO PROJETO DE LEILÕES
+    Route::prefix('leiloes')->group(function () {
+        Route::get('leiloes-negativos', function () {
+            return view('portal.imoveis.leiloes.leiloes-negativos');
+        });
+        Route::get('tratar', function () {
+            return view('portal.imoveis.leiloes.operacional-leiloes');
+        });
+    });
+
     // ROTA PARA REGISTRO DE HISTÓRICO
     Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\RegistroAtendimentoController@registrarHistorico');
 
@@ -102,6 +117,36 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::prefix('mensagens-automaticas')->group(function () {
         Route::get('autorizacao-contratacao', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarMensageriasAutorizacaoContratacao');
         Route::get('autorizacao-contratacao/{contrato}', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarAutorizacaoContratacaoViaPortal');
+    });
+});
+
+// FORNECEDORES
+Route::prefix('fornecedores')->group(function () {
+    // DESPACHANTES
+    Route::prefix('controle-despachantes')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CONTROLAR DESPACHANTES
+        Route::get('/', 'Fornecedores\DespachanteController@index');
+        // MÉTODO PARA CADASTRAR NOVO DESPACHANTE
+        Route::post('/', 'Fornecedores\DespachanteController@cadastrarDespachante');
+        // MÉTODO PARA EDITAR UM DESPACHANTE
+        Route::put('/{idDespachante}', 'Fornecedores\DespachanteController@editarCadastroDespachante');
+        // MÉTODO PARA DESATIVAR UM DESPACHANTE
+        Route::delete('/{idDespachante}', 'Fornecedores\DespachanteController@desativarDespachante');
+        // LISTAR DESPACHANTES ATIVOS DA UNIDADE
+        Route::get('listar-despachantes/{codigoUnidade}', 'Fornecedores\DespachanteController@listarDespachantes');
+    });
+    // LEILOEIROS
+    Route::prefix('controle-leiloeiros')->group(function () {
+        // RETORNA A VIEW DO PROJETO PARA CONTROLAR LEILOEIROS
+        Route::get('/', 'Fornecedores\LeiloeiroController@index');
+        // MÉTODO PARA CADASTRAR NOVO LEILOEIRO
+        Route::post('/', 'Fornecedores\LeiloeiroController@cadastrarLeiloeiro');
+        // MÉTODO PARA EDITAR UM LEILOEIRO
+        Route::put('/{idLeiloeiro}', 'Fornecedores\LeiloeiroController@editarCadastroLeiloeiro');
+        // MÉTODO PARA DESATIVAR UM LEILOEIRO
+        Route::delete('/{idLeiloeiro}', 'Fornecedores\LeiloeiroController@desativarLeiloeiro');
+        // LISTAR LEILOEIRO ATIVOS DA UNIDADE
+        Route::get('listar-leiloeiros/{codigoUnidade}', 'Fornecedores\LeiloeiroController@listarLeiloeiros');
     });
 });
 
@@ -118,7 +163,7 @@ Route::prefix('gerencial')->group(function () {
         // MÉTODO PARA DESATIVAR UMA EQUIPE
         Route::delete('/', 'GestaoEquipesController@desativarEquipe');
         // LISTAR GESTORES DA UNIDADE
-        Route::get('listar-gestores', 'GestaoEquipesController@listaGestoresUnidade');
+        Route::get('listar-gestores/{codigoUnidade}', 'GestaoEquipesController@listaGestoresUnidade');
         // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
         Route::get('listar-equipes/{codigoUnidade}', 'GestaoEquipesController@listarEquipesUnidade');
         // LISTA DE UNIDADES
@@ -133,7 +178,13 @@ Route::prefix('gerencial')->group(function () {
         Route::get('/', 'GestaoEquipesAtividadesController@index');
         // MÉTODO PARA CADASTRAR NOVA ATIVIDADE
         Route::post('/', 'GestaoEquipesAtividadesController@cadastrarAtividade');
-        // RETORNA A VIEW DO PROJETO PARA CADASTRAR EQUIPES
+        // MÉTODO PARA EDITAR ATIVIDADE
+        Route::put('/{idAtividade}', 'GestaoEquipesAtividadesController@editarAtividade');
+        // MÉTODO PARA DESATIVAR ATIVIDADE
+        Route::delete('/{idAtividade}', 'GestaoEquipesAtividadesController@desativarAtividade');
+        // MÉTODO DESIGNAR EMPREGADO NA ATIVIDADE
+        Route::post('/designar-empregado-atividade', 'GestaoEquipesAtividadesController@designarEmpregadoAtividade');
+        // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });
 });

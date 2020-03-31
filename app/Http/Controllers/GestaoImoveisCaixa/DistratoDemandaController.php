@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\Ldap;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Classes\GestaoImoveisCaixa\DistratoPhpMailer;
 use App\Http\Controllers\Controller;
@@ -141,6 +142,7 @@ class DistratoDemandaController extends Controller
      */
     public function listarDemandas()
     {
+        // $codigoUnidade = Ldap::defineUnidadeUsuarioSessao();
         $universoProtocolosDistrato = DistratoDemanda::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
         return json_encode($universoProtocolosDistrato);
     }

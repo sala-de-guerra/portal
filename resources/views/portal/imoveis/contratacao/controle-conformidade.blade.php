@@ -53,16 +53,14 @@
                                     <th>Tipo de Venda</th>
                                     <th>Tipo de Proposta</th>
                                     <th>Recursos Próprios</th>
-                                    <th>Total Recebido</th>
-                                    <th>Status</th>
-                                    <th>Card Agrupamento</th>
                                     <th>Data Entrada</th>
                                     <th>Link</th>
+                                    <th>Proposta</th>
                                     <th>Observações</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+  
                             </tbody>
                         </table>
                     </div>
@@ -188,5 +186,5 @@
 
 @section('js')
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/portal/contratacao/controle-conformidade.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/contratacao/controle-conformidade.js') }}"></script>
 @stop

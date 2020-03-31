@@ -9,6 +9,7 @@ class GestaoEquipesAtividades extends Model
     protected $table = 'TBL_GESTAO_EQUIPES_ATIVIDADES';
     protected $primaryKey = 'idAtividade';
     public $incrementing = true;
+    public $timestamps = false;
     protected $fillable = 
         [
             'idEquipe',

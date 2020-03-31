@@ -238,7 +238,8 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
 <p class="destaque">
 Atenciosamente,
 <br><br>
-GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS
+GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS<br>
+<a href="https://portal.gilie.sp.caixa/">https://portal.gilie.sp.caixa/</a>;
 </P>
 
 

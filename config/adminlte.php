@@ -222,19 +222,19 @@ return [
         [
             'text'        => 'Área de Atuação',
             'url'         => '/area',
-            'icon'        => 'fas fa-lg fa-map-marked-alt mr-2',
+            'icon'        => 'fas fa-lg fa-fw fa-map-marked-alt mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
         [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
-            'icon'        => 'fas fa-lg fa-question-circle mr-2',
+            'icon'        => 'fas fa-lg fa-fw fa-question-circle mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
         [
             'text'        => 'Orientações',
             'url'         => '/orientacoes',
-            'icon'        => 'fas fa-lg fa-directions mr-2',
+            'icon'        => 'fas fa-lg fa-fw fa-directions mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
 
@@ -252,33 +252,19 @@ return [
             'icon' => 'fas fa-lg fa-fw fa-search mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR'], // , 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')
         ],
-        // [
-        //     'text' => 'Preparar e Ofertar',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-lg fa-fw fa-sign',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
+        [
+            'text' => 'Preparar e Ofertar',
+            'icon' => 'fas fa-lg fa-fw fa-sign mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+            'submenu' => [
+                [
+                    'text' => 'Leilões Negativos',
+                    'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
+                    'url'  => '/estoque-imoveis/leiloes/leiloes-negativos',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ]
+            ],
+        ],
         // [
         //     'text' => 'Pagamentos',
         //     'url'  => 'admin/settings',
@@ -363,41 +349,26 @@ return [
                 ],
             ],
         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_two',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text' => 'Indicadores de Distrato',
-        //             'url'  => '/indicadores/distrato',
-        //             'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
-        //         ],
-        // //         [
-        // //             'text' => 'level_one',
-        // //             'url'  => '#',
-        // //         ],
-        // //         [
-        // //             'text' => 'level_two',
-        // //             'url'  => '#',
-        // //         ],
-        // //         [
-        // //             'text' => 'level_two',
-        // //             'url'  => '#',
-        // //         ],
-        // //         [
-        // //             'text' => 'level_one',
-        // //             'url'  => '#',
-        // //         ],
-        //     ],
-        // ],
+        [
+            'text'       => 'Fornecedores',
+            'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+            'submenu' => [
+                [
+                    'text' => 'Controle Despachantes',
+                    'icon'       => 'fas fa-lg fa-fw fa-id-card-alt mr-2',
+                    'url'  => '/fornecedores/controle-despachantes/',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
+                // [
+                //     'text' => 'Gestão de Atividades',
+                //     'icon'       => 'fas fa-lg fa-tasks',
+                //     'url'  => '/gerencial/gestao-atividades',
+                //     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                // ]
+    
+            ],
+        ],
 
 
         // ['header' => 'PENHOR'],
@@ -485,18 +456,18 @@ return [
 
         [
             'text'       => 'Gerencial',
-            'icon'       => 'fas fa-lg fa-fw fa-portrait mr-2',
+            'icon'       => 'fas fa-lg fa-fw fa-users mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
             'submenu' => [
                 [
                     'text' => 'Gestão de Equipes',
-                    'icon'       => 'fas fa-lg fa-users-cog',
+                    'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
                     'url'  => '/gerencial/gestao-equipes/',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
                 [
                     'text' => 'Gestão de Atividades',
-                    'icon'       => 'fas fa-lg fa-tasks',
+                    'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
                     'url'  => '/gerencial/gestao-atividades',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ]

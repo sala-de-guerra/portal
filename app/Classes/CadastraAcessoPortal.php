@@ -26,13 +26,55 @@ class CadastraAcessoPortal
     public $arrayMatriz = [
         '5530', // GEIPT
     ];
-    public $arrayGestor = [
-        /* GESTORES */
-        'c066241',  // João Marcel
-        'c072452',  // Fernanda Mendonça
-        'c090120',  // Marcelo Barboza
-        'c079436'   // Vladimir
+    public $arrayCodigoFuncaoGestao = [
+        '2030' // COORDENADOR DE PROJETOS MATRIZ
+        ,'2031' // COORDENADOR DE PROJETOS TI
+        ,'2061' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 1
+        ,'2062' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 2
+        ,'2063' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 3
+        ,'2064' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 4
+        ,'2079' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 5 
+        ,'2080' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 6
+        ,'2111' // COORDENADOR DE TI - PORTE 1
+        ,'2112' // COORDENADOR DE TI - PORTE 2
+        ,'2113' // COORDENADOR DE TI - PORTE 3
+        ,'2114' // COORDENADOR DE TI - PORTE 4
+        ,'2115' // COORDENADOR DE TI - PORTE 5
+        ,'2141' // GERENTE DE CENTRALIZADORA - PORTE 1
+        ,'2142' // GERENTE DE CENTRALIZADORA - PORTE 2
+        ,'2143' // GERENTE DE CENTRALIZADORA - PORTE 3
+        ,'2145' // GERENTE DE CENTRALIZADORA - PORTE 4
+        ,'2066' // GERENTE DE FILIAL - PORTE 1
+        ,'2067' // GERENTE DE FILIAL - PORTE 2
+        ,'2068' // GERENTE DE FILIAL - PORTE 3
+        ,'2069' // GERENTE DE FILIAL - PORTE 4
+        ,'2070' // GERENTE DE FILIAL - PORTE 5
+        ,'2038' // GERENTE NACIONAL
+        ,'2241' // GERENTE REGIONAL - PORTE 1
+        ,'2242' // GERENTE REGIONAL - PORTE 2
+        ,'2243' // GERENTE REGIONAL - PORTE 3
+        ,'2244' // GERENTE REGIONAL - PORTE 4
+        ,'2245' // GERENTE REGIONAL - PORTE 5
+        ,'2246' // GERENTE REGIONAL - PORTE 6
+        ,'2060' // SUPERVISOR - CENTRALIZADORA/FILIAL
+        ,'2037' // GERENTE EXECUTIVO
     ];
+
+    public $arrayCodigoUnidadesGilie = [
+        '7257', // GILIE/SP
+        '7244', // GILIE/BH
+        '7243', // GILIE/BE
+        '7109', // GILIE/BR
+        '7247', // GILIE/CT
+        '7248', // GILIE/FO
+        '7249', // GILIE/GO
+        '7251', // GILIE/PO
+        '7254', // GILIE/RJ
+        '7253', // GILIE/RE
+        '7255', // GILIE/SA
+        '7242'  // GILIE/BU
+    ];
+
     public $arrayDesenvolvedores = [
         /* DESENVOLVIMENTO */
         'c142765',  // Carlos
@@ -57,7 +99,6 @@ class CadastraAcessoPortal
     public function setMatricula($matricula)
     {
         $this->matricula = $matricula;
-
         return $this;
     }
 
@@ -83,7 +124,6 @@ class CadastraAcessoPortal
                 $this->eventual = true;
             } 
         } 
-
         return $this;
     }
 
@@ -108,10 +148,10 @@ class CadastraAcessoPortal
             $this->nivelAcesso = 'AUDITOR';
         } elseif (in_array($this->getUnidade(), $this->arrayMatriz)) {
             $this->nivelAcesso = 'MATRIZ';
-        } elseif ($this->getUnidade() == '7257') {
-            if (in_array($this->getMatricula(), $this->arrayGestor)) {
+        } elseif (in_array($this->getUnidade(), $this->arrayCodigoUnidadesGilie)) {
+            if(in_array(session('codigoFuncao'), $this->arrayCodigoFuncaoGestao)) {
                 $this->nivelAcesso = 'GESTOR';
-            } elseif(in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
+            } elseif (in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
                 $this->nivelAcesso = 'DESENVOLVEDOR';
             } elseif($this->getEventual()) {
                 $this->nivelAcesso = 'EVENTUAL';
@@ -139,7 +179,7 @@ class CadastraAcessoPortal
      */ 
     public function setUnidade($objEmpregado)
     {
-        if ($objEmpregado->codigoLotacaoFisica === null) {
+        if (in_array($objEmpregado->codigoLotacaoFisica, [null, 'null', 'NULL'])) {
             $this->unidade = $objEmpregado->codigoLotacaoAdministrativa;
         } else {
             $this->unidade = $objEmpregado->codigoLotacaoFisica;
