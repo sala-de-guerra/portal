@@ -53,19 +53,23 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato'+item.idDespachante+'">'+item.dataVencimentoContrato+'</span>'+'</p>'+
-                                                '<hr>'+
+                                                    '<hr>'+
                                                     '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<div id="removerdiv'+item.idDespachante+'">'+'<hr>'+
+                                                    '<div id="removerdiv'+item.idDespachante+'">'+
+                                                    '<hr>'+
                                                     '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel'+item.idDespachante+'">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                                    '<div id="removerdiv2'+item.idDespachante+'">'+'<hr>'+
+                                                    '</div>'+
+                                                    '<div id="removersegundadiv'+item.idDespachante+'">'+
+                                                    '<hr>'+
                                                     '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel'+item.idDespachante+'">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<hr>'+                           
+                                                    '</div>'+
+                                                    '<hr>'+                           
                                             '</div>' +
                                         '</div>' + 
                                     '</div>' +
@@ -228,13 +232,13 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
 $(linha).appendTo('#tblfornecedores>tbody');
 
 var confereSegundoResponsavel = $('#nome_segundo_responsavel' + item.idDespachante).text()
-if (confereSegundoResponsavel == ""){
+if (confereSegundoResponsavel == "null" || confereSegundoResponsavel == "" ){
     $('#removerdiv'+item.idDespachante).remove();
 }
 
 var confereTerceiroResponsavel = $('#nome_terceiro_responsavel' + item.idDespachante).text()
-if (confereTerceiroResponsavel == ""){
-    $('#removerdiv2'+item.idDespachante).remove();
+if (confereTerceiroResponsavel == "null" || confereTerceiroResponsavel == "" ){
+    $('#removersegundadiv'+item.idDespachante).remove();
 }
 
 // altera a data do form para formato em portugues
