@@ -104,6 +104,31 @@
     flex: none!important;
 }
 
+/* .tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #000;
+    text-align: center;
+    background-color: #fff;
+    border-radius: .25rem;
+} */
+
+/* .tooltip-inner {
+    background-color: #00cc00;
+    }
+    .tooltip.bs-tooltip-right .arrow:before {
+        border-right-color: #00cc00 !important;
+    }
+    .tooltip.bs-tooltip-left .arrow:before {
+        border-left-color: #00cc00 !important;
+    }
+    .tooltip.bs-tooltip-bottom .arrow:before {
+        border-bottom-color: #00cc00 !important;
+    }
+    .tooltip.bs-tooltip-top .arrow:before {
+        border-top-color: #00cc00 !important;
+    } */
+
 .Typeahead-spinner {
     position: absolute;
     top: 5px;

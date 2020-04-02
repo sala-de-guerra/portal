@@ -118,5 +118,5 @@
 @section('js')
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
-    <script src="{{ asset('js/portal/contratacao/acompanha-contratacao.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/contratacao/acompanha-contratacao.js') }}"></script>
 @stop

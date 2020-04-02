@@ -31,27 +31,28 @@ class SetCookiesSession
                 // $empregado = Empregado::find('c142765'); // Carlos
                 $empregado = Empregado::find('c111710'); // Chuman
                 // $empregado = Empregado::find('c079436'); // Vladimir
+                // $empregado = Empregado::find('c098453'); // Rafael
 
                 $request->session()->put([
-                    'matricula' => $empregado->matricula,
-                    'nomeCompleto' => $empregado->nomeCompleto,
-                    'primeiroNome' => $empregado->primeiroNome,
-                    'codigoFuncao' => $empregado->codigoFuncao,
-                    'nomeFuncao' => $empregado->nomeFuncao,
-                    'codigoLotacaoAdministrativa' => $empregado->codigoLotacaoAdministrativa,
-                    'nomeLotacaoAdministrativa' => $empregado->nomeLotacaoAdministrativa,
-                    'codigoLotacaoFisica' => $empregado->codigoLotacaoFisica,
-                    'nomeLotacaoFisica' => $empregado->nomeLotacaoFisica,
-                    'acessoEmpregadoPortal' => $empregado->acessaPortal->nivelAcesso,
-                    'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade
+                    'matricula'                     => $empregado->matricula,
+                    'nomeCompleto'                  => $empregado->nomeCompleto,
+                    'primeiroNome'                  => $empregado->primeiroNome,
+                    'codigoFuncao'                  => $empregado->codigoFuncao,
+                    'nomeFuncao'                    => $empregado->nomeFuncao,
+                    'codigoLotacaoAdministrativa'   => $empregado->codigoLotacaoAdministrativa,
+                    'nomeLotacaoAdministrativa'     => $empregado->nomeLotacaoAdministrativa,
+                    'codigoLotacaoFisica'           => $empregado->codigoLotacaoFisica,
+                    'nomeLotacaoFisica'             => $empregado->nomeLotacaoFisica,
+                    'acessoEmpregadoPortal'         => $empregado->acessaPortal->nivelAcesso,
+                    'unidadeEmpregadoPortal'        => $empregado->acessaPortal->unidade
                 ]);
+
+                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
             }
         } else {   
             if (!$request->session()->has('matricula')) {
                 $usuario = new Ldap;
                 $empregado = Empregado::find($usuario->getMatricula());
-                $urlBaseSistemaInova = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '/')+1));
-                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
                 $baseSimov = BaseSimov::select('DATA_ULTIMA_ALTERACAO')->orderBy('DATA_ULTIMA_ALTERACAO', 'desc')->first();
 
                 $request->session()->put([
@@ -68,6 +69,8 @@ class SetCookiesSession
                     'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade,
                     'dataAtualizacaoBaseSimov' => Carbon::parse($baseSimov->DATA_ULTIMA_ALTERACAO)->format('d/m/Y')
                 ]); 
+
+                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
             }
         }
         return $next($request);

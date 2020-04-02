@@ -99,12 +99,12 @@
 
                         <div class="form-group">
                             <label>Nome do Proponente:</label>
-                            <input type="text" name="nomeProponente" class="form-control" readonly required>
+                            <input type="text" name="nomeProponente" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                             <label>CPF / CNPJ:</label>
-                            <input type="text" name="cpfCnpjProponente" class="form-control" readonly required>
+                            <input type="text" name="cpfCnpjProponente" class="form-control" required>
                         </div>
 
                     </div>
@@ -134,6 +134,6 @@
 
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/portal/distrato/controle-distrato.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/distrato/controle-distrato.js') }}"></script>
 
 @stop

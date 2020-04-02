@@ -71,7 +71,7 @@
                 </div>
             @else
             <nav class="main-header navbar {{config('adminlte.classes_topnav_nav', 'navbar-expand-md')}} {{config('adminlte.classes_topnav', 'navbar-white navbar-light')}}">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav col">
                     <li class="nav-item">
                         <a class="nav-link menu-hamburguer" data-widget="pushmenu" href="#" @if(config('adminlte.sidebar_collapse_remember')) data-enable-remember="true" @endif @if(!config('adminlte.sidebar_collapse_remember_no_transition')) data-no-transition-after-reload="false" @endif @if(config('adminlte.sidebar_collapse_auto_size')) data-auto-collapse-size="{{config('adminlte.sidebar_collapse_auto_size')}}" @endif>
                             <i class="fas fa-bars"></i>
@@ -81,8 +81,8 @@
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')
 
-                    <li class="nav-item">
-                        <form class="form-inline" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                    <li class="nav-item d-none d-sm-block">
+                        <form class="form-inline m-0" id="formBarraBusca" onsubmit="validarBusca()" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar mr-3 text-white" required>
                                 <option value="" disabled selected>Selecione</option>
@@ -95,13 +95,36 @@
                                 <option class="text-dark" value="nomeExMutuario">Nome ex-mutuário</option>
                             </select>
                             <div class="input-group nav-search-bar">
-                                <input class="form-control form-control-navbar text-white" type="text" id="valorVariavel" minlength="5" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." oninvalid="setCustomValidity('Digite no mínimo 5 caracteres para pesquisar.')" required>
+                                <input class="form-control form-control-navbar text-white" type="text" id="inputBarraBusca" name="valorVariavel" placeholder="Digite no mínimo 5 caracteres para pesquisar." required>
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
                         </form>
                     </li>
+
+                    <li class="nav-item d-block d-sm-none">
+                        <form class="form-inline m-0" id="formBarraBuscaSm" onsubmit="validarBuscaSm()" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                            {{ csrf_field() }}
+                            <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar w-50 text-white" required>
+                                <option value="" disabled selected>Ref.</option>
+                                <option class="text-dark" value="numeroContrato">Contrato</option>
+                                <option class="text-dark" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                                <option class="text-dark" value="nomeProponente">Nome proponente</option>
+                                <option class="text-dark" value="enderecoImovel">Endereço imóvel</option>
+                                <option class="text-dark" value="matriculaImovel">Matrícula do imóvel</option>
+                                <option class="text-dark" value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
+                                <option class="text-dark" value="nomeExMutuario">Nome ex-mutuário</option>
+                            </select>
+                            <div class="input-group nav-search-bar w-50">
+                                <input class="form-control form-control-navbar text-white" type="text" id="inputBarraBuscaSm" name="valorVariavel" placeholder="Pesquisar" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+
                 </ul>
 
             @endif
@@ -130,21 +153,21 @@
                         </li>
                     @endif
 
-                    <li class="nav-item">
-                        <a href="#" id="btnFullscreen" class="nav-link" title="Modo tela cheia">
+                    <li class="nav-item d-none d-sm-block mx-1">
+                        <a href="#" id="btnFullscreen" class="nav-link px-0" title="Modo tela cheia">
                             <i class="fas fa-lg fa-expand"></i>
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="#" id="btnFullscreenOff" class="nav-link" title="Sair do modo tela cheia" style="display:none;">
+                    <li class="nav-item d-none d-sm-block mx-1">
+                        <a href="#" id="btnFullscreenOff" class="nav-link px-0" title="Sair do modo tela cheia" style="display:none;">
                             <i class="fas fa-lg fa-compress-arrows-alt"></i>
                         </a>
                     </li>
 
                     @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
-                        <li class="nav-item dropdown user-menu">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <li class="nav-item dropdown user-menu mx-1">
+                            <a href="#" class="nav-link dropdown-toggle px-0" data-toggle="dropdown">
                                 <i class="far fa-lg fa-bell"></i>
                                 <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') }}</span>
                             </a>
@@ -160,13 +183,9 @@
                         </li>
                     @endIf
 
-                    <li class="nav-item dropdown user-menu">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <!-- <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <img src="https://permissoes.correio.corp.caixa.gov.br/ThumbPhoto/C079436_AD.jpg" class="user-image" alt="User Image" onError="this.src='{{ asset('images/userSemFoto.jpg') }}';">
-                            -->
-                            <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="user-image img-circle elevation-2" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
-                            <!-- {{-- backup <img src="http://tedx.caixa/lib/asp/foto.asp?Matricula={{session()->get('matricula')}}" class="user-image" alt="User Image" onerror="this.src='{{ asset('images/userSemFoto.jpg') }}';">  --}} -->
+                    <li class="nav-item dropdown user-menu mx-1">
+                        <a href="#" class="nav-link dropdown-toggle p-0" data-toggle="dropdown">
+                            <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="user-image img-circle elevation-2 m-0" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
                             <span class="d-none d-md-inline">{{ session()->get('primeiroNome') }}</span>
                         </a>
 
@@ -185,22 +204,6 @@
                         </div>
                         
                     </li>
-
-                    <!-- <li class="nav-item dropdown user-menu">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img src="/img/question-mark.png" class="user-image img-circle elevation-2" alt="User Image">
-                            <span class="d-none d-md-inline">Alexander Pierce</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
-                            <li class="user-header bg-primary">
-                                <img src="/img/question-mark.png" class="img-circle elevation-2" alt="User Image">
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                        </ul>
-                    </li> -->
                 </ul>
                 @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
                     </nav>
@@ -256,20 +259,28 @@
         </div>
 
         <footer class="main-footer">
-
             <div class="row">
-                <div class="col-sm-2 d-flex justify-content-center">
+            <div class="col-sm-2">
+                <div class="d-inline justify-content-center">
                     <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 40px;">
                 </div>
+            </div>
+            <div class="col-sm-10">
 
-                <div class="col-sm-7">
-                    <b class="float-left m-2">2020 - GILIE/SP - Gerência de Alienar Bens Móveis e Imóveis</b>
+                <div class="d-inline justify-content-center">
+                    <b class="m-2">2020 - GILIE/SP - </b>
                 </div>
-                <div class="col-sm-3">
-                    <b class="float-right m-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
+
+                <div class="d-sm-inline d-none justify-content-center">
+                    <b class="m-2">Gerência de Alienar Bens Móveis e Imóveis</b>
+                </div>
+
+                <div class="d-inline justify-content-right">
+                    <b class="m-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
                 </div>
             </div>
 
+            </div>
         </footer>
 
 
@@ -295,13 +306,33 @@
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
-        })
+        });
+
+        function validarBusca() {
+            let inputBarraBuscaValue = $('#inputBarraBusca').val();
+            if (inputBarraBuscaValue.length < 5) {
+                alert('Digite no mínimo 5 caracteres para pesquisar.');
+            } else {
+                $('#formBarraBusca').submit();
+            };
+        };
+
+        function validarBuscaSm() {
+            let inputBarraBuscaValue = $('#inputBarraBuscaSm').val();
+            if (inputBarraBuscaValue.length < 5) {
+                alert('Digite no mínimo 5 caracteres para pesquisar.');
+            } else {
+                $('#formBarraBuscaSm').submit();
+            };
+        };
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-    <script src="{{ asset('plugins/DataTables/dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/DataTables/dataTables.fixedColumns.min.js') }}"></script>
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/toggle_fullscreen.js') }}"></script>
+    <script src="{{ asset('js/global/copy_to_clipboard.js') }}"></script>
 
     @stack('js')
     @yield('js')

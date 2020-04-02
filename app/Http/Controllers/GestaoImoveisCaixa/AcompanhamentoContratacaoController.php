@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\Ldap;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Http\Controllers\Controller;
 use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
@@ -28,51 +29,14 @@ class AcompanhamentoContratacaoController extends Controller
 
     public static function listarContratosContratacaoUltimosSessentaDias()
     {
-        $codigoUnidadeLotacaoEmpregadoSessao = session('codigoLotacaoFisica') == null ? session('codigoLotacaoAdministrativa') : session('codigoLotacaoFisica');
-        switch ($codigoUnidadeLotacaoEmpregadoSessao) {
-            case '7257':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/SP';
-                break;
-            case '7244':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/BH';
-                break;
-            case '7243':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/BE';
-                break;
-            case '7109':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/BR';
-                break;
-            case '7247':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/CT';
-                break;
-            case '7248':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/FO';
-                break;
-            case '7249':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/GO';
-                break;
-            case '7251':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/PO';
-                break;
-            case '7254':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/RJ';
-                break;
-            case '7253':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/RE';
-                break;
-            case '7255':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/SA';
-                break;
-            case '7242':
-                $nomeUnidadeLotacaoEmpregadoSessao = 'GILIE/BU';
-                break;
-        }
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $siglaGilie = defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
 
         $universoContratosContratacao = BaseSimov::where(function($statusImovel) {
                                                         $statusImovel->where('STATUS_IMOVEL', '=', 'Em Contratação')
                                                                     ->orWhere('STATUS_IMOVEL', '=', 'Contratação Pendente');
                                                     })
-                                                    ->where('UNA', '=', $nomeUnidadeLotacaoEmpregadoSessao)
+                                                    ->where('UNA', '=', $siglaGilie)
                                                     ->get();
         // dd($universoContratosContratacao->conformidadeContratacao->cardAgrupamento);
         $arrayContratosContratacaoUltimosSessentaDias = [];
