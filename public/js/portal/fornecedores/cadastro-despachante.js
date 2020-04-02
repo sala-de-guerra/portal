@@ -57,12 +57,12 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<hr>'+
-                                                    '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                '<div id="removerdiv'+item.idDespachante+'">'+'<hr>'+
+                                                    '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel'+item.idDespachante+'">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                                '<hr>'+
-                                                    '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<div id="removerdiv2'+item.idDespachante+'">'+'<hr>'+
+                                                    '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel'+item.idDespachante+'">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
                                                 '<hr>'+                           
@@ -223,9 +223,19 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                         '</div>' +
                     '</div>' + 
                 '</td>' +
-            '</tr>';
-
+            '</tr>';          
+  
 $(linha).appendTo('#tblfornecedores>tbody');
+
+var confereSegundoResponsavel = $('#nome_segundo_responsavel' + item.idDespachante).text()
+if (confereSegundoResponsavel == ""){
+    $('#removerdiv'+item.idDespachante).remove();
+}
+
+var confereTerceiroResponsavel = $('#nome_terceiro_responsavel' + item.idDespachante).text()
+if (confereTerceiroResponsavel == ""){
+    $('#removerdiv2'+item.idDespachante).remove();
+}
 
 // altera a data do form para formato em portugues
 var data =$('#vencimento_contrato'+ item.idDespachante).text()
@@ -292,5 +302,6 @@ $(document).ready(function(){
         $(".telefoneCelular").mask("(00) 00000-0000");
     
     })
+
        
 })   
