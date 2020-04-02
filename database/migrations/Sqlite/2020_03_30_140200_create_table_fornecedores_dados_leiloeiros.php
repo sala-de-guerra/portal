@@ -17,8 +17,6 @@ class CreateTableFornecedoresDadosLeiloeiros extends Migration
             $table->bigIncrements('idLeiloeiro');
             $table->string('numeroContrato', 50);
             $table->date('dataVencimentoContrato');
-            $table->boolean('classificacaoLeiloeiro');
-            $table->integer('numeroLeiloesRealizados')->default(0);
             $table->string('nomeLeiloeiro', 255);
             $table->string('telefoneLeiloeiro', 20)->nullable();
             $table->string('emailLeiloeiro', 255)->nullable();
