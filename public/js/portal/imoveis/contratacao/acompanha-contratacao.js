@@ -10,11 +10,11 @@ $(document).ready(function(){
             '<tr>' +
                 '<td>' + item.idAcompanhamentoContratacao + '</td>' +
                 '<td>' + item.numeroContrato + '</td>' +
+                '<td class="formata-data-sem-hora">' + item.dataProposta + '</td>' +
                 '<td>' + item.classificacaoImovel + '</td>' +
                 '<td>' + item.tipoVenda + '</td>' +
                 '<td>' + item.nomeProponente + '</td>' +
                 '<td>' + item.cpfCnpjProponente + '</td>' +
-                '<td class="formata-data-sem-hora">' + item.dataProposta + '</td>' +
                 '<td>' + item.quantidadeDiasAposProposta + '</td>' +
                 '<td>' + item.cardAgrupamentoContratacao + '</td>' +
                 '<td>' + item.statusConformidadeContratacao + '</td>' +
@@ -56,7 +56,7 @@ $(document).ready(function(){
     setTimeout(function() {
         _formataData(); 
         _formataValores();
-        _formataDatatable();;
+        _formataDatatableComData();;
     }, 4000);
 }); 
 
