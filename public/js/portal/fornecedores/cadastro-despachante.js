@@ -275,6 +275,7 @@ $(document).ready(function(){
         $(newIn).appendTo('#field');
         $('#b1').css("background", "#708090")
         $("#field").prop('id', 'field2')
+        $(".telefoneCelular").mask("(00) 00000-0000");
 
         $(".add-one-more").click(function(e){
         e.preventDefault();
@@ -288,6 +289,7 @@ $(document).ready(function(){
         $(newIn).appendTo('#field2');
         $('#b2').css("background", "#708090")
         $("#field2").prop('id', 'fim')})
+        $(".telefoneCelular").mask("(00) 00000-0000");
     
     })
        
