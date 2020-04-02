@@ -93,7 +93,7 @@
                             <label>Contrato <span style="color: red;"> *</span> </label>
                             <input type="text" name="numeroContrato" class="form-control" autocomplete="off" required>
                         </div>
-                        
+                        <div id="field" class="container">
                         <div class="form-group">
                             <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
                             <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
@@ -133,39 +133,12 @@
                             <label>E-mail<span style="color: red;"> *</span> </label>
                             <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br" required>
                         </div>
-                     
-                        <div class="form-group">
-                            <label>Nome do segundo responsável</label>
-                            <input type="text" name="nomeSegundoResponsavelDespachante" autocomplete="off" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Telefone do segundo responsável</label>
-                            <input type="text" name="telefoneSegundoResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneSegundoResponsavelDespachante" placeholder="(11) 99599-9696">
-                        </div>
-
-                        <div class="form-group">
-                            <label>E-mail do segundo responsável</label>
-                            <input type="email" name="emailSegundoResponsavelDespachante"  autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Nome do terceiro responsável</label>
-                            <input type="text" name="nomeTerceiroResponsavelDespachante" autocomplete="off" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Telefone do terceiro responsável</label>
-                            <input type="text" name="telefoneTerceiroResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneTerceiroResponsavelDespachante" placeholder="(11) 99599-9696">
-                        </div>
-
-                        <div class="form-group">
-                            <label>E-mail do terceiro responsável</label>
-                            <input type="email" name="emailTerceiroResponsavelDespachante" autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">
+                        <button id="b1" class="btn add-more" type="button" style="background: #4F94CD; color: white;">adicionar novo responsável</button>
                         </div>
                     </div>
                     </div>
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -193,6 +166,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+ 
 @stop
 
 
@@ -201,5 +175,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/fornecedores/cadastro-despachante.js') }}"></script>
-
 @stop

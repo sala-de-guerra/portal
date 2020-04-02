@@ -259,3 +259,36 @@ $(".telefoneCelular").mask("(00) 00000-0000");
     $('#fadeOut').fadeOut("slow");
     }, 3000);
 
+// Cria botão adicionar responsável no formulario
+$(document).ready(function(){
+    $(".add-more").click(function(e){
+        e.preventDefault();
+ 
+        var newIn = '<div class="form-group">' + '<label>'+'Nome do segundo responsável'+'</label>'+
+        '<input type="text" name="nomeSegundoResponsavelDespachante" autocomplete="off" class="form-control">'+'</div>'+
+        '<div class="form-group">'+'<label>'+'Telefone do segundo responsável'+'</label>'+
+        '<input type="text" name="telefoneSegundoResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneSegundoResponsavelDespachante" placeholder="(11) 99599-9696">'+'</div>'+
+        '<div class="form-group">'+'<label>'+'E-mail do segundo responsável'+'</label>'+'<input type="email" name="emailSegundoResponsavelDespachante"  autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">'+'</div>'+
+        '<button id="b2" class="btn add-one-more" type="button" style="background: #4F94CD; color: white;">'+'adicionar novo responsável'+'</button>'
+
+
+        $(newIn).appendTo('#field');
+        $('#b1').css("background", "#708090")
+        $("#field").prop('id', 'field2')
+
+        $(".add-one-more").click(function(e){
+        e.preventDefault();
+        var newIn = '<div class="form-group">'+'<label>'+'Nome do terceiro responsável'+'</label>'+
+                    '<input type="text" name="nomeTerceiroResponsavelDespachante" autocomplete="off" class="form-control">'+'</div>'+
+                    '<div class="form-group">'+'<label>'+'Telefone do terceiro responsável'+'</label>'+
+                    '<input type="text" name="telefoneTerceiroResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneTerceiroResponsavelDespachante" placeholder="(11) 99599-9696">'+'</div>'+
+                    '<div class="form-group">'+'<label>'+'E-mail do terceiro responsável'+'</label>'+
+                    '<input type="email" name="emailTerceiroResponsavelDespachante" autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">'+'</div>' 
+
+        $(newIn).appendTo('#field2');
+        $('#b2').css("background", "#708090")
+        $("#field2").prop('id', 'fim')})
+    
+    })
+       
+})   
