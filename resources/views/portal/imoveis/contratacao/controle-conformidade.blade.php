@@ -56,6 +56,8 @@
                                     <th>Data Entrada</th>
                                     <th>Link</th>
                                     <th>Proposta</th>
+                                    <th>Data Entrada</th>
+                                    <th>Copiar Link do Servidor</th>
                                     <th>Observações</th>
                                 </tr>
                             </thead>

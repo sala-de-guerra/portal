@@ -54,7 +54,7 @@ class SetCookiesSession
                 $usuario = new Ldap;
                 $empregado = Empregado::find($usuario->getMatricula());
                 $baseSimov = BaseSimov::select('DATA_ULTIMA_ALTERACAO')->orderBy('DATA_ULTIMA_ALTERACAO', 'desc')->first();
-
+                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
                 $request->session()->put([
                     'matricula' => $empregado->matricula,
                     'nomeCompleto' => $empregado->nomeCompleto,
@@ -69,8 +69,6 @@ class SetCookiesSession
                     'unidadeEmpregadoPortal' => $empregado->acessaPortal->unidade,
                     'dataAtualizacaoBaseSimov' => Carbon::parse($baseSimov->DATA_ULTIMA_ALTERACAO)->format('d/m/Y')
                 ]); 
-
-                $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
             }
         }
         return $next($request);

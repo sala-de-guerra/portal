@@ -255,13 +255,13 @@ return [
         [
             'text' => 'Preparar e Ofertar',
             'icon' => 'fas fa-lg fa-fw fa-sign mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+            'perfil_acesso' => ['DESENVOLVEDOR'], //, env('NOME_NOSSA_UNIDADE'), 'GESTOR'
             'submenu' => [
                 [
                     'text' => 'Leilões Negativos',
                     'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/estoque-imoveis/leiloes/leiloes-negativos',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR'], //, env('NOME_NOSSA_UNIDADE'), 'GESTOR'
                 ]
             ],
         ],

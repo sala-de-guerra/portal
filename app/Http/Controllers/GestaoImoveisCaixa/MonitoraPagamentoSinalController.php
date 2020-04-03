@@ -52,7 +52,7 @@ class MonitoraPagamentoSinalController extends Controller
     public function listarContratosSemPagamentoSinal()
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
-        $siglaGilie = defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
+        $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
         
         $consultaContratosSemPagamentoSinal = BaseSimov::where('DATA_PROPOSTA', '<=', Carbon::now()->sub('7 day')->format('Y-m-d'))
                                                         ->where('UNA',  $siglaGilie)
