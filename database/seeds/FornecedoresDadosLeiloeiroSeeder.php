@@ -16,6 +16,7 @@ class FornecedoresDadosLeiloeiroSeeder extends Seeder
         DB::table('TBL_FORNECEDORES_DADOS_LEILOEIRO')->insert([
             'numeroContrato'                    => '1234/2020',
             'classificacaoImoveisLeilao'        => 'EMGEA',
+            'quantidadeLeiloesRestantes'        => 10,
             'dataVencimentoContrato'            => '2020-12-31',
             'nomeLeiloeiro'                     => 'HUGO LEONARDO ALVARENGA CUNHA',
             'telefoneLeiloeiro'                 => '(11) 3053-0001',
@@ -34,6 +35,7 @@ class FornecedoresDadosLeiloeiroSeeder extends Seeder
         DB::table('TBL_FORNECEDORES_DADOS_LEILOEIRO')->insert([
             'numeroContrato'                    => '5678/2020',
             'classificacaoImoveisLeilao'        => 'CAIXA',
+            'quantidadeLeiloesRestantes'        => 10,
             'dataVencimentoContrato'            => '2021-12-31',
             'nomeLeiloeiro'                     => 'WASHINGTON LUIZ PEREIRA VIZEU',
             'telefoneLeiloeiro'                 => '(11) 99755-8776',
