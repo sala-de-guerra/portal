@@ -9,6 +9,7 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + gilie, functi
                 '<td>' + item.idLeiloeiro + '</td>' +
                 '<td>' + item.nomeEmpresaAssessoraLeiloeiro + '</td>' +
                 '<td>' + item.numeroContrato + '</td>' +
+                '<td>' + item.classificacaoImoveisLeilao + '</td>' +
                 '<td class="formata-data-sem-hora">' + item.dataVencimentoContrato + '</td>' +
                 '<td>' + item.nomeLeiloeiro + '</td>' +
                 '<td>' + item.telefoneLeiloeiro + '</td>' +
@@ -40,11 +41,12 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + gilie, functi
                                             '<div>' +
                                                 '<hr>'+
                                                     '<p><b>' + 'NOME:' + '</b>' + '<span class="pl-5">' + item.nomeEmpresaAssessoraLeiloeiro + '</span>' + '</p>' +
+                                                    '<p><b>' + 'Classificação:' + '</b>' + '<span class="pl-5">' + item.classificacaoImoveisLeilao + '</span>' + '</p>' +
                                                     '<p><b>'+'Telefone:'+'</b>'+ '<span class="pl-3">'+item.telefoneLeiloeiro+'</span>'+'</p>'+
                                                     '<p><b>'+'E-MAIL:'+'</b>'+ '<span class="pl-3">'+item.emailEmpresaAssessoraLeiloeiro+'</span>'+'</p>'+
                                                     '<p><b>'+'Site:'+'</b>'+ '<a class="pl-3" href="'+item.siteEmpresaAssessoraLeiloeiro+'">'+item.siteEmpresaAssessoraLeiloeiro+'</a>'+'</p>'+
                                                     '<p><b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3">'+item.numeroContrato+'</span>'+'</p>'+
-                                                    '<p><b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato'+item.idDespachante+'">'+item.dataVencimentoContrato+'</span>'+'</p>'+
+                                                    '<p><b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato'+item.idLeiloeiro+'">'+item.dataVencimentoContrato+'</span>'+'</p>'+
                                                     '<hr>'+
                                                     '<p><b>'+'Leiloeiro:'+'</b>'+ '<span class="pl-3">'+item.nomeLeiloeiro+'</span>'+'</p>'+
                                                     '<p><b>'+'Telefone/Leiloeiro:'+'</b>'+ '<span class="pl-3">'+item.telefoneLeiloeiro+'</span>'+'</p>'+
@@ -65,7 +67,7 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + gilie, functi
                         '<div class="modal fade" id="modalRemove' + item.idLeiloeiro + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
                                 '<div class="modal-content">' +
-                                    '<form method="post" action="/fornecedores/controle-despachantes/' + item.idLeiloeiro + '">' +
+                                    '<form method="post" action="/fornecedores/controle-leiloeiros/' + item.idLeiloeiro + '">' +
                                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                         '<input type="hidden" class="form-control" name="_method" value="DELETE">' +
                                         '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
@@ -88,149 +90,125 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + gilie, functi
                             '</div>' + 
                         '</div>' +  
 
-                    //     // Modal editar
-                    //     '<div class="modal fade" id="modalEditar' + item.idDespachante + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                    //         '<div class="modal-dialog modal-lg" role="document">' +
-                    //             '<div class="modal-content">' +
-                    //                 '<form method="post" action="/fornecedores/controle-despachantes/' + item.idDespachante + '">' +
-                    //                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                    //                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-                    //                     '<div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">' +
-                    //                         '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Editar cadastro:' + 
-                    //                         '<p>'+'Preencha os campos que deseja alterar e clique em salvar'+'</p>'+'</h5>' +
-                    //                         '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-                    //                             '<span aria-hidden="true">&times;</span>' +
-                    //                         '</button>' +
-                    //                     '</div>' +
-                    //                         '<div class="modal-body" px-0>' +
-                    //                             '<div style="overflow-y: hidden; height: calc(100vh - 15rem);">'+
-                    //                             '<div class="px-2" style="overflow-y: auto; height: 100%;">'+
-                    //                         '<div>' +
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Contrato: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="numeroContrato" class="form-control" autocomplete="off" placeholder="'+item.numeroContrato+'">'+'</span>'+
-                    //                                 '</div>'+
+                        // Modal editar
+                        '<div class="modal fade" id="modalEditar' + item.idLeiloeiro + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog modal-lg" role="document">' +
+                                '<div class="modal-content">' +
+                                    '<form method="post" action="/fornecedores/controle-leiloeiros/' + item.idLeiloeiro +'">' +
+                                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                                        '<div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">' +
+                                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Editar cadastro:'+
+                                            '<p>'+'Preencha os campos que deseja alterar e clique em salvar'+'</p>'+'</h5>' +
+                                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                                '<span aria-hidden="true">&times;</span>' +
+                                            '</button>' +
+                                        '</div>' +
+                                            '<div class="modal-body" px-0>' +
+                                                '<div style="overflow-y: hidden; height: calc(100vh - 15rem);">'+
+                                                '<div class="px-2" style="overflow-y: auto; height: 100%;">'+
+                                            '<div>' +
+                                            '<div id="classificacao'+item.idLeiloeiro+'">'+
+                                            '<p><b>' + 'Classificação:' + '</b>' + '<span class="pl-5" >' + item.classificacaoImoveisLeilao + '</span>' + '</p>' +
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Vencimento do contrato: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="dataVencimentoContrato" class="form-control" autocomplete="off" placeholder="'+item.dataVencimentoContrato+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Contrato</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="numeroContrato" class="form-control" autocomplete="off" placeholder="'+item.numeroContrato+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'CNPJ: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="cnpjDespachante" class="form-control cnpj" autocomplete="off" placeholder="'+item.cnpjDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group" id="vencimentoEmgea'+item.idLeiloeiro+'">'+
+                                            '<label style="float: left;">Data de vencimento</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="date" name="dataVencimentoContrato" class="form-control" autocomplete="off" placeholder="'+item.dataVencimentoContrato+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Despachante: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="nomeDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomeDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Nome</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="nomeEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="'+item.nomeEmpresaAssessoraLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
+                                            
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Telefone</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="telefoneEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" autocomplete="off" placeholder="'+item.telefoneEmpresaAssessoraLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Telefone: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="telefoneDespachante" class="form-control telefoneComum" autocomplete="off" placeholder="'+item.telefoneDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">E-mail</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" autocomplete="off" placeholder="'+item.emailEmpresaAssessoraLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'E-mail: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="emailDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Leiloeiro</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="nomeLeiloeiro" class="form-control" autocomplete="off" placeholder="'+item.nomeLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="nomePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomePrimeiroResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Telefone do leiloeiro</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="telefoneLeiloeiro" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefoneLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Telefone/Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefonePrimeiroResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">E-mail do leiloeiro</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="emailLeiloeiro" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.emailLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
+                                            
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Endereço</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="enderecoEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="'+item.enderecoEmpresaAssessoraLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'E-mail/Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="emailPrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailPrimeiroResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
-                                                    
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Segundo Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="nomeSegundoResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomeSegundoResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Endereço do leilão</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="enderecoRealizacaoLeilao" class="form-control" autocomplete="off" placeholder="'+item.enderecoRealizacaoLeilao+'">'+'</span>'+
+                                            '</div>'+
 
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Telefone/Segundo Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="telefoneSegundoResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefoneSegundoResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
-
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'E-mail/Segundo Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="emailSegundoResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailSegundoResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
-
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Terceiro Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="nomeTerceiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomeTerceiroResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
-
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'Telefone/Terceiro Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="telefoneTerceiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefoneTerceiroResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+
-
-                    //                                 '<div class="form-group">'+
-                    //                                     '<label class="pt-2" style="float: left;">'+'E-mail/Terceiro Responsável: '+'</label>'+
-                    //                                 '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                    //                                 '<input style="width: 100%;" type="text" name="emailTerceiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailTerceiroResponsavelDespachante+'">'+'</span>'+
-                    //                                 '</div>'+                               
-                    //                             '</div>' +
-                    //                         '</div>' +
-                    //                     '</div>' + 
-                    //                 '</div>' +
-                    //                 '<div class="modal-footer">' +
-                    //                     '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Cancelar' + '</button>' +
-                    //                     '<button type="submit" class="btn btn-success">Salvar</button>' +
-                    //                 '</div>' + 
-                    //              '</form>'+
-                    //             '</div>' + 
-                    //         '</div>' + 
-                    //     '</div>' +
-                    // '</div>' + 
+                                            '<div class="form-group">'+
+                                            '<label style="float: left;">Site</label>'+
+                                            '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
+                                            '<input style="width: 100%;" type="text" name="siteEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="'+item.siteEmpresaAssessoraLeiloeiro+'">'+'</span>'+
+                                            '</div>'+
+                                            
+                                            '</div>' +
+                                            '</div>' +
+                                        '</div>' + 
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Cancelar' + '</button>' +
+                                        '<button type="submit" class="btn btn-success">Salvar</button>' +
+                                    '</div>' + 
+                                 '</form>'+
+                                '</div>' + 
+                            '</div>' + 
+                        '</div>' +
+                    '</div>' + 
                 '</td>' +
             '</tr>';          
   
 $(linha).appendTo('#tblLeiloeiro>tbody');
 
-// var confereSegundoResponsavel = $('#nome_segundo_responsavel' + item.idDespachante).text()
-// if (confereSegundoResponsavel == "null" || confereSegundoResponsavel == "" ){
-//     $('#removerdiv'+item.idDespachante).remove();
-// }
+var SeCaixa = $('#classificacao' + item.idLeiloeiro).text()
+if (SeCaixa == "Classificação:CAIXA"){
+    $('#vencimentoEmgea'+item.idLeiloeiro).remove();
+}
 
-// var confereTerceiroResponsavel = $('#nome_terceiro_responsavel' + item.idDespachante).text()
-// if (confereTerceiroResponsavel == "null" || confereTerceiroResponsavel == "" ){
-//     $('#removersegundadiv'+item.idDespachante).remove();
-// }
-
-// altera a data do form para formato em portugues
-var data =$('#vencimento_contrato'+ item.idDespachante).text()
+// altera a data do form para formato Brasil
+var data =$('#vencimento_contrato'+ item.idLeiloeiro).text()
 var novaData = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
-$('#vencimento_contrato'+item.idDespachante).text(novaData)
+$('#vencimento_contrato'+item.idLeiloeiro).text(novaData)
 
-// $(".telefoneComum").mask("(00) 0000-0000");
-// $(".cnpj").mask("99.999.999/9999-99");
-// $(".telefoneCelular").mask("(00) 00000-0000");
+$(".telefoneComum").mask("(00) 0000-0000");
+$(".cnpj").mask("99.999.999/9999-99");
+$(".telefoneCelular").mask("(00) 00000-0000");
 
 })
 }).done(function() { 
@@ -243,51 +221,22 @@ $('#vencimento_contrato'+item.idDespachante).text(novaData)
     $(".telefoneCelular").mask("(00) 00000-0000");
 
 
-
-//   $( function() {
-//     $( "#datepicker" ).datepicker({
-//         dateFormat: "dd/mm/yy"
-//       });
-//   } );
-
-
   setTimeout(function(){
     $('#fadeOut').fadeOut("slow");
     }, 3000);
 
-// Cria botão adicionar responsável no formulario
-$(document).ready(function(){
-    $(".add-more").click(function(e){
-        e.preventDefault();
- 
-        var newIn = '<div class="form-group">' + '<label>'+'Nome do segundo responsável'+'</label>'+
-        '<input type="text" name="nomeSegundoResponsavelDespachante" autocomplete="off" class="form-control">'+'</div>'+
-        '<div class="form-group">'+'<label>'+'Telefone do segundo responsável'+'</label>'+
-        '<input type="text" name="telefoneSegundoResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneSegundoResponsavelDespachante" placeholder="(11) 99599-9696">'+'</div>'+
-        '<div class="form-group">'+'<label>'+'E-mail do segundo responsável'+'</label>'+'<input type="email" name="emailSegundoResponsavelDespachante"  autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">'+'</div>'+
-        '<button id="b2" class="btn add-one-more" type="button" style="background: #4F94CD; color: white;">'+'adicionar novo responsável'+'</button>'
+$("#botaocaixa").click(function(){
+    $(".LeiloeiroEmgea").hide();
+    $(".LeiloeiroCaixa").show();
+    $("#input").val("CAIXA");
+});
+      
+$("#botaoemgea").click(function(){
+    $(".LeiloeiroCaixa").hide();
+    $(".LeiloeiroEmgea").show();
+    $("#input").val("EMGEA");
+});
+      
 
 
-        $(newIn).appendTo('#field');
-        $('#b1').css("background", "#708090")
-        $("#field").prop('id', 'field2')
-        $(".telefoneCelular").mask("(00) 00000-0000");
 
-        $(".add-one-more").click(function(e){
-        e.preventDefault();
-        var newIn = '<div class="form-group">'+'<label>'+'Nome do terceiro responsável'+'</label>'+
-                    '<input type="text" name="nomeTerceiroResponsavelDespachante" autocomplete="off" class="form-control">'+'</div>'+
-                    '<div class="form-group">'+'<label>'+'Telefone do terceiro responsável'+'</label>'+
-                    '<input type="text" name="telefoneTerceiroResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneTerceiroResponsavelDespachante" placeholder="(11) 99599-9696">'+'</div>'+
-                    '<div class="form-group">'+'<label>'+'E-mail do terceiro responsável'+'</label>'+
-                    '<input type="email" name="emailTerceiroResponsavelDespachante" autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">'+'</div>' 
-
-        $(newIn).appendTo('#field2');
-        $('#b2').css("background", "#708090")
-        $("#field2").prop('id', 'fim')})
-        $(".telefoneCelular").mask("(00) 00000-0000");
-    
-    })
-
-       
-})   
