@@ -241,7 +241,7 @@ if (confereTerceiroResponsavel == "null" || confereTerceiroResponsavel == "" ){
     $('#removersegundadiv'+item.idDespachante).remove();
 }
 
-// altera a data do form para formato em portugues
+// altera a data do form para formato em Brasil
 var data =$('#vencimento_contrato'+ item.idDespachante).text()
 var novaData = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
 $('#vencimento_contrato'+item.idDespachante).text(novaData)
