@@ -30,7 +30,7 @@ class AcompanhamentoContratacaoController extends Controller
     public static function listarContratosContratacaoUltimosSessentaDias()
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
-        $siglaGilie = defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
+        $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
 
         $universoContratosContratacao = BaseSimov::where(function($statusImovel) {
                                                         $statusImovel->where('STATUS_IMOVEL', '=', 'Em Contratação')
