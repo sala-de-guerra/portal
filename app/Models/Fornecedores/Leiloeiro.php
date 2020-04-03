@@ -12,6 +12,7 @@ class Leiloeiro extends Model
     protected $fillable = [
         'numeroContrato',
         'dataVencimentoContrato',
+        'quantidadeLeiloesRestantes',
         'nomeLeiloeiro',
         'telefoneLeiloeiro',
         'emailLeiloeiro',
