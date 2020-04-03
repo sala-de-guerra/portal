@@ -287,7 +287,7 @@ $(document).ready(function(){
 
 
         $(newIn).appendTo('#field');
-        $('#b1').css("background", "#708090")
+        $('#b1').remove()
         $("#field").prop('id', 'field2')
         $(".telefoneCelular").mask("(00) 00000-0000");
 
@@ -301,9 +301,9 @@ $(document).ready(function(){
                     '<input type="email" name="emailTerceiroResponsavelDespachante" autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">'+'</div>' 
 
         $(newIn).appendTo('#field2');
-        $('#b2').css("background", "#708090")
-        $("#field2").prop('id', 'fim')})
+        $('#b2').remove()
         $(".telefoneCelular").mask("(00) 00000-0000");
+        $("#field2").prop('id', 'fim')})
     
     })
 

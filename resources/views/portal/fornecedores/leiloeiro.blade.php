@@ -81,7 +81,7 @@
                 <form method='post' action='/fornecedores/controle-leiloeiros' id="formCadastraLeiloeiro">
                 {{ csrf_field() }} 
                     <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                        <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastrar Despachante</h5>
+                        <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastrar Leiloeiro</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -108,7 +108,12 @@
 
                             <div class="form-group collapse multi-collapse LeiloeiroEmgea ">
                                 <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
-                                <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
+                                <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário">
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa ">
+                                <label>Quantidade de leilões restantes<span style="color: red;"> *</span> </label>
+                                <input type="number"  min="0" name="quantidadeLeiloesRestantes" class="form-control" autocomplete="off"required>
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
