@@ -33,6 +33,7 @@ class LeiloeiroController extends Controller
             $novoLeiloeiro->numeroContrato                      = $request->numeroContrato;
             $novoLeiloeiro->dataVencimentoContrato              = $request->dataVencimentoContrato;
             $novoLeiloeiro->classificacaoLeiloeiro              = $request->classificacaoLeiloeiro;
+            $novoLeiloeiro->quantidadeLeiloesRestantes          = $request->quantidadeLeiloesRestantes;
             $novoLeiloeiro->nomeLeiloeiro                       = $request->nomeLeiloeiro;
             $novoLeiloeiro->telefoneLeiloeiro                   = $request->telefoneLeiloeiro;
             $novoLeiloeiro->emailLeiloeiro                      = $request->emailLeiloeiro;
@@ -95,6 +96,7 @@ class LeiloeiroController extends Controller
             $editarLeiloeiro->numeroContrato                    = !in_array($request->numeroContrato, [null, 'NULL', '']) ? $request->numeroContrato : $editarLeiloeiro->numeroContrato;
             $editarLeiloeiro->dataVencimentoContrato            = !in_array($request->dataVencimentoContrato, [null, 'NULL', '']) ? $request->dataVencimentoContrato : $editarLeiloeiro->dataVencimentoContrato;
             $editarLeiloeiro->classificacaoLeiloeiro            = !in_array($request->classificacaoLeiloeiro, [null, 'NULL', '']) ? $request->classificacaoLeiloeiro : $editarLeiloeiro->classificacaoLeiloeiro;
+            $editarLeiloeiro->quantidadeLeiloesRestantes        = !in_array($request->quantidadeLeiloesRestantes, [null, 'NULL', '']) ? $request->quantidadeLeiloesRestantes : $editarLeiloeiro->quantidadeLeiloesRestantes;
             $editarLeiloeiro->numeroLeiloesRealizados           = !in_array($request->numeroLeiloesRealizados, [null, 'NULL', '']) ? $request->numeroLeiloesRealizados : $editarLeiloeiro->numeroLeiloesRealizados;
             $editarLeiloeiro->nomeLeiloeiro                     = !in_array($request->nomeLeiloeiro, [null, 'NULL', '']) ? $request->nomeLeiloeiro : $editarLeiloeiro->nomeLeiloeiro;
             $editarLeiloeiro->telefoneLeiloeiro                 = !in_array($request->telefoneLeiloeiro, [null, 'NULL', '']) ? strtoupper($request->telefoneLeiloeiro) : $editarLeiloeiro->telefoneLeiloeiro;
