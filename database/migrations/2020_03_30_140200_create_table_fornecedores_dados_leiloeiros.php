@@ -16,8 +16,9 @@ class CreateTableFornecedoresDadosLeiloeiros extends Migration
         Schema::create('TBL_FORNECEDORES_DADOS_LEILOEIRO', function (Blueprint $table) {
             $table->bigIncrements('idLeiloeiro');
             $table->string('numeroContrato', 50);
-            $table->string('classificacaoImoveisLeilao', 50);
-            $table->date('dataVencimentoContrato');
+            $table->string('classificacaoImoveisLeilao', 50)->nullable();
+            $table->date('dataVencimentoContrato')->nullable();
+            $table->integer('quantidadeLeiloesRestantes')->nullable();
             $table->string('nomeLeiloeiro', 255);
             $table->string('telefoneLeiloeiro', 20)->nullable();
             $table->string('emailLeiloeiro', 255)->nullable();
