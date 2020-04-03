@@ -68,8 +68,11 @@ class DespachanteController extends Controller
             $novoDespachante->save();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Cadastro não realizado");
@@ -115,8 +118,11 @@ class DespachanteController extends Controller
             $editarDespachante->save();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Edição não realizada");
@@ -149,8 +155,11 @@ class DespachanteController extends Controller
             $desativarDespachante->save();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th);
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Exclusão não realizada");

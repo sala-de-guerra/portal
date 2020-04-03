@@ -98,6 +98,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::prefix('conformidade-contratacao')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\ConformidadeContratataoController@index');
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
+        // Route::get('emitir-proposta/{contratoFormatado}', 'GestaoImoveisCaixa\ConformidadeContratataoController@emitirPropostaContratacao');
     });
 
     // ROTAS DO PROJETO DE LEILÕES

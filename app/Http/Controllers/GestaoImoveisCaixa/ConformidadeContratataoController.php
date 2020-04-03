@@ -155,16 +155,29 @@ class ConformidadeContratataoController extends Controller
         return json_encode($arrayContratosConformidade, JSON_UNESCAPED_UNICODE);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  string  $contratoFormatado
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function emitirPropostaContratacao($contratoFormatado)
+    // {
+    //     $dadosContrato = BaseSimov::where('BEM_FORMATADO', $contratoFormatado)->first();
+    //     $dadosProposta = [
+    //         // 1 - MODALIDADE
+    //         'modalidade' => $dadosContrato->TIPO_VENDA,
+
+    //         // 2 - IDENTIFICAÇÃO DOS PROPONENTES
+    //         'nomePrimeiroProponente' => $dadosContrato->NOME_PROPONENTE,
+    //         'dataNascimentoPrimeiroProponente' => 
+    //     ];
+        
+        
+        
+    //     return json_encode($dadosContrato);
+    //     return json_encode($dadosProposta);
+    // }
 
     /**
      * Update the specified resource in storage.

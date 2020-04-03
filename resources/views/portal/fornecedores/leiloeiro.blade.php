@@ -19,25 +19,24 @@
 <div class="row mb-2">
     <div class="col">
         <h1 class="m-0 text-dark">
-            Controle Despachantes
+            Controle Leiloeiros
         </h1>
     </div><br>
 
     <div class="col-sm-3">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraDespachante">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastraLeiloeiro">
                 <i class="far fa-lg fa-edit"></i>
-                Cadastrar Despachante
+                Cadastrar Leiloeiro
             </button>
 </div><br>
 
     <div class="col">
         <ol class="breadcrumb float-right">
             <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Fornecedores</li>
-            <li class="breadcrumb-item active"><a href="/fornecedores/controle-despachantes"> Controle Despachantes</a> </li>
+            <li class="breadcrumb-item active"><a href="/controle-leiloeiros/listar-leiloeiros"> Controle Leiloeiros</a> </li>
         </ol>
     </div>
 </div><br>
-
 
 <div class="row">
     <div class="col-md-12">
@@ -47,14 +46,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="tblfornecedores" class="table table-bordered table-striped dataTable">
+                            <table id="tblLeiloeiro" class="table table-bordered table-striped dataTable">
                                  <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>Despachante</th>
+                                        <th>Nome</th>
                                         <th>Contrato</th>
                                         <th>Data de vencimento do contrato</th>
-                                        <th>CNPJ</th>
+                                        <th>Leiloeiro</th>
+                                        <th>Telefone</th>
                                         <th> </th>
                                     </tr>
                                 </thead>
@@ -74,10 +74,10 @@
 
 </div> <!-- /.row -->
 
-<div class="modal fade" id="modalCadastraDespachante" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal fade" id="modalCadastraLeiloeiro" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form method='post' action='/fornecedores/controle-despachantes' id="formCadastraDemandaDespachante">
+                <form method='post' action='/controle-leiloeiros/listar-leiloeiros' id="formCadastraLeiloeiro">
                 {{ csrf_field() }} 
                     <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
                         <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastrar Despachante</h5>
@@ -100,38 +100,48 @@
                         </div>
 
                         <div class="form-group">
-                            <label>CNPJ<span style="color: red;"> *</span> </label>
-                            <input type="text" name="cnpjDespachante" class="form-control cnpj" id="cnpjDespachante" autocomplete="off" placeholder="00.000.000/0000-00" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Despachante<span style="color: red;"> *</span> </label>
-                            <input type="text" name="nomeDespachante" class="form-control" autocomplete="off" required>
+                            <label>Nome<span style="color: red;"> *</span> </label>
+                            <input type="text" name="nomeEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label>Telefone<span style="color: red;"> *</span> </label>
-                            <input type="text" name="telefoneDespachante" class="form-control telefoneComum" id="telefoneDespachante" placeholder="(11) 3277-9999" autocomplete="off" required>
+                            <input type="text" name="telefoneEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" id="telefoneEmpresaAssessoraLeiloeiro" placeholder="(11) 3277-9999" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label>E-mail<span style="color: red;"> *</span> </label>
-                            <input type="email" name="emailDespachante" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
+                            <input type="email" name="emailLeiloeiro" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Nome do responsável<span style="color: red;"> *</span> </label>
-                            <input type="text" name="nomePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" required>
+                            <label>responsável Leiloeiro<span style="color: red;"> *</span> </label>
+                            <input type="text" name="nomeLeiloeiro" class="form-control" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label>Telefone do responsável<span style="color: red;"> *</span> </label>
-                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" id="telefonePrimeiroResponsavelDespachante" placeholder="(11) 99599-9696" required>
+                            <input type="text" name="telefoneLeiloeiro" class="form-control telefoneCelular" autocomplete="off" id="telefoneLeiloeiro" placeholder="(11) 99599-9696" required>
                         </div>
 
                         <div class="form-group">
-                            <label>E-mail<span style="color: red;"> *</span> </label>
-                            <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br" required>
+                            <label>E-mail </label>
+                            <input type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Endereço Leiloeiro</label>
+                            <input type="email" name="enderecoEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Endereço do Leilão </label>
+                            <input type="email" name="enderecoRealizacaoLeilao" class="form-control" autocomplete="off>
+                        </div>                      
+
+                        <div class="form-group">
+                            <label>Site</label>
+                            <input type="email" name="siteEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="www.exemplo.com.br">
                         </div>
                         <button id="b1" class="btn add-more" type="button" style="background: #4F94CD; color: white;">adicionar novo responsável</button>
                         </div>
@@ -174,5 +184,5 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
-<script src="{{ asset('js/portal/fornecedores/cadastro-despachante.js') }}"></script>
+<script src="{{ asset('js/portal/fornecedores/cadastro-leiloeiro.js') }}"></script>
 @stop
