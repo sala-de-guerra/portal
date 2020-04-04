@@ -81,11 +81,11 @@ class ConsultaContratoController extends Controller
         // VALIDA SE EXISTE CONFORMIDADE NO CONTRATO
         if ($dadosConformidade == null || $dadosConformidade == 'NULL') {
             $cardDeAgrupamento          = null;
-            $nomeStatusDoDossie         =  null;
+            $nomeStatusDoDossie         = null;
             $dataParecerConformidade    = null;
         } else {
             $cardDeAgrupamento          = $dadosConformidade->cardDeAgrupamento;
-            $nomeStatusDoDossie         =  $dadosConformidade->nomeStatusDoDossie;
+            $nomeStatusDoDossie         = $dadosConformidade->nomeStatusDoDossie;
             $dataParecerConformidade    = $dadosConformidade->dataStatus;
         }
 
