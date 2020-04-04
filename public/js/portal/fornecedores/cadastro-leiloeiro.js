@@ -229,12 +229,21 @@ $("#botaocaixa").click(function(){
     $(".LeiloeiroEmgea").hide();
     $(".LeiloeiroCaixa").show();
     $("#input").val("CAIXA");
+    $("#InputClassificacao>p").text("Cadastro Leiloeiro: CAIXA")
+    $('#cardTop').css("background", "linear-gradient(to right, #4F94CD , #63B8FF)")
+    $('#btnSalvar').css("background", "blue")
+   
 });
       
 $("#botaoemgea").click(function(){
     $(".LeiloeiroCaixa").hide();
     $(".LeiloeiroEmgea").show();
     $("#input").val("EMGEA");
+    $("#InputClassificacao>p").text("Cadastro Leiloeiro: EMGEA")
+    $('#cardTop').css("background", "#85CD85")
+    $('#btnSalvar').css("background", "#85CD85")
+    $('#btnSalvar').css("border-color", "#85CD85")
+
 });
       
 

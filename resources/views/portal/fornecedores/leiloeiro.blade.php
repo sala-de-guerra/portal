@@ -80,7 +80,7 @@
             <div class="modal-content">
                 <form method='post' action='/fornecedores/controle-leiloeiros' id="formCadastraLeiloeiro">
                 {{ csrf_field() }} 
-                    <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
+                    <div id="cardTop" style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
                         <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastrar Leiloeiro</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true">&times;</span>
@@ -93,12 +93,12 @@
                         
 
                         <button id="botaocaixa" class="btn btn-primary" type="button">Leiloeiro Caixa</button>
-                        <button style="background: #85CD85; color: white;" id="botaoemgea" class="btn" type="button">Leiloeiro Emgea</button>
+                        <button style="background: #85CD85; color: white;" id="botaoemgea" class="btn" type="button">Leiloeiro EMGEA</button>
                                                                       
                         <div>
-                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Classificação <span style="color: red;"> *</span> </label>
-                                <input id="input" type="text" name="classificacaoImoveisLeilao" class="form-control" autocomplete="off" disabled>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea" id="InputClassificacao">
+                                <p class="pt-3"></p>
+                                <input id="input" type="text" name="classificacaoImoveisLeilao" class="form-control" style="display: none;">
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
@@ -113,7 +113,7 @@
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa ">
                                 <label>Quantidade de leilões restantes<span style="color: red;"> *</span> </label>
-                                <input type="number"  min="0" name="quantidadeLeiloesRestantes" class="form-control" autocomplete="off"required>
+                                <input type="number"  min="0" name="quantidadeLeiloesRestantes" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
@@ -167,7 +167,7 @@
                     
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button id="btnSalvar" type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </form>
             </div>
