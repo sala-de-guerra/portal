@@ -97,7 +97,6 @@ class LeiloeiroController extends Controller
             $editarLeiloeiro->dataVencimentoContrato            = !in_array($request->dataVencimentoContrato, [null, 'NULL', '']) ? $request->dataVencimentoContrato : $editarLeiloeiro->dataVencimentoContrato;
             $editarLeiloeiro->classificacaoImoveisLeilao        = !in_array($request->classificacaoImoveisLeilao, [null, 'NULL', '']) ? $request->classificacaoImoveisLeilao : $editarLeiloeiro->classificacaoImoveisLeilao;
             $editarLeiloeiro->quantidadeLeiloesRestantes        = !in_array($request->quantidadeLeiloesRestantes, [null, 'NULL', '']) ? $request->quantidadeLeiloesRestantes : $editarLeiloeiro->quantidadeLeiloesRestantes;
-            $editarLeiloeiro->numeroLeiloesRealizados           = !in_array($request->numeroLeiloesRealizados, [null, 'NULL', '']) ? $request->numeroLeiloesRealizados : $editarLeiloeiro->numeroLeiloesRealizados;
             $editarLeiloeiro->nomeLeiloeiro                     = !in_array($request->nomeLeiloeiro, [null, 'NULL', '']) ? $request->nomeLeiloeiro : $editarLeiloeiro->nomeLeiloeiro;
             $editarLeiloeiro->telefoneLeiloeiro                 = !in_array($request->telefoneLeiloeiro, [null, 'NULL', '']) ? strtoupper($request->telefoneLeiloeiro) : $editarLeiloeiro->telefoneLeiloeiro;
             $editarLeiloeiro->emailLeiloeiro                    = !in_array($request->emailLeiloeiro, [null, 'NULL', '']) ? $request->emailLeiloeiro : $editarLeiloeiro->emailLeiloeiro;
