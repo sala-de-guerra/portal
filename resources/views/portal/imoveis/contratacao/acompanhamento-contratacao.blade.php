@@ -60,7 +60,9 @@
                                                     <th>Classificação do imóvel</th>
                                                 </tr>
                                             </thead>
-                                            <tbody></tbody>
+                                            <tbody>
+     
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div> 
@@ -89,11 +91,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>CHB</th>
+                                    <th>Data Proposta</th>
                                     <th>Classificação Imóvel</th>
                                     <th>Tipo de Venda</th>
                                     <th>Nome Proponente</th>
                                     <th>CPF/CNPJ Proponente</th>
-                                    <th>Data Proposta</th>
                                     <th>Quantidade Dias Após Proposta</th>
                                     <th>Card Agrupamento Conformidade</th>
                                     <th>Status Conformidade</th>
@@ -101,7 +103,9 @@
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -117,6 +121,7 @@
 
 @section('js')
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
+    <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
+    <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
     <script src="{{ asset('js/portal/imoveis/contratacao/acompanha-contratacao.js') }}"></script>
 @stop

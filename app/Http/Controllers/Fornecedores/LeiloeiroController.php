@@ -32,7 +32,8 @@ class LeiloeiroController extends Controller
             $novoLeiloeiro = new Leiloeiro;
             $novoLeiloeiro->numeroContrato                      = $request->numeroContrato;
             $novoLeiloeiro->dataVencimentoContrato              = $request->dataVencimentoContrato;
-            $novoLeiloeiro->classificacaoLeiloeiro              = $request->classificacaoLeiloeiro;
+            $novoLeiloeiro->classificacaoImoveisLeilao          = $request->classificacaoImoveisLeilao;
+            $novoLeiloeiro->quantidadeLeiloesRestantes          = $request->quantidadeLeiloesRestantes;
             $novoLeiloeiro->nomeLeiloeiro                       = $request->nomeLeiloeiro;
             $novoLeiloeiro->telefoneLeiloeiro                   = $request->telefoneLeiloeiro;
             $novoLeiloeiro->emailLeiloeiro                      = $request->emailLeiloeiro;
@@ -87,15 +88,15 @@ class LeiloeiroController extends Controller
      * @param  int  $idLeiloeiro
      * @return \Illuminate\Http\Response
      */
-    public function editarCadastroDespachante(Request $request, $idLeiloeiro)
+    public function editarCadastroLeiloeiro(Request $request, $idLeiloeiro)
     {
         try {
             DB::beginTransaction();
             $editarLeiloeiro = Leiloeiro::find($idLeiloeiro);
             $editarLeiloeiro->numeroContrato                    = !in_array($request->numeroContrato, [null, 'NULL', '']) ? $request->numeroContrato : $editarLeiloeiro->numeroContrato;
             $editarLeiloeiro->dataVencimentoContrato            = !in_array($request->dataVencimentoContrato, [null, 'NULL', '']) ? $request->dataVencimentoContrato : $editarLeiloeiro->dataVencimentoContrato;
-            $editarLeiloeiro->classificacaoLeiloeiro            = !in_array($request->classificacaoLeiloeiro, [null, 'NULL', '']) ? $request->classificacaoLeiloeiro : $editarLeiloeiro->classificacaoLeiloeiro;
-            $editarLeiloeiro->numeroLeiloesRealizados           = !in_array($request->numeroLeiloesRealizados, [null, 'NULL', '']) ? $request->numeroLeiloesRealizados : $editarLeiloeiro->numeroLeiloesRealizados;
+            $editarLeiloeiro->classificacaoImoveisLeilao        = !in_array($request->classificacaoImoveisLeilao, [null, 'NULL', '']) ? $request->classificacaoImoveisLeilao : $editarLeiloeiro->classificacaoImoveisLeilao;
+            $editarLeiloeiro->quantidadeLeiloesRestantes        = !in_array($request->quantidadeLeiloesRestantes, [null, 'NULL', '']) ? $request->quantidadeLeiloesRestantes : $editarLeiloeiro->quantidadeLeiloesRestantes;
             $editarLeiloeiro->nomeLeiloeiro                     = !in_array($request->nomeLeiloeiro, [null, 'NULL', '']) ? $request->nomeLeiloeiro : $editarLeiloeiro->nomeLeiloeiro;
             $editarLeiloeiro->telefoneLeiloeiro                 = !in_array($request->telefoneLeiloeiro, [null, 'NULL', '']) ? strtoupper($request->telefoneLeiloeiro) : $editarLeiloeiro->telefoneLeiloeiro;
             $editarLeiloeiro->emailLeiloeiro                    = !in_array($request->emailLeiloeiro, [null, 'NULL', '']) ? $request->emailLeiloeiro : $editarLeiloeiro->emailLeiloeiro;
@@ -132,10 +133,11 @@ class LeiloeiroController extends Controller
 
     /**
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $idLeiloeiro
      * @return \Illuminate\Http\Response
      */
-    public function desativarLeiloeiro($idLeiloeiro)
+    public function desativarLeiloeiro(Request $request, $idLeiloeiro)
     {
         try {
             DB::beginTransaction();

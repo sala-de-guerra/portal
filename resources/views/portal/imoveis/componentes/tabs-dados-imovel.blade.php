@@ -302,7 +302,7 @@
 
                         <hr class="pontilhado">
 
-                        <h2 class="card-title"><b>Averbação de Leilões Negativos</b></h2>
+                        <!-- <h2 class="card-title"><b>Averbação de Leilões Negativos</b></h2>
 
                         <br>
                         <div class="row">
@@ -387,7 +387,6 @@
                                 </button>
                             </div>
 
-                            <!-- Modal -->
                             <div class="modal fade" id="modalKitLeiloeiro" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -401,7 +400,7 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                <!-- <div class="form-group">
+                                                <div class="form-group">
                                                     <label>CHB Formatado:</label>
                                                     <input type="text" name="contratoFormatado" class="form-control" id="inputChb" placeholder="00.0000.0000000-0" required>
                                                 </div>
@@ -418,7 +417,7 @@
                                                 <div class="form-group">
                                                     <label>CPF / CNPJ:</label>
                                                     <input type="text" name="cpfCnpjProponente" class="form-control" required>
-                                                </div> -->
+                                                </div>
 
                                             </div>
                                             <div class="modal-footer">
@@ -443,7 +442,7 @@
                                 </button>
                             </div>
 
-                            <!-- Modal -->
+       
                             <div class="modal fade" id="modalAlterarStatus" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -479,7 +478,7 @@
                                                 </div>
 
 
-                                                <!-- <div class="form-group">
+                                                <div class="form-group">
                                                     <label>CHB Formatado:</label>
                                                     <input type="text" name="contratoFormatado" class="form-control" id="inputChb" placeholder="00.0000.0000000-0" required>
                                                 </div>
@@ -496,7 +495,7 @@
                                                 <div class="form-group">
                                                     <label>CPF / CNPJ:</label>
                                                     <input type="text" name="cpfCnpjProponente" class="form-control" required>
-                                                </div> -->
+                                                </div>
 
                                             </div>
                                             <div class="modal-footer">
@@ -509,7 +508,7 @@
                             </div>
 
 
-                        </div>
+                        </div> -->
 
                     </div>
 

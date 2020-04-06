@@ -53,19 +53,23 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                                                     '<p>'+'<b>'+'CNPJ:'+'</b>'+ '<span class="pl-3" id="cnpj_despachante">'+item.cnpjDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Nº do contrato:'+'</b>'+ '<span class="pl-3" id="numero_contrato">'+item.numeroContrato+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Vencimento do contrato:'+'</b>'+ '<span class="pl-3" id="vencimento_contrato'+item.idDespachante+'">'+item.dataVencimentoContrato+'</span>'+'</p>'+
-                                                '<hr>'+
+                                                    '<hr>'+
                                                     '<p>'+'<b>'+'Responsável:'+'</b>'+ '<span class="pl-3" id="nome_responsavel">'+item.nomePrimeiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_responsavel">'+item.telefonePrimeiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Responsável:'+'</b>'+ '<span class="pl-3" id="email_responsavel">'+item.emailPrimeiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<hr>'+
-                                                    '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
+                                                    '<div id="removerdiv'+item.idDespachante+'">'+
+                                                    '<hr>'+
+                                                    '<p>'+'<b>'+'Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="nome_segundo_responsavel'+item.idDespachante+'">'+item.nomeSegundoResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_segundo_responsavel">'+item.telefoneSegundoResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Segundo Responsável:'+'</b>'+ '<span class="pl-3" id="email_segundo_responsavel">'+item.emailSegundoResponsavelDespachante+'</span>'+'</p>'+
-                                                '<hr>'+
-                                                    '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
+                                                    '</div>'+
+                                                    '<div id="removersegundadiv'+item.idDespachante+'">'+
+                                                    '<hr>'+
+                                                    '<p>'+'<b>'+'Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="nome_terceiro_responsavel'+item.idDespachante+'">'+item.nomeTerceiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'Telefone/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="telefone_terceiro_responsavel">'+item.telefoneTerceiroResponsavelDespachante+'</span>'+'</p>'+
                                                     '<p>'+'<b>'+'E-mail/Terceiro Responsável:'+'</b>'+ '<span class="pl-3" id="email_terceiro_responsavel">'+item.emailTerceiroResponsavelDespachante+'</span>'+'</p>'+
-                                                '<hr>'+                           
+                                                    '</div>'+
+                                                    '<hr>'+                           
                                             '</div>' +
                                         '</div>' + 
                                     '</div>' +
@@ -223,11 +227,21 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                         '</div>' +
                     '</div>' + 
                 '</td>' +
-            '</tr>';
-
+            '</tr>';          
+  
 $(linha).appendTo('#tblfornecedores>tbody');
 
-// altera a data do form para formato em portugues
+var confereSegundoResponsavel = $('#nome_segundo_responsavel' + item.idDespachante).text()
+if (confereSegundoResponsavel == "null" || confereSegundoResponsavel == "" ){
+    $('#removerdiv'+item.idDespachante).remove();
+}
+
+var confereTerceiroResponsavel = $('#nome_terceiro_responsavel' + item.idDespachante).text()
+if (confereTerceiroResponsavel == "null" || confereTerceiroResponsavel == "" ){
+    $('#removersegundadiv'+item.idDespachante).remove();
+}
+
+// altera a data do form para formato em Brasil
 var data =$('#vencimento_contrato'+ item.idDespachante).text()
 var novaData = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
 $('#vencimento_contrato'+item.idDespachante).text(novaData)
@@ -259,3 +273,39 @@ $(".telefoneCelular").mask("(00) 00000-0000");
     $('#fadeOut').fadeOut("slow");
     }, 3000);
 
+// Cria botão adicionar responsável no formulario
+$(document).ready(function(){
+    $(".add-more").click(function(e){
+        e.preventDefault();
+ 
+        var newIn = '<div class="form-group">' + '<label>'+'Nome do segundo responsável'+'</label>'+
+        '<input type="text" name="nomeSegundoResponsavelDespachante" autocomplete="off" class="form-control">'+'</div>'+
+        '<div class="form-group">'+'<label>'+'Telefone do segundo responsável'+'</label>'+
+        '<input type="text" name="telefoneSegundoResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneSegundoResponsavelDespachante" placeholder="(11) 99599-9696">'+'</div>'+
+        '<div class="form-group">'+'<label>'+'E-mail do segundo responsável'+'</label>'+'<input type="email" name="emailSegundoResponsavelDespachante"  autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">'+'</div>'+
+        '<button id="b2" class="btn add-one-more" type="button" style="background: #4F94CD; color: white;">'+'adicionar novo responsável'+'</button>'
+
+
+        $(newIn).appendTo('#field');
+        $('#b1').remove()
+        $("#field").prop('id', 'field2')
+        $(".telefoneCelular").mask("(00) 00000-0000");
+
+        $(".add-one-more").click(function(e){
+        e.preventDefault();
+        var newIn = '<div class="form-group">'+'<label>'+'Nome do terceiro responsável'+'</label>'+
+                    '<input type="text" name="nomeTerceiroResponsavelDespachante" autocomplete="off" class="form-control">'+'</div>'+
+                    '<div class="form-group">'+'<label>'+'Telefone do terceiro responsável'+'</label>'+
+                    '<input type="text" name="telefoneTerceiroResponsavelDespachante" autocomplete="off" class="form-control telefoneCelular" id="telefoneTerceiroResponsavelDespachante" placeholder="(11) 99599-9696">'+'</div>'+
+                    '<div class="form-group">'+'<label>'+'E-mail do terceiro responsável'+'</label>'+
+                    '<input type="email" name="emailTerceiroResponsavelDespachante" autocomplete="off" class="form-control" placeholder="exemplo@email.com.br">'+'</div>' 
+
+        $(newIn).appendTo('#field2');
+        $('#b2').remove()
+        $(".telefoneCelular").mask("(00) 00000-0000");
+        $("#field2").prop('id', 'fim')})
+    
+    })
+
+       
+})   

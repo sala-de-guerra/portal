@@ -81,11 +81,11 @@ class ConsultaContratoController extends Controller
         // VALIDA SE EXISTE CONFORMIDADE NO CONTRATO
         if ($dadosConformidade == null || $dadosConformidade == 'NULL') {
             $cardDeAgrupamento          = null;
-            $nomeStatusDoDossie         =  null;
+            $nomeStatusDoDossie         = null;
             $dataParecerConformidade    = null;
         } else {
             $cardDeAgrupamento          = $dadosConformidade->cardDeAgrupamento;
-            $nomeStatusDoDossie         =  $dadosConformidade->nomeStatusDoDossie;
+            $nomeStatusDoDossie         = $dadosConformidade->nomeStatusDoDossie;
             $dataParecerConformidade    = $dadosConformidade->dataStatus;
         }
 
@@ -269,7 +269,8 @@ class ConsultaContratoController extends Controller
                 }
                 break;
             case 'numeroContrato':
-                if (substr($request->valorVariavel, 0, 3) == '00.') {
+                $numeroContratoRequest = preg_replace('/^\p{Z}+|\p{Z}+$/u', '', $request->valorVariavel);
+                if (substr($numeroContratoRequest, 0, 3) == '00.') {
                     // CONTRATO PATRIMONIAL FORMATADO
                     $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('BEM_FORMATADO', $request->valorVariavel)->get();
                 } else {
