@@ -272,10 +272,10 @@ class ConsultaContratoController extends Controller
                 $numeroContratoRequest = preg_replace('/^\p{Z}+|\p{Z}+$/u', '', $request->valorVariavel);
                 if (substr($numeroContratoRequest, 0, 3) == '00.') {
                     // CONTRATO PATRIMONIAL FORMATADO
-                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('BEM_FORMATADO', $request->valorVariavel)->get();
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('BEM_FORMATADO', $numeroContratoRequest)->get();
                 } else {
                     // DEMAIS CONTRATOS
-                    $termoPesquisaTratado = self::trataVariavelContrato($request->valorVariavel);
+                    $termoPesquisaTratado = self::trataVariavelContrato($numeroContratoRequest);
                     $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_BEM', 'like', "%$termoPesquisaTratado%")->get();
                 }
                 foreach ($resultadoConsulta as $cadaResultado) {
@@ -412,6 +412,7 @@ class ConsultaContratoController extends Controller
 
     public static function montaArrayResultado($arrayConsultaConsolidada, $objetoSimov)
     {
+        
         array_push($arrayConsultaConsolidada, [
             'contratoFormatado'     => $objetoSimov->BEM_FORMATADO,
             'numeroContrato'        => $objetoSimov->NU_BEM,
