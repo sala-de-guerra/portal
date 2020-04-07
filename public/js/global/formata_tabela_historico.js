@@ -49,12 +49,19 @@ function _formataTabelaHistorico (numeroContrato) {
                             
                         '</div>' +
                     '</td>' +
-                    '<td class="formata-data">' + item.data + '</td>' +
+                    '<td class="formata-data'+ item.idHistorico +'">' + item.data + '</td>' +
                 '</tr>';
+
                 // console.log("obs" + item.idHistorico)
                 $(linha).appendTo('#tblHistorico>tbody');
                 formata_observacao ("obs" + item.idHistorico);
+                
+                var data =$('.formata-data'+ item.idHistorico).text()
+                console.log(data)
+                var novaData = data.replace(/^(\d+)-(\d+)-(\d+)(.*):\d+$/, '$3/$2/$1$4');;
+                $('.formata-data'+ item.idHistorico).text(novaData)
         }) 
+
         _formataDatatableComId ("tblHistorico");
     });
 };
@@ -62,3 +69,4 @@ function _formataTabelaHistorico (numeroContrato) {
 function formata_observacao(idobs){
     $('#' + idobs).html($('#' + idobs).html().substring(0, 62) + ' [...]');
 }
+
