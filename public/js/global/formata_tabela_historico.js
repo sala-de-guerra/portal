@@ -5,7 +5,7 @@ function _formataTabelaHistorico (numeroContrato) {
                 '<tr>' +
                     '<td>' + item.idHistorico + '</td>' +
                     '<td>' + item.matriculaResponsavel + '</td>' +
-                    '<td>' + item.tipo + '</td>' +
+                    '<td id="atividade_historico'+ item.idHistorico +'">' + item.tipo + '</td>' +
                     '<td>' + item.atividade + '</td>' +
                     '<td class="col-sm-4 overflow-auto" =>' + 
                         '<div class="row">' +
@@ -49,17 +49,23 @@ function _formataTabelaHistorico (numeroContrato) {
                             
                         '</div>' +
                     '</td>' +
-                    '<td class="formata-data'+ item.idHistorico +'">' + item.data + '</td>' +
+                    '<td class="formata-data">' + item.data + '</td>' +
                 '</tr>';
 
                 // console.log("obs" + item.idHistorico)
                 $(linha).appendTo('#tblHistorico>tbody');
                 formata_observacao ("obs" + item.idHistorico);
+            
+                var busca = $('#atividade_historico'+item.idHistorico).text()
+                if (busca == "ANALISE") {
+                    obs = item.observacao
+                }
                 
-                var data =$('.formata-data'+ item.idHistorico).text()
-                console.log(data)
-                var novaData = data.replace(/^(\d+)-(\d+)-(\d+)(.*):\d+$/, '$3/$2/$1$4');;
-                $('.formata-data'+ item.idHistorico).text(novaData)
+                
+                // var data =$('.formata-data').text()
+                // console.log(data)
+                // var novaData = data.replace(/^(\d+)-(\d+)-(\d+)(.*):\d+$/, '$3/$2/$1$4');;
+                // $('.formata-data').text(novaData)
         }) 
 
         _formataDatatableComId ("tblHistorico");
@@ -69,4 +75,3 @@ function _formataTabelaHistorico (numeroContrato) {
 function formata_observacao(idobs){
     $('#' + idobs).html($('#' + idobs).html().substring(0, 62) + ' [...]');
 }
-

@@ -304,6 +304,12 @@ $(document).ready(function(){
         $('#b2').remove()
         $(".telefoneCelular").mask("(00) 00000-0000");
         $("#field2").prop('id', 'fim')})
+
+        // refresh no modal ao sair
+        $('.modal').on('hidden.bs.modal', function() {
+            window.location.href = 'https://portal.gilie.des.sp.caixa/fornecedores/controle-despachantes';
+
+          });
     
     })
 

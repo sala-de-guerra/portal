@@ -301,6 +301,67 @@
                         </div>
 
                         <hr class="pontilhado">
+                        
+                        <div id="cardLeilao">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Leiloeiro:</label>
+                                        <p id="nomeLeiloeiro"></p>
+                                    </div>
+                                
+                                
+                                
+                                
+                                
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Número O.S - data:</label>
+                                        <p id="numeroOficioUnidade"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Nome Despachante:</label>
+                                        <p id="nomeDespachante"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Data retirada - Despachante:</label>
+                                        <p id="dataRetiradaDocumentosDespachante"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Nº Protocolo de prenotação:</label>
+                                        <p id="numeroProtocoloCartorio"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Senha de acompanhamento</label>
+                                        <p id="codigoAcessoProtocoloCartorio"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Situação atual - data:</label>
+                                        <p id="statusAverbacao"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Último historico:</label>
+                                        <p id="ultimoHistorico"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- <h2 class="card-title"><b>Averbação de Leilões Negativos</b></h2>
 
@@ -912,6 +973,12 @@
         </div>
     </div>
 </div>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos.js') }}"></script>
 
 
 <!-- 

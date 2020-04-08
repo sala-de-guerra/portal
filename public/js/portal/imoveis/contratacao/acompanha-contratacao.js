@@ -56,7 +56,7 @@ $(document).ready(function(){
     setTimeout(function() {
         _formataData(); 
         _formataValores();
-        _formataDatatableComData();;
+        _formataDatatableComData();
     }, 4000);
 }); 
 

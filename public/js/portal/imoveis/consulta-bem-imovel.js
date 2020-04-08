@@ -1,7 +1,7 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
 $(document).ready(function(){
-
+    var obs = '';
     _formataTabelaHistorico (numeroContrato);
     _formataTabelaMensagensEnviadas (numeroContrato);
     _formataListaDistrato (numeroContrato);

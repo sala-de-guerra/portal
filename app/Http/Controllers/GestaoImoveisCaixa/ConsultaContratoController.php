@@ -9,7 +9,10 @@ use App\Models\ControleMensageria;
 use App\Models\HistoricoPortalGilie;
 use App\Models\PropostasSimov;
 use App\Models\RelacaoAgSrComEmail;
+use App\Models\Fornecedores\Despachante;
+use App\Models\Fornecedores\Leiloeiro;
 use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
+use App\Models\LeilaoNegativo\LeilaoNegativo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +20,6 @@ use Illuminate\Support\Facades\DB;
 class ConsultaContratoController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param int  $contrato
@@ -25,20 +27,10 @@ class ConsultaContratoController extends Controller
      */
     static public function show($numeroContrato, Request $request)
     {
-        // if (!preg_match("/([0-9]{2})([.]{1})([0-9]{4})([.]{1})([0-9]{7})([-]{1})([0-9]{1})/", $numeroContrato) || $numeroContrato == '00.0000.0000000-0') {
-        //     // RETORNA A FLASH MESSAGE
-        //     $request->session()->flash('corMensagem', 'danger');
-        //     $request->session()->flash('tituloMensagem', "Busca não efetuada");
-        //     $request->session()->flash('corpoMensagem', "O termo digitado não retornou nenhum resultado. Tente novamente");
-
-        //     return view('portal.imoveis.pesquisar');
-        // } else {
-            return view('portal.imoveis.consulta-bem-imovel')->with('numeroContrato', $numeroContrato);
-        // }
+        return view('portal.imoveis.consulta-bem-imovel')->with('numeroContrato', $numeroContrato);
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param string  $numeroContrato
@@ -59,6 +51,84 @@ class ConsultaContratoController extends Controller
         // dd($dadosConformidade);
         // CAPTURA OS DADOS DA PROPOSTA DO PROPONENTE ATUAL
         $dadosProposta = PropostasSimov::where('NU_BEM', $contrato->NU_BEM)->where('VALOR RECURSOS PRÓPRIOS', $contrato->VALOR_REC_PROPRIOS_CONTRATO)->where('VALOR FGTS', $contrato->VALOR_FGTS_PROPOSTA)->where('VALOR FINANCIADO', $contrato->VALOR_FINANCIADO_PROPOSTA)->where('NOME PROPONENTE', $contrato->NOME_PROPONENTE)->first();
+
+        // CAPTURA OS DADOS DO LEILÃO NEGATIVO
+        $dadosLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $numeroContrato)->first();      
+        if ($dadosLeilaoNegativo == null || $dadosLeilaoNegativo == 'NULL') {
+            $previsaoRecebimentoDocumentosLeiloeiro     = null;
+            $dataRetiradaDocumentosDespachante          = null;
+            $numeroOficioUnidade                        = null;
+            $numeroProtocoloCartorio                    = null;
+            $codigoAcessoProtocoloCartorio              = null;
+            $statusAverbacao                            = null;
+            $idLeiloeiro                                = null;
+            $idDespachante                              = null;
+            $dataAlteracao                              = null;
+            // DADOS LEILOEIRO
+            $nomeLeiloeiro                              = null;
+            $telefoneLeiloeiro                          = null;
+            $emailLeiloeiro                             = null;
+            $nomeEmpresaAssessoraLeiloeiro              = null;
+            $telefoneEmpresaAssessoraLeiloeiro          = null;
+            $emailEmpresaAssessoraLeiloeiro             = null;
+            $siteEmpresaAssessoraLeiloeiro              = null;
+            // DADOS DESPACHANTE 
+            $nomeDespachante                            = null;
+            $telefoneDespachante                        = null;
+            $emailDespachante                           = null;
+            $nomePrimeiroResponsavelDespachante         = null;
+            $telefonePrimeiroResponsavelDespachante     = null;
+            $emailPrimeiroResponsavelDespachante        = null;
+            $siteEmpresaAssessoraLeiloeiro              = null;
+        } else {
+            $previsaoRecebimentoDocumentosLeiloeiro     = $dadosLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;
+            $dataRetiradaDocumentosDespachante          = $dadosLeilaoNegativo->dataRetiradaDocumentosDespachante;
+            $numeroOficioUnidade                        = $dadosLeilaoNegativo->numeroOficioUnidade;
+            $numeroProtocoloCartorio                    = $dadosLeilaoNegativo->numeroProtocoloCartorio;
+            $codigoAcessoProtocoloCartorio              = $dadosLeilaoNegativo->codigoAcessoProtocoloCartorio;
+            $statusAverbacao                            = $dadosLeilaoNegativo->statusAverbacao;
+            $idLeiloeiro                                = $dadosLeilaoNegativo->idLeiloeiro;
+            $idDespachante                              = $dadosLeilaoNegativo->idDespachante;
+            $dataAlteracao                              = $dadosLeilaoNegativo->dataAlteracao;
+
+            // CAPTURA DADOS FORNECEDORES
+            $dadosLeiloeiro = Leiloeiro::find($dadosLeilaoNegativo->idLeiloeiro);
+            if ($dadosLeiloeiro == null || $dadosLeiloeiro == 'NULL') {
+                $nomeLeiloeiro                          = null;
+                $telefoneLeiloeiro                      = null;
+                $emailLeiloeiro                         = null;
+                $nomeEmpresaAssessoraLeiloeiro          = null;
+                $telefoneEmpresaAssessoraLeiloeiro      = null;
+                $emailEmpresaAssessoraLeiloeiro         = null;
+                $siteEmpresaAssessoraLeiloeiro          = null;
+            } else {
+                $nomeLeiloeiro                          = $dadosLeiloeiro->nomeLeiloeiro;
+                $telefoneLeiloeiro                      = $dadosLeiloeiro->telefoneLeiloeiro;
+                $emailLeiloeiro                         = $dadosLeiloeiro->emailLeiloeiro;
+                $nomeEmpresaAssessoraLeiloeiro          = $dadosLeiloeiro->nomeEmpresaAssessoraLeiloeiro;
+                $telefoneEmpresaAssessoraLeiloeiro      = $dadosLeiloeiro->telefoneEmpresaAssessoraLeiloeiro;
+                $emailEmpresaAssessoraLeiloeiro         = $dadosLeiloeiro->emailEmpresaAssessoraLeiloeiro;
+                $siteEmpresaAssessoraLeiloeiro          = $dadosLeiloeiro->siteEmpresaAssessoraLeiloeiro;
+            }
+
+            $dadosDespachante = Despachante::find($dadosLeilaoNegativo->idDespachante);
+            if ($dadosDespachante == null || $dadosDespachante == 'NULL') {
+                $nomeDespachante                        = null;
+                $telefoneDespachante                    = null;
+                $emailDespachante                       = null;
+                $nomePrimeiroResponsavelDespachante     = null;
+                $telefonePrimeiroResponsavelDespachante = null;
+                $emailPrimeiroResponsavelDespachante    = null;
+                $siteEmpresaAssessoraLeiloeiro          = null;
+            } else {
+                $nomeDespachante                        = $dadosDespachante->nomeDespachante;
+                $telefoneDespachante                    = $dadosDespachante->telefoneDespachante;
+                $emailDespachante                       = $dadosDespachante->emailDespachante;
+                $nomePrimeiroResponsavelDespachante     = $dadosDespachante->nomePrimeiroResponsavelDespachante;
+                $telefonePrimeiroResponsavelDespachante = $dadosDespachante->telefonePrimeiroResponsavelDespachante;
+                $emailPrimeiroResponsavelDespachante    = $dadosDespachante->emailPrimeiroResponsavelDespachante;
+            }
+        }
 
         // VALIDA FLUXO CONTRATAÇÃO DA PROPOSTA - CCA OU AGÊNCIA
         $fluxoAgenciaOuCca = self::validaFluxoContratacaoPropostaCcaAgencia($contrato);
@@ -98,70 +168,94 @@ class ConsultaContratoController extends Controller
         
         // MONTA O JSON QUE VAI PRA VIEW
         $dadosContrato = [
-            'bemFormatado'                      => $numeroContrato,
+            'bemFormatado'                              => $numeroContrato,
 
             // DADOS DO IMÓVEL
-            'numeroBem'                         => $contrato->NU_BEM,
-            'classificacao'                     => $contrato->CLASSIFICACAO,
-            'nomeExMutuario'                    => $contrato->NO_EX_MUTUARIO,
-            'cpfCnpjExMutuario'                 => $contrato->NU_DOC_EX_MUTUARIO,
-            'cep'                               => $contrato->CEP,
-            'nomeEmpreendimento'                => $contrato->NOME_EMPREENDIMENTO,
-            'enderecoImovel'                    => $contrato->ENDERECO_IMOVEL,
-            'bairroImovel'                      => $contrato->BAIRRO,
-            'ufImovel'                          => $contrato->UF,
-            'cidadeImovel'                      => $contrato->CIDADE,
-            'tipoImovel'                        => $contrato->TIPO_IMOVEL,
-            'statusImovel'                      => $contrato->STATUS_IMOVEL,
-            'descricaoImovel'                   => $contrato->DESCRICAO_IMOVEL,
-            'descricaoAdicionalImovel'          => $contrato->DESCRICAO_ADIC_IMOVEL,
-            'valorAvaliacao'                    => $contrato->VALOR_AVALIACAO,
-            'matriculaImovel'                   => $contrato->MATRICULA . " / " . $contrato->OFICIO . " Cartório",
-            'origemMatricula'                   => $contrato->ORIGEM_MATRICULA,
-            'dataLaudoAvaliacao'                => Carbon::parse($contrato->DATA_LAUDO)->format('Y-m-d'),
-            'dataValidadeLaudoAvaliacao'        => Carbon::parse($contrato->DATA_VENCIMENTO_LAUDO)->format('Y-m-d'),
+            'numeroBem'                                 => $contrato->NU_BEM,
+            'classificacao'                             => $contrato->CLASSIFICACAO,
+            'nomeExMutuario'                            => $contrato->NO_EX_MUTUARIO,
+            'cpfCnpjExMutuario'                         => $contrato->NU_DOC_EX_MUTUARIO,
+            'cep'                                       => $contrato->CEP,
+            'nomeEmpreendimento'                        => $contrato->NOME_EMPREENDIMENTO,
+            'enderecoImovel'                            => $contrato->ENDERECO_IMOVEL,
+            'bairroImovel'                              => $contrato->BAIRRO,
+            'ufImovel'                                  => $contrato->UF,
+            'cidadeImovel'                              => $contrato->CIDADE,
+            'tipoImovel'                                => $contrato->TIPO_IMOVEL,
+            'statusImovel'                              => $contrato->STATUS_IMOVEL,
+            'descricaoImovel'                           => $contrato->DESCRICAO_IMOVEL,
+            'descricaoAdicionalImovel'                  => $contrato->DESCRICAO_ADIC_IMOVEL,
+            'valorAvaliacao'                            => $contrato->VALOR_AVALIACAO,
+            'matriculaImovel'                           => $contrato->MATRICULA . " / " . $contrato->OFICIO . " Cartório",
+            'origemMatricula'                           => $contrato->ORIGEM_MATRICULA,
+            'dataLaudoAvaliacao'                        => Carbon::parse($contrato->DATA_LAUDO)->format('Y-m-d'),
+            'dataValidadeLaudoAvaliacao'                => Carbon::parse($contrato->DATA_VENCIMENTO_LAUDO)->format('Y-m-d'),
 
             // LEILÕES
-            'valorPrimeiroLeilao'               => $contrato->VALOR_PRIMEIRO_LEILAO,
-            'valorSegundoLeilao'                => $contrato->VALOR_SEGUNDO_LEILAO,
-            'valorVenda'                        => $contrato->VALOR_VENDA,
-            'valorContabil'                     => $contrato->VALOR_CONTABIL,
-            'dataConsolidacao'                  => $contrato->DATA_CONSOLIDACAO,
-            'agrupamentoLeilao'                 => $contrato->AGRUPAMENTO,
-            'numeroItem'                        => $contrato->NUMERO_ITEM,
-            'dataArremate'                      => $contrato->DATA_ARREMATE,
-            'dataPrimeiroLeilao'                => $contrato->DT_PRIMEIRO_LEILAO,
-            'dataSegundoLeilao'                 => $contrato->DT_SEGUNDO_LEILAO,
+            'valorPrimeiroLeilao'                       => $contrato->VALOR_PRIMEIRO_LEILAO,
+            'valorSegundoLeilao'                        => $contrato->VALOR_SEGUNDO_LEILAO,
+            'valorVenda'                                => $contrato->VALOR_VENDA,
+            'valorContabil'                             => $contrato->VALOR_CONTABIL,
+            'dataConsolidacao'                          => $contrato->DATA_CONSOLIDACAO,
+            'agrupamentoLeilao'                         => $contrato->AGRUPAMENTO,
+            'numeroItem'                                => $contrato->NUMERO_ITEM,
+            'dataArremate'                              => $contrato->DATA_ARREMATE,
+            'dataPrimeiroLeilao'                        => $contrato->DT_PRIMEIRO_LEILAO,
+            'dataSegundoLeilao'                         => $contrato->DT_SEGUNDO_LEILAO,
+            // LEILÃO NEGATIVO
+            'previsaoRecebimentoDocumentosLeiloeiro'    => $previsaoRecebimentoDocumentosLeiloeiro, 
+            'dataRetiradaDocumentosDespachante'         => $dataRetiradaDocumentosDespachante,      
+            'numeroOficioUnidade'                       => $numeroOficioUnidade,                    
+            'numeroProtocoloCartorio'                   => $numeroProtocoloCartorio,                
+            'codigoAcessoProtocoloCartorio'             => $codigoAcessoProtocoloCartorio,          
+            'statusAverbacao'                           => $statusAverbacao,                                              
+            'dataAlteracao'                             => $dataAlteracao,                          
+            // DADOS LEILOERIO
+            'nomeLeiloeiro'                             => $nomeLeiloeiro,                      
+            'telefoneLeiloeiro'                         => $telefoneLeiloeiro,                  
+            'emailLeiloeiro'                            => $emailLeiloeiro,                     
+            'nomeEmpresaAssessoraLeiloeiro'             => $nomeEmpresaAssessoraLeiloeiro,      
+            'telefoneEmpresaAssessoraLeiloeiro'         => $telefoneEmpresaAssessoraLeiloeiro,  
+            'emailEmpresaAssessoraLeiloeiro'            => $emailEmpresaAssessoraLeiloeiro,     
+            'siteEmpresaAssessoraLeiloeiro'             => $siteEmpresaAssessoraLeiloeiro, 
+            // DADOS DESPACHANTE
+            'nomeDespachante'                           => $nomeDespachante,                        
+            'telefoneDespachante'                       => $telefoneDespachante,                    
+            'emailDespachante'                          => $emailDespachante,                       
+            'nomePrimeiroResponsavelDespachante'        => $nomePrimeiroResponsavelDespachante,     
+            'telefonePrimeiroResponsavelDespachante'    => $telefonePrimeiroResponsavelDespachante, 
+            'emailPrimeiroResponsavelDespachante'       => $emailPrimeiroResponsavelDespachante,    
+            'siteEmpresaAssessoraLeiloeiro'             => $siteEmpresaAssessoraLeiloeiro,            
 
             // CONTRATAÇÃO
-            'tipoVenda'                         => $contrato->TIPO_VENDA,
-            'nomeProponente'                    => strtoupper($contrato->NOME_PROPONENTE),
-            'cpfCnpjProponente'                 => $contrato->CPF_CNPJ_PROPONENTE,
-            'telefoneProponente'                => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
-            'emailProponente'                   => $emailProponente == null ? 'sem e-mail cadastrado' : $emailProponente,
-            'nomeCorretor'                      => $contrato->NO_CORRETOR,
-            'numeroCreciCorretor'               => $contrato->NU_CRECI,
-            'telefoneCorretor'                  => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : $telefoneCorretor,
-            'emailCorretor'                     => $contrato->EMAIL_CORRETOR == null ? 'sem e-mail cadastrado' : $contrato->EMAIL_CORRETOR,
-            'dataProposta'                      => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-            'valorTotalProposta'                => $contrato->VALOR_TOTAL_PROPOSTA,
-            'valorRecursosPropriosProposta'     => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
-            'valorFgtsProposta'                 => $contrato->VALOR_FGTS_PROPOSTA,
-            'valorFinanciamentoProposta'        => $contrato->VALOR_FINANCIADO_PROPOSTA,
-            'valorParceladoProposta'            => $contrato->VALOR_PARCELADO_PROPOSTA,
-            'quantidadeParcelasProposta'        => $contrato->QTDE_PARCELAS_PROPOSTA,
-            'codigoAgContratacaoProposta'       => str_pad($codigoAgenciaContratacao, 4, '0', STR_PAD_LEFT),
-            'nomeAgContratacaoProposta'         => $nomeAgenciaContratacao,
-            'emailAgContratacaoProposta'        => $emailAgenciaContratacao,
-            'siglaComissao'                     => $contrato->SIGLA_COMISSAO,
-            'agrupamento'                       => $contrato->AGRUPAMENTO,
-            'dataAssinaturaContrato'            => $contrato->DATA_CONTRATO == null ? 'data não informada' : Carbon::parse($contrato->DATA_CONTRATO)->format('Y-m-d'),
-            'dataRegistroCartorio'              => $contrato->DT_REGISTRO_CARTORIO == null ? 'data não informada' : Carbon::parse($contrato->DT_REGISTRO_CARTORIO)->format('Y-m-d'),
+            'tipoVenda'                                 => $contrato->TIPO_VENDA,
+            'nomeProponente'                            => strtoupper($contrato->NOME_PROPONENTE),
+            'cpfCnpjProponente'                         => $contrato->CPF_CNPJ_PROPONENTE,
+            'telefoneProponente'                        => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : '(' . $contrato->DDD_PROPONENTE . ') ' . $contrato->TELEFONE_PROPONENTE,
+            'emailProponente'                           => $emailProponente == null ? 'sem e-mail cadastrado' : $emailProponente,
+            'nomeCorretor'                              => $contrato->NO_CORRETOR,
+            'numeroCreciCorretor'                       => $contrato->NU_CRECI,
+            'telefoneCorretor'                          => $contrato->TELEFONE_PROPONENTE == null ? 'sem telefone cadastrado' : $telefoneCorretor,
+            'emailCorretor'                             => $contrato->EMAIL_CORRETOR == null ? 'sem e-mail cadastrado' : $contrato->EMAIL_CORRETOR,
+            'dataProposta'                              => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+            'valorTotalProposta'                        => $contrato->VALOR_TOTAL_PROPOSTA,
+            'valorRecursosPropriosProposta'             => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+            'valorFgtsProposta'                         => $contrato->VALOR_FGTS_PROPOSTA,
+            'valorFinanciamentoProposta'                => $contrato->VALOR_FINANCIADO_PROPOSTA,
+            'valorParceladoProposta'                    => $contrato->VALOR_PARCELADO_PROPOSTA,
+            'quantidadeParcelasProposta'                => $contrato->QTDE_PARCELAS_PROPOSTA,
+            'codigoAgContratacaoProposta'               => str_pad($codigoAgenciaContratacao, 4, '0', STR_PAD_LEFT),
+            'nomeAgContratacaoProposta'                 => $nomeAgenciaContratacao,
+            'emailAgContratacaoProposta'                => $emailAgenciaContratacao,
+            'siglaComissao'                             => $contrato->SIGLA_COMISSAO,
+            'agrupamento'                               => $contrato->AGRUPAMENTO,
+            'dataAssinaturaContrato'                    => $contrato->DATA_CONTRATO == null ? 'data não informada' : Carbon::parse($contrato->DATA_CONTRATO)->format('Y-m-d'),
+            'dataRegistroCartorio'                      => $contrato->DT_REGISTRO_CARTORIO == null ? 'data não informada' : Carbon::parse($contrato->DT_REGISTRO_CARTORIO)->format('Y-m-d'),
             // 'tipoContratacao'
-            'cardAgrupamento'                   => $cardDeAgrupamento,
-            'nomeStatusDossie'                  => $nomeStatusDoDossie,
-            'tipoFluxoContratacao'              => $fluxoAgenciaOuCca,
-            'dataParecerConformidade'           => $dataParecerConformidade == null ? $dataParecerConformidade : Carbon::parse($dataParecerConformidade)->format('Y-m-d'),
+            'cardAgrupamento'                           => $cardDeAgrupamento,
+            'nomeStatusDossie'                          => $nomeStatusDoDossie,
+            'tipoFluxoContratacao'                      => $fluxoAgenciaOuCca,
+            'dataParecerConformidade'                   => $dataParecerConformidade == null ? $dataParecerConformidade : Carbon::parse($dataParecerConformidade)->format('Y-m-d'),
             
 
         ];
@@ -237,7 +331,6 @@ class ConsultaContratoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
