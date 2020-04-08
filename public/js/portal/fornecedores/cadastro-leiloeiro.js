@@ -225,6 +225,7 @@ $(".telefoneCelular").mask("(00) 00000-0000");
     $('#fadeOut').fadeOut("slow");
     }, 3000);
 
+    // ações no botão de cadastro Caixa/EMGEA
 $("#botaocaixa").click(function(){
     $(".LeiloeiroEmgea").hide();
     $(".LeiloeiroCaixa").show();
@@ -245,6 +246,13 @@ $("#botaoemgea").click(function(){
     $('#btnSalvar').css("border-color", "#85CD85")
 
 });
+// limpa modal ao fechar
+$('.modal').on('hidden.bs.modal', function (e) {
+    $(this)
+      .find("input,textarea,select")
+         .val('')
+         .end()
+})
       
 
 

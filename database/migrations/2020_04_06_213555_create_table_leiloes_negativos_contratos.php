@@ -17,21 +17,27 @@ class CreateTableLeiloesNegativosContratos extends Migration
             $table->bigIncrements('idContratoLeilaoNegativo');
             $table->string('contratoFormatado', 50);
             $table->string('numeroContrato', 50);
-            $table->string('numeroLeilao', 255);
+            $table->string('numeroLeilao', 255)->nullable();
+            $table->string('statusAverbacao', 100);
+            $table->string('unidadeResponsavel', 4);
+            
+            $table->integer('idLeiloeiro')->nullable();
             $table->date('previsaoRecebimentoDocumentosLeiloeiro');
+            $table->date('dataEntregaDocumentosLeiloeiro')->nullable();
+            
+            $table->integer('idDespachante')->nullable();
             $table->date('previsaoDisponibilizacaoDocumentosAoDespachante');
             $table->date('dataRetiradaDocumentosDespachante')->nullable();
             $table->string('numeroOficioUnidade', 17)->nullable();
-            $table->date('previsaoProtocoloCartorio')->nullable();
+            $table->date('previsaoEntregaDocumentosCartorio')->nullable();
+            
             $table->string('numeroProtocoloCartorio', 255)->nullable();
             $table->string('codigoAcessoProtocoloCartorio', 255)->nullable();
             $table->date('dataPrevistaAnaliseCartorio')->nullable();
             $table->date('dataRetiradaDocumentoCartorio')->nullable();
             $table->date('dataEntregaAverbacaoExigenciaUnidade')->nullable();
-            $table->string('statusAverbacao', 100);
             $table->string('existeExigencia', 3)->nullable();
-            $table->integer('idLeiloeiro')->nullable();
-            $table->integer('idDespachante')->nullable();
+            
             $table->datetime('dataCadastro');
             $table->datetime('dataAlteracao');
         });

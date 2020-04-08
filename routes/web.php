@@ -101,14 +101,12 @@ Route::prefix('estoque-imoveis')->group(function () {
         // Route::get('emitir-proposta/{contratoFormatado}', 'GestaoImoveisCaixa\ConformidadeContratataoController@emitirPropostaContratacao');
     });
 
-    // ROTAS DO PROJETO DE LEILÕES
-    Route::prefix('leiloes')->group(function () {
-        Route::get('leiloes-negativos', function () {
-            return view('portal.imoveis.leiloes.leiloes-negativos');
-        });
-        Route::get('tratar', function () {
-            return view('portal.imoveis.leiloes.operacional-leiloes');
-        });
+    // ROTAS DO PROJETO DE LEILÕES NEGATIVOS
+    Route::prefix('leiloes-negativos')->group(function () {
+        Route::get('', 'LeilaoNegativo\LeilaoNegativoController@index');
+        Route::get('tratar/{numeroContrato}', 'LeilaoNegativo\LeilaoNegativoController@viewTratarLeilaoNegativo');
+        Route::get('cadastrar-contratos', 'LeilaoNegativo\LeilaoNegativoController@cadastrarContratosControleLeiloesNegativos');
+        Route::get('listar-contratos/{codigoUnidade}', 'LeilaoNegativo\LeilaoNegativoController@listarContratosLeilaoNegativo');
     });
 
     // ROTA PARA REGISTRO DE HISTÓRICO

@@ -55,7 +55,7 @@
 
 @section('js')
     <script>
-        var numeroContrato = '1.4444.0670657-6';
+        var numeroContrato = '{{ $contratoFormatado }}';
     </script>
 
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
@@ -64,5 +64,6 @@
     <script src="{{ asset('js/global/formata_tabela_despesas_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_lista_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
-    <script src="{{ asset('js/portal/imoveis/leiloes/operacional-leiloes.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/consulta-bem-imovel.js') }}"></script>
+    <!-- <script src="{{ asset('js/portal/imoveis/leiloes/operacional-leiloes.js') }}"></script> -->
 @stop

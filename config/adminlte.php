@@ -260,7 +260,7 @@ return [
                 [
                     'text' => 'Leilões Negativos',
                     'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
-                    'url'  => '/estoque-imoveis/leiloes/leiloes-negativos',
+                    'url'  => '/estoque-imoveis/leiloes-negativos',
                     'perfil_acesso' => ['DESENVOLVEDOR'], //, env('NOME_NOSSA_UNIDADE'), 'GESTOR'
                 ]
             ],

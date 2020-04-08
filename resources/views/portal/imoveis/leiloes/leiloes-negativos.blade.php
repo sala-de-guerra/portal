@@ -49,15 +49,16 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">
-                            <table id="tblDistrato" class="table table-bordered table-striped hover dataTable">
+                            <table id="tblleiloesnegativos" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>CHB</th>
-                                        <th>Nome do Comprador</th>
+                                        <th>Nº Contrato</th>
+                                        <th>Leilão</th>
+                                        <th>Data da alteração</th>
                                         <th>Status</th>
-                                        <th>Motivo</th>
-                                        <th>Data de Início</th>
+                                        <!-- <th>Botão provisório</th> -->
+
+
                                         <!-- <th>Vencimento</th> -->
                                     </tr>
                                 </thead>
@@ -131,8 +132,8 @@
 
 
 @section('js')
-
-    <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos.js') }}"></script>
+    <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-
+    <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
 @stop

@@ -25,6 +25,7 @@ class LeilaoNegativo extends Model
         'dataEntregaAverbacaoExigenciaUnidade',
         'statusAverbacao',
         'existeExigencia',
+        'unidadeResponsavel',
         'idLeiloeiro',
         'idDespachante',
         'dataCadastro',

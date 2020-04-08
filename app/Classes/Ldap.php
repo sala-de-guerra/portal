@@ -266,4 +266,23 @@ class Ldap
         ];
         return array_search($codigoUnidadeUsuarioSessao, $arraySiglasUnidadesGilie);
     }
+
+    public static function defineCodigoUnidadeUsuarioSessao($siglaUnidade)
+    {
+        $arraySiglasUnidadesGilie = [
+            '7257' => 'GILIE/SP',
+            '7244' => 'GILIE/BH',
+            '7243' => 'GILIE/BE',
+            '7109' => 'GILIE/BR',
+            '7247' => 'GILIE/CT',
+            '7248' => 'GILIE/FO',
+            '7249' => 'GILIE/GO',
+            '7251' => 'GILIE/PO',
+            '7254' => 'GILIE/RJ',
+            '7253' => 'GILIE/RE',
+            '7255' => 'GILIE/SA',
+            '7242' => 'GILIE/BU'
+        ];
+        return array_search($siglaUnidade, $arraySiglasUnidadesGilie);
+    }
 }
