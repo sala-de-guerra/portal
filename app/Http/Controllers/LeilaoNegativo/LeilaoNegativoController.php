@@ -143,14 +143,270 @@ class LeilaoNegativoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $contratoFormatado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editarDadosCadastraisContratoLeilaoNegativo(Request $request, $contratoFormatado)
     {
-        //
+        try {
+            DB::beginTransaction();
+            // CAPTURA OS DADOS DA DEMANDA
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
+            $atualizarContratoLeilaoNegativo->numeroLeilao                                      = !in_array($request->numeroLeilao, [null, 'NULL', '']) ? $request->numeroLeilao : $atualizarContratoLeilaoNegativo->numeroLeilao;
+            $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro            = !in_array($request->previsaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $request->previsaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
+            $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante   = !in_array($request->previsaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $request->previsaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
+            $atualizarContratoLeilaoNegativo->dataAlteracao                                     = date("Y-m-d H:i:s", time());
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $atualizarContratoLeilaoNegativo->contratoFormatado;
+            $historico->tipo            = "REGISTRO";
+            $historico->atividade       = "LEILÃO NEGATIVO";
+            $historico->observacao      = "EDIÇÃO DADOS CADASTRAIS CONTRATO";
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+            // SALVA O ID LEILOEIRO EM TODOS OS CONTRATOS DO MESMO LEILÃO
+            self::registraLeiloeiroNosContratosLeilao($atualizarContratoLeilaoNegativo->numeroLeilao, $request->idLeiloeiro);
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $atualizarContratoLeilaoNegativo->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Edição realizada!");
+            $request->session()->flash('corpoMensagem', "A edição dos dados cadastrais do contrato foi realizado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Edição não efetuada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a edição dos dados cadastrais do contrato. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $contratoFormatado
+     * @return \Illuminate\Http\Response
+     */
+    public function receberDocumentosLeiloeiro(Request $request, $contratoFormatado)
+    {
+        try {
+            DB::beginTransaction();
+            // CAPTURA OS DADOS DA DEMANDA
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
+            $atualizarContratoLeilaoNegativo->idLeiloeiro                       = $request->idLeiloeiro;
+            $atualizarContratoLeilaoNegativo->dataEntregaDocumentosLeiloeiro    = $request->dataEntregaDocumentosLeiloeiro;
+            $atualizarContratoLeilaoNegativo->dataAlteracao                     = date("Y-m-d H:i:s", time());
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $atualizarContratoLeilaoNegativo->contratoFormatado;
+            $historico->tipo            = "REGISTRO";
+            $historico->atividade       = "LEILÃO NEGATIVO";
+            $historico->observacao      = "DOCUMENTOS ENTREGUE PELO LEILOEIRO";
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+            // SALVA O ID LEILOEIRO EM TODOS OS CONTRATOS DO MESMO LEILÃO
+            self::registraLeiloeiroNosContratosLeilao($atualizarContratoLeilaoNegativo->numeroLeilao, $request->idLeiloeiro);
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $atualizarContratoLeilaoNegativo->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Registro realizado!");
+            $request->session()->flash('corpoMensagem', "O registro referente ao recebimento do kit do leiloeiro foi cadastrado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Registro não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do recebimento do kit do leiloeiro. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $contratoFormatado
+     * @return \Illuminate\Http\Response
+     */
+    public function entregarDocumentosDespachante(Request $request, $contratoFormatado)
+    {
+        try {
+            DB::beginTransaction();
+            /*
+                REGRA DE NEGOCIO PARA DETERMINAR AS DATA ENTREGA DOCUMENTOS CARTÓRIO
+
+                DATA ENTREGA DOCUMENTOS CARTÓRIO  = 5 DIAS ÚTEIS A PARTIR DA DATA DE ENTREGA DOS DOCUMENTOS AO DESPACHANTE
+            */
+            $dataPrevisaoEntregaDocumentosCartorio = self::contadorDiasUteis($request->dataRetiradaDocumentosDespachante, 5);
+
+            // CAPTURA OS DADOS DA DEMANDA
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
+            $atualizarContratoLeilaoNegativo->idDespachante                     = $request->idDespachante;
+            $atualizarContratoLeilaoNegativo->dataRetiradaDocumentosDespachante = $request->dataRetiradaDocumentosDespachante;
+            $atualizarContratoLeilaoNegativo->numeroOficioUnidade               = $request->$numeroOficioUnidade;
+            $atualizarContratoLeilaoNegativo->previsaoEntregaDocumentosCartorio = $dataPrevisaoEntregaDocumentosCartorio;
+            $atualizarContratoLeilaoNegativo->dataAlteracao                     = date("Y-m-d H:i:s", time());
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $atualizarContratoLeilaoNegativo->contratoFormatado;
+            $historico->tipo            = "REGISTRO";
+            $historico->atividade       = "LEILÃO NEGATIVO";
+            $historico->observacao      = "DOCUMENTOS ENTREGUE PARA DESPACHANTE";
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+            // SALVA O ID DESPACHANTE EM TODOS OS CONTRATOS DO MESMO LEILÃO
+            self::registraDespachanteNosContratosLeilao($atualizarContratoLeilaoNegativo->numeroLeilao, $request->idDespachante);
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $atualizarContratoLeilaoNegativo->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Registro realizado!");
+            $request->session()->flash('corpoMensagem', "O registro referente a entrega dos documentos ao despachante foi cadastrado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Registro não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da entrega dos documetos ao despachante. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $contratoFormatado
+     * @return \Illuminate\Http\Response
+     */
+    public function receberDocumentosDespachante(Request $request, $contratoFormatado)
+    {
+        try {
+            DB::beginTransaction();
+
+            // CAPTURA OS DADOS DA DEMANDA
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
+            $atualizarContratoLeilaoNegativo->numeroProtocoloCartorio               = $request->numeroProtocoloCartorio;
+            $atualizarContratoLeilaoNegativo->codigoAcessoProtocoloCartorio         = $request->codigoAcessoProtocoloCartorio;
+            $atualizarContratoLeilaoNegativo->dataPrevistaAnaliseCartorio           = $request->dataPrevistaAnaliseCartorio;
+            $atualizarContratoLeilaoNegativo->dataRetiradaDocumentoCartorio         = $request->dataRetiradaDocumentoCartorio;
+            $atualizarContratoLeilaoNegativo->dataEntregaAverbacaoExigenciaUnidade  = $request->dataEntregaAverbacaoExigenciaUnidade;
+            $atualizarContratoLeilaoNegativo->existeExigencia                       = $request->existeExigencia;
+            $atualizarContratoLeilaoNegativo->dataAlteracao                         = date("Y-m-d H:i:s", time());
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $contratoFormatado;
+            $historico->tipo            = "REGISTRO";
+            $historico->atividade       = "LEILÃO NEGATIVO";
+            $historico->observacao      = !in_array($request->numeroContrato, [null, 'NULL', '']) ? strtoupper(strip_tags($request->observacao)) : "DOCUMENTOS RECEBIDOS PELO DESPACHANTE"; 
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $atualizarContratoLeilaoNegativo->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Registro realizado!");
+            $request->session()->flash('corpoMensagem', "O registro referente a entrega dos documentos ao despachante foi cadastrado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Registro não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da entrega dos documetos ao despachante. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $contratoFormatado);
+    }
+
+    public static function registraLeiloeiroNosContratosLeilao($numeroLeilao, $idLeiloeiro) 
+    {
+        try {
+            DB::beginTransaction();
+            $contratosLeilao = LeilaoNegativo::where('numeroLeilao', $numeroLeilao)->get();
+            foreach ($contratosLeilao as $contrato) {
+                $contrato->idLeiloeiro = $idLeiloeiro;
+                $contrato->save();
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+        }
+    }
+
+    public static function registraDespachanteNosContratosLeilao($numeroLeilao, $idDespachante) 
+    {
+        try {
+            DB::beginTransaction();
+            $contratosLeilao = LeilaoNegativo::where('numeroLeilao', $numeroLeilao)->get();
+            foreach ($contratosLeilao as $contrato) {
+                $contrato->idDespachante = $idDespachante;
+                $contrato->save();
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+        }
     }
 }

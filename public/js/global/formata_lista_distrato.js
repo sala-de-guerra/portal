@@ -1,13 +1,13 @@
 function _formataListaDistrato (numeroContrato, view) {
 
-    $.getJSON('/estoque-imoveis/distrato/consultar-dados-demanda/' + numeroContrato, function(dados){
+    $.getJSON('/estoque-imoveis/distrato/consultar-dados-demanda/' + numeroContrato, function(dados_distrato){
         
         // CASO NÃO EXISTA DADOS DE DISTRATO, REMOVER A ABA DE DISTRATO
-        if (dados.length == 0) {
+        if (dados_distrato.length == 0) {
             $('#custon-tabs-li-distrato').remove();
         }
 
-        $.each(dados, function(key, item) {
+        $.each(dados_distrato, function(key, item) {
 
             var li =
                 '<li id="list-' + item.idDistrato + '">' +

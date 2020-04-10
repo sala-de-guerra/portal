@@ -1,0 +1,29 @@
+.tooltip-col {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    border: none;
+    cursor:pointer;
+    text-align:center;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    height:315px;
+    background-color: #247CB4;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1;
+    top: -13px;
+    left: 110%;
+}
+
+
+.tooltip-col:hover .tooltiptext {
+    visibility: visible;
+}

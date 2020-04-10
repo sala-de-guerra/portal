@@ -119,7 +119,6 @@ class ConsultaContratoController extends Controller
                 $nomePrimeiroResponsavelDespachante     = null;
                 $telefonePrimeiroResponsavelDespachante = null;
                 $emailPrimeiroResponsavelDespachante    = null;
-                $siteEmpresaAssessoraLeiloeiro          = null;
             } else {
                 $nomeDespachante                        = $dadosDespachante->nomeDespachante;
                 $telefoneDespachante                    = $dadosDespachante->telefoneDespachante;
@@ -225,7 +224,6 @@ class ConsultaContratoController extends Controller
             'nomePrimeiroResponsavelDespachante'        => $nomePrimeiroResponsavelDespachante,     
             'telefonePrimeiroResponsavelDespachante'    => $telefonePrimeiroResponsavelDespachante, 
             'emailPrimeiroResponsavelDespachante'       => $emailPrimeiroResponsavelDespachante,    
-            'siteEmpresaAssessoraLeiloeiro'             => $siteEmpresaAssessoraLeiloeiro,            
 
             // CONTRATAÇÃO
             'tipoVenda'                                 => $contrato->TIPO_VENDA,

@@ -44,12 +44,6 @@ Route::get('pesquisar', function () {
     return view('portal.imoveis.pesquisar');
 });
 
-Route::prefix('indicadores')->group(function () {
-    Route::get('distrato', function () {
-        return view('portal.imoveis.distrato.indicadores-distrato');
-    });    
-});
-
 // Consulta de bem imóvel
 Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');
 
@@ -104,9 +98,13 @@ Route::prefix('estoque-imoveis')->group(function () {
     // ROTAS DO PROJETO DE LEILÕES NEGATIVOS
     Route::prefix('leiloes-negativos')->group(function () {
         Route::get('', 'LeilaoNegativo\LeilaoNegativoController@index');
-        Route::get('tratar/{numeroContrato}', 'LeilaoNegativo\LeilaoNegativoController@viewTratarLeilaoNegativo');
         Route::get('cadastrar-contratos', 'LeilaoNegativo\LeilaoNegativoController@cadastrarContratosControleLeiloesNegativos');
         Route::get('listar-contratos/{codigoUnidade}', 'LeilaoNegativo\LeilaoNegativoController@listarContratosLeilaoNegativo');
+        Route::get('tratar/{numeroContrato}', 'LeilaoNegativo\LeilaoNegativoController@viewTratarLeilaoNegativo');
+        Route::put('tratar/editar-dados-contrato/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@editarDadosCadastraisContratoLeilaoNegativo');
+        Route::put('tratar/receber-documentos-leiloeiro/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberDocumentosLeiloeiro');
+        Route::put('tratar/entregar-documentos-despachante/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@entregarDocumentosDespachante');
+        Route::put('tratar/receber-documentos-despachante/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberDocumentosDespachante');
     });
 
     // ROTA PARA REGISTRO DE HISTÓRICO
@@ -186,6 +184,19 @@ Route::prefix('gerencial')->group(function () {
         // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });
+});
+
+// INDICADORES
+Route::prefix('indicadores')->group(function () {  
+    // INDICADORES DE ACESSO
+    Route::prefix('acessos')->group(function () {
+        // RETORNA A VIEW DOS INDICADORES DE ACESSO
+        Route::get('/', 'GestaoEquipesAtividadesController@index'); 
+    });
+    // RETORNA A VIEW DOS INDICADORES DE DISTRATO
+    Route::get('distrato', function () {
+        return view('portal.imoveis.distrato.indicadores-distrato');
+    });  
 });
 
 // ROTA DE TESTE TROCA EMPREGADO CELULA
