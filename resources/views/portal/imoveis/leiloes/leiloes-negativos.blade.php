@@ -132,8 +132,8 @@
 
 
 @section('js')
-    <script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos.js') }}"></script>
     <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos.js') }}"></script>
 @stop

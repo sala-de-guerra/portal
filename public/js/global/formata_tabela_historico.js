@@ -60,10 +60,9 @@ function _formataTabelaHistorico (numeroContrato) {
                 if (busca == "ANALISE") {
                     obs = item.observacao
                 }
-                
-                
+
                 // var data =$('.formata-data').text()
-                // console.log(data)
+                // console.log(obs)
                 // var novaData = data.replace(/^(\d+)-(\d+)-(\d+)(.*):\d+$/, '$3/$2/$1$4');;
                 // $('.formata-data').text(novaData)
         }) 

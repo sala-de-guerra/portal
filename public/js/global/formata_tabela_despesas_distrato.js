@@ -1,7 +1,7 @@
 function _formataTabelaDespesasDistrato (idDistrato, view) {
 
-    $.getJSON('/estoque-imoveis/distrato/relacao-despesas/' + idDistrato, function(dados){
-        $.each(dados, function(key, item) {
+    $.getJSON('/estoque-imoveis/distrato/relacao-despesas/' + idDistrato, function(dados_despesa){
+        $.each(dados_despesa, function(key, item) {
 
             var corIconeDespesa;
             var sentidoIconeDespesa;

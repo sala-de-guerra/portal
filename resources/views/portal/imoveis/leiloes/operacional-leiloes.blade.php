@@ -38,7 +38,6 @@
 @include('portal.imoveis.componentes.tabs-dados-imovel')
 
 
-
 @section('footer')
 
 
@@ -49,7 +48,7 @@
 @section('css')
 
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('/css/tooltip.css') }}">
 @stop
 
 
@@ -65,5 +64,6 @@
     <script src="{{ asset('js/global/formata_lista_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
     <script src="{{ asset('js/portal/imoveis/consulta-bem-imovel.js') }}"></script>
-    <!-- <script src="{{ asset('js/portal/imoveis/leiloes/operacional-leiloes.js') }}"></script> -->
+    <script src="{{ asset('js/portal/imoveis/leiloes/operacional-leiloes.js') }}"></script>
+
 @stop

@@ -300,37 +300,85 @@
                             </div>
                         </div>
 
-                        <hr class="pontilhado">
-                        
+                        <!-- <hr class="pontilhado"> -->
+                        <hr>
+                        <div style="color: #054f77; font-size: 13pt;"><b>Dados do leilão negativo: </b></div><br>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
+                                Leiloeiro: <span id="nomeEmpresaAssessoraLeiloeiro"></span>
+                                <span class="tooltiptext">
+                                    <div class="form-group">
+                                        <b>Telefone:</b><br>
+                                        <span id="telefoneEmpresaAssessoraLeiloeiro"></span><br>
+
+                                        <b>E-mail:</b><br>
+                                        <span id="emailEmpresaAssessoraLeiloeiro"></span><br>
+
+                                        <b>Site:</b><br>
+                                        <span id="siteEmpresaAssessoraLeiloeiro"></span><br>
+
+                                        <b>Responsável:</b><br>
+                                        <span id="nomeLeiloeiro"></span><br>
+
+                                        <b>Telefone:</b><br>
+                                        <span id="telefoneLeiloeiro"></span><br>
+
+                                        <b>E-mail:</b><br>
+                                        <span id="emailLeiloeiro"></span>
+                                    </div>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
+                                Despachante: <span id="nomeDespachante"></span>
+                                <span class="tooltiptext">
+                                    <div class="form-group"><br>
+                                        <b>Telefone:</b><br>
+                                        <span id="telefoneDespachante"></span><br>
+
+                                        <b>E-mail:</b><br>
+                                        <span id="emailDespachante"></span><br>
+
+                                        <b>Responsável:</b><br>
+                                        <span id="nomePrimeiroResponsavelDespachante"></span><br>
+
+                                        <b>Telefone:</b><br>
+                                        <span id="telefonePrimeiroResponsavelDespachante"></span><br>
+
+                                        <b>E-mail:</b><br>
+                                        <span id="emailPrimeiroResponsavelDespachante"></span>                                    
+                                    </div>
+                                </span>
+                                </div>
+                            </div>
+                        </div><br>
+
                         <div id="cardLeilao">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Leiloeiro:</label>
-                                        <p id="nomeLeiloeiro"></p>
+                                        <label>Previsão de recebimento do leiloeiro:</label>
+                                        <p class="formata-data-sem-hora" id="previsaoRecebimentoDocumentosLeiloeiro"></p>
                                     </div>
-                                
-                                
-                                
-                                
-                                
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Número O.S - data:</label>
+                                        <label>Data de retirada do despachante:</label>
+                                        <p class="formata-data-sem-hora" id="dataRetiradaDocumentosDespachante"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Nº Oficio: </label>
                                         <p id="numeroOficioUnidade"></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Nome Despachante:</label>
-                                        <p id="nomeDespachante"></p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Data retirada - Despachante:</label>
-                                        <p id="dataRetiradaDocumentosDespachante"></p>
+                                        <label>Nº Protocolo:</label>
+                                        <p id="numeroProtocoloCartorio"></p>
                                     </div>
                                 </div>
                             </div>
@@ -338,31 +386,108 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Nº Protocolo de prenotação:</label>
-                                        <p id="numeroProtocoloCartorio"></p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Senha de acompanhamento</label>
+                                        <label>Senha do protocolo:</label>
                                         <p id="codigoAcessoProtocoloCartorio"></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Situação atual - data:</label>
+                                        <label>status da averbacao:</label>
                                         <p id="statusAverbacao"></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Último historico:</label>
-                                        <p id="ultimoHistorico"></p>
+                                        <label>Data de alteração:</label>
+                                        <p class="formata-data-sem-hora" id="dataAlteracao"></p>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Histórico:</label>
+                                        <p id="historico"></p>
+                                    </div>
+                                </div>
+                            </div><br>
+                                <span id="LeilaoNegativo"></span>
+                                <div class="modal fade" id="modalbotaokit" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Receber documentos</h5>
+                                            <button type="button" class="Fechar" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Selecione o leiloeiro</label>
+                                                    <select class="custom-select" id="inputGroupSelect01">
+                                                        <option selected>...</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                <a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-leiloeiros"><small class="form-text">Se não encontrar. clique aqui para cadastrar.</small></a>
+                                                </div>   
+                                        </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">fechar</button>
+                                                <button type="button" class="btn btn-primary">salvar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="modal fade" id="modalbotaodespachante" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Receber documentos</h5>
+                                            <button type="button" class="Fechar" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Selecione o leiloeiro</label>
+                                                    <select class="custom-select" id="inputGroupSelect01">
+                                                        <option selected>...</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                <a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-leiloeiros"><small class="form-text">Se não encontrar. clique aqui para cadastrar.</small></a>
+                                                </div>   
+                                        </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">fechar</button>
+                                                <button type="button" class="btn btn-primary">salvar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
 
+                        
+
+
+
+                        <!-- <div>
+                            <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;">Leiloeiro
+                            <span class="tooltiptext">
+                            
+                            </span>
+                            </div>
+                        </div> -->
+    
+                      
+
+                        
+                        
+                        
                         <!-- <h2 class="card-title"><b>Averbação de Leilões Negativos</b></h2>
 
                         <br>
@@ -973,13 +1098,6 @@
         </div>
     </div>
 </div>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-
-<script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos.js') }}"></script>
-
 
 <!-- 
 <div class="row">
