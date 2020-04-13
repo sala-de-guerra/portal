@@ -1,17 +1,17 @@
-var gilie = $('#lotacao').text()
+var unidade = $('#lotacao').text()
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
 $(document).ready(function(){
-    montaLinhasFornecedores(gilie);
+    montaLinhasFornecedores(unidade);
 });
 
-function refresh(gilie) {
+function refresh(unidade) {
     $('#tblfornecedores>tbody').empty();
-    montaLinhasFornecedores(gilie);
+    montaLinhasFornecedores(unidade);
 }
 
-function montaLinhasFornecedores(gilie){   
-$.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, function(dados){
+function montaLinhasFornecedores(unidade){   
+$.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + unidade, function(dados){
     $.each(dados, function(key, item) {
         var linha =
             '<tr>' +
@@ -228,8 +228,8 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + gilie, fu
                     '</div>' + 
                 '</td>' +
             '</tr>';          
-  
 $(linha).appendTo('#tblfornecedores>tbody');
+
 
 var confereSegundoResponsavel = $('#nome_segundo_responsavel' + item.idDespachante).text()
 if (confereSegundoResponsavel == "null" || confereSegundoResponsavel == "" ){

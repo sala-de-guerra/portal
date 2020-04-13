@@ -408,70 +408,12 @@
                                         <p id="historico"></p>
                                     </div>
                                 </div>
-                            </div><br>
-                                <span id="LeilaoNegativo"></span>
-                                <div class="modal fade" id="modalbotaokit" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Receber documentos</h5>
-                                            <button type="button" class="Fechar" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label class="input-group-text" for="inputGroupSelect01">Selecione o leiloeiro</label>
-                                                    <select class="custom-select" id="inputGroupSelect01">
-                                                        <option selected>...</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                <a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-leiloeiros"><small class="form-text">Se não encontrar. clique aqui para cadastrar.</small></a>
-                                                </div>   
-                                        </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">fechar</button>
-                                                <button type="button" class="btn btn-primary">salvar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="modal fade" id="modalbotaodespachante" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Receber documentos</h5>
-                                            <button type="button" class="Fechar" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label class="input-group-text" for="inputGroupSelect01">Selecione o leiloeiro</label>
-                                                    <select class="custom-select" id="inputGroupSelect01">
-                                                        <option selected>...</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                <a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-leiloeiros"><small class="form-text">Se não encontrar. clique aqui para cadastrar.</small></a>
-                                                </div>   
-                                        </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">fechar</button>
-                                                <button type="button" class="btn btn-primary">salvar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
+                            </div><br><br>
+                        <!-- Botões do leilão negativo -->
+                         <div id="LeilaoNegativo">
 
-                        
+                        </div>
+                    </div>
 
 
 

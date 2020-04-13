@@ -107,6 +107,11 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
         1.3  Para os imóveis adquiridos através de <b>1º LEILÃO E 2º LEILÃO</b>, o <b>KIT DE DOCUMENTOS</b> para a transferência do imóvel 
         junto ao Oficial de Registro de Imóveis, <b>será entregue ao arrematante pelo leiloeiro.</b>
     </p>
+    
+    <p>
+        1.4  Os documentos referentes ao imóvel e aquisição encontram-se disponíveis para consulta, exclusivamente 
+        pela agência Caixa, no link: \\sp7257sr001\PUBLIC\EstoqueImoveis\%CONTRATO_BEM%
+    </p>
 
     <b>2    DO PAGAMENTO:</b>
     <br>

@@ -1,23 +1,9 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 var obs = '';
-$(document).ready(function(){
-    // var obs = '';
-    _formataTabelaHistorico (numeroContrato);
-    _formataTabelaMensagensEnviadas (numeroContrato);
-    _formataListaDistrato (numeroContrato);
-    setTimeout(function() {
-        _formataData();
-        _formataValores();
-    }, 4000);
-
-
+$(document).ready(function(){    
+    console.log('consulta imoveis aqui')
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
-    // $.getJSON('../js/imovel_mockado.json', function(dados){
-
         var numeroBem = dados.numeroBem;
-        // var dossieDigital = dados.dossieDigital;
-        // _formataTabelaDocumentos (numeroBem, dossieDigital);
-        // _formataTabelaLaudos (numeroBem);
 
         $.each(dados, function(key, item) {
             $('#' + key).html(item);
@@ -75,18 +61,21 @@ $(document).ready(function(){
         }
 
         // CASO NÃO EXISTA DADOS DE PROPONENTE E LEILÃO, REMOVER AS RESPECTIVAS ABAS DA CONSULTA
-        // if ($('#nomeProponente').html() == '' || $('#nomeProponente').html() == null) {
-        //     $('#custon-tabs-li-contratacao').remove();
-        // }
-        // if ($('#dataPrimeiroLeilao').html() == '' || $('#dataPrimeiroLeilao').html() == null) {
-        //     $('#custon-tabs-li-leiloes').remove();
-        // }
+        if ($('#nomeProponente').html() == '' || $('#nomeProponente').html() == null) {
+            $('#custon-tabs-li-contratacao').remove();
+        }
+        if ($('#dataPrimeiroLeilao').html() == '' || $('#dataPrimeiroLeilao').html() == null) {
+            $('#custon-tabs-li-leiloes').remove();
+        }
     });
 
 
-    // var tamanhoMaximoView = 8;
-    // var tamanhoMaximo = 8388608;
-
-    // _animaInputFile();
+    _formataTabelaHistorico (numeroContrato);
+    _formataTabelaMensagensEnviadas (numeroContrato);
+    _formataListaDistrato (numeroContrato);
+    setTimeout(function() {
+        _formataData();
+        _formataValores();
+    }, 4000);
 
 });
