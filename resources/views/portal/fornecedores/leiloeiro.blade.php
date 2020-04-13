@@ -52,6 +52,7 @@
                                         <th>id</th>
                                         <th>Nome</th>
                                         <th>Contrato</th>
+                                        <th>Classificação</th>
                                         <th>Data de vencimento do contrato</th>
                                         <th>Leiloeiro</th>
                                         <th>Telefone</th>
@@ -77,86 +78,101 @@
 <div class="modal fade" id="modalCadastraLeiloeiro" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form method='post' action='/controle-leiloeiros/listar-leiloeiros' id="formCadastraLeiloeiro">
+                <form method='post' action='/fornecedores/controle-leiloeiros' id="formCadastraLeiloeiro">
                 {{ csrf_field() }} 
-                    <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                        <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastrar Despachante</h5>
+                    <div id="cardTop" style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
+                        <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastrar Leiloeiro</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body px-0">
-                        <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
-                        <div class="px-2" style="overflow-y: auto; height: 100%;">
-                            <p style="color: red;">Campos obrigatórios (*)</p>
-                        <div class="form-group">
-                            <label>Contrato <span style="color: red;"> *</span> </label>
-                            <input type="text" name="numeroContrato" class="form-control" autocomplete="off" required>
-                        </div>
-                        <div id="field" class="container">
-                        <div class="form-group">
-                            <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
-                            <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
-                        </div>
+            <div class="modal-body px-0">
+                <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
+                    <div class="px-2" style="overflow-y: auto; height: 100%;">
+                        <p style="color: red;">Campos obrigatórios (*)</p>
+                        
 
-                        <div class="form-group">
-                            <label>Nome<span style="color: red;"> *</span> </label>
-                            <input type="text" name="nomeEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" required>
-                        </div>
+                        <button id="botaocaixa" class="btn btn-primary" type="button">Leiloeiro Caixa</button>
+                        <button style="background: #85CD85; color: white;" id="botaoemgea" class="btn" type="button">Leiloeiro EMGEA</button>
+                                                                      
+                        <div>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea" id="InputClassificacao">
+                                <p class="pt-3"></p>
+                                <input id="input" type="text" name="classificacaoImoveisLeilao" class="form-control" style="display: none;">
+                            </div>
 
-                        <div class="form-group">
-                            <label>Telefone<span style="color: red;"> *</span> </label>
-                            <input type="text" name="telefoneEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" id="telefoneEmpresaAssessoraLeiloeiro" placeholder="(11) 3277-9999" autocomplete="off" required>
-                        </div>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Contrato <span style="color: red;"> *</span> </label>
+                                <input type="text" name="numeroContrato" class="form-control" autocomplete="off" required>
+                            </div>                   
 
-                        <div class="form-group">
-                            <label>E-mail<span style="color: red;"> *</span> </label>
-                            <input type="email" name="emailLeiloeiro" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
-                        </div>
+                            <div class="form-group collapse multi-collapse LeiloeiroEmgea ">
+                                <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
+                                <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário">
+                            </div>
 
-                        <div class="form-group">
-                            <label>responsável Leiloeiro<span style="color: red;"> *</span> </label>
-                            <input type="text" name="nomeLeiloeiro" class="form-control" autocomplete="off" required>
-                        </div>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa ">
+                                <label>Quantidade de leilões restantes<span style="color: red;"> *</span> </label>
+                                <input type="number"  min="0" name="quantidadeLeiloesRestantes" class="form-control" autocomplete="off">
+                            </div>
 
-                        <div class="form-group">
-                            <label>Telefone do responsável<span style="color: red;"> *</span> </label>
-                            <input type="text" name="telefoneLeiloeiro" class="form-control telefoneCelular" autocomplete="off" id="telefoneLeiloeiro" placeholder="(11) 99599-9696" required>
-                        </div>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Nome<span style="color: red;"> *</span> </label>
+                                <input type="text" name="nomeEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label>E-mail </label>
-                            <input type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br">
-                        </div>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Telefone<span style="color: red;"> *</span> </label>
+                                <input type="text" name="telefoneEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" id="telefoneEmpresaAssessoraLeiloeiro" placeholder="(11) 3277-9999" autocomplete="off" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label>Endereço Leiloeiro</label>
-                            <input type="email" name="enderecoEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off">
-                        </div>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>E-mail<span style="color: red;"> *</span> </label>
+                                <input type="email" name="emailLeiloeiro" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label>Endereço do Leilão </label>
-                            <input type="email" name="enderecoRealizacaoLeilao" class="form-control" autocomplete="off>
-                        </div>                      
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Leiloeiro<span style="color: red;"> *</span> </label>
+                                <input type="text" name="nomeLeiloeiro" class="form-control" autocomplete="off" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label>Site</label>
-                            <input type="email" name="siteEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="www.exemplo.com.br">
-                        </div>
-                        <button id="b1" class="btn add-more" type="button" style="background: #4F94CD; color: white;">adicionar novo responsável</button>
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Telefone do leiloeiro<span style="color: red;"> *</span> </label>
+                                <input type="text" name="telefoneLeiloeiro" class="form-control telefoneCelular" autocomplete="off" id="telefoneLeiloeiro" placeholder="(11) 99599-9696" required>
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>E-mail do leiloeiro </label>
+                                <input type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br">
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Endereço</label>
+                                <input type="text" name="enderecoEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off">
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Endereço do Leilão </label>
+                                <input type="text" name="enderecoRealizacaoLeilao" class="form-control" autocomplete="off">
+                            </div>                      
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Site</label>
+                                <input type="text" name="siteEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="www.exemplo.com.br">
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
                     
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button id="btnSalvar" type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+</div>
 
 
 
