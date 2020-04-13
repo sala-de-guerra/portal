@@ -1,8 +1,9 @@
-var gilie = $('#lotacao').text()
+var unidade = $('#lotacao').text()
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
+
 $(document).ready(function(){
-$.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + gilie, function(dados){
+$.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, function(dados){
     $.each(dados, function(key, item) {
         var linha =
             '<tr>' +
@@ -193,9 +194,10 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + gilie, functi
                     '</div>' + 
                 '</td>' +
             '</tr>';          
-  
-$(linha).appendTo('#tblLeiloeiro>tbody');
 
+// popula toda tabela de leiloeiro
+$(linha).appendTo('#tblLeiloeiro>tbody');
+ 
 var SeCaixa = $('#classificacao' + item.idLeiloeiro).text()
 if (SeCaixa == "Classificação:CAIXA"){
     $('#vencimentoEmgea'+item.idLeiloeiro).remove();

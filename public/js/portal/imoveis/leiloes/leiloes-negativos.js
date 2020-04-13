@@ -1,9 +1,7 @@
 
 $(document).ready(function(){
     var unidade = $('#lotacao').text()
-    console.log(unidade)
     $.getJSON('/estoque-imoveis/leiloes-negativos/listar-contratos/' + unidade, function(dados){
-        console.log(dados)
         $.each(dados, function(key, item) {
             var linha =
                 '<tr href="/estoque-imoveis/leiloes-negativos/tratar/'+ item.contratoFormatado+'" class="cursor-pointer">'+

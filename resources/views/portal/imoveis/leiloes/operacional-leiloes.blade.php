@@ -37,7 +37,6 @@
 
 @include('portal.imoveis.componentes.tabs-dados-imovel')
 
-
 @section('footer')
 
 
@@ -60,10 +59,12 @@
     <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
     <script src="{{ asset('js/global/formata_tabela_mensagens_enviadas.js') }}"></script>
-    <script src="{{ asset('js/global/formata_tabela_despesas_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_lista_distrato.js') }}"></script>
+    <script src="{{ asset('js/global/formata_tabela_despesas_distrato.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>   <!--Função global que formata a data para valor humano br.-->
     <script src="{{ asset('js/portal/imoveis/consulta-bem-imovel.js') }}"></script>
     <script src="{{ asset('js/portal/imoveis/leiloes/operacional-leiloes.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/leiloes/lista-despachante.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/leiloes/lista-leiloeiro.js') }}"></script>
 
 @stop

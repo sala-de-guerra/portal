@@ -1,5 +1,5 @@
 function _formataTabelaDespesasDistrato (idDistrato, view) {
-
+    console.log('formata despesa distrato aqui')
     $.getJSON('/estoque-imoveis/distrato/relacao-despesas/' + idDistrato, function(dados_despesa){
         $.each(dados_despesa, function(key, item) {
 

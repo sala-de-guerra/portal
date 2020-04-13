@@ -102,6 +102,10 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
         1.2  Os dados referentes ao imóvel e aquisição encontram-se disponíveis para consulta, exclusivamente 
         pela agência Caixa, no portal: <a href="https://portal.gilie.sp.caixa/">https://portal.gilie.sp.caixa/</a>;
     </p>
+    <p>
+        1.3  Os documentos referentes ao imóvel e aquisição encontram-se disponíveis para consulta, exclusivamente 
+        pela agência Caixa, no link: \\sp7257sr001\PUBLIC\EstoqueImoveis\%CONTRATO_BEM%
+    </p>
 
     <b>2    DO PAGAMENTO:</b>
     <br>
