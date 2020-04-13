@@ -81,7 +81,7 @@
 
         &nbsp
 
-        <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalCartilhaVendaOnline">
+        <!-- <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalCartilhaVendaOnline">
             Cartilha de Venda Online &nbsp &nbsp
             <i class="fas fa-lg fa-external-link-alt"></i>
         </button>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         &nbsp
 
