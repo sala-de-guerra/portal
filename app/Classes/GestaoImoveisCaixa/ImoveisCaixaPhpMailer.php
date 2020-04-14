@@ -64,12 +64,10 @@ class ImoveisCaixaPhpMailer
         switch (env('APP_ENV')) {
             case 'DESENVOLVIMENTO':
                 $mail->addAddress('c111710@mail.caixa');
-                $mail->addAddress('c142765@mail.caixa');
                 break;
             case 'HOMOLOGACAO':
                 if (isset($objRelacaoEmailUnidades->emailAgencia)) {
                     $mail->addAddress($objRelacaoEmailUnidades->emailAgencia);
-                    // $mail->addCC($objRelacaoEmailUnidades->emailSr);
                 } else {
                     $mail->addAddress($objRelacaoEmailUnidades->emailSr);
                 }
@@ -111,8 +109,7 @@ class ImoveisCaixaPhpMailer
 
         /* DESTINATÁRIOS PILOTO */
         // if (session()->get('codigoLotacaoAdministrativa') == '7257' || session()->get('codigoLotacaoFisica') == '7257') {
-            // $mail->addAddress('c111710@mail.caixa');
-            // $mail->addAddress('c142765@mail.caixa');
+            // $mail->addAddress('c111710@mail.caixa');   
             // $mail->addAddress('c098453@mail.caixa');
         // } else {
         //     $mail->addAddress(session()->get('matricula') . '@mail.caixa');
