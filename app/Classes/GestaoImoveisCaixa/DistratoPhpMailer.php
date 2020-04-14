@@ -59,11 +59,9 @@ class DistratoPhpMailer
         switch (env('APP_ENV')) {
             case 'DESENVOLVIMENTO':
                 $mail->addAddress('c111710@mail.caixa');
-                $mail->addAddress('c142765@mail.caixa');
                 break;
             case 'HOMOLOGACAO':
                 $mail->addBCC('c111710@mail.caixa');
-                $mail->addBCC('c142765@mail.caixa');
                 $mail->addAddress(session('matricula') . '@mail.caixa');
                 break;
             case 'PRODUCAO':
