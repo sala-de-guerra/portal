@@ -108,7 +108,7 @@
 
                             <div class="form-group collapse multi-collapse LeiloeiroEmgea ">
                                 <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
-                                <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário">
+                                <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário">
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa ">

@@ -1,7 +1,6 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 var obs = '';
 $(document).ready(function(){    
-    console.log('consulta imoveis aqui')
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
         var numeroBem = dados.numeroBem;
 
@@ -69,13 +68,13 @@ $(document).ready(function(){
         }
     });
 
-
-    _formataTabelaHistorico (numeroContrato);
-    _formataTabelaMensagensEnviadas (numeroContrato);
-    _formataListaDistrato (numeroContrato);
     setTimeout(function() {
-        _formataData();
-        _formataValores();
-    }, 4000);
-
+        _formataTabelaHistorico (numeroContrato);
+        _formataTabelaMensagensEnviadas (numeroContrato);
+        _formataListaDistrato (numeroContrato);
+        setTimeout(function() {
+            _formataData();
+            _formataValores();
+        }, 4000);
+    }, 500);
 });

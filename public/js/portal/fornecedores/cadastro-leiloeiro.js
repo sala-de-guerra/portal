@@ -197,7 +197,9 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
 
 // popula toda tabela de leiloeiro
 $(linha).appendTo('#tblLeiloeiro>tbody');
- 
+
+$('.datepicker').datepicker({});
+
 var SeCaixa = $('#classificacao' + item.idLeiloeiro).text()
 if (SeCaixa == "Classificação:CAIXA"){
     $('#vencimentoEmgea'+item.idLeiloeiro).remove();
@@ -256,6 +258,5 @@ $('.modal').on('hidden.bs.modal', function (e) {
          .end()
 })
       
-
 
 

@@ -268,6 +268,7 @@ $(".telefoneCelular").mask("(00) 00000-0000");
 //       });
 //   } );
 
+$('.datepicker').datepicker({});
 
   setTimeout(function(){
     $('#fadeOut').fadeOut("slow");

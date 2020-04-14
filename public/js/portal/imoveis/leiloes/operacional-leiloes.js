@@ -2,11 +2,12 @@ var unidade = $('#lotacao').text()
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
 var url_atual = window.location.href;
-var chbformatado = url_atual.substr(75);
+var chbformatado = numeroContrato;
 $(document).ready(function(){
+    $("#custom-tabs-one-leiloes-tab").click();
 
     var appendbotao = '<div class="row">'+ 
-                            '<div class="col-sm-4">'+
+                            '<div id="teste" class="col-sm-4">'+
                         '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">'+
                             'Receber documentos Leiloeiro'+
                         '</button>'+
@@ -34,7 +35,7 @@ $(document).ready(function(){
                                '</button>'+
                            '</div>'+
                            '<div class="modal-body">'+
-                           '<form method="PUT" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-leiloeiro/'+chbformatado+'">'+
+                           '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-leiloeiro/'+chbformatado+'">'+
                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                                     '<div class="form-group">'+
@@ -46,7 +47,7 @@ $(document).ready(function(){
                                    '</div>'+
                                    '<div class="form-group">'+
                                        '<label>'+'Data de ateste do recebimento'+'</label>'+
-                                       '<input type="date" name="previsaoRecebimentoDocumentosLeiloeiro" id="datepicker" class="form-control" placeholder="Selecione no calendário" required>'+
+                                       '<input type="date" name="previsaoRecebimentoDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                                    '</div>'+
                                '<div class="modal-footer">'+
                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
@@ -68,11 +69,11 @@ $(document).ready(function(){
                         '</button>'+
                     '</div>'+
                     '<div class="modal-body">'+
-                    '<form method="PUT" action="/estoque-imoveis/leiloes-negativos/tratar/entregar-documentos-despachante/'+chbformatado+'">'+
+                    '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/entregar-documentos-despachante/'+chbformatado+'">'+
                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                         '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                             '<div class="form-group">'+
-                                '<label class="input-group-text">'+'Selecione o despachante'+'</label>'+
+                                '<label>Selecione o despachante</label>'+
                                 '<select class="custom-select" name="idDespachante"id="inputGroupSelect02">'+
                                     '<option value="disabled" disabled selected hidden>Selecione um despachante</option>'+
                                 '</select>'+
@@ -80,7 +81,7 @@ $(document).ready(function(){
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label>'+'Data da entrega'+'</label>'+
-                                '<input type="date" name="dataRetiradaDocumentosDespachante" class="form-control" placeholder="Selecione no calendário" required>'+
+                                '<input type="date" name="dataRetiradaDocumentosDespachante" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label>'+'Nº da O.S'+'</label>'+
@@ -108,33 +109,44 @@ $(document).ready(function(){
             '<div class="modal-body px-0">'+
             '<div style="overflow-y: hidden; height: calc(100vh - 15rem);">'+
             '<div class="px-2" style="overflow-y: auto; height: 100%;">'+
-            '<form method="PUT" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/'+chbformatado+'">'+
+            '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/'+chbformatado+'">'+
                  '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                  '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                      
                     '<div class="form-group">'+
                         '<label>'+'Nº Protocolo do cartório'+'</label>'+
-                        '<input type="text" name="numeroProtocoloCartorio" class="form-control">'+
+                        '<input type="text" name="numeroProtocoloCartorio" class="form-control" required>'+
                     '</div>'+
                     '<div class="form-group">'+
                         '<label>'+'Senha protocolo'+'</label>'+
-                        '<input type="date" name="codigoAcessoProtocoloCartorio" class="form-control">'+
+                        '<input type="text" name="codigoAcessoProtocoloCartorio" class="form-control" required>'+
                     '</div>'+
                     '<div class="form-group">'+
                         '<label>'+'Data prevista do cartório'+'</label>'+
-                        '<input type="date" name="dataPrevistaAnaliseCartorio"class="form-control" placeholder="Selecione no calendário">'+
+                        '<input type="date" name="dataPrevistaAnaliseCartorio"class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                     '</div>'+
                     '<div class="form-group">'+
                         '<label>'+'Data da retirada no cartório'+'</label>'+
-                        '<input type="date" name="dataRetiradaDocumentoCartorio" class="form-control" placeholder="Selecione no calendário">'+
+                        '<input type="date" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" placeholder="Selecione no calendário">'+
                     '</div>'+
                     '<div class="form-group">'+
                         '<label>'+'Data de entrega averbação'+'</label>'+
-                        '<input type="date" name="previsaoRecebimentoDocumentosLeiloeiro"class="form-control" placeholder="Selecione no calendário">'+
+                        '<input type="date" name="previsaoRecebimentoDocumentosLeiloeiro"class="form-control datepicker" placeholder="Selecione no calendário">'+
+                    '</div>'+
+                    '<div class="form-group">'+
+                        '<label>Exigência cartorária: </label><br>'+
+                        '<div class="form-check form-check-inline">' +
+                            '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaSim" value="SIM">' +
+                            '<label class="form-check-label" for="exigenciaCartorariaSim">Sim</label>' +
+                        '</div>' +
+                        '<div class="form-check form-check-inline">' +
+                            '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaNao" value="NAO">' +
+                            '<label class="form-check-label" for="exigenciaCartorariaNao">Não</label>' +
+                        '</div>' +
                     '</div>'+
                      '<div class="form-group">'+
-                        '<label>'+'Exigência cartorária'+'</label>'+
-                        '<textarea style="height: 150px" type="text" name="previsaoRecebimentoDocumentosLeiloeiro"  class="form-control">'+'</textarea>'+
+                        '<label>Observação</label>'+
+                        '<textarea style="height: 150px" type="text" name="observacao"  class="form-control">'+'</textarea>'+
                     '</div>'+
 
                 '<div class="modal-footer">'+
@@ -149,6 +161,9 @@ $(document).ready(function(){
 
     $(appendbotao).appendTo("#LeilaoNegativo")
 
+$('.datepicker').datepicker({});
+
+
     
 /***************************************************\
 | Torna required campo do form de acordo com select |
@@ -160,4 +175,5 @@ $(document).ready(function(){
             
         }
     })
+
 })

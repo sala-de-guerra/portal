@@ -1,5 +1,4 @@
 function _formataListaDistrato (numeroContrato, view) {
-    console.log('formata lista distrato aqui')
     $.getJSON('/estoque-imoveis/distrato/consultar-dados-demanda/' + numeroContrato, function(dados_distrato){
         
         // CASO NÃO EXISTA DADOS DE DISTRATO, REMOVER A ABA DE DISTRATO
