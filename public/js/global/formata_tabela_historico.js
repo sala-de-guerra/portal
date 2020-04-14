@@ -1,5 +1,4 @@
 function _formataTabelaHistorico (numeroContrato) {
-    console.log('formata historico aqui')
     $.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
         $.each(dados.historico, function(key, item) {
             var linha = 
