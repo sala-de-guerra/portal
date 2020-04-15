@@ -64,6 +64,7 @@ class ConsultaContratoController extends Controller
             $idLeiloeiro                                = null;
             $idDespachante                              = null;
             $dataAlteracao                              = null;
+            $dataPrevistaAnaliseCartorio                = null; 
             // DADOS LEILOEIRO
             $nomeLeiloeiro                              = null;
             $telefoneLeiloeiro                          = null;
@@ -90,6 +91,7 @@ class ConsultaContratoController extends Controller
             $idLeiloeiro                                = $dadosLeilaoNegativo->idLeiloeiro;
             $idDespachante                              = $dadosLeilaoNegativo->idDespachante;
             $dataAlteracao                              = $dadosLeilaoNegativo->dataAlteracao;
+            $dataPrevistaAnaliseCartorio                = $dadosLeilaoNegativo->dataPrevistaAnaliseCartorio;
 
             // CAPTURA DADOS FORNECEDORES
             $dadosLeiloeiro = Leiloeiro::find($dadosLeilaoNegativo->idLeiloeiro);
@@ -208,7 +210,8 @@ class ConsultaContratoController extends Controller
             'numeroProtocoloCartorio'                   => $numeroProtocoloCartorio,                
             'codigoAcessoProtocoloCartorio'             => $codigoAcessoProtocoloCartorio,          
             'statusAverbacao'                           => $statusAverbacao,                                              
-            'dataAlteracao'                             => $dataAlteracao,                          
+            'dataAlteracao'                             => $dataAlteracao, 
+            'dataPrevistaAnaliseCartorio'               => $dataPrevistaAnaliseCartorio,                         
             // DADOS LEILOERIO
             'nomeLeiloeiro'                             => $nomeLeiloeiro,                      
             'telefoneLeiloeiro'                         => $telefoneLeiloeiro,                  

@@ -66,5 +66,4 @@
     <script src="{{ asset('js/portal/imoveis/leiloes/operacional-leiloes.js') }}"></script>
     <script src="{{ asset('js/portal/imoveis/leiloes/lista-despachante.js') }}"></script>
     <script src="{{ asset('js/portal/imoveis/leiloes/lista-leiloeiro.js') }}"></script>
-
 @stop

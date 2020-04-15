@@ -1,5 +1,6 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 var obs = '';
+var historicofatiado = '';
 $(document).ready(function(){    
     $.getJSON('/estoque-imoveis/consulta-contrato/' + numeroContrato, function(dados){
         var numeroBem = dados.numeroBem;
@@ -58,15 +59,22 @@ $(document).ready(function(){
                 anuncioSiteCaixa.remove(); 
                 break;
         }
-
-        // CASO NÃO EXISTA DADOS DE PROPONENTE E LEILÃO, REMOVER AS RESPECTIVAS ABAS DA CONSULTA
+        // CASO NÃO EXISTA DADOS DE PROPONENTE REMOVER A RESPECTIVA ABA DA CONSULTA
         if ($('#nomeProponente').html() == '' || $('#nomeProponente').html() == null) {
             $('#custon-tabs-li-contratacao').remove();
         }
-        if ($('#dataPrimeiroLeilao').html() == '' || $('#dataPrimeiroLeilao').html() == null) {
-            $('#custon-tabs-li-leiloes').remove();
-        }
     });
+
+    /****************************************************\
+    | Monta a Progress Bar do Projeto de Leilão Negativo |
+    \****************************************************/
+    var arrayPorcentagemStatusLeilaoNegativo = {
+        0: "Leiloeiro",
+        25: "GILIE",
+        50: "Despachante",
+        75: "Cartório",
+        99: "Averbação Concluída",
+    };
 
     setTimeout(function() {
         _formataTabelaHistorico (numeroContrato);
@@ -75,6 +83,19 @@ $(document).ready(function(){
         setTimeout(function() {
             _formataData();
             _formataValores();
-        }, 4000);
+            var historicoConsultaLeilaoNegativo = window.document.getElementById('historicoLeilaoNegativo')
+            historicoConsultaLeilaoNegativo.innerHTML = historicofatiado
+            var paragrafoHistoricoleilaoNegativoCompleto = window.document.getElementById('paragrafoHistoricoleilaoNegativoCompleto')
+            paragrafoHistoricoleilaoNegativoCompleto.innerHTML = obs
+            if ($('#statusAverbacao').text() !== "") {
+                _formataProgressBar ("progressBarLeilaoNegativo", arrayPorcentagemStatusLeilaoNegativo, $('#statusAverbacao').text());
+            } else {
+                $('#consultaLeilaoNegativo').remove();
+            } 
+            let consultaDistrato = window.document.getElementById('listaDistratos')
+            if (!consultaDistrato) {
+                $('#custom-tabs-one-distrato-tab').remove();
+            }           
+        }, 3800);
     }, 500);
 });
