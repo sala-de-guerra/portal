@@ -112,8 +112,8 @@
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa ">
-                                <label>Quantidade de leilões restantes<span style="color: red;"> *</span> </label>
-                                <input type="number"  min="0" name="quantidadeLeiloesRestantes" class="form-control" autocomplete="off">
+                                <label>Quantidade de leilões realizados<span style="color: red;"> *</span> </label>
+                                <input type="number"  min="0" name="quantidadeLeiloesRealizados" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
@@ -123,7 +123,7 @@
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
                                 <label>Telefone<span style="color: red;"> *</span> </label>
-                                <input type="text" name="telefoneEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" id="telefoneEmpresaAssessoraLeiloeiro" placeholder="(11) 3277-9999" autocomplete="off" required>
+                                <input type="text" name="telefoneEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" id="telefoneEmpresaAssessoraLeiloeiro" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="fixo ou celular" autocomplete="off" required>
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
@@ -138,7 +138,7 @@
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
                                 <label>Telefone do leiloeiro<span style="color: red;"> *</span> </label>
-                                <input type="text" name="telefoneLeiloeiro" class="form-control telefoneCelular" autocomplete="off" id="telefoneLeiloeiro" placeholder="(11) 99599-9696" required>
+                                <input type="text" name="telefoneLeiloeiro" class="form-control telefoneComum" autocomplete="off" id="telefoneLeiloeiro" placeholder="fixo ou celular" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
@@ -201,4 +201,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/fornecedores/cadastro-leiloeiro.js') }}"></script>
+
 @stop

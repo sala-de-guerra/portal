@@ -5,12 +5,13 @@
     border: none;
     cursor:pointer;
     text-align:center;
+    
 }
 
 .tooltiptext {
     visibility: hidden;
     width: 300px;
-    height:315px;
+    height:325px;
     background-color: #247CB4;
     color: #fff;
     text-align: center;
@@ -19,8 +20,9 @@
     box-sizing: border-box;
     position: absolute;
     z-index: 1;
-    top: -13px;
-    left: 110%;
+    top: -350px;
+    left: 30%;
+    
 }
 
 

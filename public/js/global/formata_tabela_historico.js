@@ -5,8 +5,8 @@ function _formataTabelaHistorico (numeroContrato) {
                 '<tr>' +
                     '<td>' + item.idHistorico + '</td>' +
                     '<td>' + item.matriculaResponsavel + '</td>' +
-                    '<td id="atividade_historico'+ item.idHistorico +'">' + item.tipo + '</td>' +
-                    '<td>' + item.atividade + '</td>' +
+                    '<td>' + item.tipo + '</td>' +
+                    '<td id="atividade_historico'+ item.idHistorico +'">' + item.atividade + '</td>' +
                     '<td class="col-sm-4 overflow-auto" =>' + 
                         '<div class="row">' +
                             '<div class="col" id="obs'+ item.idHistorico +'">' +
@@ -57,9 +57,15 @@ function _formataTabelaHistorico (numeroContrato) {
                 formata_observacao ("obs" + item.idHistorico);
             
                 var busca = $('#atividade_historico'+item.idHistorico).text()
-                if (busca == "ANALISE") {
+                if (busca == "LEILÃO NEGATIVO") {
                     obs = item.observacao
                 }
+                
+                var busca = $('#atividade_historico'+item.idHistorico).text()
+                if (busca == "LEILÃO NEGATIVO") {
+                    historicofatiado = $('#obs'+item.idHistorico).text()
+                }
+
 
                 // var data =$('.formata-data').text()
                 // console.log(obs)

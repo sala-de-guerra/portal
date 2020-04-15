@@ -7,18 +7,18 @@ $(document).ready(function(){
     $("#custom-tabs-one-leiloes-tab").click();
 
     var appendbotao = '<div class="row">'+ 
-                            '<div id="teste" class="col-sm-4">'+
-                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">'+
+                            '<div id="botaoKIT" class="col-sm-4">'+
+                        '<button type="button" id="botaoReceberDocumentosLeiloeiro" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">'+
                             'Receber documentos Leiloeiro'+
                         '</button>'+
                             '</div>'+
                             '<div class="col-sm-4">'+
-                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaodespachante">'+
+                        '<button type="button" id="botaoEntregarDocumentosDespachante" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaodespachante">'+
                             'Entregar ao despachante'+
                         '</button>'+
                         '</div>'+
                         '<div class="col-sm-4">'+
-                        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberdespachante">'+
+                        '<button type="button" id="botaoReceberDocumentosDespachante" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberdespachante">'+
                             'Receber documento do despachante'+
                         '</button>'+
                         '</div>'+
@@ -39,13 +39,14 @@ $(document).ready(function(){
                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                                     '<div class="form-group">'+
-                                       '<label>Selecione o leiloeiro</label>'+
+                                        '<p style="color: red;">Campos obrigatórios (*)</p>'+
+                                       '<label>Selecione o leiloeiro</label>'+'<span style="color: red;">'+'*'+'</span>'+
                                        '<select class="custom-select" name="idLeiloeiro" id="inputGroupSelect01">'+
                                            '<option value="disabled" disabled selected hidden>Selecione um leiloeiro</option>'+
                                        '</select>'+
                                    '<a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-leiloeiros">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
                                    '</div>'+
-                                   '<div class="form-group">'+
+                                   '<div class="form-group">'+'<span style="color: red;">'+'*'+'</span>'+
                                        '<label>'+'Data de ateste do recebimento'+'</label>'+
                                        '<input type="date" name="previsaoRecebimentoDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                                    '</div>'+
@@ -73,21 +74,40 @@ $(document).ready(function(){
                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                         '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                             '<div class="form-group">'+
-                                '<label>Selecione o despachante</label>'+
+                            '<p style="color: red;">Campos obrigatórios (*)</p>'+
+                                '<label>Selecione o despachante</label>'+'<span style="color: red;">'+'*'+'</span>'+
                                 '<select class="custom-select" name="idDespachante"id="inputGroupSelect02">'+
                                     '<option value="disabled" disabled selected hidden>Selecione um despachante</option>'+
                                 '</select>'+
                             '<a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-despachantes">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
                             '</div>'+
                             '<div class="form-group">'+
-                                '<label>'+'Data da entrega'+'</label>'+
+                                '<label>'+'Data da entrega'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
                                 '<input type="date" name="dataRetiradaDocumentosDespachante" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                             '</div>'+
                             '<div class="form-group">'+
-                                '<label>'+'Nº da O.S'+'</label>'+
-                                '<input type="text" name="numeroOficioUnidade" class="form-control" required>'+
+                                '<label>'+'Nº da O.S'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                                '<input type="text" name="numeroOficioUnidade" class="form-control oficio" required>'+
+                            '</div>'+'<br>'+
+                            '<p>'+'Deseja vincular a este depachante <b>TODOS</b> os contratos deste leilão ?'+'</p>'+
+
+                            '<div class="form-check form-check-inline">' +
+                                '<input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="sensibilizarTodosContratosLeilao" id="CheckNao" value="NAO">'+
+                                '<label class="form-check-label" for="exigenciaCartorariaNao">Não</label>' +
                             '</div>'+
-                        '<div class="modal-footer">'+
+                            '<div class="form-check form-check-inline">' +
+                                '<input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="sensibilizarTodosContratosLeilao" id="CheckSim" value="SIM">'+
+                                '<label class="form-check-label" for="exigenciaCartorariaNao">Sim</label>' + 
+                            '</div>'+
+                            '<div id="visibilidade" style="visibility:hidden">'+
+                            '<div class="alert alert-warning">'+
+                                '<div class="close" data-dismiss="alert" aria-label="close">'+'</div>'+
+                                    '<i class="fas fa-exclamation-triangle"></i>'+' ATENÇÃO: '+
+                                    '<p>'+'Esta ação ira afetar <b>TODOS</b> os contratos deste leilão.'+'<br>'+
+                                        'clique em salvar se tiver certeza desta ação.'+'</p>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="modal-footer">'+
                             '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
                             '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
                         '</div>'+
@@ -114,16 +134,17 @@ $(document).ready(function(){
                  '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                      
                     '<div class="form-group">'+
-                        '<label>'+'Nº Protocolo do cartório'+'</label>'+
-                        '<input type="text" name="numeroProtocoloCartorio" class="form-control" required>'+
+                         '<p style="color: red;">Campos obrigatórios (*)</p>'+
+                        '<label>'+'Nº Protocolo do cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                        '<input type="text" name="numeroProtocoloCartorio" id="inputNumeroProtocoloCartorio" class="form-control" required>'+
                     '</div>'+
                     '<div class="form-group">'+
-                        '<label>'+'Senha protocolo'+'</label>'+
-                        '<input type="text" name="codigoAcessoProtocoloCartorio" class="form-control" required>'+
+                        '<label>'+'Senha protocolo'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                        '<input type="text" name="codigoAcessoProtocoloCartorio" id="inputCodigoAcessoProtocoloCartorio" class="form-control" required>'+
                     '</div>'+
                     '<div class="form-group">'+
-                        '<label>'+'Data prevista do cartório'+'</label>'+
-                        '<input type="date" name="dataPrevistaAnaliseCartorio"class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                        '<label>'+'Data prevista do cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                        '<input type="date" name="dataPrevistaAnaliseCartorio" id="inputDataPrevistaAnaliseCartorio" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                     '</div>'+
                     '<div class="form-group">'+
                         '<label>'+'Data da retirada no cartório'+'</label>'+
@@ -131,7 +152,7 @@ $(document).ready(function(){
                     '</div>'+
                     '<div class="form-group">'+
                         '<label>'+'Data de entrega averbação'+'</label>'+
-                        '<input type="date" name="previsaoRecebimentoDocumentosLeiloeiro"class="form-control datepicker" placeholder="Selecione no calendário">'+
+                        '<input type="date" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" placeholder="Selecione no calendário">'+
                     '</div>'+
                     '<div class="form-group">'+
                         '<label>Exigência cartorária: </label><br>'+
@@ -160,14 +181,14 @@ $(document).ready(function(){
 '</div>'
 
     $(appendbotao).appendTo("#LeilaoNegativo")
-
-$('.datepicker').datepicker({});
-
-
+   
+    $('.datepicker').datepicker({});
     
-/***************************************************\
-| Torna required campo do form de acordo com select |
-\***************************************************/
+    $(".oficio").mask("0000.000.0000.000");
+        
+    /***************************************************\
+    | Torna required campo do form de acordo com select |
+    \***************************************************/
 
     $('#statusLeiloesNegativos').change(function () {
         $('#dataRetiradaDespachante').val('');
@@ -176,4 +197,49 @@ $('.datepicker').datepicker({});
         }
     })
 
+    setTimeout(function() {
+        var divNumeroProtocoloCartorio = window.document.getElementById('numeroProtocoloCartorio').innerText
+        var inputNumeroProtocoloCartorio = window.document.getElementById('inputNumeroProtocoloCartorio')
+        inputNumeroProtocoloCartorio.value = divNumeroProtocoloCartorio
+        var divCodigoAcessoProtocoloCartorio = window.document.getElementById('codigoAcessoProtocoloCartorio').innerText
+        var inputCodigoAcessoProtocoloCartorio = window.document.getElementById('inputCodigoAcessoProtocoloCartorio')
+        inputCodigoAcessoProtocoloCartorio.value = divCodigoAcessoProtocoloCartorio
+        // var divDataPrevistaAnaliseCartorio = window.document.getElementById('dataPrevistaAnaliseCartorio').innerText
+        // var inputDataPrevistaAnaliseCartorio = window.document.getElementById('inputDataPrevistaAnaliseCartorio')
+        // inputDataPrevistaAnaliseCartorio.value = divDataPrevistaAnaliseCartorio
+
+        // $('#statusAverbacao').text("AGUARDA DOC GILIESP")
+        switch ($('#statusAverbacao').text()) {
+            case 'AGUARDA DOC LEILOEIRO':
+            case 'CADASTRADO':
+                $('#botaoEntregarDocumentosDespachante').remove()
+                $('#botaoReceberDocumentosDespachante').remove()
+                break;
+            case 'RECEBIDO DOC LEILOEIRO':
+                $('#botaoReceberDocumentosLeiloeiro').remove()
+                $('#botaoReceberDocumentosDespachante').remove()
+                break;
+            case 'ENTREGUE DOC DESPACHANTE':
+            case 'AGUARDA PRAZO CRI':
+            case 'AGUARDA DOC GILIESP':
+                $('#botaoReceberDocumentosLeiloeiro').remove()
+                $('#botaoEntregarDocumentosDespachante').remove()
+                break;
+            case 'AVERBACAO CONCLUIDA':
+                $('#botaoReceberDocumentosLeiloeiro').remove()
+                $('#botaoEntregarDocumentosDespachante').remove()
+                $('#botaoReceberDocumentosDespachante').remove()
+                break;
+        }
+    }, 1500);
+
 })
+
+// função que pergunta se o usuario tem certeza de sensibilizar todos os leilões
+function SIMnoCheck() {
+    if (document.getElementById('CheckSim').checked) {
+        document.getElementById('visibilidade').style.visibility = 'visible';
+    }
+    else document.getElementById('visibilidade').style.visibility = 'hidden';
+
+}
