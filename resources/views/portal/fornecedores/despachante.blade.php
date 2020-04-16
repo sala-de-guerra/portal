@@ -96,7 +96,7 @@
                         <div id="field" class="container">
                         <div class="form-group">
                             <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
-                            <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control" autocomplete="off" placeholder="Selecione no calendário" required>
+                            <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>
                         </div>
 
                         <div class="form-group">
@@ -111,7 +111,7 @@
 
                         <div class="form-group">
                             <label>Telefone<span style="color: red;"> *</span> </label>
-                            <input type="text" name="telefoneDespachante" class="form-control telefoneComum" id="telefoneDespachante" placeholder="(11) 3277-9999" autocomplete="off" required>
+                            <input type="text" name="telefoneDespachante" class="form-control telefoneComum" id="telefoneDespachante" placeholder="fixo ou celular" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
@@ -126,7 +126,7 @@
 
                         <div class="form-group">
                             <label>Telefone do responsável<span style="color: red;"> *</span> </label>
-                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" id="telefonePrimeiroResponsavelDespachante" placeholder="(11) 99599-9696" required>
+                            <input type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control telefoneComum" autocomplete="off" id="telefonePrimeiroResponsavelDespachante" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="fixo ou celular" required>
                         </div>
 
                         <div class="form-group">

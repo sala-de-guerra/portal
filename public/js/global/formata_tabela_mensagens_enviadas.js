@@ -1,5 +1,4 @@
 function _formataTabelaMensagensEnviadas (numeroContrato) {
-    console.log('mensagens aqui')
     $.getJSON('/estoque-imoveis/consulta-mensagens-enviadas/' + numeroContrato, function(dados){
         if (dados.length !== 0) {
             $.each(dados.mensagens, function(key, item) {

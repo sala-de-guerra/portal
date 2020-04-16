@@ -197,7 +197,7 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
 
 // popula toda tabela de leiloeiro
 $(linha).appendTo('#tblLeiloeiro>tbody');
- 
+
 var SeCaixa = $('#classificacao' + item.idLeiloeiro).text()
 if (SeCaixa == "Classificação:CAIXA"){
     $('#vencimentoEmgea'+item.idLeiloeiro).remove();
@@ -208,9 +208,9 @@ var data =$('#vencimento_contrato'+ item.idLeiloeiro).text()
 var novaData = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
 $('#vencimento_contrato'+item.idLeiloeiro).text(novaData)
 
-$(".telefoneComum").mask("(00) 0000-0000");
+$(".telefoneComum").mask("(00) 0000-00009");
 $(".cnpj").mask("99.999.999/9999-99");
-$(".telefoneCelular").mask("(00) 00000-0000");
+$(".telefoneCelular").mask("(00) 00000-00009");
 
 })
 }).done(function() { 
@@ -218,9 +218,9 @@ $(".telefoneCelular").mask("(00) 00000-0000");
     _formataData();
 })
 })
-    $(".telefoneComum").mask("(00) 0000-0000");
+    $(".telefoneComum").mask("(00) 0000-00009");
     $(".cnpj").mask("99.999.999/9999-99");
-    $(".telefoneCelular").mask("(00) 00000-0000");
+    $(".telefoneCelular").mask("(00) 00000-00009");
 
 
   setTimeout(function(){
@@ -243,6 +243,7 @@ $("#botaoemgea").click(function(){
     $(".LeiloeiroEmgea").show();
     $("#input").val("EMGEA");
     $("#InputClassificacao>p").text("Cadastro Leiloeiro: EMGEA")
+    $('.datepicker').datepicker({});
     $('#cardTop').css("background", "#85CD85")
     $('#btnSalvar').css("background", "#85CD85")
     $('#btnSalvar').css("border-color", "#85CD85")
@@ -256,6 +257,5 @@ $('.modal').on('hidden.bs.modal', function (e) {
          .end()
 })
       
-
 
 

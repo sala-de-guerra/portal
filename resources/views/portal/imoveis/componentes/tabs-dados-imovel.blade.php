@@ -56,7 +56,7 @@
                     
                         <div class="row">
                             <div class="col-sm-12">
-                                <h2 class="card-title"><b>Trajetória do Imóvel - </b><b id="numeroContratoFormatado">{{ $numeroContrato ?? '' }}</b></h2>
+                                <h2 class="card-title"><b>Trajetória do Imóvel - </b><b id="numeroContratoFormatado">{{ $numeroContrato ?? $contratoFormatado }}</b></h2>
                                 <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar CHB" onclick="copyToClipboard('#numeroContratoFormatado')"><i class="far fa-copy"></i></button>
                                 <br>
                                 <div class="card-body pb-0" id="progressBarGeral"></div>
@@ -70,7 +70,7 @@
                                     <label>Dossiê Digital:</label>
                                     <br>
                                     <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy mx-1"></i>Servidor</button>
-                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? '' ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? '' ?? '' }}</a>
+                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? $contratoFormatado ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? $contratoFormatado ?? '' }}</a>
                                 </div>
                             </div>
                             @endif
@@ -220,6 +220,11 @@
                     <div class="tab-pane fade" id="custom-tabs-one-leiloes" role="tabpanel" aria-labelledby="custom-tabs-one-leiloes-tab">
                         
                         <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-body pb-0" id="progressBarLeilaoNegativo"></div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor no Primeiro Leilão:</label>
@@ -302,118 +307,164 @@
 
                         <!-- <hr class="pontilhado"> -->
                         <hr>
-                        <div style="color: #054f77; font-size: 13pt;"><b>Dados do leilão negativo: </b></div><br>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
-                                Leiloeiro: <span id="nomeEmpresaAssessoraLeiloeiro"></span>
-                                <span class="tooltiptext">
-                                    <div class="form-group">
-                                        <b>Telefone:</b><br>
-                                        <span id="telefoneEmpresaAssessoraLeiloeiro"></span><br>
-
-                                        <b>E-mail:</b><br>
-                                        <span id="emailEmpresaAssessoraLeiloeiro"></span><br>
-
-                                        <b>Site:</b><br>
-                                        <span id="siteEmpresaAssessoraLeiloeiro"></span><br>
-
-                                        <b>Responsável:</b><br>
-                                        <span id="nomeLeiloeiro"></span><br>
-
-                                        <b>Telefone:</b><br>
-                                        <span id="telefoneLeiloeiro"></span><br>
-
-                                        <b>E-mail:</b><br>
-                                        <span id="emailLeiloeiro"></span>
-                                    </div>
-                                </span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
-                                Despachante: <span id="nomeDespachante"></span>
-                                <span class="tooltiptext">
-                                    <div class="form-group"><br>
-                                        <b>Telefone:</b><br>
-                                        <span id="telefoneDespachante"></span><br>
-
-                                        <b>E-mail:</b><br>
-                                        <span id="emailDespachante"></span><br>
-
-                                        <b>Responsável:</b><br>
-                                        <span id="nomePrimeiroResponsavelDespachante"></span><br>
-
-                                        <b>Telefone:</b><br>
-                                        <span id="telefonePrimeiroResponsavelDespachante"></span><br>
-
-                                        <b>E-mail:</b><br>
-                                        <span id="emailPrimeiroResponsavelDespachante"></span>                                    
-                                    </div>
-                                </span>
-                                </div>
-                            </div>
-                        </div><br>
-
-                        <div id="cardLeilao">
+                        <div id="consultaLeilaoNegativo">
+                            <div style="color: #054f77; font-size: 13pt;"><b>Dados do leilão negativo: </b></div><br>
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Previsão de recebimento do leiloeiro:</label>
-                                        <p class="formata-data-sem-hora" id="previsaoRecebimentoDocumentosLeiloeiro"></p>
+                                <div class="col-sm-6">
+                                    <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
+                                        Leiloeiro: <span id="nomeEmpresaAssessoraLeiloeiro"></span>
+                                        <span class="tooltiptext">
+                                            <div class="form-group">
+                                                <b>Telefone:</b><br>
+                                                <span id="telefoneEmpresaAssessoraLeiloeiro"></span><br>
+
+                                                <b>E-mail:</b><br>
+                                                <span id="emailEmpresaAssessoraLeiloeiro"></span><br>
+
+                                                <b>Site:</b><br>
+                                                <span id="siteEmpresaAssessoraLeiloeiro"></span><br>
+
+                                                <b>Responsável:</b><br>
+                                                <span id="nomeLeiloeiro"></span><br>
+
+                                                <b>Telefone:</b><br>
+                                                <span id="telefoneLeiloeiro"></span><br>
+
+                                                <b>E-mail:</b><br>
+                                                <span id="emailLeiloeiro"></span>
+                                            </div>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Data de retirada do despachante:</label>
-                                        <p class="formata-data-sem-hora" id="dataRetiradaDocumentosDespachante"></p>
+                                <div class="col-sm-6">
+                                    <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
+                                        Despachante: <span id="nomeDespachante"></span>
+                                        <span class="tooltiptext">
+                                            <div class="form-group"><br>
+                                                <b>Telefone:</b><br>
+                                                <span id="telefoneDespachante"></span><br>
+
+                                                <b>E-mail:</b><br>
+                                                <span id="emailDespachante"></span><br>
+
+                                                <b>Responsável:</b><br>
+                                                <span id="nomePrimeiroResponsavelDespachante"></span><br>
+
+                                                <b>Telefone:</b><br>
+                                                <span id="telefonePrimeiroResponsavelDespachante"></span><br>
+
+                                                <b>E-mail:</b><br>
+                                                <span id="emailPrimeiroResponsavelDespachante"></span>                                    
+                                            </div>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Nº Oficio: </label>
-                                        <p id="numeroOficioUnidade"></p>
+                            </div><br>
+
+                            <div id="cardLeilao">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Previsão de recebimento do leiloeiro:</label>
+                                            <p class="formata-data-sem-hora" id="previsaoRecebimentoDocumentosLeiloeiro"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Data de retirada do despachante:</label>
+                                            <p class="formata-data-sem-hora" id="dataRetiradaDocumentosDespachante"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Nº Oficio: </label>
+                                            <p id="numeroOficioUnidade"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Nº Protocolo:</label>
+                                            <p id="numeroProtocoloCartorio"></p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Nº Protocolo:</label>
-                                        <p id="numeroProtocoloCartorio"></p>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Senha do protocolo:</label>
+                                            <p id="codigoAcessoProtocoloCartorio"></p>
+                                        </div>
                                     </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>status da averbacao:</label>
+                                            <p id="statusAverbacao"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Data de alteração:</label>
+                                            <p class="formata-data-sem-hora" id="dataAlteracao"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Histórico :</label><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalHistoricoleilaoNegativoCompleto"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button></button> 
+                                            <p id="historicoLeilaoNegativo"></p>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalHistoricoleilaoNegativoCompleto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable"  role="document">
+                                        <div class="modal-content">
+                                        <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Histórico</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <p id="paragrafoHistoricoleilaoNegativoCompleto"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Data Prevista Análise Cartório:</label>
+                                                <p class="formata-data-sem-hora" id="dataPrevistaAnaliseCartorio"></p>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label></label>
+                                                <p id=""></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label></label>
+                                                <p id=""></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label></label>
+                                                <p id=""></p>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <br><br>
+                                    <!-- Botões do leilão negativo -->
+                                    <div id="LeilaoNegativo"></div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Senha do protocolo:</label>
-                                        <p id="codigoAcessoProtocoloCartorio"></p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>status da averbacao:</label>
-                                        <p id="statusAverbacao"></p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Data de alteração:</label>
-                                        <p class="formata-data-sem-hora" id="dataAlteracao"></p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Histórico:</label>
-                                        <p id="historico"></p>
-                                    </div>
-                                </div>
-                            </div><br><br>
-                        <!-- Botões do leilão negativo -->
-                         <div id="LeilaoNegativo">
-
-                        </div>
-                    </div>
 
 
 
@@ -928,7 +979,7 @@
                                 <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato ?? '' }}' id="formCadastraAtendimento">
+                                            <form method='post' action='/estoque-imoveis/registrar-historico/{{ $numeroContrato ?? $contratoFormatado }}' id="formCadastraAtendimento">
                                                 {{ csrf_field() }}
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Cadastrar Histórico</h5>
@@ -1005,7 +1056,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
-                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato ?? '' }}">         
+                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato ?? $contratoFormatado }}">         
                                     <button type="submit" class="btn btn-primary">
                                         <i class="far fa-lg fa-envelope m-2"></i>
                                         Enviar Autorização de Contratação

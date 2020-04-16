@@ -53,6 +53,28 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
         }
     };
 
+    if (idBarra.indexOf ("progressBarLeilaoNegativo") > -1) {
+        switch (statusAtual) {
+            case 'AGUARDA DOC LEILOEIRO':
+            case 'CADASTRADO':
+                statusAtual = 'Leiloeiro';
+                break;
+            case 'RECEBIDO DOC LEILOEIRO':
+            case 'AGUARDA DOC GILIESP':
+                    statusAtual = 'GILIE';
+                    break;
+            case 'ENTREGUE DOC DESPACHANTE':
+                statusAtual = 'Despachante';
+                break;
+            case 'AGUARDA PRAZO CRI':
+                statusAtual = 'Cartório';
+                break;
+            case 'AVERBACAO CONCLUIDA':
+                statusAtual = 'Averbação Concluída';
+                break;
+        }
+    };
+
     if (idBarra.indexOf ("progressBarDistrato") > -1) {
         switch (statusAtual) {
             case 'AGUARDA AUTORIZACAO EMGEA':

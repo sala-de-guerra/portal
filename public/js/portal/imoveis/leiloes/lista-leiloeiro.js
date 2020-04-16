@@ -4,4 +4,5 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
         var botaoLeiloeiro = '<option value="'+item.idLeiloeiro+'">'+item.nomeEmpresaAssessoraLeiloeiro+'</option>'
         $(botaoLeiloeiro).appendTo('#inputGroupSelect01')
     })
+ 
 })

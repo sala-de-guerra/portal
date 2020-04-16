@@ -246,9 +246,9 @@ var data =$('#vencimento_contrato'+ item.idDespachante).text()
 var novaData = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
 $('#vencimento_contrato'+item.idDespachante).text(novaData)
 
-$(".telefoneComum").mask("(00) 0000-0000");
+$(".telefoneComum").mask("(00) 0000-00009");
 $(".cnpj").mask("99.999.999/9999-99");
-$(".telefoneCelular").mask("(00) 00000-0000");
+$(".telefoneCelular").mask("(00) 00000-00009");
 
 })
 }).done(function() { 
@@ -256,9 +256,9 @@ $(".telefoneCelular").mask("(00) 00000-0000");
     _formataData();
 })
 }
-    $(".telefoneComum").mask("(00) 0000-0000");
+    $(".telefoneComum").mask("(00) 0000-00009");
     $(".cnpj").mask("99.999.999/9999-99");
-    $(".telefoneCelular").mask("(00) 00000-0000");
+    $(".telefoneCelular").mask("(00) 00000-00009");
 
 
 
@@ -268,6 +268,7 @@ $(".telefoneCelular").mask("(00) 00000-0000");
 //       });
 //   } );
 
+$('.datepicker').datepicker({});
 
   setTimeout(function(){
     $('#fadeOut').fadeOut("slow");
@@ -289,7 +290,7 @@ $(document).ready(function(){
         $(newIn).appendTo('#field');
         $('#b1').remove()
         $("#field").prop('id', 'field2')
-        $(".telefoneCelular").mask("(00) 00000-0000");
+        $(".telefoneCelular").mask("(00) 00000-00009");
 
         $(".add-one-more").click(function(e){
         e.preventDefault();
@@ -302,7 +303,7 @@ $(document).ready(function(){
 
         $(newIn).appendTo('#field2');
         $('#b2').remove()
-        $(".telefoneCelular").mask("(00) 00000-0000");
+        $(".telefoneCelular").mask("(00) 00000-00009");
         $("#field2").prop('id', 'fim')})
 
         // refresh no modal ao sair
