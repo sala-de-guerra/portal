@@ -29,3 +29,20 @@ function _formataValores() {
     $('.mascaradata').mask('00/00/0000');
 
 };
+
+//Função global que formata a data para valor humano.
+function _formataDataInput() {
+    moment.locale('pt-br');
+
+    $('.formata-data-input').each(function (key, item) {
+        var data = $(this).text()
+        var dataFormatada = moment(data, 'YYYY-MM-DD, HH:mm:ss').format('L LT');
+        $(item).text(dataFormatada);
+    });
+
+    $('.formata-data-sem-hora-input').each(function (key, item) {
+        var data = $(this).text()
+        var dataFormatada = moment(data, 'YYYY-MM-DD, HH:mm:ss').format('L');
+        $(item).text(dataFormatada);
+    });
+};

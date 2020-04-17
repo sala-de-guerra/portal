@@ -96,7 +96,7 @@
                         <div id="field" class="container">
                         <div class="form-group">
                             <label>Vencimento do contrato<span style="color: red;"> *</span> </label>
-                            <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>
+                            <input type="text" name="dataVencimentoContrato" id="datepicker" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>
                         </div>
 
                         <div class="form-group">

@@ -43,6 +43,7 @@
 <script src="{{ asset('plugins/numeral/locales/pt-br.min.js') }}"></script>
 <script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
+<script src="/js/global/FormataDataClass.js"></script>
 
 @include('adminlte::plugins', ['type' => 'js'])
 
