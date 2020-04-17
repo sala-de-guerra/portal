@@ -341,7 +341,7 @@ return [
         [
             'text'       => 'Fornecedores',
             'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR')], // , 'GESTOR', env('NOME_NOSSA_UNIDADE'
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE'
             'submenu' => [
                 [
                     'text' => 'Despachantes',
