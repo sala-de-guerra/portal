@@ -53,7 +53,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
         }
     };
 
-    if (idBarra.indexOf ("progressBarLeilaoNegativo") > -1) {
+    if (idBarra == "progressBarLeilaoNegativo") {
         switch (statusAtual) {
             case 'AGUARDA DOC LEILOEIRO':
             case 'CADASTRADO':
@@ -70,7 +70,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
                 statusAtual = 'Cartório';
                 break;
             case 'AVERBACAO CONCLUIDA':
-                statusAtual = 'Averbação Concluída';
+                statusAtual = 'Averbado';
                 break;
         }
     };
@@ -104,7 +104,6 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
     var porcentagemPreenchimento =  Object.keys(arrayPorcentagemEStatus).find(value => arrayPorcentagemEStatus[value] == statusAtual); 
 
     $.each(arrayPorcentagemEStatus, function(key, item) {
-        
         if (porcentagemPreenchimento >= key) {
             var passo =
                 '<li>' +
@@ -114,15 +113,12 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
         }
         else {
             var passo =
-            '<li>' +
-                '<div class="progress-step bg-secondary progress-item"></div>' +
-                '<span class="badge bg-secondary">' + item + '</span>' +
-            '</li>';
-
+                '<li>' +
+                    '<div class="progress-step bg-secondary progress-item"></div>' +
+                    '<span class="badge bg-secondary">' + item + '</span>' +
+                '</li>';
         }
-
         $(passo).appendTo('#lista' + idBarra);
-
     });
 
     $('#barra' + idBarra).css("width", function() {

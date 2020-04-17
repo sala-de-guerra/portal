@@ -19,7 +19,7 @@
     <div class="row mb-2">
         <div class="col">
             <h1 class="m-0 text-dark">
-                Controle de Leilões Negativos
+                listagem de Leilões
             </h1>
         </div>
 
@@ -52,10 +52,14 @@
                             <table id="tblleiloesnegativos" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Número do leilão</th>
-                                        <th>Quantidade de contratos</th>
-                                        <th>Data do segundo leilão</th>
+                                        <th>Nº Contrato</th>
+                                        <th>Leilão</th>
+                                        <th>Data da alteração</th>
+                                        <th>Status</th>
+                                        <!-- <th>Botão provisório</th> -->
 
+
+                                        <!-- <th>Vencimento</th> -->
                                     </tr>
                                 </thead>
 
@@ -128,8 +132,10 @@
 
 
 @section('js')
+    <script>var dataSegundoLeilao = '{{ $dataSegundoLeilao }}'</script>
+    
     <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
-    <script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos-filtrado.js') }}"></script>
 @stop

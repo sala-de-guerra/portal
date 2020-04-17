@@ -94,7 +94,9 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + unidade, 
                                         '</div>' +
                                         '<div class="modal-body">' +
                                             '<div class="container">' +  
-                                                '<p>Tem certeza que deseja excluir: <b>' + item.nomeDespachante + '</b> ?</p>' +
+                                            '<p>Tem certeza que deseja excluir:</p>' +
+                                            '<p>cadastro ID nº : '+'<b>'+ item.idDespachante +'</b>'+
+                                            '<p><b>'+ item.nomeDespachante +'</b></p>' +
                                             '</div>' + 
                                         '</div>' +
                                         '<div class="modal-footer">' +
@@ -114,8 +116,7 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + unidade, 
                                     '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                                         '<div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">' +
-                                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Editar cadastro:' + 
-                                            '<p>'+'Preencha os campos que deseja alterar e clique em salvar'+'</p>'+'</h5>' +
+                                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Editar cadastro' + '</h5>'+
                                             '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                                 '<span aria-hidden="true">&times;</span>' +
                                             '</button>' +
@@ -125,91 +126,91 @@ $.getJSON('/fornecedores/controle-despachantes/listar-despachantes/' + unidade, 
                                                 '<div class="px-2" style="overflow-y: auto; height: 100%;">'+
                                             '<div>' +
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Contrato: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Contrato '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="numeroContrato" class="form-control" autocomplete="off" placeholder="'+item.numeroContrato+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Vencimento do contrato: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Vencimento do contrato '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="dataVencimentoContrato" class="form-control" autocomplete="off" placeholder="'+item.dataVencimentoContrato+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'CNPJ: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'CNPJ '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="cnpjDespachante" class="form-control cnpj" autocomplete="off" placeholder="'+item.cnpjDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Despachante: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Despachante '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="nomeDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomeDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Telefone: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Telefone '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="telefoneDespachante" class="form-control telefoneComum" autocomplete="off" placeholder="'+item.telefoneDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'E-mail: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'E-mail '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="emailDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="nomePrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomePrimeiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Telefone/Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Telefone/Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="telefonePrimeiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefonePrimeiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'E-mail/Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'E-mail/Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="emailPrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailPrimeiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
                                                     
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Segundo Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Segundo Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="nomeSegundoResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomeSegundoResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Telefone/Segundo Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Telefone/Segundo Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="telefoneSegundoResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefoneSegundoResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'E-mail/Segundo Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'E-mail/Segundo Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="emailSegundoResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailSegundoResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Terceiro Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Terceiro Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="nomeTerceiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.nomeTerceiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'Telefone/Terceiro Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'Telefone/Terceiro Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="telefoneTerceiroResponsavelDespachante" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.telefoneTerceiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+
 
                                                     '<div class="form-group">'+
-                                                        '<label class="pt-2" style="float: left;">'+'E-mail/Terceiro Responsável: '+'</label>'+
+                                                        '<label class="pt-2" style="float: left;">'+'E-mail/Terceiro Responsável '+'</label>'+
                                                     '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
                                                     '<input style="width: 100%;" type="text" name="emailTerceiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="'+item.emailTerceiroResponsavelDespachante+'">'+'</span>'+
                                                     '</div>'+                               
