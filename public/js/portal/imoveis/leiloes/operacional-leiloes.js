@@ -1,11 +1,14 @@
 var unidade = $('#lotacao').text()
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
-
+var numeroLeilao = ""
+var prevdadosleiloeiro = ""
+var prevdadosdespachante = ""
+var cidadecartorio = ""
 var url_atual = window.location.href;
 var chbformatado = numeroContrato;
+
 $(document).ready(function(){
     $("#custom-tabs-one-leiloes-tab").click();
-
     var appendbotao =   '<div class="row">' +
                             '<button class="btn btn-primary" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
                             '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">' +
@@ -33,36 +36,50 @@ $(document).ready(function(){
                                 '<span aria-hidden="true">&times;</span>'+
                                 '</button>'+
                             '</div>'+
-                            '<div class="modal-body">'+
-                            '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-leiloeiro/'+chbformatado+'">'+
-                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-
-
-
-                                    //  '<div class="form-group">'+
-                                    //  '<label>Nº Leilão</label>'+
-                                    //  '<input type="text" id="inputNumeroLeilao" name="numeroLeilao" class="form-control" autocomplete="off" placeholder="'+numleilao+'">'+
-                                    //  '</div>'+
-                                     
-                                    //  '<div class="form-group">'+
-                                    //  '<label>Previsão de recebimento do leiloeiro</label>'+
-                                    //  '<input type="text" id="inputprevisaoRecebimentoDocumentosLeiloeiro" name="previsaoRecebimentoDocumentosLeiloeiro" class="form-control" autocomplete="off" placeholder="'+previsaoRecDocLeiloeiro+'">'+
-                                    //  '</div>'+
-
-                                    //  '<div class="form-group">'+
-                                    //  '<label>Previsão de recebimento do leiloeiro</label>'+
-                                    //  '<input type="text" id="inputprevisaoRecebimentoDocumentosLeiloeiro" name="previsaoRecebimentoDocumentosLeiloeiro" class="form-control" autocomplete="off">'+
-                                    //  '</div>'+
-
-                                     
- 
-                                '<div class="modal-footer">'+
-                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
-                                    '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                            '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/editar-dados-contrato/'+chbformatado+'">'+
+                                '<div class="modal-body">'+
+                                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                                    '<div class="form-group">'+
+                                        '<label>Nº Leilão</label>'+
+                                        '<input type="text" id="inputNumeroLeilao" name="numeroLeilao" class="form-control" autocomplete="off" placeholder="'+numeroLeilao+'">'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<label>Previsão de recebimento do leiloeiro</label>'+
+                                        '<input type="text" id="inputprevisaoRecebimentoDocumentosLeiloeiro" name="previsaoRecebimentoDocumentosLeiloeiro" class="form-control datepicker" autocomplete="off" placeholder="'+prevdadosleiloeiro+'">'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<label>Previsão Entrega Docs Despachante</label>'+
+                                        '<input type="text" id="inputprevisaoDisponibilizacaoDocumentosAoDespachante" name="previsaoDisponibilizacaoDocumentosAoDespachante" class="form-control datepicker" autocomplete="off" placeholder="'+prevdadosdespachante+'">'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<label>Cidade Comarca Cartório</label>'+
+                                        '<input type="text" id="inputcidadeComarcaCartorio" name="cidadeComarcaCartorio" class="form-control" autocomplete="off" placeholder="'+cidadecartorio+'">'+
+                                    '</div>'+
+                                    '<p>'+'Deseja vincular essas informações a <b>TODOS</b> os contratos deste leilão (exceto: Cidade Comarca)?'+'</p>'+
+                                    '<div class="form-check form-check-inline">' +
+                                        '<input type="radio" class="form-check-input" onclick="javascript:Check();" name="sensibilizarTodosContratosLeilao" id="CheckN" value="NAO">'+
+                                        '<label class="form-check-label" for="exigenciaCartorariaNao">Não</label>' +
+                                    '</div>'+
+                                    '<div class="form-check form-check-inline">' +
+                                        '<input type="radio" class="form-check-input" onclick="javascript:Check();" name="sensibilizarTodosContratosLeilao" id="CheckS" value="SIM">'+
+                                        '<label class="form-check-label" for="exigenciaCartorariaNao">Sim</label>' + 
+                                    '</div>'+
+                                    '<div id="visibilidades" style="visibility:hidden">'+
+                                        '<div class="alert alert-warning">'+
+                                            '<div class="close" data-dismiss="alert" aria-label="close">'+'</div>'+
+                                                '<i class="fas fa-exclamation-triangle"></i>'+' ATENÇÃO: '+
+                                                '<p>'+'Esta ação ira afetar <b>TODOS</b> os contratos deste leilão.'+'<br>'+
+                                                'clique em salvar se tiver certeza desta ação.'+'</p>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="modal-footer">'+
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
+                                        '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                                    '</div>'+
                                 '</div>'+
-                            '</div>'+
-                                '</form>'+
+                            '</form>'+
                         '</div>'+
                     '</div>'+
                 '</div>'+
@@ -132,7 +149,7 @@ $(document).ready(function(){
                                 '<label>'+'Nº da O.S'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
                                 '<input type="text" name="numeroOficioUnidade" class="form-control oficio" required>'+
                             '</div>'+'<br>'+
-                            '<p>'+'Deseja vincular a este depachante <b>TODOS</b> os contratos deste leilão ?'+'</p>'+
+                            '<p>'+'Deseja vincular a este despachante <b>TODOS</b> os contratos deste leilão ?'+'</p>'+
 
                             '<div class="form-check form-check-inline">' +
                                 '<input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="sensibilizarTodosContratosLeilao" id="CheckNao" value="NAO">'+
@@ -244,15 +261,13 @@ $(document).ready(function(){
             '</div>'+
         '</div>'
 
-
-
-
     $(appendbotao).appendTo("#LeilaoNegativo")
-   
+
     $('.datepicker').datepicker({});
     
     $(".oficio").mask("0000.000.0000.000");
-        
+
+
     /***************************************************\
     | Torna required campo do form de acordo com select |
     \***************************************************/
@@ -262,15 +277,30 @@ $(document).ready(function(){
         if ($(this).val() === 'rede') {
             
         }
+        
     })
 
     setTimeout(function() {
-        var divNumeroProtocoloCartorio = window.document.getElementById('numeroProtocoloCartorio').innerText
-        var inputNumeroProtocoloCartorio = window.document.getElementById('inputNumeroProtocoloCartorio')
-        inputNumeroProtocoloCartorio.value = divNumeroProtocoloCartorio
-        var divCodigoAcessoProtocoloCartorio = window.document.getElementById('codigoAcessoProtocoloCartorio').innerText
-        var inputCodigoAcessoProtocoloCartorio = window.document.getElementById('inputCodigoAcessoProtocoloCartorio')
-        inputCodigoAcessoProtocoloCartorio.value = divCodigoAcessoProtocoloCartorio
+        // var divNumeroProtocoloCartorio = window.document.getElementById('numeroProtocoloCartorio').innerText
+        // var inputNumeroProtocoloCartorio = window.document.getElementById('inputNumeroProtocoloCartorio')
+        // inputNumeroProtocoloCartorio.value = divNumeroProtocoloCartorio
+        // var divCodigoAcessoProtocoloCartorio = window.document.getElementById('codigoAcessoProtocoloCartorio').innerText
+        // var inputCodigoAcessoProtocoloCartorio = window.document.getElementById('inputCodigoAcessoProtocoloCartorio')
+        // inputCodigoAcessoProtocoloCartorio.value = divCodigoAcessoProtocoloCartorio
+        var PeganumeroLeilao = window.document.getElementById('numeroLeilao').innerText
+        var inputNumeroLeilao = window.document.getElementById('inputNumeroLeilao')
+        inputNumeroLeilao.value = PeganumeroLeilao
+        let PegaprevisaoRecDocLeiloeiroFormatado = new FormataDataClass()
+        var PegaprevisaoRecDocLeiloeiro = window.document.getElementById('previsaoRecebimentoDocumentosLeiloeiro').innerText
+        var inputprevisaoRecebimentoDocumentosLeiloeiro = window.document.getElementById('inputprevisaoRecebimentoDocumentosLeiloeiro')
+        inputprevisaoRecebimentoDocumentosLeiloeiro.value = PegaprevisaoRecDocLeiloeiroFormatado.textoParaData(PegaprevisaoRecDocLeiloeiro).toLocaleString('pt-BR').substring(0, 10)
+        let PegaprevisaoDocDespachanteFormatado = new FormataDataClass()
+        var PegaprevisaoDocDespachante = window.document.getElementById('previsaoDisponibilizacaoDocumentosAoDespachante').innerText
+        var inputprevisaoDisponibilizacaoDocumentosAoDespachante = window.document.getElementById('inputprevisaoDisponibilizacaoDocumentosAoDespachante')
+        inputprevisaoDisponibilizacaoDocumentosAoDespachante.value = PegaprevisaoDocDespachanteFormatado.textoParaData(PegaprevisaoDocDespachante).toLocaleString('pt-BR').substring(0, 10)
+        var PegacidadeComarcaCartorio = window.document.getElementById('cidadeComarcaCartorio').innerText
+        var inputcidadeComarcaCartorio = window.document.getElementById('inputcidadeComarcaCartorio')
+        inputcidadeComarcaCartorio.value = PegacidadeComarcaCartorio
         // var divDataPrevistaAnaliseCartorio = window.document.getElementById('dataPrevistaAnaliseCartorio').innerText
         // var inputDataPrevistaAnaliseCartorio = window.document.getElementById('inputDataPrevistaAnaliseCartorio')
         // inputDataPrevistaAnaliseCartorio.value = divDataPrevistaAnaliseCartorio
@@ -309,11 +339,6 @@ $(document).ready(function(){
                 break;
         }
 
-var numleilao = $('#numeroLeilao').text()
-var previsaoRecDocLeiloeiro = $('#numeroLeilao').text()
-
-
-
     }, 1500)
 })
 // função que pergunta se o usuario tem certeza de sensibilizar todos os leilões
@@ -322,6 +347,13 @@ function SIMnoCheck() {
         document.getElementById('visibilidade').style.visibility = 'visible';
     } else {
         document.getElementById('visibilidade').style.visibility = 'hidden';
+    }
+}
+function Check() {
+    if (document.getElementById('CheckS').checked) {
+        document.getElementById('visibilidades').style.visibility = 'visible';
+    } else {
+        document.getElementById('visibilidades').style.visibility = 'hidden';
     }
 }
 

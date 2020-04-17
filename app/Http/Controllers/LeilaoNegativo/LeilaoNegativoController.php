@@ -153,13 +153,6 @@ class LeilaoNegativoController extends Controller
                                                 ->where('contratoAtivo', true)
                                                 ->groupBy('dataSegundoLeilao', 'numeroLeilao')
                                                 ->get();
-        // $listaLeiloesUnidade = DB::table('TBL_LEILOES_NEGATIVOS_CONTRATOS AS LEILOES')
-        //                             ->join('ALITB001_Imovel_Completo AS SIMOV', 'LEILOES.contratoFormatado', 'SIMOV.BEM_FORMATADO')
-        //                             ->select('SIMOV.DT_SEGUNDO_LEILAO AS dataSegundoLeilao', 'LEILOES.numeroLeilao', DB::raw('COUNT(LEILOES.numeroContrato) AS numeroContrato'))
-        //                             ->where('LEILOES.unidadeResponsavel', $codigoUnidade)
-        //                             ->where('LEILOES.statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')
-        //                             ->groupBy('SIMOV.DT_SEGUNDO_LEILAO', 'LEILOES.unidadeResponsavel', 'LEILOES.numeroLeilao')
-        //                             ->get();
         return json_encode($listaLeiloesUnidade);
     }
 
@@ -177,13 +170,6 @@ class LeilaoNegativoController extends Controller
                                                         ->where('contratoAtivo', true)
                                                         ->where('statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')
                                                         ->get();
-        // $listaContratosSegundoLeilao = DB::table('TBL_LEILOES_NEGATIVOS_CONTRATOS AS LEILOES')
-        //                                     ->join('ALITB001_Imovel_Completo AS SIMOV', 'LEILOES.contratoFormatado', 'SIMOV.BEM_FORMATADO')
-        //                                     ->select('LEILOES.contratoFormatado', 'LEILOES.numeroContrato', 'LEILOES.numeroLeilao', 'LEILOES.statusAverbacao', 'LEILOES.dataAlteracao')
-        //                                     ->where('SIMOV.DT_SEGUNDO_LEILAO', $dataSegundoLeilao)
-        //                                     ->where('LEILOES.statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')
-        //                                     ->where('LEILOES.unidadeResponsavel', $unidade)
-        //                                     ->get();
         return json_encode($listaContratosSegundoLeilao);
     }
 
@@ -197,13 +183,22 @@ class LeilaoNegativoController extends Controller
     {
         try {
             DB::beginTransaction();
+            // AJUSTAR A DATA QUE ESTÁ VINDO DO FRONT
+            $dataPrevisaoRecebimentoDocumentosLeiloeiro = Carbon::createFromFormat('d/m/Y', $request->previsaoRecebimentoDocumentosLeiloeiro);
+            $dataPrevisaoDisponibilizacaoDocumentosAoDespachante = Carbon::createFromFormat('d/m/Y', $request->previsaoDisponibilizacaoDocumentosAoDespachante);
+
             // CAPTURA OS DADOS DA DEMANDA
             $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
             $atualizarContratoLeilaoNegativo->numeroLeilao                                      = !in_array($request->numeroLeilao, [null, 'NULL', '']) ? $request->numeroLeilao : $atualizarContratoLeilaoNegativo->numeroLeilao;
-            $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro            = !in_array($request->previsaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $request->previsaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
-            $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante   = !in_array($request->previsaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $request->previsaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
-            $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio                             = !in_array($request->cidadeComarcaCartorio, [null, 'NULL', '']) ? $request->cidadeComarcaCartorio : $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio;
+            $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro            = !in_array($request->previsaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $dataPrevisaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
+            $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante   = !in_array($request->previsaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $dataPrevisaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
+            $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio                             = !in_array($request->cidadeComarcaCartorio, [null, 'NULL', '']) ? mb_convert_case($request->cidadeComarcaCartorio, MB_CASE_UPPER, 'UTF-8') : $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio;
             $atualizarContratoLeilaoNegativo->dataAlteracao                                     = date("Y-m-d H:i:s", time());
+
+            // SENSIBILIZA TODOS OS CONTRATOS DO LEILAO
+            if ($request->sensibilizarTodosContratosLeilao == 'SIM') {
+                self::editarDadosCadastraisTodosContratosLeilao($atualizarContratoLeilaoNegativo, $request);
+            }
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
@@ -480,6 +475,33 @@ class LeilaoNegativoController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da entrega dos documetos ao despachante. Tente novamente");
         }
         return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $contratoFormatado);
+    }
+
+    public static function editarDadosCadastraisTodosContratosLeilao($objLeilaoNegativo, $request) 
+    {
+        try {
+            DB::beginTransaction();
+            // AJUSTAR A DATA QUE ESTÁ VINDO DO FRONT
+            $dataPrevisaoRecebimentoDocumentosLeiloeiro             = Carbon::createFromFormat('d/m/Y', $request->previsaoRecebimentoDocumentosLeiloeiro);
+            $dataPrevisaoDisponibilizacaoDocumentosAoDespachante    = Carbon::createFromFormat('d/m/Y', $request->previsaoDisponibilizacaoDocumentosAoDespachante);
+
+            $contratosLeilao = LeilaoNegativo::where('dataSegundoLeilao', $objLeilaoNegativo->dataSegundoLeilao)->where('unidadeResponsavel', $objLeilaoNegativo->unidadeResponsavel)->where('contratoAtivo', true)->get();
+            foreach ($contratosLeilao as $contrato) {
+                $contrato->numeroLeilao                                     = !in_array($request->numeroLeilao, [null, 'NULL', '']) ? $request->numeroLeilao : $atualizarContratoLeilaoNegativo->numeroLeilao;
+                $contrato->previsaoRecebimentoDocumentosLeiloeiro           = !in_array($dataPrevisaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $request->previsaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
+                $contrato->previsaoDisponibilizacaoDocumentosAoDespachante  = !in_array($dataPrevisaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $request->previsaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
+                $contrato->dataAlteracao                                    = date("Y-m-d H:i:s", time());
+                $contrato->save();
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+        }
     }
 
     public static function registraLeiloeiroNosContratosLeilao($dataSegundoLeilao, $unidadeResponsavel, $request) 

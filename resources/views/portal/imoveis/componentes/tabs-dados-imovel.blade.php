@@ -429,7 +429,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Data Entrega Documento Unidade:</label>
-                                            <p id="dataEntregaAverbacaoExigenciaUnidade"></p>
+                                            <p class="formata-data-sem-hora" id="dataEntregaAverbacaoExigenciaUnidade"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">

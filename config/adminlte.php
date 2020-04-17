@@ -255,13 +255,13 @@ return [
         [
             'text' => 'Preparar e Ofertar',
             'icon' => 'fas fa-lg fa-fw fa-sign mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], //, env('NOME_NOSSA_UNIDADE')
+            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
             'submenu' => [
                 [
                     'text' => 'Leilões Negativos',
                     'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/estoque-imoveis/leiloes-negativos',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], //, env('NOME_NOSSA_UNIDADE')
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
                 ]
             ],
         ],
@@ -341,19 +341,19 @@ return [
         [
             'text'       => 'Fornecedores',
             'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+            'perfil_acesso' => ['DESENVOLVEDOR')], // , 'GESTOR', env('NOME_NOSSA_UNIDADE'
             'submenu' => [
                 [
                     'text' => 'Despachantes',
                     'icon'       => 'fas fa-lg fa-fw fa-id-card-alt mr-2',
                     'url'  => '/fornecedores/controle-despachantes/',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
                 ],
                 [
                     'text' => 'Leiloeiros',
                     'icon'       => 'fas fa-lg fa-fw fa-gavel mr-2',
                     'url'  => '/fornecedores/controle-leiloeiros/',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
                 ]
     
             ],

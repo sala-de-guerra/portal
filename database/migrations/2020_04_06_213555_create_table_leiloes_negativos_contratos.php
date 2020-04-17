@@ -22,6 +22,7 @@ class CreateTableLeiloesNegativosContratos extends Migration
             $table->string('statusAverbacao', 100);
             $table->string('unidadeResponsavel', 4);
             $table->string('cidadeComarcaCartorio', 255)->nullable();
+            $table->string('codigoCorreio', 13)->nullable();
             
             $table->integer('idLeiloeiro')->nullable();
             $table->date('previsaoRecebimentoDocumentosLeiloeiro');
