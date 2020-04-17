@@ -21,9 +21,19 @@ class LeilaoNegativoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function viewListaLeiloesUnidade()
     {
         return view('portal.imoveis.leiloes.leiloes-negativos');
+    }
+    
+    /**
+     *
+     * @param  string  $dataSegundoLeilao
+     * @return \Illuminate\Http\Response
+     */
+    public function viewListaContratosSegundoLeilao($dataSegundoLeilao)
+    {
+        return view('portal.imoveis.leiloes.contratos-leilao')->with('dataSegundoLeilao', $dataSegundoLeilao);
     }
 
     /**
@@ -51,8 +61,8 @@ class LeilaoNegativoController extends Controller
                                                             $classificacaoImovel->where('CLASSIFICACAO', '=', 'SFI - Gar.Fid.Reg.Créd.Imob')
                                                                                 ->orWhere('CLASSIFICACAO', '=', 'Patrimonial - Alienação Fiduciária')
                                                                                 ->orWhere('CLASSIFICACAO', '=', 'EMGEA- Alienação Fiduciária');
-                                                        })->whereNull('DT_PROPRIEDADE_PLENA')
-                                                        ->select('BEM_FORMATADO', 'NU_BEM', 'UNA', 'CLASSIFICACAO', 'CIDADE', 'OFICIO', 'MATRICULA', 'ENDERECO_IMOVEL', 'AGRUPAMENTO', 'STATUS_IMOVEL', 'DT_PRIMEIRO_LEILAO', 'DT_SEGUNDO_LEILAO')
+                                                        })->whereNotNull('DT_SEGUNDO_LEILAO')->where('DT_SEGUNDO_LEILAO', '>=', '2018-01-01')
+                                                        ->select('BEM_FORMATADO', 'NU_BEM', 'UNA', 'CIDADE', 'AGRUPAMENTO', 'DT_SEGUNDO_LEILAO') //, 'CLASSIFICACAO', 'OFICIO', 'MATRICULA', 'ENDERECO_IMOVEL', 'STATUS_IMOVEL', 'DT_PRIMEIRO_LEILAO'
                                                         ->get();
             foreach ($universoContratosParaCadastro as $contrato) {
                 /*
@@ -64,18 +74,18 @@ class LeilaoNegativoController extends Controller
                 $dataPrevisaoRecebimentoDocumentosLeiloeiro = self::contadorDiasUteis($contrato->DT_SEGUNDO_LEILAO, 5);
                 $dataPrevisaoDisponibilizacaoDocumentosAoDespachante = self::contadorDiasUteis($dataPrevisaoRecebimentoDocumentosLeiloeiro, 3);
                 $unidadeResponsavel = Ldap::defineCodigoUnidadeUsuarioSessao($contrato->UNA);
-
                 // VALIDA SE JÁ EXISTE ESSE CONTRATO NO CONTROLE, CASO NEGATIVO ELE FAZ O INSERT
                 $cadastroContratoLeilaoNegativo = LeilaoNegativo::firstOrCreate(
-                    ['contratoFormatado' => $contrato->BEM_FORMATADO],
+                    ['contratoFormatado' => $contrato->BEM_FORMATADO, 'contratoAtivo' => true],
                     [
                         'contratoFormatado'                                 => $contrato->BEM_FORMATADO,
                         'numeroContrato'                                    => $contrato->NU_BEM,
-                        'numeroLeilao'                                      => $contrato->AGRUPAMENTO,
-                        'previsaoRecebimentoDocumentosLeiloeiro'            => $dataPrevisaoRecebimentoDocumentosLeiloeiro,
-                        'previsaoDisponibilizacaoDocumentosAoDespachante'   => $dataPrevisaoDisponibilizacaoDocumentosAoDespachante,
+                        'dataSegundoLeilao'                                 => $contrato->DT_SEGUNDO_LEILAO,
                         'statusAverbacao'                                   => 'AGUARDA DOC LEILOEIRO',
                         'unidadeResponsavel'                                => $unidadeResponsavel,
+                        'cidadeComarcaCartorio'                             => $contrato->CIDADE,
+                        'previsaoRecebimentoDocumentosLeiloeiro'            => $dataPrevisaoRecebimentoDocumentosLeiloeiro,
+                        'previsaoDisponibilizacaoDocumentosAoDespachante'   => $dataPrevisaoDisponibilizacaoDocumentosAoDespachante,
                         'dataCadastro'                                      => date("Y-m-d H:i:s", time()),
                         'dataAlteracao'                                     => date("Y-m-d H:i:s", time()),
                     ]
@@ -135,11 +145,46 @@ class LeilaoNegativoController extends Controller
      * @param  int  $codigoUnidade
      * @return \Illuminate\Http\Response
      */
-    public function listarContratosLeilaoNegativo($codigoUnidade)
+    public function listarLeiloesUnidade($codigoUnidade)
     {
-        $contratosLeilaoNegativo = LeilaoNegativo::where('unidadeResponsavel', $codigoUnidade)->where('statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')->select('contratoFormatado', 'numeroContrato', 'numeroLeilao', 'statusAverbacao', 'dataAlteracao')->get(); //
+        $listaLeiloesUnidade = LeilaoNegativo::where('unidadeResponsavel', $codigoUnidade)
+                                                ->select('dataSegundoLeilao', 'numeroLeilao', DB::raw('COUNT(numeroContrato) AS numeroContrato'))
+                                                ->where('statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')
+                                                ->where('contratoAtivo', true)
+                                                ->groupBy('dataSegundoLeilao', 'numeroLeilao')
+                                                ->get();
+        // $listaLeiloesUnidade = DB::table('TBL_LEILOES_NEGATIVOS_CONTRATOS AS LEILOES')
+        //                             ->join('ALITB001_Imovel_Completo AS SIMOV', 'LEILOES.contratoFormatado', 'SIMOV.BEM_FORMATADO')
+        //                             ->select('SIMOV.DT_SEGUNDO_LEILAO AS dataSegundoLeilao', 'LEILOES.numeroLeilao', DB::raw('COUNT(LEILOES.numeroContrato) AS numeroContrato'))
+        //                             ->where('LEILOES.unidadeResponsavel', $codigoUnidade)
+        //                             ->where('LEILOES.statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')
+        //                             ->groupBy('SIMOV.DT_SEGUNDO_LEILAO', 'LEILOES.unidadeResponsavel', 'LEILOES.numeroLeilao')
+        //                             ->get();
+        return json_encode($listaLeiloesUnidade);
+    }
 
-        return json_encode($contratosLeilaoNegativo);
+    /**
+     *
+     * @param  string  $dataSegundoLeilao
+     * @return \Illuminate\Http\Response
+     */
+    public function listarContratosLeilao($dataSegundoLeilao)
+    {
+        $unidade = Ldap::defineUnidadeUsuarioSessao();
+        $listaContratosSegundoLeilao = LeilaoNegativo::select('contratoFormatado', 'numeroContrato', 'numeroLeilao', 'statusAverbacao', 'dataAlteracao')
+                                                        ->where('unidadeResponsavel', $unidade)
+                                                        ->where('dataSegundoLeilao', $dataSegundoLeilao)
+                                                        ->where('contratoAtivo', true)
+                                                        ->where('statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')
+                                                        ->get();
+        // $listaContratosSegundoLeilao = DB::table('TBL_LEILOES_NEGATIVOS_CONTRATOS AS LEILOES')
+        //                                     ->join('ALITB001_Imovel_Completo AS SIMOV', 'LEILOES.contratoFormatado', 'SIMOV.BEM_FORMATADO')
+        //                                     ->select('LEILOES.contratoFormatado', 'LEILOES.numeroContrato', 'LEILOES.numeroLeilao', 'LEILOES.statusAverbacao', 'LEILOES.dataAlteracao')
+        //                                     ->where('SIMOV.DT_SEGUNDO_LEILAO', $dataSegundoLeilao)
+        //                                     ->where('LEILOES.statusAverbacao', '!=', 'AVERBACAO CONCLUIDA')
+        //                                     ->where('LEILOES.unidadeResponsavel', $unidade)
+        //                                     ->get();
+        return json_encode($listaContratosSegundoLeilao);
     }
 
     /**
@@ -157,6 +202,7 @@ class LeilaoNegativoController extends Controller
             $atualizarContratoLeilaoNegativo->numeroLeilao                                      = !in_array($request->numeroLeilao, [null, 'NULL', '']) ? $request->numeroLeilao : $atualizarContratoLeilaoNegativo->numeroLeilao;
             $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro            = !in_array($request->previsaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $request->previsaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
             $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante   = !in_array($request->previsaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $request->previsaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
+            $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio                             = !in_array($request->cidadeComarcaCartorio, [null, 'NULL', '']) ? $request->cidadeComarcaCartorio : $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio;
             $atualizarContratoLeilaoNegativo->dataAlteracao                                     = date("Y-m-d H:i:s", time());
 
             // CADASTRA HISTÓRICO
@@ -169,9 +215,6 @@ class LeilaoNegativoController extends Controller
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
-
-            // SALVA O ID LEILOEIRO EM TODOS OS CONTRATOS DO MESMO LEILÃO
-            self::registraLeiloeiroNosContratosLeilao($atualizarContratoLeilaoNegativo->numeroLeilao, $request);
 
             // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
             $atualizarContratoLeilaoNegativo->save();
@@ -208,12 +251,12 @@ class LeilaoNegativoController extends Controller
         try {
             DB::beginTransaction();
             // AJUSTAR A DATA QUE ESTÁ VINDO DO FRONT
-            $dataPrevisaoRecebimentoDocumentosLeiloeiroFormatada = Carbon::createFromFormat('d/m/Y', $request->previsaoRecebimentoDocumentosLeiloeiro);
+            $dataEntregaDocumentosLeiloeiroFormatada = Carbon::createFromFormat('d/m/Y', $request->dataEntregaDocumentosLeiloeiro);
 
             // CAPTURA OS DADOS DA DEMANDA
-            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->where('contratoAtivo', true)->first();
             $atualizarContratoLeilaoNegativo->idLeiloeiro                       = $request->idLeiloeiro;
-            $atualizarContratoLeilaoNegativo->dataEntregaDocumentosLeiloeiro    = $dataPrevisaoRecebimentoDocumentosLeiloeiroFormatada;
+            $atualizarContratoLeilaoNegativo->dataEntregaDocumentosLeiloeiro    = $dataEntregaDocumentosLeiloeiroFormatada;
             $atualizarContratoLeilaoNegativo->statusAverbacao                   = 'RECEBIDO DOC LEILOEIRO';
             $atualizarContratoLeilaoNegativo->dataAlteracao                     = date("Y-m-d H:i:s", time());
 
@@ -229,7 +272,7 @@ class LeilaoNegativoController extends Controller
             $historico->save();
 
             // SALVA O ID LEILOEIRO EM TODOS OS CONTRATOS DO MESMO LEILÃO
-            self::registraLeiloeiroNosContratosLeilao($atualizarContratoLeilaoNegativo->numeroLeilao, $request);
+            self::registraLeiloeiroNosContratosLeilao($atualizarContratoLeilaoNegativo->dataSegundoLeilao, $atualizarContratoLeilaoNegativo->unidadeResponsavel, $request);
 
             // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
             $atualizarContratoLeilaoNegativo->save();
@@ -276,7 +319,7 @@ class LeilaoNegativoController extends Controller
             $dataPrevisaoEntregaDocumentosCartorio = self::contadorDiasUteis($dataRetiradaDocumentosDespachanteFormatada, 5);
 
             // CAPTURA OS DADOS DA DEMANDA
-            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->where('contratoAtivo', true)->first();
             $atualizarContratoLeilaoNegativo->idDespachante                     = $request->idDespachante;
             $atualizarContratoLeilaoNegativo->dataRetiradaDocumentosDespachante = $dataRetiradaDocumentosDespachanteFormatada->format('Y-m-d');
             $atualizarContratoLeilaoNegativo->numeroOficioUnidade               = $request->numeroOficioUnidade;
@@ -297,7 +340,7 @@ class LeilaoNegativoController extends Controller
 
             // SALVA O ID DESPACHANTE EM TODOS OS CONTRATOS DO MESMO LEILÃO
             if ($request->sensibilizarTodosContratosLeilao == 'SIM') {
-                self::registraDespachanteNosContratosLeilao($atualizarContratoLeilaoNegativo->numeroLeilao, $request, $dataPrevisaoEntregaDocumentosCartorio);
+                self::registraDespachanteNosContratosLeilao($atualizarContratoLeilaoNegativo->dataSegundoLeilao, $atualizarContratoLeilaoNegativo->unidadeResponsavel, $request, $dataPrevisaoEntregaDocumentosCartorio);
             }
 
             // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
@@ -330,34 +373,80 @@ class LeilaoNegativoController extends Controller
      * @param  string  $contratoFormatado
      * @return \Illuminate\Http\Response
      */
+    public function receberProtocoloCartorio(Request $request, $contratoFormatado)
+    {
+        // dd($request);
+        try {
+            DB::beginTransaction();
+
+            // CAPTURA OS DADOS DA DEMANDA
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->where('contratoAtivo', true)->first();
+            $atualizarContratoLeilaoNegativo->numeroProtocoloCartorio               = $request->numeroProtocoloCartorio;
+            $atualizarContratoLeilaoNegativo->codigoAcessoProtocoloCartorio         = $request->codigoAcessoProtocoloCartorio;
+            $atualizarContratoLeilaoNegativo->dataPrevistaAnaliseCartorio           = Carbon::createFromFormat('d/m/Y', $request->dataPrevistaAnaliseCartorio);
+            $atualizarContratoLeilaoNegativo->statusAverbacao                       = 'AGUARDA PRAZO CRI';
+            $atualizarContratoLeilaoNegativo->dataAlteracao                         = date("Y-m-d H:i:s", time());
+            
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $contratoFormatado;
+            $historico->tipo            = "REGISTRO";
+            $historico->atividade       = "LEILÃO NEGATIVO";
+            $historico->observacao      = "PROTOCOLO CARTÓRIO ENTREGUE PELO DESPACHANTE"; 
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $atualizarContratoLeilaoNegativo->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Registro realizado!");
+            $request->session()->flash('corpoMensagem', "O registro referente a entrega do protocolo do cartório foi cadastrado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Registro não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da entrega do protocolo do cartório. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $contratoFormatado);
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $contratoFormatado
+     * @return \Illuminate\Http\Response
+     */
     public function receberDocumentosDespachante(Request $request, $contratoFormatado)
     {
         // dd($request);
         try {
-            
-            $dataPrevistaAnaliseCartorioFormatada = 
             DB::beginTransaction();
 
             // CAPTURA OS DADOS DA DEMANDA
-            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
-            $atualizarContratoLeilaoNegativo->numeroProtocoloCartorio               = $request->numeroProtocoloCartorio;
-            $atualizarContratoLeilaoNegativo->codigoAcessoProtocoloCartorio         = $request->codigoAcessoProtocoloCartorio;
-            $atualizarContratoLeilaoNegativo->dataPrevistaAnaliseCartorio           = Carbon::createFromFormat('d/m/Y', $request->dataPrevistaAnaliseCartorio);
+            $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->where('contratoAtivo', true)->first();
             $atualizarContratoLeilaoNegativo->dataRetiradaDocumentoCartorio         = !in_array($request->dataRetiradaDocumentoCartorio, [null, 'NULL', '']) ? Carbon::createFromFormat('d/m/Y', $request->dataRetiradaDocumentoCartorio) : $request->dataRetiradaDocumentoCartorio;
             $atualizarContratoLeilaoNegativo->dataEntregaAverbacaoExigenciaUnidade  = !in_array($request->dataEntregaAverbacaoExigenciaUnidade, [null, 'NULL', '']) ? Carbon::createFromFormat('d/m/Y', $request->dataEntregaAverbacaoExigenciaUnidade) : $request->dataEntregaAverbacaoExigenciaUnidade;
             $atualizarContratoLeilaoNegativo->existeExigencia                       = !in_array($request->existeExigencia, [null, 'NULL', '']) ? $request->existeExigencia : null;
             $atualizarContratoLeilaoNegativo->dataAlteracao                         = date("Y-m-d H:i:s", time());
 
-            if (!in_array($request->existeExigencia, [null, 'NULL', ''])) {
-                if ($request->existeExigencia == 'SIM') {
-                    $atualizarContratoLeilaoNegativo->statusAverbacao               = 'AGUARDA DOC GILIESP';
-                } else {
-                    $atualizarContratoLeilaoNegativo->statusAverbacao               = 'AVERBACAO CONCLUIDA';
-                }
+            if ($request->existeExigencia == 'SIM') {
+                $atualizarContratoLeilaoNegativo->statusAverbacao                   = 'AGUARDA DOC GILIESP';
             } else {
-                $atualizarContratoLeilaoNegativo->statusAverbacao                   = 'AGUARDA PRAZO CRI';
+                $atualizarContratoLeilaoNegativo->statusAverbacao                   = 'AVERBACAO CONCLUIDA';
             }
-            
+
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
             $historico->matricula       = session('matricula');
@@ -393,17 +482,17 @@ class LeilaoNegativoController extends Controller
         return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $contratoFormatado);
     }
 
-    public static function registraLeiloeiroNosContratosLeilao($numeroLeilao, $request) 
+    public static function registraLeiloeiroNosContratosLeilao($dataSegundoLeilao, $unidadeResponsavel, $request) 
     {
         try {
             DB::beginTransaction();
             // AJUSTAR A DATA QUE ESTÁ VINDO DO FRONT
-            $dataPrevisaoRecebimentoDocumentosLeiloeiroFormatada = Carbon::createFromFormat('d/m/Y', $request->previsaoRecebimentoDocumentosLeiloeiro);
+            $dataEntregaDocumentosLeiloeiroFormatada = Carbon::createFromFormat('d/m/Y', $request->dataEntregaDocumentosLeiloeiro);
 
-            $contratosLeilao = LeilaoNegativo::where('numeroLeilao', $numeroLeilao)->get();
+            $contratosLeilao = LeilaoNegativo::where('dataSegundoLeilao', $dataSegundoLeilao)->where('unidadeResponsavel', $unidadeResponsavel)->get();
             foreach ($contratosLeilao as $contrato) {
                 $contrato->idLeiloeiro                       = $request->idLeiloeiro;
-                $contrato->dataEntregaDocumentosLeiloeiro    = $dataPrevisaoRecebimentoDocumentosLeiloeiroFormatada;
+                $contrato->dataEntregaDocumentosLeiloeiro    = $dataEntregaDocumentosLeiloeiroFormatada;
                 $contrato->statusAverbacao                   = 'RECEBIDO DOC LEILOEIRO';
                 $contrato->dataAlteracao                     = date("Y-m-d H:i:s", time());
                 $contrato->save();
@@ -419,14 +508,14 @@ class LeilaoNegativoController extends Controller
         }
     }
 
-    public static function registraDespachanteNosContratosLeilao($numeroLeilao, $request, $dataPrevisaoEntregaDocumentosCartorio) 
+    public static function registraDespachanteNosContratosLeilao($dataSegundoLeilao, $unidadeResponsavel, $request, $dataPrevisaoEntregaDocumentosCartorio) 
     {
         try {
             DB::beginTransaction();
             // AJUSTAR A DATA QUE ESTÁ VINDO DO FRONT
             $dataRetiradaDocumentosDespachanteFormatada = Carbon::createFromFormat('d/m/Y', $request->dataRetiradaDocumentosDespachante);
 
-            $contratosLeilao = LeilaoNegativo::where('numeroLeilao', $numeroLeilao)->get();
+            $contratosLeilao = LeilaoNegativo::where('dataSegundoLeilao', $dataSegundoLeilao)->where('unidadeResponsavel', $unidadeResponsavel)->get();
             foreach ($contratosLeilao as $contrato) {
                 $contrato->idDespachante                     = $request->idDespachante;
                 $contrato->dataRetiradaDocumentosDespachante = $dataRetiradaDocumentosDespachanteFormatada;

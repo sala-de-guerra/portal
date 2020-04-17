@@ -11,7 +11,6 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
                 '<td>' + item.nomeEmpresaAssessoraLeiloeiro + '</td>' +
                 '<td>' + item.numeroContrato + '</td>' +
                 '<td>' + item.classificacaoImoveisLeilao + '</td>' +
-                '<td class="formata-data-sem-hora">' + item.dataVencimentoContrato + '</td>' +
                 '<td>' + item.nomeLeiloeiro + '</td>' +
                 '<td>' + item.telefoneLeiloeiro + '</td>' +
                 '<td>' + 
@@ -79,7 +78,9 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
                                         '</div>' +
                                         '<div class="modal-body">' +
                                             '<div class="container">' +  
-                                                '<p>Tem certeza que deseja excluir: <b>' + item.nomeEmpresaAssessoraLeiloeiro + '</b> ?</p>' +
+                                                '<p>Tem certeza que deseja excluir:</p>' +
+                                                '<p>cadastro ID nº '+'<b>'+ item.idLeiloeiro +'</b>'+
+                                                '<p><b>'+ item.nomeEmpresaAssessoraLeiloeiro +'</b></p>' +
                                             '</div>' + 
                                         '</div>' +
                                         '<div class="modal-footer">' +
@@ -99,8 +100,7 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
                                     '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                                         '<div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">' +
-                                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Editar cadastro:'+
-                                            '<p>'+'Preencha os campos que deseja alterar e clique em salvar'+'</p>'+'</h5>' +
+                                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Editar cadastro'+ '</h5>'+
                                             '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                                 '<span aria-hidden="true">&times;</span>' +
                                             '</button>' +
@@ -244,9 +244,9 @@ $("#botaoemgea").click(function(){
     $("#input").val("EMGEA");
     $("#InputClassificacao>p").text("Cadastro Leiloeiro: EMGEA")
     $('.datepicker').datepicker({});
-    $('#cardTop').css("background", "#85CD85")
-    $('#btnSalvar').css("background", "#85CD85")
-    $('#btnSalvar').css("border-color", "#85CD85")
+    $('#cardTop').css("background", "#05a88a")
+    $('#btnSalvar').css("background", "#05a88a")
+    $('#btnSalvar').css("border-color", "85CD85")
 
 });
 // limpa modal ao fechar

@@ -44,6 +44,7 @@ Route::get('pesquisar', function () {
     return view('portal.imoveis.pesquisar');
 });
 
+
 // Consulta de bem imóvel
 Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');
 
@@ -97,13 +98,16 @@ Route::prefix('estoque-imoveis')->group(function () {
 
     // ROTAS DO PROJETO DE LEILÕES NEGATIVOS
     Route::prefix('leiloes-negativos')->group(function () {
-        Route::get('', 'LeilaoNegativo\LeilaoNegativoController@index');
+        Route::get('', 'LeilaoNegativo\LeilaoNegativoController@viewListaLeiloesUnidade');
+        Route::get('contratos/{dataSegundoLeilao}', 'LeilaoNegativo\LeilaoNegativoController@viewListaContratosSegundoLeilao');
+        Route::get('listar-leiloes/{unidade}', 'LeilaoNegativo\LeilaoNegativoController@listarLeiloesUnidade');
+        Route::get('listar-contratos/{dataSegundoLeilao}', 'LeilaoNegativo\LeilaoNegativoController@listarContratosLeilao');
         Route::get('cadastrar-contratos', 'LeilaoNegativo\LeilaoNegativoController@cadastrarContratosControleLeiloesNegativos');
-        Route::get('listar-contratos/{codigoUnidade}', 'LeilaoNegativo\LeilaoNegativoController@listarContratosLeilaoNegativo');
         Route::get('tratar/{numeroContrato}', 'LeilaoNegativo\LeilaoNegativoController@viewTratarLeilaoNegativo');
         Route::put('tratar/editar-dados-contrato/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@editarDadosCadastraisContratoLeilaoNegativo');
         Route::put('tratar/receber-documentos-leiloeiro/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberDocumentosLeiloeiro');
         Route::put('tratar/entregar-documentos-despachante/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@entregarDocumentosDespachante');
+        Route::put('tratar/receber-protocolo-cartorio/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberProtocoloCartorio');
         Route::put('tratar/receber-documentos-despachante/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberDocumentosDespachante');
     });
 

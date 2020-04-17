@@ -16,10 +16,12 @@ class CreateTableLeiloesNegativosContratos extends Migration
         Schema::create('TBL_LEILOES_NEGATIVOS_CONTRATOS', function (Blueprint $table) {
             $table->bigIncrements('idContratoLeilaoNegativo');
             $table->string('contratoFormatado', 50);
+            $table->date('dataSegundoLeilao');
             $table->string('numeroContrato', 50);
             $table->string('numeroLeilao', 255)->nullable();
             $table->string('statusAverbacao', 100);
             $table->string('unidadeResponsavel', 4);
+            $table->string('cidadeComarcaCartorio', 255)->nullable();
             
             $table->integer('idLeiloeiro')->nullable();
             $table->date('previsaoRecebimentoDocumentosLeiloeiro');
@@ -38,6 +40,7 @@ class CreateTableLeiloesNegativosContratos extends Migration
             $table->date('dataEntregaAverbacaoExigenciaUnidade')->nullable();
             $table->string('existeExigencia', 3)->nullable();
             
+            $table->boolean('contratoAtivo')->default(true);
             $table->datetime('dataCadastro');
             $table->datetime('dataAlteracao');
         });

@@ -53,7 +53,6 @@
                                         <th>Nome</th>
                                         <th>Contrato</th>
                                         <th>Classificação</th>
-                                        <th>Data de vencimento do contrato</th>
                                         <th>Leiloeiro</th>
                                         <th>Telefone</th>
                                         <th> </th>
@@ -92,8 +91,8 @@
                         <p style="color: red;">Campos obrigatórios (*)</p>
                         
 
-                        <button id="botaocaixa" class="btn btn-primary" type="button">Leiloeiro Caixa</button>
-                        <button style="background: #85CD85; color: white;" id="botaoemgea" class="btn" type="button">Leiloeiro EMGEA</button>
+                        <button id="botaocaixa" class="btn btn-primary" type="button">Caixa</button>
+                        <button style="background: #05a88a; color: white;" id="botaoemgea" class="btn" type="button">EMGEA</button>
                                                                       
                         <div>
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea" id="InputClassificacao">
@@ -102,7 +101,12 @@
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Contrato <span style="color: red;"> *</span> </label>
+                                <label>Nome empresa leilão<span style="color: red;"> *</span> </label>
+                                <input type="text" name="nomeEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Contrato leiloeiro<span style="color: red;"> *</span> </label>
                                 <input type="text" name="numeroContrato" class="form-control" autocomplete="off" required>
                             </div>                   
 
@@ -116,48 +120,44 @@
                                 <input type="number"  min="0" name="quantidadeLeiloesRealizados" class="form-control" autocomplete="off">
                             </div>
 
-                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Nome<span style="color: red;"> *</span> </label>
-                                <input type="text" name="nomeEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" required>
-                            </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Telefone<span style="color: red;"> *</span> </label>
+                                <label>Telefone empresa leilão<span style="color: red;"> *</span> </label>
                                 <input type="text" name="telefoneEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" id="telefoneEmpresaAssessoraLeiloeiro" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="fixo ou celular" autocomplete="off" required>
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>E-mail<span style="color: red;"> *</span> </label>
+                                <label>E-mail empresa leilão<span style="color: red;"> *</span> </label>
                                 <input type="email" name="emailLeiloeiro" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Leiloeiro<span style="color: red;"> *</span> </label>
+                                <label>Leiloeiro responsável<span style="color: red;"> *</span> </label>
                                 <input type="text" name="nomeLeiloeiro" class="form-control" autocomplete="off" required>
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Telefone do leiloeiro<span style="color: red;"> *</span> </label>
+                                <label>Telefone do responsável<span style="color: red;"> *</span> </label>
                                 <input type="text" name="telefoneLeiloeiro" class="form-control telefoneComum" autocomplete="off" id="telefoneLeiloeiro" placeholder="fixo ou celular" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>E-mail do leiloeiro </label>
+                                <label>E-mail do responsável</label>
                                 <input type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br">
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Endereço</label>
+                                <label>Endereço empresa leilão</label>
                                 <input type="text" name="enderecoEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off">
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Endereço do Leilão </label>
+                                <label>Endereço realização leilão</label>
                                 <input type="text" name="enderecoRealizacaoLeilao" class="form-control" autocomplete="off">
                             </div>                      
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Site</label>
+                                <label>Site leiloeiro</label>
                                 <input type="text" name="siteEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="www.exemplo.com.br">
                             </div>
                         </div>

@@ -1,26 +1,25 @@
 
 $(document).ready(function(){
     var unidade = $('#lotacao').text()
-    $.getJSON('/estoque-imoveis/leiloes-negativos/listar-contratos/' + unidade, function(dados){
+    $.getJSON('/estoque-imoveis/leiloes-negativos/listar-leiloes/'+ unidade, function(dados){
         $.each(dados, function(key, item) {
+            dataLeilaoNegativo = item.dataSegundoLeilao
             var linha =
-                '<tr href="/estoque-imoveis/leiloes-negativos/tratar/'+ item.contratoFormatado+'" class="cursor-pointer">'+
-                    '<td>'+ item.numeroContrato + '</td>' + '</a>'+
+                '<tr href="/estoque-imoveis/leiloes-negativos/contratos/'+ item.dataSegundoLeilao+'" class="cursor-pointer">'+
                     '<td>' + item.numeroLeilao + '</td>' +
-                    '<td class="replaceData'+item.numeroContrato+'">' + item.dataAlteracao + '</td>' +
-                    '<td>' + item.statusAverbacao + '</td>' +
-                '</tr>'
-            $(linha).appendTo('#tblleiloesnegativos>tbody');
-            var data = $('.replaceData'+item.numeroContrato).text()
-            var novaData = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
-            $('.replaceData'+item.numeroContrato).text(novaData)
+                    '<td>' + item.numeroContrato + '</td>' +
+                    '<td class="formata-data-sem-hora">'+ item.dataSegundoLeilao + '</td>'+
+                '</tr>';
+
+                $(linha).appendTo('#tblleiloesnegativos>tbody');
         })
+        _formataData();
         _formataDatatableComData()
     })
     $('#tblleiloesnegativos tbody').on('click', 'tr', function () {
         var href = $(this).attr("href");            
         if (href == undefined) {
-            document.location.href = '/estoque-imoveis/distrato';
+            document.location.href = '/estoque-imoveis/leiloes-negativos';
         } else {
             document.location.href = href;
         };
@@ -29,5 +28,6 @@ $(document).ready(function(){
         window.location = $(this).data("href");
     });
 })
+
 
    

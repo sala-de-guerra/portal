@@ -227,8 +227,20 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
+                                    <label>Data Primeiro Leilão:</label>
+                                    <p class="formata-data-sem-hora" id="dataPrimeiroLeilao"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
                                     <label>Valor no Primeiro Leilão:</label>
                                     <p class="formata-valores" id="valorPrimeiroLeilao"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data Segundo Leilão:</label>
+                                    <p class="formata-data-sem-hora" id="dataSegundoLeilao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -236,7 +248,37 @@
                                     <label>Valor no Segundo Leilão:</label>
                                     <p class="formata-valores" id="valorSegundoLeilao"></p>
                                 </div>
+                            </div>                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data de Consolidação:</label>
+                                    <p class="formata-data-sem-hora" id="dataConsolidacao"></p>
+                                </div>
                             </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Número Leilão:</label>
+                                    <p id="agrupamentoLeilao"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Número do Item:</label>
+                                    <p id="numeroItem"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Status SIMOV:</label>
+                                    <p id="statusImovelLeilao"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Valor de Venda:</label>
@@ -249,58 +291,16 @@
                                     <p class="formata-valores" id="valorContabil"></p>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data de Consolidação:</label>
-                                    <p class="formata-data-sem-hora" id="dataConsolidacao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Agrupamento Leilão:</label>
-                                    <p id="agrupamentoLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Número do Item:</label>
-                                    <p id="numeroItem"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data Arremate:</label>
-                                    <p class="formata-data-sem-hora" id="dataArremate"></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data Primeiro Leilão:</label>
-                                    <p class="formata-data-sem-hora" id="dataPrimeiroLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data Segundo Leilão:</label>
-                                    <p class="formata-data-sem-hora" id="dataSegundoLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Status SIMOV:</label>
-                                    <p id="statusImovelLeilao"></p>
-                                </div>
-                            </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Matrícula / RI:</label>
                                     <p id="matriculaImovelLeilao"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Cidade Comarca Cartório:</label>
+                                    <p id="cidadeComarcaCartorio"></p>
                                 </div>
                             </div>
                         </div>
@@ -308,7 +308,10 @@
                         <!-- <hr class="pontilhado"> -->
                         <hr>
                         <div id="consultaLeilaoNegativo">
-                            <div style="color: #054f77; font-size: 13pt;"><b>Dados do leilão negativo: </b></div><br>
+                            <div style="color: #054f77; font-size: 13pt;"><b>Dados do leilão negativo:</b>
+                            <b class="badge badge-info badge-large mx-4" id="statusAverbacao"></b>
+                            Leilão : <span id="numeroLeilao"></span><br>
+                            </div><br>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
@@ -365,16 +368,31 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Previsão de recebimento do leiloeiro:</label>
+                                            <label>Previsão Recebimento Kit Leiloeiro:</label>
                                             <p class="formata-data-sem-hora" id="previsaoRecebimentoDocumentosLeiloeiro"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Data de retirada do despachante:</label>
+                                            <label>Data Recebimento Kit Leiloeiro:</label>
+                                            <p class="formata-data-sem-hora" id="dataEntregaDocumentosLeiloeiro"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Previsão Entrega Docs Despachante:</label>
+                                            <p class="formata-data-sem-hora" id="previsaoDisponibilizacaoDocumentosAoDespachante"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Data Entrega Docs Despachante:</label>
                                             <p class="formata-data-sem-hora" id="dataRetiradaDocumentosDespachante"></p>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Nº Oficio: </label>
@@ -387,24 +405,36 @@
                                             <p id="numeroProtocoloCartorio"></p>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Senha do protocolo:</label>
+                                            <label>Senha de Acesso:</label>
                                             <p id="codigoAcessoProtocoloCartorio"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>status da averbacao:</label>
-                                            <p id="statusAverbacao"></p>
+                                            <label>Previsão Análise Cartório:</label>
+                                            <p class="formata-data-sem-hora" id="dataPrevistaAnaliseCartorio"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Data Retirada Documento Cartório:</label>
+                                            <p class="formata-data-sem-hora" id="dataRetiradaDocumentoCartorio"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Data de alteração:</label>
+                                            <label>Data Entrega Documento Unidade:</label>
+                                            <p id="dataEntregaAverbacaoExigenciaUnidade"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Data Última Alteração:</label>
                                             <p class="formata-data-sem-hora" id="dataAlteracao"></p>
                                         </div>
                                     </div>
@@ -414,6 +444,11 @@
                                             <p id="historicoLeilaoNegativo"></p>
                                         </div>
                                     </div>
+                                    <br>
+                                    <br>
+                                    
+                                    
+
                                     <!-- Modal -->
                                     <div class="modal fade" id="modalHistoricoleilaoNegativoCompleto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable"  role="document">
@@ -434,33 +469,7 @@
                                     </div>
                                     </div>
                                         </div>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label>Data Prevista Análise Cartório:</label>
-                                                <p class="formata-data-sem-hora" id="dataPrevistaAnaliseCartorio"></p>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label></label>
-                                                <p id=""></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label></label>
-                                                <p id=""></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label></label>
-                                                <p id=""></p>
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <br><br>
+     
                                     <!-- Botões do leilão negativo -->
                                     <div id="LeilaoNegativo"></div>
                                 </div>

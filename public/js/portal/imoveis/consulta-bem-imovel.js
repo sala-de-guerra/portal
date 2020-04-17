@@ -8,7 +8,7 @@ $(document).ready(function(){
         $.each(dados, function(key, item) {
             $('#' + key).html(item);
             $('#statusImovelLeilao').html(dados.statusImovel);
-            $('#matriculaImovelLeilao').html(dados.matriculaImovel + ' / ' + dados.cidadeImovel);
+            $('#matriculaImovelLeilao').html(dados.matriculaImovel);
 
             // REMOVE O BLOCO DE CONFORMIDADE CASO NÃO EXISTA DADOS DE CONFORMIDADE NO IMAGEM.CAIXA
             if (key == 'nomeStatusDossie' && item == null) {
@@ -73,7 +73,7 @@ $(document).ready(function(){
         25: "GILIE",
         50: "Despachante",
         75: "Cartório",
-        99: "Averbação Concluída",
+        99: "Averbado",
     };
 
     setTimeout(function() {

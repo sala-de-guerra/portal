@@ -90,32 +90,32 @@
                         <div class="px-2" style="overflow-y: auto; height: 100%;">
                             <p style="color: red;">Campos obrigatórios (*)</p>
                         <div class="form-group">
-                            <label>Contrato <span style="color: red;"> *</span> </label>
+                            <label>Número contrato <span style="color: red;"> *</span> </label>
                             <input type="text" name="numeroContrato" class="form-control" autocomplete="off" required>
                         </div>
                         <div id="field" class="container">
                         <div class="form-group">
-                            <label>Data de vencimento do contrato<span style="color: red;"> *</span> </label>
+                            <label>Vencimento do contrato<span style="color: red;"> *</span> </label>
                             <input type="date" name="dataVencimentoContrato" id="datepicker" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>
                         </div>
 
                         <div class="form-group">
-                            <label>CNPJ<span style="color: red;"> *</span> </label>
+                            <label>CNPJ despachante<span style="color: red;"> *</span> </label>
                             <input type="text" name="cnpjDespachante" class="form-control cnpj" id="cnpjDespachante" autocomplete="off" placeholder="00.000.000/0000-00" required>
                         </div>
                         
                         <div class="form-group">
-                            <label>Despachante<span style="color: red;"> *</span> </label>
+                            <label>Nome despachante<span style="color: red;"> *</span> </label>
                             <input type="text" name="nomeDespachante" class="form-control" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Telefone<span style="color: red;"> *</span> </label>
+                            <label>Telefone despachante<span style="color: red;"> *</span> </label>
                             <input type="text" name="telefoneDespachante" class="form-control telefoneComum" id="telefoneDespachante" placeholder="fixo ou celular" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label>E-mail<span style="color: red;"> *</span> </label>
+                            <label>E-mail despachante<span style="color: red;"> *</span> </label>
                             <input type="email" name="emailDespachante" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
                         </div>
 
@@ -130,7 +130,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>E-mail<span style="color: red;"> *</span> </label>
+                            <label>E-mail do responsável<span style="color: red;"> *</span> </label>
                             <input type="email" name="emailPrimeiroResponsavelDespachante" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br" required>
                         </div>
                         <button id="b1" class="btn add-more" type="button" style="background: #4F94CD; color: white;">adicionar novo responsável</button>

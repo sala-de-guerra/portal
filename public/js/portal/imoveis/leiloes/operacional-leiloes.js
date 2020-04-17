@@ -6,23 +6,66 @@ var chbformatado = numeroContrato;
 $(document).ready(function(){
     $("#custom-tabs-one-leiloes-tab").click();
 
-    var appendbotao = '<div class="row">'+ 
-                            '<div id="botaoKIT" class="col-sm-4">'+
-                        '<button type="button" id="botaoReceberDocumentosLeiloeiro" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">'+
-                            'Receber documentos Leiloeiro'+
-                        '</button>'+
+    var appendbotao =   '<div class="row">' +
+                            '<button class="btn btn-primary" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
+                            '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">' +
+                                'Receber documentos Leiloeiro' +
+                            '</button>' +
+                            '<button type="button" id="botaoEntregarDocumentosDespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaodespachante">' +
+                                'Entregar documentos ao despachante' +
+                            '</button>' +
+                            '<button type="button" id="botaoReceberProtocoloCartorio" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberprotocolo">' +
+                                'Receber protocolo cartório' +
+                            '</button>' +
+                            '<button type="button" id="botaoReceberDocumentosdespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberdespachante">' +
+                                'Receber documento despachante' +
+                            '</button>' + 
+                            '<br><br>' +
+                        '</div>' +
+
+                        // modal de edição
+                        '<div class="modal fade" id="modaldeEdicao" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
+                        '<div class="modal-dialog" role="document">'+
+                            '<div class="modal-content">'+
+                            '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">'+
+                                '<h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Editar dados</h5>'+
+                                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                                '<span aria-hidden="true">&times;</span>'+
+                                '</button>'+
                             '</div>'+
-                            '<div class="col-sm-4">'+
-                        '<button type="button" id="botaoEntregarDocumentosDespachante" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaodespachante">'+
-                            'Entregar ao despachante'+
-                        '</button>'+
+                            '<div class="modal-body">'+
+                            '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-leiloeiro/'+chbformatado+'">'+
+                                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+
+
+
+                                    //  '<div class="form-group">'+
+                                    //  '<label>Nº Leilão</label>'+
+                                    //  '<input type="text" id="inputNumeroLeilao" name="numeroLeilao" class="form-control" autocomplete="off" placeholder="'+numleilao+'">'+
+                                    //  '</div>'+
+                                     
+                                    //  '<div class="form-group">'+
+                                    //  '<label>Previsão de recebimento do leiloeiro</label>'+
+                                    //  '<input type="text" id="inputprevisaoRecebimentoDocumentosLeiloeiro" name="previsaoRecebimentoDocumentosLeiloeiro" class="form-control" autocomplete="off" placeholder="'+previsaoRecDocLeiloeiro+'">'+
+                                    //  '</div>'+
+
+                                    //  '<div class="form-group">'+
+                                    //  '<label>Previsão de recebimento do leiloeiro</label>'+
+                                    //  '<input type="text" id="inputprevisaoRecebimentoDocumentosLeiloeiro" name="previsaoRecebimentoDocumentosLeiloeiro" class="form-control" autocomplete="off">'+
+                                    //  '</div>'+
+
+                                     
+ 
+                                '<div class="modal-footer">'+
+                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
+                                    '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                                '</div>'+
+                            '</div>'+
+                                '</form>'+
                         '</div>'+
-                        '<div class="col-sm-4">'+
-                        '<button type="button" id="botaoReceberDocumentosDespachante" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberdespachante">'+
-                            'Receber documento do despachante'+
-                        '</button>'+
-                        '</div>'+
-                       '</div>'+
+                    '</div>'+
+                '</div>'+
                        
 //                     //    <!-- form do botão receber documentos leiloeiro -->
                        '<div class="modal fade" id="modalbotaokit" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
@@ -48,7 +91,7 @@ $(document).ready(function(){
                                    '</div>'+
                                    '<div class="form-group">'+'<span style="color: red;">'+'*'+'</span>'+
                                        '<label>'+'Data de ateste do recebimento'+'</label>'+
-                                       '<input type="date" name="previsaoRecebimentoDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                                       '<input type="date" name="dataEntregaDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                                    '</div>'+
                                '<div class="modal-footer">'+
                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
@@ -116,69 +159,93 @@ $(document).ready(function(){
                 '</div>'+
             '</div>'+
         '</div>'+
-        //                     //    <!-- form do botão receber documentos leiloeiro -->
-        '<div class="modal fade" id="modalReceberdespachante" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
-        '<div class="modal-dialog" role="document">'+
-            '<div class="modal-content">'+
-            '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">'+
-                '<h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Receber documentos</h5>'+
-                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-                '<span aria-hidden="true">&times;</span>'+
-                '</button>'+
-            '</div>'+
-            '<div class="modal-body px-0">'+
-            '<div style="overflow-y: hidden; height: calc(100vh - 15rem);">'+
-            '<div class="px-2" style="overflow-y: auto; height: 100%;">'+
-            '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/'+chbformatado+'">'+
-                 '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
-                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
-                     
-                    '<div class="form-group">'+
-                         '<p style="color: red;">Campos obrigatórios (*)</p>'+
-                        '<label>'+'Nº Protocolo do cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
-                        '<input type="text" name="numeroProtocoloCartorio" id="inputNumeroProtocoloCartorio" class="form-control" required>'+
-                    '</div>'+
-                    '<div class="form-group">'+
-                        '<label>'+'Senha protocolo'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
-                        '<input type="text" name="codigoAcessoProtocoloCartorio" id="inputCodigoAcessoProtocoloCartorio" class="form-control" required>'+
-                    '</div>'+
-                    '<div class="form-group">'+
-                        '<label>'+'Data prevista do cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
-                        '<input type="date" name="dataPrevistaAnaliseCartorio" id="inputDataPrevistaAnaliseCartorio" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
-                    '</div>'+
-                    '<div class="form-group">'+
-                        '<label>'+'Data da retirada no cartório'+'</label>'+
-                        '<input type="date" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" placeholder="Selecione no calendário">'+
-                    '</div>'+
-                    '<div class="form-group">'+
-                        '<label>'+'Data de entrega averbação'+'</label>'+
-                        '<input type="date" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" placeholder="Selecione no calendário">'+
-                    '</div>'+
-                    '<div class="form-group">'+
-                        '<label>Exigência cartorária: </label><br>'+
-                        '<div class="form-check form-check-inline">' +
-                            '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaSim" value="SIM">' +
-                            '<label class="form-check-label" for="exigenciaCartorariaSim">Sim</label>' +
-                        '</div>' +
-                        '<div class="form-check form-check-inline">' +
-                            '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaNao" value="NAO">' +
-                            '<label class="form-check-label" for="exigenciaCartorariaNao">Não</label>' +
-                        '</div>' +
-                    '</div>'+
-                     '<div class="form-group">'+
-                        '<label>Observação</label>'+
-                        '<textarea style="height: 150px" type="text" name="observacao"  class="form-control">'+'</textarea>'+
-                    '</div>'+
-
-                '<div class="modal-footer">'+
-                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
-                    '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+        //    <!-- form do botão receber protocolo-->
+            '<div class="modal fade" id="modalReceberprotocolo" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
+            '<div class="modal-dialog" role="document">'+
+                '<div class="modal-content">'+
+                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">'+
+                    '<h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Receber protocolo</h5>'+
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span>'+
+                    '</button>'+
                 '</div>'+
+                '<div class="modal-body px-2">'+
+                '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-protocolo-cartorio/'+chbformatado+'">'+
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        
+                        '<div class="form-group">'+
+                            '<p style="color: red;">Campos obrigatórios (*)</p>'+
+                            '<label>'+'Nº Protocolo do cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                            '<input type="text" name="numeroProtocoloCartorio" id="inputNumeroProtocoloCartorio" class="form-control" required>'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>'+'Senha protocolo'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                            '<input type="text" name="codigoAcessoProtocoloCartorio" id="inputCodigoAcessoProtocoloCartorio" class="form-control" required>'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>'+'Data prevista do cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                            '<input type="date" name="dataPrevistaAnaliseCartorio" id="inputDataPrevistaAnaliseCartorio" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                        '</div>'+
+                    '<div class="modal-footer">'+
+                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
+                        '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                    '</div>'+
+                '</div>'+
+                    '</form>'+
             '</div>'+
-                '</form>'+
         '</div>'+
     '</div>'+
-'</div>'
+
+        //    <!-- form do botão receber despachante -->
+            '<div class="modal fade" id="modalReceberdespachante" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
+            '<div class="modal-dialog" role="document">'+
+                '<div class="modal-content">'+
+                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">'+
+                    '<h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Receber documentos</h5>'+
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span>'+
+                    '</button>'+
+                '</div>'+
+                '<div class="modal-body px-2">'+
+                '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/'+chbformatado+'">'+
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        '<div class="form-group">'+
+                            '<label>'+'Data da retirada no cartório'+'</label>'+
+                            '<input type="date" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" placeholder="Selecione no calendário">'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>'+'Data de entrega averbação'+'</label>'+
+                            '<input type="date" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" placeholder="Selecione no calendário">'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>Exigência cartorária: </label><br>'+
+                            '<div class="form-check form-check-inline">' +
+                                '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaSim" value="SIM">' +
+                                '<label class="form-check-label" for="exigenciaCartorariaSim">Sim</label>' +
+                            '</div>' +
+                            '<div class="form-check form-check-inline">' +
+                                '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaNao" value="NAO">' +
+                                '<label class="form-check-label" for="exigenciaCartorariaNao">Não</label>' +
+                            '</div>' +
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>Observação</label>'+
+                            '<textarea style="height: 150px" type="text" name="observacao"  class="form-control">'+'</textarea>'+
+                        '</div>'+
+
+                    '<div class="modal-footer">'+
+                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
+                        '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                    '</div>'+
+                '</div>'+
+                    '</form>'+
+            '</div>'+
+        '</div>'
+
+
+
 
     $(appendbotao).appendTo("#LeilaoNegativo")
    
@@ -208,38 +275,53 @@ $(document).ready(function(){
         // var inputDataPrevistaAnaliseCartorio = window.document.getElementById('inputDataPrevistaAnaliseCartorio')
         // inputDataPrevistaAnaliseCartorio.value = divDataPrevistaAnaliseCartorio
 
-        // $('#statusAverbacao').text("AGUARDA DOC GILIESP")
         switch ($('#statusAverbacao').text()) {
             case 'AGUARDA DOC LEILOEIRO':
-            case 'CADASTRADO':
+                $('#botaoReceberDocumentosLeiloeiro').show()
                 $('#botaoEntregarDocumentosDespachante').remove()
-                $('#botaoReceberDocumentosDespachante').remove()
+                $('#botaoReceberProtocoloCartorio').remove()
+                $('#botaoReceberDocumentosdespachante').remove()
                 break;
             case 'RECEBIDO DOC LEILOEIRO':
-                $('#botaoReceberDocumentosLeiloeiro').remove()
-                $('#botaoReceberDocumentosDespachante').remove()
-                break;
-            case 'ENTREGUE DOC DESPACHANTE':
-            case 'AGUARDA PRAZO CRI':
             case 'AGUARDA DOC GILIESP':
                 $('#botaoReceberDocumentosLeiloeiro').remove()
+                $('#botaoEntregarDocumentosDespachante').show()
+                $('#botaoReceberProtocoloCartorio').remove()
+                $('#botaoReceberDocumentosdespachante').remove()
+                break;
+            case 'ENTREGUE DOC DESPACHANTE':
+                $('#botaoReceberDocumentosLeiloeiro').remove()
                 $('#botaoEntregarDocumentosDespachante').remove()
+                $('#botaoReceberProtocoloCartorio').show()
+                $('#botaoReceberDocumentosdespachante').remove()
+                break;
+            case 'AGUARDA PRAZO CRI':
+                $('#botaoReceberDocumentosLeiloeiro').remove()
+                $('#botaoEntregarDocumentosDespachante').remove()
+                $('#botaoReceberProtocoloCartorio').remove()
+                $('#botaoReceberDocumentosdespachante').show()
                 break;
             case 'AVERBACAO CONCLUIDA':
                 $('#botaoReceberDocumentosLeiloeiro').remove()
                 $('#botaoEntregarDocumentosDespachante').remove()
-                $('#botaoReceberDocumentosDespachante').remove()
+                $('#botaoReceberProtocoloCartorio').remove()
+                $('#botaoReceberDocumentosdespachante').remove()
                 break;
         }
-    }, 1500);
 
+var numleilao = $('#numeroLeilao').text()
+var previsaoRecDocLeiloeiro = $('#numeroLeilao').text()
+
+
+
+    }, 1500)
 })
-
 // função que pergunta se o usuario tem certeza de sensibilizar todos os leilões
 function SIMnoCheck() {
     if (document.getElementById('CheckSim').checked) {
         document.getElementById('visibilidade').style.visibility = 'visible';
+    } else {
+        document.getElementById('visibilidade').style.visibility = 'hidden';
     }
-    else document.getElementById('visibilidade').style.visibility = 'hidden';
-
 }
+
