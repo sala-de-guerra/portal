@@ -71,6 +71,7 @@ class ConsultaContratoController extends Controller
             $cidadeComarcaCartorio                              = null;
             $numeroLeilao                                       = null;
             $previsaoDisponibilizacaoDocumentosAoDespachante    = null;
+            $codigoCorreio                                      = null;
             // DADOS LEILOEIRO
             $nomeLeiloeiro                                      = null;
             $telefoneLeiloeiro                                  = null;
@@ -104,6 +105,7 @@ class ConsultaContratoController extends Controller
             $cidadeComarcaCartorio                              = $dadosLeilaoNegativo->cidadeComarcaCartorio;
             $numeroLeilao                                       = $dadosLeilaoNegativo->numeroLeilao;
             $previsaoDisponibilizacaoDocumentosAoDespachante    = $dadosLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
+            $codigoCorreio                                      = $dadosLeilaoNegativo->codigoCorreio;
 
             // CAPTURA DADOS FORNECEDORES
             $dadosLeiloeiro = Leiloeiro::find($dadosLeilaoNegativo->idLeiloeiro);
@@ -213,7 +215,6 @@ class ConsultaContratoController extends Controller
             'numeroItem'                                        => $contrato->NUMERO_ITEM,
             'dataPrimeiroLeilao'                                => $contrato->DT_PRIMEIRO_LEILAO,
             'dataSegundoLeilao'                                 => $contrato->DT_SEGUNDO_LEILAO,
-            'agrupamentoLeilao'                                 => $contrato->AGRUPAMENTO,
             
             // LEILÃO NEGATIVO
             'numeroLeilao'                                      => $numeroLeilao,
@@ -229,7 +230,8 @@ class ConsultaContratoController extends Controller
             'dataRetiradaDocumentoCartorio'                     => $dataRetiradaDocumentoCartorio,
             'dataEntregaAverbacaoExigenciaUnidade'              => $dataEntregaAverbacaoExigenciaUnidade,
             'cidadeComarcaCartorio'                             => $cidadeComarcaCartorio, 
-            'previsaoDisponibilizacaoDocumentosAoDespachante'   => $previsaoDisponibilizacaoDocumentosAoDespachante,  
+            'previsaoDisponibilizacaoDocumentosAoDespachante'   => $previsaoDisponibilizacaoDocumentosAoDespachante,
+            'codigoCorreio'                                     => $codigoCorreio,  
 
             // DADOS LEILOERIO
             'nomeLeiloeiro'                                     => $nomeLeiloeiro,                      

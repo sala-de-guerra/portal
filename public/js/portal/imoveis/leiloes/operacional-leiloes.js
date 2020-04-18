@@ -10,20 +10,24 @@ var chbformatado = numeroContrato;
 $(document).ready(function(){
     $("#custom-tabs-one-leiloes-tab").click();
     var appendbotao =   '<div class="row">' +
-                            '<button class="btn btn-primary" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
-                            '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">' +
-                                'Receber documentos Leiloeiro' +
-                            '</button>' +
-                            '<button type="button" id="botaoEntregarDocumentosDespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaodespachante">' +
-                                'Entregar documentos ao despachante' +
-                            '</button>' +
-                            '<button type="button" id="botaoReceberProtocoloCartorio" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberprotocolo">' +
-                                'Receber protocolo cartório' +
-                            '</button>' +
-                            '<button type="button" id="botaoReceberDocumentosdespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberdespachante">' +
-                                'Receber documento despachante' +
-                            '</button>' + 
+                            '<div class="col-sm-6">'+
+                                '<button id=botaoEditarDadosContrato class="btn btn-primary" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
+                                '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">' +
+                                    'Receber Documentos Leiloeiro' +
+                                '</button>' +
+                                '<button type="button" id="botaoEntregarDocumentosDespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaodespachante">' +
+                                    'Entregar Documentos ao Despachante' +
+                                '</button>' +
+                                '<button type="button" id="botaoReceberProtocoloCartorio" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberprotocolo">' +
+                                    'Receber Protocolo Cartório' +
+                                '</button>' +
+                                '<button type="button" id="botaoReceberDocumentosdespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberdespachante">' +
+                                    'Receber Documento Despachante' +
+                                '</button>' + 
                             '<br><br>' +
+                            '</div>'+
+                            '<div class="col-sm-3">'+
+                            '</div>'+
                         '</div>' +
 
                         // modal de edição
@@ -45,7 +49,7 @@ $(document).ready(function(){
                                         '<input type="text" id="inputNumeroLeilao" name="numeroLeilao" class="form-control" autocomplete="off" placeholder="'+numeroLeilao+'">'+
                                     '</div>'+
                                     '<div class="form-group">'+
-                                        '<label>Previsão de recebimento do leiloeiro</label>'+
+                                        '<label>Previsão de Recebimento do Leiloeiro</label>'+
                                         '<input type="text" id="inputprevisaoRecebimentoDocumentosLeiloeiro" name="previsaoRecebimentoDocumentosLeiloeiro" class="form-control datepicker" autocomplete="off" placeholder="'+prevdadosleiloeiro+'">'+
                                     '</div>'+
                                     '<div class="form-group">'+
@@ -55,6 +59,10 @@ $(document).ready(function(){
                                     '<div class="form-group">'+
                                         '<label>Cidade Comarca Cartório</label>'+
                                         '<input type="text" id="inputcidadeComarcaCartorio" name="cidadeComarcaCartorio" class="form-control" autocomplete="off" placeholder="'+cidadecartorio+'">'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<label>Código de Rastreamento do Correio:</label>'+
+                                        '<input type="text" id="inputCodigoCorreio" name="codigoCorreio" class="form-control" autocomplete="off">'+
                                     '</div>'+
                                     '<p>'+'Deseja vincular essas informações a <b>TODOS</b> os contratos deste leilão (exceto: Cidade Comarca)?'+'</p>'+
                                     '<div class="form-check form-check-inline">' +
@@ -75,8 +83,8 @@ $(document).ready(function(){
                                         '</div>'+
                                     '</div>'+
                                     '<div class="modal-footer">'+
-                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
-                                        '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                                        '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
                                     '</div>'+
                                 '</div>'+
                             '</form>'+
@@ -100,19 +108,19 @@ $(document).ready(function(){
                                 '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                                     '<div class="form-group">'+
                                         '<p style="color: red;">Campos obrigatórios (*)</p>'+
-                                       '<label>Selecione o leiloeiro</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                                       '<label>Selecione o Leiloeiro</label>'+'<span style="color: red;">'+'*'+'</span>'+
                                        '<select class="custom-select" name="idLeiloeiro" id="inputGroupSelect01">'+
                                            '<option value="disabled" disabled selected hidden>Selecione um leiloeiro</option>'+
                                        '</select>'+
                                    '<a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-leiloeiros">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
                                    '</div>'+
                                    '<div class="form-group">'+'<span style="color: red;">'+'*'+'</span>'+
-                                       '<label>'+'Data de ateste do recebimento'+'</label>'+
-                                       '<input type="date" name="dataEntregaDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                                       '<label>'+'Data de Ateste do Recebimento'+'</label>'+
+                                       '<input type="text" name="dataEntregaDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                                    '</div>'+
                                '<div class="modal-footer">'+
-                                   '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
-                                   '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                                   '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                                   '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
                                '</div>'+
                            '</div>'+
                                '</form>'+
@@ -135,15 +143,15 @@ $(document).ready(function(){
                         '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                             '<div class="form-group">'+
                             '<p style="color: red;">Campos obrigatórios (*)</p>'+
-                                '<label>Selecione o despachante</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                                '<label>Selecione o Despachante</label>'+'<span style="color: red;">'+'*'+'</span>'+
                                 '<select class="custom-select" name="idDespachante"id="inputGroupSelect02">'+
                                     '<option value="disabled" disabled selected hidden>Selecione um despachante</option>'+
                                 '</select>'+
                             '<a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-despachantes">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
                             '</div>'+
                             '<div class="form-group">'+
-                                '<label>'+'Data da entrega'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
-                                '<input type="date" name="dataRetiradaDocumentosDespachante" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                                '<label>'+'Data da Entrega'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                                '<input type="text" name="dataRetiradaDocumentosDespachante" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label>'+'Nº da O.S'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
@@ -168,8 +176,8 @@ $(document).ready(function(){
                                 '</div>'+
                             '</div>'+
                             '<div class="modal-footer">'+
-                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
-                            '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                            '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
                         '</div>'+
                     '</div>'+
                         '</form>'+
@@ -197,16 +205,16 @@ $(document).ready(function(){
                             '<input type="text" name="numeroProtocoloCartorio" id="inputNumeroProtocoloCartorio" class="form-control" required>'+
                         '</div>'+
                         '<div class="form-group">'+
-                            '<label>'+'Senha protocolo'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                            '<label>'+'Senha Protocolo'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
                             '<input type="text" name="codigoAcessoProtocoloCartorio" id="inputCodigoAcessoProtocoloCartorio" class="form-control" required>'+
                         '</div>'+
                         '<div class="form-group">'+
-                            '<label>'+'Data prevista do cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
-                            '<input type="date" name="dataPrevistaAnaliseCartorio" id="inputDataPrevistaAnaliseCartorio" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                            '<label>'+'Data Prevista de Análise do Cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
+                            '<input type="text" name="dataPrevistaAnaliseCartorio" id="inputDataPrevistaAnaliseCartorio" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
                         '</div>'+
                     '<div class="modal-footer">'+
-                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
-                        '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                        '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
                     '</div>'+
                 '</div>'+
                     '</form>'+
@@ -229,15 +237,15 @@ $(document).ready(function(){
                     '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                         '<div class="form-group">'+
-                            '<label>'+'Data da retirada no cartório'+'</label>'+
-                            '<input type="date" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" placeholder="Selecione no calendário">'+
+                            '<label>'+'Data da Retirada no Cartório'+'</label>'+
+                            '<input type="text" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" placeholder="Selecione no calendário">'+
                         '</div>'+
                         '<div class="form-group">'+
-                            '<label>'+'Data de entrega averbação'+'</label>'+
-                            '<input type="date" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" placeholder="Selecione no calendário">'+
+                            '<label>'+'Data de Entrega Averbação'+'</label>'+
+                            '<input type="text" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" placeholder="Selecione no calendário">'+
                         '</div>'+
                         '<div class="form-group">'+
-                            '<label>Exigência cartorária: </label><br>'+
+                            '<label>Exigência Cartorária: </label><br>'+
                             '<div class="form-check form-check-inline">' +
                                 '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaSim" value="SIM">' +
                                 '<label class="form-check-label" for="exigenciaCartorariaSim">Sim</label>' +
@@ -253,8 +261,8 @@ $(document).ready(function(){
                         '</div>'+
 
                     '<div class="modal-footer">'+
-                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'fechar'+'</button>'+
-                        '<button type="submit" class="btn btn-primary">'+'salvar'+'</button>'+
+                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                        '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
                     '</div>'+
                 '</div>'+
                     '</form>'+
@@ -281,12 +289,6 @@ $(document).ready(function(){
     })
 
     setTimeout(function() {
-        // var divNumeroProtocoloCartorio = window.document.getElementById('numeroProtocoloCartorio').innerText
-        // var inputNumeroProtocoloCartorio = window.document.getElementById('inputNumeroProtocoloCartorio')
-        // inputNumeroProtocoloCartorio.value = divNumeroProtocoloCartorio
-        // var divCodigoAcessoProtocoloCartorio = window.document.getElementById('codigoAcessoProtocoloCartorio').innerText
-        // var inputCodigoAcessoProtocoloCartorio = window.document.getElementById('inputCodigoAcessoProtocoloCartorio')
-        // inputCodigoAcessoProtocoloCartorio.value = divCodigoAcessoProtocoloCartorio
         var PeganumeroLeilao = window.document.getElementById('numeroLeilao').innerText
         var inputNumeroLeilao = window.document.getElementById('inputNumeroLeilao')
         inputNumeroLeilao.value = PeganumeroLeilao
@@ -301,10 +303,11 @@ $(document).ready(function(){
         var PegacidadeComarcaCartorio = window.document.getElementById('cidadeComarcaCartorio').innerText
         var inputcidadeComarcaCartorio = window.document.getElementById('inputcidadeComarcaCartorio')
         inputcidadeComarcaCartorio.value = PegacidadeComarcaCartorio
-        // var divDataPrevistaAnaliseCartorio = window.document.getElementById('dataPrevistaAnaliseCartorio').innerText
-        // var inputDataPrevistaAnaliseCartorio = window.document.getElementById('inputDataPrevistaAnaliseCartorio')
-        // inputDataPrevistaAnaliseCartorio.value = divDataPrevistaAnaliseCartorio
+        var pegaCodigoCorreio = window.document.getElementById('codigoCorreio').innerText
+        var inputcidadeComarcaCartorio = window.document.getElementById('inputCodigoCorreio')
+        inputcidadeComarcaCartorio.value = pegaCodigoCorreio
 
+        // $('#statusAverbacao').text('AVERBACAO CONCLUIDA')
         switch ($('#statusAverbacao').text()) {
             case 'AGUARDA DOC LEILOEIRO':
                 $('#botaoReceberDocumentosLeiloeiro').show()
@@ -336,6 +339,7 @@ $(document).ready(function(){
                 $('#botaoEntregarDocumentosDespachante').remove()
                 $('#botaoReceberProtocoloCartorio').remove()
                 $('#botaoReceberDocumentosdespachante').remove()
+                $('#botaoEditarDadosContrato').remove()
                 break;
         }
 
