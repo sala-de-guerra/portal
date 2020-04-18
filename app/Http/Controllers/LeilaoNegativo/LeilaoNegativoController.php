@@ -193,6 +193,7 @@ class LeilaoNegativoController extends Controller
             $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro            = !in_array($request->previsaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $dataPrevisaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
             $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante   = !in_array($request->previsaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $dataPrevisaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
             $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio                             = !in_array($request->cidadeComarcaCartorio, [null, 'NULL', '']) ? mb_convert_case($request->cidadeComarcaCartorio, MB_CASE_UPPER, 'UTF-8') : $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio;
+            $atualizarContratoLeilaoNegativo->codigoCorreio                                     = !in_array($request->codigoCorreio, [null, 'NULL', '']) ? mb_convert_case($request->codigoCorreio, MB_CASE_UPPER, 'UTF-8') : $atualizarContratoLeilaoNegativo->codigoCorreio;
             $atualizarContratoLeilaoNegativo->dataAlteracao                                     = date("Y-m-d H:i:s", time());
 
             // SENSIBILIZA TODOS OS CONTRATOS DO LEILAO

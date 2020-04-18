@@ -261,7 +261,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Número Leilão:</label>
-                                    <p id="agrupamentoLeilao"></p>
+                                    <p id="numeroLeilao"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -308,9 +308,8 @@
                         <!-- <hr class="pontilhado"> -->
                         <hr>
                         <div id="consultaLeilaoNegativo">
-                            <div style="color: #054f77; font-size: 13pt;"><b>Dados do leilão negativo:</b>
+                            <div style="color: #054f77; font-size: 13pt;"><b>Dados do Leilão Negativo:</b>
                             <b class="badge badge-info badge-large mx-4" id="statusAverbacao"></b>
-                            Leilão : <span id="numeroLeilao"></span><br>
                             </div><br>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -442,6 +441,12 @@
                                         <div class="form-group">
                                             <label>Histórico :</label><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalHistoricoleilaoNegativoCompleto"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button></button> 
                                             <p id="historicoLeilaoNegativo"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Código Rastreamento Correio:</label><a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" target="_blank" data-toggle="tooltip" data-placement="top" title="ir para o site de rastreio" class="btn btn-link" data-toggle="modal"><i style="color: #054f77; font-size: 13pt;" class="fas fa-external-link-square-alt"></i></a>
+                                            <p id="codigoCorreio"></p>
                                         </div>
                                     </div>
                                     <br>
@@ -1063,18 +1068,25 @@
 
                     <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <div class="alert" style="background-color: #fff9c2;" >
+                                    <div></div>
+                                        <i class="fas fa-exclamation-triangle"></i> ATENÇÃO:
+                                            Envie autorização apenas após o pagamento da PP15
+                                    </div>
+                                </div>
+                            <div class="col-sm-6">
                                 @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
-                                <form method="GET" class="float-right" action="/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato ?? $contratoFormatado }}">         
-                                    <button type="submit" class="btn btn-primary">
+                
+                                    <button class="btn btn-primary float-right" onclick="avisoMensageria('/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato ?? $contratoFormatado }}')">
                                         <i class="far fa-lg fa-envelope m-2"></i>
                                         Enviar Autorização de Contratação
                                     </button>
-                                </form>
+                                </div>
                                 @endIf
                                 <br>
                                 <br>
-
+                                </div>
                                 <table id="tblMensagensEnviadas" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
@@ -1265,6 +1277,7 @@
                                 </div>
                             </div>
                         </div>
+        
                     </div>
                 </div>
             </div>

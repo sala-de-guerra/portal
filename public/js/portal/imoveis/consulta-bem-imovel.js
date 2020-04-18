@@ -98,4 +98,34 @@ $(document).ready(function(){
             }           
         }, 3800);
     }, 500);
+
 });
+
+function avisoMensageria(url) {
+    Swal.fire({
+    titleText: 'Deseja realmente enviar a autorização de contratação?',
+    text: "certifique-se de que a PP15 foi paga",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sim, enviar!',
+    cancelButtonText: "Cancelar",
+    
+    }).then((result) => {
+        if (result.value == true) {
+            $.get(url, function(){
+                if (result.value) {
+                    Swal.fire(
+                        'Mensagem enviada!',
+                        'A mensagem foi enviada com sucesso',
+                        'success'
+                        )
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                }
+            })
+        } 
+    })   
+}
