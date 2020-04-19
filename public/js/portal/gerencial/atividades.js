@@ -453,5 +453,19 @@ function montaCardsAtividades(equipe) {
     
     });
 };
-
-
+function funcao(){
+    if ($('#selectEquipe').val() != ""){
+            $('.botaoAtividade').css('visibility', 'visible');
+            $('#cardTabelaDiv').css('visibility', 'visible');
+    }else{
+            $('.botaoAtividade').css('visibility', 'hidden');
+            $('#cardTabelaDiv').css('visibility', 'hidden');
+    }
+}
+function SIMnoCheck() {
+    if (document.getElementById('CheckSim').checked) {
+        document.getElementById('visibilidade').style.visibility = 'visible';
+    } else {
+        document.getElementById('visibilidade').style.visibility = 'hidden';
+    }
+}

@@ -13,14 +13,14 @@
     </div>
 
      <div class="col-sm-3">
-        <select name="selectEquipe" id="selectEquipe" class="form-control">
+        <select name="selectEquipe" id="selectEquipe" class="form-control" onchange="funcao()">
             <option value="" selected>Selecione</option>
         </select>
     </div>
 
     <div id="buttons">
 
-        <button type="button" class="btn btn-success p-1 m-1" data-toggle="modal" data-target="#modalCriarAtividade">
+        <button style="visibility: hidden;" type="button" class="btn btn-success p-1 m-1 botaoAtividade" data-toggle="modal" data-target="#modalCriarAtividade">
             <i class="fas fa-plus mx-2"></i>Criar Atividade
         </button>
 
@@ -68,6 +68,23 @@
                                 <input type="number" name="prazoAtendimento" class="form-control" id="prazoAtendimentoCriar" required>
                             </div>
 
+                            <p>Deseja incluir esta atividade no atende ?</p>
+
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="sensibilizarTodosContratosLeilao" id="CheckNao" value="NAO">
+                                <label class="form-check-label" for="exigenciaCartorariaNao">Não</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="sensibilizarTodosContratosLeilao" id="CheckSim" value="SIM">
+                                <label class="form-check-label" for="exigenciaCartorariaNao">Sim</label>
+                            </div>
+                            <div id="visibilidade" style="visibility:hidden">
+                            <div class="alert" style="background-color: #fff9c2;">
+                                <div class="close" data-dismiss="alert" aria-label="close"></div>
+                                    <i class="fas fa-exclamation-triangle"></i>ATENÇÃO:
+                                    <p>Esta ação irá criar uma atividade no atende</p>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
@@ -81,7 +98,7 @@
 
         &nbsp
 
-        <button type="button" class="btn btn-primary p-1 m-1" data-toggle="modal" data-target="#modalAlterarAtividade">
+        <button style="visibility: hidden;" type="button" class="btn btn-primary p-1 m-1 botaoAtividade" data-toggle="modal" data-target="#modalAlterarAtividade">
             <i class="far fa-edit mx-2"></i>Alterar Atividade
         </button>
 
@@ -129,7 +146,7 @@
 
         &nbsp
 
-        <button type="button" class="btn btn-danger p-1 m-1" data-toggle="modal" data-target="#modalExcluirAtividade">
+        <button style="visibility: hidden;" type="button" class="btn btn-danger p-1 m-1 botaoAtividade" data-toggle="modal" data-target="#modalExcluirAtividade">
             <i class="fas fa-times mx-2"></i>Excluir Atividade
         </button>
 
@@ -176,7 +193,7 @@
 
 @section('content')
 
-<div class="card">
+<div class="card" id="cardTabelaDiv">
     <div class="card-body p-0 m-0" id="cardTabela">
     </div>
 </div> 
