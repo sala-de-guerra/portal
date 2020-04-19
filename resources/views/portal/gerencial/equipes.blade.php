@@ -46,7 +46,77 @@
                                 <select name="matriculaGestor" id="selectCriarEquipe" class="form-control" required></select>
                             </div>
 
-                            <!-- <input type="hidden" name="nomeGestor" id="nomeGestorCriar"> -->
+                            <p>Deseja incluir esta atividade no atende ?</p>
+
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="incluirEquipeAtende" id="CheckNao" value="NAO">
+                                <label class="form-check-label" for="incluirEquipeAtende">Não</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="incluirEquipeAtende" id="CheckSim" value="SIM">
+                                <label class="form-check-label" for="incluirEquipeAtende">Sim</label>
+                            </div>
+                            <div id="visibilidade" style="visibility:hidden">
+                            <div>
+                                <div class="close" data-dismiss="alert" aria-label="close"></div>
+                                <!-- <label for="iconeEquipe">Selecione um incone para a equipe</label>
+                                <select class="form-control fa" id="iconeEquipe" name="iconeEquipe">
+                                    <option value="">...</option>
+                                    <option value="fas fa-address-card fa-3x">&#xf2bb;</option>
+                                    <option value="fab fa-adn fa-3x">&#xf170;</option>
+                                    <option value="fas fa-at fa-3x">&#xf1fa;</option>
+                                    <option value="fas fa-book fa-3x">&#xf2bb;</option>
+                                    <option value="fab fa-bootstrap fa-3x"></i>
+                                    <option value="far fa-building fa-3x"></i>
+                                    <option value="far fa-calendar-check fa-3x"></i>
+                                    <option value="fas fa-cogs fa-3x"></i>
+                                    <option value="fas fa-dollar-sign fa-3x"></i>
+                                    <option value="far fa-edit fa-3x"></i>
+                                    <option value="fas fa-exchange-alt fa-3x"></i>
+                                    <option value="fab fa-expeditedssl fa-3x"></i>
+                                    <option value="fas fa-gavel fa-3x"></i>
+                                    <option value="fas fa-headset fa-3x"></i>
+                                    <option value="fas fa-home fa-3x"></i>
+                                    <option value="fas fa-hotel fa-3x"></i>
+                                    <option value="fas fa-house-damage fa-3x">
+                                    <option value="fab fa-houzz fa-3x"></i>
+                                    <option value="fas fa-map-marked-alt fa-3x"></i>
+                                    <option value="far fa-question-circle fa-3x"></i>
+                                    <option value="fas fa-star fa-3x"></i>
+                                    <option value="far fa-times-circle fa-3x"></i>
+                                    <option value="fas fa-users fa-3x"></i>
+                                    <option value="fas fa-tools fa-3x"></i> 
+  
+                            </select> -->
+          
+                                    Escolha um ícone para a equipe:
+                                    <button type="button" class="btn btn-link"><i class="fas fa-address-card fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-address-card fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fab fa-adn fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-adn fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-at fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-at fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-book fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-book fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fab fa-bootstrap fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-bootstrap fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="far fa-building fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-building fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="far fa-calendar-check fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-calendar-check fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-cogs fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-cogs fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-dollar-sign fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-dollar-sign fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="far fa-edit fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-edit fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-exchange-alt fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-exchange-alt fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fab fa-expeditedssl fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-expeditedssl fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-gavel fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-gavel fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-headset fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-headset fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-home fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-home fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-hotel fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-hotel fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-house-damage fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-house-damage fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fab fa-houzz fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-houzz fa-2x"></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-map-marked-alt fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-map-marked-alt fa-2x"></i></button>
+                                    <button type="button" class="btn btn-link"><i class="far fa-question-circle fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-question-circle fa-2x"></i></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-star fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-star fa-2x"></i></button>
+                                    <button type="button" class="btn btn-link"><i class="far fa-times-circle fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-times-circle fa-2x"></i></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-users fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-users fa-2x"></i></button>
+                                    <button type="button" class="btn btn-link"><i class="fas fa-tools fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-tools fa-2x"></i></button>
+
+                                </div>
+                  </div>
 
                         </div>
                         <div class="modal-footer">
@@ -179,4 +249,13 @@
 
 @section('js')
     <script src="{{ asset('js/portal/gerencial/equipes.js') }}"></script>
+    <script>   
+    function SIMnoCheck() {
+    if (document.getElementById('CheckSim').checked) {
+        document.getElementById('visibilidade').style.visibility = 'visible';
+    } else {
+        document.getElementById('visibilidade').style.visibility = 'hidden';
+    }
+}
+    </script>
 @stop

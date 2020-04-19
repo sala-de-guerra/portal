@@ -80,7 +80,7 @@ class CadastraAcessoPortal
         'c142765',  // Carlos
         'c111710',  // Chuman
         'c098453',  // Rafael
-        'c079436'   // Vladimir 
+        // 'c079436'   // Vladimir 
     ];
 
     /**
