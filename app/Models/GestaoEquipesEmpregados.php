@@ -30,4 +30,9 @@ class GestaoEquipesEmpregados extends Model
     {
         return $this->belongsTo('App\Models\Empregado', 'matricula', 'matricula');
     }
+
+    public function Atende()
+    {
+        return $this->belongsTo('App\Models\Atende', 'idEquipe', 'idEquipe');
+    }
 }

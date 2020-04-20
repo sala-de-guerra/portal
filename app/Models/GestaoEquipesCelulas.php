@@ -32,4 +32,9 @@ class GestaoEquipesCelulas extends Model
     {
         return $this->hasMany('App\Models\GestaoEquipesAtividades', 'idEquipe', 'idEquipe');
     }
+
+    public function Atende()
+    {
+        return $this->belongsTo('App\Models\Atende', 'idEquipe', 'idEquipe');
+    }
 }

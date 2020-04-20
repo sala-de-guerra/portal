@@ -21,11 +21,10 @@ class ConsultaContratoController extends Controller
 {
     /**
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param int  $contrato
+     * @param string  $numeroContrato
      * @return \Illuminate\Http\Response
      */
-    static public function show($numeroContrato, Request $request)
+    static public function show($numeroContrato)
     {
         return view('portal.imoveis.consulta-bem-imovel')->with('numeroContrato', $numeroContrato);
     }

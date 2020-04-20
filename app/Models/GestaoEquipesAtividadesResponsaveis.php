@@ -29,4 +29,9 @@ class GestaoEquipesAtividadesResponsaveis extends Model
     {
         return $this->belongsTo('App\Models\Empregado', 'matriculaResponsavelAtividade', 'matricula');
     }
+
+    public function Atende()
+    {
+        return $this->belongsTo('App\Models\Atende', 'idAtividade', 'idAtividade');
+    }
 }

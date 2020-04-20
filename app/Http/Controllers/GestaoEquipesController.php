@@ -52,6 +52,39 @@ class GestaoEquipesController extends Controller
         return json_encode($arrayEquipesUnidade);
     }
 
+    public function listarEmpregadosEquipe($idEquipe)
+    {
+        $equipe = GestaoEquipesCelulas::find($idEquipe);
+        $relacaoEmpregadosEquipe = GestaoEquipesEmpregados::where('idEquipe', $equipe->idEquipe)->where('disponivel', true)->get();
+        $arrayEmpregadosEquipe = [];
+        foreach ($relacaoEmpregadosEquipe as $empregadoEquipe) {
+            $arrayEmpregadosEquipe = self::incluirEmpregadoNoArrayDaEquipe($arrayEmpregadosEquipe, $empregadoEquipe);
+        }
+
+        $responsavelEquipe = Empregado::find($equipe->matriculaGestor);
+        array_push($arrayEmpregadosEquipe, [
+            'matricula'     => $responsavelEquipe->matricula,
+            'nomeCompleto'  => $responsavelEquipe->nomeCompleto,
+            'nomeFuncao'    => is_null($responsavelEquipe->nomeFuncao) ? 'TECNICO BANCARIO NOVO' : $responsavelEquipe->nomeFuncao,
+ 
+        ]);
+        return json_encode($arrayEmpregadosEquipe);
+    }
+
+    public function listarEquipes($codigoUnidade)
+    {
+        $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', $codigoUnidade)->where('incluirEquipeAtende', true)->get();
+        $arrayEquipesUnidade = [];
+        foreach ($relacaoEquipesUnidade as $equipe) {
+            array_push($arrayEquipesUnidade, [
+                'idEquipe'      => $equipe->idEquipe,
+                'nomeEquipe'    => $equipe->nomeEquipe,
+                'iconeEquipe'   => $equipe->iconeEquipe,
+            ]);
+        }
+        return json_encode($arrayEquipesUnidade);
+    }
+
     /**
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,6 +92,7 @@ class GestaoEquipesController extends Controller
      */
     public function cadastrarEquipe(Request $request)
     {
+        dd($request);
         $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
         foreach ($objDados as $dado) {
             $dado = explode("=", $dado);
@@ -76,6 +110,12 @@ class GestaoEquipesController extends Controller
                 case 'nomeGestor':
                     $nomeGestor = $dado[1];
                     break;
+                case 'incluirEquipeAtende':
+                    $incluirEquipeAtende = $dado[1] == '' ? null : $dado[1];
+                    break;
+                case 'iconeEquipe':
+                    $iconeEquipe = $dado[1] == '' ? null : $dado[1];
+                    break;
             }
         }
 
@@ -87,6 +127,8 @@ class GestaoEquipesController extends Controller
             $novaEquipe->nomeEquipe             = strtoupper($nomeEquipe);
             $novaEquipe->matriculaGestor        = isset($matriculaGestor) ? $matriculaGestor : null;
             $novaEquipe->nomeGestor             = isset($nomeGestor) ? $nomeGestor : null;
+            $novaEquipe->incluirEquipeAtende    = isset($incluirEquipeAtende) ? $incluirEquipeAtende : null;
+            $novaEquipe->iconeEquipe            = isset($iconeEquipe) ? $iconeEquipe : null;
             $novaEquipe->responsavelEdicao      = session('matricula');
             $novaEquipe->created_at             = date("Y-m-d H:i:s", time());
             $novaEquipe->updated_at             = date("Y-m-d H:i:s", time());
@@ -143,6 +185,12 @@ class GestaoEquipesController extends Controller
                 case 'nomeEventual':
                     $nomeEventual = $dado[1];
                     break;
+                case 'incluirEquipeAtende':
+                    $incluirEquipeAtende = $dado[1] = $dado[1] == '' ? null : $dado[1];
+                    break;
+                case 'iconeEquipe':
+                    $iconeEquipe = $dado[1] = $dado[1] == '' ? null : $dado[1];
+                    break;
             }
         }
         if ($idEquipe == '1') {
@@ -194,13 +242,15 @@ class GestaoEquipesController extends Controller
             }
 
             // EDITAR EQUIPE
-            $editarEquipe->nomeEquipe             = !in_array($nomeEquipe, [null, 'NULL', '']) ? strtoupper($nomeEquipe) : $editarEquipe->nomeEquipe;
-            $editarEquipe->matriculaGestor        = !in_array($matriculaGestor, [null, 'NULL', '']) ? $matriculaGestor : $editarEquipe->matriculaGestor;
-            $editarEquipe->nomeGestor             = !in_array($nomeGestor, [null, 'NULL', '']) ? strtoupper($nomeGestor) : $editarEquipe->nomeGestor;
-            $editarEquipe->matriculaEventual      = !in_array($matriculaEventual, [null, 'NULL', '']) ? $matriculaEventual : $editarEquipe->matriculaEventual;
-            $editarEquipe->nomeEventual           = !in_array($nomeEventual, [null, 'NULL', '']) ? strtoupper($nomeEventual) : $editarEquipe->nomeEventual;
-            $editarEquipe->responsavelEdicao      = session('matricula');
-            $editarEquipe->updated_at             = date("Y-m-d H:i:s", time());
+            $editarEquipe->nomeEquipe               = !in_array($nomeEquipe, [null, 'NULL', '']) ? strtoupper($nomeEquipe) : $editarEquipe->nomeEquipe;
+            $editarEquipe->matriculaGestor          = !in_array($matriculaGestor, [null, 'NULL', '']) ? $matriculaGestor : $editarEquipe->matriculaGestor;
+            $editarEquipe->nomeGestor               = !in_array($nomeGestor, [null, 'NULL', '']) ? strtoupper($nomeGestor) : $editarEquipe->nomeGestor;
+            $editarEquipe->matriculaEventual        = !in_array($matriculaEventual, [null, 'NULL', '']) ? $matriculaEventual : $editarEquipe->matriculaEventual;
+            $editarEquipe->nomeEventual             = !in_array($nomeEventual, [null, 'NULL', '']) ? strtoupper($nomeEventual) : $editarEquipe->nomeEventual;
+            $editarEquipe->incluirEquipeAtende      = !in_array($incluirEquipeAtende, [null, 'NULL', '']) ? $incluirEquipeAtende : $editarEquipe->incluirEquipeAtende;
+            $editarEquipe->iconeEquipe              = !in_array($iconeEquipe, [null, 'NULL', '']) ? $iconeEquipe : $editarEquipe->iconeEquipe;
+            $editarEquipe->responsavelEdicao        = session('matricula');
+            $editarEquipe->updated_at               = date("Y-m-d H:i:s", time());
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
             $registroLogHistorico = new GestaoEquipesLogHistorico;

@@ -28,7 +28,6 @@ class GestaoEquipesAtividadesController extends Controller
     public function listarAtividadesComResponsaveis($codigoUnidade)
     {
         $equipesUnidade = GestaoEquipesCelulas::where('codigoUnidadeEquipe', $codigoUnidade)->where('ativa', true)->get();
-        // dd($equipesUnidade);
         $arrayAtividadesEquipe = [];
         $arrayEquipesComAtividadesResponsaveis = [];
         foreach ($equipesUnidade as $equipe) {
@@ -55,6 +54,49 @@ class GestaoEquipesAtividadesController extends Controller
         return json_encode($arrayEquipesComAtividadesResponsaveis);
     }
 
+    /**
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function listarAtividades($idEquipe)
+    {
+        $listaMacroAtividades = GestaoEquipesAtividades::where('idEquipe', $idEquipe)->where('ativa', true)->where('incluirEquipeAtende', true)->get();
+        $arrayAtividadesEquipe = [];
+        foreach ($equipesUnidade as $equipe) {
+            if ($equipe->GestaoEquipesAtividades->count() > 0) {
+                foreach ($equipe->GestaoEquipesAtividades as $atividade) {
+                    if ($atividade->atividadeSubordinada == false) {
+                        $arrayAtividadesSubordinadas = self::listaAtividadesSubordinadas($atividade->idAtividade);
+                        array_push($arrayAtividadesEquipe, [
+                            'idAtividade'               => $atividade->idAtividade,
+                            'nomeAtividade'             => $atividade->nomeAtividade,
+                            'sinteseAtividade'          => $atividade->sinteseAtividade,
+                            'atividadesSubordinadas'    => $arrayAtividadesSubordinadas,
+                            'responsaveisAtividade'     => $listaResponsaveisAtividade,
+                        ]);
+                    }
+                }
+                array_push($arrayEquipesComAtividadesResponsaveis, $arrayAtividadesEquipe);
+            }
+        }
+        return json_encode($arrayEquipesComAtividadesResponsaveis);
+        
+        
+        
+        
+        
+        $arraylistaMacroAtividade = [];
+        foreach ($listaMacroAtividades as $atividade) {
+            array_push($arraylistaMacroAtividade, [
+                'idAtividade' => $atividade->idAtividade,
+                'nomeAtividade' => $atividade->nomeAtividade,
+                'sinteseAtividade' => $atividade->sinteseAtividade,
+                'iconeAtividade' => $atividade->iconeAtividade,
+            ]);
+        }
+        return json_encode($arrayEquipesComAtividadesResponsaveis);
+    }
+
     public static function listaAtividadesSubordinadas($idAtividadeSubordinante) {
         $arrayAtividadesSubordinadas = [];
         $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->where('atividadeAtiva', true)->get();
@@ -74,12 +116,9 @@ class GestaoEquipesAtividadesController extends Controller
         $listaResponsaveisAtividade = [];
         $arrayResponsaveisAtividade = GestaoEquipesAtividadesResponsaveis::where('idAtividade', $idAtividade)->where('atuandoAtividade', true)->get();
         foreach ($arrayResponsaveisAtividade as $responsavelAtividade) {
-            // $nomeCompleto = is_null($responsavelAtividade->dadosEmpregadoLdap->nomeCompleto) ? '' : ucwords(strtolower((string) $responsavelAtividade->dadosEmpregadoLdap->nomeCompleto));
             array_push($listaResponsaveisAtividade, [
                 'idResponsavelAtividade'    => $responsavelAtividade->idResponsavelAtividade,
                 'matricula'                 => $responsavelAtividade->matriculaResponsavelAtividade,
-                // 'nomeCompleto'  => $nomeCompleto,
-                // 'nomeFuncao'    => is_null($responsavelAtividade->dadosEmpregadoLdap->nomeFuncao) ? 'TECNICO BANCARIO NOVO' : $responsavelAtividade->dadosEmpregadoLdap->nomeFuncao,
             ]);
         }
         return $listaResponsaveisAtividade;
@@ -115,6 +154,12 @@ class GestaoEquipesAtividadesController extends Controller
                 case 'idAtividadeSubordinante':
                     $idAtividadeSubordinante = $dado[1] == '' ? null : $dado[1];
                     break;
+                case 'incluirAtividadeAtende':
+                    $incluirAtividadeAtende = $dado[1] == '' ? null : $dado[1];
+                    break;
+                case 'iconeAtividade':
+                    $iconeAtividade = $dado[1] == '' ? null : $dado[1];
+                    break;
             }
         }
 
@@ -128,6 +173,8 @@ class GestaoEquipesAtividadesController extends Controller
             $novaAtividade->atividadeSubordinada        = $atividadeSubordinada;
             $novaAtividade->idAtividadeSubordinante     = isset($idAtividadeSubordinante) ? $idAtividadeSubordinante : null;
             $novaAtividade->prazoAtendimento            = $prazoAtendimento;
+            $novaAtividade->incluirAtividadeAtende      = $incluirAtividadeAtende;
+            $novaAtividade->iconeAtividade              = $iconeAtividade;
             $novaAtividade->responsavelEdicao           = session('matricula');
             $novaAtividade->dataCriacaoAtividade        = date("Y-m-d H:i:s", time());
             $novaAtividade->dataAtualizacaoAtividade    = date("Y-m-d H:i:s", time());
@@ -175,9 +222,14 @@ class GestaoEquipesAtividadesController extends Controller
                     $encoding = mb_internal_encoding();
                     $sinteseAtividade = mb_strtoupper($dado[1], $encoding);
                     break;
+                case 'incluirAtividadeAtende':
+                    $incluirAtividadeAtende = $dado[1] == '' ? null : $dado[1];
+                    break;
+                case 'iconeAtividade':
+                    $iconeAtividade = $dado[1] == '' ? null : $dado[1];
+                    break;
             }
         }
-        // dd(['objDados' => $objDados, 'prazoAtendimento' => $prazoAtendimento, 'nomeAtividade' => $nomeAtividade, 'sinteseAtividade' => $sinteseAtividade]);
         try {
             DB::beginTransaction();
             $editarAtividade = GestaoEquipesAtividades::find($idAtividade);
@@ -192,6 +244,8 @@ class GestaoEquipesAtividadesController extends Controller
             $editarAtividade->sinteseAtividade          = !in_array($sinteseAtividade, [null, 'NULL', '']) ? $sinteseAtividade : $editarAtividade->sinteseAtividade;
             $editarAtividade->responsavelEdicao         = session('matricula');
             $editarAtividade->prazoAtendimento          = !in_array($prazoAtendimento, [null, 'NULL', '']) ? $prazoAtendimento : $editarAtividade->prazoAtendimento;
+            $editarAtividade->incluirAtividadeAtende    = !in_array($incluirAtividadeAtende, [null, 'NULL', '']) ? $incluirAtividadeAtende : $editarAtividade->incluirAtividadeAtende;
+            $editarAtividade->iconeAtividade            = !in_array($iconeAtividade, [null, 'NULL', '']) ? $iconeAtividade : $editarAtividade->iconeAtividade;
             $editarAtividade->dataAtualizacaoAtividade  = date("Y-m-d H:i:s", time());
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
@@ -214,7 +268,6 @@ class GestaoEquipesAtividadesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *
      * @param  int  $idAtividade
      * @return \Illuminate\Http\Response
@@ -264,22 +317,7 @@ class GestaoEquipesAtividadesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function designarEmpregadoAtividade(Request $request)
-    {
-        // $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
-        // foreach ($objDados as $dado) {
-        //     $dado = explode("=", $dado);
-        //     switch ($dado[0]) {
-        //         case 'idAtividade':
-        //             $idAtividade = $dado[1];
-        //         case 'matriculaResponsavelAtividade':
-        //             $matriculaResponsavelAtividade = $dado[1];
-        //             break;
-        //         case 'atuandoAtividade':
-        //             $atuandoAtividade = $dado[1];
-        //             break;
-        //     }
-        // }
-        
+    {        
         try {
 
             DB::beginTransaction();
