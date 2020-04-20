@@ -151,6 +151,23 @@ Route::prefix('fornecedores')->group(function () {
     });
 });
 
+// ATENDE
+Route::prefix('atende')->group(function () {  
+    // CADASTRAR ATENDE
+    Route::post('', 'AtendeDemandasController@cadastrarNovaDemandaAtende'); 
+    // RESPONDER ATENDE
+    Route::put('responder/{idAtende}', 'AtendeDemandasController@responderAtende'); 
+    // REDIRECIONAR ATENDE
+    Route::put('redirecionar/{idAtende}', 'AtendeDemandasController@redirecionarAtende'); 
+    // LISTAR DADOS DEMANDA ATENDE
+    Route::get('dados-demanda/{idAtende}', 'AtendeDemandasController@listarDadosDemandaAtende'); 
+    // LISTAR ATENDES DISPONÍVEIS RESPONSÁVEL
+    Route::get('listar-demandas-disponiveis', 'AtendeDemandasController@listarAtendesDisponiveisResponsavel'); 
+    // CONTAGEM DEMANDAS DISPONÍVEIS RESPONSÁVEL (SINO)
+    Route::get('contagem-demandas-disponiveis', 'AtendeDemandasController@contagemAtendesDisponiveisResponsavel'); 
+
+});
+
 // GERENCIAL
 Route::prefix('gerencial')->group(function () {
     // GESTÃO DE EQUIPES
@@ -171,6 +188,10 @@ Route::prefix('gerencial')->group(function () {
         Route::get('listar-unidades', 'GestaoEquipesController@listarUnidades');
         // DESIGNA O EMPREGADO PARA UMA EQUIPE
         Route::put('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
+        // LISTAR EMPREGADOS DA EQUIPE ATENDE
+        Route::get('listar-empregados-equipe/{idEquipe}', 'GestaoEquipesController@listarEmpregadosEquipe');
+        // LISTAR EQUIPES ATENDE
+        Route::get('listar-equipes/{codigoUnidade}', 'GestaoEquipesController@listarEquipes');
     });
     
     // GESTÃO DE ATIVIDADES
@@ -187,6 +208,8 @@ Route::prefix('gerencial')->group(function () {
         Route::post('/designar-empregado-atividade', 'GestaoEquipesAtividadesController@designarEmpregadoAtividade');
         // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
+        // LISTAR ATIVIDADE ATENDE
+        Route::get('/listar-atividades-equipe/{idEquipe}', 'GestaoEquipesAtividadesController@listarAtividades');
     });
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\LeilaoNegativo;
 
+use App\Classes\DiasUteisClass;
 use App\Classes\Ldap;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Http\Controllers\Controller;
@@ -71,8 +72,8 @@ class LeilaoNegativoController extends Controller
                     PREVISÃO DE RECEBIMENTO DO DOCUMENTOS DO LEILOEIRO  = 5 DIAS ÚTEIS A PARTIR DA DATA DO SEGUNDO LEILÃO
                     PREVISÃO DE ENTREGA DOCUMENTOS AO DESPACHANTE       = 3 DIAS ÚTEIS A PARTIR DA ENTREGA DOS DOCUMENTOS PELO LEILOEIRO
                 */
-                $dataPrevisaoRecebimentoDocumentosLeiloeiro = self::contadorDiasUteis($contrato->DT_SEGUNDO_LEILAO, 5);
-                $dataPrevisaoDisponibilizacaoDocumentosAoDespachante = self::contadorDiasUteis($dataPrevisaoRecebimentoDocumentosLeiloeiro, 3);
+                $dataPrevisaoRecebimentoDocumentosLeiloeiro = DiasUteisClass::contadorDiasUteis($contrato->DT_SEGUNDO_LEILAO, 5);
+                $dataPrevisaoDisponibilizacaoDocumentosAoDespachante = DiasUteisClass::contadorDiasUteis($dataPrevisaoRecebimentoDocumentosLeiloeiro, 3);
                 $unidadeResponsavel = Ldap::defineCodigoUnidadeUsuarioSessao($contrato->UNA);
                 // VALIDA SE JÁ EXISTE ESSE CONTRATO NO CONTROLE, CASO NEGATIVO ELE FAZ O INSERT
                 $cadastroContratoLeilaoNegativo = LeilaoNegativo::firstOrCreate(
@@ -107,38 +108,38 @@ class LeilaoNegativoController extends Controller
         return $mensagem;    
     }
 
-    public static function contadorDiasUteis($data, $quantidadeDiasUteis) 
-    {
-        $dataProposta = Carbon::parse($data);
-        $diasUteis = 0;
+    // public static function contadorDiasUteis($data, $quantidadeDiasUteis) 
+    // {
+    //     $dataProposta = Carbon::parse($data);
+    //     $diasUteis = 0;
 
-        $feriados = array(
-            'dia-mundial-da-paz' => '01-01',
-            'terca-carnaval' => '= easter -47',
-            'segunda-carnaval' => '= easter -48',
-            'sexta-feira-da-paixao' => '= easter -2',
-            'tirandentes' => '04-21',
-            'trabalho' => '05-01',
-            'corpus-christi' => '= easter 60',
-            'independencia-do-brasil' => '09-07',
-            'nossa-sra-aparecida' => '10-12',
-            'finados' => '11-02',
-            'proclamacao-republica' => '11-15',
-            'natal' => '12-25',
-            'ultimo-dia-util' => '12-31',
-        );
+    //     $feriados = array(
+    //         'dia-mundial-da-paz' => '01-01',
+    //         'terca-carnaval' => '= easter -47',
+    //         'segunda-carnaval' => '= easter -48',
+    //         'sexta-feira-da-paixao' => '= easter -2',
+    //         'tirandentes' => '04-21',
+    //         'trabalho' => '05-01',
+    //         'corpus-christi' => '= easter 60',
+    //         'independencia-do-brasil' => '09-07',
+    //         'nossa-sra-aparecida' => '10-12',
+    //         'finados' => '11-02',
+    //         'proclamacao-republica' => '11-15',
+    //         'natal' => '12-25',
+    //         'ultimo-dia-util' => '12-31',
+    //     );
         
-        BusinessDay::enable('Illuminate\Support\Carbon', 'br-national', $feriados);
-        Carbon::setHolidaysRegion('br-national');
-        while ($diasUteis < $quantidadeDiasUteis) {
-            $dataProposta->addDay();
-            if (!$dataProposta->isBusinessDay()) {
-                $dataProposta = $dataProposta->nextBusinessDay();
-            }
-            $diasUteis++;
-        }
-        return $dataProposta->format('Y-m-d');
-    }
+    //     BusinessDay::enable('Illuminate\Support\Carbon', 'br-national', $feriados);
+    //     Carbon::setHolidaysRegion('br-national');
+    //     while ($diasUteis < $quantidadeDiasUteis) {
+    //         $dataProposta->addDay();
+    //         if (!$dataProposta->isBusinessDay()) {
+    //             $dataProposta = $dataProposta->nextBusinessDay();
+    //         }
+    //         $diasUteis++;
+    //     }
+    //     return $dataProposta->format('Y-m-d');
+    // }
 
     /**
      *
@@ -312,7 +313,7 @@ class LeilaoNegativoController extends Controller
 
                 DATA ENTREGA DOCUMENTOS CARTÓRIO  = 5 DIAS ÚTEIS A PARTIR DA DATA DE ENTREGA DOS DOCUMENTOS AO DESPACHANTE
             */
-            $dataPrevisaoEntregaDocumentosCartorio = self::contadorDiasUteis($dataRetiradaDocumentosDespachanteFormatada, 5);
+            $dataPrevisaoEntregaDocumentosCartorio = DiasUteisClass::contadorDiasUteis($dataRetiradaDocumentosDespachanteFormatada, 5);
 
             // CAPTURA OS DADOS DA DEMANDA
             $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->where('contratoAtivo', true)->first();

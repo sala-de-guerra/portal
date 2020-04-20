@@ -20,6 +20,8 @@ class CreateTableGestaoEquipesAtividades extends Migration
             $table->text('sinteseAtividade');
             $table->boolean('atividadeSubordinada');
             $table->integer('idAtividadeSubordinante')->nullable();
+            $table->boolean('incluirAtividadeAtende')->nullable();
+            $table->string('iconeAtividade', 50)->nullable();
             $table->boolean('atividadeAtiva')->default(true);
             $table->integer('prazoAtendimento');
             $table->string('responsavelEdicao', 7);

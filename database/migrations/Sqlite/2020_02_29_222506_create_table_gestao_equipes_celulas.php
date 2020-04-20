@@ -21,6 +21,8 @@ class CreateTableGestaoEquipesCelulas extends Migration
             $table->string('nomeGestor', 50)->nullable();
             $table->string('matriculaEventual', 7)->nullable();
             $table->string('nomeEventual', 50)->nullable();
+            $table->boolean('incluirEquipeAtende')->nullable();
+            $table->string('iconeEquipe', 50)->nullable();
             $table->boolean('ativa')->default(true);
             $table->string('responsavelExclusao', 7)->nullable();
             $table->string('responsavelEdicao', 7)->nullable();
