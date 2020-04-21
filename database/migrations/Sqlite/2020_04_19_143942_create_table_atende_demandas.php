@@ -16,6 +16,7 @@ class CreateTableAtendeDemandas extends Migration
         Schema::create('TBL_ATENDE_DEMANDAS', function (Blueprint $table) {
             $table->bigIncrements('idAtende');
             $table->string('contratoFormatado', 50);
+            $table->integer('codigoUnidade');
             $table->string('numeroContrato', 50);
             $table->integer('idEquipe');
             $table->integer('idAtividade');

@@ -453,7 +453,7 @@ function montaCardsAtividades(equipe) {
     
     });
 };
-function funcao(){
+function colocaBotoes(){
     if ($('#selectEquipe').val() != ""){
             $('.botaoAtividade').css('visibility', 'visible');
             $('#cardTabelaDiv').css('visibility', 'visible');
@@ -462,8 +462,8 @@ function funcao(){
             $('#cardTabelaDiv').css('visibility', 'hidden');
     }
 }
-function SIMnoCheck() {
-    if (document.getElementById('CheckSim').checked) {
+function SIMCheck() {
+    if (document.getElementById('CheckS').checked) {
         document.getElementById('visibilidade').style.visibility = 'visible';
     } else {
         document.getElementById('visibilidade').style.visibility = 'hidden';
