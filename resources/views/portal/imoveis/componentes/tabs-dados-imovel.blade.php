@@ -1072,7 +1072,7 @@
                                 <div class="alert" style="background-color: #fff9c2;" >
                                     <div></div>
                                         <i class="fas fa-exclamation-triangle"></i> ATENÇÃO:
-                                            Envie autorização apenas após o pagamento da PP15
+                                            Envie a autorização apenas após o pagamento da PP15
                                     </div>
                                 </div>
                             <div class="col-sm-6">

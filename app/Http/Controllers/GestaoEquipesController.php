@@ -74,6 +74,7 @@ class GestaoEquipesController extends Controller
     public function listarEquipes($codigoUnidade)
     {
         $relacaoEquipesUnidade = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', $codigoUnidade)->where('incluirEquipeAtende', true)->get();
+        
         $arrayEquipesUnidade = [];
         foreach ($relacaoEquipesUnidade as $equipe) {
             array_push($arrayEquipesUnidade, [
@@ -92,7 +93,6 @@ class GestaoEquipesController extends Controller
      */
     public function cadastrarEquipe(Request $request)
     {
-        dd($request);
         $objDados = explode("&", str_replace('"', '', urldecode($request->data)));
         foreach ($objDados as $dado) {
             $dado = explode("=", $dado);

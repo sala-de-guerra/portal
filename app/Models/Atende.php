@@ -14,6 +14,7 @@ class Atende extends Model
         [
             'idAtende',
             'contratoFormatado',
+            'codigoUnidade',
             'numeroContrato',
             'idEquipe',
             'idAtividade',
@@ -31,7 +32,7 @@ class Atende extends Model
     
     public function gestaoEquipeCelulas()
     {
-        return $this->hasMany('App\Models\GestaoEquipesCelulas', 'idEquipe', 'idEquipe');
+        return $this->hasOne('App\Models\GestaoEquipesCelulas', 'idEquipe', 'idEquipe');
     }
 
     public function gestaoEquipeEmpregados()
@@ -41,7 +42,7 @@ class Atende extends Model
 
     public function gestaoEquipesAtividades()
     {
-        return $this->hasMany('App\Models\GestaoEquipesAtividades', 'idEquipe', 'idEquipe');
+        return $this->hasOne('App\Models\GestaoEquipesAtividades', 'idAtividade', 'idAtividade');
     }
 
     public function gestaoEquipesAtividadesResponsaveis()

@@ -165,7 +165,15 @@ Route::prefix('atende')->group(function () {
     Route::get('listar-demandas-disponiveis', 'AtendeDemandasController@listarAtendesDisponiveisResponsavel'); 
     // CONTAGEM DEMANDAS DISPONÍVEIS RESPONSÁVEL (SINO)
     Route::get('contagem-demandas-disponiveis', 'AtendeDemandasController@contagemAtendesDisponiveisResponsavel'); 
-
+    // LISTAR EQUIPES COM ATIVIDADES (MACRO E MICRO) ATENDE
+    Route::get('listar-equipes-atividades-atende', 'AtendeDemandasController@listarEquipesComAtividadesAtende'); 
+    // LISTAR PRAZO ATENDE UNIDADE
+    Route::get('controla-prazo-atende', 'AtendeDemandasController@controlaPrazoAtende'); 
+    // LISTAR TODAS AS DEMANDAS POR PRAZO
+    Route::get('listar-demandas-prazo/{prazoDemanda}', 'AtendeDemandasController@listarDemandasUnidadePorPrazo');
+    // viewdoRafael
+    Route::get('minhas-demandas','AtendeDemandasController@viewMinhasDemandas');
+    Route::get('gestao-atende','AtendeDemandasController@viewGerenciarDemandas');
 });
 
 // GERENCIAL
@@ -190,8 +198,6 @@ Route::prefix('gerencial')->group(function () {
         Route::put('alocar-empregado', 'GestaoEquipesController@alocarEmpregadoEquipe');
         // LISTAR EMPREGADOS DA EQUIPE ATENDE
         Route::get('listar-empregados-equipe/{idEquipe}', 'GestaoEquipesController@listarEmpregadosEquipe');
-        // LISTAR EQUIPES ATENDE
-        Route::get('listar-equipes/{codigoUnidade}', 'GestaoEquipesController@listarEquipes');
     });
     
     // GESTÃO DE ATIVIDADES
@@ -208,8 +214,6 @@ Route::prefix('gerencial')->group(function () {
         Route::post('/designar-empregado-atividade', 'GestaoEquipesAtividadesController@designarEmpregadoAtividade');
         // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
-        // LISTAR ATIVIDADE ATENDE
-        Route::get('/listar-atividades-equipe/{idEquipe}', 'GestaoEquipesAtividadesController@listarAtividades');
     });
 });
 
@@ -235,3 +239,6 @@ Route::match(['get', 'post', 'put', 'delete'], 'url', function (\Illuminate\Http
 
 // ROTA PARA CADASTRAR TODOS OS EMPREGADOS DA UNIDADE (RELACIONADOS NO ARRAY) NAS TABELAS DE EMPREGADOS E GESTAO EQUIPES EMPREGADOS
 Route::get('cadastra-empregados-unidade', 'CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController@CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController');
+
+//Gestão Atende
+Route::resource('gerencial/gestao-atende', 'GestaoAtendeController@index');

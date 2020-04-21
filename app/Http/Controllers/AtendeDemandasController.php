@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Classes\DiasUteisClass;
+use App\Classes\Ldap;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
+use App\Http\Controllers\GestaoEquipesAtividadesController;
+use App\Models\Atende;
 use App\Models\BaseSimov;
 use App\Models\GestaoEquipesAtividades;
 use App\Models\GestaoEquipesAtividadesResponsaveis;
@@ -22,6 +25,7 @@ class AtendeDemandasController extends Controller
      * @param  int  $idAtende
      * @return \Illuminate\Http\Response
      */
+ 
     public function listarDadosDemandaAtende($idAtende)
     {
         $dadosAtende = Atende::find($idAtende);
@@ -39,30 +43,118 @@ class AtendeDemandasController extends Controller
         ]);
     }
 
+    public function viewMinhasDemandas()
+    {
+        return view ('portal.atende.minhas-demandas');
+        
+    }
+    public function viewGerenciarDemandas()
+    {
+        return view('portal.gerencial.gestao-atende');
+        
+    }
+
     /**
      *
      * @return \Illuminate\Http\Response
      */
     public function listarAtendesDisponiveisResponsavel()
     {
-        $listaDemandasAtende = Atende::where('matriculaResponsavelAtividade', session('matricula'))->where('statusAtende', '!=', 'RESPONDIDO')->get();
+        $listaDemandasAtende = Atende::where('matriculaResponsavelAtividade', session('matricula'))->where('statusAtende', '!=', 'FINALIZADO')->get();
         $arrayDemandasResponsavel = [];
         if (!$listaDemandasAtende->isEmpty()) {
             foreach ($listaDemandasAtende as $demanda) {
+                $dadosMacroAtividade = GestaoEquipesAtividades::find($demanda->gestaoEquipesAtividades->idAtividadeSubordinante);
                 array_push($arrayDemandasResponsavel, [
-                    'idAtende' => $demanda->idAtende,
-                    'idEquipe' => $demanda->idEquipe,
-                    'nomeEquipe' => $demanda->gestaoEquipeCelulas->nomeEquipe,
-                    'idAtividade' => $demanda->idAtividade,
-                    'nomeAtividade' => $demanda->gestaoEquipesAtividades->nomeAtividade,
-                    'contratoFormatado' => $demanda->contratoFormatado,
-                    'numeroContrato' => $demanda->numeroContrato,
-                    'assuntoAtende' => $demanda->assuntoAtende,
-                    'descricaoAtende' => $demanda->descricaoAtende,
+                    'idAtende'                  => $demanda->idAtende,
+                    'idEquipe'                  => $demanda->idEquipe,
+                    'nomeEquipe'                => $demanda->gestaoEquipeCelulas->nomeEquipe,
+                    'idMacroAtividade'          => $demanda->gestaoEquipesAtividades->idAtividadeSubordinante,
+                    'nomeMacroAtividade'        => $dadosMacroAtividade !== null ? $dadosMacroAtividade->nomeAtividade : null,
+                    'idAtividade'               => $demanda->idAtividade,
+                    'nomeAtividade'             => $demanda->gestaoEquipesAtividades->nomeAtividade,
+                    'contratoFormatado'         => $demanda->contratoFormatado,
+                    'numeroContrato'            => $demanda->numeroContrato,
+                    'assuntoAtende'             => $demanda->assuntoAtende,
+                    'descricaoAtende'           => $demanda->descricaoAtende,
+                    'prazoAtendimentoAtende'    => $demanda->prazoAtendimentoAtende,
                 ]);
             }
         }
         return json_encode($arrayDemandasResponsavel);
+    }
+
+    public function listarEquipesComAtividadesAtende()
+    {
+        try {
+            DB::beginTransaction();
+            $arrayEquipesComAtividadesAtende = [];
+            $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+            // $unidadeUsuario = '7257';
+
+            // LISTAR EQUIPES
+            $listaEquipes = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', $unidadeUsuario)->where('incluirEquipeAtende', true)->get();
+            foreach ($listaEquipes as $equipe) {
+                $arrayAtividadesEquipe = [];
+                // LISTAR MACROATIVIDADES
+                $listaMacroAtividadesEquipe = GestaoEquipesAtividades::where('idEquipe', $equipe->idEquipe)->where('atividadeAtiva', true)->where('incluirAtividadeAtende', true)->get();
+                foreach ($listaMacroAtividadesEquipe as $macroAtividade) {
+                    if ($macroAtividade->atividadeSubordinada == false) {
+                        if ($macroAtividade->idAtividadeSubordinante == null) {
+                            // LISTAR MICROATIVIDADES
+                            $arrayMicroAtividades = self::listaMicroAtividades($macroAtividade->idAtividade);
+                            array_push($arrayAtividadesEquipe, [
+                                'idAtividade'               => $macroAtividade->idAtividade,
+                                'idEquipe'                  => $macroAtividade->idEquipe,
+                                'nomeAtividade'             => $macroAtividade->nomeAtividade,
+                                'sinteseAtividade'          => $macroAtividade->sinteseAtividade,
+                                'iconeAtividade'            => $macroAtividade->iconeAtividade,
+                                'microAtividade'            => $arrayMicroAtividades,
+                            ]);
+                        } else {
+                            array_push($arrayAtividadesEquipe, [
+                                'idAtividade'               => $macroAtividade->idAtividade,
+                                'nomeAtividade'             => $macroAtividade->nomeAtividade,
+                                'sinteseAtividade'          => $macroAtividade->sinteseAtividade,
+                                'iconeAtividade'            => $macroAtividade->iconeAtividade,
+                            ]);
+                        }
+                    }
+                }
+                $arrayDadosEquipe = [
+                    'idEquipe'      => $equipe->idEquipe,
+                    'nomeEquipe'    => $equipe->nomeEquipe,
+                    'iconeEquipe'   => $equipe->iconeEquipe,
+                    'atividades'    => $arrayAtividadesEquipe
+                ];
+                array_push($arrayEquipesComAtividadesAtende, $arrayDadosEquipe);
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+        }
+        return json_encode($arrayEquipesComAtividadesAtende);
+    }
+
+    public static function listaMicroAtividades($idAtividadeSubordinante) {
+        $arrayAtividadesSubordinadas = [];
+        $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->where('atividadeAtiva', true)->where('incluirAtividadeAtende', true)->get();
+        foreach ($listaAtividadesSubordinadas as $atividadeSubordinada) {
+            array_push($arrayAtividadesSubordinadas, [
+                'idAtividade'               => $atividadeSubordinada->idAtividade,
+                'idAtividadeSubordinante'   => $atividadeSubordinada->idAtividadeSubordinante,
+                'idEquipe'                  => $atividadeSubordinada->GestaoEquipesCelulas->idEquipe,
+                'nomeAtividade'             => $atividadeSubordinada->nomeAtividade,
+                'sinteseAtividade'          => $atividadeSubordinada->sinteseAtividade,
+                'iconeAtividade'            => $atividadeSubordinada->iconeAtividade,
+            ]);
+        }
+        return $arrayAtividadesSubordinadas;
     }
 
     /**
@@ -71,7 +163,7 @@ class AtendeDemandasController extends Controller
      */
     public function contagemAtendesDisponiveisResponsavel()
     {
-        $contagemDemandasAtende = Atende::where('matriculaResponsavelAtividade', session('matricula'))->where('statusAtende', '!=', 'RESPONDIDO')->count();
+        $contagemDemandasAtende = Atende::where('matriculaResponsavelAtividade', session('matricula'))->where('statusAtende', '!=', 'FINALIZADO')->count();
         
         return json_encode($contagemDemandasAtende);
     }
@@ -87,12 +179,13 @@ class AtendeDemandasController extends Controller
         try {
             DB::beginTransaction();
             // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
-            $dadosSimov = Simov::where('BEM_FORMATADO', $request->contratoFormatado)->first();
+            $dadosSimov = BaseSimov::where('BEM_FORMATADO', $request->contratoFormatado)->first();
             $dadosAtividade = GestaoEquipesAtividades::find($request->idAtividade);
 
             // CRIAR A DEMANDA
             $novaDemandaAtende = new Atende;
             $novaDemandaAtende->contratoFormatado               = $request->contratoFormatado;
+            $novaDemandaAtende->codigoUnidade                   = $dadosAtividade->GestaoEquipesCelulas->codigoUnidadeEquipe;
             $novaDemandaAtende->idEquipe                        = $request->idEquipe;
             $novaDemandaAtende->idAtividade                     = $request->idAtividade;
             $novaDemandaAtende->numeroContrato                  = $dadosSimov->NU_BEM;
@@ -101,7 +194,7 @@ class AtendeDemandasController extends Controller
             $novaDemandaAtende->statusAtende                    = 'CADASTRADO';
             $novaDemandaAtende->matriculaCriadorDemanda         = session('matricula');
             $novaDemandaAtende->prazoAtendimentoAtende          = DiasUteisClass::contadorDiasUteis(date("Y-m-d", time()), $dadosAtividade->prazoAtendimento);
-            $novaDemandaAtende->matriculaResponsavelAtividade   = self::defineResponsavelDemandaAtende($idAtividade, $dadosAtividade);
+            $novaDemandaAtende->matriculaResponsavelAtividade   = self::defineResponsavelDemandaAtende($request->idAtividade, $dadosAtividade);
             $novaDemandaAtende->dataCadastro                    = date("Y-m-d H:i:s", time());
             $novaDemandaAtende->dataAlteracao                   = date("Y-m-d H:i:s", time());
             if ($request->has('emailContatoResposta')) {
@@ -151,7 +244,7 @@ class AtendeDemandasController extends Controller
             $dadosEquipe = GestaoEquipesCelulas::find($dadosAtividade->idEquipe); 
 
             // CAPTURA A LISTA DE EMPREGADOS QUE REALIZAM AQUELA ATIVIDADE
-            $listaResponsaveisAtividade = GestaoEquipesAtividadesResponsaveis::where('idAtividade', $request->idAtividade)->where('atuandoAtividade', true)->get();
+            $listaResponsaveisAtividade = GestaoEquipesAtividadesResponsaveis::where('idAtividade', $idAtividade)->where('atuandoAtividade', true)->get();
 
             // CRIO DUAS VARIÁVEIS DE CONTROLE, UMA DE PRODUÇÃO E OUTRA PARA ATRIBUIR O RESPONSAVEL DA DEMANDA
             $responsavelDemandaAtende = '';
@@ -164,7 +257,7 @@ class AtendeDemandasController extends Controller
             */
             if (!$listaResponsaveisAtividade->isEmpty()) {
                 foreach ($listaResponsaveisAtividade as $responsavel) {
-                    $quantidadeDemandasAtribuidas = Atende::where('matriculaResponsavelAtividade', $responsavel->matriculaResponsavelAtividade)->where('statusAtende' , "!=", 'RESPONDIDO')->count() !== null ? Atende::where('matriculaResponsavelAtividade', $responsavel->matriculaResponsavelAtividade)->count() : null;
+                    $quantidadeDemandasAtribuidas = Atende::where('matriculaResponsavelAtividade', $responsavel->matriculaResponsavelAtividade)->where('statusAtende' , "!=", 'FINALIZADO')->count() !== null ? Atende::where('matriculaResponsavelAtividade', $responsavel->matriculaResponsavelAtividade)->count() : null;
                     if (!is_null($quantidadeDemandasAtribuidas)) {
                         if ($quantidadeDemandasAtribuidas < $quantidadeDemandasControle) {
                             $responsavelDemandaAtende = $responsavel->matriculaResponsavelAtividade;
@@ -201,7 +294,7 @@ class AtendeDemandasController extends Controller
             $responderAtende = Atende::find($idAtende);
 
             // EDITAR DADOS DEMANDA
-            $responderAtende->statusAtende      = 'RESPODIDO';
+            $responderAtende->statusAtende      = 'FINALIZADO';
             $responderAtende->respostaAtende    = $request->respostaAtende;
             $responderAtende->dataAlteracao     = date("Y-m-d H:i:s", time());
 
@@ -292,5 +385,110 @@ class AtendeDemandasController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante registro da resposta do Atende. Tente novamente");
         }
         return redirect("/atende/minhas-demandas");
+    }
+
+    public function controlaPrazoAtende()
+    {
+        try {
+            DB::beginTransaction();
+            $arrayEquipesComAtividadesAtende = [];
+            $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+            $demandasVencidas = 0;
+            $demandasVencemHoje = 0;
+            $demandasVencemProximoDiaUtil = 0;
+            $demandasVencemDoisDiasUteis = 0;
+            $demandasVencimentoLongo = 0;
+
+            // CAPTURAR AS QUANTIDADE DE DEMANDAS ATENDE DAQUELA UNIDADE
+            $listaEquipesUnidade = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->get();
+            foreach ($listaEquipesUnidade as $atende) {
+                $diasParaVencerPrazo = Carbon::diffInBusinessDays(Carbon::parse($atende->prazoAtendimentoAtende));
+                if ($diasParaVencerPrazo < 0) {
+                    $demandasVencidas++;
+                } else {
+                    switch ($diasParaVencerPrazo) {
+                        case 0:
+                            $demandasVencemHoje++;
+                            break;
+                        case 1:
+                            $demandasVencemProximoDiaUtil++;
+                            break;
+                        case 2:
+                            $demandasVencemDoisDiasUteis++;
+                            break;
+                        default:
+                            $demandasVencimentoLongo++;
+                            break;
+                    }
+                }
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+        }
+        return json_encode([
+            'demandasVencidas'              => $demandasVencidas,
+            'demandasVencemHoje'            => $demandasVencemHoje,
+            'demandasVencemProximoDiaUtil'  => $demandasVencemProximoDiaUtil,
+            'demandasVencemDoisDiasUteis'   => $demandasVencemDoisDiasUteis,
+            'demandasVencimentoLongo'       => $demandasVencimentoLongo,
+        ]);
+    }
+
+    public function listarDemandasUnidadePorPrazo($prazo)
+    {
+        try {
+            DB::beginTransaction();
+            $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+            $arrayDadosDemandas = [];
+            $listaDemandas =[];
+            // VERIFICAR QUAL É A DATA DE VENCIMENTO ESCOLHIDA PELO GESTOR
+            switch ($prazo) {
+                case 'demandasVencidas':
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', '<', Carbon::now())->get();
+                    break;
+                case 'demandasVencemHoje':
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', Carbon::now())->get();
+                    break;
+                case 'demandasVencemProximoDiaUtil':
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', Carbon::parse(Carbon::now())->addBusinessDays(1)->format('Y-m-d'))->get();
+                    break;
+                case 'demandasVencemProximoDiaUtil':
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', Carbon::parse(Carbon::now())->addBusinessDays(2)->format('Y-m-d'))->get();
+                    break;
+                case 'demandasVencemProximoDiaUtil':
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', '>=', Carbon::parse(Carbon::now())->addBusinessDays(3)->format('Y-m-d'))->get();
+                    break;
+            }
+            foreach ($listaDemandas as $demanda) {
+                array_push($arrayDadosDemandas, [
+                    'idAtende'                      => $demanda->idAtende,
+                    'idEquipe'                      => $demanda->idEquipe,
+                    'nomeEquipe'                    => $demanda->gestaoEquipeCelulas->nomeEquipe,
+                    'nomeGestor'                    => $demanda->gestaoEquipeCelulas->nomeGestor,
+                    'idAtividade'                   => $demanda->idAtividade,
+                    'nomeAtividade'                 => $demanda->gestaoEquipesAtividades->nomeAtividade,
+                    'contratoFormatado'             => $demanda->contratoFormatado,
+                    'numeroContrato'                => $demanda->numeroContrato,
+                    'assuntoAtende'                 => $demanda->assuntoAtende,
+                    'descricaoAtende'               => $demanda->descricaoAtende,
+                    'matriculaResponsavelAtividade' => $demanda->matriculaResponsavelAtividade,
+                ]);
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+        }
+        return json_encode($arrayDadosDemandas);
     }
 }

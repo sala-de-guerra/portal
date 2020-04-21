@@ -13,7 +13,7 @@
     </div>
 
      <div class="col-sm-3">
-        <select name="selectEquipe" id="selectEquipe" class="form-control" onchange="funcao()">
+        <select name="selectEquipe" id="selectEquipe" class="form-control" onchange="colocaBotoes()">
             <option value="" selected>Selecione</option>
         </select>
     </div>
@@ -64,25 +64,80 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Prazo de Atendimento:</label>
+                                <label>Prazo de Atendimento (Dias úteis):</label>
                                 <input type="number" name="prazoAtendimento" class="form-control" id="prazoAtendimentoCriar" required>
                             </div>
 
                             <p>Deseja incluir esta atividade no atende ?</p>
 
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="sensibilizarTodosContratosLeilao" id="CheckNao" value="NAO">
-                                <label class="form-check-label" for="exigenciaCartorariaNao">Não</label>
+                                <input type="radio" class="form-check-input" onclick="javascript:SIMCheck();" name="incluirAtividadeAtende" id="CheckN" value="false">
+                                <label class="form-check-label" for="incluirAtividadeAtende">Não</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" onclick="javascript:SIMnoCheck();" name="sensibilizarTodosContratosLeilao" id="CheckSim" value="SIM">
-                                <label class="form-check-label" for="exigenciaCartorariaNao">Sim</label>
+                                <input type="radio" class="form-check-input" onclick="javascript:SIMCheck();" name="incluirAtividadeAtende" id="CheckS" value="true">
+                                <label class="form-check-label" for="incluirAtividadeAtende">Sim</label>
                             </div>
                             <div id="visibilidade" style="visibility:hidden">
-                            <div class="alert" style="background-color: #fff9c2;">
+                            <div>
                                 <div class="close" data-dismiss="alert" aria-label="close"></div>
-                                    <i class="fas fa-exclamation-triangle"></i>ATENÇÃO:
-                                    <p>Esta ação irá criar uma atividade no atende</p>
+                                <div>
+                                    <div class="close" data-dismiss="alert" aria-label="close"></div>
+
+                                        Escolha um ícone para a atividade:
+                                        <div class="row">
+                                            <div class="col-sm -2">
+                                                <button type="button" class="btn btn-link"><i class="fas fa-address-card fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-address-card fa-2x" checked></button>
+                                                <button type="button" class="btn btn-link"><i class="fab fa-adn fa-2x"></i> <input type="radio" name="iconeAtividade" value="fab fa-adn fa-2x"></button>
+                                            </div>
+                                            <div class="col-sm -2">    
+                                                <button type="button" class="btn btn-link"><i class="fas fa-at fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-at fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-book fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-book fa-2x"></button>
+                                            </div>
+                                            <div class="col-sm -2">
+                                                <button type="button" class="btn btn-link"><i class="fab fa-bootstrap fa-2x"></i> <input type="radio" name="iconeAtividade" value="fab fa-bootstrap fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="far fa-building fa-2x"></i> <input type="radio" name="iconeAtividade" value="far fa-building fa-2x"></button>
+                                            </div>
+                                            <div class="col-sm -2">
+                                                <button type="button" class="btn btn-link"><i class="far fa-calendar-check fa-2x"></i> <input type="radio" name="iconeAtividade" value="far fa-calendar-check fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-cogs fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-cogs fa-2x"></button>
+                                            </div>
+                                            <div class="col-sm -2">
+                                                <button type="button" class="btn btn-link"><i class="fas fa-dollar-sign fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-dollar-sign fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="far fa-edit fa-2x"></i> <input type="radio" name="iconeAtividade" value="far fa-edit fa-2x"></button>
+                                            </div>
+                                            <div class="col-sm -2">
+                                                <button type="button" class="btn btn-link"><i class="fas fa-exchange-alt fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-exchange-alt fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="fab fa-expeditedssl fa-2x"></i> <input type="radio" name="iconeAtividade" value="fab fa-expeditedssl fa-2x"></button>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm -2">    
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-gavel fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-gavel fa-2x"></button>
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-headset fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-headset fa-2x"></button>
+                                                </div>
+                                                <div class="col-sm -2">
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-home fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-home fa-2x"></button>
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-hotel fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-hotel fa-2x"></button>
+                                                </div>
+                                                <div class="col-sm -2">
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-house-damage fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-house-damage fa-2x"></button>
+                                                    <button type="button" class="btn btn-link"><i class="fab fa-houzz fa-2x"></i> <input type="radio" name="iconeAtividade" value="fab fa-houzz fa-2x"></button>
+                                                </div>
+                                                <div class="col-sm -2">
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-map-marked-alt fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-map-marked-alt fa-2x"></i></button>
+                                                    <button type="button" class="btn btn-link"><i class="far fa-question-circle fa-2x"></i> <input type="radio" name="iconeAtividade" value="far fa-question-circle fa-2x"></i></button>
+                                                </div>
+                                                <div class="col-sm -2">
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-star fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-star fa-2x"></i></button>
+                                                    <button type="button" class="btn btn-link"><i class="far fa-times-circle fa-2x"></i> <input type="radio" name="iconeAtividade" value="far fa-times-circle fa-2x"></i></button>
+                                                </div>
+                                                <div class="col-sm -2">
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-users fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-users fa-2x"></i></button>
+                                                    <button type="button" class="btn btn-link"><i class="fas fa-tools fa-2x"></i> <input type="radio" name="iconeAtividade" value="fas fa-tools fa-2x"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

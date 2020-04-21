@@ -54,49 +54,6 @@ class GestaoEquipesAtividadesController extends Controller
         return json_encode($arrayEquipesComAtividadesResponsaveis);
     }
 
-    /**
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function listarAtividades($idEquipe)
-    {
-        $listaMacroAtividades = GestaoEquipesAtividades::where('idEquipe', $idEquipe)->where('ativa', true)->where('incluirEquipeAtende', true)->get();
-        $arrayAtividadesEquipe = [];
-        foreach ($equipesUnidade as $equipe) {
-            if ($equipe->GestaoEquipesAtividades->count() > 0) {
-                foreach ($equipe->GestaoEquipesAtividades as $atividade) {
-                    if ($atividade->atividadeSubordinada == false) {
-                        $arrayAtividadesSubordinadas = self::listaAtividadesSubordinadas($atividade->idAtividade);
-                        array_push($arrayAtividadesEquipe, [
-                            'idAtividade'               => $atividade->idAtividade,
-                            'nomeAtividade'             => $atividade->nomeAtividade,
-                            'sinteseAtividade'          => $atividade->sinteseAtividade,
-                            'atividadesSubordinadas'    => $arrayAtividadesSubordinadas,
-                            'responsaveisAtividade'     => $listaResponsaveisAtividade,
-                        ]);
-                    }
-                }
-                array_push($arrayEquipesComAtividadesResponsaveis, $arrayAtividadesEquipe);
-            }
-        }
-        return json_encode($arrayEquipesComAtividadesResponsaveis);
-        
-        
-        
-        
-        
-        $arraylistaMacroAtividade = [];
-        foreach ($listaMacroAtividades as $atividade) {
-            array_push($arraylistaMacroAtividade, [
-                'idAtividade' => $atividade->idAtividade,
-                'nomeAtividade' => $atividade->nomeAtividade,
-                'sinteseAtividade' => $atividade->sinteseAtividade,
-                'iconeAtividade' => $atividade->iconeAtividade,
-            ]);
-        }
-        return json_encode($arrayEquipesComAtividadesResponsaveis);
-    }
-
     public static function listaAtividadesSubordinadas($idAtividadeSubordinante) {
         $arrayAtividadesSubordinadas = [];
         $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->where('atividadeAtiva', true)->get();

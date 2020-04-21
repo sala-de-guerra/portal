@@ -237,6 +237,19 @@ return [
             'icon'        => 'fas fa-lg fa-fw fa-directions mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
+        [
+            'text' => 'Atende',
+            'icon' => 'fas fa-lg fa-fw fa-headset mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'],// 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'submenu' => [
+                [
+                    'text' => 'Minhas demandas',
+                    'icon'    => 'fas fa-lg fa-fw fa-clipboard-list mr-2',
+                    'url'  => '/atende/minhas-demandas',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                ]
+            ],
+        ],
 
         // [
         //     'text'        => 'Conheça o Projeto',
@@ -458,6 +471,12 @@ return [
                     'text' => 'Gestão de Atividades',
                     'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
                     'url'  => '/gerencial/gestao-atividades',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
+                [
+                    'text' => 'Gestão Atende',
+                    'icon'       => 'fas fa-lg fa-fw fa-calendar-check mr-2',
+                    'url'  => '/atende/gestao-atende',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ]
     
