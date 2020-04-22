@@ -173,6 +173,7 @@ Route::prefix('atende')->group(function () {
     Route::get('listar-demandas-prazo/{prazoDemanda}', 'AtendeDemandasController@listarDemandasUnidadePorPrazo');
     // viewdoRafael
     Route::get('minhas-demandas','AtendeDemandasController@viewMinhasDemandas');
+    Route::get('redirecionar-atende','AtendeDemandasController@viewRedirecionar');
     Route::get('gestao-atende','AtendeDemandasController@viewGerenciarDemandas');
 });
 

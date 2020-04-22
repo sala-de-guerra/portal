@@ -439,7 +439,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Histórico :</label><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalHistoricoleilaoNegativoCompleto"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button></button> 
+                                            <label>Histórico :</label><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalHistoricoleilaoNegativoCompleto"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button>
                                             <p id="historicoLeilaoNegativo"></p>
                                         </div>
                                     </div>
