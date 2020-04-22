@@ -38,29 +38,23 @@
         <div class="card card-default">       
             <div class="card-body">
                 
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="tblminhasDemandas" class="table table-bordered table-striped dataTable">
-                                 <thead>
-                                    <tr>
-                                        <th>Equipe</th>
-                                        <th>Atividade</th>
-                                        <th>Limite atendimento</th>
-                                        <th>Contrato</th>
-                                        <th>Assunto</th>
-                                        <th>Breve descrição</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                    <tbody>
+                <form>
+                    <div class="form-group">
+                       
+                        <label for="exampleFormControlSelect1">Selecione o Destinatário</label>
+                        <select class="form-control" id="selectDestinatario" name="matriculaResponsavelAtividade">
+     
+                        </select>
 
-                                    </tbody>
-      
-                             </table>
-                        </div>
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>
+                            <textarea class="form-control" name="motivoRedirecionamento" rows="3"></textarea>
+                          </div>
+
+
+                    </div><br>
+                    <button style="float: right;" type="submit" class="btn btn-primary">Enviar</button>
+                  </form>
 
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
@@ -93,6 +87,6 @@
 @section('js')
 <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
-<script src="{{ asset('js/portal/atende/minhas-demandas.js') }}"></script>
+<script src="{{ asset('js/portal/atende/redirecionar-demandas.js') }}"></script>
 
 @stop

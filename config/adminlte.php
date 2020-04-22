@@ -259,22 +259,22 @@ return [
 
 
         // ['header' => 'IMÓVEIS CAIXA'],
-        [
-            'text' => 'Pesquisar Imóvel',
-            'url'  => '/pesquisar',
-            'icon' => 'fas fa-lg fa-fw fa-search mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')
-        ],
+        // [
+        //     'text' => 'Pesquisar Imóvel',
+        //     'url'  => '/pesquisar',
+        //     'icon' => 'fas fa-lg fa-fw fa-search mr-2',
+        //     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')
+        // ],
         [
             'text' => 'Preparar e Ofertar',
             'icon' => 'fas fa-lg fa-fw fa-sign mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
             'submenu' => [
                 [
                     'text' => 'Leilões Negativos',
                     'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/estoque-imoveis/leiloes-negativos',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
                 ]
             ],
         ],
@@ -330,12 +330,6 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 // [
-                //     'text' => 'Controle Pagamento Sinal',
-                //     'icon'    => 'fas fa-lg fa-fw fa-search-dollar mr-2',
-                //     'url'  => '/estoque-imoveis/monitora-pagamento-sinal',
-                //     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
-                // ],
-                // [
                 //     'text' => 'level_two',
                 //     'url'  => '#',
                 // ],
@@ -354,19 +348,19 @@ return [
         [
             'text'       => 'Fornecedores',
             'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE'
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], //             
             'submenu' => [
                 [
                     'text' => 'Despachantes',
                     'icon'       => 'fas fa-lg fa-fw fa-id-card-alt mr-2',
                     'url'  => '/fornecedores/controle-despachantes/',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
                 ],
                 [
                     'text' => 'Leiloeiros',
                     'icon'       => 'fas fa-lg fa-fw fa-gavel mr-2',
                     'url'  => '/fornecedores/controle-leiloeiros/',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR', env('NOME_NOSSA_UNIDADE')
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
                 ]
     
             ],

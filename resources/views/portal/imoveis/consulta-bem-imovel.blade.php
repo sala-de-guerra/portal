@@ -15,9 +15,13 @@
         <h1 class="m-0 text-dark">Imóvel CAIXA nº <p class="d-inline" id="numeroBem"></p></h1>
     </div>
     <div class="col-sm-4">
-    <button style="background-color: #ffa500; color: white;" type="button" class="btn" data-toggle="modal" data-target="#modalAtende">
-     <b>+ Atende</b>  
-    </button>
+        @if (env('APP_ENV') != 'PRODUCAO')
+            @if (in_array(session()->get('acessoEmpregadoPortal'), ['DESENVOLVEDOR'])) <!-- env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR'-->
+        <button style="background-color: #ffa500; color: white;" type="button" class="btn" data-toggle="modal" data-target="#modalAtende">
+            <b>+ Atende</b>  
+        </button>
+            @endif
+        @endif
     </div>
     <div class="col-sm-4">
         <ol class="breadcrumb float-sm-right">
