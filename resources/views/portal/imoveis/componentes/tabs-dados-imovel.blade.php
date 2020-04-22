@@ -1067,26 +1067,29 @@
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="alert" style="background-color: #fff9c2;" >
-                                    <div></div>
-                                        <i class="fas fa-exclamation-triangle"></i> ATENÇÃO:
-                                            Envie a autorização apenas após o pagamento da PP15
+                        
+                            @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="alert" style="background-color: #fff9c2;" >
+                                        <div>
+                                            <i class="fas fa-exclamation-triangle"></i> ATENÇÃO:
+                                                Envie a autorização apenas após o pagamento da PP15
+                                        </div>
                                     </div>
                                 </div>
-                            <div class="col-sm-6">
-                                @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
-                
+                                <div class="col-sm-6">
                                     <button class="btn btn-primary float-right" onclick="avisoMensageria('/estoque-imoveis/mensagens-automaticas/autorizacao-contratacao/{{ $numeroContrato ?? $contratoFormatado }}')">
                                         <i class="far fa-lg fa-envelope m-2"></i>
                                         Enviar Autorização de Contratação
                                     </button>
                                 </div>
-                                @endIf
+                           
+                            @endIf
+                            <div class="col-sm-12">
                                 <br>
                                 <br>
-                                </div>
+                                
                                 <table id="tblMensagensEnviadas" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
