@@ -149,10 +149,10 @@ class CadastraAcessoPortal
         } elseif (in_array($this->getUnidade(), $this->arrayMatriz)) {
             $this->nivelAcesso = 'MATRIZ';
         } elseif (in_array($this->getUnidade(), $this->arrayCodigoUnidadesGilie)) {
-            if(in_array(session('codigoFuncao'), $this->arrayCodigoFuncaoGestao)) {
-                $this->nivelAcesso = 'GESTOR';
-            } elseif (in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
+            if(in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
                 $this->nivelAcesso = 'DESENVOLVEDOR';
+            } elseif (in_array(session('codigoFuncao'), $this->arrayCodigoFuncaoGestao)) {
+                $this->nivelAcesso = 'GESTOR';
             } elseif($this->getEventual()) {
                 $this->nivelAcesso = 'EVENTUAL';
             } else {
