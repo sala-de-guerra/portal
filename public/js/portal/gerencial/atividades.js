@@ -462,6 +462,7 @@ function colocaBotoes(){
             $('#cardTabelaDiv').css('visibility', 'hidden');
     }
 }
+
 function SIMCheck() {
     if (document.getElementById('CheckS').checked) {
         document.getElementById('visibilidade').style.visibility = 'visible';
@@ -469,3 +470,9 @@ function SIMCheck() {
         document.getElementById('visibilidade').style.visibility = 'hidden';
     }
 }
+$('#alteraicon').click(function(){
+    $('#alteraVisibilidade').css('visibility', 'visible');
+  });
+  $('#naoaltera').click(function(){
+    $('#alteraVisibilidade').css('visibility', 'hidden');
+  });

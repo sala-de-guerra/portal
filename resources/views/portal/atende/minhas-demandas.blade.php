@@ -44,7 +44,7 @@
                             <table id="tblminhasDemandas" class="table table-bordered table-striped dataTable">
                                  <thead>
                                     <tr>
-                                        <th>Equipe</th>
+                                        <th>ID</th>
                                         <th>Atividade</th>
                                         <th>Limite atendimento</th>
                                         <th>Contrato</th>
@@ -61,12 +61,9 @@
                         </div>
                     </div>
                 </div>
-
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
-
-
 </div> <!-- /.row -->
 
 
@@ -94,5 +91,4 @@
 <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/atende/minhas-demandas.js') }}"></script>
-
 @stop

@@ -149,8 +149,11 @@ class GestaoEquipesAtividadesController extends Controller
             DB::commit();
             return response('atividade cadastrada com sucesso', 200);
         } catch (\Throwable $th) {
-            dd($th);
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
             DB::rollback();
             return response('Não foi possível cadastrar a atividade', 500);
         }
@@ -201,8 +204,12 @@ class GestaoEquipesAtividadesController extends Controller
             $editarAtividade->sinteseAtividade          = !in_array($sinteseAtividade, [null, 'NULL', '']) ? $sinteseAtividade : $editarAtividade->sinteseAtividade;
             $editarAtividade->responsavelEdicao         = session('matricula');
             $editarAtividade->prazoAtendimento          = !in_array($prazoAtendimento, [null, 'NULL', '']) ? $prazoAtendimento : $editarAtividade->prazoAtendimento;
-            $editarAtividade->incluirAtividadeAtende    = !in_array($incluirAtividadeAtende, [null, 'NULL', '']) ? $incluirAtividadeAtende : $editarAtividade->incluirAtividadeAtende;
-            $editarAtividade->iconeAtividade            = !in_array($iconeAtividade, [null, 'NULL', '']) ? $iconeAtividade : $editarAtividade->iconeAtividade;
+            if (isset($incluirAtividadeAtende)) {
+                $editarAtividade->incluirAtividadeAtende    = !in_array($incluirAtividadeAtende, [null, 'NULL', '']) ? $incluirAtividadeAtende : $editarAtividade->incluirAtividadeAtende;
+            }
+            if (isset($incluirAtividadeAtende)) {
+                $editarAtividade->iconeAtividade            = !in_array($iconeAtividade, [null, 'NULL', '']) ? $iconeAtividade : $editarAtividade->iconeAtividade;
+            }
             $editarAtividade->dataAtualizacaoAtividade  = date("Y-m-d H:i:s", time());
 
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
@@ -218,7 +225,11 @@ class GestaoEquipesAtividadesController extends Controller
             DB::commit();
             return response('Atividade editada com sucesso', 200);
         } catch (\Throwable $th) {
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
             DB::rollback();
             return response('Não foi possível editar a atividade', 500);
         }
@@ -261,8 +272,11 @@ class GestaoEquipesAtividadesController extends Controller
             DB::commit();
             return response('atividade apagada com sucesso', 200);
         } catch (\Throwable $th) {
-            dd($th);
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
             DB::rollback();
             return response('Não foi possível apagar a atividade', 500);
         }
@@ -300,8 +314,11 @@ class GestaoEquipesAtividadesController extends Controller
             DB::commit();
             return response('empregado designado com sucesso', 200);
         } catch (\Throwable $th) {
-            dd($th);
-            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
             DB::rollback();
             return response('Não foi possível designar o empregado', 500);
         }
