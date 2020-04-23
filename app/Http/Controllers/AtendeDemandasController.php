@@ -53,12 +53,6 @@ class AtendeDemandasController extends Controller
         return view('portal.gerencial.gestao-atende');
         
     }
-    public function viewRedirecionar()
-    {
-        return view('portal.atende.redirecionar-atende');
-        
-    }
-    
     /**
      *
      * @return \Illuminate\Http\Response
