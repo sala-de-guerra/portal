@@ -41,15 +41,15 @@ class AvisoErroPortalPhpMailer
 
         switch (env('APP_ENV')) {
             case 'DESENVOLVIMENTO':
-                $mail->addAddress('c111710@mail.caixa');
+                // $mail->addAddress('c111710@mail.caixa');
                 $mail->addAddress('c098453@mail.caixa');
                 break;
             case 'HOMOLOGACAO':
-                $mail->addAddress('c111710@mail.caixa');
+                // $mail->addAddress('c111710@mail.caixa');
                 $mail->addAddress('c098453@mail.caixa');
                 break;
             case 'PRODUCAO':
-                $mail->addAddress('c111710@mail.caixa');
+                // $mail->addAddress('c111710@mail.caixa');
                 $mail->addAddress('c098453@mail.caixa');
                 $mail->addAddress('c079436@mail.caixa');
                 break;
