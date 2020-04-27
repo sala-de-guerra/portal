@@ -1007,7 +1007,7 @@
                                                     <label>Tipo de Histórico:</label>
                                                     <select name="tipoAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
-                                                        <option value="ANALISE">ANÁLISE</option>
+                                                        <option value="ANALISE">ANÁLISE/SUBSIDIO</option>
                                                         <option value="EMAIL">E-MAIL</option>
                                                         <option value="PRESENCIAL">PRESENCIAL</option>
                                                         <option value="OUVIDORIA">SAC/OUVIDORIA</option>
