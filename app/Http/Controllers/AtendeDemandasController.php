@@ -209,7 +209,7 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $request->contratoFormatado;
             $historico->tipo            = "CADASTRO";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 4, '0', STR_PAD_LEFT) . " - ATIVIDADE: " . $dadosAtividade->nomeAtividade;
+            $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT) . " - ATIVIDADE: " . $dadosAtividade->nomeAtividade;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
@@ -303,7 +303,7 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $responderAtende->contratoFormatado;
             $historico->tipo            = "RESPOSTA";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "ATENDE #" . str_pad($novaDemandaAtende->idAtende, 4, '0', STR_PAD_LEFT) . $request->respostaAtende;
+            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " " . $request->respostaAtende;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
@@ -357,7 +357,7 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $redirecionarAtende->contratoFormatado;
             $historico->tipo            = "REDIRECIONADO";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "ATENDE #" . str_pad($novaDemandaAtende->idAtende, 4, '0', STR_PAD_LEFT) . $request->motivoRedirecionamento;
+            $historico->observacao      = "ATENDE #" . str_pad($redirecionarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " " . $request->motivoRedirecionamento;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
@@ -401,7 +401,7 @@ class AtendeDemandasController extends Controller
             // CAPTURAR AS QUANTIDADE DE DEMANDAS ATENDE DAQUELA UNIDADE
             $listaEquipesUnidade = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->get();
             foreach ($listaEquipesUnidade as $atende) {
-                $diasParaVencerPrazo = Carbon::diffInBusinessDays(Carbon::parse($atende->prazoAtendimentoAtende));
+                $diasParaVencerPrazo = Carbon::parse('2020-04-29')->diffInBusinessDays(Carbon::parse('2020-04-28'));
                 if ($diasParaVencerPrazo < 0) {
                     $demandasVencidas++;
                 } else {
