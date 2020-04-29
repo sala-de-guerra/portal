@@ -191,8 +191,8 @@ class LeilaoNegativoController extends Controller
             // CAPTURA OS DADOS DA DEMANDA
             $atualizarContratoLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $contratoFormatado)->first();
             $atualizarContratoLeilaoNegativo->numeroLeilao                                      = !in_array($request->numeroLeilao, [null, 'NULL', '']) ? $request->numeroLeilao : $atualizarContratoLeilaoNegativo->numeroLeilao;
-            $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro            = !in_array($request->previsaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $dataPrevisaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
-            $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante   = !in_array($request->previsaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $dataPrevisaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
+            $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro            = !in_array($request->previsaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $dataPrevisaoRecebimentoDocumentosLeiloeiro->format('Y-m-d') : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
+            $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante   = !in_array($request->previsaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $dataPrevisaoDisponibilizacaoDocumentosAoDespachante->format('Y-m-d') : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
             $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio                             = !in_array($request->cidadeComarcaCartorio, [null, 'NULL', '']) ? mb_convert_case($request->cidadeComarcaCartorio, MB_CASE_UPPER, 'UTF-8') : $atualizarContratoLeilaoNegativo->cidadeComarcaCartorio;
             $atualizarContratoLeilaoNegativo->codigoCorreio                                     = !in_array($request->codigoCorreio, [null, 'NULL', '']) ? mb_convert_case($request->codigoCorreio, MB_CASE_UPPER, 'UTF-8') : $atualizarContratoLeilaoNegativo->codigoCorreio;
             $atualizarContratoLeilaoNegativo->dataAlteracao                                     = date("Y-m-d H:i:s", time());
@@ -490,8 +490,8 @@ class LeilaoNegativoController extends Controller
             $contratosLeilao = LeilaoNegativo::where('dataSegundoLeilao', $objLeilaoNegativo->dataSegundoLeilao)->where('unidadeResponsavel', $objLeilaoNegativo->unidadeResponsavel)->where('contratoAtivo', true)->get();
             foreach ($contratosLeilao as $contrato) {
                 $contrato->numeroLeilao                                     = !in_array($request->numeroLeilao, [null, 'NULL', '']) ? $request->numeroLeilao : $atualizarContratoLeilaoNegativo->numeroLeilao;
-                $contrato->previsaoRecebimentoDocumentosLeiloeiro           = !in_array($dataPrevisaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $request->previsaoRecebimentoDocumentosLeiloeiro : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
-                $contrato->previsaoDisponibilizacaoDocumentosAoDespachante  = !in_array($dataPrevisaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $request->previsaoDisponibilizacaoDocumentosAoDespachante : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
+                $contrato->previsaoRecebimentoDocumentosLeiloeiro           = !in_array($dataPrevisaoRecebimentoDocumentosLeiloeiro, [null, 'NULL', '']) ? $dataPrevisaoRecebimentoDocumentosLeiloeiro->format('Y-m-d') : $atualizarContratoLeilaoNegativo->previsaoRecebimentoDocumentosLeiloeiro;    
+                $contrato->previsaoDisponibilizacaoDocumentosAoDespachante  = !in_array($dataPrevisaoDisponibilizacaoDocumentosAoDespachante, [null, 'NULL', '']) ? $dataPrevisaoDisponibilizacaoDocumentosAoDespachante->format('Y-m-d') : $atualizarContratoLeilaoNegativo->previsaoDisponibilizacaoDocumentosAoDespachante;
                 $contrato->dataAlteracao                                    = date("Y-m-d H:i:s", time());
                 $contrato->save();
             }

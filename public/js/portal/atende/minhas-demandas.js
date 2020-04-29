@@ -20,7 +20,7 @@ $(document).ready(function(){
                             // botão dropdown
                         '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
                             '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
-                            '<a class="dropdown-item" type="button" id="btn-editar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalEditar' + item.idAtende + '">' + '<i class="far fa-edit">' + '</i>' + ' Tratar' + '</a>' +
+                            '<a class="dropdown-item" type="button" id="btn-editar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalTratar' + item.idAtende + '">' + '<i class="far fa-edit">' + '</i>' + ' Tratar' + '</a>' +
                             '<a class="dropdown-item"  type="button" id="btn-direcionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalDirecionar' + item.idAtende + '">'+ '<i class="fas fa-exchange-alt">' + '</i>' + ' Direcionar</a>' +
                         '</div>' +
                             // Modal de consulta
@@ -50,6 +50,37 @@ $(document).ready(function(){
                                 '</div>' + 
                             '</div>' + 
                         '</div>' +
+                        // Modal tratamento
+                    '<div class="modal fade" id="modalTratar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                        '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                            '<div class="modal-content">' +
+                                '<form method="post" action="/atende/responder/' + item.idAtende + '">' +
+                                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                        '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                                    '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                        '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Tratar Demanda' + '</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                        '</button>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+                                        '<div class="container">' +
+                                            '<div>' +
+
+                                            '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
+                                            '<textarea class="form-control" name="respostaAtende" rows="3"></textarea>'+
+
+                                            '</div>' +
+                                        '</div>' + 
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                                        '<button type="submit" class="btn btn-success">Responder</button>' +
+                                    '</div>' +
+                                '</form>'+ 
+                            '</div>' + 
+                        '</div>' + 
+                    '</div>' +
                         // modal redirecionar
                             '<div class="modal fade" id="modalDirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
