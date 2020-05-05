@@ -13,6 +13,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
 
     if (idBarra == "progressBarGeral") {
         switch (statusAtual) {
+            case 'Venda Direta Ocupante':
             case 'Em Análise':
             case 'Em Cadastramento':
             case 'Aguarda Justif. Avaliação':
@@ -26,7 +27,8 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
             case 'Laudo Vencido':
             case 'Licitação':
             case 'Montagem de Licitação':
-                statusAtual = 'Preparaçâo';
+            case 'Venda Direito Preferência':
+                statusAtual = 'Preparação';
                 break;
             case 'Aguarda 1º Leilão SFI':
             case 'Aguarda 2º Leilão SFI':
@@ -38,11 +40,9 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
                 statusAtual = 'Contratação';
                 break;
             case 'Vendido':
-            case 'Venda Direito Preferência':
             case 'Venda Direta Beneficiário':
             case 'Venda Direta Especial':
             case 'Venda Direta FAR':
-            case 'Venda Direta Ocupante':
             case 'Venda por credenciado':
                 statusAtual = 'Vendido';
                 break;

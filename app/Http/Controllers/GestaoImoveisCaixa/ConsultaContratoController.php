@@ -278,6 +278,7 @@ class ConsultaContratoController extends Controller
             'nomeStatusDossie'                                  => $nomeStatusDoDossie,
             'tipoFluxoContratacao'                              => $fluxoAgenciaOuCca,
             'dataParecerConformidade'                           => $dataParecerConformidade == null ? $dataParecerConformidade : Carbon::parse($dataParecerConformidade)->format('Y-m-d'),
+            'statusProposta'                                    => $contrato->STATUS_PROPOSTA,
         ];
         return json_encode($dadosContrato);
     }

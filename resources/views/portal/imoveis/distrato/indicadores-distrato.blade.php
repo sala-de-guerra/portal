@@ -43,16 +43,16 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">
-                        <canvas id="myChart" height="80pt"></canvas>
-                            <!-- <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
+
+                             <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Não Iniciadas</th>
-                                        <th>Em tratamento GILIE</th>
-                                        <th>Em tratamento Agência</th>
-                                        <th>Pendente Jurir / EMGEA</th>
-                                        <th>Concluídas</th>
-                                        <th>Tempo Médio de Atendimento</th>
+                                        <th style="background-color: #FF4500; color: white;">Não Iniciadas</th>
+                                        <th style="background-color: RoyalBlue; color: white;">Em tratamento GILIE</th>
+                                        <th style="background-color: DeepSkyBlue; color: white;">Em tratamento Agência</th>
+                                        <th style="background-color: DodgerBlue; color: white;">Pendente Jurir / EMGEA</th>
+                                        <th style="background-color: LimeGreen; color: white;">Concluídas</th>
+                                        <th style="background-color: CornflowerBlue; color: white;">Tempo Médio de Atendimento</th>
                                     </tr>
                                 </thead>
 
@@ -60,7 +60,8 @@
                                     
                                 </tbody>
                                 
-                            </table> -->
+                            </table> 
+                            <canvas id="myChart" height="80pt"></canvas>
                         </div> <!-- /.col-sm-12 -->
                     </div> <!-- /.row -->
                                    </div> <!-- /.card-body -->
