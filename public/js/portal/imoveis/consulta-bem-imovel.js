@@ -62,6 +62,8 @@ $(document).ready(function(){
         // CASO NÃO EXISTA DADOS DE PROPONENTE REMOVER A RESPECTIVA ABA DA CONSULTA
         if ($('#nomeProponente').html() == '' || $('#nomeProponente').html() == null) {
             $('#custon-tabs-li-contratacao').remove();
+        } else if ($('#statusProposta').html() == 'Desistência') {
+            $('#custon-tabs-li-contratacao').remove()
         }
     });
 

@@ -819,12 +819,12 @@
                                     <p id="quantidadeParcelasProposta"></p>
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-3">
+                            <div style="visibility: hidden;" class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Data Assinatura Contrato:</label>
-                                    <p id="dataAssinaturaContrato" class="formata-data-sem-hora"></p>
+                                    <label>Status da Proposta:</label>
+                                    <p id="statusProposta"></p>
                                 </div>
-                            </div> -->
+                            </div> 
                         </div>
 
                         <div class="row">
