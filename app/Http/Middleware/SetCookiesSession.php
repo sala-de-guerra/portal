@@ -70,6 +70,7 @@ class SetCookiesSession
                     'dataAtualizacaoBaseSimov' => Carbon::parse($baseSimov->DATA_ULTIMA_ALTERACAO)->format('d/m/Y')
                 ]); 
 
+
             }
         }
         return $next($request);

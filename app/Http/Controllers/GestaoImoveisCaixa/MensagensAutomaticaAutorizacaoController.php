@@ -415,7 +415,8 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             AND ([TIPO_VENDA] LIKE '%Venda Online%' OR [TIPO_VENDA] like '%Venda Direta Online%' OR [TIPO_VENDA] LIKE '%1º Leilão SFI%' OR [TIPO_VENDA] LIKE '%2º Leilão SFI%')
             AND [DATA_ALTERACAO_STATUS] >=  DATEADD(DAY, -60 , GETDATE())
             AND ([CLASSIFICACAO] = 'PANAMERICANO' OR [CLASSIFICACAO] LIKE '%Patrimonial%')
-			AND CONTROLE_EMAIL.[numeroContrato] IS NULL OR (CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
+            AND (CONTROLE_EMAIL.[numeroContrato] IS NULL OR CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
+            AND SIMOV.[BEM_FORMATADO] != '01.5555.1875119-2' -- CONTRATO RELACIONADO INDEVIDAMENTE
         ORDER BY
             'grupoClassificacao'
             ,'tipoDeVenda'
@@ -508,8 +509,9 @@ class MensagensAutomaticaAutorizacaoController extends Controller
 			AND SIMOV.[BEM_FORMATADO] != '07.1226.0015675-9' -- CONTRATO RELACIONADO INDEVIDAMENTE
 			AND SIMOV.[BEM_FORMATADO] != '08.5555.2589920-3' -- CONTRATO RELACIONADO INDEVIDAMENTE
 			AND SIMOV.[BEM_FORMATADO] != '08.4444.1018599-0' -- CONTRATO RELACIONADO INDEVIDAMENTE
-			AND SIMOV.[BEM_FORMATADO] != '08.0238.0064322-7' -- CONTRATO RELACIONADO INDEVIDAMENTE
-			AND CONTROLE_EMAIL.[numeroContrato] IS NULL OR (CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
+            AND SIMOV.[BEM_FORMATADO] != '08.0238.0064322-7' -- CONTRATO RELACIONADO INDEVIDAMENTE
+            AND SIMOV.[BEM_FORMATADO] != '01.5555.1875119-2' -- CONTRATO RELACIONADO INDEVIDAMENTE
+			AND (CONTROLE_EMAIL.[numeroContrato] IS NULL OR CONTROLE_EMAIL.[emailProponente] != EMAIL_CLIENTES.[E-MAIL PROPONENTE] AND CONTROLE_EMAIL.[emailCorretor] != SIMOV.[EMAIL_CORRETOR])
         ORDER BY 
             grupoClassificacao
             , tipoDeVenda
@@ -591,7 +593,8 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
             LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
         WHERE 
-			SIMOV.[BEM_FORMATADO] = '$numeroContratoFormatado'
+            SIMOV.[BEM_FORMATADO] = '$numeroContratoFormatado'
+            AND SIMOV.[STATUS_PROPOSTA]='Classificada'
         ORDER BY 
             grupoClassificacao
             , tipoDeVenda

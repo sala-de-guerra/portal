@@ -63,7 +63,8 @@ class ImoveisCaixaPhpMailer
         
         switch (env('APP_ENV')) {
             case 'DESENVOLVIMENTO':
-                $mail->addAddress('c111710@mail.caixa');
+                // $mail->addAddress('c111710@mail.caixa');
+                $mail->addAddress('c098453@mail.caixa');
                 break;
             case 'HOMOLOGACAO':
                 if (isset($objRelacaoEmailUnidades->emailAgencia)) {
@@ -78,7 +79,7 @@ class ImoveisCaixaPhpMailer
                     $mail->addCC($request->emailCorretor);
                 }
                 $mail->addBCC('GILIESP09@caixa.gov.br');
-                $mail->addBCC('c111710@mail.caixa');
+                // $mail->addBCC('c111710@mail.caixa');
                 $mail->addBCC('c098453@mail.caixa');
                 $mail->addBCC('c141203@mail.caixa');
                 $mail->addBCC('c079436@mail.caixa');
@@ -99,7 +100,7 @@ class ImoveisCaixaPhpMailer
                     }
                 }
                 $mail->addBCC('GILIESP09@caixa.gov.br');
-                $mail->addBCC('c111710@mail.caixa');
+                // $mail->addBCC('c111710@mail.caixa');
                 $mail->addBCC('c098453@mail.caixa');
                 $mail->addBCC('c141203@mail.caixa');
                 $mail->addBCC('c079436@mail.caixa');
