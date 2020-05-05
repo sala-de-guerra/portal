@@ -593,7 +593,8 @@ class MensagensAutomaticaAutorizacaoController extends Controller
             LEFT JOIN [dbo].[TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL] AS AGENCIA ON SIMOV.[AGENCIA_CONTRATACAO_PROPOSTA] = AGENCIA.[nomeAgencia]
             LEFT JOIN [TABELA_EMAIL_PROPONETES] AS EMAIL_CLIENTES ON SIMOV.[CPF_CNPJ_PROPONENTE] = EMAIL_CLIENTES.[CPF/CNPJ PROPONENTE]
         WHERE 
-			SIMOV.[BEM_FORMATADO] = '$numeroContratoFormatado'
+            SIMOV.[BEM_FORMATADO] = '$numeroContratoFormatado'
+            AND SIMOV.[STATUS_PROPOSTA]='Classificada'
         ORDER BY 
             grupoClassificacao
             , tipoDeVenda
