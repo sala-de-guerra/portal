@@ -92,8 +92,10 @@ Route::prefix('estoque-imoveis')->group(function () {
     // ROTAS DO PROJETO DE CONFORMIDADE CONTRATACAO
     Route::prefix('conformidade-contratacao')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\ConformidadeContratataoController@index');
+        Route::get('/tratamento/{contratoFormatado}', 'GestaoImoveisCaixa\ConformidadeContratataoController@tratamento');
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
         // Route::get('emitir-proposta/{contratoFormatado}', 'GestaoImoveisCaixa\ConformidadeContratataoController@emitirPropostaContratacao');
+        Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\RegistroAtendimentoController@registrarHistoricoConformidade');
     });
 
     // ROTAS DO PROJETO DE LEILÕES NEGATIVOS
@@ -113,7 +115,8 @@ Route::prefix('estoque-imoveis')->group(function () {
 
     // ROTA PARA REGISTRO DE HISTÓRICO
     Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\RegistroAtendimentoController@registrarHistorico');
-
+    
+    
     // ROTAS DO PROJETO DE MENSAGENS AUTOMÁTICAS
     Route::prefix('mensagens-automaticas')->group(function () {
         Route::get('autorizacao-contratacao', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarMensageriasAutorizacaoContratacao');

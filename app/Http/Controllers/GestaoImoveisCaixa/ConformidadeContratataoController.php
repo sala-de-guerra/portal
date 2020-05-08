@@ -24,6 +24,11 @@ class ConformidadeContratataoController extends Controller
         return view('portal.imoveis.contratacao.controle-conformidade');
     }
 
+    public function tratamento()
+    {
+        return view('portal.imoveis.contratacao.tratamento-conformidade');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

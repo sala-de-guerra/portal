@@ -138,8 +138,8 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
     <br>
 
     <p>
-        4.1   Cabe ao comprador tomar todas as providências necessárias para o registro do Contrato de financiamento habitacional 
-        ou Contrato de Aquisição à Vista com FGTS junto ao Oficial de Registro de Imóveis competente, conforme <span style="color: red;">%MO_UTILIZADO%</span>;
+        4.1   Cabe ao comprador tomar todas as providências necessárias para o registro da escritura
+         junto ao Oficial de Registro de Imóveis competente, conforme modelo -><span style="color: red;">%MO_UTILIZADO%</span>;
     </p>
 
     <p>

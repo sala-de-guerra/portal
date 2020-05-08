@@ -1,6 +1,6 @@
 function _formataDatatableComData (){
     $('.dataTable').DataTable({
-        "order": [[ 0, "desc" ]],
+        "order": [[ 2, "asc" ]],
         columnDefs: [
             {type: 'date-uk', targets: 2}
         ],
