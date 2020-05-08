@@ -49,16 +49,12 @@
                             <thead>
                                 <tr>
                                     <th>CHB</th>
-                                    <th>Agência</th>
-                                    <th>Tipo de Venda</th>
+                                    <th>Classificação</th>
                                     <th>Tipo de Proposta</th>
-                                    <th>Valor de Entrada</th>
-                                    <th>Valor Recebido</th>
                                     <th>Status</th>
-                                    <th>Proposta</th>
                                     <th>Data Entrada</th>
-                                    <th>Copiar Link do Servidor</th>
-                                    <th>Observações</th>
+                                    <th>Sinal Pago</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,16 +85,12 @@
                             <thead>
                                 <tr>
                                     <th>CHB</th>
-                                    <th>Agência</th>
-                                    <th>Tipo de Venda</th>
+                                    <th>Classificação</th>
                                     <th>Tipo de Proposta</th>
-                                    <th>Recursos Próprios</th>
-                                    <th>Total Recebido</th>
                                     <th>Status CIOPE</th>
-                                    <th>Card Agrupamento</th>
                                     <th>Data Entrada</th>
-                                    <th>Copiar Link do Servidor</th>
-                                    <th>Observações</th>
+                                    <th>Sinal Pago</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -128,16 +120,12 @@
                             <thead>
                                 <tr>
                                     <th>CHB</th>
-                                    <th>Agência</th>
-                                    <th>Tipo de Venda</th>
+                                    <th>Classificação</th>
                                     <th>Tipo de Proposta</th>
-                                    <th>Recursos Próprios</th>
-                                    <th>Total Recebido</th>
                                     <th>Status CIOPE</th>
-                                    <th>Card Agrupamento</th>
                                     <th>Data Entrada</th>
-                                    <th>Copiar Link do Servidor</th>
-                                    <th>Observações</th>
+                                    <th>Sinal Pago</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -163,4 +151,6 @@
 @section('js')
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/portal/imoveis/contratacao/controle-conformidade.js') }}"></script>
+    <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
+    <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
 @stop
