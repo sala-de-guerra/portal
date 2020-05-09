@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
+use App\Models\HistoricoPortalGilie;
 use App\Classes\Ldap;
 use App\Http\Controllers\Controller;
 use App\Models\GestaoImoveisCaixa\ConformidadeContratacao;
@@ -183,6 +185,44 @@ class ConformidadeContratataoController extends Controller
     //     return json_encode($dadosContrato);
     //     return json_encode($dadosProposta);
     // }
+    public function registrarHistoricoConformidade(Request $request, $numeroContratoFormatado)
+    
+    {      
+        try {
+            DB::beginTransaction();
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $numeroContratoFormatado;
+            $historico->tipo = $request->tipoAtendimento;
+            $historico->atividade = $request->atividadeAtendimento;
+            $historico->observacao = strip_tags($request->observacaoAtendimento);
+            // dd(date("Y-m-d H:i:s", time()));
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
+            
+            $historico->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Histórico registrado!");
+            $request->session()->flash('corpoMensagem', "O seu registro de histórico foi cadastrado com sucesso.");
+
+            DB::commit();
+            return response('deu certo', 200);
+        } catch (\Throwable $th) {
+            // dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Histórico não registrado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do histórico. Tente novamente");
+            return response('não deu certo', 500);
+        }
+        // return redirect("/estoque-imoveis/conformidade-contratacao");
+    }
 
     /**
      * Update the specified resource in storage.
