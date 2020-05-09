@@ -10,7 +10,7 @@
     <div class="col-sm-6">
 
         <h1 class="m-0 text-dark">
-            Controle de Conformidade
+            Fila Única
         </h1>
 
     </div>
@@ -18,7 +18,7 @@
     <div class="col-sm-6">
 
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/controle-conformidade"> Controle de Conformidade</a> </li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/controle-conformidade"> Fila Única</a> </li>
         </ol>
 
     </div>
@@ -50,9 +50,9 @@
                                 <tr>
                                     <th>CHB</th>
                                     <th>Classificação</th>
-                                    <th>Tipo de Proposta</th>
-                                    <th>Status</th>
                                     <th>Data Entrada</th>
+                                    <th>Tipo de Proposta</th>
+                                    <th>Status CIOPE</th>
                                     <th>Sinal Pago</th>
                                     <th>Ações</th>
                                 </tr>
@@ -86,9 +86,9 @@
                                 <tr>
                                     <th>CHB</th>
                                     <th>Classificação</th>
+                                    <th>Data Entrada</th>
                                     <th>Tipo de Proposta</th>
                                     <th>Status CIOPE</th>
-                                    <th>Data Entrada</th>
                                     <th>Sinal Pago</th>
                                     <th>Ações</th>
                                 </tr>
@@ -121,9 +121,9 @@
                                 <tr>
                                     <th>CHB</th>
                                     <th>Classificação</th>
+                                    <th>Data Entrada</th>
                                     <th>Tipo de Proposta</th>
                                     <th>Status CIOPE</th>
-                                    <th>Data Entrada</th>
                                     <th>Sinal Pago</th>
                                     <th>Ações</th>
                                 </tr>

@@ -95,7 +95,7 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('/tratamento/{contratoFormatado}', 'GestaoImoveisCaixa\ConformidadeContratataoController@tratamento');
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
         // Route::get('emitir-proposta/{contratoFormatado}', 'GestaoImoveisCaixa\ConformidadeContratataoController@emitirPropostaContratacao');
-        Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\RegistroAtendimentoController@registrarHistoricoConformidade');
+        Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\ConformidadeContratataoController@registrarHistoricoConformidade');
     });
 
     // ROTAS DO PROJETO DE LEILÕES NEGATIVOS

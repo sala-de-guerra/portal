@@ -39,7 +39,7 @@ $(document).ready(function(){
                     '</div>' +
                     // Modal de Observação
                 '<div class="modal fade" id="modalOBS'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
-                '<div class="modal-dialog modal-lg"" role="document">'+
+                '<div class="modal-dialog" role="document">'+
                     '<div class="modal-content">'+
                     '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                     '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Observação' + '</h5>' +
@@ -48,8 +48,6 @@ $(document).ready(function(){
                         '</button>'+
                     '</div>'+
                     '<div class="modal-body" id="modal'+ item.numeroContrato+'">'+
-
-
                     '</div>'+
                 '</div>'+
                 '</div>'+
@@ -71,42 +69,57 @@ $(document).ready(function(){
         $.get( '/estoque-imoveis/consulta-historico-contrato/'+item.contratoFormatado, function(data) {
            
             var form =
-                    '<form id="formAjax" method="post" action="/estoque-imoveis/conformidade-contratacao/registrar-historico/' + item.contratoFormatado+ '">' +
+                    '<form method="post" action="/estoque-imoveis/conformidade-contratacao/registrar-historico/' + item.contratoFormatado+ '">' +
                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                         '<input type="hidden" name="tipoAtendimento" value="ANALISE"></input>'+
                         '<input type="hidden" name="atividadeAtendimento" value="CONFORMIDADE"></input>'+
                         '<p>Contrato: <b>'+  item.contratoFormatado + '</b></p>' +
 
-                        '<p>Última Observação: </p>'+
+                        '<p>Última Observação </p>'+
                         '<span id="ultimaOBS'+ item.numeroContrato+'"></span>'+
 
                         '<div class="form-group">'+
-                        '<p>Nova Observação: </p>' +
-                            '<textarea name="observacaoAtendimento" class="form-control" rows="10" required></textarea>'+
+                        '<p>Nova Observação </p>' +
+                            '<textarea name="observacaoAtendimento" class="form-control" rows="5" required></textarea>'+
                         '</div>'+
                     '<div class="modal-footer">'+
-                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
-                        '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
+                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Voltar'+'</button>'+
+                        '<button type="submit" class="btn btn-primary">'+'Gravar'+'</button>'+
                     '</div>'+
                     '</form>'
+
             $('#modal'+item.numeroContrato).html(form)
 
-            $('#formAjax').submit( function(e) {
+            var resultado = JSON.parse(data)
+            $.each(resultado.historico, function(chave, valor) {
+                var analisaTipo = valor.atividade
+                var formataData = valor.data
+                var novaData = formataData.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
+                
+                if (analisaTipo == "CONFORMIDADE"){
+                 var data = 
+                 '<textarea class="form-control" rows="3" disabled>'+ valor.observacao +'</textarea>'+
+                '<small class="form-text text-muted">'+ 'incluida em <b>'+novaData+'</b> por <b>'+valor.matriculaResponsavel+'</b>.</small><br>'
+                 $('#ultimaOBS'+ item.numeroContrato).html(data)
+                }
+            })
+            $('form').submit( function(e) {
 
-                // e.preventDefault();
+                e.preventDefault();
             
                 let datas = JSON.stringify( $(this).serialize() );
                 let url = $(this).attr('action');
                 let method = $(this).attr('method');
             
-                console.log(datas);
-                console.log(url);
-                console.log(method);
+                // console.log(datas);
+                // console.log(url);
+                // console.log(method);
                 
                 $.ajax({
                     type: method,
                     url: url,
-                    data: {datas, csrfVar},
+                    // data: {datas, csrfVar},
+                    data: $(this).serialize(),
                     success: function (result){
                         
                         $('.modal').modal('hide');
@@ -129,41 +142,10 @@ $(document).ready(function(){
                     }
                     
                 });
-    
-            })
-      
-           
-            var resultado = JSON.parse(data)
-            $.each(resultado.historico, function(chave, valor) {
-                var analisaTipo = valor.atividade
-                if (analisaTipo == "CONFORMIDADE"){
-                 var data = '<textarea class="form-control" rows="5" disabled>'+ valor.observacao +'</textarea>'
-                 $('#ultimaOBS'+ item.numeroContrato).html(data)
-                }
+            
             })
         })
     })
-
-
-
-
-
-
-    $('#'+item.numeroContrato).click(function() {
-        $.get( '/estoque-imoveis/consulta-historico-contrato/'+item.contratoFormatado, function(data) {
-            var resultado = JSON.parse(data)
-            $.each(resultado.historico, function(chave, valor) {
-                var analisaTipo = valor.atividade
-                if (analisaTipo == "CONFORMIDADE"){
-                 var data = '<textarea class="form-control" rows="5" disabled>'+ valor.observacao +'</textarea>'
-                 $('#ultimaOBS'+ item.numeroContrato).html(data)
-                }
-            })
-        })
-    })
-
-
-
 
         });
     })).done(function() { 

@@ -318,7 +318,7 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 [
-                    'text' => 'Controle de Conformidade',
+                    'text' => 'Fila Única',
                     'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
