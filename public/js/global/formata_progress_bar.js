@@ -37,6 +37,8 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
             case 'Venda Direito Preferência':
             case 'Em Contratação':
             case 'Contratação pendente':
+            case 'Venda Direito Preferência':
+            case 'Venda Direta Ocupante':
                 statusAtual = 'Contratação';
                 break;
             case 'Vendido':
