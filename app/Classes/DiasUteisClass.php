@@ -5,6 +5,8 @@ namespace App\Classes;
 use Cmixin\BusinessDay;
 use Illuminate\Support\Carbon;
 
+// $dtaUtil = DiasUteisClass::contadorDiasUteis('2020-05-12', 3);
+
 class DiasUteisClass
 {
     public static function contadorDiasUteis($data, $quantidadeDiasUteis) 

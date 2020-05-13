@@ -58,7 +58,8 @@ class MonitoraPagamentoSinalController extends Controller
                                                         ->where('UNA',  $siglaGilie)
                                                         ->where(function($query) {
                                                             $query->where('STATUS_IMOVEL', 'Em Contratação')
-                                                                    ->orWhere('STATUS_IMOVEL', 'Contratação pendente');})
+                                                                    ->orWhere('STATUS_IMOVEL', 'Contratação pendente')
+                                                                    ;})
                                                         ->get();
         $listaContratosSemPagamentoSinal = [];                                              
         foreach ($consultaContratosSemPagamentoSinal as $contrato) {
@@ -71,7 +72,9 @@ class MonitoraPagamentoSinalController extends Controller
                         'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
                         'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
                         'statusSimov' => $contrato->STATUS_IMOVEL,
-                        'classificacaoImovel' =>$contrato->CLASSIFICACAO
+                        'classificacaoImovel' =>$contrato->CLASSIFICACAO,
+                        'bemFormatado' => $contrato->BEM_FORMATADO,
+                        'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
                     ]);
                 } 
             } else {
@@ -81,7 +84,9 @@ class MonitoraPagamentoSinalController extends Controller
                     'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
                     'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
                     'statusSimov' => $contrato->STATUS_IMOVEL,
-                    'classificacaoImovel' =>$contrato->CLASSIFICACAO
+                    'classificacaoImovel' =>$contrato->CLASSIFICACAO,
+                    'bemFormatado' => $contrato->BEM_FORMATADO,
+                    'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
                 ]);
             }
         }

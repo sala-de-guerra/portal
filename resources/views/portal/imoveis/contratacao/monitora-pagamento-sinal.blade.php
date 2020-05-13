@@ -38,7 +38,7 @@
 
 @section('content')
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-body">
@@ -61,7 +61,7 @@
                 </div> <!-- /.card-body -->
             </div> <!-- /.card -->
         </div> <!-- /.col -->
-    </div> <!-- /.row -->
+    </div> <!-- /.row --> --}}
 
 @stop
 

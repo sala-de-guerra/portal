@@ -27,6 +27,12 @@
                             <h5>Contratação</h5>
                         </a>
                     </li>
+
+                    <li style="display: none;" class="nav-item" id="custon-tabs-li-aviso">
+                        <a class="nav-link" id="custom-tabs-one-aviso-tab" data-toggle="pill" href="#custom-tabs-one-aviso" role="tab" aria-controls="custom-tabs-one-aviso" aria-selected="false">
+                            <h5>Contratação</h5>
+                        </a>
+                    </li>
                     
                     <li class="nav-item" id="custon-tabs-li-distrato">
                         <a class="nav-link" id="custom-tabs-one-distrato-tab" data-toggle="pill" href="#custom-tabs-one-distrato" role="tab" aria-controls="custom-tabs-one-distrato" aria-selected="false">
@@ -45,6 +51,7 @@
                             <h5>Mensagens</h5>
                         </a>
                     </li>
+
 
                 </ul>
             </div>
@@ -188,10 +195,17 @@
                                     <p id="descricaoImovel"></p>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Descrição Adicional:</label>
                                     <p id="descricaoAdicionalImovel"></p>
+                                </div>
+                            </div>
+                        
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Vinculação:</label>
+                                    <p id="GILIE"></p>
                                 </div>
                             </div>
                         </div>
@@ -967,7 +981,6 @@
                         </div> -->
                     </div>
 
-
                     <div class="tab-pane fade" id="custom-tabs-one-distrato" role="tabpanel" aria-labelledby="custom-tabs-one-distrato-tab">
 
                         <div class="row">
@@ -1065,6 +1078,58 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="custom-tabs-one-aviso" role="tabpanel" aria-labelledby="custom-tabs-one-aviso-tab">
+                        
+                        <h2 class="card-title">
+                            <b>AVISO</b>
+                            <b class="badge badge-info badge-large mx-4"></b>
+                            <!-- <b class="badge badge-info badge-large mx-4" id="nomeStatusDossie"></b> -->
+                        </h2>
+                    
+                        <div style="background-color: #fff9c2;" class="alert alert-warning justify-content-center"  >
+                            <div class="pl-5">
+                                <p class="justify-content-center"><i class="fas fa-exclamation-triangle"></i> <strong> ATENÇÃO!</strong></p>
+                                 <p>Esta proposta não foi sincronizada entre SIMOV e Portal GILIE ou não existe proposta cadastrada para o contrato.<br>
+                                    Orientamos verificar situação para ajuste diretamente no <a href="https://simov.caixa" target="_blank" class="alert-link">simov.caixa</a>.</p>
+
+                                 <p>O <b>simov.caixa</b> é de acesso exclusivo à funcionários lotados nas GILIE/GEIPT, em caso de dúvidas encaminhar e-mail para <b>giliesp01@caixa.gov.br</b></p>
+                                 <p style="color: red">* recomendamos não utilizar dados da planilha do SIMOV</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
                         

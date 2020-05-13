@@ -185,6 +185,7 @@ class ConsultaContratoController extends Controller
             'bemFormatado'                                      => $numeroContrato,
 
             // DADOS DO IMÓVEL
+            'GILIE'                                             => $contrato->UNA,
             'numeroBem'                                         => $contrato->NU_BEM,
             'classificacao'                                     => $contrato->CLASSIFICACAO,
             'nomeExMutuario'                                    => $contrato->NO_EX_MUTUARIO,
