@@ -58,7 +58,7 @@ class ConformidadeContratataoController extends Controller
         
         $arrayContratosConformidade = [];
         $consultaContratosConformidade = DB::table('ADJTBL_imoveisCaixa')
-                                            // ->join('ALITB075_VENDA_VL_OL37', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'), '=', DB::raw('CONVERT(VARCHAR, ALITB075_VENDA_VL_OL37.NU_BEM)'))
+                                            ->join('ALITB075_VENDA_VL_OL37', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'), '=', DB::raw('CONVERT(VARCHAR, ALITB075_VENDA_VL_OL37.NU_BEM)'))
                                             ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'))
                                             ->select(DB::raw('
                                                 ALITB001_Imovel_Completo.[BEM_FORMATADO] as contratoFormatado,
@@ -75,8 +75,8 @@ class ConformidadeContratataoController extends Controller
                                                 ADJTBL_imoveisCaixa.[nomeStatusDoDossie] as statusContratacao,
                                                 ADJTBL_imoveisCaixa.[cardDeAgrupamento] as cardAgrupamento,
                                                 CONVERT(VARCHAR, ADJTBL_imoveisCaixa.[dataStatus], 103) as dataStatus,
-                                                CONVERT(VARCHAR, ADJTBL_imoveisCaixa.[dataSimov], 103) as dataSimov
-                                               
+                                                CONVERT(VARCHAR, ADJTBL_imoveisCaixa.[dataSimov], 103) as dataSimov,
+                                                ALITB075_VENDA_VL_OL37.[VL_TOTAL_RECEBIDO] as valorTotalRecebido
                                             '))
                                             ->where('ADJTBL_imoveisCaixa.codigoGilie', $codigoUnidadeUsuarioSessao)
                                             ->where(function($cardAgrupamento) {
@@ -130,11 +130,11 @@ class ConformidadeContratataoController extends Controller
                     $tipoProposta = 'Financiado';
                 }
     
-                // if ($contrato->valorTotalRecebido >= $contrato->valorRecursosPropriosProposta) {
-                //     $sinalPago = 'SIM';
-                // } else {
-                //     $sinalPago = 'NAO';
-                // }
+                if ($contrato->valorTotalRecebido >= $contrato->valorRecursosPropriosProposta) {
+                    $sinalPago = 'SIM';
+                } else {
+                    $sinalPago = 'NAO';
+                }
                 
                 array_push($arrayContratosConformidade, [
                     'contratoFormatado' => $contrato->contratoFormatado,
@@ -143,9 +143,9 @@ class ConformidadeContratataoController extends Controller
                     'codigoAgencia' => $contrato->codigoAgencia,
                     'tipoVenda' => $contrato->tipoVenda,
                     'tipoProposta' => $tipoProposta,
-                    // 'valorRecursosProprios' => $contrato->valorRecursosPropriosProposta,
-                    // 'valorTotalRecebido' => $contrato->valorTotalRecebido,
-                    // 'sinalPago' => $sinalPago,
+                    'valorRecursosProprios' => $contrato->valorRecursosPropriosProposta,
+                    'valorTotalRecebido' => $contrato->valorTotalRecebido,
+                    'sinalPago' => $sinalPago,
                     'statusContratacao' => $contrato->statusContratacao,
                     'cardAgrupamento' => $contrato->cardAgrupamento,
                     'dataEntradaConformidade' => $contrato->dataStatus,

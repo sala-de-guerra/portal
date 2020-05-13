@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $.getJSON('/estoque-imoveis/monitora-pagamento-sinal/listar-contratos-sem-pagamento-sinal', function(dados){
+    $.getJSON('estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pagamento-sinal', function(dados){
         $.each(dados, function(key, item) {          
             var linha = 
                 '<tr class="cursor-pointer">' +

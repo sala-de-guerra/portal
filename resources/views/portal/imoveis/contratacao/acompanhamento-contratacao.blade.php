@@ -58,6 +58,7 @@
                                                     <th>Data de vencimento (PP15)</th>
                                                     <th>Status</th>
                                                     <th>Classificação do imóvel</th>
+                                                    <th>Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
