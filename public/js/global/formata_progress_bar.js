@@ -26,7 +26,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
             case 'Laudo Vencido':
             case 'Licitação':
             case 'Montagem de Licitação':
-                statusAtual = 'Preparação';
+                statusAtual = 'Preparaçâo';
                 break;
             case 'Aguarda 1º Leilão SFI':
             case 'Aguarda 2º Leilão SFI':

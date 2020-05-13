@@ -309,7 +309,7 @@ $(document).ready(function(){
 
         // refresh no modal ao sair
         $('.modal').on('hidden.bs.modal', function() {
-            window.location.href = 'https://portal.gilie.des.sp.caixa/fornecedores/controle-despachantes';
+            window.location.href = 'https://portal.gilie.sp.caixa/fornecedores/controle-despachantes';
 
           });
     
