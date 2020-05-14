@@ -53,71 +53,36 @@ class MonitoraPagamentoSinalController extends Controller
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
-
+        
         $consultaContratosSemPagamentoSinal = BaseSimov::where('DATA_PROPOSTA', '<=', Carbon::now()->sub('7 day')->format('Y-m-d'))
                                                         ->where('UNA',  $siglaGilie)
                                                         ->where(function($query) {
                                                             $query->where('STATUS_IMOVEL', 'Em Contratação')
-                                                                    ->orWhere('STATUS_IMOVEL', 'Contratação pendente')
-                                                                    ;})
+                                                                    ->orWhere('STATUS_IMOVEL', 'Contratação pendente');})
                                                         ->get();
         $listaContratosSemPagamentoSinal = [];                                              
         foreach ($consultaContratosSemPagamentoSinal as $contrato) {
             // VERIFICA SE EXISTE PAGAMENTO DO SINAL
-            if($contrato->conformidadeContratacao) {
-                if ($contrato->conformidadeContratacao->cardDeAgrupamento == 'GILIE') {           
-                    if ($contrato->saldoContratoSinaf) {
-                        if ($contrato->saldoContratoSinaf->saldoAtualContrato < $contrato->VALOR_REC_PROPRIOS_PROPOSTA) {
-                            array_push($listaContratosSemPagamentoSinal, [
-                                'numeroContrato' => $contrato->NU_BEM,
-                                'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                                'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
-                                'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
-                                'statusSimov' => $contrato->STATUS_IMOVEL,
-                                'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                                'bemFormatado' => $contrato->BEM_FORMATADO,
-                                'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
-                            ]);
-                        } 
-                    } else {
-                        array_push($listaContratosSemPagamentoSinal, [
-                            'numeroContrato' => $contrato->NU_BEM,
-                            'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                            'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
-                            'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
-                            'statusSimov' => $contrato->STATUS_IMOVEL,
-                            'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                            'bemFormatado' => $contrato->BEM_FORMATADO,
-                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
-                        ]);
-                    }
-                }
-            } else {
-                if ($contrato->saldoContratoSinaf) {
-                    if ($contrato->saldoContratoSinaf->saldoAtualContrato < $contrato->VALOR_REC_PROPRIOS_PROPOSTA) {
-                        array_push($listaContratosSemPagamentoSinal, [
-                            'numeroContrato' => $contrato->NU_BEM,
-                            'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                            'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
-                            'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
-                            'statusSimov' => $contrato->STATUS_IMOVEL,
-                            'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                            'bemFormatado' => $contrato->BEM_FORMATADO,
-                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
-                        ]);
-                    } 
-                } else {
+            if ($contrato->saldoContratoSinaf) {
+                if ($contrato->saldoContratoSinaf->saldoAtualContrato < $contrato->VALOR_REC_PROPRIOS_PROPOSTA) {
                     array_push($listaContratosSemPagamentoSinal, [
                         'numeroContrato' => $contrato->NU_BEM,
                         'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
                         'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
                         'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
                         'statusSimov' => $contrato->STATUS_IMOVEL,
-                        'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                        'bemFormatado' => $contrato->BEM_FORMATADO,
-                        'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
+                        'classificacaoImovel' =>$contrato->CLASSIFICACAO
                     ]);
-                }
+                } 
+            } else {
+                array_push($listaContratosSemPagamentoSinal, [
+                    'numeroContrato' => $contrato->NU_BEM,
+                    'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                    'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
+                    'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
+                    'statusSimov' => $contrato->STATUS_IMOVEL,
+                    'classificacaoImovel' =>$contrato->CLASSIFICACAO
+                ]);
             }
         }
         return json_encode($listaContratosSemPagamentoSinal);
