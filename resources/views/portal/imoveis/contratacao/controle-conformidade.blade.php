@@ -71,9 +71,13 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="tblConformidadeFluxoAgencia" class="table table-bordered table-striped dataTable">
-                                <div class="alert alert-info" role="alert">
-                                    Lista de contratos para envio de documentos de conformidade para CIOPE/RE em <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank" class="alert-link"> digitalizar.caixa</a>. 
-                                  </div>
+                                  <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
+                                    Lista de contratos para envio de documentos de conformidade para CIOPE/RE em &nbsp&nbsp<a href="http://retaguarda.caixa/digitalizar/#/" target="_blank" class="alert-link"> digitalizar.caixa</a>. 
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>                                    
+
                                 <thead>
                                     <tr>
                                         <th>CHB</th>
@@ -82,6 +86,7 @@
                                         <th>Tipo de Proposta</th>
                                         <th>Status CIOPE</th>
                                         <th>Ações</th>
+                                        <th>Último Tratamento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,9 +104,17 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="tblConformidadeFluxoCca" class="table table-bordered table-striped dataTable">
-                                <div class="alert alert-info" role="alert">
+
+                                  <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
                                     Lista de contratos para acerto de laudo e isenção de taxa em <a href="http://siopi.caixa" target="_blank" class="alert-link"> siopi.caixa</a>. 
-                                  </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>   
+
+
+
+
                                 <thead>
                                     <tr>
                                         <th>CHB</th>
@@ -110,6 +123,7 @@
                                         <th>Tipo de Proposta</th>
                                         <th>Status CIOPE</th>
                                         <th>Ações</th>
+                                        <th>Último Tratamento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -126,10 +140,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="tblCardAgrupamentoAgencia" class="table table-bordered table-striped dataTable">
-                                <div class="alert alert-info" role="alert">
-                                    Lista de contratos conforme (rotina GILIE) aguardando finalização da agência. 
-                                  </div>
-                                <thead>
+                                  <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
+                                    Lista de contratos conforme (rotina GILIE) aguardando finalização da agência.  
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>   
+                    
+                                  <thead>
                                     <tr>
                                         <th>CHB</th>
                                         <th>Classificação</th>
@@ -137,6 +155,7 @@
                                         <th>Tipo de Proposta</th>
                                         <th>Status CIOPE</th>
                                         <th>Ações</th>
+                                        <th>Último Tratamento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -153,9 +172,15 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="tblContratosSemPagamentoSinal" class="table table-bordered table-striped">
-                                <div class="alert alert-info" role="alert">
+
+                                  <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
                                     Lista de contratos aguardando pagamento da entrada pelo proponente. 
-                                  </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>  
+
+
                                 <thead>
                                     <tr>
                                         <th>CHB</th>

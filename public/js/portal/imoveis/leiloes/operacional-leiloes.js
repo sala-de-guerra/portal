@@ -11,7 +11,8 @@ $(document).ready(function(){
     $("#custom-tabs-one-leiloes-tab").click();
     var appendbotao =   '<div class="row">' +
                             '<div class="col-sm-6">'+
-                                '<button id=botaoEditarDadosContrato class="btn btn-primary" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
+                                '<button id="botaoEditarDadosContrato" class="btn btn-primary" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
+                                '<button id="botaoAlteraStatus" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalAlteraStatus" style="margin: 0 30px 0 10px;"><span style="color: White;">Averbar</span>&nbsp&nbsp<i style="color: white;" class="fas fa-check"></i></button>&nbsp&nbsp' +
                                 '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">' +
                                     'Receber Documentos Leiloeiro' +
                                 '</button>' +
@@ -29,6 +30,43 @@ $(document).ready(function(){
                             '<div class="col-sm-3">'+
                             '</div>'+
                         '</div>' +
+
+             //    <!-- form do botão Alterar Status para Averbado -->
+             '<div class="modal fade" id="modalAlteraStatus" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
+             '<div class="modal-dialog" role="document">'+
+                 '<div class="modal-content">'+
+                 '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">'+
+                     '<h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Averbar contrato</h5>'+
+                     '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                     '<span aria-hidden="true">&times;</span>'+
+                     '</button>'+
+                 '</div>'+
+                 '<div class="modal-body px-2">'+
+                 '<form id="formAlteraStatus">'+
+                     '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                         '<div class="form-group">'+
+                             '<div style="display:none;" class="form-check form-check-inline">' +
+                                 '<input class="form-check-input" type="radio" name="existeExigencia" id="radioAlteraStatus" value="NAO" checked>' +
+                                 '<label class="form-check-label">SIM</label>'+
+                             '</div>' +
+                             '<div class="form-group">'+
+                             '<label>'+'Data de Entrega Averbação'+'</label>'+
+                             '<input type="text" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>'+
+                         '</div>'+
+                         '<p>(Preencha estes campos apenas se tiver certeza de que não é possivel preencher o restante das informações)</p>'+
+                         '</div>'+
+                     '<div class="modal-footer">'+
+                         '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                         '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
+                     '</div>'+
+                 '</div>'+
+                     '</form>'+
+             '</div>'+
+         '</div>'+
+         '</div>'+
+                       
+
 
                         // modal de edição
                         '<div class="modal fade" id="modaldeEdicao" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
@@ -112,11 +150,11 @@ $(document).ready(function(){
                                        '<select class="custom-select" name="idLeiloeiro" id="inputGroupSelect01">'+
                                            '<option value="disabled" disabled selected hidden>Selecione um leiloeiro</option>'+
                                        '</select>'+
-                                   '<a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-leiloeiros">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
+                                   '<a href="/fornecedores/controle-leiloeiros">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
                                    '</div>'+
                                    '<div class="form-group">'+'<span style="color: red;">'+'*'+'</span>'+
                                        '<label>'+'Data de Ateste do Recebimento'+'</label>'+
-                                       '<input type="text" name="dataEntregaDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                                       '<input type="text" name="dataEntregaDocumentosLeiloeiro" id="datepicker" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>'+
                                    '</div>'+
                                '<div class="modal-footer">'+
                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
@@ -147,11 +185,11 @@ $(document).ready(function(){
                                 '<select class="custom-select" name="idDespachante"id="inputGroupSelect02">'+
                                     '<option value="disabled" disabled selected hidden>Selecione um despachante</option>'+
                                 '</select>'+
-                            '<a href="https://portal.gilie.des.sp.caixa/fornecedores/controle-despachantes">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
+                            '<a href="/fornecedores/controle-despachantes">'+'<small class="form-text">'+'Se não encontrar. clique aqui para cadastrar.'+'</small>'+'</a>'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label>'+'Data da Entrega'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
-                                '<input type="text" name="dataRetiradaDocumentosDespachante" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                                '<input type="text" name="dataRetiradaDocumentosDespachante" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label>'+'Nº da O.S'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
@@ -210,7 +248,7 @@ $(document).ready(function(){
                         '</div>'+
                         '<div class="form-group">'+
                             '<label>'+'Data Prevista de Análise do Cartório'+'</label>'+'<span style="color: red;">'+'*'+'</span>'+
-                            '<input type="text" name="dataPrevistaAnaliseCartorio" id="inputDataPrevistaAnaliseCartorio" class="form-control datepicker" placeholder="Selecione no calendário" required>'+
+                            '<input type="text" name="dataPrevistaAnaliseCartorio" id="inputDataPrevistaAnaliseCartorio" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>'+
                         '</div>'+
                     '<div class="modal-footer">'+
                         '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
@@ -238,11 +276,58 @@ $(document).ready(function(){
                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                         '<div class="form-group">'+
                             '<label>'+'Data da Retirada no Cartório'+'</label>'+
-                            '<input type="text" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" placeholder="Selecione no calendário">'+
+                            '<input type="text" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário">'+
                         '</div>'+
                         '<div class="form-group">'+
                             '<label>'+'Data de Entrega Averbação'+'</label>'+
-                            '<input type="text" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" placeholder="Selecione no calendário">'+
+                            '<input type="text" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário">'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>Exigência Cartorária: </label><br>'+
+                            '<div class="form-check form-check-inline">' +
+                                '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaSim" value="SIM">' +
+                                '<label class="form-check-label" for="exigenciaCartorariaSim">Sim</label>' +
+                            '</div>' +
+                            '<div class="form-check form-check-inline">' +
+                                '<input class="form-check-input" type="radio" name="existeExigencia" id="exigenciaCartorariaNao" value="NAO">' +
+                                '<label class="form-check-label" for="exigenciaCartorariaNao">Não</label>' +
+                            '</div>' +
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>Observação</label>'+
+                            '<textarea style="height: 150px" type="text" name="observacao"  class="form-control">'+'</textarea>'+
+                        '</div>'+
+
+                    '<div class="modal-footer">'+
+                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                        '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
+                    '</div>'+
+                '</div>'+
+                    '</form>'+
+            '</div>'+
+        '</div>'+
+
+                //    <!-- form do botão receber despachante -->
+            '<div class="modal fade" id="modalReceberdespachante" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
+            '<div class="modal-dialog" role="document">'+
+                '<div class="modal-content">'+
+                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">'+
+                    '<h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Receber documentos</h5>'+
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span>'+
+                    '</button>'+
+                '</div>'+
+                '<div class="modal-body px-2">'+
+                '<form method="POST" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/'+chbformatado+'">'+
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        '<div class="form-group">'+
+                            '<label>'+'Data da Retirada no Cartório'+'</label>'+
+                            '<input type="text" name="dataRetiradaDocumentoCartorio" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário">'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label>'+'Data de Entrega Averbação'+'</label>'+
+                            '<input type="text" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário">'+
                         '</div>'+
                         '<div class="form-group">'+
                             '<label>Exigência Cartorária: </label><br>'+
@@ -340,8 +425,47 @@ $(document).ready(function(){
                 $('#botaoReceberProtocoloCartorio').remove()
                 $('#botaoReceberDocumentosdespachante').remove()
                 $('#botaoEditarDadosContrato').remove()
+                $('#botaoAlteraStatus').remove()
                 break;
         }
+            var verificaLeiloeiro = $('#nomeEmpresaAssessoraLeiloeiro').text()
+            var verificaDespachante = $('#nomeDespachante').text()
+
+    if (verificaLeiloeiro != "" && verificaDespachante != "" ){
+        $('#botaoAlteraStatus').show()
+    }
+    $("#formAlteraStatus").submit(function (event) {
+        event.preventDefault()
+        var agoraVai = $(this).serialize()
+            Swal.fire({
+                title: 'AVISO',
+                text: "Alguns campos ficarão sem preenchimento, não será possivel preencher após a confirmação",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "Cancelar",
+                confirmButtonText: 'Concordo'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/'+chbformatado,
+                        type: "post",
+                        data: agoraVai,
+                        dataType: 'json',
+                        success: function (response) {
+                            Swal.fire(
+                                'Alterado!',
+                                'Averbação concluída.',
+                                'success'
+                            )
+                        } 
+                    }).done(
+                        location.reload()
+                    ) 
+                }
+            })
+        })
 
     }, 1500)
 })
@@ -359,5 +483,6 @@ function Check() {
     } else {
         document.getElementById('visibilidades').style.visibility = 'hidden';
     }
+
 }
 

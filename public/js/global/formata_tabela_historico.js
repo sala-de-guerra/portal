@@ -14,7 +14,7 @@ function _formataTabelaHistorico (numeroContrato) {
                             '</div>' +
 
                             '<div class="m-2 d-flex justify-content-end">' +
-                                '<button class="btn btn-primary" title="Observação do Histórico" data-toggle="modal" data-target="#modalConsultaObservacaoHistorico' + item.idHistorico + '">' +
+                                '<button class="btn btn-primary btnHistorico" title="Observação do Histórico" data-toggle="modal" data-target="#modalConsultaObservacaoHistorico' + item.idHistorico + '">' +
                                     '<i class="fas fa-info-circle"></i>' +
                                 '</button>' +
             

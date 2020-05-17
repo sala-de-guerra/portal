@@ -60,10 +60,14 @@ class ConformidadeContratataoController extends Controller
         $consultaContratosConformidade = DB::table('ADJTBL_imoveisCaixa')
                                             ->join('ALITB075_VENDA_VL_OL37', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'), '=', DB::raw('CONVERT(VARCHAR, ALITB075_VENDA_VL_OL37.NU_BEM)'))
                                             ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'))
+                                            ->join('TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.AGENCIA_CONTRATACAO_PROPOSTA)'), '=', DB::raw('CONVERT(VARCHAR, TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL.nomeAgencia)'))
+                                            ->leftJoin('TBL_HISTORICO_PORTAL_GILIE', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, TBL_HISTORICO_PORTAL_GILIE.numeroContrato)'))
                                             ->select(DB::raw('
                                                 ALITB001_Imovel_Completo.[BEM_FORMATADO] as contratoFormatado,
                                                 ALITB001_Imovel_Completo.[ACEITA_CCA] as aceitaCca, 
-                                                ALITB001_Imovel_Completo.[CLASSIFICACAO] as classificacaoImovel, 
+                                                ALITB001_Imovel_Completo.[CLASSIFICACAO] as classificacaoImovel,
+                                                ALITB001_Imovel_Completo.[NOME_PROPONENTE] as nomeProponente,
+                                                ALITB001_Imovel_Completo.[UNA] as gilieDeVinculacao, 
                                                 ADJTBL_imoveisCaixa.numeroContrato, 
                                                 ADJTBL_imoveisCaixa.codigoAgencia,
                                                 ALITB001_Imovel_Completo.[VALOR_REC_PROPRIOS_PROPOSTA] as valorRecursosPropriosProposta,
@@ -76,7 +80,9 @@ class ConformidadeContratataoController extends Controller
                                                 ADJTBL_imoveisCaixa.[cardDeAgrupamento] as cardAgrupamento,
                                                 CONVERT(VARCHAR, ADJTBL_imoveisCaixa.[dataStatus], 103) as dataStatus,
                                                 CONVERT(VARCHAR, ADJTBL_imoveisCaixa.[dataSimov], 103) as dataSimov,
-                                                ALITB075_VENDA_VL_OL37.[VL_TOTAL_RECEBIDO] as valorTotalRecebido
+                                                ALITB075_VENDA_VL_OL37.[VL_TOTAL_RECEBIDO] as valorTotalRecebido,
+                                                TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL.[emailAgencia] as emailAgencia,
+                                                TBL_HISTORICO_PORTAL_GILIE.[updated_at] as dataNovoHistorio
                                             '))
                                             ->where('ADJTBL_imoveisCaixa.codigoGilie', $codigoUnidadeUsuarioSessao)
                                             ->where(function($cardAgrupamento) {
@@ -150,6 +156,10 @@ class ConformidadeContratataoController extends Controller
                     'cardAgrupamento' => $contrato->cardAgrupamento,
                     'dataEntradaConformidade' => $contrato->dataStatus,
                     'classificacaoImovel' => $classificacaoImovel,
+                    'emailAgencia' => $contrato->emailAgencia,
+                    'nomeProponente' => $contrato->nomeProponente,
+                    'gilieDeVinculacao' =>$contrato->gilieDeVinculacao,
+                    'dataNovoHistorio' =>$contrato->dataNovoHistorio
                 ]);
                 array_push($arrayContratosParaRemoverRepetidos, $contrato->numeroContrato);
             }

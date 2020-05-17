@@ -548,4 +548,103 @@ class ConsultaContratoController extends Controller
     {
         return view('portal.imoveis.consultar.consultar-imovel');
     }
+
+    public static function pesquisaContratoAbaLeilaoNegativo(Request $request)
+    {
+        $arrayParaEvitarContratosDuplicados = [];
+        $arrayConsultaConsolidada = [];
+        switch ($request->tipoVariavel) {
+            case 'cpfCnpjProponente':
+                $termoPesquisaTratado = self::trataVariavelCpfCnpj($request->valorVariavel);
+                foreach ($termoPesquisaTratado as $termo) {
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('CPF_CNPJ_PROPONENTE', 'like', "%$termo%")->get();
+                    foreach ($resultadoConsulta as $cadaResultado) {
+                        $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                    }
+                }
+                break;
+            case 'nomeProponente':
+                $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
+                foreach ($termoPesquisaTratado as $termo) {
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NOME_PROPONENTE', 'like', "%$termo[0]%")->get();
+                    foreach ($resultadoConsulta as $cadaResultado) {
+                        if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
+                            $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                            array_push($arrayParaEvitarContratosDuplicados, $cadaResultado->NU_BEM);
+                        }
+                    }
+                }
+                break;
+            case 'numeroContrato':
+                $numeroContratoRequest = preg_replace('/^\p{Z}+|\p{Z}+$/u', '', $request->valorVariavel);
+                if (substr($numeroContratoRequest, 0, 3) == '00.') {
+                    // CONTRATO PATRIMONIAL FORMATADO
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('BEM_FORMATADO', $numeroContratoRequest)->get();
+                } else {
+                    // DEMAIS CONTRATOS
+                    $termoPesquisaTratado = self::trataVariavelContrato($numeroContratoRequest);
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_BEM', 'like', "%$termoPesquisaTratado%")->get();
+                }
+                foreach ($resultadoConsulta as $cadaResultado) {
+                    $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                }
+                break;
+            case 'enderecoImovel':
+                $termoPesquisaTratado = self::trataVariavelEndereco($request->valorVariavel);
+                $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('ENDERECO_IMOVEL', 'like', "%$termoPesquisaTratado%")->get();
+                foreach ($resultadoConsulta as $cadaResultado) {
+                    $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                }
+                break;
+            case 'cpfCnpjExMutuario':
+                $termoPesquisaTratado = self::trataVariavelCpfCnpj($request->valorVariavel);
+                foreach ($termoPesquisaTratado as $termo) {
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NU_DOC_EX_MUTUARIO', 'like', "%$termo%")->get();
+                    foreach ($resultadoConsulta as $cadaResultado) {
+                        $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                    }
+                }
+                break;
+            case 'nomeExMutuario':
+                $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
+                foreach ($termoPesquisaTratado as $termo) {
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('NO_EX_MUTUARIO', 'like', "%$termo[0]%")->get();
+                    foreach ($resultadoConsulta as $cadaResultado) {
+                        if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
+                            $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                            array_push($arrayParaEvitarContratosDuplicados, $cadaResultado->NU_BEM);
+                        }
+                    }
+                }
+                break;
+            case 'matriculaImovel':
+                // $termoPesquisaTratado = self::trataVariavelNome($request->valorVariavel);
+                // foreach ($termoPesquisaTratado as $termo) {
+                    $resultadoConsulta = DB::table('ALITB001_Imovel_Completo')->select('BEM_FORMATADO','NU_BEM', 'ENDERECO_IMOVEL', 'CIDADE', 'UNA', 'CPF_CNPJ_PROPONENTE', 'NOME_PROPONENTE', 'TIPO_VENDA', 'NU_DOC_EX_MUTUARIO', 'NO_EX_MUTUARIO', 'MATRICULA', 'OFICIO')->where('MATRICULA', 'like', "%$request->valorVariavel%")->get();
+                    foreach ($resultadoConsulta as $cadaResultado) {
+                        if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
+                            $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                            array_push($arrayParaEvitarContratosDuplicados, $cadaResultado->NU_BEM);
+                        }
+                    }
+                // }
+                break;
+        }
+
+        // SETTA UMA FLAG PARA DIZER SE EXISTE RESULTADO OU NÃO
+        if (count($arrayConsultaConsolidada) > 0) {
+            if (count($arrayConsultaConsolidada) == 1) {
+                return redirect('estoque-imoveis/leiloes-negativos/tratar/'.$arrayConsultaConsolidada[0]['contratoFormatado']);
+            } else {
+                $request->session()->flash('pesquisaComResultados');
+                return view('portal.imoveis.consultar.consultar-imovel')->with('resultadoPesquisa', $arrayConsultaConsolidada);
+            }
+        } else {
+            $request->session()->flash('pesquisaSemResultados');
+            return redirect('/estoque-imoveis/leiloes-negativos');
+        }
+    }
+
+
+
 }

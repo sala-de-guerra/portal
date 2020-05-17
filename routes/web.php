@@ -59,6 +59,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::prefix('consultar-imovel')->group(function () {
         Route::get('/', 'GestaoImoveisCaixa\ConsultaContratoController@consultaImovelComWhereVariavel');
         Route::post('resultado', 'GestaoImoveisCaixa\ConsultaContratoController@pesquisaContratoComWhereVariavel');
+        Route::post('resultado-LeilaoNegativo', 'GestaoImoveisCaixa\ConsultaContratoController@pesquisaContratoAbaLeilaoNegativo');
     });
 
     // ROTAS DO PROJETO DE DISTRATO
@@ -121,6 +122,7 @@ Route::prefix('estoque-imoveis')->group(function () {
     Route::prefix('mensagens-automaticas')->group(function () {
         Route::get('autorizacao-contratacao', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarMensageriasAutorizacaoContratacao');
         Route::get('autorizacao-contratacao/{contrato}', 'GestaoImoveisCaixa\MensagensAutomaticaAutorizacaoController@enviarAutorizacaoContratacaoViaPortal');
+        Route::get('cobranca-contratacao/{contrato}', 'GestaoImoveisCaixa\cobrancaAndamentoProcessoController@enviarMensageria');
     });
 });
 
