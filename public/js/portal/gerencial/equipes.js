@@ -307,7 +307,7 @@ function montaCardsEquipes (regiaoUnidade) {
 | Função que cria, edita e exclui equipe sem dar refresh na tela |
 \****************************************************************/
 
-$('form').submit( function(e) {
+$('.ajaxForm').submit( function(e) {
 
     e.preventDefault();
 

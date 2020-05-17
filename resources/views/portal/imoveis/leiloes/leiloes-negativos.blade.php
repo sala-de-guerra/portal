@@ -47,6 +47,21 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-body">
+                    <li class="nav-item d-none d-sm-block">
+                        <form class="form-inline m-0" id="formBarraBusca" action="/estoque-imoveis/consultar-imovel/resultado-LeilaoNegativo" method="post">
+                            {{ csrf_field() }}
+                            <select name="tipoVariavel" style="display: none;" id="tipoVariavel" class="form-control form-control-navbar mr-3 text-white" required>
+                                <option class="text-dark"  value="numeroContrato">Contrato</option>
+                            </select>
+                            <div class="input-group nav-search-bar">
+                                <input class="form-control form-control-navbar" type="text"  autocomplete="off" name="valorVariavel" placeholder="Pesquise por contrato" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"  title="Pesquisar"> <i class="fas fa-search"></i> </button>
+                                </div>
+                            </div>
+                        </form>
+                    </li><br><br>
+
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">
                             <table id="tblleiloesnegativos" class="table table-bordered table-striped hover dataTable">
@@ -132,4 +147,6 @@
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
     <script src="{{ asset('js/portal/imoveis/leiloes/leiloes-negativos.js') }}"></script>
+    
+
 @stop

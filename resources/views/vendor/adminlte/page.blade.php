@@ -103,7 +103,7 @@
                         </form>
                     </li>
 
-                    <li class="nav-item d-block d-sm-none">
+                    {{-- <li class="nav-item d-block d-sm-none">
                         <form class="form-inline m-0" id="formBarraBuscaSm" onsubmit="validarBuscaSm()" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar w-50 text-white" required>
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                         </form>
-                    </li>
+                    </li> --}}
 
                 </ul>
 
