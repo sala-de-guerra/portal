@@ -163,3 +163,11 @@ function avisoMensageria(url) {
         } 
     })   
 }
+
+setTimeout(function()
+{ 
+var classificacao = $('#classificacao').text()
+if (classificacao == 'Oriundos SFI-Gar. Fiduciária' || classificacao == 'Patrimonial -Realização de Garantia' ){
+    $('#consultaLeilaoNegativo').remove();
+}
+}, 3000);

@@ -25,8 +25,8 @@
     </div>
     <div class="col-sm-4">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> <a href="/pesquisar"> Pesquisar Bem Imóvel</a> </li>
-            <li class="breadcrumb-item active"> <a href="/index"> Consultar Bem Imóvel</a> </li>
+            <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i><a href="/"> Principal</a> </li>
+            <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i>Consulta Imóvel</li>
         </ol>
     </div>
 </div>

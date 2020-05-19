@@ -147,11 +147,12 @@ $(document).ready(function(){
                         
                         $('.modal').modal('hide');
                         
+                        
                         Toast.fire({
                             icon: 'success',
                             title: 'Alteração salva!'
                         });
-                        
+                
                     },
                   
                     error: function () {
@@ -255,12 +256,12 @@ $(document).ready(function(){
                     success: function (result){
                         
                         $('.modal').modal('hide');
-                        
+                    
                         Toast.fire({
                             icon: 'success',
                             title: 'Alteração salva!'
                         });
-                        
+                   
                     },
                   
                     error: function () {
@@ -388,7 +389,7 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                         success: function (result){
                             
                             $('.modal').modal('hide');
-                            
+
                             Toast.fire({
                                 icon: 'success',
                                 title: 'Alteração salva!'
@@ -418,4 +419,8 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
     _formataDatatableComData()
 })
 
-
+2
+3
+$("#btnRefresh").click(function() {
+    location.reload();
+});

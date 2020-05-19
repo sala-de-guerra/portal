@@ -32,8 +32,8 @@
 
     <div class="col">
         <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Fornecedores</li>
-            <li class="breadcrumb-item active"><a href="/controle-leiloeiros/listar-leiloeiros"> Controle Leiloeiros</a> </li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Principal</a> </li>
+            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Controle Leiloeiros</li>
         </ol>
     </div>
 </div><br>

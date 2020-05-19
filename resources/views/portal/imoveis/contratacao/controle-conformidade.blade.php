@@ -11,6 +11,7 @@
 
         <h1 class="m-0 text-dark">
             Fila Única
+            <button type="button" id="btnRefresh" class="btn btn-primary ml-3" data-toggle="tooltip" data-placement="right" title="Atualiza último tratamento"><i class="fas fa-sync-alt"></i></button>
         </h1>
 
     </div>
@@ -18,7 +19,8 @@
     <div class="col-sm-6">
 
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/conformidade-contratacao"> Fila Única</a> </li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Principal</a> </li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> Fila Única</li>
         </ol>
 
     </div>
