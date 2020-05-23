@@ -82,7 +82,8 @@ class ConformidadeContratataoController extends Controller
                                                 CONVERT(VARCHAR, ADJTBL_imoveisCaixa.[dataSimov], 103) as dataSimov,
                                                 ALITB075_VENDA_VL_OL37.[VL_TOTAL_RECEBIDO] as valorTotalRecebido,
                                                 TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL.[emailAgencia] as emailAgencia,
-                                                TBL_HISTORICO_PORTAL_GILIE.[updated_at] as dataNovoHistorio
+                                                TBL_HISTORICO_PORTAL_GILIE.[updated_at] as dataNovoHistorio,
+                                                TBL_HISTORICO_PORTAL_GILIE.[atividade] as tipoHistorico
                                             '))
                                             ->where('ADJTBL_imoveisCaixa.codigoGilie', $codigoUnidadeUsuarioSessao)
                                             ->where(function($cardAgrupamento) {
@@ -93,7 +94,7 @@ class ConformidadeContratataoController extends Controller
                                                 $statusSimov->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Em Contratação')
                                                         ->orWhere('ALITB001_Imovel_Completo.STATUS_IMOVEL', 'Contratação pendente');
                                             })
-                                            ->get();
+                                            ->latest()->get();
         $arrayContratosParaRemoverRepetidos = [];
         foreach ($consultaContratosConformidade as $contrato) {
             if (!in_array($contrato->numeroContrato, $arrayContratosParaRemoverRepetidos)) {
@@ -159,7 +160,8 @@ class ConformidadeContratataoController extends Controller
                     'emailAgencia' => $contrato->emailAgencia,
                     'nomeProponente' => $contrato->nomeProponente,
                     'gilieDeVinculacao' =>$contrato->gilieDeVinculacao,
-                    'dataNovoHistorio' =>$contrato->dataNovoHistorio
+                    'dataNovoHistorio' =>$contrato->dataNovoHistorio,
+                    'tipoHistorico' =>$contrato->tipoHistorico
                 ]);
                 array_push($arrayContratosParaRemoverRepetidos, $contrato->numeroContrato);
             }

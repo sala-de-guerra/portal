@@ -601,4 +601,26 @@ class DistratoDemandaController extends Controller
         ];
         return json_encode($arrayIndicadoresDistrato);
     }
+    public function listarDemandasPorGilie()
+    {
+        $codigoUnidade = Ldap::defineUnidadeUsuarioSessao();
+        $siglaUnidade = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidade);
+
+        $listaDistrato = DistratoDemanda::all();
+        $arrayDemandaUnidade = [];
+        foreach ($listaDistrato as $demanda) {
+            if ($demanda->simov->UNA = $siglaUnidade) {
+                array_push($arrayDemandaUnidade, [
+                    'idDistrato'                => $demanda->idDistrato, 
+                    'contratoFormatado'         => $demanda->contratoFormatado, 
+                    'nomeProponente'            => $demanda->nomeProponente, 
+                    'statusAnaliseDistrato'     => $demanda->statusAnaliseDistrato, 
+                    'motivoDistrato'            => $demanda->motivoDistrato, 
+                    'created_at'                => $demanda->created_at,
+                    'siglaUnidade'              => $demanda->simov->UNA
+                ]);
+            }
+        }
+        return json_encode($arrayDemandaUnidade);
+    }
 }

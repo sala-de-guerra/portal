@@ -14,7 +14,7 @@
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Principal</a> </li>
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> Área de Atuação</a> </li>
+            <li class="breadcrumb-item active"> Área de Atuação</a> </li>
         </ol>
     </div>
 </div>

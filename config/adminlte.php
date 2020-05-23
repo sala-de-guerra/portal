@@ -470,7 +470,7 @@ return [
                 [
                     'text' => 'Gestão Atende',
                     'icon'       => 'fas fa-lg fa-fw fa-calendar-check mr-2',
-                    'url'  => '/atende/gestao-atende',
+                    'url'  => 'gerencial/gestao-atende',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ]
     

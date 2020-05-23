@@ -14,53 +14,184 @@
 
     <div class="col">
         <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Atende</li>
-            <li class="breadcrumb-item active"><a href="/"> Gestão Atende</a> </li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i><a href="/gerencial/gestao-equipes">Atende</a></li>
+            <li class="breadcrumb-item active"> Gestão Atende</li>
         </ol>
     </div>
 </div><br>
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-default">       
+        <div class="card card-primary card-outline card-outline-tabs">
+            <div class="card-header p-0">
+                <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item" id="custon-tabs-li-hoje">
+                        <a class="nav-link" id="custom-tabs-one-hoje-tab" data-toggle="pill" href="#custom-tabs-one-hoje" role="tab" aria-controls="custom-tabs-one-hoje" aria-selected="true">
+                            <h5>Hoje</h5>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="custon-tabs-li-amanha">
+                        <a class="nav-link" id="custom-tabs-one-amanha-tab" data-toggle="pill" href="#custom-tabs-one-amanha" role="tab" aria-controls="custom-tabs-one-amanha" aria-selected="false">
+                            <h5>Amanhã</h5>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item" id="custon-tabs-li-doisDias">
+                        <a class="nav-link" id="custom-tabs-one-doisDias-tab" data-toggle="pill" href="#custom-tabs-one-doisDias" role="tab" aria-controls="custom-tabs-one-doisDias" aria-selected="false">
+                            <h5>2 dias</h5>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="custon-tabs-li-tresDias">
+                        <a class="nav-link" id="custom-tabs-one-tresDias-tab" data-toggle="pill" href="#custom-tabs-one-tresDias" role="tab" aria-controls="custom-tabs-one-tresDias" aria-selected="false">
+                            <h5>3 Dias +</h5>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="custon-tabs-li-vencidas">
+                        <a class="nav-link" id="custom-tabs-one-vencidas-tab" data-toggle="pill" href="#custom-tabs-one-vencidas" role="tab" aria-controls="custom-tabs-one-vencidas" aria-selected="false">
+                            <h5>Vencidas</h5>
+                        </a>
+                    </li>
+            </div>
             <div class="card-body">
-                <p>Selecione a atividade:</p>
-                
-                {{-- select Macro --}}
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="inputGroupSelect01">Equipe</label>
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+
+            <div class="tab-pane fade show active" id="custom-tabs-one-hoje" role="tabpanel" aria-labelledby="custom-tabs-one-hoje-tab">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="tblAtendeHoje" class="table table-bordered table-striped dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Contrato</th>
+                                        <th>Equipe</th>
+                                        <th>Vencimento</th>
+                                        <th>Atividade</th>
+                                        <th>Assunto</th>
+                                        <th>Responsavel</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+      
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        <select name="selectEquipe" id="selectEquipe" class="form-control">
-                            <option value="" selected>Selecione</option>
-                        </select>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="custom-tabs-one-amanha" role="tabpanel" aria-labelledby="custom-tabs-one-amanha-tab">
+                        
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="tblAtendeAmanha" class="table table-bordered table-striped dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Contrato</th>
+                                        <th>Equipe</th>
+                                        <th>Vencimento</th>
+                                        <th>Atividade</th>
+                                        <th>Assunto</th>
+                                        <th>Responsavel</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    </select>
-                  </div>
-                {{-- fim do select --}}
+                </div>
+            </div>
 
-                {{-- select Micro --}}
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="inputGroupSelect01">Macro-Atividade</label>
+            <div class="tab-pane fade" id="custom-tabs-one-doisDias" role="tabpanel" aria-labelledby="custom-tabs-one-doisDias-tab">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="tblAtendeDoisDias" class="table table-bordered table-striped dataTable">
+                                  <thead>
+                                    <tr>
+                                        <th>Contrato</th>
+                                        <th>Equipe</th>
+                                        <th>Vencimento</th>
+                                        <th>Atividade</th>
+                                        <th>Assunto</th>
+                                        <th>Responsavel</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        <select name="selectEquipe" id="selectMacro" class="form-control">
-                            <option value="" selected>Selecione</option>
-                        </select>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="custom-tabs-one-tresDias" role="tabpanel" aria-labelledby="custom-tabs-one-tresDias-tab">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="tblAtendetresDias" class="table table-bordered table-striped dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Contrato</th>
+                                        <th>Equipe</th>
+                                        <th>Vencimento</th>
+                                        <th>Atividade</th>
+                                        <th>Assunto</th>
+                                        <th>Responsavel</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    </select>
-                  </div>
-                {{-- fim do select --}}
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="custom-tabs-one-vencidas" role="tabpanel" aria-labelledby="custom-tabs-one-vencidas-tab">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="tblAtendevencidas" class="table table-bordered table-striped dataTable">
+                                  <thead>
+                                    <tr>
+                                        <th>Contrato</th>
+                                        <th>Equipe</th>
+                                        <th>Vencimento</th>
+                                        <th>Atividade</th>
+                                        <th>Assunto</th>
+                                        <th>Responsavel</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
-
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @stop
@@ -82,5 +213,10 @@
 
 
 @section('js')
+<script src="{{ asset('js/global/formata_data.js') }}"></script>
+<script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
 <script src="{{ asset('js/portal/atende/gestao-atende.js') }}"></script>
+<script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
+
+
 @stop

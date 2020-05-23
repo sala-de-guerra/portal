@@ -36,12 +36,14 @@ $(document).ready(function(){
                                     '<div class="modal-body">' +
                                         '<div class="container">' +
                                             '<div>' +
-                                            '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
-                                            '<p><b>'+'Descrição:'+'</b></p>'+
-                                            '<p><span class="pl-5">' + item.descricaoAtende + '</span></p>' +
-                                              
-                                               
-                                            '</div>' +
+                                                '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                                                '<p><b>'+'Descrição:'+'</b></p>'+
+                                                '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                            '</div><br>' +
+                                            '<div id="redirecionamento'+item.idAtende+'">'+
+                                                '<p><b>'+'Motivo do redirecionamento:'+'</b>'+'<span class="pl-5"></span></p>' +  
+                                                '<textarea id="textoRedirecionamento'+item.idAtende+'" class="form-control" rows="3" disabled>'+ item.motivoRedirecionamento +'</textarea>'+
+                                            '</div>'+
                                         '</div>' + 
                                     '</div>' +
                                     '<div class="modal-footer">' +
@@ -68,7 +70,7 @@ $(document).ready(function(){
                                             '<div>' +
 
                                             '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
-                                            '<textarea class="form-control" name="respostaAtende" rows="3"></textarea>'+
+                                            '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
 
                                             '</div>' +
                                         '</div>' + 
@@ -99,12 +101,12 @@ $(document).ready(function(){
                                                 '<div>' +
 
                                                 '<label for="exampleFormControlSelect1">Selecione o Destinatário</label>'+
-                                                '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
+                                                '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade" required>'+
                                                 '</select>'+'<br>'+
 
                                                 '<div class="form-group">'+
                                                 '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"></textarea>'+
+                                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3" required></textarea>'+
                                             '</div>'+
 
                                                 '</div>' +
@@ -123,6 +125,12 @@ $(document).ready(function(){
                
 
         $(linha).appendTo('#tblminhasDemandas>tbody');
+
+        // var texto = $('#textoRedirecionamento'+item.idAtende).text()
+        // console.log(texto)
+        if ($('#textoRedirecionamento'+item.idAtende).text() == "null"){
+            $('#redirecionamento'+item.idAtende).remove()
+        }
         
         var redirect =   '<option value="'+item.idAtende+'">'+item.idAtende+'</option>'
         $(redirect).appendTo('#selectID');

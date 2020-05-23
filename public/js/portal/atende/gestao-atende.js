@@ -1,19 +1,700 @@
+var csrfVar = $('meta[name="csrf-token"]').attr('content');
+$.fn.dataTable.ext.errMode = 'none';
 
-$(document).ready(function(){ 
-        carregar_atividades('selectEquipe')
-        function carregar_atividades(id, equipe_id){
-            var html = " "
-            
-            $.getJSON('/atende/listar-equipes-atividades-atende', function(dados){
-                $.each(dados, function(key, item){
-                html += '<option value="'+item.idEquipe+'">'+item.nomeEquipe+'</option>'
+ $.getJSON('/atende/listar-demandas-prazo/demandasVencidas', function(dados){
+        $.each(dados, function(key, item) {
+            let linha =
+            '<tr>' +
+                '<td>'+item.numeroContrato+'</td>'+
+                '<td>'+item.nomeEquipe+'</td>'+
+                '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
+                '<td>'+item.nomeAtividade+'</td>'+
+                '<td>'+item.assuntoAtende+'</td>'+
+                '<td>'+item.matriculaResponsavelAtividade+'</td>'+
+                '<td>' + 
+                '<div class="btn-group" role="group">' +
+                    '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                        'Ação' + 
+                    '</button>' + 
+    
+                    // botão dropdown
+                    '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                        '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                        '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                        '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                    '</div>' +
+                    
+                    //modal redirecionar
+                    '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                        '<div class="modal-content">' +
+                            '<form method="post" action="/redirecionar/gestor/' + item.idAtende + '">' +
+                                '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Direcionar' + '</h5>' +
+                                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                        '<span aria-hidden="true">&times;</span>' +
+                                    '</button>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                    '<div class="container">' +
+                                        '<div>' +
+
+                                        '<label for="exampleFormControlSelect1">Selecione o Destinatário</label>'+
+                                        '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
+                                        '</select>'+'<br>'+
+
+                                        '<div class="form-group" style="display: none;">'+
+                                        '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
+                                        '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                                    '</div>'+
+
+                                        '</div>' +
+                                    '</div>' + 
+                                '</div>' +
+                                '<div class="modal-footer">' +
+                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                                    '<button type="submit" class="btn btn-success">Salvar</button>' +
+                                '</div>' +
+                            '</form>'+
+                        '</div>' + 
+                    '</div>' + 
+                '</div>' + 
+
+            // Modal tratamento
+            '<div class="modal fade" id="tratar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-content">' +
+                    '<form method="post" action="/responder/gestor/' + item.idAtende + '">' +
+                            '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                            '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Tratar Demanda' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+
+                                '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
+                                '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
+
+                                '</div>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                            '<button type="submit" class="btn btn-success">Responder</button>' +
+                        '</div>' +
+                    '</form>'+ 
+                '</div>' + 
+            '</div>' + 
+        '</div>' +
+
+            // Modal Exclusão
+            '<div class="modal fade" id="excluir' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-content">' +
+                    '<form method="post" action="/excluir/gestor/' + item.idAtende + '">' +
+                            '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                            '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Excluir' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+
+                                '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
+                                '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+
+                                '</div>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                            '<button type="submit" class="btn btn-danger">Excluir</button>' +
+                        '</div>' +
+                    '</form>'+ 
+                '</div>' + 
+            '</div>' + 
+        '</div>' +
+                '</td>' + 
+            '</tr>'
+
+        $(linha).appendTo('#tblAtendevencidas>tbody');
+            $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
+                $.each(dadosEmpregado, function(empKey, empItem) {
+                    var redirect =
+                                '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                $(redirect).appendTo('#selectDestinatario'+item.idAtende);
                 })
-                $('#'+id).html(html)
-            })        
-        }
-        $(document).on('change', '#selectEquipe', function(){
-            var equipe_id = $(this).val()
-            console.log(equipe_id)
-
+            })
         })
     })
+        
+        
+
+$.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dados){
+    $.each(dados, function(key, item) {
+        let linha =
+        '<tr>' +
+            '<td>'+item.numeroContrato+'</td>'+
+            '<td>'+item.nomeEquipe+'</td>'+
+            '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
+            '<td>'+item.nomeAtividade+'</td>'+
+            '<td>'+item.assuntoAtende+'</td>'+
+            '<td>'+item.matriculaResponsavelAtividade+'</td>'+
+            '<td>' + 
+            '<div class="btn-group" role="group">' +
+                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                    'Ação' + 
+                '</button>' + 
+
+               // botão dropdown
+               '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+               '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+               '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+               '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+           '</div>' +
+           
+           //modal redirecionar
+           '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+           '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+               '<div class="modal-content">' +
+                   '<form method="post" action="/redirecionar/gestor/' + item.idAtende + '">' +
+                       '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                       '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                       '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                           '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Direcionar' + '</h5>' +
+                           '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                               '<span aria-hidden="true">&times;</span>' +
+                           '</button>' +
+                       '</div>' +
+                       '<div class="modal-body">' +
+                           '<div class="container">' +
+                               '<div>' +
+
+                               '<label for="exampleFormControlSelect1">Selecione o Destinatário</label>'+
+                               '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
+                               '</select>'+'<br>'+
+
+                               '<div class="form-group" style="display: none;">'+
+                               '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
+                               '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                           '</div>'+
+
+                               '</div>' +
+                           '</div>' + 
+                       '</div>' +
+                       '<div class="modal-footer">' +
+                           '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                           '<button type="submit" class="btn btn-success">Salvar</button>' +
+                       '</div>' +
+                   '</form>'+
+               '</div>' + 
+           '</div>' + 
+       '</div>' + 
+
+   // Modal tratamento
+   '<div class="modal fade" id="tratar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+   '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+       '<div class="modal-content">' +
+           '<form method="post" action="/responder/gestor/' + item.idAtende + '">' +
+                   '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                   '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+               '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                   '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Tratar Demanda' + '</h5>' +
+                   '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                       '<span aria-hidden="true">&times;</span>' +
+                   '</button>' +
+               '</div>' +
+               '<div class="modal-body">' +
+                   '<div class="container">' +
+                       '<div>' +
+
+                       '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
+                       '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
+
+                       '</div>' +
+                   '</div>' + 
+               '</div>' +
+               '<div class="modal-footer">' +
+                   '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                   '<button type="submit" class="btn btn-success">Responder</button>' +
+               '</div>' +
+           '</form>'+ 
+       '</div>' + 
+   '</div>' + 
+'</div>' +
+
+   // Modal Exclusão
+   '<div class="modal fade" id="excluir' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+   '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+       '<div class="modal-content">' +
+           '<form method="post" action="/excluir/gestor/' + item.idAtende + '">' +
+                   '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                   '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+               '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
+                   '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Excluir' + '</h5>' +
+                   '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                       '<span aria-hidden="true">&times;</span>' +
+                   '</button>' +
+               '</div>' +
+               '<div class="modal-body">' +
+                   '<div class="container">' +
+                       '<div>' +
+
+                       '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
+                       '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+
+                       '</div>' +
+                   '</div>' + 
+               '</div>' +
+               '<div class="modal-footer">' +
+                   '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                   '<button type="submit" class="btn btn-danger">Excluir</button>' +
+               '</div>' +
+           '</form>'+ 
+       '</div>' + 
+   '</div>' + 
+'</div>' +
+       '</td>' + 
+   '</tr>'
+
+        $(linha).appendTo('#tblAtendetresDias>tbody');
+            $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
+                $.each(dadosEmpregado, function(empKey, empItem) {
+                    var redirect =
+                                '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                $(redirect).appendTo('#selectDestinatario'+item.idAtende);
+                })
+            })
+        })
+    })
+
+$.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(dados){
+    $.each(dados, function(key, item) {
+        let linha =
+        '<tr>' +
+            '<td>'+item.numeroContrato+'</td>'+
+            '<td>'+item.nomeEquipe+'</td>'+
+            '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
+            '<td>'+item.nomeAtividade+'</td>'+
+            '<td>'+item.assuntoAtende+'</td>'+
+            '<td>'+item.matriculaResponsavelAtividade+'</td>'+
+            '<td>' + 
+            '<div class="btn-group" role="group">' +
+                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                    'Ação' + 
+                '</button>' + 
+
+                // botão dropdown
+                '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+            '</div>' +
+            
+            //modal redirecionar
+            '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-content">' +
+                    '<form method="post" action="/redirecionar/gestor/' + item.idAtende + '">' +
+                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                        '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Direcionar' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+
+                                '<label for="exampleFormControlSelect1">Selecione o Destinatário</label>'+
+                                '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
+                                '</select>'+'<br>'+
+
+                                '<div class="form-group" style="display: none;">'+
+                                '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
+                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                            '</div>'+
+
+                                '</div>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                            '<button type="submit" class="btn btn-success">Salvar</button>' +
+                        '</div>' +
+                    '</form>'+
+                '</div>' + 
+            '</div>' + 
+        '</div>' + 
+
+    // Modal tratamento
+    '<div class="modal fade" id="tratar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+        '<div class="modal-content">' +
+            '<form method="post" action="/responder/gestor/' + item.idAtende + '">' +
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Tratar Demanda' + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                    '<div class="container">' +
+                        '<div>' +
+
+                        '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
+
+                        '</div>' +
+                    '</div>' + 
+                '</div>' +
+                '<div class="modal-footer">' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                    '<button type="submit" class="btn btn-success">Responder</button>' +
+                '</div>' +
+            '</form>'+ 
+        '</div>' + 
+    '</div>' + 
+'</div>' +
+
+    // Modal Exclusão
+    '<div class="modal fade" id="excluir' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+        '<div class="modal-content">' +
+            '<form method="post" action="/excluir/gestor/' + item.idAtende + '">' +
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
+                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Excluir' + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                    '<div class="container">' +
+                        '<div>' +
+
+                        '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+
+                        '</div>' +
+                    '</div>' + 
+                '</div>' +
+                '<div class="modal-footer">' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                    '<button type="submit" class="btn btn-danger">Excluir</button>' +
+                '</div>' +
+            '</form>'+ 
+        '</div>' + 
+    '</div>' + 
+'</div>' +
+        '</td>' + 
+    '</tr>'
+
+        $(linha).appendTo('#tblAtendeDoisDias>tbody');
+            $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
+                $.each(dadosEmpregado, function(empKey, empItem) {
+                    var redirect =
+                                '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                $(redirect).appendTo('#selectDestinatario'+item.idAtende);
+                })
+            })
+        })
+    })
+$.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function(dados){
+    $.each(dados, function(key, item) {
+        let linha =
+        '<tr>' +
+            '<td>'+item.numeroContrato+'</td>'+
+            '<td>'+item.nomeEquipe+'</td>'+
+            '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
+            '<td>'+item.nomeAtividade+'</td>'+
+            '<td>'+item.assuntoAtende+'</td>'+
+            '<td>'+item.matriculaResponsavelAtividade+'</td>'+
+            '<td>' + 
+            '<div class="btn-group" role="group">' +
+                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                    'Ação' + 
+                '</button>' + 
+
+                // botão dropdown
+                '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+            '</div>' +
+            
+            //modal redirecionar
+            '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-content">' +
+                    '<form method="post" action="/redirecionar/gestor/' + item.idAtende + '">' +
+                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                        '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Direcionar' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+
+                                '<label for="exampleFormControlSelect1">Selecione o Destinatário</label>'+
+                                '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
+                                '</select>'+'<br>'+
+
+                                '<div class="form-group" style="display: none;">'+
+                                '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
+                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                            '</div>'+
+
+                                '</div>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                            '<button type="submit" class="btn btn-success">Salvar</button>' +
+                        '</div>' +
+                    '</form>'+
+                '</div>' + 
+            '</div>' + 
+        '</div>' + 
+
+    // Modal tratamento
+    '<div class="modal fade" id="tratar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+        '<div class="modal-content">' +
+            '<form method="post" action="/responder/gestor/' + item.idAtende + '">' +
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Tratar Demanda' + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                    '<div class="container">' +
+                        '<div>' +
+
+                        '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
+
+                        '</div>' +
+                    '</div>' + 
+                '</div>' +
+                '<div class="modal-footer">' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                    '<button type="submit" class="btn btn-success">Responder</button>' +
+                '</div>' +
+            '</form>'+ 
+        '</div>' + 
+    '</div>' + 
+'</div>' +
+
+    // Modal Exclusão
+    '<div class="modal fade" id="excluir' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+        '<div class="modal-content">' +
+            '<form method="post" action="/excluir/gestor/' + item.idAtende + '">' +
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
+                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Excluir' + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                    '<div class="container">' +
+                        '<div>' +
+
+                        '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+
+                        '</div>' +
+                    '</div>' + 
+                '</div>' +
+                '<div class="modal-footer">' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                    '<button type="submit" class="btn btn-danger">Excluir</button>' +
+                '</div>' +
+            '</form>'+ 
+        '</div>' + 
+    '</div>' + 
+'</div>' +
+        '</td>' + 
+    '</tr>'
+
+        $(linha).appendTo('#tblAtendeAmanha>tbody');
+            $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
+                $.each(dadosEmpregado, function(empKey, empItem) {
+                    var redirect =
+                                '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                $(redirect).appendTo('#selectDestinatario'+item.idAtende);
+                })
+            })
+        })
+    })
+
+$.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
+    $.each(dados, function(key, item) {
+        let linha =
+        '<tr>' +
+            '<td>'+item.numeroContrato+'</td>'+
+            '<td>'+item.nomeEquipe+'</td>'+
+            '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
+            '<td>'+item.nomeAtividade+'</td>'+
+            '<td>'+item.assuntoAtende+'</td>'+
+            '<td>'+item.matriculaResponsavelAtividade+'</td>'+
+            '<td>' + 
+            '<div class="btn-group" role="group">' +
+                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                    'Ação' + 
+                '</button>' + 
+
+                // botão dropdown
+                '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+            '</div>' +
+            
+            //modal redirecionar
+            '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-content">' +
+                    '<form method="post" action="/redirecionar/gestor/' + item.idAtende + '">' +
+                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                        '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                        '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Direcionar' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+
+                                '<label for="exampleFormControlSelect1">Selecione o Destinatário</label>'+
+                                '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
+                                '</select>'+'<br>'+
+
+                                '<div class="form-group" style="display: none;">'+
+                                '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
+                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                            '</div>'+
+
+                                '</div>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                            '<button type="submit" class="btn btn-success">Salvar</button>' +
+                        '</div>' +
+                    '</form>'+
+                '</div>' + 
+            '</div>' + 
+        '</div>' + 
+
+    // Modal tratamento
+    '<div class="modal fade" id="tratar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+        '<div class="modal-content">' +
+            '<form method="post" action="/responder/gestor/' + item.idAtende + '">' +
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Tratar Demanda' + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                    '<div class="container">' +
+                        '<div>' +
+
+                        '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
+
+                        '</div>' +
+                    '</div>' + 
+                '</div>' +
+                '<div class="modal-footer">' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                    '<button type="submit" class="btn btn-success">Responder</button>' +
+                '</div>' +
+            '</form>'+ 
+        '</div>' + 
+    '</div>' + 
+'</div>' +
+
+    // Modal Exclusão
+    '<div class="modal fade" id="excluir' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+        '<div class="modal-content">' +
+            '<form method="post" action="/excluir/gestor/' + item.idAtende + '">' +
+                    '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                    '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
+                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Excluir' + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                    '<div class="container">' +
+                        '<div>' +
+
+                        '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+
+                        '</div>' +
+                    '</div>' + 
+                '</div>' +
+                '<div class="modal-footer">' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                    '<button type="submit" class="btn btn-danger">Excluir</button>' +
+                '</div>' +
+            '</form>'+ 
+        '</div>' + 
+    '</div>' + 
+'</div>' +
+        '</td>' + 
+    '</tr>'
+        $(linha).appendTo('#tblAtendeHoje>tbody');
+            $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
+                $.each(dadosEmpregado, function(empKey, empItem) {
+                    var redirect =
+                                '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                $(redirect).appendTo('#selectDestinatario'+item.idAtende);
+                })
+            })
+        })
+    })
+
+    setTimeout(function(){
+        _formataData()
+        _formataDatatableComData()
+      }, 1000);
+
+
+
