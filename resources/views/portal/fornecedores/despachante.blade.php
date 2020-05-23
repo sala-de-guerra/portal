@@ -32,8 +32,8 @@
 
     <div class="col">
         <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Principal</a> </li>
-            <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Controle Despachantes</li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/fornecedores/controle-despachantes"> Fornecedores</a> </li>
+            <li class="breadcrumb-item active"> Controle Despachantes</li>
         </ol>
     </div>
 </div><br>

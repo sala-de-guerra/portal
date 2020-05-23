@@ -15,6 +15,8 @@ use Cmixin\BusinessDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Exports\CriaExcelLeilaoNegativo;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LeilaoNegativoController extends Controller
 {
@@ -558,5 +560,46 @@ class LeilaoNegativoController extends Controller
             }
             DB::rollback();
         }
+    }
+
+    public function registrarHistoricoLeilaoNegativo (Request $request, $numeroContratoFormatado)
+    {        
+        try {
+            DB::beginTransaction();
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $numeroContratoFormatado;
+            $historico->tipo = $request->tipoAtendimento;
+            $historico->atividade = $request->atividadeAtendimento;
+            $historico->observacao = strip_tags($request->observacaoAtendimento);
+            // dd(date("Y-m-d H:i:s", time()));
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
+            
+            $historico->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Histórico registrado!");
+            $request->session()->flash('corpoMensagem', "O seu registro de histórico foi cadastrado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            // dd($th);
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Histórico não registrado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do histórico. Tente novamente");
+        }
+        return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $numeroContratoFormatado);
+    }
+
+    public function criaPlanilhaExcelLeilaoNegativo()
+    {
+        return Excel::download(new CriaExcelLeilaoNegativo, 'PlanilhaLeiloesNegativo.xlsx');
     }
 }

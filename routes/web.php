@@ -112,6 +112,8 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::put('tratar/entregar-documentos-despachante/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@entregarDocumentosDespachante');
         Route::put('tratar/receber-protocolo-cartorio/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberProtocoloCartorio');
         Route::put('tratar/receber-documentos-despachante/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberDocumentosDespachante');
+        Route::post('tratar/{numeroContrato}', 'LeilaoNegativo\LeilaoNegativoController@registrarHistoricoLeilaoNegativo');
+        Route::get('/baixar-planilha', 'LeilaoNegativo\LeilaoNegativoController@criaPlanilhaExcelLeilaoNegativo');
     });
 
     // ROTA PARA REGISTRO DE HISTÓRICO
@@ -176,9 +178,10 @@ Route::prefix('atende')->group(function () {
     Route::get('controla-prazo-atende', 'AtendeDemandasController@controlaPrazoAtende'); 
     // LISTAR TODAS AS DEMANDAS POR PRAZO
     Route::get('listar-demandas-prazo/{prazoDemanda}', 'AtendeDemandasController@listarDemandasUnidadePorPrazo');
-    // viewdoRafael
+    // MINHAS DEMANDAS
     Route::get('minhas-demandas','AtendeDemandasController@viewMinhasDemandas');
     Route::get('gestao-atende','AtendeDemandasController@viewGerenciarDemandas');
+    Route::get('listar-universo','AtendeDemandasController@listarUniverso');
 });
 
 // GERENCIAL
@@ -246,4 +249,12 @@ Route::match(['get', 'post', 'put', 'delete'], 'url', function (\Illuminate\Http
 Route::get('cadastra-empregados-unidade', 'CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController@CadastraEquipeTblEmpregadosTblGestaoEquipeEmpregadosController');
 
 //Gestão Atende
-Route::resource('gerencial/gestao-atende', 'GestaoAtendeController@index');
+Route::get('gerencial/gestao-atende', 'GestaoAtendeController@index');
+//Listar Empregado
+Route::get('gerencial/listar-empregado', 'GestaoAtendeController@listarEmpregados');
+// REDIRECIONAMENTO DO GESTOR
+Route::put('redirecionar/gestor/{idAtende}', 'GestaoAtendeController@redirecionarAtendeGestor');
+// RESPONDER ATENDE GESTOR
+Route::put('responder/gestor/{idAtende}', 'GestaoAtendeController@responderAtendeGerencial');
+// EXCLUIR ATENDE GESTOR
+Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGerencial');  

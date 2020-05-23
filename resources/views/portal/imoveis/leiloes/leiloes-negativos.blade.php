@@ -32,8 +32,8 @@
 
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Principal</a> </li>
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i>Controle de Leilões Negativos</li>
+                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/leiloes-negativos"> Preparar e Ofertar</a> </li>
+                <li class="breadcrumb-item active">Controle de Leilões Negativos</li>
             </ol>
         </div>
     </div>
@@ -48,6 +48,8 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
                     <li class="nav-item d-none d-sm-block">
                         <form class="form-inline m-0" id="formBarraBusca" action="/estoque-imoveis/consultar-imovel/resultado-LeilaoNegativo" method="post">
                             {{ csrf_field() }}
@@ -55,13 +57,19 @@
                                 <option class="text-dark"  value="numeroContrato">Contrato</option>
                             </select>
                             <div class="input-group nav-search-bar">
-                                <input class="form-control form-control-navbar" type="text"  autocomplete="off" name="valorVariavel" placeholder="Pesquise por contrato" required>
+                                <input class="form-control form-control-navbar" type="number"  autocomplete="off" name="valorVariavel" placeholder="Pesquise por contrato" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit"  title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
                         </form>
-                    </li><br><br>
+                    </li>
+                        </div>
+                        <div class="col-4 ml-5">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="leiloes-negativos/baixar-planilha"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Download planilha completa de leilões"><i class="fas fa-file-download"></i>&nbsp Lista Leilões</button></a>
+                          </div>
+                    </div>
+                    <br><br>
 
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">

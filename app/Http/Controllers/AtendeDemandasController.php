@@ -40,6 +40,7 @@ class AtendeDemandasController extends Controller
             'numeroContrato' => $dadosAtende->numeroContrato,
             'assuntoAtende' => $dadosAtende->assuntoAtende,
             'descricaoAtende' => $dadosAtende->descricaoAtende,
+            'motivoRedirecionamento' => $dadosAtende->motivoRedirecionamento,
         ]);
     }
 
@@ -77,6 +78,7 @@ class AtendeDemandasController extends Controller
                     'assuntoAtende'             => $demanda->assuntoAtende,
                     'descricaoAtende'           => $demanda->descricaoAtende,
                     'prazoAtendimentoAtende'    => $demanda->prazoAtendimentoAtende,
+                    'motivoRedirecionamento'    => $demanda->motivoRedirecionamento,
                 ]);
             }
         }
@@ -455,13 +457,13 @@ class AtendeDemandasController extends Controller
                     $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', Carbon::now())->get();
                     break;
                 case 'demandasVencemProximoDiaUtil':
-                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', Carbon::parse(Carbon::now())->addBusinessDays(1)->format('Y-m-d'))->get();
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', DiasUteisClass::contadorDiasUteis(Carbon::now(), 1))->get();
                     break;
-                case 'demandasVencemProximoDiaUtil':
-                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', Carbon::parse(Carbon::now())->addBusinessDays(2)->format('Y-m-d'))->get();
+                case 'demandasVencemDoisDiasUteis':
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', DiasUteisClass::contadorDiasUteis(Carbon::now(), 2))->get();
                     break;
-                case 'demandasVencemProximoDiaUtil':
-                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', '>=', Carbon::parse(Carbon::now())->addBusinessDays(3)->format('Y-m-d'))->get();
+                case 'demandasVencimentoLongo':
+                    $listaDemandas = Atende::where('codigoUnidade', $unidadeUsuario)->where('statusAtende', '!=', 'FINALIZADO')->where('prazoAtendimentoAtende', '>=', DiasUteisClass::contadorDiasUteis(Carbon::now(), 3))->get();
                     break;
             }
             foreach ($listaDemandas as $demanda) {
@@ -477,6 +479,7 @@ class AtendeDemandasController extends Controller
                     'assuntoAtende'                 => $demanda->assuntoAtende,
                     'descricaoAtende'               => $demanda->descricaoAtende,
                     'matriculaResponsavelAtividade' => $demanda->matriculaResponsavelAtividade,
+                    'prazoAtendimentoAtende'        => $demanda->prazoAtendimentoAtende
                 ]);
             }
             DB::commit();
@@ -489,5 +492,13 @@ class AtendeDemandasController extends Controller
             DB::rollback();
         }
         return json_encode($arrayDadosDemandas);
+    }
+
+    public function listarUniverso()
+    {
+        $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        $dadosAtende = Atende::where('codigoUnidade', $unidadeUsuario)->get();
+
+        return json_encode($dadosAtende);
     }
 }

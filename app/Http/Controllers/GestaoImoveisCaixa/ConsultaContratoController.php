@@ -643,7 +643,7 @@ class ConsultaContratoController extends Controller
             $request->session()->flash('pesquisaSemResultados');
             session()->flash('corMensagem', 'danger');
             session()->flash('tituloMensagem', "Contrato não localizado");
-            session()->flash('corpoMensagem', "este não é um número CHB válido.");
+            session()->flash('corpoMensagem', "este não é um número de contrato válido.");
             return redirect('/estoque-imoveis/leiloes-negativos');
            
         }

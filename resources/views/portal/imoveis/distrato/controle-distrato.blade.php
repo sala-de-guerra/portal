@@ -32,7 +32,8 @@
 
         <div class="col-sm-3">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/distrato"> Controle de Distrato</a> </li>
+                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/distrato">Contratação</a> </li>
+                <li class="breadcrumb-item active">Controle de Distrato</li>
             </ol>
         </div>
     </div>

@@ -1,9 +1,3 @@
-<style>
-.btnHistorico{
-        height : 50px;
-    }
-</style>
-
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">
@@ -479,17 +473,33 @@
                                     <div class="modal-dialog modal-dialog-scrollable"  role="document">
                                         <div class="modal-content">
                                         <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Histórico</h5>
+                                            <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Histórico</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                        <p id="paragrafoHistoricoleilaoNegativoCompleto"></p>
+                                            <label for="paragrafoHistoricoleilaoNegativoCompleto">Histórico</label>
+                                        <textarea class="form-control" rows="3" disabled id="paragrafoHistoricoleilaoNegativoCompleto"></textarea>
                                         </div>
+
+                                    <div class="container">
+                                        <form method='post' action='/estoque-imoveis/leiloes-negativos/tratar/{{ $numeroContrato ?? $contratoFormatado ?? '' }}'>
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="tipoAtendimento" value="REGISTRO">
+                                            <input type="hidden" name="atividadeAtendimento" value="LEILÃO NEGATIVO">
+                                            <div class="form-group">
+                                                <p>Novo Histórico</p>
+                                                    <textarea name="observacaoAtendimento" class="form-control" rows="5" required></textarea>
+                                                </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Gravar</button>
                                         </div>
+                                    </form>
+                                </div>
+
                                         </div>
                                     </div>
                                     </div>

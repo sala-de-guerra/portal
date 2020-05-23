@@ -32,9 +32,9 @@
 
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Principal</a> </li>
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/leiloes-negativos"> Controle de Leilões Negativos</a> </li>
-                <li class="breadcrumb-item"> <i class="fa fa-map-signs"></i> Listagem de Leilões</li>
+                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/leiloes-negativos"> Preparar e Ofertar</a> </li>
+                <li class="breadcrumb-item active"><a href="/estoque-imoveis/leiloes-negativos">Controle de Leilões Negativos</a></li>
+                <li class="breadcrumb-item active"> Listagem de Leilões</li>
             </ol>
         </div>
     </div>

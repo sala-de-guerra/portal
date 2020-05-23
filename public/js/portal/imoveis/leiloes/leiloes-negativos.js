@@ -28,6 +28,7 @@ $(document).ready(function(){
         window.location = $(this).data("href");
     });
 })
-
-
+setTimeout(function(){
+    $('.bg-danger').fadeOut("slow");
+    }, 2000);
    

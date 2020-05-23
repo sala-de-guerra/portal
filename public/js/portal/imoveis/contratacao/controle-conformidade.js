@@ -11,6 +11,10 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
+// pegar a data de hoje para atualizar "ultimo tratamento"
+var d = new Date();
+var strDate = d.getDate() + "/" +0+ (d.getMonth()+1) + "/" + d.getFullYear();
+
 $(document).ready(function(){
     $(".menu-hamburguer").click();
 
@@ -65,15 +69,15 @@ $(document).ready(function(){
                        '<span aria-hidden="true">&times;</span>'+
                        '</button>'+
                    '</div>'+
-                   '<div class="modal-body" id="formContato'+ item.numeroContrato+'">'+
-                      
+                   '<div class="modal-body" id="formContato'+ item.numeroContrato+'">'+ 
                    '</div>'+
                    '</div>'+
                '</div>'+
                '</div>'+
-               '<td class="formata-data-sem-hora">' + item.dataNovoHistorio + '</td>' +
+               '<td class="formata-data-sem-hora" id="novoHistorico'+item.numeroContrato+'">' + item.dataNovoHistorio + '</td>' +
             '</tr>';
 
+            
             if (item.cardAgrupamento == "Agência" && item.sinalPago == "SIM") {
                 $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
                 $('.divBotao'+item.numeroContrato).show()
@@ -86,6 +90,16 @@ $(document).ready(function(){
                 $('.divBotao'+item.numeroContrato).show()
             }
 
+            if (item.tipoHistorico == "CONTRATACAO" || item.tipoHistorico == "DISTRATO" ||
+                item.tipoHistorico == "PAGAMENTO" || item.tipoHistorico == "PREPARACAO" ||
+                item.tipoHistorico == "LEILÃO NEGATIVO" || item.tipoHistorico == "ATENDE") 
+            {
+                $('#novoHistorico'+item.numeroContrato).text("")
+             }
+      
+
+           
+ 
 
         $('#'+item.numeroContrato).click(function() {
         $.get( '/estoque-imoveis/consulta-historico-contrato/'+item.contratoFormatado, function(data) {
@@ -116,7 +130,7 @@ $(document).ready(function(){
             $.each(resultado.historico, function(chave, valor) {
                 let analisaTipo = valor.atividade
                 let formataData = valor.data
-                let novaData = formataData.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
+                var novaData = formataData.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
                 
                 if (analisaTipo == "CONFORMIDADE"){
                 let toString = valor.observacao.replace(/(<([^>]+)>)/ig,"");
@@ -129,11 +143,9 @@ $(document).ready(function(){
             $('#formEnviodeObs'+item.numeroContrato).submit( function(e) {
 
                 e.preventDefault();
-            
                 let datas = JSON.stringify( $(this).serialize() );
                 let url = $(this).attr('action');
                 let method = $(this).attr('method');
-            
                 // console.log(datas);
                 // console.log(url);
                 // console.log(method);
@@ -146,13 +158,12 @@ $(document).ready(function(){
                     success: function (result){
                         
                         $('.modal').modal('hide');
-                        
-                        
+
                         Toast.fire({
                             icon: 'success',
                             title: 'Alteração salva!'
                         });
-                
+                        $('#novoHistorico'+ item.numeroContrato).text(strDate)
                     },
                   
                     error: function () {
@@ -164,7 +175,6 @@ $(document).ready(function(){
                             title: 'Erro: alteração não efetuada!'
                         });
                     }
-                    
                 });
             
             })
@@ -261,7 +271,7 @@ $(document).ready(function(){
                             icon: 'success',
                             title: 'Alteração salva!'
                         });
-                   
+                        $('#novoHistorico'+ item.numeroContrato).text(strDate)
                     },
                   
                     error: function () {
@@ -285,6 +295,7 @@ $(document).ready(function(){
         _formataData() 
         _formataValores();
         _formataDatatableComData()
+        $('#teste'+item.numeroContrato).text("21/21/21")
     })
 
 })
@@ -394,7 +405,7 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                                 icon: 'success',
                                 title: 'Alteração salva!'
                             });
-                            
+                            $('#novoHistorico'+ item.numeroContrato).text(strDate)
                         },
                       
                         error: function () {
@@ -418,9 +429,3 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
     _formataValores();
     _formataDatatableComData()
 })
-
-2
-3
-$("#btnRefresh").click(function() {
-    location.reload();
-});

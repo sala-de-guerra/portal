@@ -167,7 +167,8 @@ function avisoMensageria(url) {
 setTimeout(function()
 { 
 var classificacao = $('#classificacao').text()
-if (classificacao == 'Oriundos SFI-Gar. Fiduciária' || classificacao == 'Patrimonial -Realização de Garantia' ){
+if (classificacao == 'Oriundos SFI-Gar. Fiduciária' || classificacao == 'Patrimonial -Realização de Garantia' ||
+    classificacao == 'EMGEA - Realização de Garantia' ){
     $('#consultaLeilaoNegativo').remove();
 }
-}, 3000);
+}, 4000);

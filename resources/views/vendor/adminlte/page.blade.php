@@ -340,6 +340,19 @@
     <script src="{{ asset('js/global/toggle_fullscreen.js') }}"></script>
     <script src="{{ asset('js/global/copy_to_clipboard.js') }}"></script>
 
+    <script>
+
+// $('#tipoVariavel').click(function() {
+//   if ($('#tipoVariavel').val() == "numeroContrato" || 
+//   $('#tipoVariavel').val() == 'matriculaImovel' ) {
+//         $('#inputBarraBusca').prop('type','number');
+//   }else{
+//     $('#inputBarraBusca').prop('type','text');
+//   }
+// });
+
+    </script>
+
     @stack('js')
     @yield('js')
 @stop

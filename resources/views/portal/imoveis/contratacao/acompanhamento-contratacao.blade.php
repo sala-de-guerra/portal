@@ -9,12 +9,8 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active"> 
-                    <i class="fa fa-map-signs"></i> 
-                    <a href="/"> Home</a> 
-                    / 
-                    <a href="/estoque-imoveis/acompanha-contratacao"> Acompanhar Contratação</a>
-                </li>
+                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/acompanha-contratacao"> Contratação</a> </li>
+                <li class="breadcrumb-item active">Acompanhar Contratação</li>
             </ol>
         </div>
     </div>
@@ -34,7 +30,7 @@
     </div>
 @endif
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12">
         <div class="card collapsed-card card-primary">
             <div class="card-header cursor-pointer" data-card-widget="collapse">
@@ -73,11 +69,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="row">
     <div class="col-md-12">
-        <div class="card collapsed-card card-primary">
-            <div class="card-header cursor-pointer" data-card-widget="collapse">
+        <div class="card card-primary">
+            <div class="card-header cursor-pointer">
                 <h3 class="card-title">Acompanhar Contratação</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
