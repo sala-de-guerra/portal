@@ -649,6 +649,4 @@ class ConsultaContratoController extends Controller
         }
     }
 
-
-
 }

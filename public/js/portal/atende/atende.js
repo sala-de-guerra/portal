@@ -6,6 +6,7 @@ function Atende ()
         $.getJSON('/atende/listar-equipes-atividades-atende', function(dados){
             let resultadoFuncaoModal = desenharModal(dados)
             document.getElementById('modalAtendeHtml').innerHTML = resultadoFuncaoModal
+
         })
     })
 
@@ -164,17 +165,32 @@ function Atende ()
                                 <input type="hidden" name="idAtividade" value="${dadosAtividade.idAtividade}">
                                 <div class="form-group">
                                     <label>Assunto</label>
-                                    <input type="text" name="assuntoAtende" class="form-control" id="assuntoAtende" placeholder="Assunto do Atende">
+                                    <input type="text" name="assuntoAtende" class="form-control" placeholder="Assunto do Atende" required>
                                 </div>
                                 <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Descrição</label>
-                                    <textarea name="descricaoAtende" class="form-control" id="formAtende" rows="3"></textarea>
+                                    <textarea name="descricaoAtende" class="form-control" id="formAtende" rows="3" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" name="emailContatoResposta" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email">
-                                    <small id="emailHelp" class="form-text text-muted">Preencha este campo caso deseje enviar uma cópia da resposta.</small>
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="emailContatoResposta" aria-describedby="emailHelp" placeholder="email">
+                                    <small class="form-text text-muted">Preencha este campo caso deseje <b>direcionar</b> a resposta.</small>
+                                    <small class="form-text text-muted">este campo em branco, a resposta irá para quem efetuou a abertura do atende.</small>
+                                    <small class="form-text text-muted">envio para email caixa deve seguir o padrao c999999@<b>mail.caixa</b> ou a9999@<b>mail.caixa</b>.</small>
+
                                 </div>
+                                <button style="float: right;" onclick="addCopia()" type="button" class="btn btn-link">Adicionar cópia de email</button><br>
+                                
+                                <div style="display: none;" class="form-group toggle">
+                                    <label>CC</label>
+                                    <input type="email" class="form-control" name="emailContatoCopia" placeholder="email">
+                                    <small class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                                </div>
+                                <div style="display: none;" class="form-group toggle">
+                                    <label>CC</label>
+                                    <input type="email" class="form-control" name="emailContatoNovaCopia" placeholder="email">
+                                    <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                            </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" onclick="atende.fecharModais()">Fechar</button>
@@ -204,6 +220,10 @@ function Atende ()
 }
 
 let atende = new Atende();
+
+function addCopia(){
+    $('.toggle').toggle()
+}
 
 
 

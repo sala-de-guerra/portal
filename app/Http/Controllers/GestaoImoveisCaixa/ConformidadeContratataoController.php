@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\GestaoImoveisCaixa;
 
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
+use App\Classes\GestaoImoveisCaixa\MensagensCobranca;
 use App\Models\HistoricoPortalGilie;
 use App\Classes\Ldap;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,10 @@ use Cmixin\BusinessDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class ConformidadeContratataoController extends Controller
 {
@@ -253,4 +258,80 @@ class ConformidadeContratataoController extends Controller
     {
         //
     }
+
+    public function EnviodeCobrancaAgencia(Request $request)
+    {
+        $mail = new PHPMailer(true);
+        try {
+        $mail->isSMTP();
+        $mail->CharSet = 'UTF-8'; 
+        $mail->isHTML(true);                                         
+        $mail->Host = 'sistemas.correiolivre.caixa';  
+        $mail->SMTPAuth = false;                                  
+        $mail->Port = 25;
+        // $mail->SMTPDebug = 2;
+        $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+        $mail->addReplyTo('GILIESP01@caixa.gov.br');
+        $mail->addAddress($request->emailAgencia);
+        $mail->Subject = 'Retorno de finalização do processo '. $request->contratoFormatado;
+        // $mensagemAutomatica = file_get_contents(("CobrancaAgenciaAndamentoFinanciamento.php"), dirname(__FILE__));
+        // $mensagemAutomatica = str_replace("%AGENCIA%", $request->codigoAgencia, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%contratoFormatado%", $request->contratoFormatado, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%nomeProponente%", $request->nomeProponente, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%GILIE%", $request->gilieDeVinculacao, $mensagemAutomatica);
+        $mail->Body = nl2br($request->observacaoAtendimento);
+        $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $request->contratoFormatado;
+            $historico->tipo = "ANALISE";
+            $historico->atividade = "COBRANCA";
+            $historico->observacao = strip_tags($request->observacaoAtendimento);
+            // dd(date("Y-m-d H:i:s", time()));
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
+            $historico->save();
+        $mail->send();
+        echo 'Mensagem enviada';
+         } catch (Exception $e) {
+             echo "Erro. Mensagem não foi enviada: {$mail->ErrorInfo}";
+        }
+    }
+    public function EnviodeCobrancaPagamentoCliente(Request $request)
+    {
+        $mail = new PHPMailer(true);
+        try {
+        $mail->isSMTP();
+        $mail->CharSet = 'UTF-8'; 
+        $mail->isHTML(true);                                         
+        $mail->Host = 'sistemas.correiolivre.caixa';  
+        $mail->SMTPAuth = false;                                  
+        $mail->Port = 25;
+        // $mail->SMTPDebug = 2;
+        $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+        $mail->addReplyTo('GILIESP01@caixa.gov.br');
+        $mail->addAddress($request->emailContato);
+        $mail->Subject = 'Retorno de finalização do processo '. $request->bemFormatado;
+        // $mensagemAutomatica = file_get_contents(("CobrancaAgenciaAndamentoFinanciamento.php"), dirname(__FILE__));
+        // $mensagemAutomatica = str_replace("%AGENCIA%", $request->codigoAgencia, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%contratoFormatado%", $request->contratoFormatado, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%nomeProponente%", $request->nomeProponente, $mensagemAutomatica);
+        // $mensagemAutomatica = str_replace("%GILIE%", $request->gilieDeVinculacao, $mensagemAutomatica);
+        $mail->Body = nl2br($request->observacaoAtendimento);
+        $historico = new HistoricoPortalGilie;
+            $historico->matricula = session('matricula');
+            $historico->numeroContrato = $request->bemFormatado;
+            $historico->tipo = "ANALISE";
+            $historico->atividade = "COBRANCA";
+            $historico->observacao = strip_tags($request->observacaoAtendimento);
+            // dd(date("Y-m-d H:i:s", time()));
+            $historico->created_at = date("Y-m-d H:i:s", time());
+            $historico->updated_at = date("Y-m-d H:i:s", time());
+            $historico->save();
+        $mail->send();
+        echo 'Mensagem enviada';
+         } catch (Exception $e) {
+             echo "Erro. Mensagem não foi enviada: {$mail->ErrorInfo}";
+        }
+    }
+
 }

@@ -44,10 +44,9 @@
                             <table id="tblminhasDemandas" class="table table-bordered table-striped dataTable">
                                  <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Contrato</th>
                                         <th>Atividade</th>
                                         <th>Limite atendimento</th>
-                                        <th>Contrato</th>
                                         <th>Assunto</th>
                                         <th>Breve descrição</th>
                                         <th></th>

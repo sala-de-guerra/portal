@@ -17,6 +17,9 @@ use Cmixin\BusinessDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class AtendeDemandasController extends Controller
 {
@@ -79,6 +82,9 @@ class AtendeDemandasController extends Controller
                     'descricaoAtende'           => $demanda->descricaoAtende,
                     'prazoAtendimentoAtende'    => $demanda->prazoAtendimentoAtende,
                     'motivoRedirecionamento'    => $demanda->motivoRedirecionamento,
+                    'emailContatoResposta'      => $demanda->emailContatoResposta,
+                    'emailContatoCopia'             => $demanda->emailContatoCopia,
+                    'emailContatoNovaCopia'         => $demanda->emailContatoNovaCopia,
                 ]);
             }
         }
@@ -201,6 +207,12 @@ class AtendeDemandasController extends Controller
             if ($request->has('emailContatoResposta')) {
                 $novaDemandaAtende->emailContatoResposta        = $request->emailContatoResposta;
             }
+            if ($request->has('emailContatoCopia')) {
+                $novaDemandaAtende->emailContatoCopia           = $request->emailContatoCopia;
+            }
+            if ($request->has('emailContatoResposta')) {
+                $novaDemandaAtende->emailContatoNovaCopia        = $request->emailContatoNovaCopia;
+            }
 
             // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
             $novaDemandaAtende->save();
@@ -289,7 +301,33 @@ class AtendeDemandasController extends Controller
      */
     public function responderAtende(Request $request, $idAtende)
     {
+        $mail = new PHPMailer(true);
         try {
+            $mail->isSMTP();
+            $mail->CharSet = 'UTF-8'; 
+            $mail->isHTML(true);                                         
+            $mail->Host = 'sistemas.correiolivre.caixa';  
+            $mail->SMTPAuth = false;                                  
+            $mail->Port = 25;
+            // $mail->SMTPDebug = 2;
+            $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+            $mail->addReplyTo('GILIESP01@caixa.gov.br');
+            if ($request->emailContatoResposta == "null"){
+            $mail->addAddress(session('matricula'). "@mail.caixa");
+            }else {
+            $mail->addCC($request->emailContatoResposta);
+            }
+
+            if ($request->emailContatoCopia != "null"){
+                $mail->addCC($request->emailContatoCopia);
+            }
+            if ($request->emailContatoNovaCopia != "null"){
+                $mail->addCC($request->emailContatoNovaCopia);
+            }
+
+            $mail->Subject = 'Resposta Atende';
+            $mail->Body = nl2br($request->respostaAtende);
+            $mail->send();
             DB::beginTransaction();
             // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
             $responderAtende = Atende::find($idAtende);
@@ -305,7 +343,7 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $responderAtende->contratoFormatado;
             $historico->tipo            = "RESPOSTA";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " " . $request->respostaAtende;
+            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " <br>" . $request->respostaAtende;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
@@ -369,8 +407,8 @@ class AtendeDemandasController extends Controller
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Atende respondido!");
-            $request->session()->flash('corpoMensagem', "O Atende foi respondido com sucesso.");
+            $request->session()->flash('tituloMensagem', "Atende redirecionado!");
+            $request->session()->flash('corpoMensagem', "O Atende foi redirecionado com sucesso.");
 
             DB::commit();
         } catch (\Throwable $th) {
@@ -382,8 +420,8 @@ class AtendeDemandasController extends Controller
             DB::rollback();
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'danger');
-            $request->session()->flash('tituloMensagem', "Resposta não registrada");
-            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante registro da resposta do Atende. Tente novamente");
+            $request->session()->flash('tituloMensagem', "Erro");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o redirecionamento. Tente novamente");
         }
         return redirect("/atende/minhas-demandas");
     }
@@ -500,5 +538,51 @@ class AtendeDemandasController extends Controller
         $dadosAtende = Atende::where('codigoUnidade', $unidadeUsuario)->get();
 
         return json_encode($dadosAtende);
+    }
+    public function responderAtende_bkp(Request $request, $idAtende)
+    {
+        try {
+            DB::beginTransaction();
+            // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
+            $responderAtende = Atende::find($idAtende);
+
+            // EDITAR DADOS DEMANDA
+            $responderAtende->statusAtende      = 'FINALIZADO';
+            $responderAtende->respostaAtende    = $request->respostaAtende;
+            $responderAtende->dataAlteracao     = date("Y-m-d H:i:s", time());
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $responderAtende->contratoFormatado;
+            $historico->tipo            = "RESPOSTA";
+            $historico->atividade       = "ATENDE";
+            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " " . $request->respostaAtende;
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $responderAtende->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Atende respondido!");
+            $request->session()->flash('corpoMensagem', "O Atende foi respondido com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Resposta não registrada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante registro da resposta do Atende. Tente novamente");
+        }
+        return redirect("/atende/minhas-demandas");
     }
 }

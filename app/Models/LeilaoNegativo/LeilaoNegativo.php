@@ -31,4 +31,10 @@ class LeilaoNegativo extends Model
         'dataCadastro',
         'dataAlteracao',
         ];
+        public function getData2Attribute()
+        {
+            return date('d/m/Y', strtotime($this->attributes['dataSegundoLeilao']));
+        }
+   
+
 }

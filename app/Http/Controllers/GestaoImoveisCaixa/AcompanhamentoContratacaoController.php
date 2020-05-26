@@ -143,4 +143,5 @@ class AcompanhamentoContratacaoController extends Controller
         }
         return redirect("/estoque-imoveis/acompanha-contratacao");
     }
+
 }

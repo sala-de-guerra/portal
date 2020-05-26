@@ -8,10 +8,12 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
         var linha =
             '<tr>' +
                 '<td>' + item.idLeiloeiro + '</td>' +
-                '<td>' + item.nomeEmpresaAssessoraLeiloeiro + '</td>' +
+                '<td>' + item.nomeLeiloeiro + '</td>' +
+                // '<td>' + item.nomeEmpresaAssessoraLeiloeiro + '</td>' +
                 '<td>' + item.numeroContrato + '</td>' +
                 '<td>' + item.classificacaoImoveisLeilao + '</td>' +
-                '<td>' + item.nomeLeiloeiro + '</td>' +
+                '<td>' + item.nomeEmpresaAssessoraLeiloeiro + '</td>' +
+                // '<td>' + item.nomeLeiloeiro + '</td>' +
                 '<td>' + item.telefoneLeiloeiro + '</td>' +
                 '<td>' + 
                     '<div class="btn-group" role="group">' +

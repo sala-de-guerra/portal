@@ -143,8 +143,6 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
-                                  </div>   
-                    
                                   <thead>
                                     <tr>
                                         <th>CHB</th>
@@ -177,8 +175,11 @@
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>  
-
-
+                                </div>
+                                <div class="spinner-border spinnerTbl text-primary" role="status">
+                                    <span class="sr-only"></span>
+                                  </div>
+                                  <span class="spinnerTbl">Carregando Tabela Aguarde...</span>
                                 <thead>
                                     <tr>
                                         <th>CHB</th>
