@@ -165,3 +165,40 @@ input[type=number] {
 .btnHistorico{
     height : 50px;
 }
+.btn-gradient {    
+    width:50%;
+    position: relative;
+    display: inline-block;
+    left:-20px;
+    background: rgba(29, 29, 29, 0.15);
+    border-top-right-radius: 90px;
+    padding: 8px 24px 8px 14px;
+    /* box-shadow: 2px 0px 0px 0px rgba(78, 72, 72, 0.4); */
+    /* box-shadow: 2px 0px 0px 0px  rgba(0, 0, 0, 0.15); */
+}
+
+.btn-behance{
+    border-radius: 10px;
+    font-size:23px;
+    padding:0px 20px;
+    color: #fff;
+    background-color: #249eb4;
+    border:none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width:200px;
+    box-shadow: -5px 5px rgba(29, 29, 29, 0.15);
+
+}
+
+.btn-text{
+    width:60%;
+}
+
+.btn-gradient i{
+  font-size:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}

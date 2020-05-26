@@ -2,9 +2,8 @@
 
 @section('title', 'Portal GILIE/SP')
 <style>
-  
 
-    
+
 </style>
 
 @section('content_header')
@@ -17,16 +16,25 @@
     <div class="col-sm-4">
         @if (env('APP_ENV') != 'PRODUCAO')
             @if (in_array(session()->get('acessoEmpregadoPortal'), ['DESENVOLVEDOR'])) <!-- env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR'-->
-        <button style="background-color: #ffa500; color: white;" type="button" class="btn" data-toggle="modal" data-target="#modalAtende">
+        {{-- <button style="background-color: #ffa500; color: white;" type="button" class="btn" data-toggle="modal" data-target="#modalAtende">
             <b>+ Atende</b>  
-        </button>
+        </button> --}}
+
+        <button type="button" class="btn-behance" data-toggle="modal" data-target="#modalAtende">
+            <span class="btn-gradient">
+              <i class="fas fa-headset"></i>
+            </span>
+            <span class="btn-text">Atende</span>
+          </button>
+            
+        
             @endif
         @endif
     </div>
     <div class="col-sm-4">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i><a href="/"> Principal</a> </li>
-            <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i>Consulta Imóvel</li>
+            <li class="breadcrumb-item active"></i>Consulta Imóvel</li>
         </ol>
     </div>
 </div>

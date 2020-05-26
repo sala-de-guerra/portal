@@ -76,7 +76,11 @@ class MonitoraPagamentoSinalController extends Controller
                                 'statusSimov' => $contrato->STATUS_IMOVEL,
                                 'classificacaoImovel' =>$contrato->CLASSIFICACAO,
                                 'bemFormatado' => $contrato->BEM_FORMATADO,
-                                'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
+                                'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                                'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                                'NO_CORRETOR' => $contrato->NO_CORRETOR,
+                                'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                                'UNA' =>$contrato->UNA
                             ]);
                         } 
                     } else {
@@ -88,7 +92,11 @@ class MonitoraPagamentoSinalController extends Controller
                             'statusSimov' => $contrato->STATUS_IMOVEL,
                             'classificacaoImovel' =>$contrato->CLASSIFICACAO,
                             'bemFormatado' => $contrato->BEM_FORMATADO,
-                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
+                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                            'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                            'NO_CORRETOR' => $contrato->NO_CORRETOR,
+                            'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                            'UNA' =>$contrato->UNA
                         ]);
                     }
                 }
@@ -103,7 +111,11 @@ class MonitoraPagamentoSinalController extends Controller
                             'statusSimov' => $contrato->STATUS_IMOVEL,
                             'classificacaoImovel' =>$contrato->CLASSIFICACAO,
                             'bemFormatado' => $contrato->BEM_FORMATADO,
-                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
+                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                            'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                            'NO_CORRETOR' => $contrato->NO_CORRETOR,
+                            'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                            'UNA' =>$contrato->UNA
                         ]);
                     } 
                 } else {
@@ -115,7 +127,11 @@ class MonitoraPagamentoSinalController extends Controller
                         'statusSimov' => $contrato->STATUS_IMOVEL,
                         'classificacaoImovel' =>$contrato->CLASSIFICACAO,
                         'bemFormatado' => $contrato->BEM_FORMATADO,
-                        'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA
+                        'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                        'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                        'NO_CORRETOR' => $contrato->NO_CORRETOR,
+                        'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                        'UNA' =>$contrato->UNA
                     ]);
                 }
             }

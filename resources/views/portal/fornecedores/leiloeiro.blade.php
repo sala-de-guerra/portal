@@ -50,10 +50,10 @@
                                  <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>Nome</th>
+                                        <th>Leiloeiro</th>
                                         <th>Contrato</th>
                                         <th>Classificação</th>
-                                        <th>Leiloeiro</th>
+                                        <th>Empresa</th>
                                         <th>Telefone</th>
                                         <th> </th>
                                     </tr>
@@ -101,6 +101,21 @@
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Leiloeiro responsável<span style="color: red;"> *</span> </label>
+                                <input type="text" name="nomeLeiloeiro" class="form-control" autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>Telefone do responsável<span style="color: red;"> *</span> </label>
+                                <input type="text" name="telefoneLeiloeiro" class="form-control telefoneComum" autocomplete="off" id="telefoneLeiloeiro" placeholder="fixo ou celular" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
+                                <label>E-mail do responsável</label>
+                                <input type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br">
+                            </div>
+
+                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
                                 <label>Nome empresa leilão<span style="color: red;"> *</span> </label>
                                 <input type="text" name="nomeEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" required>
                             </div>
@@ -129,21 +144,6 @@
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
                                 <label>E-mail empresa leilão<span style="color: red;"> *</span> </label>
                                 <input type="email" name="emailLeiloeiro" class="form-control" placeholder="exemplo@email.com.br" autocomplete="off" required>
-                            </div>
-
-                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Leiloeiro responsável<span style="color: red;"> *</span> </label>
-                                <input type="text" name="nomeLeiloeiro" class="form-control" autocomplete="off" required>
-                            </div>
-
-                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>Telefone do responsável<span style="color: red;"> *</span> </label>
-                                <input type="text" name="telefoneLeiloeiro" class="form-control telefoneComum" autocomplete="off" id="telefoneLeiloeiro" placeholder="fixo ou celular" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
-                            </div>
-
-                            <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">
-                                <label>E-mail do responsável</label>
-                                <input type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="exemplo@email.com.br">
                             </div>
 
                             <div class="form-group collapse multi-collapse LeiloeiroCaixa LeiloeiroEmgea">

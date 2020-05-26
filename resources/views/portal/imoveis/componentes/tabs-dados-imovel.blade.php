@@ -73,12 +73,12 @@
                         <div class="row">
                             @if (session()->get('acessoEmpregadoPortal') !== 'AGENCIA')
                             <div class="col-sm-3">
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <label>Dossiê Digital:</label>
                                     <br>
                                     <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy mx-1"></i>Servidor</button>
                                     <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? $contratoFormatado ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? $contratoFormatado ?? '' }}</a>
-                                </div>
+                                </div> 
                             </div>
                             @endif
                             <div id="anuncioSiteCaixa"class="col-sm-3">
@@ -328,7 +328,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
-                                        Leiloeiro: <span id="nomeEmpresaAssessoraLeiloeiro"></span>
+                                        Leiloeiro: <span id="nomeLeiloeiro"></span>
                                         <span class="tooltiptext">
                                             <div class="form-group">
                                                 <b>Telefone:</b><br>
@@ -340,8 +340,8 @@
                                                 <b>Site:</b><br>
                                                 <span id="siteEmpresaAssessoraLeiloeiro"></span><br>
 
-                                                <b>Responsável:</b><br>
-                                                <span id="nomeLeiloeiro"></span><br>
+                                                <b>Empresa:</b><br>
+                                                <span id="nomeEmpresaAssessoraLeiloeiro"></span><br>
 
                                                 <b>Telefone:</b><br>
                                                 <span id="telefoneLeiloeiro"></span><br>

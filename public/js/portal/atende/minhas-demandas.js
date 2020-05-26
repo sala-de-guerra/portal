@@ -6,10 +6,9 @@ $(document).ready(function(){
 
             var linha =
                 '<tr>' +
-                    '<td>' + item.idAtende + '</td>' +
+                    '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
                     '<td>' + item.nomeAtividade + '</td>' +
                     '<td class="formata-data-sem-hora">' + item.prazoAtendimentoAtende + '</td>' +
-                    '<td>' + item.numeroContrato + '</td>' +
                     '<td>' + item.assuntoAtende + '</td>' +
                     '<td class="obs'+item.idAtende+'">' + item.descricaoAtende + '</td>' +
                     '<td>' + 
@@ -67,8 +66,10 @@ $(document).ready(function(){
                                     '</div>' +
                                     '<div class="modal-body">' +
                                         '<div class="container">' +
+                                        '<input type="hidden" name="emailContatoResposta" value="'+item.emailContatoResposta+'"></input>'+
+                                        '<input type="hidden" name="emailContatoCopia" value="'+item.emailContatoCopia+'"></input>'+
+                                        '<input type="hidden" name="emailContatoNovaCopia" value="'+item.emailContatoNovaCopia+'"></input>'+
                                             '<div>' +
-
                                             '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
                                             '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
 
@@ -162,5 +163,9 @@ $(document).ready(function(){
     
     })
 })
+
+setTimeout(function(){
+    $('#fadeOut').fadeOut("slow");
+}, 2000);
 
 

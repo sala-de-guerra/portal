@@ -48,6 +48,8 @@ Route::get('pesquisar', function () {
 // Consulta de bem imóvel
 Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');
 
+
+
 //  ROTAS WEB DOS PROCESSOS PERTINENTES AO ESTOQUE DE IMÓVEIS
 Route::prefix('estoque-imoveis')->group(function () {
     // ROTAS API DE CONSULTA JSON
@@ -97,6 +99,8 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::get('listar-contratos', 'GestaoImoveisCaixa\ConformidadeContratataoController@listarContratosConformidade');
         // Route::get('emitir-proposta/{contratoFormatado}', 'GestaoImoveisCaixa\ConformidadeContratataoController@emitirPropostaContratacao');
         Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\ConformidadeContratataoController@registrarHistoricoConformidade');
+        Route::post('/mensagem', 'GestaoImoveisCaixa\ConformidadeContratataoController@EnviodeCobrancaAgencia');
+        Route::post('/mensagemPagamento', 'GestaoImoveisCaixa\ConformidadeContratataoController@EnviodeCobrancaPagamentoCliente');
     });
 
     // ROTAS DO PROJETO DE LEILÕES NEGATIVOS

@@ -5,7 +5,7 @@ $.fn.dataTable.ext.errMode = 'none';
         $.each(dados, function(key, item) {
             let linha =
             '<tr>' +
-                '<td>'+item.numeroContrato+'</td>'+
+                '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
                 '<td>'+item.nomeEquipe+'</td>'+
                 '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
                 '<td>'+item.nomeAtividade+'</td>'+
@@ -19,10 +19,39 @@ $.fn.dataTable.ext.errMode = 'none';
     
                     // botão dropdown
                     '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                    '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
                         '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
                         '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
                         '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
                     '</div>' +
+
+                    // Modal de consulta
+                    '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                        '<div class="modal-content">' +
+                            '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
+                                '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                '</button>' +
+                            '</div>' +
+                            '<div class="modal-body">' +
+                                '<div class="container">' +
+                                    '<div>' +
+                                        '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                                        '<p><b>'+'Descrição:'+'</b></p>'+
+                                        '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                    '</div><br>' +
+                                '</div>' + 
+                            '</div>' +
+                            '<div class="modal-footer">' +
+                                '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                            '</div>' + 
+                        '</div>' + 
+                    '</div>' + 
+                '</div>' +
+
+
                     
                     //modal redirecionar
                     '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
@@ -145,7 +174,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
     $.each(dados, function(key, item) {
         let linha =
         '<tr>' +
-            '<td>'+item.numeroContrato+'</td>'+
+            '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
             '<td>'+item.nomeEquipe+'</td>'+
             '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
             '<td>'+item.nomeAtividade+'</td>'+
@@ -157,12 +186,40 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
                     'Ação' + 
                 '</button>' + 
 
-               // botão dropdown
-               '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-               '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
-               '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
-               '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
-           '</div>' +
+                    // botão dropdown
+                    '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                    '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
+                        '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                        '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                        '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                    '</div>' +
+
+
+                    // Modal de consulta
+                    '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                        '<div class="modal-content">' +
+                            '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
+                                '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                    '<span aria-hidden="true">&times;</span>' +
+                                '</button>' +
+                            '</div>' +
+                            '<div class="modal-body">' +
+                                '<div class="container">' +
+                                    '<div>' +
+                                        '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                                        '<p><b>'+'Descrição:'+'</b></p>'+
+                                        '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                    '</div><br>' +
+                                '</div>' + 
+                            '</div>' +
+                            '<div class="modal-footer">' +
+                                '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                            '</div>' + 
+                        '</div>' + 
+                    '</div>' + 
+                '</div>' +
            
            //modal redirecionar
            '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
@@ -283,7 +340,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
     $.each(dados, function(key, item) {
         let linha =
         '<tr>' +
-            '<td>'+item.numeroContrato+'</td>'+
+            '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
             '<td>'+item.nomeEquipe+'</td>'+
             '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
             '<td>'+item.nomeAtividade+'</td>'+
@@ -294,13 +351,41 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
                 '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                     'Ação' + 
                 '</button>' + 
-
+            
                 // botão dropdown
                 '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-                '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
-                '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
-                '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                '</div>' +
+
+                // Modal de consulta
+                '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                    '<div class="modal-content">' +
+                        '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+                                    '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                                    '<p><b>'+'Descrição:'+'</b></p>'+
+                                    '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                '</div><br>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                        '</div>' + 
+                    '</div>' + 
+                '</div>' + 
             '</div>' +
+                           
             
             //modal redirecionar
             '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
@@ -420,7 +505,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
     $.each(dados, function(key, item) {
         let linha =
         '<tr>' +
-            '<td>'+item.numeroContrato+'</td>'+
+            '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
             '<td>'+item.nomeEquipe+'</td>'+
             '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
             '<td>'+item.nomeAtividade+'</td>'+
@@ -434,10 +519,38 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
 
                 // botão dropdown
                 '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-                '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
-                '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
-                '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                '</div>' +
+
+                // Modal de consulta
+                '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                    '<div class="modal-content">' +
+                        '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+                                    '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                                    '<p><b>'+'Descrição:'+'</b></p>'+
+                                    '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                '</div><br>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                        '</div>' + 
+                    '</div>' + 
+                '</div>' + 
             '</div>' +
+                           
             
             //modal redirecionar
             '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
@@ -558,7 +671,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
     $.each(dados, function(key, item) {
         let linha =
         '<tr>' +
-            '<td>'+item.numeroContrato+'</td>'+
+            '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
             '<td>'+item.nomeEquipe+'</td>'+
             '<td class="formata-data-sem-hora">'+item.prazoAtendimentoAtende+'</td>'+
             '<td>'+item.nomeAtividade+'</td>'+
@@ -572,10 +685,38 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
 
                 // botão dropdown
                 '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-                '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
-                '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
-                '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                '</div>' +
+
+                // Modal de consulta
+                '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                    '<div class="modal-content">' +
+                        '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                            '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                            '<div class="container">' +
+                                '<div>' +
+                                    '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                                    '<p><b>'+'Descrição:'+'</b></p>'+
+                                    '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                '</div><br>' +
+                            '</div>' + 
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                        '</div>' + 
+                    '</div>' + 
+                '</div>' + 
             '</div>' +
+                           
             
             //modal redirecionar
             '<div class="modal fade" id="redirecionar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
@@ -696,5 +837,8 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
         _formataDatatableComData()
       }, 1000);
 
+setTimeout(function(){
+        $('#fadeOut').fadeOut("slow");
+}, 2000);
 
 
