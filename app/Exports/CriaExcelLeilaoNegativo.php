@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Exports;
-use App\Models\LeilaoNegativo\LeilaoNegativo;
+use App\Models\LeilaoNegativo\LeilaoNegativoExcel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
 
 
 
-class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAutoSize, WithColumnFormatting
+class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -23,8 +23,22 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
     public function collection()
     {
         $unidade = Ldap::defineUnidadeUsuarioSessao();
-        $criaPlanilha = LeilaoNegativo::where('unidadeResponsavel', $unidade)
-        ->select('contratoFormatado', 'dataSegundoLeilao','numeroLeilao', 'statusAverbacao')
+        $criaPlanilha = LeilaoNegativoExcel::where('unidadeResponsavel', $unidade)
+        ->select('contratoFormatado', 
+        'dataSegundoLeilao',
+        'numeroLeilao', 
+        'statusAverbacao', 
+        'idLeiloeiro', 
+        'dataEntregaDocumentosLeiloeiro', 
+        'dataRetiradaDocumentosDespachante', 
+        'numeroOficioUnidade', 
+        'previsaoEntregaDocumentosCartorio', 
+        'numeroProtocoloCartorio', 
+        'codigoAcessoProtocoloCartorio', 
+        'dataPrevistaAnaliseCartorio', 
+        'dataRetiradaDocumentoCartorio', 
+        'existeExigencia',
+        'dataEntregaAverbacaoExigenciaUnidade')
         ->orderBy('dataSegundoLeilao', 'desc')
         ->get();
 
@@ -34,17 +48,32 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
     public function headings(): array
     {
         return [
-            ["Contrato", "Data Segundo Leilão", "Número Leilão", "Status Averbação", "Data Segundo Leilão"],
+            ['Contrato', 
+            'Data Segundo Leilao',
+            'Numero Leilao', 
+            'Status Averbacao', 
+            'Nº id Leiloeiro', 
+            'Entrega Documentos Leiloeiro', 
+            'Retirada Documentos Despachante', 
+            'Número Oficio Unidade', 
+            'Previsao Entrega Doc Cartorio', 
+            'Número Protocolo Cartorio', 
+            'Código Acesso Protocolo', 
+            'Previsão Analise Cartório', 
+            'Retirada Documento Cartório',
+            'existeExigencia', 
+            'Entrega Averbacao Exigencia Unidade'
+            ],
         ];
     }
 
-    public function columnFormats(): array
-    {
-        $criaPlanilha = $this->collection();
+    // public function columnFormats(): array
+    // {
+    //     $criaPlanilha = $this->collection();
   
-        return [
-            'B' => Date::stringToExcel($criaPlanilha[1])
-        ];
-    }
+    //     return [
+    //         'B' => Date::stringToExcel($criaPlanilha[1])
+    //     ];
+    // }
 
 }

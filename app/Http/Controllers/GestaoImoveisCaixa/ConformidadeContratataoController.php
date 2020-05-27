@@ -272,7 +272,12 @@ class ConformidadeContratataoController extends Controller
         // $mail->SMTPDebug = 2;
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
-        $mail->addAddress($request->emailAgencia);
+        if (env('APP_ENV') == 'PRODUCAO'){
+            $mail->addAddress($request->emailAgencia);
+            $mail->addCC('c098453@mail.caixa');
+        }else{
+            $mail->addAddress('c098453@mail.caixa');
+        }
         $mail->Subject = 'Retorno de finalização do processo '. $request->contratoFormatado;
         // $mensagemAutomatica = file_get_contents(("CobrancaAgenciaAndamentoFinanciamento.php"), dirname(__FILE__));
         // $mensagemAutomatica = str_replace("%AGENCIA%", $request->codigoAgencia, $mensagemAutomatica);
@@ -309,7 +314,12 @@ class ConformidadeContratataoController extends Controller
         // $mail->SMTPDebug = 2;
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
-        $mail->addAddress($request->emailContato);
+        if (env('APP_ENV') == 'PRODUCAO'){
+            $mail->addAddress($request->emailContato);
+            $mail->addCC('c098453@mail.caixa');
+        }else{
+            $mail->addAddress('c098453@mail.caixa');
+        }
         $mail->Subject = 'Retorno de finalização do processo '. $request->bemFormatado;
         // $mensagemAutomatica = file_get_contents(("CobrancaAgenciaAndamentoFinanciamento.php"), dirname(__FILE__));
         // $mensagemAutomatica = str_replace("%AGENCIA%", $request->codigoAgencia, $mensagemAutomatica);
