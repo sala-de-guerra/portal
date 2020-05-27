@@ -30,11 +30,6 @@ class LeilaoNegativo extends Model
         'idDespachante',
         'dataCadastro',
         'dataAlteracao',
-        ];
-        public function getData2Attribute()
-        {
-            return date('d/m/Y', strtotime($this->attributes['dataSegundoLeilao']));
-        }
-   
+        ];  
 
 }
