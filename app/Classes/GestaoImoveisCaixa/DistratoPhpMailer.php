@@ -69,6 +69,7 @@ class DistratoPhpMailer
                 $mail->addBCC(session('matricula') . '@mail.caixa');
                 $mail->addBCC('c076585@mail.caixa');
                 $mail->addBCC('c079436@mail.caixa');
+                $mail->addBCC('c099389@mail.caixa');
                 $mail->addBCC('GILIESP09@mail.caixa');
                 break;
         }
