@@ -107,6 +107,8 @@ $(document).ready(function(){
 
             if (item.tipoHistorico == "CONTRATACAO" || item.tipoHistorico == "DISTRATO" ||
                 item.tipoHistorico == "PAGAMENTO" || item.tipoHistorico == "PREPARACAO" ||
+                item.tipoHistorico == "CONFORMIDADE CONTRATAÇÃO" || item.tipoHistorico == "AVERBACAO" ||
+                item.tipoHistorico == "EMGEA" ||
                 item.tipoHistorico == "LEILÃO NEGATIVO" || item.tipoHistorico == "ATENDE") 
             {
                 $('#novoHistorico'+item.numeroContrato).text("")
