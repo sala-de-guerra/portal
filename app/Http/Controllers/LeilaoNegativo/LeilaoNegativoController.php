@@ -600,6 +600,7 @@ class LeilaoNegativoController extends Controller
 
     public function criaPlanilhaExcelLeilaoNegativo()
     {
+
         return Excel::download(new CriaExcelLeilaoNegativo, 'PlanilhaLeiloesNegativo.xlsx');
     }
 }

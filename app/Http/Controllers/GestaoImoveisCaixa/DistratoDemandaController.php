@@ -587,7 +587,7 @@ class DistratoDemandaController extends Controller
         
         $arrayIndicadoresDistrato = [
             // QUANTIDADE DEMANDAS NÃO INICIADAS
-            'quantidadeDemandasNaoIniciadas' => DistratoDemanda::where('statusAnaliseDistrato', 'CADASTRADA')->count(),
+            // 'quantidadeDemandasNaoIniciadas' => DistratoDemanda::where('statusAnaliseDistrato', 'CADASTRADA')->count(),
             // QUANTIDADE DEMANDAS NA GILIE
             'quantidadeDemandasEmTratamentoGilie' => DistratoDemanda::where('statusAnaliseDistrato', 'EM ANALISE')->count(),
             // QUANTIDADE DEMANDAS NA AGÊNCIA
@@ -595,9 +595,9 @@ class DistratoDemandaController extends Controller
             // QUANTIDADE DEMANDAS PENDENTES JURIR/EMGEA
             'quantidadeDemandasPendentesJurirEmgea' => DistratoDemanda::where('statusAnaliseDistrato', 'AGUARDA AUTORIZACAO EMGEA')->orWhere('statusAnaliseDistrato', 'CONSULTA JURIR')->count(),
             // QUANTIDADE DEMANDAS CONCLUÍDAS
-            'quantidadeDemandasConcluidas' => DistratoDemanda::where('statusAnaliseDistrato', 'CANCELADA')->orWhere('statusAnaliseDistrato', 'CONCLUIDA')->count(),
+            // 'quantidadeDemandasConcluidas' => DistratoDemanda::where('statusAnaliseDistrato', 'CANCELADA')->orWhere('statusAnaliseDistrato', 'CONCLUIDA')->count(),
             // TEMPO MÉDIO DE ATENDIMENTO - TMA
-            'tmaDemandasDistratoConcluidas' => $tmaDemandasDistratoConcluidas
+            // 'tmaDemandasDistratoConcluidas' => $tmaDemandasDistratoConcluidas
         ];
         return json_encode($arrayIndicadoresDistrato);
     }

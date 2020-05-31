@@ -28,4 +28,9 @@ class BaseSimov extends Model
     {
         return $this->hasOne('App\Models\GestaoImoveisCaixa\SaldoConstratoSinaf', 'numeroContrato', 'NU_BEM');
     }
+
+    public function leilaoNegativoExcel()
+    {
+        return $this->hasOne('App\Models\LeilaoNegativo\LeilaoNegativoExcel', 'BEM_FORMATADO', 'contratoFormatado');
+    }
 }

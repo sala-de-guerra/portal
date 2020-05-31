@@ -301,6 +301,9 @@ class AtendeDemandasController extends Controller
      */
     public function responderAtende(Request $request, $idAtende)
     {
+        // $arquivo = $_FILES['arquivo'];
+
+
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
@@ -325,7 +328,12 @@ class AtendeDemandasController extends Controller
                 $mail->addCC($request->emailContatoNovaCopia);
             }
 
-            $mail->Subject = 'Resposta Atende';
+            if(isset($_FILES['arquivo']['tmp_name']) && $_FILES['arquivo']['tmp_name'] != "") {
+                $mail->AddAttachment($_FILES['arquivo']['tmp_name'],
+                $_FILES['arquivo']['name']);
+              }
+
+            $mail->Subject = 'Resposta de Demanda Aberta';
             $mail->Body = nl2br($request->respostaAtende);
             $mail->send();
             DB::beginTransaction();

@@ -23,6 +23,11 @@ Route::get('area', function () {
     return view('portal.informativas.app');
 });
 
+Route::get('/teste', function () {
+    $path = 'C:\Users\c098453\Desktop\Estudo';
+ exec("explorer '" . $path . "'");
+});
+
 // duvidas frequentes
 Route::get('faq', function () {
     return view('portal.informativas.faq');
