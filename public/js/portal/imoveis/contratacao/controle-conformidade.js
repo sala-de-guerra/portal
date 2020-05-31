@@ -93,12 +93,12 @@ $(document).ready(function(){
             '</tr>';
 
             
-            if (item.cardAgrupamento == "Agência" && item.sinalPago == "SIM") {
+            if (item.cardAgrupamento == "Agência") {
                 $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
                 $('.divBotao'+item.numeroContrato).show()
-            } else if (item.fluxoContratacao == "AG" && item.sinalPago == "SIM") {
+            } else if (item.fluxoContratacao == "AG") {
                 $(linha).appendTo('#tblConformidadeFluxoAgencia>tbody');
-            } else if (item.fluxoContratacao == "CCA" && item.sinalPago == "SIM") {
+            } else if (item.fluxoContratacao == "CCA") {
                 $(linha).appendTo('#tblConformidadeFluxoCca>tbody');
             } else {
                 $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');

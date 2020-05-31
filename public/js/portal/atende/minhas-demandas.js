@@ -55,7 +55,7 @@ $(document).ready(function(){
                     '<div class="modal fade" id="modalTratar' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                         '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
                             '<div class="modal-content">' +
-                                '<form method="post" action="/atende/responder/' + item.idAtende + '">' +
+                                '<form method="post" enctype="multipart/form-data" action="/atende/responder/' + item.idAtende + '">' +
                                         '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                                         '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                                     '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
@@ -72,8 +72,12 @@ $(document).ready(function(){
                                             '<div>' +
                                             '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
                                             '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+
-
                                             '</div>' +
+                                            '<div class="row">'+
+                                            '<div class="form-group col-sm-10">'+
+                                            '<input type="file" name="arquivo" ></input>'+
+                                            '</div>'+
+                                            '</div>' + 
                                         '</div>' + 
                                     '</div>' +
                                     '<div class="modal-footer">' +

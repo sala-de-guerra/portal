@@ -28,4 +28,8 @@ class Leiloeiro extends Model
         'dataCadastro',
         'dataAlteracao',
     ];
+    public function leilaoNegativo()
+    {
+        return $this->belongsTo('App\Models\LeilaoNegativo\LeilaoNegativoExcel', 'idLeiloeiro', 'idLeiloeiro');
+    }
 }

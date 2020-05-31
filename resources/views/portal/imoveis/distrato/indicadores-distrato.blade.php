@@ -36,23 +36,22 @@
 
 @section('content')
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12 table-responsive p-0">
+                        <div class="col-sm-6 table-responsive p-0">
 
                              <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
-                                        <th style="background-color: #FF4500; color: white;">Não Iniciadas</th>
+                                        {{-- <th style="background-color: #FF4500; color: white;">Não Iniciadas</th> --}}
                                         <th style="background-color: RoyalBlue; color: white;">Em tratamento GILIE</th>
                                         <th style="background-color: DeepSkyBlue; color: white;">Em tratamento Agência</th>
-                                        <th style="background-color: DodgerBlue; color: white;">Pendente Jurir / EMGEA</th>
-                                        <th style="background-color: LimeGreen; color: white;">Concluídas</th>
-                                        <th style="background-color: CornflowerBlue; color: white;">Tempo Médio de Atendimento</th>
+                                        <th style="background-color: seagreen; color: white;">Pendente Jurir / EMGEA</th>
+                                        {{-- <th style="background-color: LimeGreen; color: white;">Concluídas</th>
+                                        <th style="background-color: CornflowerBlue; color: white;">Tempo Médio de Atendimento</th> --}}
                                     </tr>
                                 </thead>
 
@@ -63,11 +62,43 @@
                             </table> 
                             <canvas id="myChart" height="80pt"></canvas>
                         </div> <!-- /.col-sm-12 -->
+
+                        <div class="col-sm-6 table-responsive p-0">
+
+                            <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
+                               <thead>
+                                   <tr>
+                                       {{-- <th style="background-color: #FF4500; color: white;">Não Iniciadas</th> --}}
+                                       <th style="background-color: RoyalBlue; color: white;">Em tratamento GILIE</th>
+                                       <th style="background-color: DeepSkyBlue; color: white;">Em tratamento Agência</th>
+                                       <th style="background-color: seagreen; color: white;">Pendente Jurir / EMGEA</th>
+                                       {{-- <th style="background-color: LimeGreen; color: white;">Concluídas</th>
+                                       <th style="background-color: CornflowerBlue; color: white;">Tempo Médio de Atendimento</th> --}}
+                                   </tr>
+                               </thead>
+
+                               <tbody>
+                                   
+                               </tbody>
+                               
+                           </table> 
+                           <canvas id="myChart" height="80pt"></canvas>
+                       </div> <!-- /.col-sm-12 -->
+
+
+
+
+
+
+
+
+
                     </div> <!-- /.row -->
-                                   </div> <!-- /.card-body -->
+                </div> <!-- /.card-body -->
             </div> <!-- /.card -->
         </div> <!-- /.col -->
     </div> <!-- /.row -->
+    
     
     
     
@@ -92,3 +123,4 @@
 <script src="{{ asset('js/portal/imoveis/distrato/indicadores-distrato.js') }}"></script>
 
 @stop
+
