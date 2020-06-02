@@ -32,7 +32,9 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
         ->select('contratoFormatado',
         'ALITB001_Imovel_Completo.MATRICULA',
         'ALITB001_Imovel_Completo.OFICIO',
-        'ALITB001_Imovel_Completo.CIDADE',  
+        'ALITB001_Imovel_Completo.CIDADE',
+        'ALITB001_Imovel_Completo.STATUS_IMOVEL',
+        'ALITB001_Imovel_Completo.CLASSIFICACAO',
         'dataSegundoLeilao',
         'numeroLeilao', 
         'statusAverbacao', 
@@ -57,13 +59,15 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
     {
 
         return [
-            ['Contrato', 
+            ['Contrato',
             'Matricula',
             'Oficio',
             'Cidade',
+            'Status Imóvel',
+            'Classificação',
             'Data Segundo Leilao',
             'Numero Leilao', 
-            'Status Averbacao', 
+            'Status Averbacao',
             'Leiloeiro', 
             'Entrega Documentos Leiloeiro', 
             'Retirada Documentos Despachante', 
