@@ -273,6 +273,7 @@ class AtendeDemandasController extends Controller
                     $quantidadeDemandasAtribuidas = Atende::where('matriculaResponsavelAtividade', $responsavel->matriculaResponsavelAtividade)->where('statusAtende' , "!=", 'FINALIZADO')->count() !== null ? Atende::where('matriculaResponsavelAtividade', $responsavel->matriculaResponsavelAtividade)->count() : null;
                     if (!is_null($quantidadeDemandasAtribuidas)) {
                         if ($quantidadeDemandasAtribuidas < $quantidadeDemandasControle) {
+                            $quantidadeDemandasControle = $quantidadeDemandasAtribuidas;
                             $responsavelDemandaAtende = $responsavel->matriculaResponsavelAtividade;
                         }
                     }

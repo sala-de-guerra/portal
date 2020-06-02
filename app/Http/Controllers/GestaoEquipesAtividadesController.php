@@ -31,8 +31,9 @@ class GestaoEquipesAtividadesController extends Controller
         $arrayAtividadesEquipe = [];
         $arrayEquipesComAtividadesResponsaveis = [];
         foreach ($equipesUnidade as $equipe) {
-            if ($equipe->GestaoEquipesAtividades->count() > 0) {
-                foreach ($equipe->GestaoEquipesAtividades as $atividade) {
+            $atividadesEquipe = GestaoEquipesAtividades::where('idEquipe', $equipe->idEquipe)->where('atividadeAtiva', true)->get();
+            if ($atividadesEquipe->count() > 0) {
+                foreach ($atividadesEquipe as $atividade) {
                     if ($atividade->atividadeSubordinada == false) {
                         $arrayAtividadesSubordinadas = self::listaAtividadesSubordinadas($atividade->idAtividade);
                         $listaResponsaveisAtividade = self::listarResponsaveisAtividade($atividade->idAtividade);
@@ -56,7 +57,7 @@ class GestaoEquipesAtividadesController extends Controller
 
     public static function listaAtividadesSubordinadas($idAtividadeSubordinante) {
         $arrayAtividadesSubordinadas = [];
-        $listaAtividadesSubordinadas = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividadeSubordinante)->where('atividadeAtiva', true)->get();
+        $listaAtividadesSubordinadas = GestaoEquipesAtividades::whereNotNull('idAtividadeSubordinante')->where('idAtividadeSubordinante', $idAtividadeSubordinante)->where('atividadeAtiva', true)->get();
         foreach ($listaAtividadesSubordinadas as $atividadeSubordinada) {
             $listaResponsaveisAtividade = self::listarResponsaveisAtividade($atividadeSubordinada->idAtividade);
             array_push($arrayAtividadesSubordinadas, [
@@ -250,6 +251,15 @@ class GestaoEquipesAtividadesController extends Controller
             $desativarAtividade->responsavelEdicao          = session('matricula');
             $desativarAtividade->dataAtualizacaoAtividade   = date("Y-m-d H:i:s", time());
 
+            // DESABILITA AS MICRO ATIVIDADES
+            $desativarMicroAtividades = GestaoEquipesAtividades::where('idAtividadeSubordinante', $idAtividade)->get();
+            foreach ($desativarMicroAtividades as $atividade) {
+                $atividade->atividadeAtiva             = false;
+                $atividade->responsavelEdicao          = session('matricula');
+                $atividade->dataAtualizacaoAtividade   = date("Y-m-d H:i:s", time());
+                $atividade->save();
+            }   
+
             // DESATIVA TODOS OS EMPREGADOS DA ATIVIDADE DESABILITADA 
             $empregadosAtividadeDesativada = GestaoEquipesAtividadesResponsaveis::where('idAtividade', $idAtividade)->get();
             foreach ($empregadosAtividadeDesativada as $empregado) {
@@ -258,10 +268,10 @@ class GestaoEquipesAtividadesController extends Controller
                 $empregado->dataAtualizacao                 = date("Y-m-d H:i:s", time());
                 $empregado->save();
             }
-
+            
             // REGISTRA O LOG DE HISTORICO DA AÇÃO
             $registroLogHistorico = new GestaoEquipesLogHistorico;
-            $registroLogHistorico->idEquipe                 = $desativarAtividade->GestaoEquipesCelulas->idEquipe;
+            $registroLogHistorico->idEquipe                 = $desativarAtividade->idEquipe;
             $registroLogHistorico->matriculaResponsavel     = session('matricula');
             $registroLogHistorico->tipo                     = 'DESATIVAR';
             $registroLogHistorico->observacao               = "DESATIVAÇÃO DA ATIVIDADE " . $desativarAtividade->nomeAtividade;
@@ -278,6 +288,7 @@ class GestaoEquipesAtividadesController extends Controller
                 AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
             }
             DB::rollback();
+            dd($th);
             return response('Não foi possível apagar a atividade', 500);
         }
     }
