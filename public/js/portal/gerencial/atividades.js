@@ -182,6 +182,7 @@ function montaCardsAtividades(equipe) {
         });
         
         // console.log(atividades);
+        // inclui essa linha para forçar o novo pull
 
         // $.each(a1, function(key, item) {
         //     let idEquipe = Object.getOwnPropertyNames(item);
