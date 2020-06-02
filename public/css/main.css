@@ -204,8 +204,8 @@ input[type=number] {
 }
 
 .has-treeview li {
-    background-color: rgb(66, 112, 172) !important;
-    border-radius: 25px;
+    background-color: rgb(250, 151, 37) !important;
+    /* border-radius: 25px; */
 
 }
 .has-treeview li p{
