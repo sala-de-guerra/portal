@@ -318,7 +318,7 @@
                                 </div>
                             </div>
                         </div>
-
+                         
                         <!-- <hr class="pontilhado"> -->
                         <hr>
                         <div id="consultaLeilaoNegativo">
@@ -327,6 +327,33 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-sm-6">
+                                <div class="btn-group dropup">
+                                    <button type="button" class="btn btn-link dropdown-toggle" style="color: #054f77; font-size: 13pt;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-info-circle"></i>Leiloeiro: <span id="nomeLeiloeiro"></span>
+                                    </button>
+                                    <div class="dropdown-menu" style="background-color: #054f77; color: white;">
+                                        <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
+                                        <h6 class="dropdown-header" style="color: white;"><span id="telefoneLeiloeiro"></span></h6>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
+                                        <h6 class="dropdown-header" style="color: white;"><span id="emailLeiloeiro"></span></h6>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header" style="color: white;">Site:</h6>
+                                        <h6 class="dropdown-header" style="color: white;"><span id="siteEmpresaAssessoraLeiloeiro"></span></h6>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header" style="color: white;">Empresa:</h6>
+                                        <h6 class="dropdown-header" style="color: white;"><span id="nomeEmpresaAssessoraLeiloeiro"></span></h6>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
+                                        <h6 class="dropdown-header" style="color: white;"><span id="telefoneEmpresaAssessoraLeiloeiro"></span></h6>
+                                        <div class="dropdown-divider"></div>
+                                        <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
+                                        <h6 class="dropdown-header" style="color: white;"><span id="emailEmpresaAssessoraLeiloeiro"></span></h6>
+ 
+                                    </div>
+                                  </div>
+                                </div>
+                                {{-- <div class="col-sm-6">
                                     <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
                                         Leiloeiro: <span id="nomeLeiloeiro"></span>
                                         <span class="tooltiptext">
@@ -351,9 +378,32 @@
                                             </div>
                                         </span>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-sm-6">
-                                    <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
+                                    <div class="btn-group dropup">
+                                        <button type="button" class="btn btn-link dropdown-toggle" style="color: #054f77; font-size: 13pt;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-info-circle"></i>Despachante: <span id="nomeDespachante"></span>
+                                        </button>
+                                        <div class="dropdown-menu" style="background-color: #054f77; color: white;">
+                                            <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
+                                            <h6 class="dropdown-header" style="color: white;"><span id="telefoneDespachante"></span></h6>
+                                            <div class="dropdown-divider"></div>
+                                            <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
+                                            <h6 class="dropdown-header" style="color: white;"><span id="emailDespachante"></span></h6>
+                                            <div class="dropdown-divider"></div>
+                                            <h6 class="dropdown-header" style="color: white;">Responsável:</h6>
+                                            <h6 class="dropdown-header" style="color: white;"><span id="nomePrimeiroResponsavelDespachante"></span></h6>
+                                            <div class="dropdown-divider"></div>
+                                            <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
+                                            <h6 class="dropdown-header" style="color: white;"><span id="telefonePrimeiroResponsavelDespachante"></span></h6>
+                                            <div class="dropdown-divider"></div>
+                                            <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
+                                            <h6 class="dropdown-header" style="color: white;"><span id="emailPrimeiroResponsavelDespachante"></span></h6>
+     
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {{-- <div class="tooltip-col text-center" style="color: #054f77; font-size: 13pt;"><i class="fas fa-info-circle"></i>
                                         Despachante: <span id="nomeDespachante"></span>
                                         <span class="tooltiptext">
                                             <div class="form-group"><br>
@@ -374,8 +424,8 @@
                                             </div>
                                         </span>
                                     </div>
-                                </div>
-                            </div><br>
+                                </div> --}}
+                            </div><br><br>
 
                             <div id="cardLeilao">
                                 <div class="row">
@@ -460,9 +510,10 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Código Rastreamento Correio:</label>&nbsp&nbsp
-                                            @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
-                                            <button type="button" style="color: #white; font-size: 13pt; padding: 0; margin: 0;" class="btn btn-primary" data-toggle="modal" data-target="#cadastraCodigoCorreio" data-toggle="tooltip" data-placement="right" title="cadastrar novo código de rastreio">&nbsp Cadastrar &nbsp</button>
-                                            @endif
+                                            <span id="botaocadastrar"></span>
+                                            {{-- @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
+                                            <button type="button" style="color: #white; font-size: 13pt; padding: 0; margin: 0;" class="btn btn-primary" data-toggle="modal" data-target="#cadastraCodigoCorreio">&nbsp Cadastrar &nbsp</button>
+                                            @endif --}}
                                             <a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" target="_blank" data-toggle="tooltip" data-placement="top" title="ir para o site de rastreio" class="btn btn-link" data-toggle="modal"><i style="color: #054f77; font-size: 13pt;" class="fas fa-external-link-square-alt"></i></a>
                                             {{-- <p id="codigoCorreio"></p> --}}
                                             <ul style="list-style-type: none; padding: 0; margin: 0;" id="codigoDoCorreio"></ul>

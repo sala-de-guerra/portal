@@ -1,5 +1,7 @@
 var unidade = $('#lotacao').text()
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
+var url     = window.location.href;
+var chbsplit     = url.slice(75) 
 var numeroLeilao = ""
 var prevdadosleiloeiro = ""
 var prevdadosdespachante = ""
@@ -486,6 +488,8 @@ function Check() {
 }
 
     var botaoCadastrarCodigo = `
+    <button type="button" style="color: #white; font-size: 13pt; padding: 0; margin: 0;" class="btn btn-primary" data-toggle="modal" data-target="#cadastraCodigoCorreio">&nbsp Cadastrar &nbsp</button>
+    
     <div class="modal fade" id="cadastraCodigoCorreio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -513,7 +517,7 @@ function Check() {
             </div>
         </div>
     </div>`
-    $(botaoCadastrarCodigo).appendTo('#codigoDoCorreio')
+    $(botaoCadastrarCodigo).appendTo('#botaocadastrar')
 
 
 
