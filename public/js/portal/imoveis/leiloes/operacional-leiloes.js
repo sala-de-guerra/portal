@@ -98,10 +98,10 @@ $(document).ready(function(){
                                         '<label>Cidade Comarca Cartório</label>'+
                                         '<input type="text" id="inputcidadeComarcaCartorio" name="cidadeComarcaCartorio" class="form-control" autocomplete="off" placeholder="'+cidadecartorio+'">'+
                                     '</div>'+
-                                    '<div class="form-group">'+
-                                        '<label>Código de Rastreamento do Correio:</label>'+
-                                        '<input type="text" id="inputCodigoCorreio" name="codigoCorreio" class="form-control" autocomplete="off">'+
-                                    '</div>'+
+                                    // '<div class="form-group">'+
+                                    //     '<label>Código de Rastreamento do Correio:</label>'+
+                                    //     '<input type="text" id="inputCodigoCorreio" name="codigoCorreio" class="form-control" autocomplete="off">'+
+                                    // '</div>'+
                                     '<p>'+'Deseja vincular essas informações a <b>TODOS</b> os contratos deste leilão (exceto: Cidade Comarca)?'+'</p>'+
                                     '<div class="form-check form-check-inline">' +
                                         '<input type="radio" class="form-check-input" onclick="javascript:Check();" name="sensibilizarTodosContratosLeilao" id="CheckN" value="NAO">'+
@@ -388,9 +388,9 @@ $(document).ready(function(){
         var PegacidadeComarcaCartorio = window.document.getElementById('cidadeComarcaCartorio').innerText
         var inputcidadeComarcaCartorio = window.document.getElementById('inputcidadeComarcaCartorio')
         inputcidadeComarcaCartorio.value = PegacidadeComarcaCartorio
-        var pegaCodigoCorreio = window.document.getElementById('codigoCorreio').innerText
+        // var pegaCodigoCorreio = window.document.getElementById('codigoCorreio').innerText
         var inputcidadeComarcaCartorio = window.document.getElementById('inputCodigoCorreio')
-        inputcidadeComarcaCartorio.value = pegaCodigoCorreio
+        // inputcidadeComarcaCartorio.value = pegaCodigoCorreio
 
         // $('#statusAverbacao').text('AVERBACAO CONCLUIDA')
         switch ($('#statusAverbacao').text()) {
@@ -483,6 +483,37 @@ function Check() {
     } else {
         document.getElementById('visibilidades').style.visibility = 'hidden';
     }
-
 }
+
+    var botaoCadastrarCodigo = `
+    <div class="modal fade" id="cadastraCodigoCorreio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               
+            <form action="/estoque-imoveis/leiloes-negativos/novo-codigo-correio" method="POST">
+            <input type="hidden" name="_token" value="${csrfVar}">
+                <input type="hidden" class="form-control" name="contratoFormatado" value="${chbsplit}">
+                <div class="form-group">
+                    <label>Código de Rastreamento Correio</label>
+                    <input type="text" maxlength="13" class="form-control" name="codigoDoCorreio" required>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+            </form>
+            </div>
+            </div>
+        </div>
+    </div>`
+    $(botaoCadastrarCodigo).appendTo('#codigoDoCorreio')
+
+
 

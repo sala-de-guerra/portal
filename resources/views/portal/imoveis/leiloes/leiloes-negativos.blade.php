@@ -57,7 +57,7 @@
                                 <option class="text-dark"  value="numeroContrato">Contrato</option>
                             </select>
                             <div class="input-group nav-search-bar">
-                                <input class="form-control form-control-navbar" type="number"  autocomplete="off" name="valorVariavel" placeholder="Pesquise por contrato" required>
+                                <input class="form-control form-control-navbar" type="number"  autocomplete="off" name="valorVariavel" placeholder="Pesquise por contrato sem formatação" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit"  title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>

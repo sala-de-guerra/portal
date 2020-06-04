@@ -123,6 +123,8 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::put('tratar/receber-documentos-despachante/{contratoFormatado}', 'LeilaoNegativo\LeilaoNegativoController@receberDocumentosDespachante');
         Route::post('tratar/{numeroContrato}', 'LeilaoNegativo\LeilaoNegativoController@registrarHistoricoLeilaoNegativo');
         Route::get('/baixar-planilha', 'LeilaoNegativo\LeilaoNegativoController@criaPlanilhaExcelLeilaoNegativo');
+        Route::get('/codigo-correio/{numeroContrato}', 'LeilaoNegativo\LeilaoNegativoController@CodigoCorreio');
+        Route::post('/novo-codigo-correio', 'LeilaoNegativo\LeilaoNegativoController@SalvarCodigoCorreio');
     });
 
     // ROTA PARA REGISTRO DE HISTÓRICO

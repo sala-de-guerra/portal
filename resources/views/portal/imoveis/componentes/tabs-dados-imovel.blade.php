@@ -457,16 +457,19 @@
                                             <p id="historicoLeilaoNegativo"></p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>Código Rastreamento Correio:</label><a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" target="_blank" data-toggle="tooltip" data-placement="top" title="ir para o site de rastreio" class="btn btn-link" data-toggle="modal"><i style="color: #054f77; font-size: 13pt;" class="fas fa-external-link-square-alt"></i></a>
-                                            <p id="codigoCorreio"></p>
+                                            <label>Código Rastreamento Correio:</label>&nbsp&nbsp
+                                            @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
+                                            <button type="button" style="color: #white; font-size: 13pt; padding: 0; margin: 0;" class="btn btn-primary" data-toggle="modal" data-target="#cadastraCodigoCorreio" data-toggle="tooltip" data-placement="right" title="cadastrar novo código de rastreio">&nbsp Cadastrar &nbsp</button>
+                                            @endif
+                                            <a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" target="_blank" data-toggle="tooltip" data-placement="top" title="ir para o site de rastreio" class="btn btn-link" data-toggle="modal"><i style="color: #054f77; font-size: 13pt;" class="fas fa-external-link-square-alt"></i></a>
+                                            {{-- <p id="codigoCorreio"></p> --}}
+                                            <ul style="list-style-type: none; padding: 0; margin: 0;" id="codigoDoCorreio"></ul>
                                         </div>
                                     </div>
                                     <br>
-                                    <br>
-                                    
-                                    
+                                    <br>             
 
                                     <!-- Modal -->
                                     <div class="modal fade" id="modalHistoricoleilaoNegativoCompleto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1114,37 +1117,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">

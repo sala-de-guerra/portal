@@ -30,6 +30,12 @@ class LeilaoNegativo extends Model
         'idDespachante',
         'dataCadastro',
         'dataAlteracao',
-        ];  
+        ];
+    
+        public function CodigoCorreio()
+        {
+            return $this->hasMany('App\Models\Models\LeilaoNegativo\Codigo_correio_leilaoNegativo', 'contratoFormatado', 'contratoFormatado');
+            
+        }
 
 }
