@@ -185,14 +185,14 @@
 
                     <li class="nav-item dropdown user-menu mx-1">
                         <a href="#" class="nav-link dropdown-toggle p-0" data-toggle="dropdown">
-                            <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="user-image img-circle elevation-2 m-0" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
+                            <img src='{{ asset('/img/perfil-sem-foto.png') }}' class="user-image img-circle elevation-2 m-0" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
                             <span class="d-none d-md-inline">{{ session()->get('primeiroNome') }}</span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
+                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right absolute">
                             <a class="dropdown-item">
                                 <div class="media">
-                                    <img src="http://www.sr2576.sp.caixa/2017/foto.asp?matricula={{ session()->get('matricula') }}" class="user-image-dropdown img-circle" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
+                                    <img src='{{ asset('/img/perfil-sem-foto.png') }}' class="user-image-dropdown img-circle" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title ">{{ session()->get('nomeCompleto') }}</h3>
                                         <p class="text-sm">{{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}</p>
@@ -201,7 +201,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> 
                         
                     </li>
                 </ul>

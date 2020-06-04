@@ -172,3 +172,12 @@ if (classificacao == 'Oriundos SFI-Gar. Fiduciária' || classificacao == 'Patrim
     $('#consultaLeilaoNegativo').remove();
 }
 }, 4000);
+
+$.getJSON('/estoque-imoveis/leiloes-negativos/codigo-correio/' + numeroContrato, function(dados){
+    $.each(dados, function(key, item) {
+        codigo = 
+                `<li>${item.codigoDoCorreio}</li>`
+        $(codigo).appendTo('#codigoDoCorreio')
+
+    })
+})

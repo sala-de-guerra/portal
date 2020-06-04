@@ -10,6 +10,7 @@ use App\Models\BaseSimov;
 use App\Models\Fornecedores\Despachante;
 use App\Models\Fornecedores\Leiloeiro;
 use App\Models\LeilaoNegativo\LeilaoNegativo;
+use App\Models\LeilaoNegativo\Codigo_correio_leilaoNegativo;
 use App\Models\HistoricoPortalGilie;
 use Cmixin\BusinessDay;
 use Illuminate\Http\Request;
@@ -602,5 +603,26 @@ class LeilaoNegativoController extends Controller
     {
 
         return Excel::download(new CriaExcelLeilaoNegativo, 'PlanilhaLeiloesNegativo.xlsx');
+    }
+
+    public function CodigoCorreio($numeroContratoFormatado)
+    {
+        $codigo = Codigo_correio_leilaoNegativo::where('contratoFormatado', $numeroContratoFormatado)->get();
+        
+        return json_encode($codigo);
+        
+    }
+    public function SalvarCodigoCorreio(Request $request)
+    {
+        $codigo = new Codigo_correio_leilaoNegativo();
+        $codigo->codigoDoCorreio   = $request->input('codigoDoCorreio');
+        $codigo->contratoFormatado = $request->input('contratoFormatado');
+        $codigo->save();
+
+        $request->session()->flash('corMensagem', 'success');
+        $request->session()->flash('tituloMensagem', "Código de Rastreamento Cadastrado");
+        $request->session()->flash('corpoMensagem', "O seu registro foi cadastrado com sucesso.");
+    
+        return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $codigo->contratoFormatado);
     }
 }
