@@ -493,8 +493,8 @@ function Check() {
     <div class="modal fade" id="cadastraCodigoCorreio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+            <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: white;" >Cadastrar Código Correio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -509,8 +509,8 @@ function Check() {
                     <input type="text" maxlength="13" class="form-control" name="codigoDoCorreio" required>
                 </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                        <button type="submit" class="btn btn-primary">Gravar</button>
                     </div>
             </form>
             </div>
