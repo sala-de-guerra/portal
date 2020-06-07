@@ -140,12 +140,34 @@ class DistratoDemandaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listarDemandas()
+    // public function listarDemandas()
+    // {
+    //     // $codigoUnidade = Ldap::defineUnidadeUsuarioSessao();
+    //     $universoProtocolosDistrato = DistratoDemanda::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
+    //     return json_encode($universoProtocolosDistrato);
+    // }
+        public function listarDemandas()
     {
-        // $codigoUnidade = Ldap::defineUnidadeUsuarioSessao();
-        $universoProtocolosDistrato = DistratoDemanda::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
+        $universoProtocolosDistrato = DB::table('ALITB001_Imovel_Completo')
+        ->join('TBL_DISTRATOS_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_DISTRATOS_DEMANDAS.contratoFormatado)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'))
+        ->select(DB::raw('
+        TBL_DISTRATOS_DEMANDAS.[idDistrato],
+        TBL_DISTRATOS_DEMANDAS.[contratoFormatado],
+        TBL_DISTRATOS_DEMANDAS.[nomeProponente],
+        TBL_DISTRATOS_DEMANDAS.[statusAnaliseDistrato],
+        TBL_DISTRATOS_DEMANDAS.[motivoDistrato],
+        TBL_DISTRATOS_DEMANDAS.[created_at],
+        ALITB001_Imovel_Completo.[UNA]
+        '))
+        ->where('ALITB001_Imovel_Completo.UNA', $siglaGilie)
+        ->get();
         return json_encode($universoProtocolosDistrato);
+        // $universoProtocolosDistrato = DistratoDemanda::select('idDistrato', 'contratoFormatado', 'nomeProponente', 'statusAnaliseDistrato', 'motivoDistrato', 'created_at')->get();
+        // return json_encode($universoProtocolosDistrato);
     }
+    
 
     /**
      *

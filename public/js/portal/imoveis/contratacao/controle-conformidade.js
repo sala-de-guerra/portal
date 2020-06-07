@@ -40,15 +40,15 @@ $(document).ready(function(){
                 '<td>' + item.statusContratacao + '</td>' +
                 '<td>' +
                     '<div class="row">' +
-                    '<div class="col-4">'+
+                    '<div >'+
                         '<button id="btnLinkServidor" onclick="copyToClipboard(' + elementoLinkServidor + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
-                        '<a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\sp7257sr001\\PUBLIC\\EstoqueImoveis\\'+ item.contratoFormatado +'</a>' +
+                        '<a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\sp7257sr001\\PUBLIC\\EstoqueImoveis\\'+ item.contratoFormatado +'</a>&nbsp&nbsp&nbsp&nbsp' +
                     '</div>' +
                     
-                    '<div class="col-4">'+
-                    '<button id="'+item.numeroContrato+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalOBS'+ item.numeroContrato+'"><i class="fas fa-info-circle"></i>'+'</button>'+
+                    '<div >'+
+                    '<button id="'+item.numeroContrato+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalOBS'+ item.numeroContrato+'"><i class="fas fa-info-circle"></i>'+'</button>&nbsp&nbsp&nbsp&nbsp'+
                     '</div>' +
-                    '<div class="col-4 divBotao'+item.numeroContrato+'" style="display: none;">'+
+                    '<div class="divBotao'+item.numeroContrato+'" style="display: none;">'+
                     '<button id="botaoContato'+item.numeroContrato+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalContato'+ item.numeroContrato+'"><i class="far fa-envelope"></i>'+'</button>'+
                     '</div>' +
 
@@ -93,17 +93,21 @@ $(document).ready(function(){
             '</tr>';
 
             
-            if (item.cardAgrupamento == "Agência") {
+            if (item.cardAgrupamento == "Agência" && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios" ) {
                 $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
                 $('.divBotao'+item.numeroContrato).show()
-            } else if (item.fluxoContratacao == "AG") {
+            } else if (item.fluxoContratacao == "AG" && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios") {
                 $(linha).appendTo('#tblConformidadeFluxoAgencia>tbody');
-            } else if (item.fluxoContratacao == "CCA") {
+            } else if (item.fluxoContratacao == "CCA" && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios"){ 
                 $(linha).appendTo('#tblConformidadeFluxoCca>tbody');
-            } else {
+            } else if (item.cardAgrupamento == null && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios"){ 
                 $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
-                $('.divBotao'+item.numeroContrato).show()
             }
+
+            // else {
+            //     $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
+            //     $('.divBotao'+item.numeroContrato).show()
+            // }
 
             if (item.tipoHistorico == "CONTRATACAO" || item.tipoHistorico == "DISTRATO" ||
                 item.tipoHistorico == "PAGAMENTO" || item.tipoHistorico == "PREPARACAO" ||
@@ -326,33 +330,33 @@ $(document).ready(function(){
 $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pagamento-sinal', function(dados){
     $.each(dados, function(key, item) {  
 
-        elementoServidor = "'#linkServidor" + item.numeroContrato + "'";
+        elementoServidor = "'#linkServidor" + item.BEM_FORMATADO + "'";
             
             let formataData = item.vencimentoPp15
             let novaData = formataData.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
         
             let Novalinha = 
             '<tr>' +
-            '<td><a href="/consulta-bem-imovel/'+ item.bemFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
-                '<td class="formata-valores">' + item.valorProposta + '</td>' +
+            '<td><a href="/consulta-bem-imovel/'+ item.BEM_FORMATADO +'" class="cursor-pointer">' + item.NU_BEM + '</a></td>' +
+                '<td class="formata-valores">' + item.VALOR_REC_PROPRIOS_PROPOSTA + '</td>' +
                 '<td>' + novaData + '</td>' +
-                '<td>' + item.statusSimov + '</td>' +
+                '<td>' + item.STATUS_IMOVEL + '</td>' +
                 '<td>'+ 
                     '<div class="row">' +
-                    '<div class="col-4">'+
+                    '<div>'+
                         '<button id="btnLinkServidor" onclick="copyToClipboard(' + elementoServidor + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
-                        '<a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/' + item.bemFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\sp7257sr001\\PUBLIC\\EstoqueImoveis\\'+ item.bemFormatado +'</a>' +
+                        '<a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/' + item.BEM_FORMATADO + '" id="linkServidor' + item.NU_BEM + '" hidden>\\\\sp7257sr001\\PUBLIC\\EstoqueImoveis\\'+ item.BEM_FORMATADO +'</a>&nbsp&nbsp&nbsp&nbsp' +
                     '</div>' +
-                '<div class="col-4">'+
-                '<button id="Pagamento'+item.numeroContrato+'" class="btn btn-primary" data-toggle="modal" data-target="#modalPagamento'+ item.numeroContrato+'"><i class="fas fa-info-circle"></i>'+'</button>'+
+                '<div>'+
+                '<button id="Pagamento'+item.NU_BEM+'" class="btn btn-primary" data-toggle="modal" data-target="#modalPagamento'+ item.NU_BEM+'"><i class="fas fa-info-circle"></i>'+'</button>&nbsp&nbsp&nbsp&nbsp'+
                 '</div>'+
 
-                '<div class="col-4 divBotao'+item.numeroContrato+'">'+
-                '<button id="botaoContato'+item.numeroContrato+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalContatoPagamento'+ item.numeroContrato+'"><i class="far fa-envelope"></i>'+'</button>'+
+                '<div class="divBotao'+item.NU_BEM+'">'+
+                '<button id="botaoContato'+item.NU_BEM+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalContatoPagamento'+ item.NU_BEM+'"><i class="far fa-envelope"></i>'+'</button>'+
                 '</div>' +
 
                  // Modal de contato
-               '<div class="modal fade" id="modalContatoPagamento'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">'+
+               '<div class="modal fade" id="modalContatoPagamento'+ item.NU_BEM+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">'+
                 '<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">'+
                     '<div class="modal-content">'+
                             '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
@@ -361,7 +365,7 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                                 '<span aria-hidden="true">&times;</span>'+
                                 '</button>'+
                             '</div><br>'+
-                            '<div class="modal-body" id="formContatoPagamento'+ item.numeroContrato+'">'+ 
+                            '<div class="modal-body" id="formContatoPagamento'+ item.NU_BEM+'">'+ 
 
                             '</div>'+
                         '</div>'+
@@ -369,7 +373,7 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                    '</div>'+
 
                 // Modal de Observação
-                '<div class="modal fade" id="modalPagamento'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
+                '<div class="modal fade" id="modalPagamento'+ item.NU_BEM+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
                 '<div class="modal-dialog" role="document">'+
                     '<div class="modal-content">'+
                     '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
@@ -378,24 +382,25 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                         '<span aria-hidden="true">&times;</span>'+
                         '</button>'+
                     '</div>'+
-                    '<div class="modal-body" id="modalBodyPagamento'+ item.numeroContrato+'">'+
+                    '<div class="modal-body" id="modalBodyPagamento'+ item.NU_BEM+'">'+
                     '</div>'+
                 '</div>'+
                 '</div>'+
                 '</td>' +
+                '<td class="formata-data-sem-hora" id="novoHistorico'+item.NU_BEM+'">' + item.updated_at + '</td>' +
             '</tr>';
         $(Novalinha).appendTo('#tblContratosSemPagamentoSinal>tbody');
  
         var formCobrancaPagamento = 
 
-        '<form id="formEnviodeCobrancaAgencia'+ item.numeroContrato+'" method="post" action="/estoque-imoveis/conformidade-contratacao/mensagemPagamento">' +
+        '<form id="formEnviodeCobrancaAgencia'+ item.NU_BEM+'" method="post" action="/estoque-imoveis/conformidade-contratacao/mensagemPagamento">' +
             '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
             // '<input type="hidden" name="tipoAtendimento" value="ANALISE"></input>'+
             // '<input type="hidden" name="atividadeAtendimento" value="COBRANCA"></input>'+
-            '<input type="hidden" name="bemFormatado" value="'+  item.bemFormatado +'"></input>'+
+            '<input type="hidden" name="bemFormatado" value="'+  item.BEM_FORMATADO +'"></input>'+
 
             '<p><span style="color: red;">* </span> E-mail proponente: Buscar no simov</p>'+
-            '<p id="corretor'+item.numeroContrato+'"><span style="color: red;">* </span>E-mail Corretor: '+item.EMAIL_CORRETOR+'</p>'+
+            '<p id="corretor'+item.NU_BEM+'"><span style="color: red;">* </span>E-mail Corretor: '+item.EMAIL_CORRETOR+'</p>'+
 
             '<div class="form-group">'+
             '<p>Incluir Mensagem : </p>' +
@@ -406,14 +411,14 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
             '<input type="email" class="form-control" name="emailContato" placeholder="email" required><br>'+
 
             '<div class="form-group">'+
-            '<button id="btnToggle'+item.numeroContrato+'" type="button" class="btn btn-primary">Modelo de Cobrança</button><br><br>'+
+            '<button id="btnToggle'+item.NU_BEM+'" type="button" class="btn btn-primary">Modelo de Cobrança</button><br><br>'+
             
-            '<div contenteditable="true" id="toggleModelo'+item.numeroContrato+'" style="display: none;">À <br> '+ item.NOME_PROPONENTE+' ,<br>'+
+            '<div contenteditable="true" id="toggleModelo'+item.NU_BEM+'" style="display: none;">À <br> '+ item.NOME_PROPONENTE+' ,<br>'+
             'Corretor(a): '+ item.NO_CORRETOR+' <br>'+
             'Setor de Habitação <br><br>'+
             '1. Solicitamos o envio do boleto/pp15 referente ao valor em Recursos próprios do cliente <b>'+ item.NOME_PROPONENTE+'</b>, não recebido até o momento.<br><br>'+
 
-            '2. Aguardamos o envio do mesmo para prosseguimento da contratação referente ao imóvel adjudicado -'+item.bemFormatado +'. <br><br>'+
+            '2. Aguardamos o envio do mesmo para prosseguimento da contratação referente ao imóvel adjudicado -'+item.BEM_FORMATADO +'. <br><br>'+
 
             '3. À disposição para esclarecimentos. <br><br>'+
 
@@ -432,13 +437,13 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
         '</div>'+
         '</form>'
 
-            $('#formContatoPagamento'+item.numeroContrato).html(formCobrancaPagamento)
+            $('#formContatoPagamento'+item.NU_BEM).html(formCobrancaPagamento)
 
-            $('#btnToggle'+item.numeroContrato).click(function() {
-                $('#toggleModelo'+item.numeroContrato).toggle();
+            $('#btnToggle'+item.NU_BEM).click(function() {
+                $('#toggleModelo'+item.NU_BEM).toggle();
             });
 
-            $('#formEnviodeCobrancaAgencia'+item.numeroContrato).submit( function(e) {
+            $('#formEnviodeCobrancaAgencia'+item.NU_BEM).submit( function(e) {
 
                 e.preventDefault();
             
@@ -447,9 +452,9 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                 let url = $(this).attr('action');
                 let method = $(this).attr('method');
 
-                console.log(datas);
-                console.log(url);
-                console.log(method);
+                // console.log(datas);
+                // console.log(url);
+                // console.log(method);
                 
                 $.ajax({
                     type: method,
@@ -464,7 +469,7 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                             icon: 'success',
                             title: 'Email enviado!'
                         });
-                        $('#novoHistorico'+ item.numeroContrato).text(strDate)
+                        $('#novoHistorico'+ item.NU_BEM).text(strDate)
                     },
                 
                     error: function () {
@@ -481,17 +486,18 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
 
             })
 
-        $('#Pagamento'+item.numeroContrato).click(function() {
-            $.get( '/estoque-imoveis/consulta-historico-contrato/'+item.bemFormatado, function(data) {
+        $('#Pagamento'+item.NU_BEM).click(function() {
+            $.get( '/estoque-imoveis/consulta-historico-contrato/'+item.BEM_FORMATADO, function(data) {
+                console.log(item.BEM_FORMATADO)
                 var formPag =
-                        '<form method="post" action="/estoque-imoveis/conformidade-contratacao/registrar-historico/' + item.bemFormatado+ '">' +
+                        '<form method="post" action="/estoque-imoveis/conformidade-contratacao/registrar-historico/' + item.BEM_FORMATADO+ '">' +
                             '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                             '<input type="hidden" name="tipoAtendimento" value="ANALISE"></input>'+
-                            '<input type="hidden" name="atividadeAtendimento" value="COBRANÇA"></input>'+
-                            '<p>Contrato: <b>'+  item.bemFormatado + '</b></p>' +
+                            '<input type="hidden" name="atividadeAtendimento" value="COBRANCA"></input>'+
+                            '<p>Contrato: <b>'+  item.BEM_FORMATADO + '</b></p>' +
     
                             '<p>Última Observação </p>'+
-                            '<span id="ultimaObsPag'+ item.numeroContrato+'"></span>'+
+                            '<span id="ultimaObsPag'+ item.NU_BEM+'"></span>'+
     
                             '<div class="form-group">'+
                             '<p>Nova Observação </p>' +
@@ -503,7 +509,7 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                         '</div>'+
                         '</form>'
     
-                $('#modalBodyPagamento'+item.numeroContrato).html(formPag)
+                $('#modalBodyPagamento'+item.NU_BEM).html(formPag)
                 
                 var Novoresultado = JSON.parse(data)
                 $.each(Novoresultado.historico, function(chave, valor) {
@@ -512,11 +518,12 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                     var formataData = valor.data
                     var novaData = formataData.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
                     
-                    if (analisaTipo == "COBRANÇA"){
+                    if (analisaTipo == "COBRANCA"){
+                    let toString = valor.observacao.replace(/(<([^>]+)>)/ig,"");
                      var NovoDado = 
-                     '<textarea class="form-control" rows="3" disabled>'+ valor.observacao +'</textarea>'+
+                     '<textarea class="form-control" rows="3" disabled>'+ toString +'</textarea>'+
                     '<small class="form-text text-muted">'+ 'incluida em <b>'+novaData+'</b> por <b>'+valor.matriculaResponsavel+'</b>.</small><br>'
-                     $('#ultimaObsPag'+ item.numeroContrato).html(NovoDado)
+                     $('#ultimaObsPag'+ item.NU_BEM).html(NovoDado)
                     }
                 })
                 $('form').submit( function(e) {
@@ -544,7 +551,7 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                                 icon: 'success',
                                 title: 'Alteração salva!'
                             });
-                            $('#novoHistorico'+ item.numeroContrato).text(strDate)
+                            $('#novoHistorico'+ item.NU_BEM).text(strDate)
                         },
                       
                         error: function () {
@@ -564,7 +571,8 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
         })
     })
 })).done(function() {
-    $('#tblContratosSemPagamentoSinal').addClass("dataTable"); 
+    $('#tblContratosSemPagamentoSinal').addClass("dataTable");
+    _formataData()  
     _formataValores();
     _formataDatatableComData()
     $('.spinnerTbl').remove()
