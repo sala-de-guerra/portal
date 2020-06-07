@@ -187,6 +187,7 @@
                                         <th>vencimento(PP15)</th>
                                         <th>Status</th>
                                         <th>Ações</th>
+                                        <th>Último Tratamento</th>
                                     </tr>
                                 </thead>
                                 <tbody>

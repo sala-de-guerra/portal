@@ -55,47 +55,74 @@ class MonitoraPagamentoSinalController extends Controller
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
 
         $consultaContratosSemPagamentoSinal = BaseSimov::where('DATA_PROPOSTA', '<=', Carbon::now()->sub('7 day')->format('Y-m-d'))
+                                            ->leftjoin('TBL_HISTORICO_PORTAL_GILIE', 'TBL_HISTORICO_PORTAL_GILIE.numeroContrato',  "=", 'ALITB001_Imovel_Completo.BEM_FORMATADO')
+                                                     ->select(DB::raw('
+                                                        ALITB001_Imovel_Completo.[NU_BEM] as NU_BEM,
+                                                        ALITB001_Imovel_Completo.[UNA] as UNA,
+                                                        ALITB001_Imovel_Completo.[DATA_PROPOSTA] as DATA_PROPOSTA, 
+                                                        ALITB001_Imovel_Completo.[STATUS_IMOVEL] as STATUS_IMOVEL,
+                                                        ALITB001_Imovel_Completo.[VALOR_TOTAL_PROPOSTA] as VALOR_TOTAL_PROPOSTA,
+                                                        ALITB001_Imovel_Completo.[CLASSIFICACAO] as CLASSIFICACAO,
+                                                        ALITB001_Imovel_Completo.[BEM_FORMATADO] as BEM_FORMATADO,
+                                                        ALITB001_Imovel_Completo.[VALOR_REC_PROPRIOS_PROPOSTA] as VALOR_REC_PROPRIOS_PROPOSTA,
+                                                        ALITB001_Imovel_Completo.[NOME_PROPONENTE] as NOME_PROPONENTE,
+                                                        ALITB001_Imovel_Completo.[NO_CORRETOR] as NO_CORRETOR,
+                                                        ALITB001_Imovel_Completo.[EMAIL_CORRETOR] as EMAIL_CORRETOR,
+                                                        TBL_HISTORICO_PORTAL_GILIE.[updated_at] as updated_at,
+                                                        TBL_HISTORICO_PORTAL_GILIE.[observacao] as observacao,
+                                                        TBL_HISTORICO_PORTAL_GILIE.[atividade] as atividade
+                                                    '))
                                                         ->where('UNA',  $siglaGilie)
                                                         ->where(function($query) {
                                                             $query->where('STATUS_IMOVEL', 'Em Contratação')
                                                                     ->orWhere('STATUS_IMOVEL', 'Contratação pendente')
                                                                     ;})
+                                                        ->orderBy('updated_at', 'desc')
                                                         ->get();
-        $listaContratosSemPagamentoSinal = [];                                              
-        foreach ($consultaContratosSemPagamentoSinal as $contrato) {
+        
+        $retiraDuplicado = $consultaContratosSemPagamentoSinal->unique('NU_BEM');
+        
+        $listaContratosSemPagamentoSinal = [];                                             
+        foreach ($retiraDuplicado as $contrato) {
             // VERIFICA SE EXISTE PAGAMENTO DO SINAL
             if($contrato->conformidadeContratacao) {
                 if ($contrato->conformidadeContratacao->cardDeAgrupamento == 'GILIE') {           
                     if ($contrato->saldoContratoSinaf) {
                         if ($contrato->saldoContratoSinaf->saldoAtualContrato < $contrato->VALOR_REC_PROPRIOS_PROPOSTA) {
                             array_push($listaContratosSemPagamentoSinal, [
-                                'numeroContrato' => $contrato->NU_BEM,
-                                'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                                'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
+                                'NU_BEM' => $contrato->NU_BEM,
+                                'DATA_PROPOSTA' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                                'VALOR_TOTAL_PROPOSTA' => $contrato->VALOR_TOTAL_PROPOSTA,
                                 'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
-                                'statusSimov' => $contrato->STATUS_IMOVEL,
-                                'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                                'bemFormatado' => $contrato->BEM_FORMATADO,
-                                'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                                'STATUS_IMOVEL' => $contrato->STATUS_IMOVEL,
+                                'CLASSIFICACAO' =>$contrato->CLASSIFICACAO,
+                                'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
+                                'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                                 'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
                                 'NO_CORRETOR' => $contrato->NO_CORRETOR,
                                 'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                                'updated_at' =>$contrato->updated_at,
+                                'atividade' =>$contrato->atividade,
+                                'observacao' =>$contrato->observacao,
                                 'UNA' =>$contrato->UNA
                             ]);
                         } 
                     } else {
                         array_push($listaContratosSemPagamentoSinal, [
-                            'numeroContrato' => $contrato->NU_BEM,
-                            'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                            'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
+                            'NU_BEM' => $contrato->NU_BEM,
+                            'DATA_PROPOSTA' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                            'VALOR_TOTAL_PROPOSTA' => $contrato->VALOR_TOTAL_PROPOSTA,
                             'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
-                            'statusSimov' => $contrato->STATUS_IMOVEL,
-                            'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                            'bemFormatado' => $contrato->BEM_FORMATADO,
-                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                            'STATUS_IMOVEL' => $contrato->STATUS_IMOVEL,
+                            'CLASSIFICACAO' =>$contrato->CLASSIFICACAO,
+                            'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
+                            'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                             'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
                             'NO_CORRETOR' => $contrato->NO_CORRETOR,
                             'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                            'updated_at' =>$contrato->updated_at,
+                            'atividade' =>$contrato->atividade,
+                            'observacao' =>$contrato->observacao,
                             'UNA' =>$contrato->UNA
                         ]);
                     }
@@ -104,33 +131,39 @@ class MonitoraPagamentoSinalController extends Controller
                 if ($contrato->saldoContratoSinaf) {
                     if ($contrato->saldoContratoSinaf->saldoAtualContrato < $contrato->VALOR_REC_PROPRIOS_PROPOSTA) {
                         array_push($listaContratosSemPagamentoSinal, [
-                            'numeroContrato' => $contrato->NU_BEM,
-                            'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                            'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
+                            'NU_BEM' => $contrato->NU_BEM,
+                            'DATA_PROPOSTA' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                            'VALOR_TOTAL_PROPOSTA' => $contrato->VALOR_TOTAL_PROPOSTA,
                             'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
-                            'statusSimov' => $contrato->STATUS_IMOVEL,
-                            'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                            'bemFormatado' => $contrato->BEM_FORMATADO,
-                            'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                            'STATUS_IMOVEL' => $contrato->STATUS_IMOVEL,
+                            'CLASSIFICACAO' =>$contrato->CLASSIFICACAO,
+                            'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
+                            'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                             'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
                             'NO_CORRETOR' => $contrato->NO_CORRETOR,
                             'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                            'updated_at' =>$contrato->updated_at,
+                            'atividade' =>$contrato->atividade,
+                            'observacao' =>$contrato->observacao,
                             'UNA' =>$contrato->UNA
                         ]);
                     } 
                 } else {
                     array_push($listaContratosSemPagamentoSinal, [
-                        'numeroContrato' => $contrato->NU_BEM,
-                        'dataProposta' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
-                        'valorProposta' => $contrato->VALOR_TOTAL_PROPOSTA,
+                        'NU_BEM' => $contrato->NU_BEM,
+                        'DATA_PROPOSTA' => Carbon::parse($contrato->DATA_PROPOSTA)->format('Y-m-d'),
+                        'VALOR_TOTAL_PROPOSTA' => $contrato->VALOR_TOTAL_PROPOSTA,
                         'vencimentoPp15' => self::calculaVencimentoPp15($contrato->DATA_PROPOSTA),
-                        'statusSimov' => $contrato->STATUS_IMOVEL,
-                        'classificacaoImovel' =>$contrato->CLASSIFICACAO,
-                        'bemFormatado' => $contrato->BEM_FORMATADO,
-                        'ValorRecebido' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
+                        'STATUS_IMOVEL' => $contrato->STATUS_IMOVEL,
+                        'CLASSIFICACAO' =>$contrato->CLASSIFICACAO,
+                        'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
+                        'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                         'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
                         'NO_CORRETOR' => $contrato->NO_CORRETOR,
                         'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
+                        'updated_at' =>$contrato->updated_at,
+                        'atividade' =>$contrato->atividade,
+                        'observacao' =>$contrato->observacao,
                         'UNA' =>$contrato->UNA
                     ]);
                 }

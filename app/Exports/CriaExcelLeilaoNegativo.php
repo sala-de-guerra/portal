@@ -82,5 +82,4 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
             ],
         ];
     }
-
 }

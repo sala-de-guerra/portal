@@ -269,3 +269,9 @@ Route::put('redirecionar/gestor/{idAtende}', 'GestaoAtendeController@redireciona
 Route::put('responder/gestor/{idAtende}', 'GestaoAtendeController@responderAtendeGerencial');
 // EXCLUIR ATENDE GESTOR
 Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGerencial');  
+
+// Rota do teste de importação
+Route::get('/testeExcel', 'LeilaoNegativo\LeilaoNegativoController@importaExcel');
+Route::post('/testeExcel/envia', 'LeilaoNegativo\LeilaoNegativoController@ProcessaImportacao');
+Route::get('/testeExcel/lista', 'LeilaoNegativo\LeilaoNegativoController@listaUpload');
+
