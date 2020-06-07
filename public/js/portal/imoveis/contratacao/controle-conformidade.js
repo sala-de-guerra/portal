@@ -89,7 +89,7 @@ $(document).ready(function(){
                    '</div>'+
                '</div>'+
                '</div>'+
-               '<td class="formata-data-sem-hora" id="novoHistorico'+item.numeroContrato+'">' + item.dataNovoHistorio + '</td>' +
+               '<td class="formata-data-sem-horas" id="novoHistorico'+item.numeroContrato+'">' + item.dataNovoHistorio + '</td>' +
             '</tr>';
 
             
@@ -320,8 +320,7 @@ $(document).ready(function(){
 
         });
     })).done(function() {
-        _formataData() 
-        _formataValores();
+        _formataDatas()
         _formataDatatableComData()
     })
 
