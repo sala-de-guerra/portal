@@ -46,3 +46,19 @@ function _formataDataInput() {
         $(item).text(dataFormatada);
     });
 };
+
+function _formataDatas() {
+    moment.locale('pt-br');
+
+    $('.formata-datas').each(function (key, item) {
+        var data = $(this).text()
+        var dataFormatada = moment(data, 'YYYY-MM-DD, HH:mm:ss').format('L LT');
+        $(item).text(dataFormatada);
+    });
+
+    $('.formata-data-sem-horas').each(function (key, item) {
+        var data = $(this).text()
+        var dataFormatada = moment(data, 'YYYY-MM-DD, HH:mm:ss').format('L');
+        $(item).text(dataFormatada);
+    });
+};
