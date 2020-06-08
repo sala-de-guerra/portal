@@ -42,7 +42,7 @@ $(document).ready(function(){
                     '<div class="row">' +
                     '<div >'+
                         '<button id="btnLinkServidor" onclick="copyToClipboard(' + elementoLinkServidor + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
-                        '<a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\sp7257sr001\\PUBLIC\\EstoqueImoveis\\'+ item.contratoFormatado +'</a>&nbsp&nbsp&nbsp&nbsp' +
+                        '<a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\arquivos.caixa\\sp\\SP7257FS201\\PUBLICO\\PUBLIC\\EstoqueImoveis\\'+ item.contratoFormatado +'</a>&nbsp&nbsp&nbsp&nbsp' +
                     '</div>' +
                     
                     '<div >'+
@@ -329,7 +329,7 @@ $(document).ready(function(){
 $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pagamento-sinal', function(dados){
     $.each(dados, function(key, item) {  
 
-        elementoServidor = "'#linkServidor" + item.BEM_FORMATADO + "'";
+        elementoServidorpag = "'#linkServidorpag" + item.NU_BEM + "'";
             
             let formataData = item.vencimentoPp15
             let novaData = formataData.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
@@ -343,8 +343,8 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                 '<td>'+ 
                     '<div class="row">' +
                     '<div>'+
-                        '<button id="btnLinkServidor" onclick="copyToClipboard(' + elementoServidor + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
-                        '<a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/' + item.BEM_FORMATADO + '" id="linkServidor' + item.NU_BEM + '" hidden>\\\\sp7257sr001\\PUBLIC\\EstoqueImoveis\\'+ item.BEM_FORMATADO +'</a>&nbsp&nbsp&nbsp&nbsp' +
+                        '<button id="btnLinkServidorpag" onclick="copyToClipboard(' + elementoServidorpag + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
+                        '<a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/' + item.BEM_FORMATADO + '" id="linkServidorpag' + item.NU_BEM + '" hidden>\\\\arquivos.caixa\\sp\\SP7257FS201\\PUBLICO\\PUBLIC\\EstoqueImoveis\\'+ item.BEM_FORMATADO +'</a>&nbsp&nbsp&nbsp&nbsp' +
                     '</div>' +
                 '<div>'+
                 '<button id="Pagamento'+item.NU_BEM+'" class="btn btn-primary" data-toggle="modal" data-target="#modalPagamento'+ item.NU_BEM+'"><i class="fas fa-info-circle"></i>'+'</button>&nbsp&nbsp&nbsp&nbsp'+
