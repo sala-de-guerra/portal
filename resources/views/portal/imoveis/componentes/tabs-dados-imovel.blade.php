@@ -77,7 +77,7 @@
                                     <label>Dossiê Digital:</label>
                                     <br>
                                     <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy mx-1"></i>Servidor</button>
-                                    <a href="file://///sp7257sr001/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? $contratoFormatado ?? '' }}" id="linkServidor" hidden>\\sp7257sr001\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? $contratoFormatado ?? '' }}</a>
+                                    <a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? $contratoFormatado ?? '' }}" id="linkServidor" hidden>\\arquivos.caixa\sp\SP7257FS201\PUBLICO\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? $contratoFormatado ?? '' }}</a>
                                 </div> 
                             </div>
                             @endif
