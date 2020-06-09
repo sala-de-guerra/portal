@@ -47,9 +47,10 @@ class ConsultaContratoController extends Controller
         
         // CAPTURA DADOS DE CONFORMIDADE
         $dadosConformidade = ConformidadeContratacao::where('numeroContrato', $contrato->NU_BEM)->first();
-        // dd($dadosConformidade);
+
         // CAPTURA OS DADOS DA PROPOSTA DO PROPONENTE ATUAL
-        $dadosProposta = PropostasSimov::where('NU_BEM', $contrato->NU_BEM)->where('VALOR RECURSOS PRÓPRIOS', $contrato->VALOR_REC_PROPRIOS_CONTRATO)->where('VALOR FGTS', $contrato->VALOR_FGTS_PROPOSTA)->where('VALOR FINANCIADO', $contrato->VALOR_FINANCIADO_PROPOSTA)->where('NOME PROPONENTE', $contrato->NOME_PROPONENTE)->first();
+         $dadosProposta = PropostasSimov::where('NÚMERO BEM', $contrato->BEM_FORMATADO)->where('NOME PROPONENTE', $contrato->NOME_PROPONENTE)->first();
+        // ->where('VALOR RECURSOS PRÓPRIOS', $contrato->VALOR_REC_PROPRIOS_CONTRATO)->where('VALOR FGTS', $contrato->VALOR_FGTS_PROPOSTA)->where('VALOR FINANCIADO', $contrato->VALOR_FINANCIADO_PROPOSTA)->where('NOME PROPONENTE', $contrato->NOME_PROPONENTE)->first();
 
         // CAPTURA OS DADOS DO LEILÃO NEGATIVO
         $dadosLeilaoNegativo = LeilaoNegativo::where('contratoFormatado', $numeroContrato)->where('contratoAtivo', true)->first();      
