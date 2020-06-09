@@ -398,8 +398,8 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
             // '<input type="hidden" name="atividadeAtendimento" value="COBRANCA"></input>'+
             '<input type="hidden" name="bemFormatado" value="'+  item.BEM_FORMATADO +'"></input>'+
 
-            '<p><span style="color: red;">* </span> E-mail proponente: Buscar no simov</p>'+
-            '<p id="corretor'+item.NU_BEM+'"><span style="color: red;">* </span>E-mail Corretor: '+item.EMAIL_CORRETOR+'</p>'+
+            '<p><span style="color: red;">* </span>E-mail proponente: <b>'+item.emailproponente+'</b></p>'+
+            '<p id="corretor'+item.NU_BEM+'"><span style="color: red;">* </span>E-mail Corretor: <b>'+item.EMAIL_CORRETOR+'</b></p>'+
 
             '<div class="form-group">'+
             '<p>Incluir Mensagem : </p>' +

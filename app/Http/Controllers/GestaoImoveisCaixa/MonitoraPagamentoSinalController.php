@@ -56,6 +56,7 @@ class MonitoraPagamentoSinalController extends Controller
 
         $consultaContratosSemPagamentoSinal = BaseSimov::where('DATA_PROPOSTA', '<=', Carbon::now()->sub('7 day')->format('Y-m-d'))
                                             ->leftjoin('TBL_HISTORICO_PORTAL_GILIE', 'TBL_HISTORICO_PORTAL_GILIE.numeroContrato',  "=", 'ALITB001_Imovel_Completo.BEM_FORMATADO')
+                                            ->leftjoin('ALITB048_CUB120000', 'ALITB048_CUB120000.NOME PROPONENTE',  "=", 'ALITB001_Imovel_Completo.NOME_PROPONENTE')
                                                      ->select(DB::raw('
                                                         ALITB001_Imovel_Completo.[NU_BEM] as NU_BEM,
                                                         ALITB001_Imovel_Completo.[UNA] as UNA,
@@ -66,6 +67,8 @@ class MonitoraPagamentoSinalController extends Controller
                                                         ALITB001_Imovel_Completo.[BEM_FORMATADO] as BEM_FORMATADO,
                                                         ALITB001_Imovel_Completo.[VALOR_REC_PROPRIOS_PROPOSTA] as VALOR_REC_PROPRIOS_PROPOSTA,
                                                         ALITB001_Imovel_Completo.[NOME_PROPONENTE] as NOME_PROPONENTE,
+                                                        ALITB048_CUB120000.[E-MAIL PROPONENTE] as emailproponente,
+                                                        ALITB048_CUB120000.[NOME PROPONENTE] as nomeproponente,
                                                         ALITB001_Imovel_Completo.[NO_CORRETOR] as NO_CORRETOR,
                                                         ALITB001_Imovel_Completo.[EMAIL_CORRETOR] as EMAIL_CORRETOR,
                                                         TBL_HISTORICO_PORTAL_GILIE.[updated_at] as updated_at,
@@ -99,6 +102,7 @@ class MonitoraPagamentoSinalController extends Controller
                                 'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
                                 'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                                 'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                                'emailproponente' => $contrato->emailproponente,
                                 'NO_CORRETOR' => $contrato->NO_CORRETOR,
                                 'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
                                 'updated_at' =>$contrato->updated_at,
@@ -118,6 +122,7 @@ class MonitoraPagamentoSinalController extends Controller
                             'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
                             'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                             'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                            'emailproponente' => $contrato->emailproponente,
                             'NO_CORRETOR' => $contrato->NO_CORRETOR,
                             'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
                             'updated_at' =>$contrato->updated_at,
@@ -140,6 +145,7 @@ class MonitoraPagamentoSinalController extends Controller
                             'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
                             'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                             'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                            'emailproponente' => $contrato->emailproponente,
                             'NO_CORRETOR' => $contrato->NO_CORRETOR,
                             'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
                             'updated_at' =>$contrato->updated_at,
@@ -159,6 +165,7 @@ class MonitoraPagamentoSinalController extends Controller
                         'BEM_FORMATADO' => $contrato->BEM_FORMATADO,
                         'VALOR_REC_PROPRIOS_PROPOSTA' => $contrato->VALOR_REC_PROPRIOS_PROPOSTA,
                         'NOME_PROPONENTE' => $contrato->NOME_PROPONENTE,
+                        'emailproponente' => $contrato->emailproponente,
                         'NO_CORRETOR' => $contrato->NO_CORRETOR,
                         'EMAIL_CORRETOR' =>$contrato->EMAIL_CORRETOR,
                         'updated_at' =>$contrato->updated_at,
