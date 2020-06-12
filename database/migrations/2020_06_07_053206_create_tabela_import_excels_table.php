@@ -13,11 +13,11 @@ class CreateTabelaImportExcelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tabela_import_excels', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('Nome');
-            $table->string('Matricula');
-            $table->string('funcao');
+        Schema::create('TBL_IMPORTA_EXCEL', function (Blueprint $table) {
+            $table->bigIncrements('idExcel');
+            $table->string('Contrato');
+            $table->integer('caixa');
+            $table->string('silog');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTabelaImportExcelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tabela_import_excels');
+        Schema::dropIfExists('TBL_IMPORTA_EXCEL');
     }
 }

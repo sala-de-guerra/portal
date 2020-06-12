@@ -141,7 +141,7 @@ $.fn.dataTable.ext.errMode = 'none';
                                 '<div>' +
 
                                 '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
-                                '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+                                '<textarea class="form-control" name="respostaAtende" rows="5" required></textarea>'+
 
                                 '</div>' +
                             '</div>' + 
@@ -309,7 +309,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
                        '<div>' +
 
                        '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
-                       '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+                       '<textarea class="form-control" name="respostaAtende" rows="5" required></textarea>'+
 
                        '</div>' +
                    '</div>' + 
@@ -475,7 +475,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
                         '<div>' +
 
                         '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
-                        '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="5" required></textarea>'+
 
                         '</div>' +
                     '</div>' + 
@@ -640,7 +640,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
                         '<div>' +
 
                         '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
-                        '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="5" required></textarea>'+
 
                         '</div>' +
                     '</div>' + 
@@ -806,7 +806,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
                         '<div>' +
 
                         '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
-                        '<textarea class="form-control" name="respostaAtende" rows="5"></textarea>'+
+                        '<textarea class="form-control" name="respostaAtende" rows="5" required></textarea>'+
 
                         '</div>' +
                     '</div>' + 

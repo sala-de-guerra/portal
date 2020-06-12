@@ -19,7 +19,7 @@
     <div class="row mb-2">
         <div class="col">
             <h1 class="m-0 text-dark">
-                Teste upload excel
+                Controle de Envio de Arquivo
             </h1>
         </div>
 
@@ -32,8 +32,7 @@
 
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/leiloes-negativos"> Preparar e Ofertar</a> </li>
-                <li class="breadcrumb-item active">Teste upload excel</li>
+                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/controle-arquivos"> Controle de Envio de Arquivo</a> </li>
             </ol>
         </div>
     </div>
@@ -51,11 +50,11 @@
                     <div class="row">
                         <div class="col-12">
 
-                    <form method="POST" action="/testeExcel/envia" enctype="multipart/form-data">
+                    <form method="POST" action="/controle-arquivos/envia" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <label>Arquivo</label>
-                        <input type="file" name="arquivo"><br><br>
-                        <input type="submit" value="Enviar"><br><br><br>
+                        <input type="file" name="arquivo" required><br><br>
+                        <input type="submit" class="btn btn-primary" value="Enviar"><br><br><br>
 
                     </form>
 
@@ -64,9 +63,9 @@
                             <table id="tblimportexcel" class="table table-bordered table-striped hover dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Nome</th>
-                                        <th>Matricula</th>
-                                        <th>Função</th>
+                                        <th>Contrato</th>
+                                        <th>Caixa</th>
+                                        <th>Silog</th>
 
                                     </tr>
                                 </thead>
@@ -105,7 +104,7 @@
     <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
-    <script src="{{ asset('js/portal/imoveis/leiloes/lista-upload.js') }}"></script>
+    <script src="{{ asset('js/portal/silog/lista-upload.js') }}"></script>
     
 
 @stop

@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="row">
-                            @if (session()->get('acessoEmpregadoPortal') !== 'AGENCIA')
+                            {{-- @if (session()->get('acessoEmpregadoPortal') !== 'AGENCIA') --}}
                             <div class="col-sm-3">
                                  <div class="form-group">
                                     <label>Dossiê Digital:</label>
@@ -80,7 +80,7 @@
                                     <a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? $contratoFormatado ?? '' }}" id="linkServidor" hidden>\\arquivos.caixa\sp\SP7257FS201\PUBLICO\PUBLIC\EstoqueImoveis\{{ $numeroContrato ?? $contratoFormatado ?? '' }}</a>
                                 </div> 
                             </div>
-                            @endif
+                            {{-- @endif --}}
                             <div id="anuncioSiteCaixa"class="col-sm-3">
                                 <div class="form-group">
                                     <label>Anúncio X Imóveis:</label>

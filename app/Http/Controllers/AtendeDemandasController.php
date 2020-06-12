@@ -594,4 +594,6 @@ class AtendeDemandasController extends Controller
         }
         return redirect("/atende/minhas-demandas");
     }
+
+
 }
