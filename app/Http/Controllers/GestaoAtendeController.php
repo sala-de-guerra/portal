@@ -237,5 +237,9 @@ class GestaoAtendeController extends Controller
         }
         return redirect("/atende/gestao-atende");
     }
+    public function GerenciarDemandaGenerica()
+    {
+        return view('portal.gerencial.atividades-genericas');
+    }
 
 }

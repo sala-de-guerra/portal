@@ -209,6 +209,8 @@ Route::prefix('gerencial')->group(function () {
         Route::delete('/', 'GestaoEquipesController@desativarEquipe');
         // LISTAR GESTORES DA UNIDADE
         Route::get('listar-gestores/{codigoUnidade}', 'GestaoEquipesController@listaGestoresUnidade');
+        // LISTAR GERENTE DA UNIDADE
+        Route::get('listar-gerente/{codigoUnidade}', 'GestaoEquipesController@listaGerenteUnidade');
         // LISTA AS EQUIPES DE DETERMINADA UNIDADE COM OS EMPREGADOS
         Route::get('listar-equipes/{codigoUnidade}', 'GestaoEquipesController@listarEquipesUnidade');
         // LISTA DE UNIDADES
@@ -271,7 +273,14 @@ Route::put('responder/gestor/{idAtende}', 'GestaoAtendeController@responderAtend
 Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGerencial');  
 
 // Rota do teste de importação
-Route::get('/testeExcel', 'LeilaoNegativo\LeilaoNegativoController@importaExcel');
-Route::post('/testeExcel/envia', 'LeilaoNegativo\LeilaoNegativoController@ProcessaImportacao');
-Route::get('/testeExcel/lista', 'LeilaoNegativo\LeilaoNegativoController@listaUpload');
+Route::get('/controle-arquivos', 'uploadExcelController@importaExcel');
+Route::post('/controle-arquivos/envia', 'uploadExcelController@import');
+Route::get('/controle-arquivos/lista', 'uploadExcelController@listaUpload');
 
+//ROTA DO ATENDE GENERICO
+Route::get('gerencial/gerenciar-demanda-generica', 'atendeGenericoController@AtendeGenericoIndex');
+Route::get('atende/abrir', 'atendeGenericoController@cadastrarAtendeGenericoIndex');
+Route::post('gerencial/cadastra-atividade-generica', 'atendeGenericoController@cadastrarAtividadeGenerica');
+Route::get('atende/lista-atende-generico', 'atendeGenericoController@listademandasgenericas');
+Route::post('atende/abrir', 'atendeGenericoController@cadastrarNovaDemandaAtendeGenerica');
+Route::delete('gerencial/apagar-demanda-generica/{id}', 'atendeGenericoController@apagarAtividadeGenerica');

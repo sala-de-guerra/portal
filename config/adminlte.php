@@ -226,6 +226,12 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
         [
+            'text'        => 'Abrir Atende',
+            'url'         => '/atende/abrir',
+            'icon'        => 'fas fa-lg fa-fw fa-headset mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'],
+        ],
+        [
             'text' => 'Atende',
             'icon' => 'fas fa-lg fa-fw fa-headset mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR'],// 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
@@ -237,6 +243,12 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
                 ]
             ],
+        ],
+        [
+            'text'        => 'Controle Silog',
+            'url'         => '/controle-arquivos',
+            'icon'        => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'],
         ],
         [
             'text'        => 'Dúvidas Frequentes',
@@ -457,6 +469,13 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
             'submenu' => [
                 [
+                    'text' => 'Atividades Genéricas',
+                    // 'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
+                    'url'  => '/gerencial/gerenciar-demanda-generica',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
+                
+                [
                     'text' => 'Gestão Atende',
                     // 'icon'       => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => 'gerencial/gestao-atende',
@@ -468,6 +487,7 @@ return [
                     'url'  => '/gerencial/gestao-atividades',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
+
                 [
                     'text' => 'Gestão de Equipes',
                     // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',

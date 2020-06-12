@@ -14,7 +14,7 @@
 
      <div class="col-sm-3">
         <select name="selectEquipe" id="selectEquipe" class="form-control" onchange="colocaBotoes()">
-            <option value="" selected>Selecione</option>
+            <option value="" selected>Selecione a Atividade</option>
         </select>
     </div>
 

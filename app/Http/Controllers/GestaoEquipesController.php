@@ -483,4 +483,48 @@ class GestaoEquipesController extends Controller
             ,'2037' // GERENTE EXECUTIVO
         ];
     }
+
+    public static function listaGerenteUnidade($codigoUnidade)
+    {
+        $listaGestoresUnidade = Empregado::where(function($lotacao) use($codigoUnidade) {
+            $lotacao->where('codigoLotacaoAdministrativa', $codigoUnidade)
+                    ->orWhere('codigoLotacaoFisica', $codigoUnidade);   
+        })->whereIn('codigoFuncao', self::listarCodigoGerente())->select('matricula', 'nomeCompleto', 'nomeFuncao')->get();
+
+        return json_encode($listaGestoresUnidade);
+    }
+
+    public function listarUnidade()
+    {
+        return json_encode(array('unidades' => [
+            '5530' => 'GEIPT',
+            '7257' => 'GILIE/SP',
+            '7244' => 'GILIE/BH',
+            '7243' => 'GILIE/BE',
+            '7109' => 'GILIE/BR',
+            '7247' => 'GILIE/CT',
+            '7248' => 'GILIE/FO',
+            '7249' => 'GILIE/GO',
+            '7251' => 'GILIE/PO',
+            '7254' => 'GILIE/RJ',
+            '7253' => 'GILIE/RE',
+            '7255' => 'GILIE/SA',
+            '7242' => 'GILIE/BU'
+        ]));
+    }
+
+    public static function listarCodigoGerente()
+    {
+        return [
+             '2141' // GERENTE DE CENTRALIZADORA - PORTE 1
+            ,'2142' // GERENTE DE CENTRALIZADORA - PORTE 2
+            ,'2143' // GERENTE DE CENTRALIZADORA - PORTE 3
+            ,'2145' // GERENTE DE CENTRALIZADORA - PORTE 4
+            ,'2066' // GERENTE DE FILIAL - PORTE 1
+            ,'2067' // GERENTE DE FILIAL - PORTE 2
+            ,'2068' // GERENTE DE FILIAL - PORTE 3
+            ,'2069' // GERENTE DE FILIAL - PORTE 4
+            ,'2070' // GERENTE DE FILIAL - PORTE 5
+        ];
+    }
 }
