@@ -628,41 +628,4 @@ class LeilaoNegativoController extends Controller
         return redirect("/estoque-imoveis/leiloes-negativos/tratar/" . $codigo->contratoFormatado);
     }
 
-    public function importaExcel()
-    {
-        return view('portal.imoveis.leiloes.import-excel');
-    }
-
-//     public function ProcessaImportacao()
-//     {
-//         $primeira_linha = true;
-
-//         if (!empty($_FILES['arquivo']['tmp_name'])){
-//             $arquivo = new DOMDocument();
-//             $arquivo->load($_FILES['arquivo']['tmp_name']);
-
-
-//             $linhas = $arquivo->getElementsByTagName("Row");
-//             foreach ($linhas as $linha){
-//                if ($primeira_linha == false){
-//                 $nome = $linha->getElementsByTagName("Data")->item(0)->nodeValue;
-//                 $Matricula = $linha->getElementsByTagName("Data")->item(1)->nodeValue;
-//                 $funcao = $linha->getElementsByTagName("Data")->item(2)->nodeValue;
-                
-//                 $upload = new TabelaImportExcel();
-//                 $upload->Nome = $nome;
-//                 $upload->Matricula = $Matricula;
-//                 $upload->funcao = $funcao;
-//                 $upload->save();
-//                }
-//             $primeira_linha = false;
-//             }
-//             return view('portal.imoveis.leiloes.import-excel');;
-//         }
-//     }
-//     public function listaUpload()
-//     {
-//         $upload = TabelaImportExcel::all();
-//         return json_encode($upload);
-//     }
 }

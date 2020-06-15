@@ -13,12 +13,19 @@ class CreateAtendeGenericosTable extends Migration
      */
     public function up()
     {
-        Schema::create('TBL_ATENDE_GENERICOS', function (Blueprint $table) {
+        Schema::create('TBL_FALE_CONOSCO', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Responsavel_Atendimento');
             $table->string('Responsavel_Designacao');
             $table->string('Nome_Atividade');
+            $table->string('Assunto')->nullable();
+            $table->text('Descricao')->nullable();
+            $table->text('Resposta')->nullable();
+            $table->string('GILIE');
             $table->integer('Prazo_Atendimento');
+            $table->date('Data_atendimento')->nullable();
+            $table->integer('Status');
+            $table->string('Email_contato')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +37,6 @@ class CreateAtendeGenericosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('TBL_ATENDE_GENERICOS');
+        Schema::dropIfExists('TBL_FALE_CONOSCO');
     }
 }

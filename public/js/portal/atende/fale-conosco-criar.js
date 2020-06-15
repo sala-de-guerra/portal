@@ -6,11 +6,11 @@ $(document).ready(function(){
             var linha =
             ` <tr>
             <td>${item.Nome_Atividade}</td>
-            <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#demandaGenericaModal">
-            Clique aqui para abrir Atende
+            <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#demandaGenericaModal${+ item.id}">
+            Clique aqui para enviar mensagem
           </button>
 
-          <div class="modal fade" id="demandaGenericaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="demandaGenericaModal${+ item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                     <div class="modal-header"style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
@@ -21,20 +21,21 @@ $(document).ready(function(){
                     </div>
                     <div class="modal-body">
                         
-                    <form method="post" action="/atende/abrir">
+                    <form method="post" action="/fale-conosco/abrir">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="${csrfVar}">
-                        <input type="hidden" name="idEquipe" value="${999999 + item.id}">
-                        <input type="hidden" name="idAtividade" value="${999999 + item.id}">
-                        <input type="hidden" name="responsavelAtividade" value="${item.Responsavel_Atendimento}">
+                        <input type="hidden" name="responsavelAtendimento" value="${item.Responsavel_Atendimento}">
+                        <input type="hidden" name="responsavelDesignacao" value="${item.Responsavel_Designacao}">
                         <input type="hidden" name="nomeAtividade" value="${item.Nome_Atividade}">
+                        <input type="hidden" name="prazoAtendimento" value="${item.Prazo_Atendimento}">
+                        <input type="hidden" name="gilie" value="${item.GILIE}">
                         <div class="form-group">
                             <label>Assunto</label>
-                            <input type="text" name="assuntoAtende" class="form-control" placeholder="Assunto do Atende" required>
+                            <input type="text" name="Assunto" class="form-control" placeholder="Assunto do Atende" required>
                         </div>
                         <div class="form-group">
                         <label for="exampleFormControlTextarea1">Descrição</label>
-                            <textarea name="descricaoAtende" class="form-control" id="formAtende" rows="3" required></textarea>
+                            <textarea name="Descricao" class="form-control" id="formAtende" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
                             <label>Email</label>

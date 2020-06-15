@@ -33,7 +33,7 @@
 </div><br>
 
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12">
         <div class="card card-default">       
             <div class="card-body">
@@ -63,13 +63,107 @@
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
-</div> <!-- /.row -->
+</div> <!-- /.row --> --}}
 
 
  @stop 
 
 
 @section('content')
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary card-outline card-outline-tabs">
+            <div class="card-header p-0">
+                <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item" id="custon-tabs-li-minhasDemandas">
+                        <a class="nav-link" id="custom-tabs-one-minhasDemandas-tab" data-toggle="pill" href="#custom-tabs-one-minhasDemandas" role="tab" aria-controls="custom-tabs-one-minhasDemandas" aria-selected="true">
+                            <h5>Minhas Demandas</h5>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="custon-tabs-li-faleConosco">
+                        <a class="nav-link" id="custom-tabs-one-faleConosco-tab" data-toggle="pill" href="#custom-tabs-one-faleConosco" role="tab" aria-controls="custom-tabs-one-faleConosco" aria-selected="false">
+                            <h5>Fale Conosco</h5>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="">
+                        <a style="display: none;" class="nav-link" id="" data-toggle="pill" href="" role="tab" aria-controls="" aria-selected="false">
+                            <h5>Exemplo</h5>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="">
+                        <a class="nav-link" style="display: none;" id="" data-toggle="pill" href="" role="tab" aria-controls="" aria-selected="false">
+                            <h5>Exemplo</h5>
+                        </a>
+                    </li>
+                    
+            </div>
+
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+
+            <div class="tab-pane fade show active" id="custom-tabs-one-minhasDemandas" role="tabpanel" aria-labelledby="custom-tabs-one-minhasDemandas-tab">
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="tblminhasDemandas" class="table table-bordered table-striped dataTable"> 
+
+                                    <thead>
+                                        <tr>
+                                            <th>Contrato</th>
+                                            <th>Atividade</th>
+                                            <th>Limite atendimento</th>
+                                            <th>Assunto</th>
+                                            <th>Breve descrição</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+   
+   
+
+
+        <div class="tab-pane fade" id="custom-tabs-one-faleConosco" role="tabpanel" aria-labelledby="custom-tabs-one-faleConosco-tab">
+                        
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tblFaleconosco" class="table table-bordered table-striped dataTable"> 
+
+                                        <thead>
+                                            <tr>
+                                                <th>Responsável</th>
+                                                <th>Atividade</th>
+                                                <th>Limite atendimento</th>
+                                                <th>Assunto</th>
+                                                <th>Breve descrição</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -90,4 +184,5 @@
 <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/atende/minhas-demandas.js') }}"></script>
+<script src="{{ asset('js/portal/atende/fale-conosco-tratar.js') }}"></script>
 @stop

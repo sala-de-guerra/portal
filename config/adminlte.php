@@ -226,10 +226,16 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
         [
-            'text'        => 'Abrir Atende',
-            'url'         => '/atende/abrir',
-            'icon'        => 'fas fa-lg fa-fw fa-headset mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'],
+            'text'        => 'Dúvidas Frequentes',
+            'url'         => '/faq',
+            'icon'        => 'fas fa-lg fa-fw fa-question-circle mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+        ],
+        [
+            'text'        => 'Orientações',
+            'url'         => '/orientacoes',
+            'icon'        => 'fas fa-lg fa-fw fa-directions mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
         [
             'text' => 'Atende',
@@ -245,22 +251,74 @@ return [
             ],
         ],
         [
+            'text'    => 'Contratação',
+            'icon'    => 'fas fa-lg fa-fw fa-file-contract mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+            'submenu' => [
+                [
+                    'text' => 'Acompanhar Contratação',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                    'url'  => '/estoque-imoveis/acompanha-contratacao',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
+                [
+                    'text' => 'Controle de Distrato',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
+                    'url'  => '/estoque-imoveis/distrato',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
+                [
+                    'text' => 'Fila Única',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
+                    'url'  => '/estoque-imoveis/conformidade-contratacao',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
+
+                // [
+                //     'text' => 'level_two',
+                //     'url'  => '#',
+                // ],
+                // [
+                //     'text' => 'level_two',
+                //     'url'  => '#',
+                // ],
+                // [
+                //     'text' => 'level_one',
+                //     'url'  => '#',
+                // ],
+            ],
+        ],
+        [
             'text'        => 'Controle Silog',
             'url'         => '/controle-arquivos',
             'icon'        => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR'],
         ],
         [
-            'text'        => 'Dúvidas Frequentes',
-            'url'         => '/faq',
-            'icon'        => 'fas fa-lg fa-fw fa-question-circle mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'text'        => 'Fale Conosco',
+            'url'         => '/fale-conosco/abrir',
+            'icon'        => 'fas fa-lg fa-fw fa-at mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'],
         ],
         [
-            'text'        => 'Orientações',
-            'url'         => '/orientacoes',
-            'icon'        => 'fas fa-lg fa-fw fa-directions mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'text'       => 'Fornecedores',
+            'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], //             
+            'submenu' => [
+                [
+                    'text' => 'Despachantes',
+                    // 'icon'       => 'fas fa-lg fa-fw fa-id-card-alt mr-2',
+                    'url'  => '/fornecedores/controle-despachantes/',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                ],
+                [
+                    'text' => 'Leiloeiros',
+                    // 'icon'       => 'fas fa-lg fa-fw fa-gavel mr-2',
+                    'url'  => '/fornecedores/controle-leiloeiros/',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                ]
+    
+            ],
         ],
 
         // [
@@ -318,68 +376,8 @@ return [
         //     ],
 
         // ],
-        [
-            'text'    => 'Contratação',
-            'icon'    => 'fas fa-lg fa-fw fa-file-contract mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
-            'submenu' => [
-                [
-                    'text' => 'Acompanhar Contratação',
-                    // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
-                    'url'  => '/estoque-imoveis/acompanha-contratacao',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
-                ],
-                [
-                    'text' => 'Controle de Distrato',
-                    // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
-                    'url'  => '/estoque-imoveis/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
-                ],
-                [
-                    'text' => 'Fila Única',
-                    // 'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
-                    'url'  => '/estoque-imoveis/conformidade-contratacao',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
-                ],
-
-                // [
-                //     'text' => 'level_two',
-                //     'url'  => '#',
-                // ],
-                // [
-                //     'text' => 'level_two',
-                //     'url'  => '#',
-                // ],
-                // [
-                //     'text' => 'level_one',
-                //     'url'  => '#',
-                // ],
-            ],
-        ],
 
         
-        [
-            'text'       => 'Fornecedores',
-            'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], //             
-            'submenu' => [
-                [
-                    'text' => 'Despachantes',
-                    // 'icon'       => 'fas fa-lg fa-fw fa-id-card-alt mr-2',
-                    'url'  => '/fornecedores/controle-despachantes/',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
-                ],
-                [
-                    'text' => 'Leiloeiros',
-                    // 'icon'       => 'fas fa-lg fa-fw fa-gavel mr-2',
-                    'url'  => '/fornecedores/controle-leiloeiros/',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
-                ]
-    
-            ],
-        ],
-
-
         // ['header' => 'PENHOR'],
         // [
         //     'text' => 'Preparar e Ofertar',
@@ -469,9 +467,9 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
             'submenu' => [
                 [
-                    'text' => 'Atividades Genéricas',
+                    'text' => 'Fale Conosco',
                     // 'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
-                    'url'  => '/gerencial/gerenciar-demanda-generica',
+                    'url'  => '/gerencial/gerenciar-fale-conosco',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
                 

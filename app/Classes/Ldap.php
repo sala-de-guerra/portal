@@ -7,13 +7,13 @@ use Exception;
 
 class Ldap
 {
-    private $simularMatricula; 
+    // private $simularMatricula; 
     // private $simularMatricula = 'c070499'; // viviane - AG
     // private $simularMatricula = 'c090120'; // Marcelo Barboza - GILIE
     // private $simularMatricula = 'c066241'; // João Marcel - GILIE
     // private $simularMatricula = 'c072452'; // Fernanda Pereira Mendonça - GILIE
     // private $simularMatricula = 'c076457'; // FRANCISCO DE ASSIS DE SOUZA AMARAL - GILIE/RE
-    // private $simularMatricula = 'c079436'; // Vladimir Pereira de Lemos
+    private $simularMatricula = 'c079436'; // Vladimir Pereira de Lemos
     // private $simularMatricula = 'c033591'; // Rafael
     private $matricula;
     private $nomeCompleto;

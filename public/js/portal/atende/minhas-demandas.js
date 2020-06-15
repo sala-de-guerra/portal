@@ -1,4 +1,5 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
+$.fn.dataTable.ext.errMode = 'none';
 
 $(document).ready(function(){  
     $.getJSON('/atende/listar-demandas-disponiveis', function(dados){
@@ -146,7 +147,6 @@ $(document).ready(function(){
             $('.obs'+item.idAtende).text(novo)
             
         })
-    _formataDatatable();
     _formataData();
     })
     $.getJSON('/atende/listar-demandas-disponiveis', function(date){
