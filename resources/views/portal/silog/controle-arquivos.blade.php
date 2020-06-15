@@ -52,11 +52,20 @@
 
                     <form method="POST" action="/controle-arquivos/envia" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <label>Arquivo</label>
-                        <input type="file" name="arquivo" required><br><br>
-                        <input type="submit" class="btn btn-primary" value="Enviar"><br><br><br>
-
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Arquivo</label>
+                                <input type="file" name="arquivo" required><br><br>
+                            </div>
+                            <div class="col-2">    
+                                <button type="submit" class="btn btn-primary">Upload &nbsp &nbsp<i class="fas fa-file-upload"></i></button>
+                            </div>
                     </form>
+                            <div class="col-4">    
+                                <a href="/controle-arquivos/baixar"><button type="button" class="btn btn-primary">Download &nbsp &nbsp<i class="fas fa-file-download"></i></button></a><br><br><br>
+                            </div> 
+                        </div>   
+                   
 
                     <div class="row">
                         <div class="col-sm-12 table-responsive p-0">
@@ -66,6 +75,9 @@
                                         <th>Contrato</th>
                                         <th>Caixa</th>
                                         <th>Silog</th>
+                                        <th>Responsável</th>
+                                        <th>GILIE</th>
+                                        <th>Data Upload</th>
 
                                     </tr>
                                 </thead>
@@ -101,9 +113,7 @@
 
 
 @section('js')
-    <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
-    <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
     <script src="{{ asset('js/portal/silog/lista-upload.js') }}"></script>
     
 

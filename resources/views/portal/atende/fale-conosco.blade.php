@@ -19,35 +19,29 @@
 <div class="row mb-2">
     <div class="col">
         <h1 class="m-0 text-dark">
-            Abrir Demandas
+            Fale Conosco
         </h1>
     </div><br>
 
 
     <div class="col">
         <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i> Atende</li>
-            <li class="breadcrumb-item active"><a href="/atende/abrir"> Abrir Demandas</a> </li>    
+           <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i> <a href="/atende/abrir"> Fale Conosco</a> </li> 
         </ol>
     </div>
 </div><br>
-
 
 <div class="row">
     <div class="col-md-12">
         <div class="card card-default">       
             <div class="card-body">
-                <h4>*Atenção:</h4>
-                Caso deseje abrir uma demanda relacionada a um contrato, favor localizar o imóvel na barra de pesquisas no topo da página e clicar no botão ATENDE.<br>
-
-               <br><br>
-
+                <h4>Escolha o assunto desejado:</h4><br>
                 <div class="col-sm-12 table-responsive p-0">
                     <table id="tblAtendeGenerico" class="table hover">
                         <thead>
                             <tr>
                                 <th>Assunto</th>
-                                <th>Abrir Atende</th>
+                                <th>Enviar Pergunta</th>
                                 <!-- <th>Botão provisório</th> -->
 
 
@@ -61,8 +55,7 @@
                         
                     </table>
                 </div> <!-- /.col-sm-12 -->
-
-
+    
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col -->
@@ -92,5 +85,5 @@
 @section('js')
 <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
-<script src="{{ asset('js/portal/atende/atende-generico.js') }}"></script>
+<script src="{{ asset('js/portal/atende/fale-conosco-criar.js') }}"></script>
 @stop

@@ -273,14 +273,20 @@ Route::put('responder/gestor/{idAtende}', 'GestaoAtendeController@responderAtend
 Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGerencial');  
 
 // Rota do teste de importação
-Route::get('/controle-arquivos', 'uploadExcelController@importaExcel');
-Route::post('/controle-arquivos/envia', 'uploadExcelController@import');
-Route::get('/controle-arquivos/lista', 'uploadExcelController@listaUpload');
+Route::get('/controle-arquivos', 'PlaniladeControle\UploadexcelController@importaExcel');
+Route::post('/controle-arquivos/envia', 'PlaniladeControle\UploadexcelController@import');
+Route::get('/controle-arquivos/lista', 'PlaniladeControle\UploadexcelController@listaUpload');
+Route::get('/controle-arquivos/baixar', 'PlaniladeControle\DownloadexcelController@criaPlanilhaControleExcel');
 
-//ROTA DO ATENDE GENERICO
-Route::get('gerencial/gerenciar-demanda-generica', 'atendeGenericoController@AtendeGenericoIndex');
-Route::get('atende/abrir', 'atendeGenericoController@cadastrarAtendeGenericoIndex');
-Route::post('gerencial/cadastra-atividade-generica', 'atendeGenericoController@cadastrarAtividadeGenerica');
-Route::get('atende/lista-atende-generico', 'atendeGenericoController@listademandasgenericas');
-Route::post('atende/abrir', 'atendeGenericoController@cadastrarNovaDemandaAtendeGenerica');
-Route::delete('gerencial/apagar-demanda-generica/{id}', 'atendeGenericoController@apagarAtividadeGenerica');
+//ROTA DO FALECONOSCO
+Route::get('gerencial/gerenciar-fale-conosco', 'FaleConoscoController@AtendeGenericoIndex');
+Route::get('fale-conosco/abrir', 'FaleConoscoController@cadastrarAtendeGenericoIndex');
+Route::post('gerencial/cadastra-atividade-generica', 'FaleConoscoController@cadastrarAtividadeGenerica');
+Route::put('gerencial/editar-atividade-generica/{id}', 'FaleConoscoController@editarAtividadeGenerica');
+Route::put('gerencial/excluir-atividade-generica/{id}', 'FaleConoscoController@apagarFaleConosco');
+Route::put('fale-conosco/responder/{id}', 'FaleConoscoController@responderFaleConosco');
+Route::get('atende/lista-atende-generico', 'FaleConoscoController@listademandasgenericas');
+Route::get('atende/lista-atende-faleConosco', 'FaleConoscoController@listaFaleConosco');
+Route::post('fale-conosco/abrir', 'FaleConoscoController@cadastrarNovaDemandaAtendeGenerica');
+Route::delete('gerencial/apagar-demanda-generica/{id}', 'FaleConoscoController@apagarAtividadeGenerica');
+Route::get('gerencial/gerenciar-fale-conosco/lista', 'FaleConoscoController@ListaFaleConoscoGerencial');

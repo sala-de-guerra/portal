@@ -16,8 +16,10 @@ class CreateTabelaImportExcelsTable extends Migration
         Schema::create('TBL_IMPORTA_EXCEL', function (Blueprint $table) {
             $table->bigIncrements('idExcel');
             $table->string('Contrato');
-            $table->integer('caixa');
-            $table->string('silog');
+            $table->string('Caixa');
+            $table->string('Silog');
+            $table->string('Matricula');
+            $table->string('GILIE');
             $table->timestamps();
         });
     }
