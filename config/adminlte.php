@@ -250,6 +250,27 @@ return [
                 ]
             ],
         ],
+
+        [
+            'text'    => 'Carga em Lote',
+            'icon'    => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'],
+            'submenu' => [
+                [
+                    'text' => 'Controle Arquivos EMGEA',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                    'url'  => '/controle-arquivos',
+                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                ],
+                [
+                    'text' => 'Leilão Negativo',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
+                    'url'  => '',
+                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                ]
+            ]
+        ],
+
         [
             'text'    => 'Contratação',
             'icon'    => 'fas fa-lg fa-fw fa-file-contract mr-2',
@@ -287,12 +308,6 @@ return [
                 //     'url'  => '#',
                 // ],
             ],
-        ],
-        [
-            'text'        => 'Controle Silog',
-            'url'         => '/controle-arquivos',
-            'icon'        => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'],
         ],
         [
             'text'        => 'Fale Conosco',

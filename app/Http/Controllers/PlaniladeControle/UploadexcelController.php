@@ -26,13 +26,21 @@ class UploadexcelController extends Controller
     public function import(Request $request) 
     {
         try {
-
+            
+            $pathtofile = ($_FILES['arquivo']['name']);
+           
+            $info = pathinfo($pathtofile);
+            if ($info["extension"] == "xlsx"){
             Excel::import(new UsersImport,request()->file('arquivo'));
-
+          
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Cadastro realizado!");
             $request->session()->flash('corpoMensagem', "O upload foi realizado com sucesso.");
-
+            }else{
+                $request->session()->flash('corMensagem', 'danger');
+                $request->session()->flash('tituloMensagem', "Não foi possivel cadatrar!");
+                $request->session()->flash('corpoMensagem', "Envie apenas arquivos do Excel (XLS e XLSX)"); 
+            }
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
                  foreach ($failures as $failure) {
@@ -47,10 +55,6 @@ class UploadexcelController extends Controller
             $request->session()->flash('tituloMensagem', "Não foi possivel cadatrar!");
             $request->session()->flash('corpoMensagem', $message); 
             }
-
-
-                   
-
         }   
         
         return back();

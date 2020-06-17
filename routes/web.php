@@ -49,6 +49,11 @@ Route::get('pesquisar', function () {
     return view('portal.imoveis.pesquisar');
 });
 
+//Download da Planilha Excel para controle de arquivos EMGEA
+Route::get("/download/{file}", function ($file="") {
+    return response()->download(storage_path("app/public/".$file));
+    });
+
 
 // Consulta de bem imóvel
 Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');

@@ -21,22 +21,29 @@ class UsersImport implements ToModel, WithValidation, WithStartRow
     */
     public function model(array $row)
     {
+        
 
         // CADASTRA HISTÓRICO
         $historico = new HistoricoPortalGilie;
         $historico->matricula       = session('matricula');
-        $historico->numeroContrato  = $row[0];
-        $historico->tipo            = "CADASTRO";
-        $historico->atividade       = "CONTROLE DE ENVIO";
-        $historico->observacao      = "ENVIO DE CAIXA DE CONTROLE CODIGO: " .  $row[2];
+        $historico->numeroContrato  = $row[2];
+        $historico->tipo            = "REMESSA";
+        $historico->atividade       = "PROCESSO EMGEA";
+        $historico->observacao      = "ENVIO DE CAIXA EMGEA À GILIE/PO - CODIGO SILOG: " .  $row[8] . " CAIXA NÚMERO: ". $row[7];
         $historico->created_at      = date("Y-m-d H:i:s", time());
         $historico->updated_at      = date("Y-m-d H:i:s", time());
         $historico->save();
 
         return new TabelaImportExcel([
-            'Contrato'     => $row[0],
-            'Caixa'        => $row[1],
-            'Silog'        => $row[2],
+            'DataInclusaoPlanilha'             => $row[0],
+            'MatriculaInclusaoPlanilha'        => $row[1],
+            'Contrato'                         => $row[2],
+            'NU_BEM'                           => $row[3],
+            'Classificacao'                    => $row[4],
+            'Status'                           => $row[5],
+            'Coluna1'                          => $row[6],
+            'Caixa'                            => $row[7],
+            'Silog'                            => $row[8],
             'Matricula'    => session('matricula'),
             'GILIE'    => session('codigoLotacaoAdministrativa')
 
@@ -46,19 +53,25 @@ class UsersImport implements ToModel, WithValidation, WithStartRow
     public function rules(): array
     {
         return [
-            '0' => function($attribute, $value, $onFailure) { 
+            '2' => function($attribute, $value, $onFailure) { 
                 if (!isset($value)) {
                     $onFailure('Coluna Contrato não pode ter célula vazia'); 
                 } 
             },
 
-            '1' =>function($attribute, $value, $onFailure) { 
+            '2' => function($attribute, $value, $onFailure) { 
+                if (strlen($value) != 17) {
+                    $onFailure('Enviar apenas contrato formatado'); 
+                } 
+            },
+
+            '7' =>function($attribute, $value, $onFailure) { 
                 if (!isset($value)) {
                     $onFailure('coluna CAIXA não pode ter célula vazia'); 
                 } 
             },
 
-            '2' => function($attribute, $value, $onFailure) { 
+            '8' => function($attribute, $value, $onFailure) { 
                 if (!isset($value)) {
                     $onFailure('Coluna Silog não pode ter célula vazia'); 
                 } 
