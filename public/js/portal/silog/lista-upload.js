@@ -18,7 +18,6 @@
     )
 })
 
-
 setTimeout(function(){
     _formataDatatable()
     }, 1000);

@@ -86,7 +86,7 @@ $(document).ready(function(){
 
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Selecione o Destinatário</label>
-                      <select class="form-control" id="responsavelAtendimentoEditar" name="responsavelAtendimento">
+                      <select class="form-control" id="responsavelAtendimentoEditar${+ item.id}" name="responsavelAtendimento">
                       '<option value="${item.Responsavel_Atendimento}" selected>Selecione</option>
                       </select>
                    </div>
@@ -110,7 +110,7 @@ $(document).ready(function(){
                 $.each(dadosEmpregado, function(empKey, empItem) {
                     var redirect =
                                 '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
-                $(redirect).appendTo('#responsavelAtendimentoEditar');
+                $(redirect).appendTo('#responsavelAtendimentoEditar'+ item.id);
                 })
             })
         })
@@ -214,7 +214,7 @@ $.getJSON('/gerencial/gerenciar-fale-conosco/lista', function(dados){
       
           <div class="form-group">
             <label for="exampleFormControlSelect1">Selecione o Destinatário</label>
-            <select class="form-control" id="responsavelAtendimentoDirecionar" name="responsavelAtendimento">
+            <select class="form-control" id="responsavelAtendimentoDirecionar${+ item.id}" name="responsavelAtendimento">
             '<option value="${item.Responsavel_Atendimento}" selected>Selecione</option>
             </select>
          </div>
@@ -267,7 +267,7 @@ $.getJSON('/gerencial/gerenciar-fale-conosco/lista', function(dados){
             $.each(dadosEmpregado, function(empKey, empItem) {
                 var redirect =
                             '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
-            $(redirect).appendTo('#responsavelAtendimentoDirecionar');
+            $(redirect).appendTo('#responsavelAtendimentoDirecionar'+ item.id);
             })
         })
 

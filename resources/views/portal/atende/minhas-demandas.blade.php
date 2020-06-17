@@ -77,7 +77,7 @@
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                     <li class="nav-item" id="custon-tabs-li-minhasDemandas">
                         <a class="nav-link" id="custom-tabs-one-minhasDemandas-tab" data-toggle="pill" href="#custom-tabs-one-minhasDemandas" role="tab" aria-controls="custom-tabs-one-minhasDemandas" aria-selected="true">
-                            <h5>Minhas Demandas</h5>
+                            <h5>Atende</h5>
                         </a>
                     </li>
 
