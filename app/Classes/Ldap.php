@@ -14,7 +14,8 @@ class Ldap
     // private $simularMatricula = 'c072452'; // Fernanda Pereira Mendonça - GILIE
     // private $simularMatricula = 'c076457'; // FRANCISCO DE ASSIS DE SOUZA AMARAL - GILIE/RE
     // private $simularMatricula = 'c079436'; // Vladimir Pereira de Lemos
-    // private $simularMatricula = 'c142639'; // Rafael
+    // private $simularMatricula = 'c082403'; // Carla - Assistente JR - GILIE/SP
+    // private $simularMatricula = 'c098453'; // Rafael - Desenvolvedor
     private $matricula;
     private $nomeCompleto;
     private $cpf;

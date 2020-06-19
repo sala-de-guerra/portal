@@ -13,18 +13,18 @@ $(document).ready(function(){
     $("#custom-tabs-one-leiloes-tab").click();
     var appendbotao =   '<div class="row">' +
                             '<div class="col-sm-6">'+
-                                '<button id="botaoEditarDadosContrato" class="btn btn-primary" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
-                                '<button id="botaoAlteraStatus" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalAlteraStatus" style="margin: 0 30px 0 10px;"><span style="color: White;">Averbar</span>&nbsp&nbsp<i style="color: white;" class="fas fa-check"></i></button>&nbsp&nbsp' +
-                                '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaokit">' +
+                                '<button id="botaoEditarDadosContrato" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
+                                '<button id="botaoAlteraStatus" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalAlteraStatus" style="margin: 0 30px 0 10px;"><span style="color: White;">Averbar</span>&nbsp&nbsp<i style="color: white;" class="fas fa-check"></i></button>&nbsp&nbsp' +
+                                '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalbotaokit">' +
                                     'Receber Documentos Leiloeiro' +
                                 '</button>' +
-                                '<button type="button" id="botaoEntregarDocumentosDespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalbotaodespachante">' +
+                                '<button type="button" id="botaoEntregarDocumentosDespachante" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalbotaodespachante">' +
                                     'Entregar Documentos ao Despachante' +
                                 '</button>' +
-                                '<button type="button" id="botaoReceberProtocoloCartorio" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberprotocolo">' +
+                                '<button type="button" id="botaoReceberProtocoloCartorio" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalReceberprotocolo">' +
                                     'Receber Protocolo Cartório' +
                                 '</button>' +
-                                '<button type="button" id="botaoReceberDocumentosdespachante" style="display:none;" class="btn btn-primary" data-toggle="modal" data-target="#modalReceberdespachante">' +
+                                '<button type="button" id="botaoReceberDocumentosdespachante" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalReceberdespachante">' +
                                     'Receber Documento Despachante' +
                                 '</button>' + 
                             '<br><br>' +

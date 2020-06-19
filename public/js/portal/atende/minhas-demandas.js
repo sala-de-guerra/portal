@@ -7,6 +7,7 @@ $(document).ready(function(){
 
             var linha =
                 '<tr>' +
+                    '<td>' + item.idAtende + '</td>' +
                     '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
                     '<td>' + item.nomeAtividade + '</td>' +
                     '<td class="formata-data-sem-hora">' + item.prazoAtendimentoAtende + '</td>' +

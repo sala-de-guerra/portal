@@ -130,6 +130,9 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
     <p>
         2.4   Na data da autenticação, enviar comprovante de pagamento digitalizado para o e-mail giliesp01@caixa.gov.br.
     </p>
+    <p>
+        2.5 A guia de pagamento / boleto deve ser apresentada ao <b>GERENTE</b> da unidade para proceder conforme item 3
+    </p>
 
     <b>3    DA CONTRATAÇÃO:</b>
     <br>

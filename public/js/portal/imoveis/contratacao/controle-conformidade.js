@@ -39,17 +39,17 @@ $(document).ready(function(){
                 '<td>' + item.tipoProposta + '</td>' +
                 '<td>' + item.statusContratacao + '</td>' +
                 '<td>' +
-                    '<div class="row">' +
-                    '<div >'+
-                        '<button id="btnLinkServidor" onclick="copyToClipboard(' + elementoLinkServidor + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
-                        '<a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\arquivos.caixa\\sp\\SP7257FS201\\PUBLICO\\PUBLIC\\EstoqueImoveis\\'+ item.contratoFormatado +'</a>&nbsp&nbsp&nbsp&nbsp' +
-                    '</div>' +
+                    '<div class="row ml-2">' +
+                    // '<div >'+
+                    //     '<button id="btnLinkServidor" onclick="copyToClipboard(' + elementoLinkServidor + ')" class="btn btn-outline-primary ml-2 mb-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
+                    //     '<a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\arquivos.caixa\\sp\\SP7257FS201\\PUBLICO\\PUBLIC\\EstoqueImoveis\\'+ item.contratoFormatado +'</a>&nbsp&nbsp&nbsp&nbsp' +
+                    // '</div>' +
                     
                     '<div >'+
-                    '<button id="'+item.numeroContrato+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalOBS'+ item.numeroContrato+'"><i class="fas fa-info-circle"></i>'+'</button>&nbsp&nbsp&nbsp&nbsp'+
+                    '<button id="'+item.numeroContrato+'" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOBS'+ item.numeroContrato+'"><i class="fas fa-info-circle"></i>'+'</button>&nbsp&nbsp&nbsp&nbsp'+
                     '</div>' +
                     '<div class="divBotao'+item.numeroContrato+'" style="display: none;">'+
-                    '<button id="botaoContato'+item.numeroContrato+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalContato'+ item.numeroContrato+'"><i class="far fa-envelope"></i>'+'</button>'+
+                    '<button id="botaoContato'+item.numeroContrato+'" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalContato'+ item.numeroContrato+'"><i class="far fa-envelope"></i>'+'</button>'+
                     '</div>' +
 
                     // Modal de Observação
@@ -341,11 +341,11 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
                 '<td>' + novaData + '</td>' +
                 '<td>' + item.STATUS_IMOVEL + '</td>' +
                 '<td>'+ 
-                    '<div class="row">' +
-                    '<div>'+
-                        '<button id="btnLinkServidorpag" onclick="copyToClipboard(' + elementoServidorpag + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
-                        '<a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/' + item.BEM_FORMATADO + '" id="linkServidorpag' + item.NU_BEM + '" hidden>\\\\arquivos.caixa\\sp\\SP7257FS201\\PUBLICO\\PUBLIC\\EstoqueImoveis\\'+ item.BEM_FORMATADO +'</a>&nbsp&nbsp&nbsp&nbsp' +
-                    '</div>' +
+                    '<div class="row ml-2">' +
+                    // '<div>'+
+                    //     '<button id="btnLinkServidorpag" onclick="copyToClipboard(' + elementoServidorpag + ')" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link"><i class="far fa-copy"></i></button>' +
+                    //     '<a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/' + item.BEM_FORMATADO + '" id="linkServidorpag' + item.NU_BEM + '" hidden>\\\\arquivos.caixa\\sp\\SP7257FS201\\PUBLICO\\PUBLIC\\EstoqueImoveis\\'+ item.BEM_FORMATADO +'</a>&nbsp&nbsp&nbsp&nbsp' +
+                    // '</div>' +
                 '<div>'+
                 '<button id="Pagamento'+item.NU_BEM+'" class="btn btn-primary" data-toggle="modal" data-target="#modalPagamento'+ item.NU_BEM+'"><i class="fas fa-info-circle"></i>'+'</button>&nbsp&nbsp&nbsp&nbsp'+
                 '</div>'+

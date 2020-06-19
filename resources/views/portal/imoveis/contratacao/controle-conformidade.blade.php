@@ -33,7 +33,6 @@
 
 
 @section('content')
-
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">
@@ -73,7 +72,9 @@
                         <div class="col-sm-12">
                             <table id="tblConformidadeFluxoAgencia" class="table table-bordered table-striped dataTable">
                                   <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
-                                    Lista de contratos para envio de documentos de conformidade para CIOPE/RE em &nbsp&nbsp<a href="http://retaguarda.caixa/digitalizar/#/" target="_blank" class="alert-link"> digitalizar.caixa</a>. 
+                                    Lista de contratos para envio de documentos de conformidade para CIOPE/RE em &nbsp&nbsp<a href="http://retaguarda.caixa/digitalizar/#/" target="_blank" class="alert-link"> digitalizar.caixa</a>.<br>
+                                    
+                                    *Antes de efetuar o tratamento, leia a cartilha <b>FILA ÚNICA</b> -> <a href="/download/Cartilha_filaUnica.pdf" class="alert-link"> Clique aqui para baixar</a>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
@@ -107,7 +108,9 @@
                             <table id="tblConformidadeFluxoCca" class="table table-bordered table-striped dataTable">
 
                                   <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
-                                    Lista de contratos para acerto de laudo e isenção de taxa em <a href="http://siopi.caixa" target="_blank" class="alert-link"> siopi.caixa</a>. 
+                                    Lista de contratos para acerto de laudo e isenção de taxa em <a href="http://siopi.caixa" target="_blank" class="alert-link"> siopi.caixa</a>.<br>
+
+                                    *Antes de efetuar o tratamento, leia a cartilha <b>FILA ÚNICA</b> -> <a href="/download/Cartilha_filaUnica.pdf" class="alert-link"> Clique aqui para baixar</a>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
@@ -139,7 +142,9 @@
                         <div class="col-sm-12">
                             <table id="tblCardAgrupamentoAgencia" class="table table-bordered table-striped dataTable">
                                   <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
-                                    Lista de contratos conforme (rotina GILIE) aguardando finalização da agência.  
+                                    Lista de contratos conforme (rotina GILIE) aguardando finalização da agência.  <br>
+
+                                    *Antes de efetuar o tratamento, leia a cartilha <b>FILA ÚNICA</b> -> <a href="/download/Cartilha_filaUnica.pdf" class="alert-link"> Clique aqui para baixar</a>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
@@ -170,7 +175,9 @@
                             <table id="tblContratosSemPagamentoSinal" class="table table-bordered table-striped">
 
                                   <div style="background-color: #c9eff0; border-color: #c9eff0; color: #035f3f;" class="alert alert-info alert-dismissible fade show" role="alert">
-                                    Lista de contratos aguardando pagamento da entrada pelo proponente. 
+                                    Lista de contratos aguardando pagamento da entrada pelo proponente. <br>
+
+                                    *Antes de efetuar o tratamento, leia a cartilha <b>FILA ÚNICA</b> -> <a href="/download/Cartilha_filaUnica.pdf" class="alert-link"> Clique aqui para baixar</a>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
