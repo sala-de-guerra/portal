@@ -122,6 +122,10 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
 	acessível na área restrita do proponente vencedor a partir da divulgação do resultado e sua autenticação dentro do prazo de vencimento;
     </p>
 
+       <p>
+        2.4 A guia de pagamento / boleto deve ser apresentada ao <b>GERENTE</b> da unidade para proceder conforme item 3
+    </p>
+
     <b>3    DA CONTRATAÇÃO:</b>
     <br>
 

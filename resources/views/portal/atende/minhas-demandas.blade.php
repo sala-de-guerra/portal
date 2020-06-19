@@ -77,13 +77,13 @@
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                     <li class="nav-item" id="custon-tabs-li-minhasDemandas">
                         <a class="nav-link" id="custom-tabs-one-minhasDemandas-tab" data-toggle="pill" href="#custom-tabs-one-minhasDemandas" role="tab" aria-controls="custom-tabs-one-minhasDemandas" aria-selected="true">
-                            <h5>Atende</h5>
+                            <h5>Atende com contrato</h5>
                         </a>
                     </li>
 
                     <li class="nav-item" id="custon-tabs-li-faleConosco">
                         <a class="nav-link" id="custom-tabs-one-faleConosco-tab" data-toggle="pill" href="#custom-tabs-one-faleConosco" role="tab" aria-controls="custom-tabs-one-faleConosco" aria-selected="false">
-                            <h5>Fale Conosco</h5>
+                            <h5>Atende sem contrato</h5>
                         </a>
                     </li>
 
@@ -113,6 +113,7 @@
 
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Contrato</th>
                                             <th>Atividade</th>
                                             <th>Limite atendimento</th>

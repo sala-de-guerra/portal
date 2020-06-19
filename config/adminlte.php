@@ -243,33 +243,59 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR'],// 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
             'submenu' => [
                 [
+                    'text' => 'Abrir Demanda',
+                    // 'icon'    => 'far fa-fw fa-circle mr-2',
+                    'url'  => '/fale-conosco/abrir',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                ],
+                [
+                    'text' => 'TESTE',
+                    // 'icon'    => 'far fa-fw fa-circle mr-2',
+                    'url'  => '/sem pagina',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                ],
+                [
                     'text' => 'Minhas Demandas',
                     // 'icon'    => 'far fa-fw fa-circle mr-2',
                     'url'  => '/atende/minhas-demandas',
                     'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
-                ]
+                ],
             ],
         ],
 
         [
-            'text'    => 'Carga em Lote',
-            'icon'    => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'],
+            'text' => 'Carga em Lote',
+            'icon' => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
             'submenu' => [
-                [
-                    'text' => 'Controle Arquivos EMGEA',
-                    // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                 [
+                     'text' => 'Controle Arquivos EMGEA',
+                     // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
                     'url'  => '/controle-arquivos',
-                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
                 ],
-                [
-                    'text' => 'Leilão Negativo',
-                    // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
-                    'url'  => '',
-                    'perfil_acesso' => ['DESENVOLVEDOR'],
-                ]
-            ]
+            ],
         ],
+
+        // [
+        //     'text'    => 'Carga em Lote',
+        //     'icon'    => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
+        //     'perfil_acesso' => ['DESENVOLVEDOR'],
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Controle Arquivos EMGEA',
+        //             // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+        //             'url'  => '/controle-arquivos',
+        //             'perfil_acesso' => ['DESENVOLVEDOR'],
+        //         ],
+        //         [
+        //             'text' => 'Leilão Negativo',
+        //             // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
+        //             'url'  => '',
+        //             'perfil_acesso' => ['DESENVOLVEDOR'],
+        //         ]
+        //     ]
+        // ],
 
         [
             'text'    => 'Contratação',
@@ -309,12 +335,12 @@ return [
                 // ],
             ],
         ],
-        [
-            'text'        => 'Fale Conosco',
-            'url'         => '/fale-conosco/abrir',
-            'icon'        => 'fas fa-lg fa-fw fa-at mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'],
-        ],
+        // [
+        //     'text'        => 'Fale Conosco',
+        //     'url'         => '/fale-conosco/abrir',
+        //     'icon'        => 'fas fa-lg fa-fw fa-at mr-2',
+        //     'perfil_acesso' => ['DESENVOLVEDOR'],
+        // ],
         [
             'text'       => 'Fornecedores',
             'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',

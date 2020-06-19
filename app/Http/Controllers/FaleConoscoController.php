@@ -35,7 +35,7 @@ class FaleConoscoController extends Controller
             $demandaGenerica->Nome_Atividade          = $request->input('nomeAtividade');
             $demandaGenerica->Prazo_Atendimento       = $request->input('prazoAtendimento');
             $demandaGenerica->GILIE                   = session('codigoLotacaoAdministrativa');
-            $demandaGenerica->Status                   = 0;
+            $demandaGenerica->Status                   = "Cadastrar";
             $demandaGenerica->save();
 
             $request->session()->flash('corMensagem', 'success');
@@ -57,7 +57,7 @@ class FaleConoscoController extends Controller
 
     public function listademandasgenericas()
     {
-       $demandaGenerica = FaleConosco::where('Status', 0)->get();
+       $demandaGenerica = FaleConosco::where('Status', "Cadastrar")->get();
        return json_encode($demandaGenerica);
         
     }
@@ -71,7 +71,7 @@ class FaleConoscoController extends Controller
             $novaDemandaAtende->Nome_Atividade          = $request->input('nomeAtividade');
             $novaDemandaAtende->Prazo_Atendimento       = $request->input('prazoAtendimento');
             $novaDemandaAtende->GILIE                   = $request->input('gilie');
-            $novaDemandaAtende->Status                  = 1; 
+            $novaDemandaAtende->Status                  = "Análise"; 
             $novaDemandaAtende->Assunto                 = $request->Assunto;
             $novaDemandaAtende->Descricao               = $request->Descricao;
             $novaDemandaAtende->Data_atendimento         = DiasUteisClass::contadorDiasUteis(date("Y-m-d", time()), $novaDemandaAtende->Prazo_Atendimento);
@@ -117,7 +117,7 @@ class FaleConoscoController extends Controller
 
     public function ListaFaleConoscoGerencial()
     {
-    $demandaGenerica = FaleConosco::where('Status', 1)
+    $demandaGenerica = FaleConosco::where('Status', "Análise")
     ->orderBy('Data_atendimento', 'desc')
     ->get();
     return json_encode($demandaGenerica);
@@ -157,7 +157,7 @@ class FaleConoscoController extends Controller
             // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
             $responderAtende = FaleConosco::find($id);;
             // EDITAR DADOS DEMANDA
-            $responderAtende->Status                  = 3; 
+            $responderAtende->Status                  = "Finalizado"; 
             $responderAtende->Resposta                = $request->respostaFaleConosco;
             $responderAtende->save();
 
@@ -197,7 +197,7 @@ class FaleConoscoController extends Controller
     public function listaFaleConosco()
     {
 
-       $demandaGenerica = FaleConosco::where('Status', 1)
+       $demandaGenerica = FaleConosco::where('Status', "Análise")
        ->where('Responsavel_Atendimento', session('matricula'))
        ->orderBy('Data_atendimento', 'desc')
        ->get();

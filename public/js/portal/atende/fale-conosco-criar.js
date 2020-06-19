@@ -7,7 +7,7 @@ $(document).ready(function(){
             ` <tr>
             <td>${item.Nome_Atividade}</td>
             <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#demandaGenericaModal${+ item.id}">
-            Clique aqui para enviar mensagem
+            Abrir Atende
           </button>
 
           <div class="modal fade" id="demandaGenericaModal${+ item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
