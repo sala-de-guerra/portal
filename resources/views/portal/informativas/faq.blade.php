@@ -4,6 +4,11 @@
 
 @section('content_header')
 
+<style>
+    a:hover {   
+        text-decoration: underline
+        }
+</style>
 
 <div class="row mb-2">
     <div class="col-sm-6">
@@ -31,8 +36,8 @@
             <div class="card-header">
                 <h3 class="card-title">
                     Esclarecemos que os imóveis podem ser retirados da venda a qualquer momento. <br>
-                    Consulte a relação atualizada no site da CAIXA, 
-                    <a href="http://www.caixa.gov.br/voce/habitacao/imoveis-venda">http://www.caixa.gov.br/voce/habitacao/imoveis-venda</a>.
+                    Consulte a relação atualizada no site da CAIXA: 
+                    <a href="http://www.caixa.gov.br/voce/habitacao/imoveis-venda" target="_blank">http://www.caixa.gov.br/voce/habitacao/imoveis-venda</a>.
                 </h3>
             </div> <!-- /.card-header -->
         </div> <!-- /.card -->

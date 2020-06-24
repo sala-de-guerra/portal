@@ -18,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" type="text/css" href="./estilos.css">  não deu --> 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notificação de demanda ATENDE - %NU_ATENDE%</title>
+    <title>Notificação de demanda ATENDE</title>
 
 </head>
 
@@ -27,16 +27,13 @@
 
 
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p><br><br>
-
-<p>À</p>
-
-<p>%NOME%</p>
-
 <br><br>
-    <p>Prezado (a),</p>
+    <p>Prezado (a),<br>
+    Notificamos o direcionamento de ATENDE para as suas demandas</p>
 
-    <p>Notificamos o direcionamento do ATENDE nº: <b>%NU_ATENDE%</b> para as suas demandas em <a href="https://portal.gilie.sp.caixa/atende/minhas-demandas"> https://portal.gilie.sp.caixa/atende/minhas-demandas</a> </p> 
-    <p>a finalização da demanda deverá ser em %quantidade_dias% dias.</p>
+    <b>Assunto: </b> %Assunto% <br><br>
+    esta demanda está disponivel para tratamento em <a href="https://portal.gilie.sp.caixa/atende/minhas-demandas"> https://portal.gilie.sp.caixa/atende/minhas-demandas</a> </p> 
+    <p>a resposta deverá ser efetuada até <b> %quantidade_dias%  </b>.</p><br><br>
 
 <footer class="fixarRodape">    
 <p class="destaque">

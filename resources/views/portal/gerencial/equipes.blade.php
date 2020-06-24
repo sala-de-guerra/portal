@@ -64,53 +64,53 @@
                                     Escolha um ícone para a equipe:
                                     <div class="row">
                                         <div class="col-sm -2">
-                                            <button type="button" class="btn btn-link"><i class="fas fa-address-card fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-address-card fa-2x" checked></button>
-                                            <button type="button" class="btn btn-link"><i class="fab fa-adn fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-adn fa-2x"></button>
+                                            <button type="button" class="btn btn-link"><i class="fas fa-address-card fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-address-card fa-2x" checked>
+                                            <button type="button" class="btn btn-link"><i class="fab fa-adn fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fab fa-adn fa-2x">
                                         </div>
                                         <div class="col-sm -2">    
-                                            <button type="button" class="btn btn-link"><i class="fas fa-at fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-at fa-2x"></button>
-                                            <button type="button" class="btn btn-link"><i class="fas fa-book fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-book fa-2x"></button>
+                                            <button type="button" class="btn btn-link"><i class="fas fa-at fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-at fa-2x">
+                                            <button type="button" class="btn btn-link"><i class="fas fa-book fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-book fa-2x">
                                         </div>
                                         <div class="col-sm -2">
-                                            <button type="button" class="btn btn-link"><i class="fab fa-bootstrap fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-bootstrap fa-2x"></button>
-                                            <button type="button" class="btn btn-link"><i class="far fa-building fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-building fa-2x"></button>
+                                            <button type="button" class="btn btn-link"><i class="fab fa-bootstrap fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fab fa-bootstrap fa-2x">
+                                            <button type="button" class="btn btn-link"><i class="far fa-building fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="far fa-building fa-2x">
                                         </div>
                                         <div class="col-sm -2">
-                                            <button type="button" class="btn btn-link"><i class="far fa-calendar-check fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-calendar-check fa-2x"></button>
-                                            <button type="button" class="btn btn-link"><i class="fas fa-cogs fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-cogs fa-2x"></button>
+                                            <button type="button" class="btn btn-link"><i class="far fa-calendar-check fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="far fa-calendar-check fa-2x">
+                                            <button type="button" class="btn btn-link"><i class="fas fa-cogs fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-cogs fa-2x">
                                         </div>
                                         <div class="col-sm -2">
-                                            <button type="button" class="btn btn-link"><i class="fas fa-dollar-sign fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-dollar-sign fa-2x"></button>
-                                            <button type="button" class="btn btn-link"><i class="far fa-edit fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-edit fa-2x"></button>
+                                            <button type="button" class="btn btn-link"><i class="fas fa-dollar-sign fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-dollar-sign fa-2x">
+                                            <button type="button" class="btn btn-link"><i class="far fa-edit fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="far fa-edit fa-2x">
                                         </div>
                                         <div class="col-sm -2">
-                                            <button type="button" class="btn btn-link"><i class="fas fa-exchange-alt fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-exchange-alt fa-2x"></button>
-                                            <button type="button" class="btn btn-link"><i class="fab fa-expeditedssl fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-expeditedssl fa-2x"></button>
+                                            <button type="button" class="btn btn-link"><i class="fas fa-exchange-alt fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-exchange-alt fa-2x">
+                                            <button type="button" class="btn btn-link"><i class="fab fa-expeditedssl fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fab fa-expeditedssl fa-2x">
                                         </div>
                                         <div class="row">
                                             <div class="col-sm -2">    
-                                                <button type="button" class="btn btn-link"><i class="fas fa-gavel fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-gavel fa-2x"></button>
-                                                <button type="button" class="btn btn-link"><i class="fas fa-headset fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-headset fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-gavel fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="fas fa-gavel fa-2x">
+                                                <button type="button" class="btn btn-link"><i class="fas fa-headset fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="fas fa-headset fa-2x">
                                             </div>
                                             <div class="col-sm -2">
-                                                <button type="button" class="btn btn-link"><i class="fas fa-home fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-home fa-2x"></button>
-                                                <button type="button" class="btn btn-link"><i class="fas fa-hotel fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-hotel fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-home fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-home fa-2x">
+                                                <button type="button" class="btn btn-link"><i class="fas fa-hotel fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-hotel fa-2x">
                                             </div>
                                             <div class="col-sm -2">
-                                                <button type="button" class="btn btn-link"><i class="fas fa-house-damage fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-house-damage fa-2x"></button>
-                                                <button type="button" class="btn btn-link"><i class="fab fa-houzz fa-2x"></i> <input type="radio" name="iconeEquipe" value="fab fa-houzz fa-2x"></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-house-damage fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fas fa-house-damage fa-2x">
+                                                <button type="button" class="btn btn-link"><i class="fab fa-houzz fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="fab fa-houzz fa-2x">
                                             </div>
                                             <div class="col-sm -2">
-                                                <button type="button" class="btn btn-link"><i class="fas fa-map-marked-alt fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-map-marked-alt fa-2x"></i></button>
-                                                <button type="button" class="btn btn-link"><i class="far fa-question-circle fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-question-circle fa-2x"></i></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-map-marked-alt fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="fas fa-map-marked-alt fa-2x"></i>
+                                                <button type="button" class="btn btn-link"><i class="far fa-question-circle fa-2x"></i></button> <input type="radio" name="iconeEquipe" value="far fa-question-circle fa-2x"></i>
                                             </div>
                                             <div class="col-sm -2">
-                                                <button type="button" class="btn btn-link"><i class="fas fa-star fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-star fa-2x"></i></button>
-                                                <button type="button" class="btn btn-link"><i class="far fa-times-circle fa-2x"></i> <input type="radio" name="iconeEquipe" value="far fa-times-circle fa-2x"></i></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-star fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="fas fa-star fa-2x"></i>
+                                                <button type="button" class="btn btn-link"><i class="far fa-times-circle fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="far fa-times-circle fa-2x"></i>
                                             </div>
                                             <div class="col-sm -2">
-                                                <button type="button" class="btn btn-link"><i class="fas fa-users fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-users fa-2x"></i></button>
-                                                <button type="button" class="btn btn-link"><i class="fas fa-tools fa-2x"></i> <input type="radio" name="iconeEquipe" value="fas fa-tools fa-2x"></i></button>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-users fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="fas fa-users fa-2x"></i>
+                                                <button type="button" class="btn btn-link"><i class="fas fa-tools fa-2x"></i> </button><input type="radio" name="iconeEquipe" value="fas fa-tools fa-2x"></i>
                                             </div>
                                         </div>
                                     </div>
