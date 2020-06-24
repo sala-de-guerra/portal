@@ -9,12 +9,13 @@ use App\Models\FaleConosco;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Models\HistoricoPortalGilie;
 use PHPMailer\PHPMailer\PHPMailer;
+use App\Classes\Ldap;
 
 class FaleConoscoController extends Controller
 {
     public function AtendeGenericoIndex()
     {
-        return view ('portal.gerencial.fale-conosco');
+        return view ('portal.gerencial.atende-generico');
         
     }
 
@@ -40,8 +41,8 @@ class FaleConoscoController extends Controller
 
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Cadastro realizado!");
-            $request->session()->flash('corpoMensagem', "Fale Conosco cadastrado com sucesso.");
-            return redirect("/gerencial/gerenciar-fale-conosco");
+            $request->session()->flash('corpoMensagem', "Atende cadastrado com sucesso.");
+            return redirect("/gerencial/gerenciar-atende-generico");
 
        
         } catch (\Throwable $th) {
@@ -49,7 +50,7 @@ class FaleConoscoController extends Controller
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Cadastro não efetuado!");
             $request->session()->flash('corpoMensagem', "Tente novamente");
-            return redirect("/gerencial/gerenciar-fale-conosco");
+            return redirect("/gerencial/gerenciar-atende-generico");
 
         } 
 
@@ -57,17 +58,32 @@ class FaleConoscoController extends Controller
 
     public function listademandasgenericas()
     {
-       $demandaGenerica = FaleConosco::where('Status', "Cadastrar")->get();
+       $demandaGenerica = FaleConosco::where('Status', "Cadastrar")
+       ->where('GILIE', session('codigoLotacaoAdministrativa'))->get();
        return json_encode($demandaGenerica);
         
     }
+
+    public function abrirdemandaporgilie($gilie)
+    {
+        return view ('portal.atende.fale-conosco-porGilie')->with('numeroGilie', $gilie);
+    }
+
+    public function listademandaporgilie($gilie)
+    {
+        $demandaGenerica = FaleConosco::where('Status', "Cadastrar")
+        ->where('GILIE', $gilie)->get();
+        return json_encode($demandaGenerica);
+    }
+
+
 
     public function cadastrarNovaDemandaAtendeGenerica(Request $request)
     {
         try {
             $novaDemandaAtende = new FaleConosco;
             $novaDemandaAtende->Responsavel_Atendimento = $request->input('responsavelAtendimento');
-            $novaDemandaAtende->Responsavel_Designacao  = $request->input('responsavelDesignacao');
+            $novaDemandaAtende->Responsavel_Designacao  = session('matricula');
             $novaDemandaAtende->Nome_Atividade          = $request->input('nomeAtividade');
             $novaDemandaAtende->Prazo_Atendimento       = $request->input('prazoAtendimento');
             $novaDemandaAtende->GILIE                   = $request->input('gilie');
@@ -81,17 +97,17 @@ class FaleConoscoController extends Controller
             $novaDemandaAtende->save();
 
             $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Fale Conosco Registrado!");
+            $request->session()->flash('tituloMensagem', "Atende Registrado!");
             $request->session()->flash('corpoMensagem', "Em breve responderemos.");
 
-            return redirect("/fale-conosco/abrir");
+            return redirect("/atende/abrir");
          } catch (\Throwable $th) {
 
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "Algo deu errado!");
             $request->session()->flash('corpoMensagem', "Tente novamente");
 
-            return redirect("/fale-conosco/abrir");
+            return redirect("/atende/abrir");
         }
     }
     public function apagarAtividadeGenerica($id)
@@ -100,7 +116,7 @@ class FaleConoscoController extends Controller
         if (isset($novaDemandaAtende)){
             $novaDemandaAtende->delete();
         }    
-    return redirect("/gerencial/gerenciar-fale-conosco");  
+    return redirect("/gerencial/gerenciar-atende-generico");  
     }
 
     public function editarAtividadeGenerica(Request $request, $id)
@@ -112,7 +128,7 @@ class FaleConoscoController extends Controller
             $alteraDemandaAtende->Prazo_Atendimento       = $request->input('prazoAtendimento');
             $alteraDemandaAtende->save();
            
-    return redirect("/gerencial/gerenciar-fale-conosco");  
+    return redirect("/gerencial/gerenciar-atende-generico");  
     }
 
     public function ListaFaleConoscoGerencial()
@@ -163,8 +179,8 @@ class FaleConoscoController extends Controller
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
-            $request->session()->flash('tituloMensagem', "Fale Conosco respondido!");
-            $request->session()->flash('corpoMensagem', "O Fale Conosco foi respondido com sucesso.");
+            $request->session()->flash('tituloMensagem', "Atende respondido!");
+            $request->session()->flash('corpoMensagem', "O Atende foi respondido com sucesso.");
 
 
         } catch (\Throwable $th) {
@@ -188,8 +204,8 @@ class FaleConoscoController extends Controller
             $alteraDemandaAtende->save();
 
         $request->session()->flash('corMensagem', 'success');
-        $request->session()->flash('tituloMensagem', "Fale Conosco excluido!");
-        $request->session()->flash('corpoMensagem', "O Fale Conosco foi excluido com sucesso.");
+        $request->session()->flash('tituloMensagem', "Atende excluido!");
+        $request->session()->flash('corpoMensagem', "O Atende Conosco foi excluido com sucesso.");
            
     return back();
     }
@@ -203,6 +219,76 @@ class FaleConoscoController extends Controller
        ->get();
        return json_encode($demandaGenerica);
         
+    }
+
+    public function listaFaleConoscoagencia()
+    {
+
+       $demandaGenerica = FaleConosco::where('Status', "Análise")
+       ->where('Responsavel_Designacao', session('matricula'))
+       ->orderBy('Data_atendimento', 'desc')
+       ->get();
+       return json_encode($demandaGenerica);
+        
+    }
+
+    public function listaFaleConoscoagenciaFinalizado()
+    {
+
+       $demandaGenerica = FaleConosco::where('Status', "Finalizado")
+       ->where('Responsavel_Designacao', session('matricula'))
+       ->orderBy('Data_atendimento', 'desc')
+       ->get();
+       return json_encode($demandaGenerica);
+        
+    }
+
+    public function excluirFaleConoscoAgencia(Request $request, $id)
+    {
+
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->CharSet = 'UTF-8'; 
+            $mail->isHTML(true);                                         
+            $mail->Host = 'sistemas.correiolivre.caixa';  
+            $mail->SMTPAuth = false;                                  
+            $mail->Port = 25;
+            // $mail->SMTPDebug = 2;
+            $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+            $mail->addReplyTo('GILIESP01@caixa.gov.br');
+            if ($request->emailContatoResposta == 'null' ){
+            $mail->addAddress(($request->Responsavel). "@mail.caixa");
+            }else {
+            $mail->addAddress($request->emailContatoResposta);
+            }
+
+            $mail->Subject = 'Resposta Fale Conosco';
+            $mail->Body = nl2br($request->respostaFaleConosco);
+            $mail->send();
+
+            // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
+            $responderAtende = FaleConosco::find($id);;
+            // EDITAR DADOS DEMANDA
+            $responderAtende->Status                  = "Excluido"; 
+            $responderAtende->Resposta                = $request->respostaFaleConosco;
+            $responderAtende->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Atende excluido!");
+            $request->session()->flash('corpoMensagem', "O Atende foi excluido com sucesso.");
+
+
+        } catch (\Throwable $th) {
+
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Algo deu errado!");
+            $request->session()->flash('corpoMensagem', "Tente novamente");
+
+            return back();
+        }
+        return back();
     }
 
 }

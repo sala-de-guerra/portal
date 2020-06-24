@@ -13,7 +13,7 @@ class CreateAtendeGenericosTable extends Migration
      */
     public function up()
     {
-        Schema::create('TBL_ATENDE_SEM CONTRATO', function (Blueprint $table) {
+        Schema::create('TBL_ATENDE_SEM_CONTRATO', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Responsavel_Atendimento');
             $table->string('Responsavel_Designacao');
@@ -37,6 +37,6 @@ class CreateAtendeGenericosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('TBL_ATENDE_SEM CONTRATO');
+        Schema::dropIfExists('TBL_ATENDE_SEM_CONTRATO');
     }
 }

@@ -102,29 +102,6 @@
                             </div>
                         </form>
                     </li>
-
-                    {{-- <li class="nav-item d-block d-sm-none">
-                        <form class="form-inline m-0" id="formBarraBuscaSm" onsubmit="validarBuscaSm()" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
-                            {{ csrf_field() }}
-                            <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar w-50 text-white" required>
-                                <option value="" disabled selected>Ref.</option>
-                                <option class="text-dark" value="numeroContrato">Contrato</option>
-                                <option class="text-dark" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
-                                <option class="text-dark" value="nomeProponente">Nome proponente</option>
-                                <option class="text-dark" value="enderecoImovel">Endereço imóvel</option>
-                                <option class="text-dark" value="matriculaImovel">Matrícula do imóvel</option>
-                                <option class="text-dark" value="cpfCnpjExMutuario">CPF/CNPJ ex-mutuário</option>
-                                <option class="text-dark" value="nomeExMutuario">Nome ex-mutuário</option>
-                            </select>
-                            <div class="input-group nav-search-bar w-50">
-                                <input class="form-control form-control-navbar text-white" type="text" id="inputBarraBuscaSm" name="valorVariavel" placeholder="Pesquisar" required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
-                                </div>
-                            </div>
-                        </form>
-                    </li> --}}
-
                 </ul>
 
             @endif
@@ -231,9 +208,7 @@
                     </ul>
                 </nav>
             </div>
-            <!-- <div class="d-flex justify-content-center" style="position:relative; bottom:3rem;">
-                <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 50px;">
-            </div> -->
+
         </aside>
         @endif
 
@@ -339,20 +314,6 @@
     <script src="{{ asset('js/global/formata_datatable.js') }}"></script>
     <script src="{{ asset('js/global/toggle_fullscreen.js') }}"></script>
     <script src="{{ asset('js/global/copy_to_clipboard.js') }}"></script>
-
-    <script>
-
-// $('#tipoVariavel').click(function() {
-//   if ($('#tipoVariavel').val() == "numeroContrato" || 
-//   $('#tipoVariavel').val() == 'matriculaImovel' ) {
-//         $('#inputBarraBusca').prop('type','number');
-//   }else{
-//     $('#inputBarraBusca').prop('type','text');
-//   }
-// });
-
-    </script>
-
     @stack('js')
     @yield('js')
 @stop

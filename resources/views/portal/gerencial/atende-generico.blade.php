@@ -19,14 +19,14 @@
 <div class="row mb-2">
     <div class="col">
         <h1 class="m-0 text-dark">
-            Fale Conosco
+            Atende sem contrato
         </h1>
     </div><br>
 
     <div class="col">
         <ol class="breadcrumb float-right">
             <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i> Gerencial</li>
-            <li class="breadcrumb-item active"><a href="/gerencial/gerenciar-demanda-generica">Fale Conosco</a> </li>    
+            <li class="breadcrumb-item active"><a href="/gerencial/gerenciar-demanda-generica">Atende sem contrato</a> </li>    
         </ol>
     </div>
 </div><br>

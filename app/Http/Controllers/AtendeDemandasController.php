@@ -52,6 +52,11 @@ class AtendeDemandasController extends Controller
         return view ('portal.atende.minhas-demandas');
         
     }
+    public function viewMinhasDemandasAgencia()
+    {
+        return view ('portal.atende.minhas-demandas-visualizacao-agencia');
+        
+    }
     public function viewGerenciarDemandas()
     {
         return view('portal.gerencial.gestao-atende');
@@ -90,6 +95,21 @@ class AtendeDemandasController extends Controller
         }
         return json_encode($arrayDemandasResponsavel);
     }
+    public function listarAtendesAbertoAgencia()
+    {
+        $listaDemandasAtende = Atende::where('matriculaCriadorDemanda', session('matricula'))
+        ->where('statusAtende', '!=','FINALIZADO')->get();
+
+        return json_encode($listaDemandasAtende);
+    }
+
+    public function listarAtendesFinalizadoAgencia()
+    {
+        $listaDemandasAtende = Atende::where('matriculaCriadorDemanda', session('matricula'))
+        ->where('statusAtende', 'FINALIZADO')->get();
+
+        return json_encode($listaDemandasAtende);
+    }
 
     public function listarEquipesComAtividadesAtende()
     {
@@ -100,8 +120,51 @@ class AtendeDemandasController extends Controller
             // $unidadeUsuario = '7257';
 
             // LISTAR EQUIPES
-            $listaEquipes = GestaoEquipesCelulas::where('ativa', true)->where('codigoUnidadeEquipe', $unidadeUsuario)->where('incluirEquipeAtende', true)->get();
+            $listaEquipes = GestaoEquipesCelulas::where('ativa', true)->where('incluirEquipeAtende', true)->get();
             foreach ($listaEquipes as $equipe) {
+                // if ($equipe->codigoUnidadeEquipe == '7257'){
+                //     $equipe->codigoUnidadeEquipe = 'GILIE/SP';
+                // }
+                switch ($equipe->codigoUnidadeEquipe){
+                    case $equipe->codigoUnidadeEquipe = 7109:
+                        $equipe->codigoUnidadeEquipe = "GILIE/BR";
+                        break;
+                    case $equipe->codigoUnidadeEquipe = 7242:
+                        $equipe->codigoUnidadeEquipe = "GILIE/BU";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7243:
+                        $equipe->codigoUnidadeEquipe = "GILIE/BE";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7244:
+                        $equipe->codigoUnidadeEquipe = "GILIE/BH";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7247:
+                        $equipe->codigoUnidadeEquipe = "GILIE/CT";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7248:
+                        $equipe->codigoUnidadeEquipe = "GILIE/FO";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7249:
+                        $equipe->codigoUnidadeEquipe = "GILIE/GO";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7251:
+                        $equipe->codigoUnidadeEquipe = "GILIE/PO";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7253:
+                        $equipe->codigoUnidadeEquipe = "GILIE/RE";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7254:
+                        $equipe->codigoUnidadeEquipe = "GILIE/RJ";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7255:
+                        $equipe->codigoUnidadeEquipe = "GILIE/SA";
+                    break;
+                    case $equipe->codigoUnidadeEquipe = 7257:
+                        $equipe->codigoUnidadeEquipe = "GILIE/SP";
+                    break;
+                    default:
+                    $equipe->codigoUnidadeEquipe = null;                  
+                }
                 $arrayAtividadesEquipe = [];
                 // LISTAR MACROATIVIDADES
                 $listaMacroAtividadesEquipe = GestaoEquipesAtividades::where('idEquipe', $equipe->idEquipe)->where('atividadeAtiva', true)->where('incluirAtividadeAtende', true)->get();
@@ -129,10 +192,12 @@ class AtendeDemandasController extends Controller
                     }
                 }
                 $arrayDadosEquipe = [
+                    'Unidade'       => $equipe->codigoUnidadeEquipe,
                     'idEquipe'      => $equipe->idEquipe,
                     'nomeEquipe'    => $equipe->nomeEquipe,
                     'iconeEquipe'   => $equipe->iconeEquipe,
                     'atividades'    => $arrayAtividadesEquipe
+                  
                 ];
                 array_push($arrayEquipesComAtividadesAtende, $arrayDadosEquipe);
             }

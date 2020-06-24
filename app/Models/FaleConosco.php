@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FaleConosco extends Model
 {
-    protected $table = 'TBL_ATENDE_SEM CONTRATO';
+    protected $table = 'TBL_ATENDE_SEM_CONTRATO';
     protected $appends = [
         'Data_atendimento'
     ];

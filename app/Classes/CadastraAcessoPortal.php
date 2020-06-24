@@ -83,6 +83,11 @@ class CadastraAcessoPortal
         'c079436'   // Vladimir 
     ];
 
+    public $arrayConvidados = [
+        /* PRESTADORES */
+        'P952892'  // Cristiane
+    ];
+
     /**
      * Get the value of matricula
      */ 
@@ -140,26 +145,30 @@ class CadastraAcessoPortal
      *
      * @return  self
      */ 
-    public function setNivelAcesso()
+    public function setNivelAcesso($objEmpregado)
     {
-        if(in_array($this->getUnidade(), $this->arraySr)) {
-            $this->nivelAcesso = 'SR';
-        } elseif (in_array($this->getUnidade(), $this->arrayAudir)) {
-            $this->nivelAcesso = 'AUDITOR';
-        } elseif (in_array($this->getUnidade(), $this->arrayMatriz)) {
-            $this->nivelAcesso = 'MATRIZ';
-        } elseif (in_array($this->getUnidade(), $this->arrayCodigoUnidadesGilie)) {
-            if(in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
-                $this->nivelAcesso = 'DESENVOLVEDOR';
-            } elseif (in_array(session('codigoFuncao'), $this->arrayCodigoFuncaoGestao)) {
-                $this->nivelAcesso = 'GESTOR';
-            } elseif($this->getEventual()) {
-                $this->nivelAcesso = 'EVENTUAL';
-            } else {
-                $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
-            }
+        if (in_array($this->getMatricula(), $this->arrayConvidados)) {
+            $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
         } else {
-            $this->nivelAcesso = 'AGENCIA';
+            if(in_array($this->getUnidade(), $this->arraySr)) {
+                $this->nivelAcesso = 'SR';
+            } elseif (in_array($this->getUnidade(), $this->arrayAudir)) {
+                $this->nivelAcesso = 'AUDITOR';
+            } elseif (in_array($this->getUnidade(), $this->arrayMatriz)) {
+                $this->nivelAcesso = 'MATRIZ';
+            } elseif (in_array($this->getUnidade(), $this->arrayCodigoUnidadesGilie)) {
+                if(in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
+                    $this->nivelAcesso = 'DESENVOLVEDOR';
+                } elseif (in_array($objEmpregado->codigoFuncao, $this->arrayCodigoFuncaoGestao)) {
+                    $this->nivelAcesso = 'GESTOR';
+                } elseif($this->getEventual()) {
+                    $this->nivelAcesso = 'EVENTUAL';
+                } else {
+                    $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
+                }
+            } else {
+                $this->nivelAcesso = 'AGENCIA';
+            }
         }
         return $this;
     }
@@ -192,7 +201,7 @@ class CadastraAcessoPortal
         $this->setMatricula($objEmpregado->matricula);
         $this->setEventual($objEmpregado->matricula);
         $this->setUnidade($objEmpregado);
-        $this->setNivelAcesso();
+        $this->setNivelAcesso($objEmpregado);
         $this->atualizaPerfilAcessoEsteira();
     }
 

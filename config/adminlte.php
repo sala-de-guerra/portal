@@ -240,25 +240,25 @@ return [
         [
             'text' => 'Atende',
             'icon' => 'fas fa-lg fa-fw fa-headset mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'],// 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
             'submenu' => [
                 [
                     'text' => 'Abrir Demanda',
                     // 'icon'    => 'far fa-fw fa-circle mr-2',
-                    'url'  => '/fale-conosco/abrir',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                    'url'  => '/atende/abrir',
+                    'perfil_acesso' => ['DESENVOLVEDOR','AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
                 ],
                 [
-                    'text' => 'TESTE',
+                    'text' => 'Minhas Demandas',
                     // 'icon'    => 'far fa-fw fa-circle mr-2',
-                    'url'  => '/sem pagina',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                    'url'  => '/atende/minhas-demandas-agencia',
+                    'perfil_acesso' => ['AGENCIA', 'SR', 'MATRIZ'],
                 ],
                 [
                     'text' => 'Minhas Demandas',
                     // 'icon'    => 'far fa-fw fa-circle mr-2',
                     'url'  => '/atende/minhas-demandas',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], //'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
                 ],
             ],
         ],
@@ -505,33 +505,33 @@ return [
         [
             'text'       => 'Gerencial',
             'icon'       => 'fas fa-lg fa-fw fa-users mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
             'submenu' => [
                 [
-                    'text' => 'Fale Conosco',
+                    'text' => 'Atende sem contrato',
                     // 'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
-                    'url'  => '/gerencial/gerenciar-fale-conosco',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                    'url'  => '/gerencial/gerenciar-atende-generico',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
                 ],
                 
                 [
                     'text' => 'Gestão Atende',
                     // 'icon'       => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => 'gerencial/gestao-atende',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
                 ],
                 [
                     'text' => 'Gestão de Atividades',
                     // 'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
                     'url'  => '/gerencial/gestao-atividades',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
                 ],
 
                 [
                     'text' => 'Gestão de Equipes',
                     // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
                     'url'  => '/gerencial/gestao-equipes/',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
                 ]
     
             ],

@@ -6,7 +6,6 @@ function Atende ()
         $.getJSON('/atende/listar-equipes-atividades-atende', function(dados){
             let resultadoFuncaoModal = desenharModal(dados)
             document.getElementById('modalAtendeHtml').innerHTML = resultadoFuncaoModal
-
         })
     })
 
@@ -27,14 +26,25 @@ function Atende ()
         if(dados.length>0){
             dados.forEach(equipe => {
                 html+=`
-                                    <div class="col-sm">
+                                    <div class="col-sm" id="btnMacro${equipe.idEquipe}" >
                                         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalMacroAtividades_${equipe.idEquipe}">
                                             <i class="${equipe.iconeEquipe}"></i><p>${equipe.nomeEquipe}</p>
-                                        </button>        
+                                        </button>     
                                     </div>`
                     if (equipe.atividades.length > 0) {
                         modalMacroAtividades += criaModalMacroAtividades(equipe.atividades)
                     }
+                    
+                    // setTimeout(function(){ 
+                    //     var retiraAtende = $('#GILIE').text()
+                    //     console.log(retiraAtende); 
+                    // }, 1000);
+                     setTimeout(function(){
+                        var retiraAtende = $('#GILIE').text()
+                         if  (retiraAtende != equipe.Unidade){
+                        $('#btnMacro' + equipe.idEquipe).remove()
+                         }
+                     }, 1000);
             });            
         }
         html += `   
@@ -228,4 +238,3 @@ function addCopia(){
 
 
 
-                        
