@@ -24,7 +24,6 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
             case 'Excluído':
             case 'Indício de Fraude':
             case 'Laudo Vencido':
-            case 'Licitação':
             case 'Montagem de Licitação':
                 statusAtual = 'Preparaçâo';
                 break;
@@ -48,6 +47,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
             case 'Venda por credenciado':
                 statusAtual = 'Vendido';
                 break;
+            case 'Licitação':
             case 'Venda Direta Online':
             case 'Venda Direta':
                 statusAtual = 'Venda Online';

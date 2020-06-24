@@ -8,7 +8,7 @@ $(document).ready(function(){
         $.each(dados, function(key, item) {
             var linha =
             ` <tr>
-            <td>${item.Responsavel_Atendimento}</td>
+            <td>${item.id}</td>
             <td>${item.Nome_Atividade}</td>
             <td>${item.Data_atendimento}</td>
             <td>${item.Assunto}</td>

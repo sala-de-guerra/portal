@@ -90,7 +90,7 @@ class GestaoAtendeController extends Controller
     }
     public function listarEmpregados()
     {
-        $listarEmpregados = Empregado::where('codigoLotacaoAdministrativa', '7257')
+        $listarEmpregados = Empregado::where('codigoLotacaoAdministrativa', session('codigoLotacaoAdministrativa'))
         ->orderBy('nomeCompleto', 'asc')
         ->get();
 
@@ -235,7 +235,7 @@ class GestaoAtendeController extends Controller
             $request->session()->flash('tituloMensagem', "Erro!");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a exclusão do Atende. Tente novamente");
         }
-        return redirect("/atende/gestao-atende");
+        return back();
     }
     public function GerenciarDemandaGenerica()
     {

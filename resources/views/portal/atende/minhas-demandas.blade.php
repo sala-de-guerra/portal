@@ -113,7 +113,7 @@
 
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Nº Atende</th>
                                             <th>Contrato</th>
                                             <th>Atividade</th>
                                             <th>Limite atendimento</th>
@@ -144,7 +144,7 @@
 
                                         <thead>
                                             <tr>
-                                                <th>Responsável</th>
+                                                <th>Nº Atende</th>
                                                 <th>Atividade</th>
                                                 <th>Limite atendimento</th>
                                                 <th>Assunto</th>

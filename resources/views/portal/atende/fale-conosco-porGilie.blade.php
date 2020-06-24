@@ -54,7 +54,7 @@
                     <li class="d-sm-block">
                         <form class="form-inline m-0"  action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
-                            <select name="tipoVariavel" id="tipoVariavel" class="form-control mr-3" required>
+                            <select class="form-control mr-3" required>
                                 <option value="" disabled selected>Selecione o tipo</option>
                                 <option class="text-dark" value="numeroContrato">Contrato</option>
                                 <option class="text-dark" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
@@ -72,16 +72,16 @@
                             </div>
                         </form>
                     </li>
-
+                    <input type="hidden" id="numeroGilie" value="{{$numeroGilie}}">
     
             </div> <!-- /.card-body -->
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
                  <small style="margin-left: -10%">Minha demanda não esta vinculada a um contrato</small>
                 </button><br><br>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse show" id="collapseExample">
                     <div class="col-sm-12 p-0">
                         <div class="options">
-                            <select class="custom-select" id="selecao" onChange="AbrirSecao(this.value)">
+                            <select class="custom-select" id="selecao">
                                 <option selected>Selecione a GILIE</option>
                                 <option value="7109">GILIE/BR</option>
                                 <option value="7242">GILIE/BU</option>
@@ -98,29 +98,31 @@
                             </select>
                         </div>
 
+                        <div class="col-sm-12 table-responsive p-0">
+                            <table id="tblAtendeGenericoporgilie" class="table hover">
+                                <thead>
+                                    <tr>
+                                        <th>Assunto</th>
+                                        <th></th>
+                                        <!-- <th>Botão provisório</th> -->
+            
+            
+                                        <!-- <th>Vencimento</th> -->
+                                    </tr>
+                                </thead>
+            
+                                <tbody>
+            
+                                </tbody>
+                                
+                            </table>
+                        </div> <!-- /.col-sm-12 -->
+
                     </div> <!-- /.col-sm-12 -->
                 </div>
               </div>
 
-              {{-- <div class="col-sm-12 table-responsive p-0">
-                <table id="tblAtendeGenerico" class="table hover">
-                    <thead>
-                        <tr>
-                            <th>Assunto</th>
-                            <th></th>
-                            <!-- <th>Botão provisório</th> -->
 
-
-                            <!-- <th>Vencimento</th> -->
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                    </tbody>
-                    
-                </table>
-            </div> <!-- /.col-sm-12 --> --}}
   
 
 
@@ -156,7 +158,6 @@
 <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/atende/fale-conosco-criar.js') }}"></script>
-<script src="{{ asset('js/portal/atende/atende_old.js') }}"></script>
  <script>
     $('#selecao').change(function() {
         window.location = $(this).val();

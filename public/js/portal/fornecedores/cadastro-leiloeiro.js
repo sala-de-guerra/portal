@@ -142,7 +142,7 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
                                             '<div class="form-group">'+
                                             '<label style="float: left;">E-mail</label>'+
                                             '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                                            '<input style="width: 100%;" type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control telefoneComum" autocomplete="off" placeholder="'+item.emailEmpresaAssessoraLeiloeiro+'">'+'</span>'+
+                                            '<input style="width: 100%;" type="email" name="emailEmpresaAssessoraLeiloeiro" class="form-control" autocomplete="off" placeholder="'+item.emailEmpresaAssessoraLeiloeiro+'">'+'</span>'+
                                             '</div>'+
 
                                             '<div class="form-group">'+
@@ -160,7 +160,7 @@ $.getJSON('/fornecedores/controle-leiloeiros/listar-leiloeiros/' + unidade, func
                                             '<div class="form-group">'+
                                             '<label style="float: left;">E-mail do leiloeiro</label>'+
                                             '<span style="display: block; overflow: hidden; padding: 0 4px 0 6px;">'+
-                                            '<input style="width: 100%;" type="text" name="emailLeiloeiro" class="form-control telefoneCelular" autocomplete="off" placeholder="'+item.emailLeiloeiro+'">'+'</span>'+
+                                            '<input style="width: 100%;" type="text" name="emailLeiloeiro" class="form-control" autocomplete="off" placeholder="'+item.emailLeiloeiro+'">'+'</span>'+
                                             '</div>'+
                                             
                                             '<div class="form-group">'+

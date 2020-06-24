@@ -43,7 +43,7 @@
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <!-- <li data-target="#carouselExampleCaptions" data-slide-to="2"></li> -->
+ 
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -70,19 +70,7 @@
                             </a>
                         </div>
                     </div>
-                    <!-- <div class="carousel-item">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-lg fa-users "></i>
-                                Sobre a GILIE
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <a href="/sobre">
-                                <img src="{{ asset('/img/equipe.png') }}" class="d-block img-fluid" width="600px" height="300px" alt="...">
-                            </a>
-                        </div>
-                    </div> -->
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -138,39 +126,6 @@
 
 </div>
 
-<!-- <div class="row">
-
-    <div class="col-md-12">
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">
-                    Vitrine
-                </h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-
-                    <div class="col-md-8">
-                        <p class="text-justify">
-                            Fundada em 01 de outubro de 1998, a Gerência de Alienar Bens Móveis e Imóveis de São Paulo é responsável pela guarda 
-                            e desfazimento de bens retomados, oriundos principalmente de contratos descumpridos, como imóveis e jóias.
-                        </p>
-                        <p class="text-justify">
-                            Sob a gestão do gerente de filial Marcelo Barboza Fernandes e dos coordenadores Fernanda Pereira Mendonça, 
-                            João Marcel Quintiliano e Vladimir Pereira de Lemos, a filial conta com um quadro atual de aproximadamente 60 
-                            funcionários, divididos entre suas áreas de atuação.
-                        </p>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <img src="{{ asset('/img/edificio_eluma.jpg') }}" class="d-block img-fluid" alt="Foto do Edifício Eluma, na Av. Paulista.">
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 @stop
 
 @section('footer')

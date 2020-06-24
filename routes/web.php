@@ -185,7 +185,11 @@ Route::prefix('atende')->group(function () {
     // LISTAR DADOS DEMANDA ATENDE
     Route::get('dados-demanda/{idAtende}', 'AtendeDemandasController@listarDadosDemandaAtende'); 
     // LISTAR ATENDES DISPONÍVEIS RESPONSÁVEL
-    Route::get('listar-demandas-disponiveis', 'AtendeDemandasController@listarAtendesDisponiveisResponsavel'); 
+    Route::get('listar-demandas-disponiveis', 'AtendeDemandasController@listarAtendesDisponiveisResponsavel');
+    // LISTAR ATENDES DISPONÍVEIS RESPONSÁVEL ABERTURA
+    Route::get('listar-demandas-agencia', 'AtendeDemandasController@listarAtendesAbertoAgencia'); 
+    // LISTAR ATENDES FINALIZADOS RESPONSÁVEL ABERTURA
+    Route::get('listar-demandas-finalizadas', 'AtendeDemandasController@listarAtendesFinalizadoAgencia');
     // CONTAGEM DEMANDAS DISPONÍVEIS RESPONSÁVEL (SINO)
     Route::get('contagem-demandas-disponiveis', 'AtendeDemandasController@contagemAtendesDisponiveisResponsavel'); 
     // LISTAR EQUIPES COM ATIVIDADES (MACRO E MICRO) ATENDE
@@ -196,6 +200,7 @@ Route::prefix('atende')->group(function () {
     Route::get('listar-demandas-prazo/{prazoDemanda}', 'AtendeDemandasController@listarDemandasUnidadePorPrazo');
     // MINHAS DEMANDAS
     Route::get('minhas-demandas','AtendeDemandasController@viewMinhasDemandas');
+    Route::get('minhas-demandas-agencia','AtendeDemandasController@viewMinhasDemandasAgencia');
     Route::get('gestao-atende','AtendeDemandasController@viewGerenciarDemandas');
     Route::get('listar-universo','AtendeDemandasController@listarUniverso');
 });
@@ -283,15 +288,20 @@ Route::post('/controle-arquivos/envia', 'PlaniladeControle\UploadexcelController
 Route::get('/controle-arquivos/lista', 'PlaniladeControle\UploadexcelController@listaUpload');
 Route::get('/controle-arquivos/baixar', 'PlaniladeControle\DownloadexcelController@criaPlanilhaControleExcel');
 
-//ROTA DO FALECONOSCO
-Route::get('gerencial/gerenciar-fale-conosco', 'FaleConoscoController@AtendeGenericoIndex');
-Route::get('fale-conosco/abrir', 'FaleConoscoController@cadastrarAtendeGenericoIndex');
+//ROTA DO ATENDE GENERICO
+Route::get('gerencial/gerenciar-atende-generico', 'FaleConoscoController@AtendeGenericoIndex');
+Route::get('atende/abrir', 'FaleConoscoController@cadastrarAtendeGenericoIndex');
 Route::post('gerencial/cadastra-atividade-generica', 'FaleConoscoController@cadastrarAtividadeGenerica');
 Route::put('gerencial/editar-atividade-generica/{id}', 'FaleConoscoController@editarAtividadeGenerica');
 Route::put('gerencial/excluir-atividade-generica/{id}', 'FaleConoscoController@apagarFaleConosco');
 Route::put('fale-conosco/responder/{id}', 'FaleConoscoController@responderFaleConosco');
+Route::put('fale-conosco/excluir/{id}', 'FaleConoscoController@excluirFaleConoscoAgencia');
 Route::get('atende/lista-atende-generico', 'FaleConoscoController@listademandasgenericas');
+Route::get('atende/lista-atende-generico/{gilie}', 'FaleConoscoController@listademandaporgilie');
 Route::get('atende/lista-atende-faleConosco', 'FaleConoscoController@listaFaleConosco');
 Route::post('fale-conosco/abrir', 'FaleConoscoController@cadastrarNovaDemandaAtendeGenerica');
+Route::get('atende/{gilie}', 'FaleConoscoController@abrirdemandaporgilie');
 Route::delete('gerencial/apagar-demanda-generica/{id}', 'FaleConoscoController@apagarAtividadeGenerica');
 Route::get('gerencial/gerenciar-fale-conosco/lista', 'FaleConoscoController@ListaFaleConoscoGerencial');
+Route::get('listar/atende-sem-contrato-agencia', 'FaleConoscoController@listaFaleConoscoagencia');
+Route::get('listar/atende-sem-contrato-finalizado', 'FaleConoscoController@listaFaleConoscoagenciaFinalizado');
