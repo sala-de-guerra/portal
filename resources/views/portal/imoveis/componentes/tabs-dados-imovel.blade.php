@@ -90,15 +90,25 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Nome Ex-Mutuário:</label>
-                                    <p id="nomeExMutuario"></p>
+                                    <label>Status SIMOV:</label>
+                                    <p id="statusImovel"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>CPF Ex-Mutuário:</label>
-                                    <p id="cpfCnpjExMutuario"></p>
+                                    <label>Classificação:</label>
+                                    <p id="classificacao"></p>
                                 </div>
+                                {{-- <div class="form-group">
+                                    <label>Vinculação:</label>
+                                    <p id="GILIE"></p>
+                                </div> --}}
+                            </div>
+                            <div class="col-sm-3">
+                                {{-- <div class="form-group">
+                                    <label>CPF Ex-Mutuário:</label>
+                                    <p id=""></p>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -159,6 +169,10 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
+                                    <label>IPTU:</label>
+                                    <p id="IPTU"></p>
+                                </div>
+                                {{-- <div class="form-group">
                                     <label>Status SIMOV:</label>
                                     <p id="statusImovel"></p>
                                 </div>
@@ -167,7 +181,7 @@
                                 <div class="form-group">
                                     <label>Classificação:</label>
                                     <p id="classificacao"></p>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
@@ -206,6 +220,44 @@
                                 <div class="form-group">
                                     <label>Vinculação:</label>
                                     <p id="GILIE"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="pontilhado">
+
+                        <h2 class="card-title"><b>Dados do Ex-Mutuário</b></h2>
+
+                        <br><br>
+                        {{-- <div class="form-group">
+                            <label>Nome Ex-Mutuário:</label>
+                            <p id="nomeExMutuario"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>CPF Ex-Mutuário:</label>
+                            <p id="cpfCnpjExMutuario"></p>
+                        </div>
+                    </div> --}}
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Nome:</label>
+                                    <p id="nomeExMutuario"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>CPF/CNPJ:</label>
+                                    <p id="cpfCnpjExMutuario"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>E-mail:</label>
+                                    <p id="emailExMutuario"></p>
                                 </div>
                             </div>
                         </div>

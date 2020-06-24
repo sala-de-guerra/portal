@@ -293,6 +293,28 @@ class AtendeDemandasController extends Controller
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
 
+            $formataData =  Carbon::parse($novaDemandaAtende->prazoAtendimentoAtende)->format('d/m/Y');
+            $mensagem = file_get_contents(("NotificacaoDemandaAtende.php"), dirname(__FILE__));
+            $mensagem = str_replace("%Assunto%", $novaDemandaAtende->assuntoAtende, $mensagem);
+            $mensagem = str_replace("%quantidade_dias%", $formataData, $mensagem);
+
+
+            $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->CharSet = 'UTF-8'; 
+                $mail->isHTML(true);                                         
+                $mail->Host = 'sistemas.correiolivre.caixa';  
+                $mail->SMTPAuth = false;                                  
+                $mail->Port = 25;
+                // $mail->SMTPDebug = 2;
+                $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+                $mail->addReplyTo('GILIESP01@caixa.gov.br');
+                $mail->addAddress($novaDemandaAtende->matriculaResponsavelAtividade . '@mail.caixa');
+    
+                $mail->Subject = 'Você recebeu um direcionamento de atende';
+                $mail->Body = $mensagem;
+                $mail->send();
+
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Cadastro realizado!");
