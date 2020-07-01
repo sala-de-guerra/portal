@@ -62,6 +62,14 @@ class AtendeDemandasController extends Controller
         return view('portal.gerencial.gestao-atende');
         
     }
+    public function tratarDemanda($id)
+    {
+        $demanda = Atende::where('idAtende', $id)
+        ->select('idAtende');
+        return view('portal.atende.tratar-atende')
+        ->with('id', $demanda );
+        
+    }
     /**
      *
      * @return \Illuminate\Http\Response

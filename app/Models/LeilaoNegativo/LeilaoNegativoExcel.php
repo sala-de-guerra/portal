@@ -102,4 +102,10 @@ class LeilaoNegativoExcel extends Model
         return $this->belongsTo('App\Models\Fornecedores\Leiloeiro', 'idLeiloeiro', 'idLeiloeiro');
         
     }
+
+    public function historico()
+    {
+        return $this->belongsTo('App\Models\HistoricoPortalGilie', 'contratoFormatado', 'numeroContrato');
+        
+    }
 }

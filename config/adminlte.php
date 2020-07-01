@@ -382,6 +382,13 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
             'submenu' => [
                 [
+                    'text' => 'Controle de Laudos',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
+                    'url'  => '/controle-laudos',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                ],
+                
+                [
                     'text' => 'Leilões Negativos',
                     // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/estoque-imoveis/leiloes-negativos',

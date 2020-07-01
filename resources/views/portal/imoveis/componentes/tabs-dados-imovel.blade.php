@@ -1152,12 +1152,13 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Coordenação:</label>
+                                                    <label>Atividade:</label>
                                                     <select name="atividadeAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
                                                         <option value="CONTRATACAO">CONTRATAÇÃO</option>
                                                         <option value="PAGAMENTO">PAGAMENTO</option>
                                                         <option value="PREPARACAO">PREPARAÇÃO</option>
+                                                        <option value="LEILÃO NEGATIVO">LEILÃO NEGATIVO</option>
                                                     </select>
                                                 </div>
 

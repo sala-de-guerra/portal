@@ -29,6 +29,7 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
         $criaPlanilha = LeilaoNegativoExcel::where('unidadeResponsavel', $unidade)
         ->join('ALITB001_Imovel_Completo', 'ALITB001_Imovel_Completo.BEM_FORMATADO',  "=", 'TBL_LEILOES_NEGATIVOS_CONTRATOS.contratoFormatado')
         ->leftjoin('TBL_FORNECEDORES_DADOS_LEILOEIRO', 'TBL_FORNECEDORES_DADOS_LEILOEIRO.idLeiloeiro',  "=", 'TBL_LEILOES_NEGATIVOS_CONTRATOS.idLeiloeiro')
+        ->leftjoin('TBL_HISTORICO_PORTAL_GILIE', 'TBL_HISTORICO_PORTAL_GILIE.numeroContrato',  "=", 'TBL_LEILOES_NEGATIVOS_CONTRATOS.contratoFormatado')
         ->select('contratoFormatado',
         'ALITB001_Imovel_Completo.MATRICULA',
         'ALITB001_Imovel_Completo.OFICIO',
@@ -48,11 +49,15 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
         'dataPrevistaAnaliseCartorio', 
         'dataRetiradaDocumentoCartorio', 
         'existeExigencia',
+        'TBL_HISTORICO_PORTAL_GILIE.observacao',
         'dataEntregaAverbacaoExigenciaUnidade')
         ->orderBy('dataSegundoLeilao', 'desc')
+        ->orderBy('TBL_HISTORICO_PORTAL_GILIE.created_at', 'desc')
         ->get();
-
-        return $criaPlanilha;
+        $unique = $criaPlanilha->unique('contratoFormatado');
+        $unique->values()->all();
+        
+        return $unique;
      }
 
     public function headings(): array
@@ -77,7 +82,8 @@ class CriaExcelLeilaoNegativo implements FromCollection, WithHeadings, ShouldAut
             'Código Acesso Protocolo', 
             'Previsão Analise Cartório', 
             'Retirada Documento Cartório',
-            'Existe Exigencia', 
+            'Existe Exigencia',
+            'histórico',
             'Entrega Averbacao Exigencia Unidade'
             ],
         ];
