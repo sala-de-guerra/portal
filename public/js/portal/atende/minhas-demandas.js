@@ -21,7 +21,8 @@ $(document).ready(function(){
                             // botão dropdown
                         '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
                             '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
-                            '<a class="dropdown-item" type="button" id="btn-editar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalTratar' + item.idAtende + '">' + '<i class="far fa-edit">' + '</i>' + ' Tratar' + '</a>' +
+                            // '<a class="dropdown-item" type="button" id="btn-editar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalTratar' + item.idAtende + '">' + '<i class="far fa-edit">' + '</i>' + ' Tratar' + '</a>' +
+                            '<a class="dropdown-item" type="button" href="/atende/tratar-atende/'+ item.idAtende +'"><i class="far fa-edit"></i>' + ' Tratar' + '</a>'+
                             '<a class="dropdown-item"  type="button" id="btn-direcionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalDirecionar' + item.idAtende + '">'+ '<i class="fas fa-exchange-alt">' + '</i>' + ' Direcionar</a>' +
                         '</div>' +
                             // Modal de consulta

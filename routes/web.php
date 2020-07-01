@@ -203,6 +203,8 @@ Route::prefix('atende')->group(function () {
     Route::get('minhas-demandas-agencia','AtendeDemandasController@viewMinhasDemandasAgencia');
     Route::get('gestao-atende','AtendeDemandasController@viewGerenciarDemandas');
     Route::get('listar-universo','AtendeDemandasController@listarUniverso');
+      // TRATAR ATENDE
+    Route::get('tratar-atende/{id}','AtendeDemandasController@tratarDemanda');
 });
 
 // GERENCIAL
@@ -305,3 +307,16 @@ Route::delete('gerencial/apagar-demanda-generica/{id}', 'FaleConoscoController@a
 Route::get('gerencial/gerenciar-fale-conosco/lista', 'FaleConoscoController@ListaFaleConoscoGerencial');
 Route::get('listar/atende-sem-contrato-agencia', 'FaleConoscoController@listaFaleConoscoagencia');
 Route::get('listar/atende-sem-contrato-finalizado', 'FaleConoscoController@listaFaleConoscoagenciaFinalizado');
+
+//ROTA controle de laudo
+Route::get('controle-laudos', 'Laudo\controleLaudoController@controleLaudoIndex');
+//traz universo laudo
+Route::get('controle-laudos/universo', 'Laudo\controleLaudoController@universoLaudo');
+//traz universo vencido
+Route::get('controle-laudos/laudo-vencido', 'Laudo\controleLaudoController@laudoVencido');
+//Em Reavaliacao
+Route::get('controle-laudos/reavaliacao', 'Laudo\controleLaudoController@laudoEmReavaliacao');
+//Em Pendencia
+Route::get('controle-laudos/em-pendencia', 'Laudo\controleLaudoController@laudoEmPendencia');
+//Cadastrar OS
+Route::post('controle-laudos/alterar/{id}', 'Laudo\controleLaudoController@cadastrarAlteracoes');
