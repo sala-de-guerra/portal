@@ -16,16 +16,10 @@ class CreateLaudosTable extends Migration
         
         Schema::create('TBL_CONTROLE_LAUDO', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('quanto_falta');
-            $table->string('UNA');
             $table->string('BEM_FORMATADO');
             $table->string('NU_BEM');
-            $table->string('STATUS_IMOVEL');
-            $table->datetime('DATA_LAUDO');
-            $table->datetime('DATA_VENCIMENTO_LAUDO');
-            $table->string('CLASSIFICACAO');
             $table->text('observacao')->nullable();
-            $table->string('numeroOS')->nullable();
+            $table->string('numeroOS');
             $table->timestamps();
         });
         

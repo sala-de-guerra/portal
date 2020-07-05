@@ -284,7 +284,7 @@ Route::put('responder/gestor/{idAtende}', 'GestaoAtendeController@responderAtend
 // EXCLUIR ATENDE GESTOR
 Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGerencial');  
 
-// Rota do teste de importação
+// ROTA CONTROLE ARQUIVO EMGEA
 Route::get('/controle-arquivos', 'PlaniladeControle\UploadexcelController@importaExcel');
 Route::post('/controle-arquivos/envia', 'PlaniladeControle\UploadexcelController@import');
 Route::get('/controle-arquivos/lista', 'PlaniladeControle\UploadexcelController@listaUpload');
@@ -320,3 +320,7 @@ Route::get('controle-laudos/reavaliacao', 'Laudo\controleLaudoController@laudoEm
 Route::get('controle-laudos/em-pendencia', 'Laudo\controleLaudoController@laudoEmPendencia');
 //Cadastrar OS
 Route::post('controle-laudos/alterar/{id}', 'Laudo\controleLaudoController@cadastrarAlteracoes');
+//Envia Mensageria
+Route::post('controle-laudos/envia-mensagem', 'Laudo\controleLaudoController@enviaMensagem');
+//Cria Excel para Download
+Route::get('controle-laudos/download-excel', 'Laudo\controleLaudoController@criaPlanilhaExcelLaudo');
