@@ -1143,6 +1143,7 @@
                                                     <select name="tipoAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
                                                         <option value="ANALISE">ANÁLISE/SUBSIDIO</option>
+                                                        <option value="CAR-CAC">CAR/CAC</option>
                                                         <option value="EMAIL">E-MAIL</option>
                                                         <option value="PRESENCIAL">PRESENCIAL</option>
                                                         <option value="OUVIDORIA">SAC/OUVIDORIA</option>
@@ -1231,7 +1232,7 @@
                                     <div class="alert" style="background-color: #fff9c2;" >
                                         <div>
                                             <i class="fas fa-exclamation-triangle"></i> ATENÇÃO:
-                                                Envie a autorização apenas após o pagamento da PP15
+                                                Envie a autorização apenas após o pagamento da PP15 / Boleto
                                         </div>
                                     </div>
                                 </div>
