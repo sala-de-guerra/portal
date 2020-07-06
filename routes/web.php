@@ -318,9 +318,13 @@ Route::get('controle-laudos/laudo-vencido', 'Laudo\controleLaudoController@laudo
 Route::get('controle-laudos/reavaliacao', 'Laudo\controleLaudoController@laudoEmReavaliacao');
 //Em Pendencia
 Route::get('controle-laudos/em-pendencia', 'Laudo\controleLaudoController@laudoEmPendencia');
-//Cadastrar OS
+//Altera dados
 Route::post('controle-laudos/alterar/{id}', 'Laudo\controleLaudoController@cadastrarAlteracoes');
 //Envia Mensageria
 Route::post('controle-laudos/envia-mensagem', 'Laudo\controleLaudoController@enviaMensagem');
 //Cria Excel para Download
 Route::get('controle-laudos/download-excel', 'Laudo\controleLaudoController@criaPlanilhaExcelLaudo');
+//cadastra OS
+Route::post('controle-laudos/cadastrarOS', 'Laudo\controleLaudoController@cadastrarOS');
+//cadastra OBS
+Route::post('controle-laudos/cadastrarobs/{id}', 'Laudo\controleLaudoController@cadastrarOBS');

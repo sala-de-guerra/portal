@@ -113,7 +113,6 @@ border-color: #80D651;
                                         <th>Contrato</th>
                                         <th>Classificação</th>
                                         <th>Status</th>
-                                        <th>Vencimento Laudo</th>
                                         <th>Dias p/ vencimento</th>
                                         <th>O.S</th>
                                         <th>Status SIOPI</th>
@@ -149,7 +148,6 @@ border-color: #80D651;
                                         <th>Contrato</th>
                                         <th>Classificação</th>
                                         <th>Status</th>
-                                        <th>Vencimento Laudo</th>
                                         <th>Dias p/ vencimento</th>
                                         <th>O.S</th>
                                         <th>Status SIOPI</th>
@@ -184,7 +182,6 @@ border-color: #80D651;
                                         <th>Contrato</th>
                                         <th>Classificação</th>
                                         <th>Status</th>
-                                        <th>Vencimento Laudo</th>
                                         <th>Dias p/ vencimento</th>
                                         <th>O.S</th>
                                         <th>Status SIOPI</th>
@@ -218,7 +215,6 @@ border-color: #80D651;
                                         <th>Contrato</th>
                                         <th>Classificação</th>
                                         <th>Status</th>
-                                        <th>Vencimento Laudo</th>
                                         <th>Dias p/ vencimento</th>
                                         <th>O.S</th>
                                         <th>Status SIOPI</th>
