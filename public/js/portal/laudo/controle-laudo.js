@@ -1,4 +1,5 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
+$.fn.dataTable.ext.errMode = 'none';
 /**********************\
 | Config inicial Toast |
 \**********************/
@@ -10,32 +11,10 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
-//Arruma ordenação do datatable em formato Brasil
-jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-	"date-uk-pre": function ( a ) {
-		if (a == null || a == "") {
-			return 0;
-		}
-		var ukDatea = a.split('/');
-		return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
-	},
 
-	"date-uk-asc": function ( a, b ) {
-		return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-	},
-
-	"date-uk-desc": function ( a, b ) {
-		return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-	}
-} );
-
-//define formato brasileiro de data na coluna 3
 function _formataDatatableComData (){
     $('.dataTable').DataTable({
         "order": [[ 3, "asc" ]],
-        columnDefs: [
-            {type: 'date-uk', targets: 3}
-        ],
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -77,10 +56,10 @@ function _formataDatatableComData (){
             $.each(dados, function(key, item) {
                 var observacao = item.observacao
                 if (typeof(observacao) != "undefined" && observacao !== null){
-                var observacao = observacao.substring(0, 20) + '[...]' + '<button type="button" class="btn btn-Link" data-toggle="modal" data-target="#obsModal'+item.id+'"><i style="color: #247cb4;" class="fas fa-info-circle"></i>'+
+                var observacao = observacao.substring(0, 20) + '[...]' + '<button type="button" class="btn btn-Link" data-toggle="modal" data-target="#obsModal'+item.NU_BEM+'"><i style="color: #247cb4;" class="fas fa-info-circle"></i>'+
                 '</button>'+
                 `
-                <div class="modal fade" id="obsModal${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="obsModal${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
@@ -106,24 +85,23 @@ function _formataDatatableComData (){
                         <td><a href="/consulta-bem-imovel/${item.BEM_FORMATADO}" class="cursor-pointer">${item.NU_BEM}</a></td>
                         <td>${item.CLASSIFICACAO}</td>
                         <td>${item.STATUS_IMOVEL}</td>
-                        <td>`+ moment(item.DATA_VENCIMENTO_LAUDO).format("DD/MM/YYYY") +`</td>
-                        <td id="quantoFalta${item.id}">${item.quanto_falta}</td>
-                        <td id="OS${item.id}">${item.numeroOS}</td>
-                        <td id="status${item.id}">${item.statusSiopi}</td>
-                        <td id="obs${item.id}">${observacao}</td>
+                        <td id="quantoFalta${item.NU_BEM}">${item.quanto_falta}</td>
+                        <td id="OS${item.NU_BEM}">${item.numeroOS}</td>
+                        <td id="status${item.NU_BEM}">${item.statusSiopi}</td>
+                        <td id="obs${item.NU_BEM}">${observacao}</td>
                         <td>
                             <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Ação
                             </button> 
 
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastraOS${item.id}"><i class="far fa-edit"></i>O.S</a>
-                                <a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastrarStatus${item.id}"><i class="far fa-edit"></i>Status Siopi</a>
-                                <a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastraOBS${item.id}"><i class="far fa-edit"></i>Observação</a>
-                                <a class="dropdown-item" type="button" class="btn btn-primary" data-toggle="modal" data-target="#mensageria${item.id}"><i class="far fa-envelope"></i></i>mensagem</a>
+                                <a class="dropdown-item" id="cadastra${item.NU_BEM}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastraOS${item.NU_BEM}"><i class="far fa-edit"></i>Cadastrar O.S</a>
+                                <a class="dropdown-item" id="altera${item.NU_BEM}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastrarStatus${item.NU_BEM}"><i class="far fa-edit"></i>alterar</a>
+                                <a class="dropdown-item" id="observa${item.NU_BEM}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastraOBS${item.NU_BEM}"><i class="far fa-edit"></i>Observação</a>
+                                <a class="dropdown-item" id="msg${item.NU_BEM}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#mensageria${item.NU_BEM}"><i class="far fa-envelope"></i></i>mensagem</a>
                             </div> 
                             <!-- Modal Mensageria -->
-                            <div class="modal fade" id="mensageria${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="mensageria${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                   <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
@@ -148,14 +126,14 @@ function _formataDatatableComData (){
                                   <small class="form-text text-muted"><span style="color: red;">* Feche um modelo para abrir o outro.</span></small>
                                   <div class="row">
                                   <div class="col-sm">
-                                  <button id="btnToggle${item.id}" type="button" class="btn btn-primary">Modelo de Cobrança</button><br><br>
+                                  <button id="btnToggle${item.NU_BEM}" type="button" class="btn btn-primary">Modelo de Cobrança</button><br><br>
                                   </div>
                                   <div class="col-sm">
-                                  <button id="btnToggleCobranca${item.id}" type="button" class="btn btn-primary">Modelo de Correção</button><br><br>
+                                  <button id="btnToggleCobranca${item.NU_BEM}" type="button" class="btn btn-primary">Modelo de Correção</button><br><br>
                                   </div>
                                  
                                   
-                                  <div contenteditable="true" id="toggleModelo${item.id}" style="display: none;"><br>
+                                  <div contenteditable="true" id="toggleModelo${item.NU_BEM}" style="display: none;"><br>
                                   Prezado Credenciado(a): <br><br>
                                   1. Solicitamos informações sobre a entrega do laudo referente à O.S ${item.numeroOS} no sistema SIOPI, ainda não entregue<br><br>
                       
@@ -171,7 +149,7 @@ function _formataDatatableComData (){
                                   </div>
                 
                                   </div>
-                                  <div contenteditable="true" id="toggleModeloCobranca${item.id}" style="display: none;"><br>
+                                  <div contenteditable="true" id="toggleModeloCobranca${item.NU_BEM}" style="display: none;"><br>
                                   Prezado Credenciado(a): <br><br>
                                   1.	Solicitamos correção no laudo: <br><br>
                       
@@ -197,7 +175,7 @@ function _formataDatatableComData (){
                             </div>
                         
                         <!-- Modal Cadastra Observação-->
-                            <div class="modal fade" id="cadastraOBS${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="cadastraOBS${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
@@ -207,7 +185,7 @@ function _formataDatatableComData (){
                                                 </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post" action="/controle-laudos/alterar/${item.id}" id="formOBS${item.id}">
+                                            <form method="post" action="/controle-laudos/cadastrarobs/${item.id}" id="formOBS${item.NU_BEM}">
                                                 <input type="hidden" name="_token" value="${csrfVar}">
                                                 <input type="hidden" name="contratoFormatado" value="${item.BEM_FORMATADO}">
                                                     <div class="form-group">
@@ -225,7 +203,7 @@ function _formataDatatableComData (){
                             </div>
 
                         <!-- Modal cadastra status -->
-                        <div class="modal fade" id="cadastrarStatus${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="cadastrarStatus${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
@@ -235,12 +213,16 @@ function _formataDatatableComData (){
                                             </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="/controle-laudos/alterar/${item.id}" id="formStatus${item.id}">
+                                        <form method="post" action="/controle-laudos/alterar/${item.id}" id="formStatus${item.NU_BEM}">
                                             <input type="hidden" name="_token" value="${csrfVar}">
-                                            <input type="hidden" name="contratoFormatado" value="${item.BEM_FORMATADO}">
+                                            <div class="form-group">
+                                                <label>Nº da O.S</label>
+                                                <input type="text" name="numeroOS" class="form-control OS" minlength="33" value="${item.numeroOS}" maxlength="33">
+                                            </div>
+                                            <p><b>Status O.S</b></p>
                                             <div class="input-group mb-3">
                                                 <select class="custom-select" name="statusSiopi">
-                                                    <option selected>Escolher...</option>
+                                                    <option selected value="${item.statusSiopi}">Escolher...</option>
                                                     <option value="Cancelada">Cancelada</option>
                                                     <option value="Concluída">Concluída</option>
                                                     <option value="Convocada">Convocada</option>
@@ -261,7 +243,7 @@ function _formataDatatableComData (){
                         </div>    
                         
                         <!-- Modal cadastra O.S -->
-                            <div class="modal fade" id="cadastraOS${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="cadastraOS${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
@@ -271,13 +253,15 @@ function _formataDatatableComData (){
                                                 </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post" action="/controle-laudos/alterar/${item.id}" id="formLaudo${item.id}">
+                                            <form method="post" action="controle-laudos/cadastrarOS" id="formLaudo${item.NU_BEM}">
                                                 <div class="modal-body">
                                                     <input type="hidden" name="_token" value="${csrfVar}">
                                                     <input type="hidden" name="contratoFormatado" value="${item.BEM_FORMATADO}">
+                                                    <input type="hidden" name="numBem" value="${item.NU_BEM}">
+                                                    <input type="hidden" name="statusSiopi" value="Convocada">
                                                     <div class="form-group">
                                                         <label>Nº da O.S</label>
-                                                        <input type="text" name="numeroOS" class="form-control OS" minlength="33" maxlength="33" value="${item.numeroOS}" required>
+                                                        <input type="text" name="numeroOS" class="form-control OS" minlength="33" maxlength="33" required>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
@@ -293,41 +277,45 @@ function _formataDatatableComData (){
                 </tr>` 
 
         $(linha).appendTo('#tblLaudoEmDia>tbody');
-            if ($('#OS'+item.id).text() == 'null'){
-                $('#OS'+item.id).text("")
-            }
-            if ($('#obs'+item.id).text() == 'null'){
-                $('#obs'+item.id).text("")
-            }
-            if ($('#status'+item.id).text() == 'null'){
-                $('#status'+item.id).text("")
-            }
-            if ($('#quantoFalta'+item.id).text() < 20 ){
-                $('#quantoFalta'+item.id).html('<b style="color: green;">'+item.quanto_falta +'</b>')
+            if ($('#OS'+item.NU_BEM).text() == 'null'){
+                $('#OS'+item.NU_BEM).text("")
+                $('#altera'+item.NU_BEM).remove()
+                $('#observa'+item.NU_BEM).remove()
+                $('#msg'+item.NU_BEM).remove()
             }else{
-                $('#quantoFalta'+item.id).html('<b style="color: blue;">'+item.quanto_falta +'</b>')
+                $('#cadastra'+item.NU_BEM).remove()
             }
-            $('#btnToggle'+item.id).click(function() {
-                $('#toggleModelo'+item.id).toggle();
+            if ($('#obs'+item.NU_BEM).text() == 'null'){
+                $('#obs'+item.NU_BEM).text("")
+            }
+            if ($('#status'+item.NU_BEM).text() == 'null'){
+                $('#status'+item.NU_BEM).text("")
+            }
+            if ($('#quantoFalta'+item.NU_BEM).text() < 20 ){
+                $('#quantoFalta'+item.NU_BEM).html('<b style="color: green;">'+item.quanto_falta +'</b>')
+            }else{
+                $('#quantoFalta'+item.NU_BEM).html('<b style="color: blue;">'+item.quanto_falta +'</b>')
+            }
+            $('#btnToggle'+item.NU_BEM).click(function() {
+                $('#toggleModelo'+item.NU_BEM).toggle();
               });
-              $('#btnToggleCobranca'+item.id).click(function() {
-                $('#toggleModeloCobranca'+item.id).toggle();
+              $('#btnToggleCobranca'+item.NU_BEM).click(function() {
+                $('#toggleModeloCobranca'+item.NU_BEM).toggle();
               });
-            $('#formLaudo'+item.id).submit( function(e) {
+            $('#formLaudo'+item.NU_BEM).submit( function(e) {
 
                 e.preventDefault();
     
                 let datas = JSON.stringify( $(this).serialize() );
                 let url = $(this).attr('action');
                 let method = $(this).attr('method');
-                // console.log(datas);
-                // console.log(url);
-                // console.log(method);
+                console.log(datas);
+                console.log(url);
+                console.log(method);
                 var post = datas
-                var resultadoPrimeiraParte = post.substring(94, 113);
-                var resultadoSegundaParte = post.substring(116, 129);
-    
-                
+                var post = post.substring(137, 172);
+                var decodedUrl = decodeURIComponent(post);
+   
                 $.ajax({
                     type: method,
                     url: url,
@@ -341,7 +329,9 @@ function _formataDatatableComData (){
                             icon: 'success',
                             title: 'Alteração salva!'
                         });
-                    $('#OS'+item.id).text(resultadoPrimeiraParte + "/" + resultadoSegundaParte)
+                    $('#OS'+item.NU_BEM).html(decodedUrl)
+                    $('#status'+item.NU_BEM).html("Convocada")
+                    $('#cadastra'+item.NU_BEM).remove()
                     },
                   
                     error: function () {
@@ -356,7 +346,7 @@ function _formataDatatableComData (){
                 });
             
             })
-            $('#formStatus'+item.id).submit( function(e) {
+            $('#formStatus'+item.NU_BEM).submit( function(e) {
     
                 e.preventDefault();
     
@@ -364,12 +354,15 @@ function _formataDatatableComData (){
                 let datas = JSON.stringify( $(this).serialize() );
                 let url = $(this).attr('action');
                 let method = $(this).attr('method');
-                // console.log(datas);
-                // console.log(url);
-                // console.log(method);
-                var post = datas
-                var post = post.substring(97, 130);
+                console.log(datas);
+                console.log(url);
+                console.log(method);
+                var post  = datas
+                var post2 = datas
+                var post = post.substring(106, 140);
                 var decodedUrl = decodeURIComponent(post);
+                var post2 = post2.substring(58, 93);
+                var decodedUrl2 = decodeURIComponent(post2);
 
                 $.ajax({
                     type: method,
@@ -384,7 +377,8 @@ function _formataDatatableComData (){
                             icon: 'success',
                             title: 'Alteração salva!'
                         });
-                    $('#status'+item.id).html(decodedUrl)
+                    $('#status'+item.NU_BEM).html(decodedUrl)
+                    $('#OS'+item.NU_BEM).html(decodedUrl2)
                     },
                 
                     error: function () {
@@ -400,7 +394,7 @@ function _formataDatatableComData (){
             
             })
     
-            $('#formOBS'+item.id).submit( function(e) {
+            $('#formOBS'+item.NU_BEM).submit( function(e) {
     
                 e.preventDefault();
     
@@ -429,7 +423,7 @@ function _formataDatatableComData (){
                                 icon: 'success',
                                 title: 'Alteração salva!'
                             });
-                        $('#obs'+item.id).html(decodedUrl + '[...]') 
+                        $('#obs'+item.NU_BEM).html(decodedUrl + '[...]') 
                         },
                     
                         error: function () {
@@ -444,12 +438,15 @@ function _formataDatatableComData (){
                     });
                 
                 })
-            }
-        )}
+             }
+         )}
     )
 setTimeout(function(){
     _formataDatatableComData()
     $(".OS").mask("0000.0000.000000000/0000.00.00.00");
+    $('#tblLaudoEmDia').dataTable( {
+        "autoWidth": false
+      } );
     }, 1000);
     
 setTimeout(function(){

@@ -29,96 +29,27 @@ class controleLaudoController extends Controller
         return view('portal.laudo.controle-laudos');
     }
 
-    // public function universoLaudo()
-    // {
-    // $universoLaudo = DB::table('TBL_CONTROLE_LAUDO')
-    //     ->where('UNA', '=', 'GILIE/SP')
-    //     ->where('quanto_falta', '<=', 70)
-    //     ->where('quanto_falta', '>=', 0)
-    //     ->where('STATUS_IMOVEL', '<>', 'Em Pendência')
-    //     ->where('STATUS_IMOVEL', '<>', 'Em Reavaliação')
-    //     ->orderBy('quanto_falta', 'asc')
-    //      ->get();
-
-    //      return json_encode($universoLaudo);
-    // }
-
-    // public function laudoVencido()
-    // {
-    // $universoLaudo = DB::table('TBL_CONTROLE_LAUDO')
-    //     ->where('UNA', '=', 'GILIE/SP')
-    //     ->where('quanto_falta', '<', 0)
-    //     ->where('STATUS_IMOVEL', '<>', 'Em Pendência')
-    //     ->where('STATUS_IMOVEL', '<>', 'Em Reavaliação')
-    //      ->get();
-    //      return json_encode($universoLaudo);
-    // }
-
-    // public function laudoEmReavaliacao()
-    // {
-    // $universoLaudo = DB::table('TBL_CONTROLE_LAUDO')
-    //     ->where('UNA', '=', 'GILIE/SP')
-    //     ->where('quanto_falta', '<', 70)
-    //     ->where('STATUS_IMOVEL', '=', 'Em Reavaliação')
-    //      ->get();
-    //      return json_encode($universoLaudo);
-    // }
-
-    // public function laudoEmPendencia()
-    // {
-    // $universoLaudo = DB::table('TBL_CONTROLE_LAUDO')
-    //     ->where('UNA', '=', 'GILIE/SP')
-    //     ->where('quanto_falta', '<=', 0)
-    //     ->where('STATUS_IMOVEL', '=', 'Em Pendência')
-    //      ->get();
-    //      return json_encode($universoLaudo);
-    // }
-
     public function cadastrarAlteracoes(Request $request, $id)
     {
-        try {
-        $novaOS = Laudo::find($id);
-        if (isset($request->numeroOS)){
-            $novaOS->numeroOS = $request->input('numeroOS');
-            
-            $historico = new HistoricoPortalGilie;
-            $historico->matricula       = session('matricula');
-            $historico->numeroContrato  = $request->contratoFormatado;
-            $historico->tipo            = "CADASTRO";
-            $historico->atividade       = "LAUDO";
-            $historico->observacao      = "CADASTRO DE O.S: " . '<B>'. $request->input('numeroOS') . '</B>';
-            $historico->created_at      = date("Y-m-d H:i:s", time());
-            $historico->updated_at      = date("Y-m-d H:i:s", time());
-            $historico->save();
-        }
-        if (isset($request->observacao)){
-            $novaOS->observacao = $request->input('observacao');
+    try 
+        {
 
-            $historico = new HistoricoPortalGilie;
-            $historico->matricula       = session('matricula');
-            $historico->numeroContrato  = $request->contratoFormatado;
-            $historico->tipo            = "CADASTRO";
-            $historico->atividade       = "LAUDO";
-            $historico->observacao      = $request->input('observacao');
-            $historico->created_at      = date("Y-m-d H:i:s", time());
-            $historico->updated_at      = date("Y-m-d H:i:s", time());
-            $historico->save();
+            $novaOS = Laudo::find($id);
+            $novaOS->statusSiopi = $request->statusSiopi;
+            $novaOS->numeroOS = $request->numeroOS;
+            $novaOS->save();
 
-          }
-        if (isset($request->statusSiopi)){
-        $novaOS->statusSiopi = $request->input('statusSiopi');
-        }
-        $novaOS->save();
-        $request->session()->flash('corMensagem', 'success');
-        $request->session()->flash('tituloMensagem', "Controle de laudo atualizado");
-        $request->session()->flash('corpoMensagem', "Alteração efetuada com sucesso");
-    } catch (\Throwable $th) {
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Controle de laudo atualizado");
+            $request->session()->flash('corpoMensagem', "Alteração efetuada com sucesso");
+    
+        } catch (\Throwable $th) {
         // dd($th);
         AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
         DB::rollback();
         // RETORNA A FLASH MESSAGE
         $request->session()->flash('corMensagem', 'danger');
-        $request->session()->flash('tituloMensagem', "O.S não registrado");
+        $request->session()->flash('tituloMensagem', "Alteração não efetuada");
         $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro da O.S, Tente novamente!");
     }
     return back();
@@ -157,10 +88,10 @@ class controleLaudoController extends Controller
             $historico->updated_at = date("Y-m-d H:i:s", time());
             $historico->save();
         $mail->send();
-        echo 'Mensagem enviada';
          } catch (Exception $e) {
              echo "Erro. Mensagem não foi enviada: {$mail->ErrorInfo}";
         }
+         return back();
     }
     public function universoLaudo()
     {
@@ -184,8 +115,8 @@ class controleLaudoController extends Controller
               
         '))
          ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
-        ->where('quanto_falta', '<=', 70)
-         ->where('quanto_falta', '>=', 1)
+         ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) <= ?', [70])
+         ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) >= ?', [0])
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '<>', 'Em Pendência')
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '<>', 'Em Reavaliação')
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '<>', 'Vendido')
@@ -197,7 +128,8 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
-         ->orderBy('quanto_falta', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
 
          return json_encode($universoLaudo);
@@ -225,12 +157,13 @@ class controleLaudoController extends Controller
               
         '))
          ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
-         ->where('quanto_falta', '<', 70)
+         ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) <= ?', [70])
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '=', 'Em Reavaliação')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
-         ->orderBy('quanto_falta', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
 
          return json_encode($universoLaudo);
@@ -258,12 +191,13 @@ class controleLaudoController extends Controller
               
         '))
          ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
-         ->where('quanto_falta', '<=', 0)
+         ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) <= ?', [0])
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '=', 'Em Pendência')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
-         ->orderBy('quanto_falta', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
 
          return json_encode($universoLaudo);
@@ -291,7 +225,7 @@ class controleLaudoController extends Controller
               
         '))
          ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
-         ->where('quanto_falta', '<', 0)
+         ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) < ?', [0])
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '<>', 'Em Pendência')
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '<>', 'Em Reavaliação')
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '<>', 'Vendido')
@@ -303,7 +237,8 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
-         ->orderBy('quanto_falta', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
 
          return json_encode($universoLaudo);
@@ -313,5 +248,49 @@ class controleLaudoController extends Controller
 
         return Excel::download(new CriaExcelLaudo, 'PlanilhaControleDeLaudo.xlsx');
     }
+    public function cadastrarOS(Request $request)
+    {
 
+        $novaOS = new Laudo;
+            $novaOS->numeroOS = $request->input('numeroOS');
+            $novaOS->BEM_FORMATADO = $request->input('contratoFormatado');
+            $novaOS->NU_BEM = $request->input('numBem');
+            $novaOS->statusSiopi = $request->input('statusSiopi');
+            $novaOS->save();
+
+        $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $request->contratoFormatado;
+            $historico->tipo            = "CADASTRO";
+            $historico->atividade       = "LAUDO";
+            $historico->observacao      = "Laudo solicitado - OS nº: " . $request->input('numeroOS');
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+
+            
+       
+        return back();
+    }
+    public function cadastrarOBS(Request $request, $id)
+    {
+
+        $novaOBS =  Laudo::find($id);
+            $novaOBS->observacao = $request->input('observacao');
+            $novaOBS->save();
+
+        $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $request->contratoFormatado;
+            $historico->tipo            = "CADASTRO";
+            $historico->atividade       = "LAUDO";
+            $historico->observacao      = $request->input('observacao');
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+       
+        return back();
+    }
+  
 }

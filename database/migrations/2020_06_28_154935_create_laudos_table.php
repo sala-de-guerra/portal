@@ -20,6 +20,7 @@ class CreateLaudosTable extends Migration
             $table->string('NU_BEM');
             $table->text('observacao')->nullable();
             $table->string('numeroOS');
+            $table->string('statusSiopi')->nullable();
             $table->timestamps();
         });
         
