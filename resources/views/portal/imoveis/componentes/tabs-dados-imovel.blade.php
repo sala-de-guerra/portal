@@ -279,8 +279,13 @@
                                     <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
                                 </div>
                             </div> 
+                            <div class="col-sm-3"> 
+                                <div class="form-group">
+                                    <label>Valor de Avaliação:</label>
+                                    <p class="formata-valores" id="valorAvaliacao"></p>
+                                </div>
+                            </div> 
                         </div>
-
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-leiloes" role="tabpanel" aria-labelledby="custom-tabs-one-leiloes-tab">
@@ -510,7 +515,7 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Nº Oficio: </label>
+                                            <label>Nº Ordem de Serviço: </label>
                                             <p id="numeroOficioUnidade"></p>
                                         </div>
                                     </div>
@@ -1124,12 +1129,12 @@
                                     Cadastrar Historico
                                 </button>
                                 @endIf
-                               
+
                                 <button type="button" id="historicoPrestador" class="btn btn-primary float-right" style="display: none;" data-toggle="modal" data-target="#modalCadastraAtendimento">
                                     <i class="fas fa-lg fa-headset m-2"></i>
                                     Cadastrar Historico
                                 </button>
-                     
+
                                 <!-- Modal -->
                                 <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -1149,6 +1154,7 @@
                                                     <select name="tipoAtendimento" class="form-control" required>
                                                         <option value="">Selecione</option>
                                                         <option value="ANALISE">ANÁLISE/SUBSIDIO</option>
+                                                        <option value="CAR-CAC">CAR/CAC</option>
                                                         <option value="EMAIL">E-MAIL</option>
                                                         <option value="PRESENCIAL">PRESENCIAL</option>
                                                         <option value="OUVIDORIA">SAC/OUVIDORIA</option>
@@ -1237,7 +1243,7 @@
                                     <div class="alert" style="background-color: #fff9c2;" >
                                         <div>
                                             <i class="fas fa-exclamation-triangle"></i> ATENÇÃO:
-                                                Envie a autorização apenas após o pagamento da PP15
+                                                Envie a autorização apenas após o pagamento da PP15 / Boleto
                                         </div>
                                     </div>
                                 </div>
