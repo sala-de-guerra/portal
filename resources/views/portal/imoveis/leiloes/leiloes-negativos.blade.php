@@ -57,14 +57,14 @@
                                 <option class="text-dark"  value="numeroContrato">Contrato</option>
                             </select>
                             <div class="input-group nav-search-bar">
-                                <input class="form-control form-control-navbar" type="number"  autocomplete="off" name="valorVariavel" placeholder="Pesquise por contrato" required>
+                                <input class="form-control form-control-navbar" type="text"  autocomplete="off" name="valorVariavel" placeholder="Pesquise por contrato" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit"  title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
                         </form>
                     </li>
-                    <small class="form-text text-muted pl-2"><span style="color: red;"> * </span> sem formatação.</small>
+                    {{-- <small class="form-text text-muted pl-2"><span style="color: red;"> * </span> sem formatação.</small> --}}
                         </div>
                         <div class="col-4 ml-5">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             <a href="leiloes-negativos/baixar-planilha"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Download planilha completa de leilões"><i class="fas fa-file-download"></i>&nbsp Lista Leilões</button></a>

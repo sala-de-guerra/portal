@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         $this->call([
-            GestaoEquipesCelulasTableSeeder::class,
+            // GestaoEquipesCelulasTableSeeder::class,
         ]);
     }
 }
