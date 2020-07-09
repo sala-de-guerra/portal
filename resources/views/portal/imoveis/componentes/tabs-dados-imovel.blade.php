@@ -1134,7 +1134,7 @@
                                     <i class="fas fa-lg fa-headset m-2"></i>
                                     Cadastrar Historico
                                 </button>
-                                
+
                                 <!-- Modal -->
                                 <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
