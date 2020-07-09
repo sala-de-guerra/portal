@@ -279,8 +279,13 @@
                                     <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
                                 </div>
                             </div> 
+                            <div class="col-sm-3"> 
+                                <div class="form-group">
+                                    <label>Valor de Avaliação:</label>
+                                    <p class="formata-valores" id="valorAvaliacao"></p>
+                                </div>
+                            </div> 
                         </div>
-
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-leiloes" role="tabpanel" aria-labelledby="custom-tabs-one-leiloes-tab">
@@ -510,7 +515,7 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Nº Oficio: </label>
+                                            <label>Nº Ordem de Serviço: </label>
                                             <p id="numeroOficioUnidade"></p>
                                         </div>
                                     </div>
@@ -1124,6 +1129,12 @@
                                     Cadastrar Historico
                                 </button>
                                 @endIf
+
+                                <button type="button" id="historicoPrestador" class="btn btn-primary float-right" style="display: none;" data-toggle="modal" data-target="#modalCadastraAtendimento">
+                                    <i class="fas fa-lg fa-headset m-2"></i>
+                                    Cadastrar Historico
+                                </button>
+                                
                                 <!-- Modal -->
                                 <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -1445,3 +1456,10 @@
         </div>
     </div>
 </div> -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+var botãoPrestador = $('.dropdown-item-title').text()
+if (botãoPrestador == "CRISTIANE VIEIRA BARBOSA"){
+    $('#historicoPrestador').css('display','block');
+}
+</script>

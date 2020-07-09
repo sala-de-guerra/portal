@@ -168,7 +168,11 @@ class CadastraAcessoPortal
                     $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
                 }
             } else {
-                $this->nivelAcesso = 'AGENCIA';
+                if (in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
+                    $this->nivelAcesso = 'DESENVOLVEDOR';
+                } else {
+                    $this->nivelAcesso = 'AGENCIA';
+                }                
             }
         }
         return $this;
