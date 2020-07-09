@@ -64,11 +64,11 @@ class AtendeDemandasController extends Controller
     }
     public function tratarDemanda($id)
     {
-        $demanda = Atende::where('idAtende', $id)
-        ->select('idAtende');
-        return view('portal.atende.tratar-atende')
-        ->with('id', $demanda );
-        
+        $listaDemandasAtende = Atende::find($id);
+        if (isset($listaDemandasAtende)){
+            return view('portal.atende.tratar-atende', compact('listaDemandasAtende'));
+        }
+        return redirect ('/atende/minhas-demandas'); 
     }
     /**
      *
@@ -411,16 +411,15 @@ class AtendeDemandasController extends Controller
             // $mail->SMTPDebug = 2;
             $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
             $mail->addReplyTo('GILIESP01@caixa.gov.br');
-            if ($request->emailContatoResposta == "null"){
+            if ($request->emailContatoResposta == "null" || $request->emailContatoResposta == null){
             $mail->addAddress(session('matricula'). "@mail.caixa");
             }else {
             $mail->addCC($request->emailContatoResposta);
             }
-
-            if ($request->emailContatoCopia != "null"){
+            if (isset($request->emailContatoCopia)){
                 $mail->addCC($request->emailContatoCopia);
             }
-            if ($request->emailContatoNovaCopia != "null"){
+            if (isset($request->emailContatoNovaCopia)){
                 $mail->addCC($request->emailContatoNovaCopia);
             }
 
@@ -430,7 +429,9 @@ class AtendeDemandasController extends Controller
               }
 
             $mail->Subject = 'Resposta de Demanda Aberta';
-            $mail->Body = nl2br($request->respostaAtende);
+            $mail->Body = "<h3> Você recebeu uma resposta do Atende: </h3>". "<br>".
+            "Descrição Atende : ". "<br>" . nl2br($request->descricaoAtende) . "<br><br>".
+            "Resposta Atende : " . "<br>" . nl2br($request->respostaAtende);
             $mail->send();
             DB::beginTransaction();
             // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)

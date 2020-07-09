@@ -80,12 +80,12 @@ class CadastraAcessoPortal
         'c142765',  // Carlos
         'c111710',  // Chuman
         'c098453',  // Rafael
-        'c079436'   // Vladimir 
+        'c079436',   // Vladimir
     ];
 
     public $arrayConvidados = [
         /* PRESTADORES */
-        'P952892'  // Cristiane
+        'P952892' 
     ];
 
     /**
