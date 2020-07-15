@@ -47,7 +47,7 @@ $.fn.dataTable.ext.errMode = 'none';
                         <td><a href="/consulta-bem-imovel/${item.BEM_FORMATADO}" class="cursor-pointer">${item.NU_BEM}</a></td>
                         <td>${item.CLASSIFICACAO}</td>
                         <td>${item.STATUS_IMOVEL}</td>
-                        <td id="quantoFalta${item.NU_BEM}">${item.quanto_falta}</td>
+                        <td id="quantoFalta${item.NU_BEM}">${item.laudoPedido}</td>
                         <td id="OS${item.NU_BEM}">${item.numeroOS}</td>
                         <td id="status${item.NU_BEM}">${item.statusSiopi}</td>
                         <td id="obs${item.NU_BEM}">${observacao}</td>
@@ -239,7 +239,11 @@ $.fn.dataTable.ext.errMode = 'none';
                 </tr>` 
 
         $(linha).appendTo('#tblReavaliacao>tbody');
-            if ($('#OS'+item.NU_BEM).text() == 'null'){
+            
+        var dias = $('#quantoFalta'+item.NU_BEM).text()
+        var positivo = Math.abs(dias)
+
+        if ($('#OS'+item.NU_BEM).text() == 'null'){
                 $('#OS'+item.NU_BEM).text("")
                 $('#altera'+item.NU_BEM).remove()
                 $('#observa'+item.NU_BEM).remove()
@@ -253,12 +257,14 @@ $.fn.dataTable.ext.errMode = 'none';
             if ($('#status'+item.NU_BEM).text() == 'null'){
                 $('#status'+item.NU_BEM).text("")
             }
-            if ($('#quantoFalta'+item.NU_BEM).text() < 0 ){
-                $('#quantoFalta'+item.NU_BEM).html('<b style="color: red;">'+item.quanto_falta +'</b>')
-            }else if ($('#quantoFalta'+item.NU_BEM).text() <= 20 ){
-                $('#quantoFalta'+item.NU_BEM).html('<b style="color: green;">'+item.quanto_falta +'</b>')
+            if (positivo < 5 ){
+                $('#quantoFalta'+item.NU_BEM).html('<b style="color: blue;">'+Math.abs(item.laudoPedido) +'</b>')
+            }else if (positivo <= 8 ){
+                $('#quantoFalta'+item.NU_BEM).html('<b style="color: green;">'+Math.abs(item.laudoPedido) +'</b>')
+            }else if (positivo == "0" || positivo == null || positivo == "null" ){
+                $('#quantoFalta'+item.NU_BEM).html('<b style="color: red;">'+"inconsistência" +'</b>')
             }else{
-                $('#quantoFalta'+item.NU_BEM).html('<b style="color: blue;">'+item.quanto_falta +'</b>')
+                $('#quantoFalta'+item.NU_BEM).html('<b style="color: red;">'+Math.abs(item.laudoPedido) +'</b>')
             }
             $('#btnToggle'+item.NU_BEM).click(function() {
                 $('#toggleModelo'+item.NU_BEM).toggle();
@@ -409,7 +415,7 @@ $.fn.dataTable.ext.errMode = 'none';
 $("#reavaliacaotbl").click(function() {
     setTimeout(function(){
         $('.dtableReavaliacao').DataTable({
-            "order": [[ 3, "asc" ]],
+            "order": [[ 3, "desc" ]],
             "language": {
                 "sEmptyTable": "Nenhum registro encontrado",
                 "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

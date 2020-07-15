@@ -28,6 +28,10 @@ class controleLaudoController extends Controller
     {
         return view('portal.laudo.controle-laudos');
     }
+    public function baixaDeLaudo()
+    {
+        return view('portal.laudo.laudo-baixar');
+    }
 
     public function cadastrarAlteracoes(Request $request, $id)
     {
@@ -154,7 +158,7 @@ class controleLaudoController extends Controller
                 TBL_CONTROLE_LAUDO.[observacao] as observacao,
                 TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
                 TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
-                datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) as quanto_falta
+                datediff(day,getdate(), TBL_CONTROLE_LAUDO.[dataCadastroSiopi]) as laudoPedido
               
         '))
          ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)

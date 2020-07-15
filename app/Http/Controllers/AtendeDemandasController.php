@@ -412,7 +412,7 @@ class AtendeDemandasController extends Controller
             $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
             $mail->addReplyTo('GILIESP01@caixa.gov.br');
             if ($request->emailContatoResposta == "null" || $request->emailContatoResposta == null){
-            $mail->addAddress(session('matricula'). "@mail.caixa");
+            $mail->addAddress($request->matriculaCriadorDemanda. "@mail.caixa");
             }else {
             $mail->addCC($request->emailContatoResposta);
             }

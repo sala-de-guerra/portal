@@ -111,6 +111,7 @@
                                 <input type="hidden" name="emailContatoCopia" value="{{$listaDemandasAtende->emailContatoCopia}}">
                                 <input type="hidden" name="emailContatoNovaCopia" value="{{$listaDemandasAtende->emailContatoNovaCopia}}">
                                 <input type="hidden" name="descricaoAtende" value="{{$listaDemandasAtende->descricaoAtende}}">
+                                <input type="hidden" name="matriculaCriadorDemanda" value="{{$listaDemandasAtende->matriculaCriadorDemanda}}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Responder Atende</label>
