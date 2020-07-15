@@ -60,6 +60,7 @@ border-color: #80D651;
 
 @section('content')
 
+<a type="button" href="controle-laudos/controle-baixa" class="btn btn-outline-danger">Baixar</a><br><br>
 
 <div class="row">
     <div class="col-md-12">
@@ -182,7 +183,7 @@ border-color: #80D651;
                                         <th>Contrato</th>
                                         <th>Classificação</th>
                                         <th>Status</th>
-                                        <th>Dias p/ vencimento</th>
+                                        <th>qtd dias da solicitação</th>
                                         <th>O.S</th>
                                         <th>Status SIOPI</th>
                                         <th>Observação</th>

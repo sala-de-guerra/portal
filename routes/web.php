@@ -328,3 +328,5 @@ Route::get('controle-laudos/download-excel', 'Laudo\controleLaudoController@cria
 Route::post('controle-laudos/cadastrarOS', 'Laudo\controleLaudoController@cadastrarOS');
 //cadastra OBS
 Route::post('controle-laudos/cadastrarobs/{id}', 'Laudo\controleLaudoController@cadastrarOBS');
+//view de baixa
+Route::get('controle-laudos/controle-baixa', 'Laudo\controleLaudoController@baixaDeLaudo');
