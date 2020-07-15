@@ -143,7 +143,13 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
 
     <p>
         4.1   Cabe ao comprador tomar todas as providências necessárias para o registro da escritura
-         junto ao Oficial de Registro de Imóveis competente, conforme modelo -><span style="color: red;">%MO_UTILIZADO%</span>;
+         junto ao Oficial de Registro de Imóveis competente, conforme modelo -><span style="color: red;">%MO_UTILIZADO%</span>;<br><br>
+    
+    
+         <span style="color: red;">* Atenção: </span>
+        Caso a venda tenha sido realizada por meio do Exercício do Direito de Preferência é formalizada por lavratura de escritura pública
+        de compra e venda do imóvel conforme modelo <b>MO28096</b>
+    
     </p>
 
     <p>
@@ -163,7 +169,10 @@ estão com atendimento contingencial e reduzido no horário das 10h às 14h***</
 
     <p>
         5.1   Caso haja débitos de IPTU e/ou CONDOMÍNIO pendentes orientamos que estes deverão ser enviados pelo proponente 
-	para a caixa postal giliesp07@caixa.gov.br;
+    para a caixa postal giliesp07@caixa.gov.br;<br><br>
+    
+        <span style="color: red;">* Atenção: </span>
+        Vendas de Direito de Preferência e VDO (Venda Direta ao Ocupante), o comprador fica responsável pelo pagamento dos débitos anteriores, vinculados ao imóvel.   
     </p>
     
     <p>
