@@ -80,12 +80,14 @@ class CadastraAcessoPortal
         'c142765',  // Carlos
         'c111710',  // Chuman
         'c098453',  // Rafael
-        'c079436',   // Vladimir
+        'c079436',  // Vladimir 
+        'c066517',   // Renata
+        'c142639'   // Fernanda
     ];
 
     public $arrayConvidados = [
         /* PRESTADORES */
-        'P952892' 
+        'P952892'
     ];
 
     /**
@@ -167,7 +169,11 @@ class CadastraAcessoPortal
                     $this->nivelAcesso = env('NOME_NOSSA_UNIDADE');
                 }
             } else {
-                $this->nivelAcesso = 'AGENCIA';
+                if (in_array($this->getMatricula(), $this->arrayDesenvolvedores)) {
+                    $this->nivelAcesso = 'DESENVOLVEDOR';
+                } else {
+                    $this->nivelAcesso = 'AGENCIA';
+                }                
             }
         }
         return $this;
