@@ -128,6 +128,7 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'De Terceiros')
          ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
          ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
@@ -162,6 +163,7 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'De Terceiros')
          ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
          ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
@@ -196,6 +198,7 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'De Terceiros')
          ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
          ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
@@ -237,6 +240,7 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'De Terceiros')
          ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
          ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
          ->get();
