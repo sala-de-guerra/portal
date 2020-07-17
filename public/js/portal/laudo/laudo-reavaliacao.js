@@ -186,12 +186,12 @@ $.fn.dataTable.ext.errMode = 'none';
                                                 <select class="custom-select" name="statusSiopi">
                                                     <option selected value="${item.statusSiopi}">Escolher...</option>
                                                     <option value="Cancelada">Cancelada</option>
-                                                    <option value="Concluída">Concluída</option>
+                                                    <option value="Concluida">Concluida</option>
                                                     <option value="Convocada">Convocada</option>
                                                     <option value="Emitida">Emitida</option>
                                                     <option value="Excluída">Excluída</option>
                                                     <option value="Laudo Finalizado">Laudo Finalizado</option>
-                                                    <option value="Vistoria Concluída">Vistoria Concluída</option>
+                                                    <option value="Vistoria Concluida">Vistoria Concluida</option>
                                                 </select>
                                             </div>
                                             <div class="modal-footer">
@@ -238,7 +238,10 @@ $.fn.dataTable.ext.errMode = 'none';
                     </td>
                 </tr>` 
 
-        $(linha).appendTo('#tblReavaliacao>tbody');
+            if (item.statusSiopi != "Concluida"){
+                $(linha).appendTo('#tblReavaliacao>tbody');
+            }
+    
             
         var dias = $('#quantoFalta'+item.NU_BEM).text()
         var positivo = Math.abs(dias)
