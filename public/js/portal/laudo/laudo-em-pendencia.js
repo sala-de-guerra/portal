@@ -21,7 +21,7 @@ $("#pendenciatbl").click(function() {
                 '</button>'+
                 `
                 <div class="modal fade" id="obsModal${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                         <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
                             <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Observação</h5>
@@ -30,7 +30,7 @@ $("#pendenciatbl").click(function() {
                             </button>
                         </div>
                         <div class="modal-body">
-                            ${item.observacao}
+                        <textarea class="form-control" rows="5" disabled>${item.observacao}</textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
