@@ -22,7 +22,7 @@ $.fn.dataTable.ext.errMode = 'none';
                 '</button>'+
                 `
                 <div class="modal fade" id="obsModal${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                         <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
                             <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Observação</h5>
@@ -31,7 +31,7 @@ $.fn.dataTable.ext.errMode = 'none';
                             </button>
                         </div>
                         <div class="modal-body">
-                            ${item.observacao}
+                        <textarea class="form-control" rows="5" disabled>${item.observacao}</textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
@@ -73,7 +73,7 @@ $.fn.dataTable.ext.errMode = 'none';
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                  <form method="post" action="controle-laudos/envia-mensagem">
+                                  <form method="post" action="controle-laudos/envia-mensagem/${item.id}">
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="numeroOS" value="${item.numeroOS}">
                                         <input type="hidden" name="bemFormatado" value="${item.BEM_FORMATADO}">
@@ -419,6 +419,11 @@ $("#reavaliacaotbl").click(function() {
     setTimeout(function(){
         $('.dtableReavaliacao').DataTable({
             "order": [[ 3, "desc" ]],
+            'columnDefs' : [ { 
+                    'searchable'    : false, 
+                    'targets'       : [7] 
+                },
+            ],
             "language": {
                 "sEmptyTable": "Nenhum registro encontrado",
                 "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

@@ -32,6 +32,10 @@ class controleLaudoController extends Controller
     {
         return view('portal.laudo.laudo-baixar');
     }
+        public function correcaoDeLaudo()
+    {
+        return view('portal.laudo.laudo-correcao');
+    }
 
     public function cadastrarAlteracoes(Request $request, $id)
     {
@@ -60,8 +64,13 @@ class controleLaudoController extends Controller
 
     }
 
-    public function enviaMensagem(Request $request)
+    public function enviaMensagem(Request $request, $id)
     {
+        $novaOBS =  Laudo::find($id);
+        $novaOBS->correcao = 1;
+        $novaOBS->observacao = $request->observacaoAtendimento;
+        $novaOBS->save();
+
         $mail = new PHPMailer(true);
         try {
         $mail->isSMTP();
@@ -156,6 +165,7 @@ class controleLaudoController extends Controller
                 ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO] as DATA_VENCIMENTO_LAUDO,
                 ALITB001_Imovel_Completo.[CLASSIFICACAO] as CLASSIFICACAO,
                 TBL_CONTROLE_LAUDO.[observacao] as observacao,
+                TBL_CONTROLE_LAUDO.[correcao] as correcao,
                 TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
                 TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
                 datediff(day,getdate(), TBL_CONTROLE_LAUDO.[dataCadastroSiopi]) as laudoPedido
@@ -164,6 +174,7 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
          ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) <= ?', [70])
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '=', 'Em Reavaliação')
+         ->where('TBL_CONTROLE_LAUDO.correcao', '=', 0)
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
@@ -264,6 +275,8 @@ class controleLaudoController extends Controller
             $novaOS->BEM_FORMATADO = $request->input('contratoFormatado');
             $novaOS->NU_BEM = $request->input('numBem');
             $novaOS->statusSiopi = $request->input('statusSiopi');
+            $novaOS->dataCadastroSiopi = date("Y-m-d H:i:s", time());
+            $novaOS->correcao = 0;
             $novaOS->save();
 
         $historico = new HistoricoPortalGilie;
@@ -299,6 +312,43 @@ class controleLaudoController extends Controller
             $historico->save();
        
         return back();
+    }
+
+    public function laudoEmCorrecao()
+    {
+    $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+    $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
+    $universoLaudo = DB::table('ALITB001_Imovel_Completo')
+        ->leftjoin('TBL_CONTROLE_LAUDO', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, TBL_CONTROLE_LAUDO.BEM_FORMATADO)'))
+        ->select(DB::raw('
+                TBL_CONTROLE_LAUDO.[id] as id,
+                ALITB001_Imovel_Completo.[UNA] as UNA,
+                ALITB001_Imovel_Completo.[BEM_FORMATADO] as BEM_FORMATADO,
+                ALITB001_Imovel_Completo.[NU_BEM] as NU_BEM,
+                ALITB001_Imovel_Completo.[STATUS_IMOVEL] as STATUS_IMOVEL,
+                ALITB001_Imovel_Completo.[DATA_LAUDO] as DATA_LAUDO,
+                ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO] as DATA_VENCIMENTO_LAUDO,
+                ALITB001_Imovel_Completo.[CLASSIFICACAO] as CLASSIFICACAO,
+                TBL_CONTROLE_LAUDO.[observacao] as observacao,
+                TBL_CONTROLE_LAUDO.[correcao] as correcao,
+                TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
+                TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
+                datediff(day,getdate(), TBL_CONTROLE_LAUDO.[dataCadastroSiopi]) as laudoPedido
+              
+        '))
+         ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
+         ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) <= ?', [70])
+         ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '=', 'Em Reavaliação')
+         ->where('TBL_CONTROLE_LAUDO.correcao', '=', 1)
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')
+         ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'De Terceiros')
+         ->orderBy('ALITB001_Imovel_Completo.DATA_VENCIMENTO_LAUDO', 'asc')
+         ->orderBy('ALITB001_Imovel_Completo.BEM_FORMATADO', 'asc')
+         ->get();
+
+         return json_encode($universoLaudo);
     }
   
 }

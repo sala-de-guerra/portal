@@ -15,6 +15,11 @@ const Toast = Swal.mixin({
 function _formataDatatableComData (){
     $('.dataTable').DataTable({
         "order": [[ 3, "asc" ]],
+        'columnDefs' : [ { 
+            'searchable'    : false, 
+            'targets'       : [7] 
+                },
+            ],
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -40,19 +45,18 @@ function _formataDatatableComData (){
         }
     });
 };
+Date.prototype.getMonthFormatted = function() {
+    var month = this.getMonth() + 1;
+    return month < 10 ? '0' + month : month;
+}
+Date.prototype.getDateFormatted = function() {
+    var date = this.getDate();
+    return date < 10 ? '0' + date : date;
+}
+var d = new Date();
+var strDate = d.getDateFormatted()  + "/" + d.getMonthFormatted() + "/" + d.getFullYear();
 
         $.getJSON('/controle-laudos/universo', function(dados){
-            Date.prototype.getMonthFormatted = function() {
-                var month = this.getMonth() + 1;
-                return month < 10 ? '0' + month : month;
-            }
-            Date.prototype.getDateFormatted = function() {
-                var date = this.getDate();
-                return date < 10 ? '0' + date : date;
-            }
-            var d = new Date();
-            var strDate = d.getDateFormatted()  + "/" + d.getMonthFormatted() + "/" + d.getFullYear();
-
             $.each(dados, function(key, item) {
                 var observacao = item.observacao
                 if (typeof(observacao) != "undefined" && observacao !== null){
@@ -60,7 +64,7 @@ function _formataDatatableComData (){
                 '</button>'+
                 `
                 <div class="modal fade" id="obsModal${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                         <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
                             <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Observação</h5>
@@ -69,7 +73,7 @@ function _formataDatatableComData (){
                             </button>
                         </div>
                         <div class="modal-body">
-                            ${item.observacao}
+                        <textarea class="form-control" rows="5" disabled>${item.observacao}</textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
@@ -302,7 +306,7 @@ function _formataDatatableComData (){
               $('#btnToggleCobranca'+item.NU_BEM).click(function() {
                 $('#toggleModeloCobranca'+item.NU_BEM).toggle();
               });
-            $('#formLaudo'+item.NU_BEM).submit( function(e) {
+            $('#formLaudo2'+item.NU_BEM).submit( function(e) {
 
                 e.preventDefault();
     

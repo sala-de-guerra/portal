@@ -60,7 +60,8 @@ border-color: #80D651;
 
 @section('content')
 
-<a type="button" href="controle-laudos/controle-baixa" class="btn btn-outline-danger">Baixar</a><br><br>
+<a type="button" href="controle-laudos/controle-baixa" class="btn btn-outline-success">Baixar</a>
+<a type="button" href="controle-laudos/controle-correcao" class="btn btn-outline-warning">Cobrança Engenharia</a><br><br>
 
 <div class="row">
     <div class="col-md-12">

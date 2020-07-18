@@ -321,7 +321,7 @@ Route::get('controle-laudos/em-pendencia', 'Laudo\controleLaudoController@laudoE
 //Altera dados
 Route::post('controle-laudos/alterar/{id}', 'Laudo\controleLaudoController@cadastrarAlteracoes');
 //Envia Mensageria
-Route::post('controle-laudos/envia-mensagem', 'Laudo\controleLaudoController@enviaMensagem');
+Route::post('controle-laudos/envia-mensagem/{id}', 'Laudo\controleLaudoController@enviaMensagem');
 //Cria Excel para Download
 Route::get('controle-laudos/download-excel', 'Laudo\controleLaudoController@criaPlanilhaExcelLaudo');
 //cadastra OS
@@ -330,3 +330,6 @@ Route::post('controle-laudos/cadastrarOS', 'Laudo\controleLaudoController@cadast
 Route::post('controle-laudos/cadastrarobs/{id}', 'Laudo\controleLaudoController@cadastrarOBS');
 //view de baixa
 Route::get('controle-laudos/controle-baixa', 'Laudo\controleLaudoController@baixaDeLaudo');
+//view de correcao
+Route::get('controle-laudos/controle-correcao', 'Laudo\controleLaudoController@correcaoDeLaudo');
+Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCorrecao');

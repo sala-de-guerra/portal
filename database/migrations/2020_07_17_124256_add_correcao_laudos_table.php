@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLaudosTable extends Migration
+class AddCorrecaoLaudosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddLaudosTable extends Migration
     public function up()
     {
         Schema::table('TBL_CONTROLE_LAUDO', function (Blueprint $table) {
-            $table->dateTime('dataCadastroSiopi')->nullable();
+            $table->integer('correcao')->nullable();
         });
     }
 
