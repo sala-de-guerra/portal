@@ -419,6 +419,11 @@ $("#reavaliacaotbl").click(function() {
     setTimeout(function(){
         $('.dtableReavaliacao').DataTable({
             "order": [[ 3, "desc" ]],
+            'columnDefs' : [ { 
+                'searchable'    : false, 
+                'targets'       : [7] 
+                },
+            ],
             "language": {
                 "sEmptyTable": "Nenhum registro encontrado",
                 "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

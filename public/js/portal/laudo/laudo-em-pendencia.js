@@ -409,6 +409,11 @@ $("#pendenciatbl").click(function() {
 setTimeout(function(){
     $('.dtablePendencia').DataTable({
         "order": [[ 3, "asc" ]],
+        'columnDefs' : [ { 
+            'searchable'    : false, 
+            'targets'       : [7] 
+            },
+        ],
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
