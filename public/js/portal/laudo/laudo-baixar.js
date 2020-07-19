@@ -30,7 +30,7 @@ $( document ).ready(function() {
                             </button>
                         </div>
                         <div class="modal-body">
-                        <textarea class="form-control" rows="5" disabled>${item.observacao}</textarea>
+                        <textarea class="form-control" rows="5" disabled>${item.observacao}</textarea><br>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
@@ -144,8 +144,17 @@ $( document ).ready(function() {
                                                 <input type="hidden" name="contratoFormatado" value="${item.BEM_FORMATADO}">
                                                     <div class="form-group">
                                                         <p>Observação </p>
-                                                        <textarea name="observacao" class="form-control" rows="5"></textarea>
+                                                        <textarea name="observacao" class="form-control" rows="5" required></textarea>
                                                     </div>
+
+                                                    <div class="form-group">
+                                                    Enviado para correção ? <br>
+                                                        <input type="radio" name="correcao" value=1>
+                                                        <label for="Sim">Sim</label><br>
+                                                        <input type="radio" name="correcao" value=0 checked>
+                                                        <label for="Nao">Não</label><br>
+                                                    </div>
+
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                     <button type="submit" class="btn btn-primary">Enviar</button>
@@ -163,7 +172,13 @@ $( document ).ready(function() {
             }
             if ($('#obs'+item.NU_BEM).text() == 'null'){
                 $('#obs'+item.NU_BEM).text("")
-            }  
+            }
+            $('#btnToggle'+item.NU_BEM).click(function() {
+                $('#toggleModelo'+item.NU_BEM).toggle();
+              });
+              $('#btnToggleCobranca'+item.NU_BEM).click(function() {
+                $('#toggleModeloCobranca'+item.NU_BEM).toggle();
+            });  
         })
     })
 })   

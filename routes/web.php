@@ -333,3 +333,9 @@ Route::get('controle-laudos/controle-baixa', 'Laudo\controleLaudoController@baix
 //view de correcao
 Route::get('controle-laudos/controle-correcao', 'Laudo\controleLaudoController@correcaoDeLaudo');
 Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCorrecao');
+
+
+//ROTA Corretores
+Route::get('corretores', 'CorretoresController@Corretores');
+// lista corretores
+Route::get('corretores/lista-corretores', 'CorretoresController@listaCorretores');
