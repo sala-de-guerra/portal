@@ -60,6 +60,7 @@ border-color: #80D651;
 
 
 @section('content')
+<a type="button" href="controle-correcao" class="btn btn-outline-warning">Cobrança Engenharia</a><br><br>
 
 <div class="row">
     <div class="col-md-12">

@@ -60,7 +60,7 @@ border-color: #80D651;
 
 
 @section('content')
-
+<a type="button" href="controle-baixa" class="btn btn-outline-success">Baixar</a><br><br>
 <div class="row">
     <div class="col-md-12">
         <div class="card card-default">

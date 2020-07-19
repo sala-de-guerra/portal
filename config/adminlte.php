@@ -226,6 +226,12 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
         [
+            'text'        => 'Corretores',
+            'url'         => '/corretores',
+            'icon'        => 'fas fa-lg fa-fw fa-address-card mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+        ],
+        [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
             'icon'        => 'fas fa-lg fa-fw fa-question-circle mr-2',

@@ -11,68 +11,65 @@ var chbformatado = numeroContrato;
 
 $(document).ready(function(){
     $("#custom-tabs-one-leiloes-tab").click();
-    var appendbotao =   `<div class="row">
-                            <div class="col-sm-6">
-                               <button id="botaoEditarDadosContrato" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">
-                                    Editar</span>
-                               </button>
-                                
-                               <button id="botaoAlteraStatus" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalAlteraStatus" style="margin: 0 30px 0 10px;"><span style="color: White;">
-                               Averbar</span>&nbsp&nbsp<i style="color: white;" class="fas fa-check"></i>
-                               </button>&nbsp&nbsp
-
-                                <button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalbotaokit">
-                                    Receber Documentos Leiloeiro
-                                </button>
-
-                                <button type="button" id="botaoEntregarDocumentosDespachante" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalbotaodespachante">
-                                    Entregar Documentos ao Despachante
-                                </button>
-                                
-                                <button type="button" id="botaoReceberProtocoloCartorio" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalReceberprotocolo">
-                                    Receber Protocolo Cartório
-                                </button>
-                                
-                                <button type="button" id="botaoReceberDocumentosdespachante" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalReceberdespachante">
-                                    Receber Documento Despachante
-                                </button><br><br>
-                            
-                            </div>
-                        </div>` +
+    var appendbotao =   '<div class="row">' +
+                            '<div class="col-sm-6">'+
+                                '<button id="botaoEditarDadosContrato" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modaldeEdicao" style="margin: 0 30px 0 10px;"><i style="color: white;" class="far fa-edit"></i><span style="color: White;">Editar</span></button>' +
+                                '<button id="botaoAlteraStatus" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalAlteraStatus" style="margin: 0 30px 0 10px;"><span style="color: White;">Averbar</span>&nbsp&nbsp<i style="color: white;" class="fas fa-check"></i></button>&nbsp&nbsp' +
+                                '<button type="button" id="botaoReceberDocumentosLeiloeiro" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalbotaokit">' +
+                                    'Receber Documentos Leiloeiro' +
+                                '</button>' +
+                                '<button type="button" id="botaoEntregarDocumentosDespachante" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalbotaodespachante">' +
+                                    'Entregar Documentos ao Despachante' +
+                                '</button>' +
+                                '<button type="button" id="botaoReceberProtocoloCartorio" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalReceberprotocolo">' +
+                                    'Receber Protocolo Cartório' +
+                                '</button>' +
+                                '<button type="button" id="botaoReceberDocumentosdespachante" style="display:none;" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalReceberdespachante">' +
+                                    'Receber Documento Despachante' +
+                                '</button>' + 
+                            '<br><br>' +
+                            '</div>'+
+                            '<div class="col-sm-3">'+
+                            '</div>'+
+                        '</div>' +
 
              //    <!-- form do botão Alterar Status para Averbado -->
-                `<div class="modal fade" id="modalAlteraStatus" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                                <h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Averbar contrato</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">                     
-                            <form id="formAlteraStatus2" action="/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/${chbformatado}" method="post">
-                                <input type="hidden" class="form-control" name="_token" value="${csrfVar}">
-                                <input type="hidden" class="form-control" name="_method" value="PUT">
-                                <div class="form-group">
-                                    <div style="display:none;" class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="existeExigencia" id="radioAlteraStatus" value="NAO" checked>
-                                        <label class="form-check-label">SIM</label>
-                                    </div>
-                                    <label>Data de Entrega Averbação</label>
-                                    <input type="text" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>
-                                    <p>(Preencha estes campos apenas se tiver certeza de que não é possivel preencher o restante das informações)</p>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                        <button type="submit" class="btn btn-primary">Salvar</button>
-                                    </div>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>`+
+             '<div class="modal fade" id="modalAlteraStatus" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
+             '<div class="modal-dialog" role="document">'+
+                 '<div class="modal-content">'+
+                 '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">'+
+                     '<h5 style="color: white;" class="modal-title" id="staticBackdropLabel">Averbar contrato</h5>'+
+                     '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                     '<span aria-hidden="true">&times;</span>'+
+                     '</button>'+
+                 '</div>'+
+                 '<div class="modal-body px-2">'+
+                 '<form id="formAlteraStatus">'+
+                     '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                     '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                         '<div class="form-group">'+
+                             '<div style="display:none;" class="form-check form-check-inline">' +
+                                 '<input class="form-check-input" type="radio" name="existeExigencia" id="radioAlteraStatus" value="NAO" checked>' +
+                                 '<label class="form-check-label">SIM</label>'+
+                             '</div>' +
+                             '<div class="form-group">'+
+                             '<label>'+'Data de Entrega Averbação'+'</label>'+
+                             '<input type="text" name="dataEntregaAverbacaoExigenciaUnidade" class="form-control datepicker" autocomplete="off" placeholder="Selecione no calendário" required>'+
+                         '</div>'+
+                         '<p>(Preencha estes campos apenas se tiver certeza de que não é possivel preencher o restante das informações)</p>'+
+                         '</div>'+
+                     '<div class="modal-footer">'+
+                         '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                         '<button type="submit" class="btn btn-primary">'+'Salvar'+'</button>'+
+                     '</div>'+
+                 '</div>'+
+                     '</form>'+
+             '</div>'+
+         '</div>'+
+         '</div>'+
                        
+
+
                         // modal de edição
                         '<div class="modal fade" id="modaldeEdicao" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">'+
                         '<div class="modal-dialog" role="document">'+
@@ -436,9 +433,42 @@ $(document).ready(function(){
             var verificaLeiloeiro = $('#nomeEmpresaAssessoraLeiloeiro').text()
             var verificaDespachante = $('#nomeDespachante').text()
 
-        if (verificaLeiloeiro != "" && verificaDespachante != "" ){
-            $('#botaoAlteraStatus').show()
-        }
+    if (verificaLeiloeiro != "" && verificaDespachante != "" ){
+        $('#botaoAlteraStatus').show()
+    }
+    $("#formAlteraStatus").submit(function (event) {
+        event.preventDefault()
+        var agoraVai = $(this).serialize()
+            Swal.fire({
+                title: 'AVISO',
+                text: "Alguns campos ficarão sem preenchimento, não será possivel preencher após a confirmação",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "Cancelar",
+                confirmButtonText: 'Concordo'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '/estoque-imoveis/leiloes-negativos/tratar/receber-documentos-despachante/'+chbformatado,
+                        type: "post",
+                        data: agoraVai,
+                        dataType: 'json',
+                        success: function (response) {
+                            Swal.fire(
+                                'Alterado!',
+                                'Averbação concluída.',
+                                'success'
+                            )
+                        } 
+                    }).done(
+                        location.reload()
+                    ) 
+                }
+            })
+        })
+
     }, 1500)
 })
 // função que pergunta se o usuario tem certeza de sensibilizar todos os leilões

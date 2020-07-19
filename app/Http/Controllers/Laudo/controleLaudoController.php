@@ -299,6 +299,7 @@ class controleLaudoController extends Controller
 
         $novaOBS =  Laudo::find($id);
             $novaOBS->observacao = $request->input('observacao');
+            $novaOBS->correcao = $request->input('correcao');
             $novaOBS->save();
 
         $historico = new HistoricoPortalGilie;
