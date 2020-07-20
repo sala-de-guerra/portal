@@ -368,5 +368,5 @@ setTimeout(function(){
     $('.spinnerTblPendencia').remove()
     $("#pendenciatbl").off('click')
     $(".OS").mask("0000.0000.000000000/0000.00.00.00");
-}, 1000);
+}, 2000);
 })
