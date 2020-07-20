@@ -377,9 +377,9 @@ setTimeout(function(){
     $('#tblLaudoEmDia').dataTable( {
         "autoWidth": false
       } );
-    }, 1000);
+    }, 2000);
     
 setTimeout(function(){
     $('.spinnerTbl').remove()
-    }, 1000);
+    }, 2000);
 
