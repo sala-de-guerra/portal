@@ -31,7 +31,10 @@
         <div class="card card-default">
 
             <div class="card-header">
-                <h3 class="card-title">Listagem de corretores ativos</h3>
+                <h3 class="card-title">Listagem de corretores</h3>&nbsp&nbsp
+                <div class="spinner-border spinnerTbl text-primary" role="status">
+                    <span class="sr-only"></span>
+                  </div>
             </div> <!-- /.card-header -->
             
             <div class="card-body">
@@ -39,6 +42,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <table id="tblCorretores" class="table table-bordered table-striped dataTable">
+                            <div class="notice notice-success">
+                                <strong>Corretores: </strong>Listagem de corretores com contrato <strong>ATIVO</strong> registrado no SIMOV.
+                            </div><br>
                             <thead>
                                 <tr>
                                     <th>Nome</th>

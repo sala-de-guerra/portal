@@ -59,4 +59,6 @@ setTimeout(function(){
             }
         }
     });
-}, 3000);
+    $('.spinnerTbl').remove()
+}
+, 3000);
