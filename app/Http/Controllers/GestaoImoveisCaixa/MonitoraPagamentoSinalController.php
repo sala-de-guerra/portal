@@ -54,7 +54,7 @@ class MonitoraPagamentoSinalController extends Controller
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
 
-        $consultaContratosSemPagamentoSinal = BaseSimov::where('DATA_PROPOSTA', '<=', Carbon::now()->sub('7 day')->format('Y-m-d'))
+        $consultaContratosSemPagamentoSinal = BaseSimov::where('ALITB001_Imovel_Completo.DATA_PROPOSTA', '<=', Carbon::now()->sub('7 day')->format('Y-m-d'))
                                             ->leftjoin('TBL_HISTORICO_PORTAL_GILIE', 'TBL_HISTORICO_PORTAL_GILIE.numeroContrato',  "=", 'ALITB001_Imovel_Completo.BEM_FORMATADO')
                                             ->leftjoin('ALITB048_CUB120000', 'ALITB048_CUB120000.NOME PROPONENTE',  "=", 'ALITB001_Imovel_Completo.NOME_PROPONENTE')
                                                      ->select(DB::raw('
