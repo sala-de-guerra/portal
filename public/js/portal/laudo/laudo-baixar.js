@@ -211,4 +211,5 @@ $( document ).ready(function() {
                 }
             }
         });
+        $('.spinnerTbl').remove()
     }, 2000);

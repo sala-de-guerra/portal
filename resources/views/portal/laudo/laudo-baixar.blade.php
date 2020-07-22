@@ -3,26 +3,6 @@
 @section('title', 'Portal GILIE/SP')
 
 @section('content_header')
-<style>
-.notice {
-padding: 15px;
-background-color: #fafafa;
-border-left: 6px solid #7f7f84;
-margin-bottom: 10px;
--webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
--moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-}
-.notice-warning {
-border-color: #FEAF20;
-}
-.notice-danger {
-border-color: #d73814;
-}
-.notice-success {
-border-color: #80D651;
-}
-</style>
 <div class="row mb-2">
 
     <div class="col-sm-6">
@@ -60,7 +40,11 @@ border-color: #80D651;
 
 
 @section('content')
-<a type="button" href="controle-correcao" class="btn btn-outline-warning">Cobrança Engenharia</a><br><br>
+<div class="card">
+    <div class="card-body">
+        <a type="button" href="controle-correcao" class="btn btn-outline-warning">Cobrança Engenharia</a>
+    </div>
+  </div>
 
 <div class="row">
     <div class="col-md-12">
@@ -74,7 +58,13 @@ border-color: #80D651;
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="tblbaixar" class="table table-bordered table-striped dataTable">
-
+                            <div class="notice notice-success">
+                                <strong>Baixar: </strong> Laudos com o status <strong>CONCLUIDO</strong> no SIOPI
+                            </div><br>
+                            <div class="spinner-border spinnerTbl text-primary" role="status">
+                                <span class="sr-only"></span>
+                              </div>
+                              <span class="spinnerTbl">Carregando Tabela Aguarde...</span>
                             <thead>
                                 <tr>
                                     <th>Contrato</th>
