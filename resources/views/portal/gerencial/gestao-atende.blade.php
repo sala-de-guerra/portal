@@ -33,6 +33,12 @@
     </div>
 </div><br>
 
+<div class="card">
+    <div class="card-body">
+        <a type="button" href="/gerencial/gestao-atende" class="btn btn-primary">Visão Unificada</a>  
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">

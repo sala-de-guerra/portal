@@ -70,7 +70,7 @@ class RegistroAtendimentoController extends Controller
             $request->session()->flash('tituloMensagem', "Histórico não registrado");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o registro do histórico. Tente novamente");
         }
-        return redirect("/consulta-bem-imovel/" . $numeroContratoFormatado);
+        return back();
     }
 
     
