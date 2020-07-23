@@ -8,6 +8,7 @@ use App\Models\Atende;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Models\HistoricoPortalGilie;
 use Illuminate\Support\Facades\DB;
+use App\Classes\Ldap;
 
 class GestaoAtendeController extends Controller
 {
@@ -19,75 +20,17 @@ class GestaoAtendeController extends Controller
     public function index()
     {
         
+        return view('portal.gerencial.gestao-atende-novo');
+        
+    }
+
+    public function visaoDiasDeVencimento()
+    {
+        
         return view('portal.gerencial.gestao-atende');
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     public function listarEmpregados()
     {
         $listarEmpregados = Empregado::where('codigoLotacaoAdministrativa', session('codigoLotacaoAdministrativa'))
@@ -142,7 +85,7 @@ class GestaoAtendeController extends Controller
             $request->session()->flash('tituloMensagem', "Atende não redirecionado");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o redirecionado do Atende. Tente novamente");
         }
-        return redirect("/atende/gestao-atende");
+        return back();
     }
     public function responderAtendeGerencial(Request $request, $idAtende)
     {
@@ -188,7 +131,7 @@ class GestaoAtendeController extends Controller
             $request->session()->flash('tituloMensagem', "Resposta não registrada");
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante registro da resposta do Atende. Tente novamente");
         }
-        return redirect("/atende/gestao-atende");
+        return back();
     }
 
     public function excluirAtendeGerencial(Request $request, $idAtende)
@@ -240,6 +183,91 @@ class GestaoAtendeController extends Controller
     public function GerenciarDemandaGenerica()
     {
         return view('portal.gerencial.atividades-genericas');
+    }
+    public function listarUniverso()
+    {
+        // $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        // $dadosAtende = Atende::where('codigoUnidade', $unidadeUsuario)
+        // ->where('statusAtende','<>','FINALIZADO')
+        // ->get();
+
+        // return json_encode($dadosAtende);
+        $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        $dadosAtende = DB::table('TBL_ATENDE_DEMANDAS')
+            ->join('TBL_GESTAO_EQUIPES_ATIVIDADES', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_ATIVIDADES.idAtividade)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idAtividade)'))
+            ->join('TBL_GESTAO_EQUIPES_CELULAS', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_CELULAS.idEquipe)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idEquipe)'))
+            ->join('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade)'))
+            ->select(DB::raw('
+                    TBL_ATENDE_DEMANDAS.[idAtende] as idAtende,
+                    TBL_ATENDE_DEMANDAS.[contratoFormatado] as contratoFormatado,
+                    TBL_ATENDE_DEMANDAS.[numeroContrato] as numeroContrato,
+                    TBL_ATENDE_DEMANDAS.[idAtividade] as idAtividade,
+                    TBL_EMPREGADOS.[nomeCompleto] as matriculaResponsavelAtividade,
+                    TBL_ATENDE_DEMANDAS.[assuntoAtende] as assuntoAtende,
+                    TBL_ATENDE_DEMANDAS.[descricaoAtende] as descricaoAtende,
+                    TBL_ATENDE_DEMANDAS.[motivoRedirecionamento] as motivoRedirecionamento,
+                    TBL_ATENDE_DEMANDAS.[respostaAtende] as respostaAtende,
+                    TBL_ATENDE_DEMANDAS.[prazoAtendimentoAtende] as prazoAtendimentoAtende,
+                    TBL_ATENDE_DEMANDAS.[statusAtende] as statusAtende,
+                    TBL_ATENDE_DEMANDAS.[matriculaCriadorDemanda] as matriculaCriadorDemanda,
+                    TBL_ATENDE_DEMANDAS.[emailContatoResposta] as emailContatoResposta,
+                    TBL_ATENDE_DEMANDAS.[dataCadastro] as dataCadastro,
+                    TBL_ATENDE_DEMANDAS.[dataAlteracao] as dataAlteracao,
+                    TBL_ATENDE_DEMANDAS.[codigoUnidade] as codigoUnidade,
+                    TBL_ATENDE_DEMANDAS.[emailContatoCopia] as emailContatoCopia,
+                    TBL_ATENDE_DEMANDAS.[emailContatoNovaCopia] as emailContatoNovaCopia,
+                    TBL_ATENDE_DEMANDAS.[idEquipe] as idEquipe,
+                    TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+                    TBL_GESTAO_EQUIPES_ATIVIDADES.[nomeAtividade] as nomeAtividade
+            '))
+             ->where('codigoUnidade', $unidadeUsuario)
+             ->where('statusAtende','<>','FINALIZADO')
+             ->get();
+
+             return json_encode($dadosAtende);
+    }
+
+    public function listarFinalizados()
+    {
+        // $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        // $dadosAtende = Atende::where('codigoUnidade', $unidadeUsuario)
+        // ->where('statusAtende','<>','FINALIZADO')
+        // ->get();
+
+        // return json_encode($dadosAtende);
+        $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        $dadosAtende = DB::table('TBL_ATENDE_DEMANDAS')
+            ->join('TBL_GESTAO_EQUIPES_ATIVIDADES', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_ATIVIDADES.idAtividade)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idAtividade)'))
+            ->join('TBL_GESTAO_EQUIPES_CELULAS', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_CELULAS.idEquipe)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idEquipe)'))
+            ->join('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade)'))
+            ->select(DB::raw('
+                    TBL_ATENDE_DEMANDAS.[idAtende] as idAtende,
+                    TBL_ATENDE_DEMANDAS.[contratoFormatado] as contratoFormatado,
+                    TBL_ATENDE_DEMANDAS.[numeroContrato] as numeroContrato,
+                    TBL_ATENDE_DEMANDAS.[idAtividade] as idAtividade,
+                    TBL_EMPREGADOS.[nomeCompleto] as matriculaResponsavelAtividade,
+                    TBL_ATENDE_DEMANDAS.[assuntoAtende] as assuntoAtende,
+                    TBL_ATENDE_DEMANDAS.[descricaoAtende] as descricaoAtende,
+                    TBL_ATENDE_DEMANDAS.[motivoRedirecionamento] as motivoRedirecionamento,
+                    TBL_ATENDE_DEMANDAS.[respostaAtende] as respostaAtende,
+                    TBL_ATENDE_DEMANDAS.[prazoAtendimentoAtende] as prazoAtendimentoAtende,
+                    TBL_ATENDE_DEMANDAS.[statusAtende] as statusAtende,
+                    TBL_ATENDE_DEMANDAS.[matriculaCriadorDemanda] as matriculaCriadorDemanda,
+                    TBL_ATENDE_DEMANDAS.[emailContatoResposta] as emailContatoResposta,
+                    TBL_ATENDE_DEMANDAS.[dataCadastro] as dataCadastro,
+                    TBL_ATENDE_DEMANDAS.[dataAlteracao] as dataAlteracao,
+                    TBL_ATENDE_DEMANDAS.[codigoUnidade] as codigoUnidade,
+                    TBL_ATENDE_DEMANDAS.[emailContatoCopia] as emailContatoCopia,
+                    TBL_ATENDE_DEMANDAS.[emailContatoNovaCopia] as emailContatoNovaCopia,
+                    TBL_ATENDE_DEMANDAS.[idEquipe] as idEquipe,
+                    TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+                    TBL_GESTAO_EQUIPES_ATIVIDADES.[nomeAtividade] as nomeAtividade
+            '))
+             ->where('codigoUnidade', $unidadeUsuario)
+             ->where('statusAtende','=','FINALIZADO')
+             ->get();
+
+             return json_encode($dadosAtende);
     }
 
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\GestaoEquipesAtividadesController;
 use App\Models\Atende;
 use App\Models\BaseSimov;
 use App\Models\GestaoEquipesAtividades;
+use App\Models\ModeloMensagem;
 use App\Models\GestaoEquipesAtividadesResponsaveis;
 use App\Models\GestaoEquipesCelulas;
 use App\Models\GestaoEquipesLogHistorico;
@@ -689,6 +690,46 @@ class AtendeDemandasController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante registro da resposta do Atende. Tente novamente");
         }
         return redirect("/atende/minhas-demandas");
+    }
+
+    public function criaModeloMensagem(Request $request)
+    {try {
+        DB::beginTransaction();
+        
+        $novaMensagem = new ModeloMensagem;
+        $novaMensagem->nomeModelo          = $request->nomeModelo;
+        $novaMensagem->modeloMensageria    = strip_tags($request->modeloMensageria);
+        $novaMensagem->matricula           = session('matricula');
+        $novaMensagem->save();
+
+        // RETORNA A FLASH MESSAGE
+        $request->session()->flash('corMensagem', 'success');
+        $request->session()->flash('tituloMensagem', "Modelo de mensagem criado!");
+        $request->session()->flash('corpoMensagem', "O novo modelo foi salvo com sucesso.");
+
+        DB::commit();
+    } catch (\Throwable $th) {
+        if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+            dd($th);
+        } else {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+        }
+        DB::rollback();
+        // RETORNA A FLASH MESSAGE
+        $request->session()->flash('corMensagem', 'danger');
+        $request->session()->flash('tituloMensagem', "Modelo de mensagem não salvo");
+        $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a criação do modelo. Tente novamente");
+    }
+    return back();
+
+    }
+
+    public function listarModeloMensagem()
+    {
+
+        $mensagemCadastrada = ModeloMensagem::where('matricula', session('matricula'))->get();
+
+        return json_encode($mensagemCadastrada);
     }
 
 

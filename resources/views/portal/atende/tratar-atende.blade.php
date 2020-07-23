@@ -70,6 +70,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item" id="custon-tabs-li-modeloMensageria">
+                        <a class="nav-link" id="custom-tabs-one-modeloMensageria-tab" data-toggle="pill" href="#custom-tabs-one-modeloMensageria" role="tab" aria-controls="custom-tabs-one-modeloMensageria" aria-selected="false">
+                            <h5>Modelos de Mensagem</h5>
+                        </a>
+                    </li>
+
 
                 </ul>
             </div>
@@ -275,319 +281,7 @@
 
                     </div>
 
-                    <div class="tab-pane fade" id="custom-tabs-one-laudos" role="tabpanel" aria-labelledby="custom-tabs-one-laudos-tab">
-
-                        <div class="row">
-                            <div class="col-sm-3"> 
-                                <div class="form-group">
-                                    <label>Data Laudo de Avaliação:</label>
-                                    <p class="formata-data-sem-hora" id="dataLaudoAvaliacao"></p>
-                                </div>
-                            </div> 
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data Validade do Laudo:</label>
-                                    <p class="formata-data-sem-hora" id="dataValidadeLaudoAvaliacao"></p>
-                                </div>
-                            </div> 
-                            <div class="col-sm-3"> 
-                                <div class="form-group">
-                                    <label>Valor de Avaliação:</label>
-                                    <p class="formata-valores" id="valorAvaliacao"></p>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="custom-tabs-one-leiloes" role="tabpanel" aria-labelledby="custom-tabs-one-leiloes-tab">
-                        
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-body pb-0" id="progressBarLeilaoNegativo"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data Primeiro Leilão:</label>
-                                    <p class="formata-data-sem-hora" id="dataPrimeiroLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Valor no Primeiro Leilão:</label>
-                                    <p class="formata-valores" id="valorPrimeiroLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data Segundo Leilão:</label>
-                                    <p class="formata-data-sem-hora" id="dataSegundoLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Valor no Segundo Leilão:</label>
-                                    <p class="formata-valores" id="valorSegundoLeilao"></p>
-                                </div>
-                            </div>                            
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Data de Consolidação:</label>
-                                    <p class="formata-data-sem-hora" id="dataConsolidacao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Número Leilão:</label>
-                                    <p id="numeroLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Número do Item:</label>
-                                    <p id="numeroItem"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Status SIMOV:</label>
-                                    <p id="statusImovelLeilao"></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Valor de Venda:</label>
-                                    <p class="formata-valores" id="valorVenda"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Valor Contábil:</label>
-                                    <p class="formata-valores" id="valorContabil"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Matrícula / RI:</label>
-                                    <p id="matriculaImovelLeilao"></p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Cidade Comarca Cartório:</label>
-                                    <p id="cidadeComarcaCartorio"></p>
-                                </div>
-                            </div>
-                        </div>
-                         
-                        <!-- <hr class="pontilhado"> -->
-                        <hr>
-                        <div id="consultaLeilaoNegativo">
-                            <div style="color: #054f77; font-size: 13pt;"><b>Dados do Leilão Negativo:</b>
-                            <b class="badge badge-info badge-large mx-4" id="statusAverbacao"></b>
-                            </div><br>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                <div class="btn-group dropup">
-                                    <button type="button" class="btn btn-link dropdown-toggle" style="color: #054f77; font-size: 13pt;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-info-circle"></i>Leiloeiro: <span id="nomeLeiloeiro"></span>
-                                    </button>
-                                    <div class="dropdown-menu" style="background-color: #054f77; color: white;">
-                                        <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
-                                        <h6 class="dropdown-header" style="color: white;"><span id="telefoneLeiloeiro"></span></h6>
-                                        <div class="dropdown-divider"></div>
-                                        <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
-                                        <h6 class="dropdown-header" style="color: white;"><span id="emailLeiloeiro"></span></h6>
-                                        <div class="dropdown-divider"></div>
-                                        <h6 class="dropdown-header" style="color: white;">Site:</h6>
-                                        <h6 class="dropdown-header" style="color: white;"><span id="siteEmpresaAssessoraLeiloeiro"></span></h6>
-                                        <div class="dropdown-divider"></div>
-                                        <h6 class="dropdown-header" style="color: white;">Empresa:</h6>
-                                        <h6 class="dropdown-header" style="color: white;"><span id="nomeEmpresaAssessoraLeiloeiro"></span></h6>
-                                        <div class="dropdown-divider"></div>
-                                        <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
-                                        <h6 class="dropdown-header" style="color: white;"><span id="telefoneEmpresaAssessoraLeiloeiro"></span></h6>
-                                        <div class="dropdown-divider"></div>
-                                        <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
-                                        <h6 class="dropdown-header" style="color: white;"><span id="emailEmpresaAssessoraLeiloeiro"></span></h6>
- 
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="btn-group dropup">
-                                        <button type="button" class="btn btn-link dropdown-toggle" style="color: #054f77; font-size: 13pt;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-info-circle"></i>Despachante: <span id="nomeDespachante"></span>
-                                        </button>
-                                        <div class="dropdown-menu" style="background-color: #054f77; color: white;">
-                                            <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
-                                            <h6 class="dropdown-header" style="color: white;"><span id="telefoneDespachante"></span></h6>
-                                            <div class="dropdown-divider"></div>
-                                            <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
-                                            <h6 class="dropdown-header" style="color: white;"><span id="emailDespachante"></span></h6>
-                                            <div class="dropdown-divider"></div>
-                                            <h6 class="dropdown-header" style="color: white;">Responsável:</h6>
-                                            <h6 class="dropdown-header" style="color: white;"><span id="nomePrimeiroResponsavelDespachante"></span></h6>
-                                            <div class="dropdown-divider"></div>
-                                            <h6 class="dropdown-header" style="color: white;">Telefone:</h6>
-                                            <h6 class="dropdown-header" style="color: white;"><span id="telefonePrimeiroResponsavelDespachante"></span></h6>
-                                            <div class="dropdown-divider"></div>
-                                            <h6 class="dropdown-header" style="color: white;">E-mail:</h6>
-                                            <h6 class="dropdown-header" style="color: white;"><span id="emailPrimeiroResponsavelDespachante"></span></h6>
-     
-                                        </div>
-                                      </div>
-                                    </div>
-
-                            </div><br><br>
-
-                            <div id="cardLeilao">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Previsão Recebimento Kit Leiloeiro:</label>
-                                            <p class="formata-data-sem-hora" id="previsaoRecebimentoDocumentosLeiloeiro"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Data Recebimento Kit Leiloeiro:</label>
-                                            <p class="formata-data-sem-hora" id="dataEntregaDocumentosLeiloeiro"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Previsão Entrega Docs Despachante:</label>
-                                            <p class="formata-data-sem-hora" id="previsaoDisponibilizacaoDocumentosAoDespachante"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Data Entrega Docs Despachante:</label>
-                                            <p class="formata-data-sem-hora" id="dataRetiradaDocumentosDespachante"></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Nº Ordem de Serviço: </label>
-                                            <p id="numeroOficioUnidade"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Nº Protocolo:</label>
-                                            <p id="numeroProtocoloCartorio"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Senha de Acesso:</label>
-                                            <p id="codigoAcessoProtocoloCartorio"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Previsão Análise Cartório:</label>
-                                            <p class="formata-data-sem-hora" id="dataPrevistaAnaliseCartorio"></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Data Retirada Documento Cartório:</label>
-                                            <p class="formata-data-sem-hora" id="dataRetiradaDocumentoCartorio"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Data Entrega Documento Unidade:</label>
-                                            <p class="formata-data-sem-hora" id="dataEntregaAverbacaoExigenciaUnidade"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Data Última Alteração:</label>
-                                            <p class="formata-data-sem-hora" id="dataAlteracao"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label>Histórico :</label><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalHistoricoleilaoNegativoCompleto"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button>
-                                            <p id="historicoLeilaoNegativo"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Código Rastreamento Correio:</label>&nbsp&nbsp
-                                            <span id="botaocadastrar"></span>
-                                            {{-- @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
-                                            <button type="button" style="color: #white; font-size: 13pt; padding: 0; margin: 0;" class="btn btn-primary" data-toggle="modal" data-target="#cadastraCodigoCorreio">&nbsp Cadastrar &nbsp</button>
-                                            @endif --}}
-                                            <a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" target="_blank" data-toggle="tooltip" data-placement="top" title="ir para o site de rastreio" class="btn btn-link" data-toggle="modal"><i style="color: #054f77; font-size: 13pt;" class="fas fa-external-link-square-alt"></i></a>
-                                            {{-- <p id="codigoCorreio"></p> --}}
-                                            <ul style="list-style-type: none; padding: 0; margin: 0;" id="codigoDoCorreio"></ul>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <br>             
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="modalHistoricoleilaoNegativoCompleto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-scrollable"  role="document">
-                                        <div class="modal-content">
-                                        <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                                            <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Histórico</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <label for="paragrafoHistoricoleilaoNegativoCompleto">Histórico</label>
-                                        <textarea class="form-control" rows="3" disabled id="paragrafoHistoricoleilaoNegativoCompleto"></textarea>
-                                        </div>
-
-                                    <div class="container">
-                                        <form method='post'>
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="tipoAtendimento" value="REGISTRO">
-                                            <input type="hidden" name="atividadeAtendimento" value="LEILÃO NEGATIVO">
-                                            <div class="form-group">
-                                                <p>Novo Histórico</p>
-                                                    <textarea name="observacaoAtendimento" class="form-control" rows="5" required></textarea>
-                                                </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <button type="submit" class="btn btn-primary">Gravar</button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                        </div>
-                                    </div>
-                                    </div>
-                                        </div>
-     
-                                    <!-- Botões do leilão negativo -->
-                                    <div id="LeilaoNegativo"></div>
-                                </div>
-                            </div>
-
-
-                    </div>
+                    
 
                     <div class="tab-pane fade" id="custom-tabs-one-contratacao" role="tabpanel" aria-labelledby="custom-tabs-one-contratacao-tab">
                         
@@ -803,17 +497,6 @@
                      
                     </div>
 
-                    <div class="tab-pane fade" id="custom-tabs-one-distrato" role="tabpanel" aria-labelledby="custom-tabs-one-distrato-tab">
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <ul id="listaDistratos" class="list-unstyled">
-
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-historico" role="tabpanel" aria-labelledby="custom-tabs-one-historico-tab">
                         <div class="row">
@@ -825,16 +508,12 @@
                                 </button>
                                 @endIf
 
-                                <button type="button" id="historicoPrestador" class="btn btn-primary float-right" style="display: none;" data-toggle="modal" data-target="#modalCadastraAtendimento">
-                                    <i class="fas fa-lg fa-headset m-2"></i>
-                                    Cadastrar Historico
-                                </button>
-
+    
                                 <!-- Modal -->
                                 <div class="modal fade modalCadastraAtendimento" id="modalCadastraAtendimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                            <form method='post' id="formCadastraAtendimento">
+                                            <form method='post' id="formCadastraAtendimento" action="/estoque-imoveis/registrar-historico/{{$listaDemandasAtende->contratoFormatado}}">
                                                 {{ csrf_field() }}
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Cadastrar Histórico</h5>
@@ -909,25 +588,79 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="custom-tabs-one-aviso" role="tabpanel" aria-labelledby="custom-tabs-one-aviso-tab">
-                        
-                        <h2 class="card-title">
-                            <b>AVISO</b>
-                            <b class="badge badge-info badge-large mx-4"></b>
-                            <!-- <b class="badge badge-info badge-large mx-4" id="nomeStatusDossie"></b> -->
-                        </h2>
-                    
-                        <div style="background-color: #fff9c2;" class="alert alert-warning justify-content-center"  >
-                            <div class="pl-5">
-                                <p class="justify-content-center"><i class="fas fa-exclamation-triangle"></i> <strong> ATENÇÃO!</strong></p>
-                                 <p>Esta proposta não foi sincronizada entre SIMOV e Portal GILIE ou não existe proposta cadastrada para o contrato.<br>
-                                    Orientamos verificar situação para ajuste diretamente no <a href="https://simov.caixa" target="_blank" class="alert-link">simov.caixa</a>.</p>
 
-                                 <p>O <b>simov.caixa</b> é de acesso exclusivo à funcionários lotados nas GILIE/GEIPT, em caso de dúvidas encaminhar e-mail para <b>giliesp01@caixa.gov.br</b></p>
-                                 <p style="color: red">* recomendamos não utilizar dados da planilha do SIMOV</p>
+
+                    <div class="tab-pane fade" id="custom-tabs-one-modeloMensageria" role="tabpanel" aria-labelledby="custom-tabs-one-modeloMensageria-tab">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCadastraMensagem">
+                                    <i class="far fa-envelope"></i>
+                                    Criar Modelo Mensagem
+                                </button>                      
+
+                                <!-- Modal -->
+                                <div class="modal fade modalCadastraAtendimento" id="modalCadastraMensagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <form method='post' id="formCadastraMensagem" action="/atende/criar-mensagem">
+                                                {{ csrf_field() }}
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Mensagem</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <label>Nome do modelo:</label>
+                                                    <input type="text" name="nomeModelo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Modelo Mensagem:</label>
+                                                    <textarea rows="10" name="modeloMensageria" class="form-control"></textarea>
+                                                </div>
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <br>
+                                <br>
+                        
+
+                                <table id="tblMensagemCriada" class="table table-bordered table-striped ">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome Modelo</th>
+                                            <th>Modelo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>  
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
 
 
                     <div class="tab-pane fade show active" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
@@ -1065,6 +798,7 @@ if (botãoPrestador == "CRISTIANE VIEIRA BARBOSA"){
      var numeroContrato = $('#numeroCHB').text()
 </script>
 <script src="{{ asset('js/portal/atende/tratar-atende.js') }}"></script>
+<script src="{{ asset('js/portal/atende/popula-modelo-mensagem.js') }}"></script>
 <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
 <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>

@@ -11,9 +11,8 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
-
-function _formataDatatableComData (){
-    $('.dataTable').DataTable({
+function _formataDatatableComData (idTabela){
+    $('#' + idTabela).DataTable({
         "order": [[ 3, "asc" ]],
         'columnDefs' : [ { 
             'searchable'    : false, 
@@ -372,7 +371,7 @@ var strDate = d.getDateFormatted()  + "/" + d.getMonthFormatted() + "/" + d.getF
          )}
     )
 setTimeout(function(){
-    _formataDatatableComData()
+    _formataDatatableComData("tblLaudoEmDia")
     $(".OS").mask("0000.0000.000000000/0000.00.00.00");
     $('#tblLaudoEmDia').dataTable( {
         "autoWidth": false

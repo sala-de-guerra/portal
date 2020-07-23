@@ -205,6 +205,10 @@ Route::prefix('atende')->group(function () {
     Route::get('listar-universo','AtendeDemandasController@listarUniverso');
       // TRATAR ATENDE
     Route::get('tratar-atende/{id}','AtendeDemandasController@tratarDemanda');
+    // criar modelo de mensagem
+    Route::post('criar-mensagem','AtendeDemandasController@criaModeloMensagem');
+    // lista modelos de mensagem
+    Route::get('lista-mensagem','AtendeDemandasController@listarModeloMensagem');
 });
 
 // GERENCIAL
@@ -275,6 +279,8 @@ Route::get('cadastra-empregados-unidade', 'CadastraEquipeTblEmpregadosTblGestaoE
 
 //Gestão Atende
 Route::get('gerencial/gestao-atende', 'GestaoAtendeController@index');
+//Gestão Atende por dias de vencimento
+Route::get('gerencial/gestao-atende-porVencimento', 'GestaoAtendeController@visaoDiasDeVencimento');
 //Listar Empregado
 Route::get('gerencial/listar-empregado', 'GestaoAtendeController@listarEmpregados');
 // REDIRECIONAMENTO DO GESTOR
@@ -282,7 +288,11 @@ Route::put('redirecionar/gestor/{idAtende}', 'GestaoAtendeController@redireciona
 // RESPONDER ATENDE GESTOR
 Route::put('responder/gestor/{idAtende}', 'GestaoAtendeController@responderAtendeGerencial');
 // EXCLUIR ATENDE GESTOR
-Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGerencial');  
+Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGerencial'); 
+// LISTAR UNIVERSO ATENDE
+Route::get('gerencial/listar-atende', 'GestaoAtendeController@listarUniverso');
+// LISTAR FINALIZADOS
+Route::get('gerencial/listar-finalizados', 'GestaoAtendeController@listarFinalizados'); 
 
 // ROTA CONTROLE ARQUIVO EMGEA
 Route::get('/controle-arquivos', 'PlaniladeControle\UploadexcelController@importaExcel');
