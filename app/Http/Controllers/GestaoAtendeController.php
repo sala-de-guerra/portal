@@ -222,6 +222,7 @@ class GestaoAtendeController extends Controller
             '))
              ->where('codigoUnidade', $unidadeUsuario)
              ->where('statusAtende','<>','FINALIZADO')
+             ->orderBy('prazoAtendimentoAtende', 'asc')
              ->get();
 
              return json_encode($dadosAtende);
@@ -265,6 +266,7 @@ class GestaoAtendeController extends Controller
             '))
              ->where('codigoUnidade', $unidadeUsuario)
              ->where('statusAtende','=','FINALIZADO')
+             ->orderBy('prazoAtendimentoAtende', 'asc')
              ->get();
 
              return json_encode($dadosAtende);

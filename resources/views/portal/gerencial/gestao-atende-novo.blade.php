@@ -149,7 +149,6 @@
 
 
 @section('js')
-<script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/gerencial/gerenciamento-atende.js') }}"></script>
 
 @stop
