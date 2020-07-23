@@ -27,7 +27,7 @@ $.fn.dataTable.ext.errMode = 'none';
 
                     // Modal de consulta
                     '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                    '<div class="modal-dialog modal-lg" role="document">' +
                         '<div class="modal-content">' +
                             '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                                 '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -40,7 +40,7 @@ $.fn.dataTable.ext.errMode = 'none';
                                     '<div>' +
                                         '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                                         '<p><b>'+'Descrição:'+'</b></p>'+
-                                        '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                        '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
                                     '</div><br>' +
                                 '</div>' + 
                             '</div>' +
@@ -197,7 +197,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
 
                     // Modal de consulta
                     '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                    '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                    '<div class="modal-dialog modal-lg" role="document">' +
                         '<div class="modal-content">' +
                             '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                                 '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -210,7 +210,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
                                     '<div>' +
                                         '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                                         '<p><b>'+'Descrição:'+'</b></p>'+
-                                        '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                        '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
                                     '</div><br>' +
                                 '</div>' + 
                             '</div>' +
@@ -362,7 +362,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
 
                 // Modal de consulta
                 '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-dialog modal-lg" role="document">' +
                     '<div class="modal-content">' +
                         '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                             '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -375,7 +375,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
                                 '<div>' +
                                     '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                                     '<p><b>'+'Descrição:'+'</b></p>'+
-                                    '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                    '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
                                 '</div><br>' +
                             '</div>' + 
                         '</div>' +
@@ -527,7 +527,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
 
                 // Modal de consulta
                 '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-dialog modal-lg" role="document">' +
                     '<div class="modal-content">' +
                         '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                             '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -540,7 +540,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
                                 '<div>' +
                                     '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                                     '<p><b>'+'Descrição:'+'</b></p>'+
-                                    '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                    '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
                                 '</div><br>' +
                             '</div>' + 
                         '</div>' +
@@ -693,7 +693,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
 
                 // Modal de consulta
                 '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-dialog modal-lg" role="document">' +
                     '<div class="modal-content">' +
                         '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                             '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -706,7 +706,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
                                 '<div>' +
                                     '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                                     '<p><b>'+'Descrição:'+'</b></p>'+
-                                    '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                    '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
                                 '</div><br>' +
                             '</div>' + 
                         '</div>' +

@@ -20,7 +20,7 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 
 function _formataDatatableComId (idTabela){
     $('#' + idTabela).DataTable({
-        "order": [[ 0, "desc" ]],
+        "order": [[ 2, "asc" ]],
         columnDefs: [
             {type: 'date-uk', targets: 2}
         ],
@@ -58,7 +58,7 @@ $( document ).ready(function() {
             `<tr>
             <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
             <td>${item.nomeEquipe}</td>
-            <td class="formata-data-sem-hora">${item.prazoAtendimentoAtende}</td>
+            <td>`+moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')+`</td>
             <td>${item.nomeAtividade}</td>
             <td>${item.assuntoAtende}</td>
             <td>${item.matriculaResponsavelAtividade}</td>`+
@@ -78,7 +78,7 @@ $( document ).ready(function() {
 
                 // Modal de consulta
                 '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-dialog modal-lg" role="document">' +
                     '<div class="modal-content">' +
                         '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                             '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -91,7 +91,7 @@ $( document ).ready(function() {
                                 '<div>' +
                                     '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                                     '<p><b>'+'Descrição:'+'</b></p>'+
-                                    '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                                    '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
                                 '</div><br>' +
                             '</div>' + 
                         '</div>' +
@@ -219,7 +219,6 @@ $( document ).ready(function() {
             })
         })
         _formataDatatableComId("tblAtendeAberto")
-        _formataData()
     })
 })
 
@@ -230,7 +229,7 @@ $.getJSON('listar-finalizados', function(dados){
      `<tr>
      <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
      <td>${item.nomeEquipe}</td>
-     <td class="formata-data-sem-hora">${item.prazoAtendimentoAtende}</td>
+     <td>`+moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')+`</td>
      <td>${item.nomeAtividade}</td>
      <td>${item.assuntoAtende}</td>
      <td>${item.matriculaResponsavelAtividade}</td>`+
@@ -247,7 +246,7 @@ $.getJSON('listar-finalizados', function(dados){
 
          // Modal de consulta
          '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-         '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+         '<div class="modal-dialog modal-lg" role="document">' +
              '<div class="modal-content">' +
                  '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                      '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -260,7 +259,7 @@ $.getJSON('listar-finalizados', function(dados){
                          '<div>' +
                              '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                              '<p><b>'+'Descrição:'+'</b></p>'+
-                             '<textarea class="form-control" rows="3" disabled>'+ item.descricaoAtende +'</textarea>'+
+                             '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
                          '</div><br>' +
                      '</div>' + 
                  '</div>' +
@@ -284,5 +283,4 @@ $.getJSON('listar-finalizados', function(dados){
      })
  })
  _formataDatatableComId("tblAtendeFinalizado")
- _formataData()
 })
