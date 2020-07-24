@@ -452,7 +452,7 @@ class ConsultaContratoController extends Controller
             }
         } else {
             $request->session()->flash('pesquisaSemResultados');
-            return view('portal.imoveis.consultar.consultar-imovel')->with('resultadoPesquisa', 'Não foram encontratos resultados para a pesquisa. Tente novamente.');
+            return view('portal.imoveis.consultar.consultar-imovel')->with('resultadoPesquisa', 'Não foram encontrados resultados para a pesquisa. Tente novamente.');
         }
     }
 

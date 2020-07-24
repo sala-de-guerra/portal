@@ -1,12 +1,19 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 $.fn.dataTable.ext.errMode = 'none';
 
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
+
 $(document).ready(function(){  
     $.getJSON('/atende/listar-demandas-agencia', function(dados){
         $.each(dados, function(key, item) {
+            let atende = item.idAtende
             var linha =
                 '<tr>' +
-                    '<td>' + item.idAtende + '</td>' +
+                    '<td>#' + pad(atende, 5) + '</td>' +
                     '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
                     '<td class="formata-data-sem-hora">' + item.prazoAtendimentoAtende + '</td>' +
                     '<td>' + item.assuntoAtende + '</td>' +

@@ -1,5 +1,18 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
+//pega data
+var hoje = new Date()
+var hojeFormatado = moment(hoje).format('DD/MM/YYYY');
+console.log(hojeFormatado)
+
+//formata idAtende #00000
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
+
+//Arruma ordenação datatable na data formato dd/mm/aaaa
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 	"date-uk-pre": function ( a ) {
 		if (a == null || a == "") {
@@ -53,12 +66,15 @@ function _formataDatatableComId (idTabela){
 $( document ).ready(function() {
     $.getJSON('listar-atende', function(dados){
            $.each(dados, function(key, item) {
+            let atende = item.idAtende
+            var vencimento = moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')
 
             var linha = 
             `<tr>
+            <td>#`+pad(atende, 5)+`</td>
             <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
             <td>${item.nomeEquipe}</td>
-            <td>`+moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')+`</td>
+            <td id="vencimento${item.idAtende}">${vencimento}</td>
             <td>${item.nomeAtividade}</td>
             <td>${item.assuntoAtende}</td>
             <td>${item.matriculaResponsavelAtividade}</td>`+
@@ -210,6 +226,10 @@ $( document ).ready(function() {
 
         $(linha).appendTo('#tblAtendeAberto>tbody');
 
+        if (vencimento <= hojeFormatado){
+        $('#vencimento'+item.idAtende).html('<b style="color: red;">'+vencimento +'</b>')
+        }
+
             $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
                 $.each(dadosEmpregado, function(empKey, empItem) {
                     var redirect =
@@ -224,9 +244,10 @@ $( document ).ready(function() {
 
 $.getJSON('listar-finalizados', function(dados){
     $.each(dados, function(key, item) {
-
+    let atende = item.idAtende
      var linha = 
      `<tr>
+     <td>#`+pad(atende, 5)+`</td>
      <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
      <td>${item.nomeEquipe}</td>
      <td>`+moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')+`</td>
@@ -259,8 +280,13 @@ $.getJSON('listar-finalizados', function(dados){
                          '<div>' +
                              '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                              '<p><b>'+'Descrição:'+'</b></p>'+
-                             '<textarea class="form-control" rows="20" disabled>'+ item.descricaoAtende +'</textarea>'+
+                             '<textarea class="form-control" rows="5" disabled>'+ item.descricaoAtende +'</textarea>'+
                          '</div><br>' +
+                        '<div>'+
+                         '<p><b>'+'Resposta:'+'</b></p>'+
+                            '<textarea class="form-control" rows="10" disabled>'+ item.respostaAtende +'</textarea>'+
+                        '</div><br>' +
+
                      '</div>' + 
                  '</div>' +
                  '<div class="modal-footer">' +
