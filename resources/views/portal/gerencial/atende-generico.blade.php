@@ -25,7 +25,7 @@
 
     <div class="col">
         <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i> Gerencial</li>
+            <li class="breadcrumb-item active"> Gerencial</li>
             <li class="breadcrumb-item active"><a href="/gerencial/gerenciar-demanda-generica">Atende sem contrato</a> </li>    
         </ol>
     </div>
