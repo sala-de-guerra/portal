@@ -105,6 +105,13 @@
                                 </div> 
                             </div>
                             {{-- @endif --}}
+                            <div id="anuncioSiteCaixa"class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Anúncio X Imóveis:</label>
+                                    <br>
+                                    <button id="linkXimoveis" onClick="" class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Visitar o anúncio do imóvel"><i class="fas fa-globe-americas mx-1"></i>X-Imóveis</button>
+                                </div>
+                            </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Status SIMOV:</label>
@@ -593,6 +600,9 @@
                     <div class="tab-pane fade" id="custom-tabs-one-modeloMensageria" role="tabpanel" aria-labelledby="custom-tabs-one-modeloMensageria-tab">
                         <div class="row">
                             <div class="col-sm-12">
+                                <div class="notice notice-success">
+                                    <strong>Modelos: </strong> Você pode criar modelos de mensagem para usar quando desejar</a>
+                                </div>
                                 <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCadastraMensagem">
                                     <i class="far fa-envelope"></i>
                                     Criar Modelo Mensagem
@@ -654,116 +664,104 @@
                     </div>
 
 
-
-
-
-
-
-
-
-
-
                     <div class="tab-pane fade show active" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
-                
-                            <div class="col-sm-12">                       
-                                <div id="accordion" role="tablist" aria-multiselectable="true">
-                                    <div class="card card-primary">
-                                      <div class="card-header" role="tab" id="headingOne"  onclick="mudaColapse()">
-                                        <h5 class="mb-0">
-                                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                
-                                                        <div class="row">
-                                                            <div class="col-sm">
-                                                                ATENDE: <b>{{$listaDemandasAtende->idAtende}}</b> 
-                                                            </div>
-                                                            <div class="col-sm">
-                                                                Aberto por: <b>{{$listaDemandasAtende->matriculaCriadorDemanda}}</b>  
-                                                            </div>
-                                                            <div class="col-sm">
-                                                                Contrato: <b><span id="numeroCHB">{{$listaDemandasAtende->contratoFormatado}}</span>
-                                                                </div></b>
-                                                          </div>
-                                               
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button id="collapse" class="btn btn-primary" style="float: right">X</button>
-                                                </div>
-                                            </div>
-                                          </a>
-                                        </h5>
-                                      </div>
+                        <div class="col-sm" style="display: none">
+                            Contrato: <b><span id="numeroCHB">{{$listaDemandasAtende->contratoFormatado}}</span>
+                        </div></b>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        ATENDE: <b>#{{str_pad($listaDemandasAtende->idAtende, 5, '0', STR_PAD_LEFT)}}</b> 
+                                            
+                                    </div>
+                                    <div class="col-sm-2">
+                                        Aberto por: <b>{{$listaDemandasAtende->matriculaCriadorDemanda}}</b>
+                                    </div>
+
+                                    <div class="col-sm-8">
+                                        Copia da respota para: <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp       
+                                        <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp
+                                        <b>{{$listaDemandasAtende->emailContatoResposta}}</b>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div><br>
+
+
+
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-default">
                                 
-                                      <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="card-block">
-                                        
+                                <div class="card-body">
+                    
                                     <div class="row">
                                         <div class="col-md-12">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="row">
-                                
-                                                                <b><p>Assunto: </b>{{$listaDemandasAtende->assuntoAtende}}</p> 
-                                                                {{-- <div class="container">
-                                                                    <p>{{$listaDemandasAtende->descricaoAtende}}</p> 
-                                                                </div> --}}
-                                                                <textarea class="form-control" rows="5">{{$listaDemandasAtende->descricaoAtende}}</textarea>
-                                
-                                                            </div>
-                                                        </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>           
-                                                    </div>
+                                            <form method="post" enctype="multipart/form-data" action="/atende/responder/{{$listaDemandasAtende->idAtende}}">
+                                            {{ csrf_field() }} 
+                                                <div class="form-group">
+                                                    <input type="hidden" class="form-control" name="_method" value="PUT">
+                                                    <input type="hidden" name="emailContatoResposta" value="{{$listaDemandasAtende->emailContatoResposta}}">
+                                                    <input type="hidden" name="emailContatoCopia" value="{{$listaDemandasAtende->emailContatoCopia}}">
+                                                    <input type="hidden" name="emailContatoNovaCopia" value="{{$listaDemandasAtende->emailContatoNovaCopia}}">
+                                                    <input type="hidden" name="descricaoAtende" value="{{$listaDemandasAtende->descricaoAtende}}">
+                                                    <input type="hidden" name="matriculaCriadorDemanda" value="{{$listaDemandasAtende->matriculaCriadorDemanda}}">
                                                 </div>
+                                                        
+<div class="form-group">
+<label for="exampleFormControlTextarea1">Responder Atende</label>
+<textarea class="form-control" name="respostaAtende" rows="10" required>
+
+
+
+
+
+Esta demanda foi respondida por: {{ session()->get('nomeCompleto') }} - ({{$listaDemandasAtende->matriculaResponsavelAtividade}})
+e pode ser consultada no histórico do contrato {{$listaDemandasAtende->contratoFormatado}} pelo link https://portal.gilie.sp.caixa/consulta-bem-imovel/{{$listaDemandasAtende->contratoFormatado}}
+(link disponivel apenas para funcionários CAIXA)
+GILIE - {{ session()->get('codigoLotacaoAdministrativa') }}
+</textarea>
+</div>
+                                                <div class="row">
+                                                <div class="form-group col-sm-10">
+                                                <input type="file" name="arquivo">
                                             </div>
-                                        </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-success">Responder</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                     </div>
                                 </div>
-                                
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.card -->
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+                <hr>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card card-default">
-                                            
-                                            <div class="card-body">
-                                
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <form method="post" enctype="multipart/form-data" action="/atende/responder/{{$listaDemandasAtende->idAtende}}">
-                                                        {{ csrf_field() }} 
-                                                            <div class="form-group">
-                                                                <input type="hidden" class="form-control" name="_method" value="PUT">
-                                                                <input type="hidden" name="emailContatoResposta" value="{{$listaDemandasAtende->emailContatoResposta}}">
-                                                                <input type="hidden" name="emailContatoCopia" value="{{$listaDemandasAtende->emailContatoCopia}}">
-                                                                <input type="hidden" name="emailContatoNovaCopia" value="{{$listaDemandasAtende->emailContatoNovaCopia}}">
-                                                                <input type="hidden" name="descricaoAtende" value="{{$listaDemandasAtende->descricaoAtende}}">
-                                                                <input type="hidden" name="matriculaCriadorDemanda" value="{{$listaDemandasAtende->matriculaCriadorDemanda}}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleFormControlTextarea1">Responder Atende</label>
-                                                                <textarea class="form-control" name="respostaAtende" rows="10" required></textarea>
-                                                                </div>
-                                                                <div class="row">
-                                                                <div class="form-group col-sm-10">
-                                                                <input type="file" name="arquivo">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-success">Responder</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- /.card-body -->
-                                        </div> <!-- /.card -->
-                                    </div> <!-- /.col -->
-                                </div> <!-- /.row -->
+                                    <div class="col-12">
+                                        <div class="row">
+            
+                                            <b><p>Assunto: </b>{{$listaDemandasAtende->assuntoAtende}}</p> 
+                                            <textarea class="form-control" rows="10">{{$listaDemandasAtende->descricaoAtende}}</textarea>
+            
+                                        </div>
+                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>           
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-
+                    </div> 
                 </div>
             </div>
         </div>
@@ -772,14 +770,6 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script>
-var botãoPrestador = $('.dropdown-item-title').text()
-if (botãoPrestador == "CRISTIANE VIEIRA BARBOSA"){
-    $('#historicoPrestador').css('display','block');
-}
-</script>
-                     
-
 @section('footer')
 
 

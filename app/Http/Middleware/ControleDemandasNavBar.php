@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use App\Models\Atende;
+use App\Classes\Ldap;
+use App\Models\Empregado;
+
+class ControleDemandasNavBar
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        
+        $request->session()->put([
+            'demandasAtende' => Atende::where('statusAtende','<>', 'FINALIZADO')
+            ->where('matriculaResponsavelAtividade', session('matricula'))
+            ->count(),
+        ]);
+        return $next($request);
+    }
+}

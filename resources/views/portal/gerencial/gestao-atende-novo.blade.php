@@ -33,7 +33,7 @@
 
 <div class="card">
     <div class="card-body">
-        <a type="button" href="/gerencial/gestao-atende-porVencimento" class="btn btn-primary">Visão em dias de vencimento</a>  
+        <a type="button" href="/gerencial/gestao-atende-porVencimento" class="btn btn-primary">Visão por dia de vencimento</a>  
     </div>
   </div>
 
@@ -78,6 +78,7 @@
                             <table id="tblAtendeAberto" class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
+                                        <th>Atende</th>
                                         <th>Contrato</th>
                                         <th>Equipe</th>
                                         <th>Vencimento</th>
@@ -104,6 +105,7 @@
                             <table id="tblAtendeFinalizado" class="table table-bordered table-striped dataTable">
                                   <thead>
                                     <tr>
+                                        <th>Atende</th>
                                         <th>Contrato</th>
                                         <th>Equipe</th>
                                         <th>Vencimento</th>

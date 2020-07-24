@@ -423,7 +423,7 @@ class AtendeDemandasController extends Controller
             if (isset($request->emailContatoNovaCopia)){
                 $mail->addCC($request->emailContatoNovaCopia);
             }
-
+            $mail->addCC('GILIESP09@caixa.gov.br');
             if(isset($_FILES['arquivo']['tmp_name']) && $_FILES['arquivo']['tmp_name'] != "") {
                 $mail->AddAttachment($_FILES['arquivo']['tmp_name'],
                 $_FILES['arquivo']['name']);
@@ -431,8 +431,10 @@ class AtendeDemandasController extends Controller
 
             $mail->Subject = 'Resposta de Demanda Aberta';
             $mail->Body = "<h3> Você recebeu uma resposta do Atende: </h3>". "<br>".
-            "Descrição Atende : ". "<br>" . nl2br($request->descricaoAtende) . "<br><br>".
-            "Resposta Atende : " . "<br>" . nl2br($request->respostaAtende);
+            "<b>Resposta Atende </b>: " . "<br><br>" . nl2br($request->respostaAtende)."<br><br>".
+            "<hr>"."<br>".
+            "<b>Esta resposta refere-se ao questionamento </b>: ". "<br><br>" . nl2br($request->descricaoAtende); 
+            
             $mail->send();
             DB::beginTransaction();
             // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)

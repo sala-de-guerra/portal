@@ -160,6 +160,24 @@
                         </li>
                     @endIf
 
+                    @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE')]))
+                    <li class="nav-item dropdown user-menu mx-1">
+                        <a href="#" class="nav-link dropdown-toggle px-0" data-toggle="dropdown">
+                            <i class="far fa-lg fa-bell"></i>
+                            <span class="badge badge-warning navbar-badge">{{ session()->get('demandasAtende') }}</span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-item dropdown-header">Notificações</span>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/atende/minhas-demandas">
+                                <i class="fas fa-envelope mr-2"></i>
+                                {{ session()->get('demandasAtende') }} Atendes para responder.
+                            </a>
+                        </div>
+                    </li>
+                @endIf
+
                     <li class="nav-item dropdown user-menu mx-1">
                         <a href="#" class="nav-link dropdown-toggle p-0" data-toggle="dropdown">
                             <img src='{{ asset('/img/perfil-sem-foto.png') }}' class="user-image img-circle elevation-2 m-0" alt="Foto do Usuário" onerror="this.src='{{ asset('/img/question-mark.png') }}';">
