@@ -48,7 +48,7 @@ input[type='file'] {
 
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/controle-arquivos"> Controle de Envio de Caixa EMGEA</a> </li>
+                <li class="breadcrumb-item active"> <a href="/controle-arquivos"> Controle de Envio de Caixa EMGEA</a> </li>
             </ol>
         </div>
     </div>
