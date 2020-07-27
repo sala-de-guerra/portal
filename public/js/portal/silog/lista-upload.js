@@ -11,7 +11,6 @@
                         '<td>' + item.created_at + '</td>' +
                     '</tr>';          
         
-        // popula toda tabela de leiloeiro
         $(linha).appendTo('#tblimportexcel>tbody');
             }
         )}

@@ -1,6 +1,64 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 $.fn.dataTable.ext.errMode = 'none';
 
+//pega data
+var hoje = new Date()
+var hojeFormatado = moment(hoje).format('DD/MM/YYYY');
+
+jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+	"date-uk-pre": function ( a ) {
+		if (a == null || a == "") {
+			return 0;
+		}
+		var ukDatea = a.split('/');
+		return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+	},
+
+	"date-uk-asc": function ( a, b ) {
+		return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+	},
+
+	"date-uk-desc": function ( a, b ) {
+		return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+	}
+} );
+
+function _formataDatatableComData (idTabela){
+    $('#' + idTabela).DataTable({
+        "order": [[ 3, "asc" ]],
+        columnDefs: [
+            {type: 'date-uk', targets: 3}
+        ],
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Mostrar _MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    });
+};
+
+
+
+
+
 function pad(n, width, z) {
     z = z || '0';
     n = n + '';
@@ -12,12 +70,13 @@ $(document).ready(function(){
     $.getJSON('/atende/listar-demandas-disponiveis', function(dados){
         $.each(dados, function(key, item) {
             let atende = item.idAtende
+            var vencimento = moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')
             var linha =
                 '<tr>' +
                     '<td>#' + pad(atende, 5) + '</td>' +
                     '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
                     '<td>' + item.nomeAtividade + '</td>' +
-                    '<td class="formata-data-sem-hora">' + item.prazoAtendimentoAtende + '</td>' +
+                    `<td id="vencimento${item.idAtende}">${vencimento}</td>`+
                     '<td>' + item.assuntoAtende + '</td>' +
                     '<td class="obs'+item.idAtende+'">' + item.descricaoAtende + '</td>' +
                     '<td>' + 
@@ -140,9 +199,11 @@ $(document).ready(function(){
                
 
         $(linha).appendTo('#tblminhasDemandas>tbody');
+        
+        if (vencimento <= hojeFormatado){
+            $('#vencimento'+item.idAtende).html('<b style="color: red;">'+vencimento +'</b>')
+        }
 
-        // var texto = $('#textoRedirecionamento'+item.idAtende).text()
-        // console.log(texto)
         if ($('#textoRedirecionamento'+item.idAtende).text() == "null"){
             $('#redirecionamento'+item.idAtende).remove()
         }
@@ -156,7 +217,8 @@ $(document).ready(function(){
             $('.obs'+item.idAtende).text(novo)
             
         })
-    _formataData();
+    }).done(function() {
+        _formataDatatableComData('tblminhasDemandas')
     })
     $.getJSON('/atende/listar-demandas-disponiveis', function(date){
         $.each(date, function(chave, valor) {
@@ -177,8 +239,113 @@ $(document).ready(function(){
     })
 })
 
+
+function _formataDatatableFinalizados (idTabela){
+    $('#' + idTabela).DataTable({
+        "order": [[ 3, "desc" ]],
+        columnDefs: [
+            {type: 'date-uk', targets: 3}
+        ],
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Mostrar _MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    });
+};
+
+
+$.getJSON('demandas-finalizadas-responsavel', function(dados){
+    $.each(dados, function(key, item) {
+    let atende = item.idAtende
+     var linha = 
+     `<tr>
+     <td>#`+pad(atende, 5)+`</td>
+     <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
+     <td>${item.nomeEquipe}</td>
+     <td>`+moment(item.dataAlteracao).format('DD/MM/YYYY')+`</td>
+     <td>${item.nomeAtividade}</td>
+     <td>${item.assuntoAtende}</td>`+
+     '<td>' + 
+     '<div class="btn-group" role="group">' +
+         '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+             'Ação' + 
+         '</button>' + 
+
+         // botão dropdown
+         '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+         '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
+         '</div>' +
+
+         // Modal de consulta
+         '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+         '<div class="modal-dialog modal-lg" role="document">' +
+             '<div class="modal-content">' +
+                 '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                     '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
+                     '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                         '<span aria-hidden="true">&times;</span>' +
+                     '</button>' +
+                 '</div>' +
+                 '<div class="modal-body">' +
+                     '<div class="container">' +
+                         '<div>' +
+                             '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                             '<p><b>'+'Descrição:'+'</b></p>'+
+                             '<textarea class="form-control" rows="5" disabled>'+ item.descricaoAtende +'</textarea>'+
+                         '</div><br>' +
+                        '<div>'+
+                         '<p><b>'+'Resposta:'+'</b></p>'+
+                            '<textarea class="form-control" rows="10" disabled>'+ item.respostaAtende +'</textarea>'+
+                        '</div><br>' +
+
+                     '</div>' + 
+                 '</div>' +
+                 '<div class="modal-footer">' +
+                     '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                 '</div>' + 
+             '</div>' + 
+         '</div>' + 
+     '</div>' +
+     '</td>' + 
+ '</tr>'
+
+        $(linha).appendTo('#tblFinalizados>tbody');
+        })
+    }).done(function() {
+        _formataDatatableFinalizados('tblFinalizados')
+})
+
+
 setTimeout(function(){
     $('#fadeOut').fadeOut("slow");
 }, 2000);
 
-
+//troca demanda aberta por finalizada
+$("#btnFinalizado").click(function() {
+    $("#displayAberto").css("display", "none");
+    $("#displayFechado").css("display", "block");
+});
+// troca demanda finalizada por aberta
+$("#btnAbertas").click(function() {
+    $("#displayFechado").css("display", "none");
+    $("#displayAberto").css("display", "block");
+});

@@ -141,9 +141,9 @@ $( document ).ready(function() {
                                     '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
                                     '</select>'+'<br>'+
 
-                                    '<div class="form-group" style="display: none;">'+
+                                    '<div class="form-group">'+
                                     '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                                    '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                                    '<textarea class="form-control" name="motivoRedirecionamento" rows="10"></textarea>'+
                                 '</div>'+
 
                                     '</div>' +
@@ -251,7 +251,7 @@ $.getJSON('listar-finalizados', function(dados){
      <td>#`+pad(atende, 5)+`</td>
      <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
      <td>${item.nomeEquipe}</td>
-     <td>`+moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')+`</td>
+     <td>`+moment(item.dataAlteracao).format('DD/MM/YYYY')+`</td>
      <td>${item.nomeAtividade}</td>
      <td>${item.assuntoAtende}</td>
      <td>${item.matriculaResponsavelAtividade}</td>`+

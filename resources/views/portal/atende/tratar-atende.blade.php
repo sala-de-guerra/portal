@@ -680,7 +680,7 @@
                                     </div>
 
                                     <div class="col-sm-8">
-                                        Copia da respota para: <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp       
+                                        Copia da resposta para: <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp       
                                         <b>{{$listaDemandasAtende->emailContatoCopia}}</b>&nbsp&nbsp&nbsp&nbsp
                                         <b>{{$listaDemandasAtende->emailContatoNovaCopia}}</b>
                                     </div>
@@ -729,7 +729,7 @@ GILIE - {{ session()->get('codigoLotacaoAdministrativa') }}
                                                 <input type="file" name="arquivo">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success">Responder</button>
+                                                <button type="submit" class="btn btn-success">Enviar Resposta</button>
                                             </div>
                                         </form>
                                     </div>

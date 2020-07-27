@@ -108,7 +108,7 @@
                                         <th>Atende</th>
                                         <th>Contrato</th>
                                         <th>Equipe</th>
-                                        <th>Vencimento</th>
+                                        <th>Respondido em</th>
                                         <th>Atividade</th>
                                         <th>Assunto</th>
                                         <th>Responsavel</th>

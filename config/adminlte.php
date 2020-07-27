@@ -560,6 +560,11 @@ return [
                     'url'  => '/indicadores/distrato',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
+                [
+                    'text' => 'Tempo Médio à Vista',
+                    'url'  => '/tma/avista',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
             ],
         ],
 
