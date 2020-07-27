@@ -734,5 +734,51 @@ class AtendeDemandasController extends Controller
         return json_encode($mensagemCadastrada);
     }
 
+    public function listarAtendesFinalizadoResponsavel()
+    {
+       
+       
+        // ->where('statusAtende','<>','FINALIZADO')
+        // ->get();
+
+        // return json_encode($dadosAtende);
+        $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        $dadosAtende = DB::table('TBL_ATENDE_DEMANDAS')
+            ->join('TBL_GESTAO_EQUIPES_ATIVIDADES', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_ATIVIDADES.idAtividade)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idAtividade)'))
+            ->join('TBL_GESTAO_EQUIPES_CELULAS', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_CELULAS.idEquipe)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idEquipe)'))
+            ->join('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade)'))
+            ->select(DB::raw('
+                    TBL_ATENDE_DEMANDAS.[idAtende] as idAtende,
+                    TBL_ATENDE_DEMANDAS.[contratoFormatado] as contratoFormatado,
+                    TBL_ATENDE_DEMANDAS.[numeroContrato] as numeroContrato,
+                    TBL_ATENDE_DEMANDAS.[idAtividade] as idAtividade,
+                    TBL_EMPREGADOS.[nomeCompleto] as matriculaResponsavelAtividade,
+                    TBL_ATENDE_DEMANDAS.[assuntoAtende] as assuntoAtende,
+                    TBL_ATENDE_DEMANDAS.[descricaoAtende] as descricaoAtende,
+                    TBL_ATENDE_DEMANDAS.[motivoRedirecionamento] as motivoRedirecionamento,
+                    TBL_ATENDE_DEMANDAS.[respostaAtende] as respostaAtende,
+                    TBL_ATENDE_DEMANDAS.[prazoAtendimentoAtende] as prazoAtendimentoAtende,
+                    TBL_ATENDE_DEMANDAS.[statusAtende] as statusAtende,
+                    TBL_ATENDE_DEMANDAS.[matriculaCriadorDemanda] as matriculaCriadorDemanda,
+                    TBL_ATENDE_DEMANDAS.[emailContatoResposta] as emailContatoResposta,
+                    TBL_ATENDE_DEMANDAS.[dataCadastro] as dataCadastro,
+                    TBL_ATENDE_DEMANDAS.[dataAlteracao] as dataAlteracao,
+                    TBL_ATENDE_DEMANDAS.[codigoUnidade] as codigoUnidade,
+                    TBL_ATENDE_DEMANDAS.[emailContatoCopia] as emailContatoCopia,
+                    TBL_ATENDE_DEMANDAS.[emailContatoNovaCopia] as emailContatoNovaCopia,
+                    TBL_ATENDE_DEMANDAS.[idEquipe] as idEquipe,
+                    TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+                    TBL_GESTAO_EQUIPES_ATIVIDADES.[nomeAtividade] as nomeAtividade
+            '))
+             ->where('codigoUnidade', $unidadeUsuario)
+             ->where('statusAtende','=','FINALIZADO')
+             ->where('matriculaResponsavelAtividade','=', session('matricula'))
+             ->orderBy('dataAlteracao', 'desc')
+            ->limit(20)
+             ->get();
+
+             return json_encode($dadosAtende);
+    }
+
 
 }

@@ -186,6 +186,8 @@ Route::prefix('atende')->group(function () {
     Route::get('dados-demanda/{idAtende}', 'AtendeDemandasController@listarDadosDemandaAtende'); 
     // LISTAR ATENDES DISPONÍVEIS RESPONSÁVEL
     Route::get('listar-demandas-disponiveis', 'AtendeDemandasController@listarAtendesDisponiveisResponsavel');
+    // LISTAR ATENDES FINALIZADOS RESPONSÁVEL
+    Route::get('demandas-finalizadas-responsavel', 'AtendeDemandasController@listarAtendesFinalizadoResponsavel');
     // LISTAR ATENDES DISPONÍVEIS RESPONSÁVEL ABERTURA
     Route::get('listar-demandas-agencia', 'AtendeDemandasController@listarAtendesAbertoAgencia'); 
     // LISTAR ATENDES FINALIZADOS RESPONSÁVEL ABERTURA
@@ -349,3 +351,9 @@ Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCor
 Route::get('corretores', 'CorretoresController@Corretores');
 // lista corretores
 Route::get('corretores/lista-corretores', 'CorretoresController@listaCorretores');
+
+//ROTA Venda A Vista
+//lista universo
+Route::get('tma/avista', 'VendaAVista\vendaAVistaController@indexVendaAVista');
+//universo venda a vista
+Route::get('tma-venda-a-vista', 'VendaAVista\vendaAVistaController@universoVendaAVista');

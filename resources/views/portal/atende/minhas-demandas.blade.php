@@ -32,41 +32,7 @@
     </div>
 </div><br>
 
-
-{{-- <div class="row">
-    <div class="col-md-12">
-        <div class="card card-default">       
-            <div class="card-body">
-                
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="tblminhasDemandas" class="table table-bordered table-striped dataTable">
-                                 <thead>
-                                    <tr>
-                                        <th>Contrato</th>
-                                        <th>Atividade</th>
-                                        <th>Limite atendimento</th>
-                                        <th>Assunto</th>
-                                        <th>Breve descrição</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                    <tbody>
-
-                                    </tbody>
-      
-                             </table>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- /.card-body -->
-        </div> <!-- /.card -->
-    </div> <!-- /.col -->
-</div> <!-- /.row --> --}}
-
-
- @stop 
+@stop 
 
 
 @section('content')
@@ -109,31 +75,54 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="tblminhasDemandas" class="table table-bordered table-striped dataTable"> 
+                                <div id="displayAberto">
+                                    <table id="tblminhasDemandas" class="table table-bordered table-striped dataTable">
+                                        <div class="notice notice-warning">
+                                            <strong>Atende: </strong> Demandas para responder.<button style="float: right;" type="button" class="btn btn-primary pb-2" id="btnFinalizado">Ver demandas finalizadas</button>
+                                        </div><br>
+                                        <thead>
+                                            <tr>
+                                                <th>Nº Atende</th>
+                                                <th>Contrato</th>
+                                                <th>Atividade</th>
+                                                <th>Limite atendimento</th>
+                                                <th>Assunto</th>
+                                                <th>Breve descrição</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+            
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                    <thead>
-                                        <tr>
-                                            <th>Nº Atende</th>
-                                            <th>Contrato</th>
-                                            <th>Atividade</th>
-                                            <th>Limite atendimento</th>
-                                            <th>Assunto</th>
-                                            <th>Breve descrição</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-        
-                                    </tbody>
-                                </table>
+                                <div id="displayFechado" style="display: none">
+                                    <table id="tblFinalizados" class="table table-bordered table-striped dataTable">
+                                        <div class="notice notice-success">
+                                            <strong>Atende: </strong> Últimas 20 demandas finalizadas.<button style="float: right;" type="button" class="btn btn-primary pb-2" id="btnAbertas">Ver demandas abertas</button>
+                                        </div><br>
+                                        <thead>
+                                            <tr>
+                                                <th>Nº Atende</th>
+                                                <th>Contrato</th>
+                                                <th>Atividade</th>
+                                                <th>Respondido em</th>
+                                                <th>Assunto</th>
+                                                <th>Breve descrição</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+            
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
           
-   
-   
-
 
         <div class="tab-pane fade" id="custom-tabs-one-faleConosco" role="tabpanel" aria-labelledby="custom-tabs-one-faleConosco-tab">
                         
@@ -156,6 +145,7 @@
             
                                         </tbody>
                                     </table>
+
                                 </div>
                             </div>
                         </div>
@@ -182,8 +172,6 @@
 
 
 @section('js')
-<script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
-<script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/atende/minhas-demandas.js') }}"></script>
 <script src="{{ asset('js/portal/atende/fale-conosco-tratar.js') }}"></script>
 @stop
