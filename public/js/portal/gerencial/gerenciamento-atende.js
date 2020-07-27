@@ -80,12 +80,12 @@ $( document ).ready(function() {
             <td>${item.matriculaResponsavelAtividade}</td>`+
             '<td>' + 
             '<div class="btn-group" role="group">' +
-                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                     'Ação' + 
                 '</button>' + 
 
                 // botão dropdown
-                '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1'+item.idAtende+'">' +
                 '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
                     '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
                     '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
@@ -225,18 +225,19 @@ $( document ).ready(function() {
         '</tr>'
 
         $(linha).appendTo('#tblAtendeAberto>tbody');
+            if (vencimento <= hojeFormatado){
+            $('#vencimento'+item.idAtende).html('<b style="color: red;">'+vencimento +'</b>')
+            }
 
-        if (vencimento <= hojeFormatado){
-        $('#vencimento'+item.idAtende).html('<b style="color: red;">'+vencimento +'</b>')
-        }
-
-            $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
-                $.each(dadosEmpregado, function(empKey, empItem) {
-                    var redirect =
-                                '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
-                $(redirect).appendTo('#selectDestinatario'+item.idAtende);
+            $('#btnGroupDrop1'+item.idAtende).click(function() {
+                $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
+                    $.each(dadosEmpregado, function(empKey, empItem) {
+                        var redirect =
+                                    '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                    $(redirect).appendTo('#selectDestinatario'+item.idAtende);
+                    })
                 })
-            })
+            });
         })
         _formataDatatableComId("tblAtendeAberto")
     })
@@ -299,14 +300,9 @@ $.getJSON('listar-finalizados', function(dados){
  '</tr>'
 
  $(linha).appendTo('#tblAtendeFinalizado>tbody');
-
-     $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
-         $.each(dadosEmpregado, function(empKey, empItem) {
-             var redirect =
-                         '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
-         $(redirect).appendTo('#selectDestinatario'+item.idAtende);
-         })
-     })
  })
  _formataDatatableComId("tblAtendeFinalizado")
 })
+
+
+
