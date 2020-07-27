@@ -681,8 +681,8 @@
 
                                     <div class="col-sm-8">
                                         Copia da respota para: <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp       
-                                        <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp
-                                        <b>{{$listaDemandasAtende->emailContatoResposta}}</b>
+                                        <b>{{$listaDemandasAtende->emailContatoCopia}}</b>&nbsp&nbsp&nbsp&nbsp
+                                        <b>{{$listaDemandasAtende->emailContatoNovaCopia}}</b>
                                     </div>
                                     
                                 </div>
