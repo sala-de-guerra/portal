@@ -26,7 +26,7 @@
 
     <div class="col">
         <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item active"><i class="fa fa-map-signs"></i></i> Atende</li>
+            <li class="breadcrumb-item active"> Atende</li>
             <li class="breadcrumb-item active"><a href="/atende/minhas-demandas"> Minhas Demandas</a> </li>    
         </ol>
     </div>
