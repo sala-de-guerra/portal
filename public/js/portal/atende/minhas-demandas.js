@@ -81,7 +81,7 @@ $(document).ready(function(){
                     '<td class="obs'+item.idAtende+'">' + item.descricaoAtende + '</td>' +
                     '<td>' + 
                         '<div class="btn-group" role="group">' +
-                            '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                            '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                                 'Ação' + 
                             '</button>' +
                             // botão dropdown
@@ -199,7 +199,23 @@ $(document).ready(function(){
                
 
         $(linha).appendTo('#tblminhasDemandas>tbody');
+
+    $('#btnGroupDrop1'+item.idAtende).one("click",function() {
+        $.getJSON('/atende/listar-demandas-disponiveis', function(date){
+            $.each(date, function(chave, valor) {
+                $.getJSON('/gerencial/gestao-equipes/listar-empregados-equipe/'+valor.idEquipe, function(dados){
+                    $.each(dados, function(key, item) {
         
+                        var redirect =
+                                    '<option value="'+item.matricula+'">'+item.nomeCompleto+'</option>'
+        
+                    $(redirect).appendTo('#selectDestinatario'+valor.idAtende);
+                    })
+                })
+            })
+        })
+    })
+
         if (vencimento <= hojeFormatado){
             $('#vencimento'+item.idAtende).html('<b style="color: red;">'+vencimento +'</b>')
         }
@@ -219,23 +235,6 @@ $(document).ready(function(){
         })
     }).done(function() {
         _formataDatatableComData('tblminhasDemandas')
-    })
-    $.getJSON('/atende/listar-demandas-disponiveis', function(date){
-        $.each(date, function(chave, valor) {
-            $.getJSON('/gerencial/gestao-equipes/listar-empregados-equipe/'+valor.idEquipe, function(dados){
-                $.each(dados, function(key, item) {
-    
-                    var redirect =
-                                '<option value="'+item.matricula+'">'+item.nomeCompleto+'</option>'
-    
-                $(redirect).appendTo('#selectDestinatario'+valor.idAtende);
-                
-    
-                })
-            })
-    
-        })
-    
     })
 })
 
