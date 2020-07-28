@@ -48,11 +48,108 @@ $(document).ready(function(){
                     <td>${item.CLASSIFICACAO}</td>
                     <td>${item.PAGAMENTO_BOLETO}</td>
                     <td>${item.DIAS_DECORRIDOS}</td>
-                    <td>${item.NOME_PROPONENTE}</td>
+                    <td id="nomeProponente${item.NU_BEM}">${item.NOME_PROPONENTE}</td>
                     <td>${item.CPF_CNPJ_PROPONENTE}</td>
+                    <td>
+                    <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton${item.NU_BEM}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Ação
+                    </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" id="baixar${item.NU_BEM}" type="button" data-toggle="modal" data-target="#baixarContrato${item.NU_BEM}"><i class="fas fa-dollar-sign"></i>&nbsp  Baixar</a>
+                          <a class="dropdown-item" id="cancelar${item.NU_BEM}" type="button" data-toggle="modal" data-target="#cancelarContrato${item.NU_BEM}"><i class="fas fa-times"></i>&nbsp Cancelar</a>
+                          <a class="dropdown-item" id="aguarda${item.NU_BEM}" type="button" data-toggle="modal" data-target="#aguardaContrato${item.NU_BEM}"><i class="far fa-pause-circle"></i> Aguardar</a>
+                        </div>
+                      </div>
+
+                        <!-- Modal baixa -->
+                        <div class="modal fade" id="baixarContrato${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Baixar contrato</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <form action="/tma/baixar-chb/${item.BEM_FORMATADO}" method="post">
+                              <input type="hidden" name="_token" value="${csrfVar}">
+                              <div class="modal-body">
+                                  <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como baixado ?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                  <button type="submit" class="btn btn-primary">Baixar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Modal cancelar -->
+                        <div class="modal fade" id="cancelarContrato${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cancelar contrato</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <form action="/tma/cancelar-chb/${item.BEM_FORMATADO}" method="post">
+                              <input type="hidden" name="_token" value="${csrfVar}">
+                              <div class="modal-body">
+                                  <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como distrato ?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                  <button type="submit" class="btn btn-danger">Distratar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Modal cancelar -->
+                        <div class="modal fade" id="aguardaContrato${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Aguarda pagamento</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <form action="/tma/aguarda-pagamento-chb/${item.BEM_FORMATADO}" method="post">
+                              <input type="hidden" name="_token" value="${csrfVar}">
+                              <div class="modal-body">
+                                <label for="observacaoAtendimento">Observação</label>
+                                <textarea class="form-control" name="observacaoAtendimento" rows="5" required></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                  <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+
+                    </td>
                 </tr>`       
         
             $(linha).appendTo('#tblTma>tbody');
+              if (item.baixaEfetuada == 'sim'){
+                $('#nomeProponente'+item.NU_BEM).html('<b style="color: blue;">'+item.NOME_PROPONENTE +'</b>')
+                $('#dropdownMenuButton'+item.NU_BEM).remove()
+              }else if (item.baixaEfetuada == 'del'){
+                $('#nomeProponente'+item.NU_BEM).html('<b style="color: red;">'+item.NOME_PROPONENTE +'</b>')
+                $('#dropdownMenuButton'+item.NU_BEM).remove()
+              }else if (item.baixaEfetuada == 'pag'){
+                $('#nomeProponente'+item.NU_BEM).html('<b style="color: green;">'+item.NOME_PROPONENTE +'</b>')
+                $('#dropdownMenuButton'+item.NU_BEM).remove()
+              }
             }
         )}
     ).done(function() {
@@ -60,3 +157,7 @@ $(document).ready(function(){
          $('.spinnerTbl').remove()
     })
 })
+
+setTimeout(function(){
+  $('#fadeOut').fadeOut("slow");
+}, 2000);

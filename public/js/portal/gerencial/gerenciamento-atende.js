@@ -3,7 +3,7 @@ var csrfVar = $('meta[name="csrf-token"]').attr('content');
 //pega data
 var hoje = new Date()
 var hojeFormatado = moment(hoje).format('DD/MM/YYYY');
-console.log(hojeFormatado)
+
 
 //formata idAtende #00000
 function pad(n, width, z) {
@@ -33,9 +33,9 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 
 function _formataDatatableComId (idTabela){
     $('#' + idTabela).DataTable({
-        "order": [[ 2, "asc" ]],
+        "order": [[ 3, "asc" ]],
         columnDefs: [
-            {type: 'date-uk', targets: 2}
+            {type: 'date-uk', targets: 3}
         ],
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
@@ -77,7 +77,7 @@ $( document ).ready(function() {
             <td id="vencimento${item.idAtende}">${vencimento}</td>
             <td>${item.nomeAtividade}</td>
             <td>${item.assuntoAtende}</td>
-            <td>${item.matriculaResponsavelAtividade}</td>`+
+            <td id="nome${item.idAtende}">${item.matriculaResponsavelAtividade}</td>`+
             '<td>' + 
             '<div class="btn-group" role="group">' +
                 '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
@@ -223,10 +223,13 @@ $( document ).ready(function() {
     '</div>' +
             '</td>' + 
         '</tr>'
-
+        
+        var confereVencimento = moment(item.prazoAtendimentoAtende).isBefore(hoje);
+        
         $(linha).appendTo('#tblAtendeAberto>tbody');
-            if (vencimento <= hojeFormatado){
-            $('#vencimento'+item.idAtende).html('<b style="color: red;">'+vencimento +'</b>')
+
+            if (confereVencimento == true){
+            $('#nome'+item.idAtende).html('<b style="color: red;">'+item.matriculaResponsavelAtividade +'</b>')
             }
 
             $('#btnGroupDrop1'+item.idAtende).click(function() {

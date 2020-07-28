@@ -8,7 +8,7 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Tempo Médio Venda à Vista
+            Tempo médio venda à vista
         </h1>
     </div>
     <div class="col-sm-6">
@@ -22,22 +22,43 @@
 
 @stop
 
-
 @section('content')
 
+@if (session('tituloMensagem'))
+    <div id="fadeOut" class="card text-white bg-{{ session('corMensagem') }}">
+        <div class="card-header">
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
+                <br>
+                <p class="card-text">{{ session('corpoMensagem') }}</p>
+            </div>
+        </div>
+    </div>
+@endif
 
 <div class="row">
     <div class="col-md-12">
         <div class="card card-default">
 
             <div class="card-header">
-                <h3 class="card-title">TMA Venda à Vista</h3>
+                <h3 class="card-title">TMA venda à vista</h3>
             </div> <!-- /.card-header -->
             
             <div class="card-body">
-                <div class="notice notice-warning">
-                    <strong>TMA: </strong> .
+                <div class="notice notice-success">
+                    @foreach ($mediaAVista as $media)
+                    <strong>TMA: {{$media->media}}</strong>
                 </div><br>
+                    @endforeach
+                    <div class="row">
+                        <div class="col">
+                          <strong>Legenda:</strong>
+                          <i style="color: blue;" class="fas fa-square"> Baixa sinalizada</i>&nbsp&nbsp&nbsp
+                          <i style="color: red;" class="fas fa-square"> Distrato sinalizado</i>&nbsp&nbsp&nbsp
+                          <i style="color: green;" class="fas fa-square"> Aguarda pagamento</i> 
+                        </div>
+                    </div>
+                      <br>
                 <table id="tblTma" class="table table-bordered table-striped dataTable">
                     <div class="spinner-border spinnerTbl text-primary" role="status">
                         <span class="sr-only"></span>
@@ -52,6 +73,7 @@
                             <th>Dias Decorridos</th>
                             <th>Nome Proponente</th>
                             <th>CPF/CNPJ</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
