@@ -561,7 +561,7 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],
                 [
-                    'text' => 'Tempo Médio à Vista',
+                    'text' => 'TMA venda à vista',
                     'url'  => '/tma/avista',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
                 ],

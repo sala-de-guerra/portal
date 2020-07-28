@@ -357,3 +357,9 @@ Route::get('corretores/lista-corretores', 'CorretoresController@listaCorretores'
 Route::get('tma/avista', 'VendaAVista\vendaAVistaController@indexVendaAVista');
 //universo venda a vista
 Route::get('tma-venda-a-vista', 'VendaAVista\vendaAVistaController@universoVendaAVista');
+//Marcar CHB baixado
+Route::post('tma/baixar-chb/{chb}', 'VendaAVista\vendaAVistaController@baixarVendaAVista');
+//Marcar CHB cancelado
+Route::post('tma/cancelar-chb/{chb}', 'VendaAVista\vendaAVistaController@cancelarVendaAVista');
+//Marcar CHB aguarda pagamento
+Route::post('tma/aguarda-pagamento-chb/{chb}', 'VendaAVista\vendaAVistaController@aguardaVendaAVista');
