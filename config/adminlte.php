@@ -565,6 +565,12 @@ return [
                     'url'  => '/tma/avista',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
                 ],
+                [
+                    'text' => 'TMA venda financiada',
+                    'url'  => '/tma/financiado',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
+
+                ],
             ],
         ],
 

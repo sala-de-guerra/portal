@@ -680,7 +680,7 @@
                                     </div>
 
                                     <div class="col-sm-8">
-                                        Copia da resposta para: <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp       
+                                        Cópia da resposta para: <b>{{$listaDemandasAtende->emailContatoResposta}}</b>&nbsp&nbsp&nbsp&nbsp       
                                         <b>{{$listaDemandasAtende->emailContatoCopia}}</b>&nbsp&nbsp&nbsp&nbsp
                                         <b>{{$listaDemandasAtende->emailContatoNovaCopia}}</b>
                                     </div>
@@ -688,6 +688,14 @@
                                 </div>
                             </div>
                         </div><br>
+
+                                                    <div class="col-sm-3">
+                                 <div class="form-group">
+                                    <label>Dossiê Digital:</label>
+                                    <button class="btn btn-outline-primary ml-2" data-toggle="tooltip" data-placement="top" title="Copiar link" onclick="copyToClipboard('#linkServidor')"><i class="far fa-copy mx-1"></i>Servidor</button>
+                                    <a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/{{ $numeroContrato ?? $contratoFormatado ?? '' }}" id="linkServidor" hidden>\\arquivos.caixa\sp\SP7257FS201\PUBLICO\PUBLIC\EstoqueImoveis\{{$listaDemandasAtende->contratoFormatado}}</a>
+                                </div> 
+                            </div>
 
 
 
@@ -708,27 +716,38 @@
                                                     <input type="hidden" name="emailContatoNovaCopia" value="{{$listaDemandasAtende->emailContatoNovaCopia}}">
                                                     <input type="hidden" name="descricaoAtende" value="{{$listaDemandasAtende->descricaoAtende}}">
                                                     <input type="hidden" name="matriculaCriadorDemanda" value="{{$listaDemandasAtende->matriculaCriadorDemanda}}">
+                                                    <input type="hidden" name="contratoFormatado" value="{{$listaDemandasAtende->contratoFormatado}}">
                                                 </div>
                                                         
-<div class="form-group">
-<label for="exampleFormControlTextarea1">Responder Atende</label>
-<textarea class="form-control" name="respostaAtende" rows="10" required>
-
-
-
-
-
-Esta demanda foi respondida por: {{ session()->get('nomeCompleto') }} - ({{$listaDemandasAtende->matriculaResponsavelAtividade}})
-e pode ser consultada no histórico do contrato {{$listaDemandasAtende->contratoFormatado}} pelo link https://portal.gilie.sp.caixa/consulta-bem-imovel/{{$listaDemandasAtende->contratoFormatado}}
-(link disponivel apenas para funcionários CAIXA)
-GILIE - {{ session()->get('codigoLotacaoAdministrativa') }}
-</textarea>
-</div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Responder Atende</label>
+                                                        <textarea class="form-control" name="respostaAtende" rows="10" required></textarea>
+                                                </div>
                                                 <div class="row">
-                                                <div class="form-group col-sm-10">
-                                                <input type="file" name="arquivo">
+                                                    <div class="form-group col-sm-10">
+                                                        <input type="file" name="arquivo">
+                                                        <button  style="float: right;" onclick="addCopia()" type="button" class="btn btn-primary">Adicionar email para cópia de resposta</button><br><br>
+                                
+                                                    <div style="display: none;" class="form-group toggle">
+                                                        <label>Primeiro e-mail cópia</label>
+                                                        <input type="email" class="form-control" name="emailAnexadoPeloResponsavel" placeholder="email">
+                                                        <small class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                                                    </div>
+                                                    <div style="display: none;" class="form-group toggle">
+                                                        <label>Segundo e-mail cópia</label>
+                                                        <input type="email" class="form-control" name="emailAnexadoPeloResponsavelCopia" placeholder="email">
+                                                        <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                                                    </div>
+                                                    <div style="display: none;" class="form-group toggle">
+                                                        <label>Terceiro e-mail cópia</label>
+                                                        <input type="email" class="form-control" name="emailAnexadoPeloResponsavelTerceiraCopia" placeholder="email">
+                                                        <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="modal-footer">
+                                            <br>
+                                           
+                                            <div style="float: right;" class="modal-footer">
                                                 <button type="submit" class="btn btn-success">Enviar Resposta</button>
                                             </div>
                                         </form>
@@ -792,4 +811,9 @@ GILIE - {{ session()->get('codigoLotacaoAdministrativa') }}
 <script src="{{ asset('js/global/formata_progress_bar.js') }}"></script>
 <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
+<script>
+    function addCopia(){
+    $('.toggle').toggle()
+}
+</script>
 @stop

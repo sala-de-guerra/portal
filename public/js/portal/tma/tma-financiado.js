@@ -40,7 +40,7 @@ function _formataDatatableComId (idTabela){
 
 
 $(document).ready(function(){
-    $.getJSON('/tma-venda-a-vista', function(dados){
+    $.getJSON('/tma-venda-com-financimento', function(dados){
         $.each(dados, function(key, item) {
             var linha =
                 `<tr>
@@ -72,7 +72,7 @@ $(document).ready(function(){
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="/tma/baixar-chb/${item.BEM_FORMATADO}" method="post">
+                              <form action="/tma/baixar-financiado-chb/${item.BEM_FORMATADO}" method="post">
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
                                   <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como baixado ?</p>
@@ -96,10 +96,10 @@ $(document).ready(function(){
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="/tma/cancelar-chb/${item.BEM_FORMATADO}" method="post">
+                              <form action="/tma/cancelar-financiado-chb/${item.BEM_FORMATADO}" method="post">
+                              <input type="hidden" name="_token" value="${csrfVar}">
                               <input type="hidden" name="nomeProponente" value="${item.NOME_PROPONENTE}">
                               <input type="hidden" name="cpfNnpjProponente" value="${item.CPF_CNPJ_PROPONENTE}">
-                              <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
                                   <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como distrato ?</p>
                                 </div>
@@ -112,7 +112,7 @@ $(document).ready(function(){
                           </div>
                         </div>
 
-                        <!-- Modal aguarda pagamento -->
+                        <!-- Modal aguardar -->
                         <div class="modal fade" id="aguardaContrato${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -122,7 +122,7 @@ $(document).ready(function(){
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="/tma/aguarda-pagamento-chb/${item.BEM_FORMATADO}" method="post">
+                              <form action="/tma/aguarda-pagamento-financiado-chb/${item.BEM_FORMATADO}" method="post">
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
                                 <label for="observacaoAtendimento">Observação</label>
@@ -141,7 +141,7 @@ $(document).ready(function(){
                     </td>
                 </tr>`       
         
-            $(linha).appendTo('#tblTma>tbody');
+            $(linha).appendTo('#tblTmaFinanciado>tbody');
               if (item.baixaEfetuada == 'sim'){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: blue;">'+item.NOME_PROPONENTE +'</b>')
                 $('#dropdownMenuButton'+item.NU_BEM).remove()
@@ -155,7 +155,7 @@ $(document).ready(function(){
             }
         )}
     ).done(function() {
-        _formataDatatableComId('tblTma')
+        _formataDatatableComId('tblTmaFinanciado')
          $('.spinnerTbl').remove()
     })
 })
