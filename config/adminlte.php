@@ -569,6 +569,7 @@ return [
                     'text' => 'TMA venda financiada',
                     'url'  => '/tma/financiado',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
+
                 ],
             ],
         ],
