@@ -721,7 +721,7 @@
                                                         
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">Responder Atende</label>
-                                                        <textarea class="form-control" name="respostaAtende" rows="10" required></textarea>
+                                                        <textarea class="form-control" name="respostaAtende" rows="10" id="summernote" required></textarea>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-sm-10">
@@ -815,5 +815,10 @@
     function addCopia(){
     $('.toggle').toggle()
 }
+</script>
+<script>
+$('#summernote').summernote({
+  height: 200, 
+});
 </script>
 @stop

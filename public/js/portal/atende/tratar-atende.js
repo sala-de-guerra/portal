@@ -83,10 +83,6 @@ $(document).ready(function(){
         setTimeout(function() {
             _formataData();
             _formataValores();
-            var historicoConsultaLeilaoNegativo = window.document.getElementById('historicoLeilaoNegativo')
-            historicoConsultaLeilaoNegativo.innerHTML = historicofatiado
-            var paragrafoHistoricoleilaoNegativoCompleto = window.document.getElementById('paragrafoHistoricoleilaoNegativoCompleto')
-            paragrafoHistoricoleilaoNegativoCompleto.innerHTML = obs
             if ($('#statusAverbacao').text() !== "") {
                 _formataProgressBar ("progressBarLeilaoNegativo", arrayPorcentagemStatusLeilaoNegativo, $('#statusAverbacao').text());
             } else {
