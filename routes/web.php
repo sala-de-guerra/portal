@@ -352,14 +352,26 @@ Route::get('corretores', 'CorretoresController@Corretores');
 // lista corretores
 Route::get('corretores/lista-corretores', 'CorretoresController@listaCorretores');
 
-//ROTA Venda A Vista
-//lista universo
-Route::get('tma/avista', 'VendaAVista\vendaAVistaController@indexVendaAVista');
+//ROTA TMA A VISTA
+//view index
+Route::get('tma/avista', 'TMA\vendaAVistaController@indexVendaAVista');
 //universo venda a vista
-Route::get('tma-venda-a-vista', 'VendaAVista\vendaAVistaController@universoVendaAVista');
+Route::get('tma-venda-a-vista', 'TMA\vendaAVistaController@universoVendaAVista');
 //Marcar CHB baixado
-Route::post('tma/baixar-chb/{chb}', 'VendaAVista\vendaAVistaController@baixarVendaAVista');
+Route::post('tma/baixar-chb/{chb}', 'TMA\vendaAVistaController@baixarVendaAVista');
 //Marcar CHB cancelado
-Route::post('tma/cancelar-chb/{chb}', 'VendaAVista\vendaAVistaController@cancelarVendaAVista');
+Route::post('tma/cancelar-chb/{chb}', 'TMA\vendaAVistaController@cancelarVendaAVista');
 //Marcar CHB aguarda pagamento
-Route::post('tma/aguarda-pagamento-chb/{chb}', 'VendaAVista\vendaAVistaController@aguardaVendaAVista');
+Route::post('tma/aguarda-pagamento-chb/{chb}', 'TMA\vendaAVistaController@aguardaVendaAVista');
+
+//ROTA TMA FINANCIADO
+//view index
+Route::get('tma/financiado', 'TMA\vendaFinanciadaController@indexVendaFinanciada');
+//universo venda com financiamento
+Route::get('tma-venda-com-financimento', 'TMA\vendaFinanciadaController@universoVendaFinanciada');
+//Marcar CHB baixado
+Route::post('tma/baixar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@baixarVendaFinanciada');
+//Marcar CHB cancelado
+Route::post('tma/cancelar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@cancelarVendaFinanciada');
+//Marcar CHB aguarda pagamento
+Route::post('tma/aguarda-pagamento-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@aguardaVendaFinanciada');

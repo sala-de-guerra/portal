@@ -553,7 +553,7 @@ return [
         [
             'text'    => 'Indicadores',
             'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
             'submenu' => [
                 [
                     'text' => 'Indicadores de Distrato',
@@ -563,7 +563,12 @@ return [
                 [
                     'text' => 'TMA venda à vista',
                     'url'  => '/tma/avista',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
+                ],
+                [
+                    'text' => 'TMA venda financiada',
+                    'url'  => '/tma/financiado',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
                 ],
             ],
         ],

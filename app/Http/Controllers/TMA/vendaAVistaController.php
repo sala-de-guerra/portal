@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\vendaAvista;
+namespace App\Http\Controllers\TMA;
 
 use App\Classes\Ldap;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
-use App\Models\TMAaVista\TMAaVista;
+use App\Models\TMA\TMAaVista;
 use App\Models\HistoricoPortalGilie;
 
 
@@ -112,7 +112,7 @@ class vendaAvistaController extends Controller
             $historico->numeroContrato  = $chb;
             $historico->tipo            = "CADASTRO";
             $historico->atividade       = "DISTRATO";
-            $historico->observacao      = "CANCELAMENTO DE VENDA";
+            $historico->observacao      = "venda cancelada - pagamento não identificado no SIMOV e SIACI - boleto baixado - cpf: " . $request->cpfNnpjProponente. "- nome: . $request->nomeProponente";
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();

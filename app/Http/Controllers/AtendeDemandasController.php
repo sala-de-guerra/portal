@@ -297,7 +297,8 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $request->contratoFormatado;
             $historico->tipo            = "CADASTRO";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT) . " - ATIVIDADE: " . $dadosAtividade->nomeAtividade;
+            $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT) . " - ATIVIDADE: " . $dadosAtividade->nomeAtividade . "<br>" .
+            "Descrição do atende: ". "<br>". $request->descricaoAtende;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
@@ -423,6 +424,15 @@ class AtendeDemandasController extends Controller
             if (isset($request->emailContatoNovaCopia)){
                 $mail->addCC($request->emailContatoNovaCopia);
             }
+            if (isset($request->emailAnexadoPeloResponsavel)){
+                $mail->addCC($request->emailAnexadoPeloResponsavel);
+            }
+            if (isset($request->emailAnexadoPeloResponsavelCopia)){
+                $mail->addCC($request->emailAnexadoPeloResponsavelCopia);
+            }
+            if (isset($request->emailAnexadoPeloResponsavelTerceiraCopia)){
+                $mail->addCC($request->emailAnexadoPeloResponsavelTerceiraCopia);
+            }
             $mail->addCC('GILIESP09@caixa.gov.br');
             if(isset($_FILES['arquivo']['tmp_name']) && $_FILES['arquivo']['tmp_name'] != "") {
                 $mail->AddAttachment($_FILES['arquivo']['tmp_name'],
@@ -432,7 +442,12 @@ class AtendeDemandasController extends Controller
             $mail->Subject = 'Resposta de Demanda Aberta';
             $mail->Body = "<h3> Você recebeu uma resposta do Atende: </h3>". "<br>".
             "<b>Resposta Atende </b>: " . "<br><br>" . nl2br($request->respostaAtende)."<br><br>".
-            "<hr>"."<br>".
+            'Esta demanda foi respondida por: '.  session()->get('nomeCompleto'). '- '  .  session('matricula') . "<br>" .
+            "e pode ser consultada no histórico do contrato " . $request->contratoFormatado . " pelo link https://portal.gilie.sp.caixa/consulta-bem-imovel/". $request->contratoFormatado . "<br>" .
+            "(link disponivel apenas para funcionários CAIXA)" . "<br>".
+            "GILIE - " . session()->get('codigoLotacaoAdministrativa') .
+            "<br>".
+            "<hr>"."<br><br>".
             "<b>Esta resposta refere-se ao questionamento </b>: ". "<br><br>" . nl2br($request->descricaoAtende); 
             
             $mail->send();

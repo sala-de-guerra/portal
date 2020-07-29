@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\TMAaVista;
+namespace App\Models\TMA;
 
 use Illuminate\Database\Eloquent\Model;
 

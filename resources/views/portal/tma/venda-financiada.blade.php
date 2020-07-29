@@ -8,13 +8,13 @@
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
-            Tempo médio venda à vista
+            Tempo médio venda com financiamento
         </h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/"> Principal</a> </li>
-            <li class="breadcrumb-item active"> Venda à vista</a> </li>
+            <li class="breadcrumb-item active"> Venda com financimento</a> </li>
         </ol>
     </div>
 </div>
@@ -41,12 +41,12 @@
         <div class="card card-default">
 
             <div class="card-header">
-                <h3 class="card-title">TMA venda à vista</h3>
+                <h3 class="card-title">TMA venda financiada</h3>
             </div> <!-- /.card-header -->
             
             <div class="card-body">
                 <div class="notice notice-success">
-                    @foreach ($mediaAVista as $media)
+                    @foreach ($mediaComFinanciamento as $media)
                     <strong>TMA: {{$media->media}}</strong>
                 </div><br>
                     @endforeach
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                       <br>
-                <table id="tblTma" class="table table-bordered table-striped dataTable">
+                <table id="tblTmaFinanciado" class="table table-bordered table-striped dataTable">
                     <div class="spinner-border spinnerTbl text-primary" role="status">
                         <span class="sr-only"></span>
                       </div>
@@ -101,7 +101,7 @@
 
 @section('js')
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
-<script src="{{ asset('js/portal/tma/tma.js') }}"></script>
+<script src="{{ asset('js/portal/tma/tma-financiado.js') }}"></script>
 
 
 @stop

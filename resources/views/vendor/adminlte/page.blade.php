@@ -176,7 +176,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/atende/minhas-demandas">
                                 <i class="fas fa-envelope mr-2"></i>
-                                {{ session()->get('demandasAtende') }} Atendes para responder.
+                                {{ session()->get('demandasAtende') }} Atende(s) para responder.
                             </a>
                         </div>
                     </li>
