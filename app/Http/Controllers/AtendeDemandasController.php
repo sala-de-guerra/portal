@@ -297,7 +297,8 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $request->contratoFormatado;
             $historico->tipo            = "CADASTRO";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT) . " - ATIVIDADE: " . $dadosAtividade->nomeAtividade;
+            $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT) . " - ATIVIDADE: " . $dadosAtividade->nomeAtividade . "<br>" .
+            "Descrição do atende: ". "<br>". $request->descricaoAtende;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
