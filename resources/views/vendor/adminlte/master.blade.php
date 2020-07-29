@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
 @yield('title', config('adminlte.title', 'AdminLTE 3'))
 @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
@@ -43,6 +44,7 @@
 <script src="{{ asset('plugins/masks/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
 <script src="/js/global/FormataDataClass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 @include('adminlte::plugins', ['type' => 'js'])
 
