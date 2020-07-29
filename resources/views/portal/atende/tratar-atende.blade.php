@@ -744,7 +744,6 @@
                                                         <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
                                                     </div>
                                                 </div>
-                                            </div>
                                             <br>
                                            
                                             <div style="float: right;" class="modal-footer">
