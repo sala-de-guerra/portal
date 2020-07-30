@@ -45,6 +45,7 @@
 <script src="{{ asset('plugins/moment/moment-with-locales.min.js') }}"></script>
 <script src="/js/global/FormataDataClass.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="/js/global/summernote-pt-BR.min.js"></script>
 
 @include('adminlte::plugins', ['type' => 'js'])
 

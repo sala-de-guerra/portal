@@ -441,7 +441,7 @@ class AtendeDemandasController extends Controller
 
             $mail->Subject = 'Resposta de Demanda Aberta';
             $mail->Body = "<h3> Você recebeu uma resposta do Atende: </h3>". "<br>".
-            "<b>Resposta Atende </b>: " . "<br><br>" . nl2br($request->respostaAtende)."<br><br>".
+            "<b>Resposta Atende </b>: " . "<br><br>" . $request->respostaAtende."<br><br>".
             'Esta demanda foi respondida por: '.  session()->get('nomeCompleto'). '- '  .  session('matricula') . "<br>" .
             "e pode ser consultada no histórico do contrato " . $request->contratoFormatado . " pelo link https://portal.gilie.sp.caixa/consulta-bem-imovel/". $request->contratoFormatado . "<br>" .
             "(link disponivel apenas para funcionários CAIXA)" . "<br>".

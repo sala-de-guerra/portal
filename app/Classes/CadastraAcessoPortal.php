@@ -82,7 +82,8 @@ class CadastraAcessoPortal
         'c098453',  // Rafael
         'c079436',  // Vladimir 
         'c066517',   // Renata
-        'c142639'   // Fernanda
+        'c142639',   // Fernanda
+        'c141203'   // Marcão
     ];
 
     public $arrayConvidados = [

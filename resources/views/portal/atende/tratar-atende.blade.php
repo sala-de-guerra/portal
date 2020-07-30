@@ -744,7 +744,6 @@
                                                         <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
                                                     </div>
                                                 </div>
-                                            </div>
                                             <br>
                                            
                                             <div style="float: right;" class="modal-footer">
@@ -818,7 +817,8 @@
 </script>
 <script>
 $('#summernote').summernote({
-  height: 200, 
+  height: 200,
+  lang: "pt-BR" 
 });
 </script>
 @stop
