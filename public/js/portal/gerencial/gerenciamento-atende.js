@@ -271,7 +271,7 @@ $.getJSON('listar-finalizados', function(dados){
 
          // Modal de consulta
          '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-         '<div class="modal-dialog modal-lg" role="document">' +
+         '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
              '<div class="modal-content">' +
                  '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
                      '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
@@ -285,10 +285,10 @@ $.getJSON('listar-finalizados', function(dados){
                              '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
                              '<p><b>'+'Descrição:'+'</b></p>'+
                              '<textarea class="form-control" rows="5" disabled>'+ item.descricaoAtende +'</textarea>'+
-                         '</div><br>' +
+                         '</div><hr><br>' +
                         '<div>'+
                          '<p><b>'+'Resposta:'+'</b></p>'+
-                            '<textarea class="form-control" rows="10" disabled>'+ item.respostaAtende +'</textarea>'+
+                            '<p>'+ item.respostaAtende +'</p>'+
                         '</div><br>' +
 
                      '</div>' + 
