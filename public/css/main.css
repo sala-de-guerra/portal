@@ -232,3 +232,9 @@ input[type=number] {
     .notice-success {
     border-color: #80D651;
 }
+.note-insert {
+    display: none !important;
+}
+.note-view{
+  display: none !important;
+}

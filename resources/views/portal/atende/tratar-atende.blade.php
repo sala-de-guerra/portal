@@ -817,7 +817,8 @@
 </script>
 <script>
 $('#summernote').summernote({
-  height: 200, 
+  height: 200,
+  lang: "pt-BR" 
 });
 </script>
 @stop
