@@ -150,6 +150,8 @@ $(document).ready(function(){
                 $('#dropdownMenuButton'+item.NU_BEM).remove()
               }else if (item.baixaEfetuada == 'pag'){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: green;">'+item.NOME_PROPONENTE +'</b>')
+              }else if (item.repetido != null){
+                $('#nomeProponente'+item.NU_BEM).html('<b style="color: red;">* </b>'+item.NOME_PROPONENTE)
               }
             }
         )}

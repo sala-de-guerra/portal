@@ -73,7 +73,7 @@ $(document).ready(function(){
             var vencimento = moment(item.prazoAtendimentoAtende).format('DD/MM/YYYY')
             var linha =
                 '<tr>' +
-                    '<td>#' + pad(atende, 5) + '</td>' +
+                    '<td id="numeroAtende'+item.idAtende+'">#' + pad(atende, 5) + '</td>' +
                     '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
                     '<td>' + item.nomeAtividade + '</td>' +
                     `<td id="vencimento${item.idAtende}">${vencimento}</td>`+
@@ -196,7 +196,8 @@ $(document).ready(function(){
                         '</div>' + 
                     '</td>'+
                 '</tr>' 
-               
+                
+            var confereVencimento = moment(item.prazoAtendimentoAtende).isBefore(hoje);
 
         $(linha).appendTo('#tblminhasDemandas>tbody');
 
@@ -216,9 +217,10 @@ $(document).ready(function(){
         })
     })
 
-        if (vencimento <= hojeFormatado){
-            $('#vencimento'+item.idAtende).html('<b style="color: red;">'+vencimento +'</b>')
+        if (confereVencimento == true){
+            $('#numeroAtende'+item.idAtende).html('<b style="color: red;">#' + pad(atende, 5) + '</b>')
         }
+
 
         if ($('#textoRedirecionamento'+item.idAtende).text() == "null"){
             $('#redirecionamento'+item.idAtende).remove()

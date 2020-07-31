@@ -55,7 +55,8 @@
                           <strong>Legenda:</strong>
                             <i style="color: blue;" class="fas fa-square"></i> <span style="color: blue;">Baixa sinalizada</span> &nbsp&nbsp&nbsp
                             <i style="color: red;" class="fas fa-square"></i> <span style="color: red;">Distrato sinalizado</span> &nbsp&nbsp&nbsp
-                            <i style="color: green;" class="fas fa-square"></i> <span style="color: green;">Aguarda pagamento</span>
+                            <i style="color: green;" class="fas fa-square"></i> <span style="color: green;">Aguarda pagamento</span>&nbsp&nbsp&nbsp
+                            <b style="color: red;">*</b> Proponente com mais de uma proposta
                         </div>
                     </div>
                       <br>

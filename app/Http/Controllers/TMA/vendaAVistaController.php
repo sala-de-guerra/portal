@@ -43,6 +43,7 @@ class vendaAvistaController extends Controller
     $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
     $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
     $universoAVista= DB::table('TBL_VENDA_AVISTA')
+    ->leftjoin('TBL_VENDA_AVISTA_DUPLICADA', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA_DUPLICADA.NOME_PROPONENTE)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NOME_PROPONENTE)'))
         ->select(DB::raw('
             TBL_VENDA_AVISTA.[BEM_FORMATADO] as BEM_FORMATADO,
             TBL_VENDA_AVISTA.[NU_BEM] as NU_BEM,
@@ -52,7 +53,8 @@ class vendaAvistaController extends Controller
             TBL_VENDA_AVISTA.[CLASSIFICACAO] as CLASSIFICACAO,
             TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
             TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
-            TBL_VENDA_AVISTA.[baixaEfetuada] as baixaEfetuada
+            TBL_VENDA_AVISTA.[baixaEfetuada] as baixaEfetuada,
+            TBL_VENDA_AVISTA_DUPLICADA.[repetido] as repetido
 
 
         '))

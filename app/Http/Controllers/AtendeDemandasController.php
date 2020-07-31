@@ -77,7 +77,7 @@ class AtendeDemandasController extends Controller
      */
     public function listarAtendesDisponiveisResponsavel()
     {
-        $listaDemandasAtende = Atende::where('matriculaResponsavelAtividade', session('matricula'))->where('statusAtende', '!=', 'FINALIZADO')->get();
+        $listaDemandasAtende = Atende::where('matriculaResponsavelAtividade', session('matricula'))->where('statusAtende', '!=', 'FINALIZADO')->orderBy('prazoAtendimentoAtende')->get();
         $arrayDemandasResponsavel = [];
         if (!$listaDemandasAtende->isEmpty()) {
             foreach ($listaDemandasAtende as $demanda) {
