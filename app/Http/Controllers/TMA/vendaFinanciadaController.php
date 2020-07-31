@@ -39,6 +39,7 @@ class vendaFinanciadaController extends Controller
     $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
     $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
     $universoFinanciado= DB::table('TBL_VENDA_FINANCIADO')
+        ->leftjoin('TBL_VENDA_FINANCIADO_DUPLICADAS', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO_DUPLICADAS.NOME_PROPONENTE)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NOME_PROPONENTE)'))
         ->select(DB::raw('
         TBL_VENDA_FINANCIADO.[BEM_FORMATADO] as BEM_FORMATADO,
         TBL_VENDA_FINANCIADO.[NU_BEM] as NU_BEM,
@@ -48,7 +49,8 @@ class vendaFinanciadaController extends Controller
         TBL_VENDA_FINANCIADO.[CLASSIFICACAO] as CLASSIFICACAO,
         TBL_VENDA_FINANCIADO.[NOME_PROPONENTE] as NOME_PROPONENTE,
         TBL_VENDA_FINANCIADO.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
-        TBL_VENDA_FINANCIADO.[baixaEfetuada] as baixaEfetuada
+        TBL_VENDA_FINANCIADO.[baixaEfetuada] as baixaEfetuada,
+        TBL_VENDA_FINANCIADO_DUPLICADAS.[repetido] as repetido
 
 
         '))
@@ -179,3 +181,4 @@ class vendaFinanciadaController extends Controller
     }
 
 }
+
