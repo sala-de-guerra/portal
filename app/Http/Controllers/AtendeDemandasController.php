@@ -298,7 +298,7 @@ class AtendeDemandasController extends Controller
             $historico->tipo            = "CADASTRO";
             $historico->atividade       = "ATENDE";
             $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT) . " - ATIVIDADE: " . $dadosAtividade->nomeAtividade . "<br>" .
-            "Descrição do atende: ". "<br>". $request->descricaoAtende;
+                "<b>". "Assunto: " . "</b>" . $request->assuntoAtende . "<br>" . "<b>"."Descrição do atende: ". "</b>" . "<br>". $request->descricaoAtende;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
@@ -440,7 +440,7 @@ class AtendeDemandasController extends Controller
               }
 
             $mail->Subject = 'Resposta de Demanda Aberta';
-            $mail->Body = "<h3> Você recebeu uma resposta do Atende: </h3>". "<br>".
+            $mail->Body = "<h3> Você recebeu uma resposta do Atende: #". str_pad($request->numAtende, 5, '0', STR_PAD_LEFT) . "</h3><br>".
             "<b>Resposta Atende </b>: " . "<br><br>" . $request->respostaAtende."<br><br>".
             'Esta demanda foi respondida por: '.  session()->get('nomeCompleto'). '- '  .  session('matricula') . "<br>" .
             "e pode ser consultada no histórico do contrato " . $request->contratoFormatado . " pelo link https://portal.gilie.sp.caixa/consulta-bem-imovel/". $request->contratoFormatado . "<br>" .
