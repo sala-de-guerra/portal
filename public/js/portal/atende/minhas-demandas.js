@@ -138,6 +138,7 @@ $(document).ready(function(){
                                         '<input type="hidden" name="emailContatoResposta" value="'+item.emailContatoResposta+'"></input>'+
                                         '<input type="hidden" name="emailContatoCopia" value="'+item.emailContatoCopia+'"></input>'+
                                         '<input type="hidden" name="emailContatoNovaCopia" value="'+item.emailContatoNovaCopia+'"></input>'+
+                                        '<input type="hidden" name="numAtende" value=>"#' + pad(atende, 5)+'"></input>'+
                                             '<div>' +
                                             '<label for="exampleFormControlTextarea1">Responder Atende</label>'+
                                             '<textarea class="form-control" name="respostaAtende" rows="15" required></textarea>'+

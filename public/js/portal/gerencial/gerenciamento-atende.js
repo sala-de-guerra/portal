@@ -4,7 +4,6 @@ var csrfVar = $('meta[name="csrf-token"]').attr('content');
 var hoje = new Date()
 var hojeFormatado = moment(hoje).format('DD/MM/YYYY');
 
-
 //formata idAtende #00000
 function pad(n, width, z) {
     z = z || '0';

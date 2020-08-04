@@ -14,7 +14,7 @@ function Atende ()
         let modalMacroAtividades = '';
         let html =`
                 <div class="modal" tabindex="-1" role="dialog" id="modalAtende">
-                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-dialog modal-lg mda" role="document">
                     <div class="modal-content">
                         <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
                             <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Abrir Atende</h5>
@@ -67,7 +67,7 @@ function Atende ()
         let formMacroAtividade = ''
         let modalMacroAtividades = `
             <div class="modal fade" id="modalMacroAtividades_${arrayDeAtividades[0].idEquipe}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg mda" role="document">
                     <div class="modal-content">
                         <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
                             <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Abrir Atende</h5>
@@ -81,15 +81,15 @@ function Atende ()
                 modalMacroAtividades += `
                                 <div class="col-sm">
                                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalMicroAtividades_${macroAtividade.idAtividade}">
-                                        <i class="${macroAtividade.iconeAtividade}"></i><p>${macroAtividade.nomeAtividade}</p>
+                                        <i class="${macroAtividade.iconeAtividade}"></i><p>${macroAtividade.nomeAtividade}</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br>${macroAtividade.sinteseAtividade}</span>
                                     </button>
                                 </div>
                 `
             } else {
                 modalMacroAtividades += `
                                 <div class="col-sm">
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalFormAtende_${macroAtividade.idAtividade}">
-                                        <i class="${macroAtividade.iconeAtividade}"></i><p>${macroAtividade.nomeAtividade}</p>
+                                    <button type="button" class="btn btn-link tooltip-col" aria-hidden="true" data-toggle="modal" data-target="#modalFormAtende_${macroAtividade.idAtividade}">
+                                        <i class="${macroAtividade.iconeAtividade}"></i><p>${macroAtividade.nomeAtividade}</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br>${macroAtividade.sinteseAtividade}</span>                         
                                     </button>
                                 </div>
                 `
@@ -121,7 +121,7 @@ function Atende ()
         let formMicroAtividade = ''
         let modalMicroAtividade = `
             <div class="modal fade" id="modalMicroAtividades_${arrayMicroAtividades[0].idAtividadeSubordinante}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg mda" role="document">
                     <div class="modal-content">
                         <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
                             <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Abrir Atende</h5>
@@ -133,8 +133,8 @@ function Atende ()
         arrayMicroAtividades.forEach(microAtividade => {
             modalMicroAtividade += `
                                 <div class="col-sm">
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalFormAtende_${microAtividade.idAtividade}">
-                                        <i class="${microAtividade.iconeAtividade}"></i><p>${microAtividade.nomeAtividade}</p>
+                                    <button type="button" class="btn btn-link tooltip-col" aria-hidden="true" data-toggle="modal" data-target="#modalFormAtende_${microAtividade.idAtividade}">
+                                        <i class="${microAtividade.iconeAtividade}"></i><p>${microAtividade.nomeAtividade}</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br>${microAtividade.sinteseAtividade}</span>    
                                     </button>
                                 </div>
             `
@@ -159,7 +159,7 @@ function Atende ()
     {
         let formAtende = `
             <div class="modal fade" id="modalFormAtende_${dadosAtividade.idAtividade}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg mda" role="document">
                     <div class="modal-content">
                         <div class="modal-header"style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
                             <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Abrir Atende</h5>
@@ -173,6 +173,7 @@ function Atende ()
                                 <input type="hidden" name="contratoFormatado" value="${numeroContrato}">
                                 <input type="hidden" name="idEquipe" value="${dadosAtividade.idEquipe}">
                                 <input type="hidden" name="idAtividade" value="${dadosAtividade.idAtividade}">
+
                                 <div class="form-group">
                                     <label>Assunto</label>
                                     <input type="text" name="assuntoAtende" class="form-control" placeholder="Assunto do Atende" required>
@@ -203,9 +204,30 @@ function Atende ()
                             </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" onclick="atende.fecharModais()">Fechar</button>
+                            <button data-toggle="modal" data-target="#modalTeste" style="float: left;" type="button" class="btn btn-link tooltip-col mr-4" aria-hidden="true"><span style="color: red;">Histórico atende aberto nos últimos 7 dias</span>
+                            <small class="form-text text-muted">clique para ver mais.</small>
+                            <span class="tooltiptext5"><br>Atende(s) última semana: <br>
+                            
+                            <table id="tblTooltipAtende" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Status</th>
+
+                                </thead>
+                                <tbody>  
+
+                                </tbody>
+                            </table>
+                            
+                            </span>
+                            </button>
+                            
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
+                            
+                            
                         </form>
                     </div>
                 </div>

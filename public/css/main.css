@@ -238,3 +238,54 @@ input[type=number] {
 .note-view{
   display: none !important;
 }
+
+.tooltiptext4 {
+    visibility: hidden;
+    width: 23%;
+    height: 80%;
+    background-color: #fff;
+    color: #247CB4;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 1;
+    top: 56px;
+    right: 30px;
+    border-style: solid;
+    border-color: #247CB4;
+    
+}
+
+.tooltiptext5 {
+    visibility: hidden;
+    width: 35%;
+    height: 80%;
+    background-color: #fff;
+    color: #247CB4;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 1;
+    top: 56px;
+    right: 30px;
+    border-style: solid;
+    border-color: #247CB4;
+    
+}
+
+
+.tooltip-col:hover .tooltiptext4 {
+    visibility: visible;
+}
+.tooltip-col:hover .tooltiptext5 {
+    visibility: visible;
+}
+.mda{
+    margin-left: 10% !important;
+    width: 80% !important;
+    height: 70% !important;
+ }
