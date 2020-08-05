@@ -47,11 +47,14 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
             case 'Venda por credenciado':
                 statusAtual = 'Vendido';
                 break;
-            case 'Licitação':
             case 'Venda Direta Online':
             case 'Venda Direta':
+            case 'Licitação':
                 statusAtual = 'Venda Online';
                 break;
+        }
+        if ($('#tipoVenda').text() == "2º Leilão SFI" || $('#tipoVenda').text() == "1º Leilão SFI"){
+            statusAtual = 'Leilão'
         }
     };
 
@@ -126,6 +129,5 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
     $('#barra' + idBarra).css("width", function() {
         return porcentagemPreenchimento + "%";
     });
-
 
 };

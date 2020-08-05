@@ -80,7 +80,7 @@ function Atende ()
             if (macroAtividade.microAtividade.length > 0) {
                 modalMacroAtividades += `
                                 <div class="col-sm">
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalMicroAtividades_${macroAtividade.idAtividade}">
+                                    <button type="button" class="btn btn-link tooltip-col" aria-hidden="true" class="btn btn-link" data-toggle="modal" data-target="#modalMicroAtividades_${macroAtividade.idAtividade}">
                                         <i class="${macroAtividade.iconeAtividade}"></i><p>${macroAtividade.nomeAtividade}</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br>${macroAtividade.sinteseAtividade}</span>
                                     </button>
                                 </div>
