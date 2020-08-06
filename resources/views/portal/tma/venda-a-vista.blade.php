@@ -47,9 +47,10 @@
             <div class="card-body">
                 <div class="notice notice-success">
                     @foreach ($mediaAVista as $media)
-                    <strong>TMA: {{$media->media}}</strong>
-                </div><br>
+                        <strong>TMA: {{$media->media}}</strong>
                     @endforeach
+                </div><br>
+                   
                     <div class="row">
                         <div class="col">
                           <strong>Legenda:</strong>

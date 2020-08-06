@@ -375,3 +375,16 @@ Route::post('tma/baixar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@ba
 Route::post('tma/cancelar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@cancelarVendaFinanciada');
 //Marcar CHB aguarda pagamento
 Route::post('tma/aguarda-pagamento-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@aguardaVendaFinanciada');
+
+//teste de upload
+Route::get('/testedeupload', function () {
+    return view('portal.upload.testeDeUpload');
+});
+//Marcar CHB cancelado
+Route::post('testedeupload/enviar', 'upload\uploadController@store');
+
+//ROTA TMA Unificado
+//view index
+Route::get('tma/tma', 'TMA\tmaVisaoUnificadaController@indexVendaAVista');
+//Media TMA Financiado
+Route::get('tma/media-tma-financiado', 'TMA\tmaVisaoUnificadaController@mediaVendaFinanciada');

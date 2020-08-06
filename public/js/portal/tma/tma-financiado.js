@@ -1,6 +1,17 @@
     
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
+  $.getJSON('/tma/media-tma-financiado', function(dados){
+    $.each(dados, function(key, item) {
+        var tma = item.media
+        console.log(item.media)
+  // $(tma).appendTo('#tblimportexcel>tbody');
+    $('#tmaFinanciado').html(item.media);
+    }
+  )}
+)
+
+
 function _formataDatatableComId (idTabela){
     $('#' + idTabela).DataTable({
         "order": [[ 3, "desc" ]],

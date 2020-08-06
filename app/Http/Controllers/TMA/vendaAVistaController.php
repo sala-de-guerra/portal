@@ -35,7 +35,7 @@ class vendaAvistaController extends Controller
              ->where('TBL_VENDA_AVISTA.baixaEfetuada', '<>', 'del')
              ->get();
             
-            return view('portal.tma.venda-a-vista', compact('mediaAVista'));
+            return view('portal.tma.tma', compact('mediaAVista'));
         }
 
     public function universoVendaAVista()
