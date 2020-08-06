@@ -326,6 +326,23 @@ return [
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
+                [
+                    'text' => 'TMA',
+                    'url'  => '/tma/tma',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'], // , 'GESTOR'
+                ],
+
+                // [
+                //     'text' => 'TMA venda à vista',
+                //     'url'  => '/tma/avista',
+                //     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'], // , 'GESTOR'
+                // ],
+                // [
+                //     'text' => 'TMA venda financiada',
+                //     'url'  => '/tma/financiado',
+                //     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'], // , 'GESTOR'
+
+                // ],
 
                 // [
                 //     'text' => 'level_two',
@@ -559,17 +576,6 @@ return [
                     'text' => 'Indicadores de Distrato',
                     'url'  => '/indicadores/distrato',
                     'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
-                ],
-                [
-                    'text' => 'TMA venda à vista',
-                    'url'  => '/tma/avista',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
-                ],
-                [
-                    'text' => 'TMA venda financiada',
-                    'url'  => '/tma/financiado',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
-
                 ],
             ],
         ],
