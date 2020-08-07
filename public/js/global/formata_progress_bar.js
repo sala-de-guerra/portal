@@ -53,9 +53,11 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
                 statusAtual = 'Venda Online';
                 break;
         }
+        if (statusAtual != 'Vendido' && statusAtual != 'Preparaçâo' && statusAtual != 'Contratação'){
         if ($('#tipoVenda').text() == "2º Leilão SFI" || $('#tipoVenda').text() == "1º Leilão SFI"){
             statusAtual = 'Leilão'
         }
+    }
     };
 
     if (idBarra == "progressBarLeilaoNegativo") {
@@ -97,6 +99,7 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
                 break;
             case 'AVERBACAO DISTRATO':
             case 'ENCAMINHADA AGENCIA':
+            case 'ENCAMINHADO AGENCIA':
                 statusAtual = 'Encaminhada Agência';
                 break;
             case 'CONCLUIDA':
