@@ -24,7 +24,7 @@ function _formataTabelaHistorico (numeroContrato) {
                                 '</button>' +
             
                                 '<div class="modal fade" id="modalConsultaObservacaoHistorico' + item.idHistorico + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                                    '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">' +
+                                    '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">' +
                                         '<div class="modal-content">' +
             
                                             '<div class="modal-header">' +

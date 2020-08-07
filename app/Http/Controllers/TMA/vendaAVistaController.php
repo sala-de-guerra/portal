@@ -114,7 +114,7 @@ class vendaAvistaController extends Controller
             $historico->numeroContrato  = $chb;
             $historico->tipo            = "CADASTRO";
             $historico->atividade       = "DISTRATO";
-            $historico->observacao      = "venda cancelada - pagamento não identificado no SIMOV e SIACI - boleto baixado - cpf: " . $request->cpfNnpjProponente. "- nome: . $request->nomeProponente";
+            $historico->observacao      = strip_tags($request->observacaoAtendimento);
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();

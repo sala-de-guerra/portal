@@ -114,6 +114,11 @@ $(document).ready(function(){
                               <div class="modal-body">
                                   <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como distrato ?</p>
                                 </div>
+                                <div class="modal-body">
+                                <label for="observacaoAtendimento">Observação</label>
+                                <textarea class="form-control" name="observacaoAtendimento" rows="5" required>venda cancelada - pagamento não identificado no SIMOV e SIACI - boleto baixado - cpf: ${item.CPF_CNPJ_PROPONENTE} - nome: ${item.NOME_PROPONENTE}
+                                </textarea>
+                                </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
                                   <button type="submit" class="btn btn-danger">Distratar</button>

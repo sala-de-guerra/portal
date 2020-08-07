@@ -88,7 +88,7 @@ $(document).ready(function(){
 
                         <!-- Modal cancelar -->
                         <div class="modal fade" id="cancelarContrato${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
+                          <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Cancelar contrato</h5>
@@ -102,6 +102,11 @@ $(document).ready(function(){
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
                                   <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como distrato ?</p>
+                                </div>
+                                <div class="modal-body">
+                                <label for="observacaoAtendimento">Observação</label>
+                                <textarea class="form-control" name="observacaoAtendimento" rows="5" required>venda cancelada - pagamento não identificado no SIMOV e SIACI - boleto baixado - cpf: ${item.CPF_CNPJ_PROPONENTE} - nome: ${item.NOME_PROPONENTE}
+                                </textarea>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
