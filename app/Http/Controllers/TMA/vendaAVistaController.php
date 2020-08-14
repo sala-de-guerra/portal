@@ -51,6 +51,7 @@ class vendaAvistaController extends Controller
             TBL_VENDA_AVISTA.[UNA] as UNA,
             TBL_VENDA_AVISTA.[DIAS_DECORRIDOS] as DIAS_DECORRIDOS,
             TBL_VENDA_AVISTA.[CLASSIFICACAO] as CLASSIFICACAO,
+            TBL_VENDA_AVISTA.[TIPO_VENDA] as tipoVenda,
             TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
             TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
             TBL_VENDA_AVISTA.[baixaEfetuada] as baixaEfetuada,

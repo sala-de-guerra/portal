@@ -43,7 +43,8 @@
                     <div class="col-md-12">
                         <table id="tblCorretores" class="table table-bordered table-striped dataTable">
                             <div class="notice notice-success">
-                                <strong>Corretores: </strong>Listagem de corretores com contrato <strong>ATIVO</strong> registrado no SIMOV.
+                                <strong>Corretores: </strong>Listagem de corretores com contrato <strong>ATIVO</strong> registrado no SIMOV. &nbsp &nbsp
+                            <a href="corretores/baixar-planilha"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha Corretores &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                             </div><br>
                             <thead>
                                 <tr>
@@ -52,6 +53,7 @@
                                     <th>Celular</th>
                                     <th>Email</th>
                                     <th>Vencimento Contrato</th>
+                                    <th>GILIE</th>
                                 </tr>
                             </thead>
                             <tbody>

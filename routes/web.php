@@ -351,6 +351,8 @@ Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCor
 Route::get('corretores', 'CorretoresController@Corretores');
 // lista corretores
 Route::get('corretores/lista-corretores', 'CorretoresController@listaCorretores');
+//Cria Planilha
+Route::get('corretores/baixar-planilha', 'CorretoresController@criaPlanilhaExcelCorretores');
 
 //ROTA TMA A VISTA
 //view index

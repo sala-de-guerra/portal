@@ -45,11 +45,11 @@ $(document).ready(function(){
             var linha =
                 `<tr>
                     <td><a href="/consulta-bem-imovel/${item.BEM_FORMATADO}" class="cursor-pointer">${item.NU_BEM}</a></td>
-                    <td>${item.CLASSIFICACAO}</td>
+                    <td>${item.tipoVenda}</td>
                     <td>${item.PAGAMENTO_BOLETO}</td>
                     <td>${item.DIAS_DECORRIDOS}</td>
                     <td id="nomeProponente${item.NU_BEM}">${item.NOME_PROPONENTE}</td>
-                    <td>${item.CPF_CNPJ_PROPONENTE}</td>
+                    <td style="white-space:nowrap;">${item.CPF_CNPJ_PROPONENTE}</td>
                     <td>
                     <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton${item.NU_BEM}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

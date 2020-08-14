@@ -131,7 +131,7 @@ $(document).ready(function(){
                 $('#custom-tabs-one-distrato-tab').remove();
             }           
         }, 3800);
-    }, 500);
+    }, 1000);
 
 });
 

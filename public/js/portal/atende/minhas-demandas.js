@@ -202,21 +202,16 @@ $(document).ready(function(){
 
         $(linha).appendTo('#tblminhasDemandas>tbody');
 
-    $('#btnGroupDrop1'+item.idAtende).one("click",function() {
-        $.getJSON('/atende/listar-demandas-disponiveis', function(date){
-            $.each(date, function(chave, valor) {
-                $.getJSON('/gerencial/gestao-equipes/listar-empregados-equipe/'+valor.idEquipe, function(dados){
-                    $.each(dados, function(key, item) {
-        
-                        var redirect =
-                                    '<option value="'+item.matricula+'">'+item.nomeCompleto+'</option>'
-        
-                    $(redirect).appendTo('#selectDestinatario'+valor.idAtende);
+        $('#btnGroupDrop1'+item.idAtende).click(function() {
+            $.getJSON('/gerencial/gestao-equipes/listar-empregados-equipe/' +item.idEquipe, function(dadosEmpregado){
+                $.each(dadosEmpregado, function(empKey, empItem) {
+                    var redirect =
+                                '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                $(redirect).appendTo('#selectDestinatario'+item.idAtende);
                     })
                 })
             })
-        })
-    })
+            
 
         if (confereVencimento == true){
             $('#numeroAtende'+item.idAtende).html('<b style="color: red;">#' + pad(atende, 5) + '</b>')

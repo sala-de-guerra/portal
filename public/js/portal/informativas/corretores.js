@@ -16,6 +16,7 @@ $(document).ready( function () {
                     <td id="telefone${item.NU_CRECI}">(${item.CO_DDD_CELULAR})`+" "+`${item.CO_TELEFONE_CELULAR}</td>
                     <td>${item.ED_EMAIL_PESSOA}</td>
                     <td>${dataFormatada}</td>
+                    <td>${item.GILIE}</td>
                 </tr>`
 
                 if (data >= hoje){

@@ -1,16 +1,6 @@
     
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
-  $.getJSON('/tma/media-tma-financiado', function(dados){
-    $.each(dados, function(key, item) {
-        var tma = item.media
-        console.log(item.media)
-  // $(tma).appendTo('#tblimportexcel>tbody');
-    $('#tmaFinanciado').html(item.media);
-    }
-  )}
-)
-
 
 function _formataDatatableComId (idTabela){
     $('#' + idTabela).DataTable({
@@ -56,11 +46,12 @@ $(document).ready(function(){
             var linha =
                 `<tr>
                     <td><a href="/consulta-bem-imovel/${item.BEM_FORMATADO}" class="cursor-pointer">${item.NU_BEM}</a></td>
-                    <td>${item.CLASSIFICACAO}</td>
+                    <td>${item.tipoVenda}</td>
                     <td>${item.PAGAMENTO_BOLETO}</td>
                     <td>${item.DIAS_DECORRIDOS}</td>
                     <td id="nomeProponente${item.NU_BEM}">${item.NOME_PROPONENTE}</td>
-                    <td>${item.CPF_CNPJ_PROPONENTE}</td>
+                    <td style="white-space:nowrap;">${item.CPF_CNPJ_PROPONENTE}</td>
+                    <td id="colunacca${item.NU_BEM}">${item.ACEITA_CCA}</td>
                     <td>
                     <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton${item.NU_BEM}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -168,6 +159,10 @@ $(document).ready(function(){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: green;">'+item.NOME_PROPONENTE +'</b>')
               }else if (item.repetido != null){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: red;">* </b>'+item.NOME_PROPONENTE)
+              }
+
+              if ($('#colunacca' +item.NU_BEM).text() == 'null'){
+                $('#colunacca' +item.NU_BEM).text('Nao')
               }
             }
         )}

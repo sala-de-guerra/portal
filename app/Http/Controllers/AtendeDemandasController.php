@@ -308,6 +308,11 @@ class AtendeDemandasController extends Controller
             $mensagem = str_replace("%Assunto%", $novaDemandaAtende->assuntoAtende, $mensagem);
             $mensagem = str_replace("%quantidade_dias%", $formataData, $mensagem);
 
+            //futuro upload de arquivos
+            // if ($request->file('anexoAtende') != null){
+            //     $nameFile = date("d_m_Y_His", time()). "_" . session('matricula'). "_". $request->file('anexoAtende')->getClientOriginalName();
+            //      $request->file('anexoAtende')->storeAs('PUBLIC/EstoqueImoveis/'.$request->contratoFormatado, $nameFile);
+            //  }
 
             $mail = new PHPMailer(true);
                 $mail->isSMTP();
@@ -416,7 +421,7 @@ class AtendeDemandasController extends Controller
             if ($request->emailContatoResposta == "null" || $request->emailContatoResposta == null){
             $mail->addAddress($request->matriculaCriadorDemanda. "@mail.caixa");
             }else {
-            $mail->addCC($request->emailContatoResposta);
+            $mail->addAddress($request->emailContatoResposta);
             }
             if (isset($request->emailContatoCopia)){
                 $mail->addCC($request->emailContatoCopia);
@@ -433,7 +438,7 @@ class AtendeDemandasController extends Controller
             if (isset($request->emailAnexadoPeloResponsavelTerceiraCopia)){
                 $mail->addCC($request->emailAnexadoPeloResponsavelTerceiraCopia);
             }
-            $mail->addCC('GILIESP09@caixa.gov.br');
+            $mail->addBCC('GILIESP09@caixa.gov.br');
             if(isset($_FILES['arquivo']['tmp_name']) && $_FILES['arquivo']['tmp_name'] != "") {
                 $mail->AddAttachment($_FILES['arquivo']['tmp_name'],
                 $_FILES['arquivo']['name']);

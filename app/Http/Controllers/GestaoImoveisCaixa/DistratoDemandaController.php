@@ -543,7 +543,8 @@ class DistratoDemandaController extends Controller
                     $historico->numeroContrato = $demandaDistrato->contratoFormatado;
                     $historico->tipo = "PARECER EMITIDO";
                     $historico->atividade = "DISTRATO";
-                    $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " SEGUIRÁ SEM COBRANÇA MULTA";
+                    $historico->observacao = "DISTRATO #" . str_pad($demandaDistrato->idDistrato, 4, '0', STR_PAD_LEFT) . " <br>" .
+                    $demandaDistrato->parecerGestor;
                     $historico->created_at = date("Y-m-d H:i:s", time());
                     $historico->updated_at = date("Y-m-d H:i:s", time());
                     $historico->save();

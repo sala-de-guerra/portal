@@ -263,7 +263,9 @@ class DistratoPhpMailer
                 $mensagemAutomatica = str_replace("%EMAIL_PROPONENTE%", $request->emailProponente, $mensagemAutomatica);
                 break;
         }       
-        $mail->Body = $mensagemAutomatica;
+        $mail->Body = $mensagemAutomatica . "<br>" . 
+        'Este emai foi enviado por: '.  session()->get('nomeCompleto'). ' - '  .  session('matricula') . "<br>" .
+        "através de Rotinas Automáticas do https://portal.gilie.sp.caixa";
         return $mail; 
     }
 
