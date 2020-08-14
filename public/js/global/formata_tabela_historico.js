@@ -5,6 +5,10 @@ var semanaPassada = moment(s).format('DD/MM/YYYY');
 function _formataTabelaHistorico (numeroContrato) {
     $.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
         $.each(dados.historico, function(key, item) {
+            var historicoCompleto = item.observacao
+            HistoricoSemQuebra = historicoCompleto.replace(/(<p[^>]+?>|<p>|<\/p>)/img, "");
+            var stripped = HistoricoSemQuebra.replace(/(<br\s*\/?>){1,}/gi, '<p>');
+
             var data = moment(item.data).format('DD/MM/YYYY')
             var linha = 
                 '<tr>' +
@@ -24,7 +28,7 @@ function _formataTabelaHistorico (numeroContrato) {
                                 '</button>' +
             
                                 '<div class="modal fade" id="modalConsultaObservacaoHistorico' + item.idHistorico + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                                    '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">' +
+                                    '<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">' +
                                         '<div class="modal-content">' +
             
                                             '<div class="modal-header">' +
@@ -37,8 +41,7 @@ function _formataTabelaHistorico (numeroContrato) {
                                             '<div class="modal-body">' +
             
                                                 '<div class="form-group">' +
-                                                    '<p>' + item.observacao + '</p>' +                                        
-                                                '</div>' +
+                                                '<p id="observacaoHist'+ item.idHistorico +'">' +  item.observacao + '</p>' +
             
                                             '</div>' +
             
@@ -88,11 +91,10 @@ function _formataTabelaHistorico (numeroContrato) {
                     historicofatiado = $('#obs'+item.idHistorico).text()
                 }
 
+                if (item.tipo == "RESPOSTA"){
+                   $('#observacaoHist' + item.idHistorico).html(stripped)
+                 }
 
-                // var data =$('.formata-data').text()
-                // console.log(obs)
-                // var novaData = data.replace(/^(\d+)-(\d+)-(\d+)(.*):\d+$/, '$3/$2/$1$4');;
-                // $('.formata-data').text(novaData)
         }) 
 
         _formataDatatableComId ("tblHistorico");

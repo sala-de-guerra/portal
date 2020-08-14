@@ -29,9 +29,36 @@ class tmaVisaoUnificadaController extends Controller
             ->where('TBL_VENDA_AVISTA.baixaEfetuada', '<>', 'sim')
             ->where('TBL_VENDA_AVISTA.baixaEfetuada', '<>', 'del')
             ->get();
+
+
+            $mediaComFinanciamento= DB::table('TBL_VENDA_FINANCIADO')
+            ->select(DB::raw('
+           
+            avg([DIAS_DECORRIDOS]) as media
+            '))
+             ->where('TBL_VENDA_FINANCIADO.UNA', '=', $siglaGilie)
+             ->where('TBL_VENDA_FINANCIADO.baixaEfetuada', '<>', 'sim')
+             ->where('TBL_VENDA_FINANCIADO.baixaEfetuada', '<>', 'del')
+             ->get();
+
+             $mediaCCA= DB::table('TBL_VENDA_FINANCIADO')
+             ->select(DB::raw('
+            
+             avg([DIAS_DECORRIDOS]) as media
+             '))
+              ->where('TBL_VENDA_FINANCIADO.UNA', '=', $siglaGilie)
+              ->where('TBL_VENDA_FINANCIADO.ACEITA_CCA','Sim')
+              ->where('TBL_VENDA_FINANCIADO.baixaEfetuada', '<>', 'sim')
+              ->where('TBL_VENDA_FINANCIADO.baixaEfetuada', '<>', 'del')
+              ->get();
+            
+            return view('portal.tma.tma', [    
+             'mediaAVista'           => $mediaAVista
+            ,'mediaComFinanciamento' => $mediaComFinanciamento
+            ,'mediaCCA'              => $mediaCCA
+            ]);
+        }
         
-        return view('portal.tma.tma', compact('mediaAVista'));
-    }
 
     public function indexVendaFinanciada()
     {

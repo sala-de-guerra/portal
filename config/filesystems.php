@@ -57,10 +57,11 @@ return [
 
         'servidor' => [
             'driver' => 'local',
-            'root' => storage_path('arquivos/PUBLIC'),
-            'url' => env('APP_URL').'/public',
+            'root' => env('SERVIDOR_UPLOAD_DOCUMENTOS'),
+            'url' => env('SERVIDOR_UPLOAD_DOCUMENTOS'),
             'visibility' => 'public',
         ],
+
 
         's3' => [
             'driver' => 's3',

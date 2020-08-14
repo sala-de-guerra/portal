@@ -19,7 +19,7 @@
 <div class="row mb-2">
     <div class="col">
         <h1 class="m-0 text-dark">
-            Tempo médio de aquisição
+            Tempo médio de atendimento 
         </h1>
     </div><br>
 
@@ -27,7 +27,7 @@
     <div class="col">
         <ol class="breadcrumb float-right">
             <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/estoque-imoveis/conformidade-contratacao">Contratação</a> </li>
-            <li class="breadcrumb-item active"><a href="/atende/minhas-demandas"> TMA</a> </li>    
+            <li class="breadcrumb-item active"><a href=""> TMA</a> </li>    
         </ol>
     </div>
 </div><br>
@@ -125,7 +125,13 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="notice notice-success"> 
-                                        <strong>TMA: <span id="tmaFinanciado"></span></strong>
+                                        @foreach ($mediaComFinanciamento as $mediaFinanciada)
+                                            <strong>TMA: {{$mediaFinanciada->media}}</strong>
+                                        @endforeach
+                                        &nbsp&nbsp&nbsp&nbsp&nbsp
+                                        @foreach ($mediaCCA as $mediaApenasCCA)
+                                        <strong>TMA CCA: {{$mediaApenasCCA->media}}</strong>
+                                    @endforeach
                                     </div><br>
                                     <div class="col">
                                         <strong>Legenda:</strong>
@@ -148,6 +154,7 @@
                                                 <th>Dias Decorridos</th>
                                                 <th>Nome Proponente</th>
                                                 <th>CPF/CNPJ</th>
+                                                <th>CCA</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
