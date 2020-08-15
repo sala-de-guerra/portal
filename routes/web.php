@@ -390,3 +390,10 @@ Route::post('testedeupload/enviar', 'upload\uploadController@store');
 Route::get('tma/tma', 'TMA\tmaVisaoUnificadaController@indexVendaAVista');
 //Media TMA Financiado
 Route::get('tma/media-tma-financiado', 'TMA\tmaVisaoUnificadaController@mediaVendaFinanciada');
+
+//ROTA Controle de Chaves
+Route::get('estoque-imoveis/chaves', 'GestaoImoveisCaixa\controleDeChavesController@index');
+Route::get('estoque-imoveis/universo-chave', 'GestaoImoveisCaixa\controleDeChavesController@listaUniversoChaves');
+Route::get('estoque-imoveis/universo-emprestado', 'GestaoImoveisCaixa\controleDeChavesController@listaChavesEmprestadas');
+Route::post('estoque-imoveis/cadastra-chave', 'GestaoImoveisCaixa\controleDeChavesController@adicionarChaves');
+Route::post('estoque-imoveis/empresta-chave/{idChave}', 'GestaoImoveisCaixa\controleDeChavesController@emprestaChaves');
