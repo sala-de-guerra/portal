@@ -210,6 +210,8 @@ Route::prefix('atende')->group(function () {
     // criar modelo de mensagem
     Route::post('criar-mensagem','AtendeDemandasController@criaModeloMensagem');
     // lista modelos de mensagem
+    Route::get('apagar-mensagem/{id}','AtendeDemandasController@apagarModeloMensagem');
+    // lista modelos de mensagem
     Route::get('lista-mensagem','AtendeDemandasController@listarModeloMensagem');
 });
 
@@ -296,11 +298,14 @@ Route::get('gerencial/listar-atende', 'GestaoAtendeController@listarUniverso');
 // LISTAR FINALIZADOS
 Route::get('gerencial/listar-finalizados', 'GestaoAtendeController@listarFinalizados'); 
 
-// ROTA CONTROLE ARQUIVO EMGEA
-Route::get('/controle-arquivos', 'PlaniladeControle\UploadexcelController@importaExcel');
+// ROTA CARGA EM LOTE EMGEA
+Route::get('carga-em-lote/controle-arquivos', 'PlaniladeControle\UploadexcelController@importaExcel');
 Route::post('/controle-arquivos/envia', 'PlaniladeControle\UploadexcelController@import');
 Route::get('/controle-arquivos/lista', 'PlaniladeControle\UploadexcelController@listaUpload');
 Route::get('/controle-arquivos/baixar', 'PlaniladeControle\DownloadexcelController@criaPlanilhaControleExcel');
+// ROTA CARGA EM LOTE AVERBAÇÃO LEILÃO NEGATIVO
+Route::get('carga-em-lote/averbacao-leilao-negativo', 'LeilaoNegativo\cargaAverbacaoController@importaExcelAverbacao');
+Route::post('/carga-em-lote/averbacao-leilao-negativo/envia', 'LeilaoNegativo\cargaAverbacaoController@import');
 
 //ROTA DO ATENDE GENERICO
 Route::get('gerencial/gerenciar-atende-generico', 'FaleConoscoController@AtendeGenericoIndex');
@@ -321,7 +326,7 @@ Route::get('listar/atende-sem-contrato-agencia', 'FaleConoscoController@listaFal
 Route::get('listar/atende-sem-contrato-finalizado', 'FaleConoscoController@listaFaleConoscoagenciaFinalizado');
 
 //ROTA controle de laudo
-Route::get('controle-laudos', 'Laudo\controleLaudoController@controleLaudoIndex');
+Route::get('preparar-e-ofertar/controle-laudos', 'Laudo\controleLaudoController@controleLaudoIndex');
 //traz universo laudo
 Route::get('controle-laudos/universo', 'Laudo\controleLaudoController@universoLaudo');
 //traz universo vencido
@@ -333,30 +338,55 @@ Route::get('controle-laudos/em-pendencia', 'Laudo\controleLaudoController@laudoE
 //Altera dados
 Route::post('controle-laudos/alterar/{id}', 'Laudo\controleLaudoController@cadastrarAlteracoes');
 //Envia Mensageria
-Route::post('controle-laudos/envia-mensagem/{id}', 'Laudo\controleLaudoController@enviaMensagem');
+Route::post('preparar-e-ofertar/controle-laudos/envia-mensagem/{id}', 'Laudo\controleLaudoController@enviaMensagem');
 //Cria Excel para Download
 Route::get('controle-laudos/download-excel', 'Laudo\controleLaudoController@criaPlanilhaExcelLaudo');
 //cadastra OS
-Route::post('controle-laudos/cadastrarOS', 'Laudo\controleLaudoController@cadastrarOS');
+Route::post('preparar-e-ofertar/controle-laudos/cadastrarOS', 'Laudo\controleLaudoController@cadastrarOS');
 //cadastra OBS
 Route::post('controle-laudos/cadastrarobs/{id}', 'Laudo\controleLaudoController@cadastrarOBS');
 //view de baixa
-Route::get('controle-laudos/controle-baixa', 'Laudo\controleLaudoController@baixaDeLaudo');
+Route::get('preparar-e-ofertar/controle-laudos/controle-baixa', 'Laudo\controleLaudoController@baixaDeLaudo');
 //view de correcao
-Route::get('controle-laudos/controle-correcao', 'Laudo\controleLaudoController@correcaoDeLaudo');
+Route::get('preparar-e-ofertar/controle-laudos/controle-correcao', 'Laudo\controleLaudoController@correcaoDeLaudo');
 Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCorrecao');
 
 
-//ROTA Corretores
+//ROTA Corretores view
 Route::get('corretores', 'CorretoresController@Corretores');
-// lista corretores
+// lista corretores GILIE SP
 Route::get('corretores/lista-corretores', 'CorretoresController@listaCorretores');
+// lista corretores GILIE SA
+Route::get('corretores/lista-corretores-sa', 'CorretoresController@listaCorretoresSA');
+// lista corretores GILIE RE
+Route::get('corretores/lista-corretores-re', 'CorretoresController@listaCorretoresRE');
+// lista corretores GILIE RJ
+Route::get('corretores/lista-corretores-rj', 'CorretoresController@listaCorretoresRJ');
+// lista corretores GILIE PO
+Route::get('corretores/lista-corretores-po', 'CorretoresController@listaCorretoresPO');
+// lista corretores GILIE GO
+Route::get('corretores/lista-corretores-go', 'CorretoresController@listaCorretoresGO');
+// lista corretores GILIE FO
+Route::get('corretores/lista-corretores-fo', 'CorretoresController@listaCorretoresFO');
+// lista corretores GILIE CT
+Route::get('corretores/lista-corretores-ct', 'CorretoresController@listaCorretoresCT');
+// lista corretores GILIE BR
+Route::get('corretores/lista-corretores-br', 'CorretoresController@listaCorretoresBR');
+// lista corretores GILIE BE
+Route::get('corretores/lista-corretores-be', 'CorretoresController@listaCorretoresBE');
+// lista corretores GILIE BU
+Route::get('corretores/lista-corretores-bu', 'CorretoresController@listaCorretoresBU');
+// lista corretores GILIE BH
+Route::get('corretores/lista-corretores-bh', 'CorretoresController@listaCorretoresBH');
 //Cria Planilha
 Route::get('corretores/baixar-planilha', 'CorretoresController@criaPlanilhaExcelCorretores');
 
-//ROTA TMA A VISTA
+
+//ROTA TMA Unificado
 //view index
-Route::get('tma/avista', 'TMA\vendaAVistaController@indexVendaAVista');
+Route::get('contratacao/tempo-medio-aquisicao', 'TMA\tmaVisaoUnificadaController@indexVendaAVista');
+//Media TMA Financiado
+Route::get('tma/media-tma-financiado', 'TMA\tmaVisaoUnificadaController@mediaVendaFinanciada');
 //universo venda a vista
 Route::get('tma-venda-a-vista', 'TMA\vendaAVistaController@universoVendaAVista');
 //Marcar CHB baixado
@@ -365,10 +395,6 @@ Route::post('tma/baixar-chb/{chb}', 'TMA\vendaAVistaController@baixarVendaAVista
 Route::post('tma/cancelar-chb/{chb}', 'TMA\vendaAVistaController@cancelarVendaAVista');
 //Marcar CHB aguarda pagamento
 Route::post('tma/aguarda-pagamento-chb/{chb}', 'TMA\vendaAVistaController@aguardaVendaAVista');
-
-//ROTA TMA FINANCIADO
-//view index
-Route::get('tma/financiado', 'TMA\vendaFinanciadaController@indexVendaFinanciada');
 //universo venda com financiamento
 Route::get('tma-venda-com-financimento', 'TMA\vendaFinanciadaController@universoVendaFinanciada');
 //Marcar CHB baixado
@@ -378,22 +404,16 @@ Route::post('tma/cancelar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@
 //Marcar CHB aguarda pagamento
 Route::post('tma/aguarda-pagamento-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@aguardaVendaFinanciada');
 
-//teste de upload
-Route::get('/testedeupload', function () {
-    return view('portal.upload.testeDeUpload');
-});
-//Marcar CHB cancelado
-Route::post('testedeupload/enviar', 'upload\uploadController@store');
-
-//ROTA TMA Unificado
-//view index
-Route::get('tma/tma', 'TMA\tmaVisaoUnificadaController@indexVendaAVista');
-//Media TMA Financiado
-Route::get('tma/media-tma-financiado', 'TMA\tmaVisaoUnificadaController@mediaVendaFinanciada');
-
 //ROTA Controle de Chaves
 Route::get('estoque-imoveis/chaves', 'GestaoImoveisCaixa\controleDeChavesController@index');
 Route::get('estoque-imoveis/universo-chave', 'GestaoImoveisCaixa\controleDeChavesController@listaUniversoChaves');
 Route::get('estoque-imoveis/universo-emprestado', 'GestaoImoveisCaixa\controleDeChavesController@listaChavesEmprestadas');
 Route::post('estoque-imoveis/cadastra-chave', 'GestaoImoveisCaixa\controleDeChavesController@adicionarChaves');
 Route::post('estoque-imoveis/empresta-chave/{idChave}', 'GestaoImoveisCaixa\controleDeChavesController@emprestaChaves');
+
+//teste de upload
+Route::get('/testedeupload', function () {
+    return view('portal.upload.testeDeUpload');
+});
+//Marcar CHB cancelado
+Route::post('testedeupload/enviar', 'upload\uploadController@store');

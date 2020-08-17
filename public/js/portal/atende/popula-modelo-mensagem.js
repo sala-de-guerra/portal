@@ -1,3 +1,5 @@
+var csrfVar = $('meta[name="csrf-token"]').attr('content');
+
 function _formataDatatableComId (idTabela){
     $('#' + idTabela).DataTable({
         "order": [[ 0, "desc" ]],
@@ -36,10 +38,14 @@ function _formataDatatableComId (idTabela){
                     <td>
                         <button class="btn btn-primary btnHistorico" title="Modelo Mensagem" data-toggle="modal" data-target="#modalModeloMensageria${item.id}">
                             <i class="far fa-envelope"></i>
+                        </button>&nbsp&nbsp&nbsp
+
+                        <button class="btn btn-danger btnHistorico" title="Apagar Modelo" data-toggle="modal" data-target="#modalApagarModeloMensageria${item.id}">
+                            <i class="fas fa-trash-alt"></i>
                         </button>
 
                         <div class="modal fade" id="modalModeloMensageria${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">${item.nomeModelo}</h5>
@@ -49,7 +55,7 @@ function _formataDatatableComId (idTabela){
                                     </div>
                                 <div class="modal-body">
                                     
-                                        <textarea class="form-control" rows="10">${item.modeloMensageria}</textarea>     
+                                        <p>${item.modeloMensageria}</p>  
                                 </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
@@ -57,6 +63,31 @@ function _formataDatatableComId (idTabela){
                                 </div>
                             </div>
                         </div>
+
+                        <div class="modal fade" id="modalApagarModeloMensageria${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Apagar Modelo de Mensagem</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="/atende/apagar-mensagem/${item.id}" method="post">
+                                <input type="hidden" name="_token" value="${csrfVar}">
+                                <input type="hidden" class="form-control" name="_method" value="GET">
+                                    <div class="modal-body">
+                                        <p>Tem certeza que deseja apagar modelo: <b>${item.nomeModelo}</b> ? </p>  
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                        <button type="submit" class="btn btn-danger">Apagar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     </td>
                 </tr>`
             
@@ -64,4 +95,7 @@ function _formataDatatableComId (idTabela){
         })
         _formataDatatableComId("tblMensagemCriada")
     })
-
+//Fade Out Flash Message
+setTimeout(function(){
+    $('#fadeOut').fadeOut("slow");
+}, 4000);

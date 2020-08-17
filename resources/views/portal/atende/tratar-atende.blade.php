@@ -624,12 +624,12 @@
 
                                                 <div class="form-group">
                                                     <label>Nome do modelo:</label>
-                                                    <input type="text" name="nomeModelo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                                    <input type="text" name="nomeModelo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Modelo Mensagem:</label>
-                                                    <textarea rows="10" name="modeloMensageria" class="form-control"></textarea>
+                                                    <textarea rows="10" name="modeloMensageria" class="form-control summernote"></textarea>
                                                 </div>
 
 
@@ -722,7 +722,7 @@
                                                         
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">Responder Atende</label>
-                                                        <textarea class="form-control" name="respostaAtende" rows="10" id="summernote" required></textarea>
+                                                        <textarea class="form-control summernote" name="respostaAtende" rows="10" required></textarea>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-sm-10">
@@ -817,7 +817,7 @@
 }
 </script>
 <script>
-$('#summernote').summernote({
+$('.summernote').summernote({
   height: 200,
   lang: "pt-BR" 
 });

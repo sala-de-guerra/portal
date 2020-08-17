@@ -14,6 +14,7 @@
 
     <div class="col">
         <select name="selectGilie" id="selectGilie" class="form-control">
+            <option value="" selected>Selecione a GILIE</option>
         </select>
     </div>
 
@@ -303,7 +304,7 @@
 
 
 @section('content')
-<div id="equipes" class="row">
+<div id="equipes" class="row" style="display: none;">
 </div> 
 
 @section('footer')

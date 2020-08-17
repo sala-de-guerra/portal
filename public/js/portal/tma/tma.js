@@ -1,6 +1,13 @@
     
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+});
+
 function _formataDatatableComId (idTabela){
     $('#' + idTabela).DataTable({
         "order": [[ 3, "desc" ]],
@@ -72,7 +79,7 @@ $(document).ready(function(){
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="/tma/baixar-chb/${item.BEM_FORMATADO}" method="post">
+                              <form action="/tma/baixar-chb/${item.BEM_FORMATADO}" method="post" id="formBaixar${item.NU_BEM}">
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
                                   <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como baixado ?</p>
@@ -96,7 +103,7 @@ $(document).ready(function(){
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="/tma/cancelar-chb/${item.BEM_FORMATADO}" method="post">
+                              <form action="/tma/cancelar-chb/${item.BEM_FORMATADO}" method="post" id="Formcancelar${item.NU_BEM}">
                               <input type="hidden" name="nomeProponente" value="${item.NOME_PROPONENTE}">
                               <input type="hidden" name="cpfNnpjProponente" value="${item.CPF_CNPJ_PROPONENTE}">
                               <input type="hidden" name="_token" value="${csrfVar}">
@@ -127,7 +134,7 @@ $(document).ready(function(){
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="/tma/aguarda-pagamento-chb/${item.BEM_FORMATADO}" method="post">
+                              <form action="/tma/aguarda-pagamento-chb/${item.BEM_FORMATADO}" method="post" id="formPagar${item.NU_BEM}">
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
                                 <label for="observacaoAtendimento">Observação</label>
@@ -147,6 +154,7 @@ $(document).ready(function(){
                 </tr>`       
         
             $(linha).appendTo('#tblTma>tbody');
+
               if (item.baixaEfetuada == 'sim'){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: blue;">'+item.NOME_PROPONENTE +'</b>')
                 $('#dropdownMenuButton'+item.NU_BEM).remove()
@@ -158,11 +166,106 @@ $(document).ready(function(){
               }else if (item.repetido != null){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: red;">* </b>'+item.NOME_PROPONENTE)
               }
+
+              $('#formBaixar'+item.NU_BEM).submit( function(e) {
+                e.preventDefault();
+                let datas = JSON.stringify( $(this).serialize() );
+                let url = $(this).attr('action');
+                let method = $(this).attr('method');
+                // console.log(datas);
+                // console.log(url);
+                // console.log(method);
+                $.ajax({
+                    type: method,
+                    url: url,
+                    // data: {datas, csrfVar},
+                    data: $(this).serialize(),
+                    success: function (result){
+                        $('.modal').modal('hide');
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Baixa Efetuada!'
+                        });
+                    $('#nomeProponente'+item.NU_BEM).html('<b style="color: blue;">'+item.NOME_PROPONENTE +'</b>')
+                    $('#dropdownMenuButton'+item.NU_BEM).remove()
+                    },
+                    error: function () {
+                        $('.modal').modal('hide');
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Erro: tente novamente!'
+                        });
+                      } 
+                    });
+              })
+
+              $('#Formcancelar'+item.NU_BEM).submit( function(e) {
+                e.preventDefault();
+                let datas = JSON.stringify( $(this).serialize() );
+                let url = $(this).attr('action');
+                let method = $(this).attr('method');
+                // console.log(datas);
+                // console.log(url);
+                // console.log(method);
+                $.ajax({
+                    type: method,
+                    url: url,
+                    // data: {datas, csrfVar},
+                    data: $(this).serialize(),
+                    success: function (result){
+                        $('.modal').modal('hide');
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Cancelamento Efetuado!'
+                        });
+                      $('#nomeProponente'+item.NU_BEM).html('<b style="color: red;">'+item.NOME_PROPONENTE +'</b>')
+                      $('#dropdownMenuButton'+item.NU_BEM).remove()
+                    },
+                    error: function () {
+                        $('.modal').modal('hide');
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Erro: tente novamente!'
+                        });
+                      } 
+                    });
+              })
+
+              $('#formPagar'+item.NU_BEM).submit( function(e) {
+                e.preventDefault();
+                let datas = JSON.stringify( $(this).serialize() );
+                let url = $(this).attr('action');
+                let method = $(this).attr('method');
+                // console.log(datas);
+                // console.log(url);
+                // console.log(method);
+                $.ajax({
+                    type: method,
+                    url: url,
+                    // data: {datas, csrfVar},
+                    data: $(this).serialize(),
+                    success: function (result){
+                        $('.modal').modal('hide');
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Aguardando pagamento!'
+                        });
+                      $('#nomeProponente'+item.NU_BEM).html('<b style="color: green;">'+item.NOME_PROPONENTE +'</b>')
+                    },
+                    error: function () {
+                        $('.modal').modal('hide');
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Erro: tente novamente!'
+                        });
+                      } 
+                    });
+              })
             }
-        )}
+        )}   
     ).done(function() {
         _formataDatatableComId('tblTma')
-         $('.spinnerTbl').remove()
+        $('.spinnerTbl').remove()
     })
 })
 
