@@ -67,7 +67,7 @@ $( document ).ready(function() {
                                 </button>
                               </div>
                               <div class="modal-body">
-                              <form method="post" action="/controle-laudos/envia-mensagem/${item.id}">
+                              <form method="post" action="/preparar-e-ofertar/controle-laudos/envia-mensagem/${item.id}">
                                     <input type="hidden" name="_token" value="${csrfVar}">
                                     <input type="hidden" name="numeroOS" value="${item.numeroOS}">
                                     <input type="hidden" name="bemFormatado" value="${item.BEM_FORMATADO}">

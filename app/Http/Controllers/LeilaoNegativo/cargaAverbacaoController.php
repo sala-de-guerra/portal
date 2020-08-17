@@ -1,28 +1,29 @@
 <?php
-   
-namespace App\Http\Controllers\PlaniladeControle;
-  
-use Illuminate\Http\Request;
+
+namespace App\Http\Controllers\LeilaoNegativo;
+
+use App\Classes\Ldap;
+use App\TabelaImportExcel;
+use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use App\Http\Controllers\Controller;
-use App\Exports\UsersExport;
-use App\Imports\UsersImport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Models\TabelaImportExcel;
+use App\Models\LeilaoNegativo\LeilaoNegativo;
+use App\Models\LeilaoNegativo\Codigo_correio_leilaoNegativo;
 use App\Models\HistoricoPortalGilie;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Exports\CriaExcelLeilaoNegativo;
+use DOMDocument;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\averbacaoImport;
 
-
-
-  
-class UploadexcelController extends Controller
+class cargaAverbacaoController extends Controller
 {
-    public function importaExcel()
+    public function importaExcelAverbacao()
     {
-        return view('portal.controle-arquivos.controle-arquivos');
+        return view('portal.controle-arquivos.carga-leilao-negativo');
     }
-   
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+
     public function import(Request $request) 
     {
         try {
@@ -31,7 +32,7 @@ class UploadexcelController extends Controller
            
             $info = pathinfo($pathtofile);
             if ($info["extension"] == "xlsx"){
-            Excel::import(new UsersImport,request()->file('arquivo'));
+            Excel::import(new averbacaoImport,request()->file('arquivo'));
           
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Cadastro realizado!");
@@ -58,12 +59,6 @@ class UploadexcelController extends Controller
         }   
         
         return back();
-    }
-
-    public function listaUpload()
-    {
-        $upload = TabelaImportExcel::all();
-        return json_encode($upload);
     }
 
 }

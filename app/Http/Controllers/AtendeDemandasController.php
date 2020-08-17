@@ -462,7 +462,7 @@ class AtendeDemandasController extends Controller
 
             // EDITAR DADOS DEMANDA
             $responderAtende->statusAtende      = 'FINALIZADO';
-            $responderAtende->respostaAtende    = $request->respostaAtende;
+            $responderAtende->respostaAtende    = strip_tags($request->respostaAtende);
             $responderAtende->dataAlteracao     = date("Y-m-d H:i:s", time());
 
             // CADASTRA HISTÓRICO
@@ -720,7 +720,7 @@ class AtendeDemandasController extends Controller
         
         $novaMensagem = new ModeloMensagem;
         $novaMensagem->nomeModelo          = $request->nomeModelo;
-        $novaMensagem->modeloMensageria    = strip_tags($request->modeloMensageria);
+        $novaMensagem->modeloMensageria    = $request->modeloMensageria;
         $novaMensagem->matricula           = session('matricula');
         $novaMensagem->save();
 
@@ -741,6 +741,36 @@ class AtendeDemandasController extends Controller
         $request->session()->flash('corMensagem', 'danger');
         $request->session()->flash('tituloMensagem', "Modelo de mensagem não salvo");
         $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a criação do modelo. Tente novamente");
+    }
+    return back();
+
+    }
+
+    public function apagarModeloMensagem($id)
+    {
+        try {
+        
+        DB::beginTransaction();
+        $apagarMensagem = ModeloMensagem::find($id);
+        $apagarMensagem->delete();
+    
+
+        // RETORNA A FLASH MESSAGE
+        session()->flash('corMensagem', 'success');
+        session()->flash('tituloMensagem', "Modelo de mensagem excluido!");
+        session()->flash('corpoMensagem', "O modelo foi excluido com sucesso.");
+
+        DB::commit();
+    } catch (\Throwable $th) {
+        if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+        } else {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+        }
+        DB::rollback();
+        // RETORNA A FLASH MESSAGE
+        session()->flash('corMensagem', 'danger');
+        session()->flash('tituloMensagem', "Algo deu errado!!!");
+        session()->flash('corpoMensagem', "Tente novamente");
     }
     return back();
 

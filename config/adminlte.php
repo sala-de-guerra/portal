@@ -274,10 +274,16 @@ return [
             'icon' => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
             'submenu' => [
+                [
+                    'text' => 'Averbação Leilão Negativo',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                   'url'  => 'carga-em-lote/averbacao-leilao-negativo',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+               ],
                  [
                      'text' => 'Controle Arquivos EMGEA',
                      // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
-                    'url'  => '/controle-arquivos',
+                    'url'  => 'carga-em-lote/controle-arquivos',
                      'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
                 ],
             ],
@@ -328,7 +334,7 @@ return [
                 ],
                 [
                     'text' => 'TMA',
-                    'url'  => '/tma/tma',
+                    'url'  => '/contratacao/tempo-medio-aquisicao',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'], // , 'GESTOR'
                 ],
 
@@ -407,7 +413,7 @@ return [
                 [
                     'text' => 'Controle de Laudos',
                     // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
-                    'url'  => '/controle-laudos',
+                    'url'  => '/preparar-e-ofertar/controle-laudos',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
                 ],
                 

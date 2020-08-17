@@ -26,7 +26,7 @@ $('.modal').on('hidden.bs.modal', function(e){
 $.getJSON('/gerencial/gestao-equipes/listar-unidades', function(dados) {
     $.each(dados.unidades, function(key, item) {
         let option =
-            `<option value="` + key + `" selected>` + item + `</option>`
+            `<option value="` + key + `">` + item + `</option>`
         ;
         $(option).appendTo('#selectGilie');
     });
@@ -61,6 +61,7 @@ $(document).ready( function () {
 \**********************************************************/
 
 $('#selectGilie').change(function() {
+    $('#equipes').css('display', 'block')
     let regiaoUnidade = $(this).val();
     refresh(regiaoUnidade);
 });

@@ -1,39 +1,5 @@
-$(document).ready( function () {
-
-    $.getJSON('corretores/lista-corretores', function(dados){
-
-        $.each(dados, function(key, item) {
-            var hoje = new Date()
-            var dataVencimento = item.DT_VENCIMENTO_CONTRATO
-            var transformaData = dataVencimento.split(/\//).reverse().join('/')
-            var data = new Date(transformaData)
-            dataFormatada = moment(data).format('DD/MM/YYYY');
-          
-            let linha =
-                `<tr>
-                    <td>${item.NO_CORRETOR}</td>
-                    <td>${item.NU_CRECI}</td>
-                    <td id="telefone${item.NU_CRECI}">(${item.CO_DDD_CELULAR})`+" "+`${item.CO_TELEFONE_CELULAR}</td>
-                    <td>${item.ED_EMAIL_PESSOA}</td>
-                    <td>${dataFormatada}</td>
-                    <td>${item.GILIE}</td>
-                </tr>`
-
-                if (data >= hoje){
-                    $(linha).appendTo('#tblCorretores>tbody');
-                   }
-            
-            if($('#telefone' + item.NU_CRECI).text() == "(null) null" ||
-                $('#telefone' + item.NU_CRECI).text() == "(Null) Null"){
-                $('#telefone' + item.NU_CRECI).text("")
-            }
-        
-        });
-    });
-});
-
-setTimeout(function(){ 
-    $('.dataTable').DataTable({
+function _formataDatatableComData (idTabela){
+    $('#' + idTabela).DataTable({
         "order": [[ 0, "asc" ]],
         "pageLength": 25,
         "language": {
@@ -60,6 +26,442 @@ setTimeout(function(){
             }
         }
     });
-    $('.spinnerTbl').remove()
 }
-, 3000);
+
+$('#selectGILIE').change(function(){
+    if ($(this).val() === "7257") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblSP').css('display', 'block');
+        $.getJSON('corretores/lista-corretores', function(dados){
+            $.each(dados, function(key, item) {
+                let linha =
+                    `<tr>
+                        <td>${item.CORRETOR}</td>
+                        <td>${item.CRECI}</td>
+                        <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                        <td>${item.EMAIL}</td>
+                        <td>${item.VENCIMENTO}</td>
+                    </tr>`
+                        $(linha).appendTo('#tblCorretores>tbody');
+
+                        if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                        $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                        $('#telefone' + item.CRECI).text("")
+                    }
+                    
+            });
+            _formataDatatableComData("tblCorretores")
+            $('.spinnerTbl').remove()
+            $('#tblCorretores').attr('id', 'tblCorretoresPopulada');
+        });
+    }else if ($(this).val() === "7255") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'block');
+        $.getJSON('corretores/lista-corretores-sa', function(dados){
+            $.each(dados, function(key, item) {
+                let linha =
+                    `<tr>
+                        <td>${item.CORRETOR}</td>
+                        <td>${item.CRECI}</td>
+                        <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                        <td>${item.EMAIL}</td>
+                        <td>${item.VENCIMENTO}</td>
+                    </tr>`
+                        $(linha).appendTo('#tblCorretoresSA>tbody');
+
+                        if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                        $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                        $('#telefone' + item.CRECI).text("")
+                    }
+                    
+            });
+            _formataDatatableComData("tblCorretoresSA")
+            $('.spinnerTblSA').remove()
+            $('#tblCorretoresSA').attr('id', 'tblCorretoresSAPopulada');
+        });
+    }else if ($(this).val() === "7253") {
+         $('#tblBH').css('display', 'none');
+         $('#tblBU').css('display', 'none');
+         $('#tblBE').css('display', 'none');
+         $('#tblBR').css('display', 'none');
+         $('#tblCT').css('display', 'none');
+         $('#tblFO').css('display', 'none');
+         $('#tblGO').css('display', 'none');
+         $('#tblPO').css('display', 'none');
+         $('#tblRJ').css('display', 'none');
+         $('#tblSP').css('display', 'none');
+         $('#tblSA').css('display', 'none');
+         $('#tblRE').css('display', 'block');
+        $.getJSON('corretores/lista-corretores-re', function(dados){
+            $.each(dados, function(key, item) {
+                let linha =
+                    `<tr>
+                        <td>${item.CORRETOR}</td>
+                        <td>${item.CRECI}</td>
+                        <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                        <td>${item.EMAIL}</td>
+                        <td>${item.VENCIMENTO}</td>
+                    </tr>`
+                        $(linha).appendTo('#tblCorretoresRE>tbody');
+
+                        if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                        $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                        $('#telefone' + item.CRECI).text("")
+                    }
+                    
+            });
+            _formataDatatableComData("tblCorretoresRE")
+            $('.spinnerTblRE').remove()
+            $('#tblCorretoresRE').attr('id', 'tblCorretoresREPopulada');
+        });
+    }else if ($(this).val() === "7254") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-rj', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresRJ>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresRJ")
+           $('.spinnerTblRJ').remove()
+           $('#tblCorretoresRJ').attr('id', 'tblCorretoresRJPopulada');
+       });
+    }else if ($(this).val() === "7251") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-po', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresPO>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresPO")
+           $('.spinnerTblPO').remove()
+           $('#tblCorretoresPO').attr('id', 'tblCorretoresPOPopulada');
+       });
+    }else if ($(this).val() === "7249") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-go', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresGO>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresGO")
+           $('.spinnerTblGO').remove()
+           $('#tblCorretoresGO').attr('id', 'tblCorretoresGOPopulada');
+       });
+    }else if ($(this).val() === "7248") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblFO').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-fo', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresFO>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresFO")
+           $('.spinnerTblFO').remove()
+           $('#tblCorretoresFO').attr('id', 'tblCorretoresFOPopulada');
+       });
+ }else if ($(this).val() === "7247") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblCT').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-ct', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresCT>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresCT")
+           $('.spinnerTblCT').remove()
+           $('#tblCorretoresCT').attr('id', 'tblCorretoresCTPopulada');
+       });
+    }else if ($(this).val() === "7109") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblBR').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-br', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresBR>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresBR")
+           $('.spinnerTblBR').remove()
+           $('#tblCorretoresBR').attr('id', 'tblCorretoresBRPopulada');
+       });
+    }else if ($(this).val() === "7243") {
+        $('#tblBH').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblBE').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-be', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresBE>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresBE")
+           $('.spinnerTblBE').remove()
+           $('#tblCorretoresBE').attr('id', 'tblCorretoresBEPopulada');
+       });
+    }else if ($(this).val() === "7242") {
+        $('#tblBH').css('display', 'none');
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBU').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-bu', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresBU>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresBU")
+           $('.spinnerTblBU').remove()
+           $('#tblCorretoresBU').attr('id', 'tblCorretoresBUPopulada');
+       });
+    }else if ($(this).val() === "7244") {
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBH').css('display', 'block');
+       $.getJSON('corretores/lista-corretores-bh', function(dados){
+           $.each(dados, function(key, item) {
+               let linha =
+                   `<tr>
+                       <td>${item.CORRETOR}</td>
+                       <td>${item.CRECI}</td>
+                       <td id="telefone${item.CRECI}">(${item.DDDCELULAR})`+" "+`${item.TELEFONECELULAR}</td>
+                       <td>${item.EMAIL}</td>
+                       <td>${item.VENCIMENTO}</td>
+                   </tr>`
+                       $(linha).appendTo('#tblCorretoresBH>tbody');
+
+                       if($('#telefone' + item.CRECI).text() == "(null) null" ||
+                       $('#telefone' + item.CRECI).text() == "(Null) Null"){
+                       $('#telefone' + item.CRECI).text("")
+                   }
+                   
+           });
+           _formataDatatableComData("tblCorretoresBH")
+           $('.spinnerTblBH').remove()
+           $('#tblCorretoresBH').attr('id', 'tblCorretoresBHPopulada');
+       });
+    }else{
+        $('#tblSP').css('display', 'none');
+        $('#tblSA').css('display', 'none');
+        $('#tblRE').css('display', 'none');
+        $('#tblRJ').css('display', 'none');
+        $('#tblPO').css('display', 'none');
+        $('#tblGO').css('display', 'none');
+        $('#tblFO').css('display', 'none');
+        $('#tblCT').css('display', 'none');
+        $('#tblBR').css('display', 'none');
+        $('#tblBE').css('display', 'none');
+        $('#tblBU').css('display', 'none');
+        $('#tblBH').css('display', 'none');
+   }
+})
+
