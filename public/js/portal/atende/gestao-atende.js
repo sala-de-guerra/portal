@@ -13,7 +13,7 @@ $.fn.dataTable.ext.errMode = 'none';
                 '<td>'+item.matriculaResponsavelAtividade+'</td>'+
                 '<td>' + 
                 '<div class="btn-group" role="group">' +
-                    '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                    '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                         'Ação' + 
                     '</button>' + 
     
@@ -74,9 +74,9 @@ $.fn.dataTable.ext.errMode = 'none';
                                         '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
                                         '</select>'+'<br>'+
 
-                                        '<div class="form-group" style="display: none;">'+
+                                        '<div class="form-group">'+
                                         '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                                        '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                                        '<textarea class="form-control" name="motivoRedirecionamento" rows="3"></textarea>'+
                                     '</div>'+
 
                                         '</div>' +
@@ -158,6 +158,8 @@ $.fn.dataTable.ext.errMode = 'none';
             '</tr>'
 
         $(linha).appendTo('#tblAtendevencidas>tbody');
+        
+        $('#btnGroupDrop1'+item.idAtende).one("click", function() {
             $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
                 $.each(dadosEmpregado, function(empKey, empItem) {
                     var redirect =
@@ -165,8 +167,10 @@ $.fn.dataTable.ext.errMode = 'none';
                 $(redirect).appendTo('#selectDestinatario'+item.idAtende);
                 })
             })
-        })
+        });
     })
+    _formataDatatableComDataeID('tblAtendevencidas')
+})
         
         
 
@@ -182,7 +186,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
             '<td>'+item.matriculaResponsavelAtividade+'</td>'+
             '<td>' + 
             '<div class="btn-group" role="group">' +
-                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                     'Ação' + 
                 '</button>' + 
 
@@ -242,9 +246,9 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
                                '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
                                '</select>'+'<br>'+
 
-                               '<div class="form-group" style="display: none;">'+
+                               '<div class="form-group">'+
                                '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                               '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                               '<textarea class="form-control" name="motivoRedirecionamento" rows="3"></textarea>'+
                            '</div>'+
 
                                '</div>' +
@@ -326,6 +330,8 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
    '</tr>'
 
         $(linha).appendTo('#tblAtendetresDias>tbody');
+        
+        $('#btnGroupDrop1'+item.idAtende).one("click", function() {
             $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
                 $.each(dadosEmpregado, function(empKey, empItem) {
                     var redirect =
@@ -333,8 +339,10 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencimentoLongo', function(dado
                 $(redirect).appendTo('#selectDestinatario'+item.idAtende);
                 })
             })
-        })
+        });
     })
+    _formataDatatableComDataeID('tblAtendetresDias')
+})
 
 $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(dados){
     $.each(dados, function(key, item) {
@@ -348,7 +356,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
             '<td>'+item.matriculaResponsavelAtividade+'</td>'+
             '<td>' + 
             '<div class="btn-group" role="group">' +
-                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                     'Ação' + 
                 '</button>' + 
             
@@ -408,9 +416,9 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
                                 '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
                                 '</select>'+'<br>'+
 
-                                '<div class="form-group" style="display: none;">'+
+                                '<div class="form-group">'+
                                 '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"></textarea>'+
                             '</div>'+
 
                                 '</div>' +
@@ -492,6 +500,8 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
     '</tr>'
 
         $(linha).appendTo('#tblAtendeDoisDias>tbody');
+        
+        $('#btnGroupDrop1'+item.idAtende).one("click", function() {
             $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
                 $.each(dadosEmpregado, function(empKey, empItem) {
                     var redirect =
@@ -499,8 +509,10 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemDoisDiasUteis', function(
                 $(redirect).appendTo('#selectDestinatario'+item.idAtende);
                 })
             })
-        })
+        });
     })
+    _formataDatatableComDataeID('tblAtendeDoisDias')
+})
 $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function(dados){
     $.each(dados, function(key, item) {
         let linha =
@@ -513,7 +525,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
             '<td>'+item.matriculaResponsavelAtividade+'</td>'+
             '<td>' + 
             '<div class="btn-group" role="group">' +
-                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                     'Ação' + 
                 '</button>' + 
 
@@ -573,9 +585,9 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
                                 '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
                                 '</select>'+'<br>'+
 
-                                '<div class="form-group" style="display: none;">'+
+                                '<div class="form-group">'+
                                 '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"></textarea>'+
                             '</div>'+
 
                                 '</div>' +
@@ -657,6 +669,8 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
     '</tr>'
 
         $(linha).appendTo('#tblAtendeAmanha>tbody');
+        
+        $('#btnGroupDrop1'+item.idAtende).one("click", function() {
             $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
                 $.each(dadosEmpregado, function(empKey, empItem) {
                     var redirect =
@@ -664,8 +678,10 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemProximoDiaUtil', function
                 $(redirect).appendTo('#selectDestinatario'+item.idAtende);
                 })
             })
-        })
+        });
     })
+    _formataDatatableComDataeID('tblAtendeAmanha')
+})
 
 $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
     $.each(dados, function(key, item) {
@@ -679,7 +695,7 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
             '<td>'+item.matriculaResponsavelAtividade+'</td>'+
             '<td>' + 
             '<div class="btn-group" role="group">' +
-                '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                '<button id="btnGroupDrop1'+item.idAtende+'" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                     'Ação' + 
                 '</button>' + 
 
@@ -739,9 +755,9 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
                                 '<select class="form-control" id="selectDestinatario'+item.idAtende+'" name="matriculaResponsavelAtividade">'+
                                 '</select>'+'<br>'+
 
-                                '<div class="form-group" style="display: none;">'+
+                                '<div class="form-group">'+
                                 '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"> Redirecionamento Gerencial</textarea>'+
+                                '<textarea class="form-control" name="motivoRedirecionamento" rows="3"></textarea>'+
                             '</div>'+
 
                                 '</div>' +
@@ -822,6 +838,8 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
         '</td>' + 
     '</tr>'
         $(linha).appendTo('#tblAtendeHoje>tbody');
+        
+        $('#btnGroupDrop1'+item.idAtende).one("click", function() {
             $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
                 $.each(dadosEmpregado, function(empKey, empItem) {
                     var redirect =
@@ -829,12 +847,13 @@ $.getJSON('/atende/listar-demandas-prazo/demandasVencemHoje', function(dados){
                 $(redirect).appendTo('#selectDestinatario'+item.idAtende);
                 })
             })
-        })
+        });
     })
+    _formataDatatableComDataeID('tblAtendeHoje')
+})
 
     setTimeout(function(){
         _formataData()
-        _formataDatatableComData()
       }, 1000);
 
 setTimeout(function(){

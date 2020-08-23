@@ -49,4 +49,9 @@ class Atende extends Model
     {
         return $this->hasMany('App\Models\GestaoEquipesAtividadesResponsaveis', 'idAtividade', 'idAtividade');
     }
+
+    public function NomesResponsaveisAtividades()
+    {
+        return $this->hasOne('App\Models\Empregado','matricula', 'matriculaResponsavelAtividade');
+    }
 }
