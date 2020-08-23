@@ -5,10 +5,6 @@ var semanaPassada = moment(s).format('DD/MM/YYYY');
 function _formataTabelaHistorico (numeroContrato) {
     $.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
         $.each(dados.historico, function(key, item) {
-            var historicoCompleto = item.observacao
-            HistoricoSemQuebra = historicoCompleto.replace(/(<p[^>]+?>|<p>|<\/p>)/img, "");
-            var stripped = HistoricoSemQuebra.replace(/(<br\s*\/?>){1,}/gi, '<p>');
-
             var data = moment(item.data).format('DD/MM/YYYY')
             var linha = 
                 '<tr>' +
@@ -41,7 +37,7 @@ function _formataTabelaHistorico (numeroContrato) {
                                             '<div class="modal-body">' +
             
                                                 '<div class="form-group">' +
-                                                '<p id="observacaoHist'+ item.idHistorico +'">' +  item.observacao + '</p>' +
+                                                '<p>' +  item.observacao + '</p>' +
             
                                             '</div>' +
             
@@ -90,10 +86,6 @@ function _formataTabelaHistorico (numeroContrato) {
                 if (busca == "LEILÃO NEGATIVO") {
                     historicofatiado = $('#obs'+item.idHistorico).text()
                 }
-
-                if (item.tipo == "RESPOSTA"){
-                   $('#observacaoHist' + item.idHistorico).html(stripped)
-                 }
 
         }) 
 
