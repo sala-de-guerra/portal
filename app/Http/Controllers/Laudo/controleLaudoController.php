@@ -174,7 +174,6 @@ class controleLaudoController extends Controller
          ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
          ->whereRaw('datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) <= ?', [70])
          ->where('ALITB001_Imovel_Completo.STATUS_IMOVEL', '=', 'Em Reavaliação')
-         ->where('TBL_CONTROLE_LAUDO.correcao', '=', 0)
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA- Alienação Fiduciária')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA - Realização de Garantia')
          ->where('ALITB001_Imovel_Completo.CLASSIFICACAO', '<>', 'EMGEA')

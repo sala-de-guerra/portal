@@ -340,7 +340,7 @@ Route::post('controle-laudos/alterar/{id}', 'Laudo\controleLaudoController@cadas
 //Envia Mensageria
 Route::post('preparar-e-ofertar/controle-laudos/envia-mensagem/{id}', 'Laudo\controleLaudoController@enviaMensagem');
 //Cria Excel para Download
-Route::get('controle-laudos/download-excel', 'Laudo\controleLaudoController@criaPlanilhaExcelLaudo');
+Route::get('preparar-e-ofertar/controle-laudos/download-excel', 'Laudo\controleLaudoController@criaPlanilhaExcelLaudo');
 //cadastra OS
 Route::post('preparar-e-ofertar/controle-laudos/cadastrarOS', 'Laudo\controleLaudoController@cadastrarOS');
 //cadastra OBS

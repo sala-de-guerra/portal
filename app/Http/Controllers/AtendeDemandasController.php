@@ -416,7 +416,7 @@ class AtendeDemandasController extends Controller
             $mail->SMTPAuth = false;                                  
             $mail->Port = 25;
             // $mail->SMTPDebug = 2;
-            $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+            $mail->setFrom('GILIESP01@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
             $mail->addReplyTo('GILIESP01@caixa.gov.br');
             if ($request->emailContatoResposta == "null" || $request->emailContatoResposta == null){
             $mail->addAddress($request->matriculaCriadorDemanda. "@mail.caixa");
@@ -462,7 +462,7 @@ class AtendeDemandasController extends Controller
 
             // EDITAR DADOS DEMANDA
             $responderAtende->statusAtende      = 'FINALIZADO';
-            $responderAtende->respostaAtende    = strip_tags($request->respostaAtende);
+            $responderAtende->respostaAtende    = nl2br($request->respostaAtende);
             $responderAtende->dataAlteracao     = date("Y-m-d H:i:s", time());
 
             // CADASTRA HISTÓRICO
@@ -471,7 +471,7 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $responderAtende->contratoFormatado;
             $historico->tipo            = "RESPOSTA";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " <br>" . $request->respostaAtende;
+            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " <br>" . nl2br($request->respostaAtende);
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
