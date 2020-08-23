@@ -417,3 +417,16 @@ Route::get('/testedeupload', function () {
 });
 //Marcar CHB cancelado
 Route::post('testedeupload/enviar', 'upload\uploadController@store');
+
+//Controle de Boletos
+Route::get('/contratacao/controle-boletos', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@index');
+//Controle de Boletos lista universo
+Route::get('/contratacao/controle-boletos/listar-boleto/{id}', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaDadosBoleto');
+//Controle de Boletos lista universo a vista
+Route::get('/contratacao/controle-boletos/listar-universo-a-vista', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaUniversoAvista');
+//Controle de Boletos lista universo com financiamento
+Route::get('/contratacao/controle-boletos/listar-universo-financiamento', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaUniversoFinanciamento');
+//Controle de Boletos envia mensageria
+Route::get('/contratacao/controle-boletos/envia-mensageria', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@enviaMensageriaGILIES');
+//Controle de Boletos lista pagamentos novos
+Route::get('/contratacao/controle-boletos/listar-pagamentos-novos', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaPagamentosNovos');

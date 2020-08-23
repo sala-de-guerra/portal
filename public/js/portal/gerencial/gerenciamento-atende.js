@@ -231,7 +231,7 @@ $( document ).ready(function() {
             $('#nome'+item.idAtende).html('<b style="color: red;">'+item.matriculaResponsavelAtividade +'</b>')
             }
 
-            $('#btnGroupDrop1'+item.idAtende).click(function() {
+            $('#btnGroupDrop1'+item.idAtende).one("click", function() {
                 $.getJSON('/gerencial/listar-empregado', function(dadosEmpregado){
                     $.each(dadosEmpregado, function(empKey, empItem) {
                         var redirect =

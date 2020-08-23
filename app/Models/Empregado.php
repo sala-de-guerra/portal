@@ -36,4 +36,9 @@ class Empregado extends Model
     {
         return $this->belongsTo('App\Models\GestaoEquipesAtividadesResponsaveis', 'matriculaResponsavelAtividade', 'matricula');
     }
+
+    public function NomesResponsaveisAtividades()
+    {
+        return $this->belongsTo('App\Models\Atende','matriculaResponsavelAtividade', 'matricula');
+    }
 }

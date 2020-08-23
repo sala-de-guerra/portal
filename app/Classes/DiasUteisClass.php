@@ -75,6 +75,4 @@ class DiasUteisClass
         return $dataProposta->format('d/m/Y');
         // $ultimoDiaUtil = DiasUteisClass::retornaPassadoEmQuantidadeDiasUteis(Carbon::now(), 1);
     }
-
-
 }

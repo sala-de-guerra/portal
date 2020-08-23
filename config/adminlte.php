@@ -321,6 +321,12 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
                 ],
                 [
+                    'text' => 'Controle de Boletos',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
+                    'url'  => '/contratacao/controle-boletos',
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                ],
+                [
                     'text' => 'Controle de Distrato',
                     // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
                     'url'  => '/estoque-imoveis/distrato',

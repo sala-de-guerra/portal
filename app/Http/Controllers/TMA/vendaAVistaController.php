@@ -57,7 +57,6 @@ class vendaAvistaController extends Controller
             TBL_VENDA_AVISTA.[baixaEfetuada] as baixaEfetuada,
             TBL_VENDA_AVISTA_DUPLICADA.[repetido] as repetido
 
-
         '))
          ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
          ->get();

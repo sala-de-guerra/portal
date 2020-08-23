@@ -313,7 +313,7 @@ class AtendeDemandasController extends Controller
             //     $nameFile = date("d_m_Y_His", time()). "_" . session('matricula'). "_". $request->file('anexoAtende')->getClientOriginalName();
             //      $request->file('anexoAtende')->storeAs('PUBLIC/EstoqueImoveis/'.$request->contratoFormatado, $nameFile);
             //  }
-
+            
             $mail = new PHPMailer(true);
                 $mail->isSMTP();
                 $mail->CharSet = 'UTF-8'; 
@@ -329,6 +329,33 @@ class AtendeDemandasController extends Controller
                 $mail->Subject = 'Você recebeu um direcionamento de atende';
                 $mail->Body = $mensagem;
                 $mail->send();
+            
+            $numeroAtende = '#'. str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT);
+            $mensagemAbertura = file_get_contents(("NotificacaoAberturaDemandaAtende.php"), dirname(__FILE__));
+            $mensagemAbertura = str_replace("%Assunto%", $novaDemandaAtende->assuntoAtende, $mensagemAbertura);
+            $mensagemAbertura = str_replace("%quantidade_dias%", $formataData, $mensagemAbertura);
+            $mensagemAbertura = str_replace("%contrato_formatado%", $novaDemandaAtende->contratoFormatado, $mensagemAbertura);
+            $mensagemAbertura = str_replace("%numero_atende%", $numeroAtende, $mensagemAbertura);
+
+            $mailAbertura = new PHPMailer(true);
+                $mailAbertura->isSMTP();
+                $mailAbertura->CharSet = 'UTF-8'; 
+                $mailAbertura->isHTML(true);                                         
+                $mailAbertura->Host = 'sistemas.correiolivre.caixa';  
+                $mailAbertura->SMTPAuth = false;                                  
+                $mailAbertura->Port = 25;
+                // $mail->SMTPDebug = 2;
+                $mailAbertura->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+                $mailAbertura->addReplyTo('GILIESP01@caixa.gov.br');
+                if ($novaDemandaAtende->emailContatoResposta == "null" || $novaDemandaAtende->emailContatoResposta == null){
+                    $mailAbertura->addAddress($novaDemandaAtende->matriculaCriadorDemanda. "@mail.caixa");
+                    }else {
+                    $mailAbertura->addAddress($novaDemandaAtende->emailContatoResposta);
+                }
+    
+                $mailAbertura->Subject = 'Abertura de Atende #'. str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT);
+                $mailAbertura->Body = $mensagemAbertura;
+                $mailAbertura->send();
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
@@ -645,7 +672,8 @@ class AtendeDemandasController extends Controller
                     'assuntoAtende'                 => $demanda->assuntoAtende,
                     'descricaoAtende'               => $demanda->descricaoAtende,
                     'matriculaResponsavelAtividade' => $demanda->matriculaResponsavelAtividade,
-                    'prazoAtendimentoAtende'        => $demanda->prazoAtendimentoAtende
+                    'prazoAtendimentoAtende'        => $demanda->prazoAtendimentoAtende,
+                    'nomeCompleto'                  => $demanda->nomeCompleto
                 ]);
             }
             DB::commit();

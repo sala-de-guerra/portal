@@ -3,6 +3,14 @@
 @section('title', 'Portal GILIE/SP')
 
 @section('content_header')
+<style>
+@media (min-width: 768px) {
+  .modal-xxl {
+    width: 90%;
+   max-width:1200px;
+  }
+}
+</style>
 
 @if (session('tituloMensagem'))
 <div id="fadeOut" class="card text-white bg-{{ session('corMensagem') }}">

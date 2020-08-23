@@ -52,11 +52,14 @@ $(document).ready(function(){
                     <td id="nomeProponente${item.NU_BEM}">${item.NOME_PROPONENTE}</td>
                     <td style="white-space:nowrap;">${item.CPF_CNPJ_PROPONENTE}</td>
                     <td id="colunacca${item.NU_BEM}">${item.ACEITA_CCA}</td>
-                    <td>
+                    <td style="white-space:nowrap;">
                     <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton${item.NU_BEM}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Ação
-                    </button>
+                    </button>` + `
+                    <button type="button" id="boleto${item.NU_BEM}" class="btn btn-primary" data-toggle="modal" data-target="#consultaBoletoModal${item.NU_BEM}">
+                      <i class="fas fa-barcode"></i>
+                    </button> 
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" id="baixar${item.NU_BEM}" type="button" data-toggle="modal" data-target="#baixarContrato${item.NU_BEM}"><i class="fas fa-dollar-sign"></i>&nbsp  Baixar</a>
                           <a class="dropdown-item" id="cancelar${item.NU_BEM}" type="button" data-toggle="modal" data-target="#cancelarContrato${item.NU_BEM}"><i class="fas fa-times"></i>&nbsp Cancelar</a>
@@ -144,6 +147,42 @@ $(document).ready(function(){
                           </div>
                         </div>
 
+                        <div class="modal fade" id="consultaBoletoModal${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xxl" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Consulta Boleto</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Proponente</th>
+                                  <th scope="col">Data emissão</th>
+                                  <th scope="col">Data validade</th>
+                                  <th scope="col">Data pagamento</th>
+                                  <th scope="col">Banco pagamento</th>
+                                  <th scope="col">Tipo pagamento</th>
+                                  <th scope="col">Valor Boleto</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tabelaPagamento${item.NU_BEM}">
+                               
+                              </tbody>
+                            </table>
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
 
                     </td>
                 </tr>`       
@@ -160,6 +199,53 @@ $(document).ready(function(){
               }else if (item.repetido != null){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: red;">* </b>'+item.NOME_PROPONENTE)
               }
+
+              $( "#boleto" + item.NU_BEM).one("click", function() {
+                $.getJSON('/contratacao/controle-boletos/listar-boleto/'+item.NU_BEM, function(dados){
+                  $.each(dados, function(key, item) {
+                    var valorSemformatacao = item.valorBoleto
+                    var valBoleto = valorSemformatacao.toString().replace(',', '.')
+                    console.log(item.valBoleto)
+                    var valorBoletoFormatado = Number(valBoleto).toLocaleString('pt-BR', {style: "currency", currency: "BRL"})
+                    let linha =
+                    `<tr>
+                        <td id="colunaStatus${item.nuBEM + item.banco}">${item.status}</td>
+                        <td id="colunaProponente${item.nuBEM + item.banco}">${item.proponente}</td>
+                        <td id="colunaEmissao${item.nuBEM + item.banco}">${item.emissao}</td>
+                        <td id="colunaValidade${item.nuBEM + item.banco}">${item.validade}</td>
+                        <td id="colunaPagamento${item.nuBEM + item.banco}">${item.dataPagamento}</td>
+                        <td id="colunaBanco${item.nuBEM + item.banco}">${item.banco}</td>
+                        <td id="colunaTipo${item.nuBEM + item.banco}">${item.tipo}</td>
+                        <td id="colunaValorBoleto${item.nuBEM + item.banco}">${valorBoletoFormatado}</td>
+                    </tr>`
+                      $('#tabelaPagamento'+item.nuBEM).append(linha);
+                      if($('#colunaPagamento'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaPagamento'+item.nuBEM + item.banco).text("")
+                      }
+                      if($('#colunaProponente'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaProponente'+item.nuBEM + item.banco).text("")
+                      }
+                      if($('#colunaStatus'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaStatus'+item.nuBEM + item.banco).text("")
+                      }
+                      if($('#colunaEmissao'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaEmissao'+item.nuBEM + item.banco).text("")
+                      }
+                      if($('#colunaValidade'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaValidade'+item.nuBEM + item.banco).text("")
+                      }
+                      if($('#colunaBanco'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaBanco'+item.nuBEM + item.banco).text("")
+                      }
+                      if($('#colunaTipo'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaTipo'+item.nuBEM + item.banco).text("")
+                      }
+                      if($('#colunaValorBoleto'+item.nuBEM + item.banco).text() == 'null'){
+                        $('#colunaValorBoleto'+item.nuBEM + item.banco).text("")
+                      }
+                  })
+                })  
+              }) 
 
               if ($('#colunacca' +item.NU_BEM).text() == 'null'){
                 $('#colunacca' +item.NU_BEM).text('Nao')
