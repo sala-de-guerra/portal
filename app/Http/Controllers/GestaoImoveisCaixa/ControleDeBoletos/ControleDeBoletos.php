@@ -141,7 +141,7 @@ class ControleDeBoletos extends Controller
               $historico->numeroContrato  = $boleto->contratoFormatado;
               $historico->tipo            = "PAGAMENTO DE BOLETO";
               $historico->atividade       = "CONTRATAÇÃO";
-              $historico->observacao      = "PAGAMENTO DO BOLETO: Proponente - " . $boleto->proponente .  "NO VALOR DE: " . "R$".$boleto->valorPagamento;
+              $historico->observacao      = "PAGAMENTO DO BOLETO: Proponente - " . $boleto->proponente .  " - NO VALOR DE: " . "R$".$boleto->valorPagamento;
               $historico->created_at      = date("Y-m-d H:i:s", time());
               $historico->updated_at      = date("Y-m-d H:i:s", time());
               $historico->save();
@@ -172,6 +172,7 @@ class ControleDeBoletos extends Controller
             // $mail->SMTPDebug = 2;
             $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
             $mail->addReplyTo('GILIESP01@caixa.gov.br');
+            $mail->addAddress('giliesp01@caixa.gov.br');
             $mail->addAddress('giliebh@caixa.gov.br');
             $mail->addAddress('giliebu@caixa.gov.br');
             $mail->addAddress('giliebe@caixa.gov.br');

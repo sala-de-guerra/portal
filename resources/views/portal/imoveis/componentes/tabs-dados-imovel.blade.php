@@ -195,6 +195,13 @@
                                     <p id="origemMatricula"></p>
                                 </div>
                             </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Estado Ocupação:</label>
+                                    <p id="estadoOcupacao"></p>
+                                </div>
+                            </div>
                             
                         </div>
                         
