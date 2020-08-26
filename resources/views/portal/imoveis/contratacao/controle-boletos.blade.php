@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="notice notice-success">
-                                <strong>Controle de Boletos: </strong>Contratações à vista.
+                                <strong>Controle de Boletos: </strong>Contratações à vista. <a href="/contratacao/controle-boletos/baixar-planilha-boletos"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha de Boletos &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                             </div><br>
                             <div id="displayAberto">
                                 <div class="col">
@@ -120,7 +120,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="notice notice-success"> 
-                            <strong>Controle de Boletos: </strong> Contratações com financiamento.
+                            <strong>Controle de Boletos: </strong> Contratações com financiamento.<a href="/contratacao/controle-boletos/baixar-planilha-boletos"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha de Boletos &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                         </div><br>
                         <div class="col">
                             <table id="tblControleDeBoletosFinanciado" class="table table-bordered table-striped">

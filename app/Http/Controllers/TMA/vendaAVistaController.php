@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\TMA\TMAaVista;
 use App\Models\HistoricoPortalGilie;
-
+use App\Models\Bloqueados;
 
 class vendaAvistaController extends Controller
 {
@@ -44,6 +44,7 @@ class vendaAvistaController extends Controller
     $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
     $universoAVista= DB::table('TBL_VENDA_AVISTA')
     ->leftjoin('TBL_VENDA_AVISTA_DUPLICADA', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA_DUPLICADA.NOME_PROPONENTE)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NOME_PROPONENTE)'))
+    ->join('ALITB048_CUB120000', DB::raw('CONVERT(VARCHAR, ALITB048_CUB120000.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
         ->select(DB::raw('
             TBL_VENDA_AVISTA.[BEM_FORMATADO] as BEM_FORMATADO,
             TBL_VENDA_AVISTA.[NU_BEM] as NU_BEM,
@@ -55,13 +56,19 @@ class vendaAvistaController extends Controller
             TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
             TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
             TBL_VENDA_AVISTA.[baixaEfetuada] as baixaEfetuada,
-            TBL_VENDA_AVISTA_DUPLICADA.[repetido] as repetido
+            TBL_VENDA_AVISTA_DUPLICADA.[repetido] as repetido,
+            ALITB048_CUB120000.[E-MAIL PROPONENTE] as emailProponente,
+            ALITB048_CUB120000.[UF_PROPONENTE] as ufProponente
+            
 
         '))
          ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
+         ->whereRaw('TBL_VENDA_AVISTA.NOME_PROPONENTE = ALITB048_CUB120000.[NOME PROPONENTE]')
          ->get();
 
-         return json_encode($universoAVista);
+        $retiraDuplicado = $universoAVista->unique('NU_BEM');
+
+        return json_encode($retiraDuplicado);
     }
 
     public function baixarVendaAVista(Request $request, $chb)
@@ -122,6 +129,17 @@ class vendaAvistaController extends Controller
             $baixarTMA = TMAaVista::find($chb);
             $baixarTMA->baixaEfetuada  = "del";
             $baixarTMA->save();
+
+            if ($request->bloquearProponente == 'sim'){
+            $proponenteBloqueado = new Bloqueados;
+            $proponenteBloqueado->nome  = $request->nomeProponente;
+            $proponenteBloqueado->CPF_CNPJ  = str_replace(array(".", ",", "-", "/"), "", $request->cpfNnpjProponente);
+            $proponenteBloqueado->UF  =  $request->ufProponente;
+            $proponenteBloqueado->email  = $request->emailProponente;
+            $proponenteBloqueado->CPF_CONJUGE = "";
+            $proponenteBloqueado->NOME_CONJUGE = "";
+            $proponenteBloqueado->save();
+            }
 
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');

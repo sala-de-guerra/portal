@@ -384,7 +384,7 @@ Route::get('corretores/baixar-planilha', 'CorretoresController@criaPlanilhaExcel
 
 //ROTA TMA Unificado
 //view index
-Route::get('contratacao/tempo-medio-aquisicao', 'TMA\tmaVisaoUnificadaController@indexVendaAVista');
+Route::get('contratacao/tempo-medio-atendimento', 'TMA\tmaVisaoUnificadaController@indexVendaAVista');
 //Media TMA Financiado
 Route::get('tma/media-tma-financiado', 'TMA\tmaVisaoUnificadaController@mediaVendaFinanciada');
 //universo venda a vista
@@ -419,6 +419,7 @@ Route::get('/testedeupload', function () {
 Route::post('testedeupload/enviar', 'upload\uploadController@store');
 
 //Controle de Boletos
+//view de Boletos
 Route::get('/contratacao/controle-boletos', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@index');
 //Controle de Boletos lista universo
 Route::get('/contratacao/controle-boletos/listar-boleto/{id}', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaDadosBoleto');
@@ -430,3 +431,9 @@ Route::get('/contratacao/controle-boletos/listar-universo-financiamento', 'Gesta
 Route::get('/contratacao/controle-boletos/envia-mensageria', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@enviaMensageriaGILIES');
 //Controle de Boletos lista pagamentos novos
 Route::get('/contratacao/controle-boletos/listar-pagamentos-novos', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaPagamentosNovos');
+//Planilha Excel boletos
+Route::get('/contratacao/controle-boletos/baixar-planilha-boletos', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@criaPlanilhaControleBoletos');
+
+//Emissão de O.S
+//view de O.S
+Route::get('/preparar-e-ofertar/emitir-os', 'OrdemDeServico\ordemDeServicoController@OrdemDeServicoIndex');
