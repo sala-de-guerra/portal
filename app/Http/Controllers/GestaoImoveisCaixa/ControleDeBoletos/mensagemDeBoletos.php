@@ -125,6 +125,8 @@ table th {
        
 
 <p>A listagem completa pode ser encontrada em  <a href="https://portal.gilie.sp.caixa/contratacao/controle-boletos">https://portal.gilie.sp.caixa/contratacao/controle-boletos</a></p>
+<p>Acesse também  <a href="https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento">https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento</a>
+para controle de gestão do tempo de atendimento</p>
 <footer class="fixarRodape">    
 <p class="destaque">
 Atenciosamente,

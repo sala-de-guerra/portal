@@ -93,7 +93,7 @@ $(document).ready(function(){
 
                         <!-- Modal cancelar -->
                         <div class="modal fade" id="cancelarContrato${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
+                          <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Cancelar contrato</h5>
@@ -105,6 +105,8 @@ $(document).ready(function(){
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <input type="hidden" name="nomeProponente" value="${item.NOME_PROPONENTE}">
                               <input type="hidden" name="cpfNnpjProponente" value="${item.CPF_CNPJ_PROPONENTE}">
+                              <input type="hidden" name="emailProponente" value="${item.emailProponente}">
+                              <input type="hidden" name="ufProponente" value="${item.ufProponente}">
                               <div class="modal-body">
                                   <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como distrato ?</p>
                                 </div>
@@ -112,6 +114,19 @@ $(document).ready(function(){
                                 <label for="observacaoAtendimento">Observação</label>
                                 <textarea class="form-control" name="observacaoAtendimento" rows="5" required>venda cancelada - pagamento não identificado no SIMOV e SIACI - boleto baixado - cpf: ${item.CPF_CNPJ_PROPONENTE} - nome: ${item.NOME_PROPONENTE}
                                 </textarea>
+                                <br>Marcar proponente bloqueado ?<br>
+                                <div class="form-check  form-check-inline">
+                                  <input class="form-check-input" type="radio" name="bloquearProponente" value="nao" checked>
+                                  <label class="form-check-label" for="bloquearProponente${item.NU_BEM}">
+                                    NÃO
+                                  </label>
+                                </div>
+                                <div class="form-check  form-check-inline">
+                                  <input class="form-check-input" type="radio" name="bloquearProponente" value="sim">
+                                  <label class="form-check-label" for="bloquearProponente${item.NU_BEM}">
+                                    SIM
+                                  </label>
+                                </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>

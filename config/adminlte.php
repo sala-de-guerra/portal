@@ -340,7 +340,7 @@ return [
                 ],
                 [
                     'text' => 'TMA',
-                    'url'  => '/contratacao/tempo-medio-aquisicao',
+                    'url'  => '/contratacao/tempo-medio-atendimento',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'], // , 'GESTOR'
                 ],
 
@@ -421,6 +421,12 @@ return [
                     // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/preparar-e-ofertar/controle-laudos',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                ],
+                [
+                    'text' => 'Emissão de O.S',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
+                    'url'  => '/preparar-e-ofertar/emitir-os',
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // 
                 ],
                 
                 [
