@@ -589,7 +589,7 @@ class ControleDeBoletos extends Controller
           "))
             ->whereNotNull('PAGO')
             ->whereNotNull('SITUAÇÃO')
-            ->where('CUB_056_PAGAMENTOS_BOLETOS_SIMOV.GILIE', '7109')
+            ->where('CUB_056_PAGAMENTOS_BOLETOS_SIMOV.GILIE', '7248')
             ->orderBy('CUB_056_PAGAMENTOS_BOLETOS_SIMOV.GILIE', 'asc')
             ->get();
             
