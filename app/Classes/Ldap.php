@@ -15,7 +15,7 @@ class Ldap
     // private $simularMatricula = 'c076457'; // FRANCISCO DE ASSIS DE SOUZA AMARAL - GILIE/RE
     //  private $simularMatricula = 'c079436'; // Vladimir Pereira de Lemos
     // private $simularMatricula = 'c082403'; // Carla - Assistente JR - GILIE/SP
-    // private $simularMatricula = 'c093725'; // MARTINA  - Gerente GILIE/PO
+    // private $simularMatricula = 'c083912'; // MARTINA  - Gerente GILIE/PO
     // private $simularMatricula = 'c085308'; // Cristiane  - Prestador
 
     private $matricula;

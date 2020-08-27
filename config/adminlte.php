@@ -238,6 +238,12 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
         ],
         [
+            'text'        => 'Equipe',
+            'url'         => '/equipe',
+            'icon'        => 'fas fa-lg fa-fw fa-users mr-2',
+            'perfil_acesso' => ['DESENVOLVEDOR'],
+        ],
+        [
             'text'        => 'Orientações',
             'url'         => '/orientacoes',
             'icon'        => 'fas fa-lg fa-fw fa-directions mr-2',

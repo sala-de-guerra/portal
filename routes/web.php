@@ -437,3 +437,13 @@ Route::get('/contratacao/controle-boletos/baixar-planilha-boletos', 'GestaoImove
 //Emissão de O.S
 //view de O.S
 Route::get('/preparar-e-ofertar/emitir-os', 'OrdemDeServico\ordemDeServicoController@OrdemDeServicoIndex');
+
+//Equipe
+//View de Equipes
+Route::get('/equipe', 'Equipes\equipesController@equipeIndex');
+//lista Nomes equipe
+Route::get('/equipe/listar-nomes-equipe', 'Equipes\equipesController@listaNomesEquipes');
+//lista equipe
+Route::get('/equipe/listar-equipe', 'Equipes\equipesController@listaEquipe');
+//lista atividade
+Route::get('/equipe/listar-atividade', 'Equipes\equipesController@listaAtividade');
