@@ -8,6 +8,7 @@ use App\Models\GestaoEquipesLogHistorico;
 use App\Models\GestaoEquipesEmpregados;
 use App\Models\GestaoEquipesCelulas;
 use App\Models\GestaoEquipesAlocarEmpregado;
+use App\Models\GestaoEquipesAtividadesResponsaveis;
 use Illuminate\Support\Facades\DB;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 
@@ -306,6 +307,15 @@ class GestaoEquipesController extends Controller
                 $registroLogHistorico->save();
 
                 $antigaEquipe->save();
+            }
+
+            // REMOVE AS ATIVIDADES DA EQUIPE ANTERIOR
+            $atividadesAntigas = GestaoEquipesAtividadesResponsaveis::where('matriculaResponsavelAtividade', $request->matricula)->get();
+            foreach ($atividadesAntigas as $atividade) {
+                $atividade->atuandoAtividade                = false;
+                $atividade->matriculaResponsavelDesignacao  = session('matricula');
+                $atividade->dataAtualizacao                 = date("Y-m-d H:i:s", time());
+                $atividade->save();
             }
 
             $empregadoAlocado->idEquipe         = $request->idEquipe;
