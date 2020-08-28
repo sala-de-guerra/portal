@@ -438,12 +438,66 @@ Route::get('/contratacao/controle-boletos/baixar-planilha-boletos', 'GestaoImove
 //view de O.S
 Route::get('/preparar-e-ofertar/emitir-os', 'OrdemDeServico\ordemDeServicoController@OrdemDeServicoIndex');
 
-//Equipe
+//Rotas de Equipe
 //View de Equipes
 Route::get('/equipe', 'Equipes\equipesController@equipeIndex');
-//lista Nomes equipe
+//lista São Paulo
 Route::get('/equipe/listar-nomes-equipe', 'Equipes\equipesController@listaNomesEquipes');
-//lista equipe
 Route::get('/equipe/listar-equipe', 'Equipes\equipesController@listaEquipe');
-//lista atividade
 Route::get('/equipe/listar-atividade', 'Equipes\equipesController@listaAtividade');
+Route::get('/equipe/listar-gerente-sp', 'Equipes\equipesController@listaGerenteSP');
+//lista Porto Alegre
+Route::get('/equipe/listar-nomes-equipe-po', 'Equipes\equipesController@listaNomesEquipesPO');
+Route::get('/equipe/listar-equipe-po', 'Equipes\equipesController@listaEquipePO');
+Route::get('/equipe/listar-atividade-po', 'Equipes\equipesController@listaAtividadePO');
+Route::get('/equipe/listar-gerente-po', 'Equipes\equipesController@listaGerentePO');
+//lista Belo Horizonte
+Route::get('/equipe/listar-nomes-equipe-bh', 'Equipes\equipesController@listaNomesEquipesBH');
+Route::get('/equipe/listar-equipe-bh', 'Equipes\equipesController@listaEquipeBH');
+Route::get('/equipe/listar-atividade-bh', 'Equipes\equipesController@listaAtividadeBH');
+Route::get('/equipe/listar-gerente-bh', 'Equipes\equipesController@listaGerenteBH');
+//lista Bauru
+Route::get('/equipe/listar-nomes-equipe-bu', 'Equipes\equipesController@listaNomesEquipesBU');
+Route::get('/equipe/listar-equipe-bu', 'Equipes\equipesController@listaEquipeBU');
+Route::get('/equipe/listar-atividade-bu', 'Equipes\equipesController@listaAtividadeBU');
+Route::get('/equipe/listar-gerente-bu', 'Equipes\equipesController@listaGerenteBU');
+//lista Belem
+Route::get('/equipe/listar-nomes-equipe-be', 'Equipes\equipesController@listaNomesEquipesBE');
+Route::get('/equipe/listar-equipe-be', 'Equipes\equipesController@listaEquipeBE');
+Route::get('/equipe/listar-atividade-be', 'Equipes\equipesController@listaAtividadeBE');
+Route::get('/equipe/listar-gerente-be', 'Equipes\equipesController@listaGerenteBE');
+//lista Brasilia
+Route::get('/equipe/listar-nomes-equipe-br', 'Equipes\equipesController@listaNomesEquipesBR');
+Route::get('/equipe/listar-equipe-br', 'Equipes\equipesController@listaEquipeBR');
+Route::get('/equipe/listar-atividade-br', 'Equipes\equipesController@listaAtividadeBR');
+Route::get('/equipe/listar-gerente-br', 'Equipes\equipesController@listaGerenteBR');
+//lista Curitiba
+Route::get('/equipe/listar-nomes-equipe-ct', 'Equipes\equipesController@listaNomesEquipesCT');
+Route::get('/equipe/listar-equipe-ct', 'Equipes\equipesController@listaEquipeCT');
+Route::get('/equipe/listar-atividade-ct', 'Equipes\equipesController@listaAtividadeCT');
+Route::get('/equipe/listar-gerente-ct', 'Equipes\equipesController@listaGerenteCT');
+//lista Fortaleza
+Route::get('/equipe/listar-nomes-equipe-fo', 'Equipes\equipesController@listaNomesEquipesFO');
+Route::get('/equipe/listar-equipe-fo', 'Equipes\equipesController@listaEquipeFO');
+Route::get('/equipe/listar-atividade-fo', 'Equipes\equipesController@listaAtividadeFO');
+Route::get('/equipe/listar-gerente-fo', 'Equipes\equipesController@listaGerenteFO');
+//lista Goiania
+Route::get('/equipe/listar-nomes-equipe-go', 'Equipes\equipesController@listaNomesEquipesGO');
+Route::get('/equipe/listar-equipe-go', 'Equipes\equipesController@listaEquipeGO');
+Route::get('/equipe/listar-atividade-go', 'Equipes\equipesController@listaAtividadeGO');
+Route::get('/equipe/listar-gerente-go', 'Equipes\equipesController@listaGerenteGO');
+//lista Rio de Janeiro
+Route::get('/equipe/listar-nomes-equipe-rj', 'Equipes\equipesController@listaNomesEquipesRJ');
+Route::get('/equipe/listar-equipe-rj', 'Equipes\equipesController@listaEquipeRJ');
+Route::get('/equipe/listar-atividade-rj', 'Equipes\equipesController@listaAtividadeRJ');
+Route::get('/equipe/listar-gerente-rj', 'Equipes\equipesController@listaGerenteRJ');
+//lista Recife
+Route::get('/equipe/listar-nomes-equipe-re', 'Equipes\equipesController@listaNomesEquipesRE');
+Route::get('/equipe/listar-equipe-re', 'Equipes\equipesController@listaEquipeRE');
+Route::get('/equipe/listar-atividade-re', 'Equipes\equipesController@listaAtividadeRE');
+Route::get('/equipe/listar-gerente-re', 'Equipes\equipesController@listaGerenteRE');
+//lista Salvador
+Route::get('/equipe/listar-nomes-equipe-sa', 'Equipes\equipesController@listaNomesEquipesSA');
+Route::get('/equipe/listar-equipe-sa', 'Equipes\equipesController@listaEquipeSA');
+Route::get('/equipe/listar-atividade-sa', 'Equipes\equipesController@listaAtividadeSA');
+Route::get('/equipe/listar-gerente-sa', 'Equipes\equipesController@listaGerenteSA');

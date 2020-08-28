@@ -223,42 +223,42 @@ return [
             'text'        => 'Área de Atuação',
             'url'         => '/area',
             'icon'        => 'fas fa-lg fa-fw fa-map-marked-alt mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
         ],
         [
             'text'        => 'Corretores',
             'url'         => '/corretores',
             'icon'        => 'fas fa-lg fa-fw fa-address-card mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
         ],
         [
             'text'        => 'Dúvidas Frequentes',
             'url'         => '/faq',
             'icon'        => 'fas fa-lg fa-fw fa-question-circle mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
         ],
         [
             'text'        => 'Equipe',
             'url'         => '/equipe',
             'icon'        => 'fas fa-lg fa-fw fa-users mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR'],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'],
         ],
         [
             'text'        => 'Orientações',
             'url'         => '/orientacoes',
             'icon'        => 'fas fa-lg fa-fw fa-directions mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
         ],
         [
             'text' => 'Atende',
             'icon' => 'fas fa-lg fa-fw fa-headset mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
             'submenu' => [
                 [
                     'text' => 'Abrir Demanda',
                     // 'icon'    => 'far fa-fw fa-circle mr-2',
                     'url'  => '/atende/abrir',
-                    'perfil_acesso' => ['DESENVOLVEDOR','AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                    'perfil_acesso' => ['DESENVOLVEDOR','AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
                 ],
                 [
                     'text' => 'Minhas Demandas',
@@ -270,7 +270,7 @@ return [
                     'text' => 'Minhas Demandas',
                     // 'icon'    => 'far fa-fw fa-circle mr-2',
                     'url'  => '/atende/minhas-demandas',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
                 ],
             ],
         ],
@@ -278,19 +278,19 @@ return [
         [
             'text' => 'Carga em Lote',
             'icon' => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
             'submenu' => [
                 [
                     'text' => 'Averbação Leilão Negativo',
                     // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
                    'url'  => 'carga-em-lote/averbacao-leilao-negativo',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
                ],
                  [
                      'text' => 'Controle Arquivos EMGEA',
                      // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
                     'url'  => 'carga-em-lote/controle-arquivos',
-                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')],
+                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
                 ],
             ],
         ],
@@ -318,36 +318,36 @@ return [
         [
             'text'    => 'Contratação',
             'icon'    => 'fas fa-lg fa-fw fa-file-contract mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
             'submenu' => [
                 [
                     'text' => 'Acompanhar Contratação',
                     // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
                     'url'  => '/estoque-imoveis/acompanha-contratacao',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
                 ],
                 [
                     'text' => 'Controle de Boletos',
                     // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
                     'url'  => '/contratacao/controle-boletos',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
                 ],
                 [
                     'text' => 'Controle de Distrato',
                     // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
                     'url'  => '/estoque-imoveis/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
                 ],
                 [
                     'text' => 'Fila Única',
                     // 'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
                 ],
                 [
                     'text' => 'TMA',
                     'url'  => '/contratacao/tempo-medio-atendimento',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'], // , 'GESTOR'
                 ],
 
                 // [
@@ -385,19 +385,19 @@ return [
         [
             'text'       => 'Fornecedores',
             'icon'       => 'fas fa-lg fa-fw fa-address-card mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], //             
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], //             
             'submenu' => [
                 [
                     'text' => 'Despachantes',
                     // 'icon'       => 'fas fa-lg fa-fw fa-id-card-alt mr-2',
                     'url'  => '/fornecedores/controle-despachantes/',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], // 
                 ],
                 [
                     'text' => 'Leiloeiros',
                     // 'icon'       => 'fas fa-lg fa-fw fa-gavel mr-2',
                     'url'  => '/fornecedores/controle-leiloeiros/',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], // 
                 ]
     
             ],
@@ -420,26 +420,26 @@ return [
         [
             'text' => 'Preparar e Ofertar',
             'icon' => 'fas fa-lg fa-fw fa-sign mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], // 
             'submenu' => [
                 [
                     'text' => 'Controle de Laudos',
                     // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/preparar-e-ofertar/controle-laudos',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], // 
                 ],
                 [
                     'text' => 'Emissão de O.S',
                     // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/preparar-e-ofertar/emitir-os',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // 
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // 
                 ],
                 
                 [
                     'text' => 'Leilões Negativos',
                     // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/estoque-imoveis/leiloes-negativos',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE')], // 
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], // 
                 ]
             ],
         ],
@@ -559,33 +559,33 @@ return [
         [
             'text'       => 'Gerencial',
             'icon'       => 'fas fa-lg fa-fw fa-users mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
             'submenu' => [
                 [
                     'text' => 'Atende sem contrato',
                     // 'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
                     'url'  => '/gerencial/gerenciar-atende-generico',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ],
                 
                 [
                     'text' => 'Gestão Atende',
                     // 'icon'       => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => 'gerencial/gestao-atende',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ],
                 [
                     'text' => 'Gestão de Atividades',
                     // 'icon'       => 'fas fa-lg fa-fw fa-tasks mr-2',
                     'url'  => '/gerencial/gestao-atividades',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ],
 
                 [
                     'text' => 'Gestão de Equipes',
                     // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
                     'url'  => '/gerencial/gestao-equipes/',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ]
     
             ],
@@ -594,12 +594,12 @@ return [
         [
             'text'    => 'Indicadores',
             'icon'    => 'fas fa-lg fa-fw fa-chart-bar mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR'], // , 'GESTOR'
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'], // , 'GESTOR'
             'submenu' => [
                 [
                     'text' => 'Indicadores de Distrato',
                     'url'  => '/indicadores/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // , 'GESTOR'
                 ],
             ],
         ],
