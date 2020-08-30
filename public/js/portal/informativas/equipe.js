@@ -8,6 +8,7 @@ $('#selectGILIE').change(function(){
     })
   
       $.getJSON('/equipe/listar-nomes-equipe', function(dados){
+        $('#warning').css('display', 'block');
         $('#mostraBH').css('display', 'none');
         $('#mostraBU').css('display', 'none');
         $('#mostraBE').css('display', 'none');
@@ -87,7 +88,11 @@ $('#selectGILIE').change(function(){
                       $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                     });
                   });
-                  $('.spinner').remove() 
+                  $('.spinner').remove()
+                  setTimeout(function(){  
+                    $( "#warning" ).fadeOut( "slow", function() {
+                      $('#warning').css('display', 'none');
+                    })}, 1000);
               })
           });
       })
@@ -99,6 +104,7 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-po', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -180,7 +186,11 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
+                          $('.spinner').remove()
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000); 
                       })
                 });
             }) 
@@ -193,6 +203,7 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-bh', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'block');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -274,8 +285,12 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
-                      })
+                          $('.spinner').remove()
+                          setTimeout(function(){  
+                          $( "#warning" ).fadeOut( "slow", function() {
+                            $('#warning').css('display', 'none');
+                          })}, 1000); 
+                        })
                 });
             }) 
         }
@@ -287,6 +302,7 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-bu', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'block');
                 $('#mostraBE').css('display', 'none');
@@ -368,7 +384,11 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
+                          $('.spinner').remove()
+                        setTimeout(function(){  
+                        $( "#warning" ).fadeOut( "slow", function() {
+                          $('#warning').css('display', 'none');
+                        })}, 1000); 
                       })
                 });
             }) 
@@ -381,6 +401,7 @@ $('#selectGILIE').change(function(){
                 })
             })
             $.getJSON('/equipe/listar-nomes-equipe-be', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'block');
@@ -463,6 +484,10 @@ $('#selectGILIE').change(function(){
                             });
                           });
                           $('.spinner').remove() 
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000);
                       })
                 });
             }) 
@@ -475,6 +500,7 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-br', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -557,6 +583,10 @@ $('#selectGILIE').change(function(){
                             });
                           });
                           $('.spinner').remove() 
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000);
                       })
                 });
             }) 
@@ -569,6 +599,7 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-ct', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -650,7 +681,11 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
+                          $('.spinner').remove()
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000); 
                       })
                 });
             }) 
@@ -662,7 +697,8 @@ $('#selectGILIE').change(function(){
                 $('#nomeGestor').html(' <b>GERENTE DE FILIAL: </b>' + item.nomeCompleto + ` (${item.matricula})`);
              })
           })
-            $.getJSON('/equipe/listar-nomes-equipe-br', function(dados){
+            $.getJSON('/equipe/listar-nomes-equipe-fo', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -744,8 +780,12 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
-                      })
+                          $('.spinner').remove()
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000); 
+                          })
                 });
             }) 
         }
@@ -757,6 +797,7 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-go', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -838,7 +879,11 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
+                          $('.spinner').remove()
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000); 
                       })
                 });
             }) 
@@ -851,16 +896,17 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-rj', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
-                $('#mostraBR').css('display', 'block');
+                $('#mostraBR').css('display', 'none');
                 $('#mostraCT').css('display', 'none');
                 $('#mostraFO').css('display', 'none');
                 $('#mostraGO').css('display', 'none');
                 $('#mostraSA').css('display', 'none');
                 $('#mostraRE').css('display', 'none');
-                $('#mostraRJ').css('display', 'none');
+                $('#mostraRJ').css('display', 'block');
                 $('#mostraPO').css('display', 'none');
                 $('#mostraSP').css('display', 'none');
                 $.each(dados, function(key, item) {
@@ -932,7 +978,11 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
+                          $('.spinner').remove()
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000); 
                       })
                 });
             }) 
@@ -945,6 +995,7 @@ $('#selectGILIE').change(function(){
              })
           })
             $.getJSON('/equipe/listar-nomes-equipe-re', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -1026,7 +1077,11 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
+                          $('.spinner').remove()
+                          setTimeout(function(){  
+                            $( "#warning" ).fadeOut( "slow", function() {
+                              $('#warning').css('display', 'none');
+                            })}, 1000); 
                       })
                 });
             }) 
@@ -1038,7 +1093,8 @@ $('#selectGILIE').change(function(){
                 $('#nomeGestor').html(' <b>GERENTE DE FILIAL: </b>' + item.nomeCompleto + ` (${item.matricula})`);
              })
           })
-            $.getJSON('/equipe/listar-nomes-equipe-br', function(dados){
+            $.getJSON('/equipe/listar-nomes-equipe-sa', function(dados){
+                $('#warning').css('display', 'block');
                 $('#mostraBH').css('display', 'none');
                 $('#mostraBU').css('display', 'none');
                 $('#mostraBE').css('display', 'none');
@@ -1120,12 +1176,17 @@ $('#selectGILIE').change(function(){
                               $('#atividade'+item.matriculaResponsavel).attr('id', '#atividadePreenchida'+item.matriculaResponsavel);   
                             });
                           });
-                          $('.spinner').remove() 
+                          $('.spinner').remove()
+                    setTimeout(function(){  
+                      $( "#warning" ).fadeOut( "slow", function() {
+                        $('#warning').css('display', 'none');
+                       })}, 1000); 
                       })
                 });
             }) 
         }else{
             $('#nomeGestor').text('Selecione a GILIE no botão acima e clique na equipe para expandir');
+            $('#warning').css('display', 'none');
             $('#mostraBH').css('display', 'none');
             $('#mostraBU').css('display', 'none');
             $('#mostraBE').css('display', 'none');
