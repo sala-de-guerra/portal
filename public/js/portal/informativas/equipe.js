@@ -464,7 +464,7 @@ $('#selectGILIE').change(function(){
             </div>`
               $(linha).appendTo('#divAppendCard'+item.idEquipe);
             });
-              $.getJSON('/equipe/listar-equipe-be', function(dados){
+              $.getJSON('/equipe/listar-equipe-br', function(dados){
                 $.each(dados, function(key, item) {
                   $('#divAppendCard'+item.idEquipe).attr('id', '#divAppendCardpreenchido'+item.idEquipe);
                })
@@ -761,7 +761,7 @@ $('#selectGILIE').change(function(){
             </div>`
             
             
-            $(linha).appendTo('#divPrincipalBR');
+            $(linha).appendTo('#divPrincipalRJ');
         });
         $('#divPrincipalRJ').attr('id', 'divPrincipalPopuladoRJ');
     }).done(function() {
@@ -831,7 +831,7 @@ $('#selectGILIE').change(function(){
   })
 
     $.getJSON('/equipe/listar-nomes-equipe-re', function(dados){
-      $('#mostraBR').css('display', 'block');
+      $('#mostraRE').css('display', 'block');
         $.each(dados, function(key, item) {
             let linha = `
             <div class="card card-solid">

@@ -265,7 +265,7 @@
             <div class="col-sm-10">
 
                 <div class="d-inline justify-content-center">
-                    <b class="m-2">2020 - GILIE/SP - </b>
+                    <b class="m-2">2020 - GILIE - </b>
                 </div>
 
                 <div class="d-sm-inline d-none justify-content-center">
