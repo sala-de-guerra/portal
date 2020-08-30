@@ -80,7 +80,7 @@ $(document).ready(function(){
                               <form action="/tma/baixar-financiado-chb/${item.BEM_FORMATADO}" method="post" id="formBaixar${item.NU_BEM}">
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
-                                  <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como baixado ?</p>
+                                  <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como vendido ?</p>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>

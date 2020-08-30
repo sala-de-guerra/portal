@@ -59,7 +59,7 @@
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 
 <p style="color: red;"><b>***ATENÇÃO***</b>   devido ao novo Corona vírus as agências da Caixa Econômica Federal <br>
-estão com atendimento contingencial e reduzido no horário das 10h às 14h***</p>
+estão com atendimento contingencial e reduzido no horário das 10h às 13h***</p>
 <p style="color: red;"><b>confira a lista de agências abertas acessando:</b> <a href="www.caixa.gov.br/caixacomvoce/Paginas/default.aspx#horario">www.caixa.gov.br/caixacomvoce/Paginas/default.aspx#horario</a></p>
 
 
