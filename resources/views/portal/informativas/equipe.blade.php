@@ -12,7 +12,7 @@
     padding: 0;
 }
 .card-topo{
-    height: 28%;
+    height: 30%;
 }
 </style>
 
@@ -54,7 +54,9 @@
 
 
 @section('content')
-
+<div class="notice notice-warning" id="warning" style="display: none;">
+    <strong>Atenção: Clique na equipe para expandir </strong>
+</div>
 <div class="card">
     <div class="card-body">
         <span id="nomeGestor">Selecione a GILIE no botão acima e clique na equipe para expandir</span>
