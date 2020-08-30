@@ -11,6 +11,9 @@
     margin: 0;
     padding: 0;
 }
+.card-topo{
+    height: 28%;
+}
 </style>
 
 <div class="row mb-4">
@@ -51,9 +54,10 @@
 
 
 @section('content')
+
 <div class="card">
     <div class="card-body">
-     <b>GERENTE DE FILIAL: </b><span id="nomeGestor"></span>
+        <span id="nomeGestor">Selecione a GILIE no botão acima e clique na equipe para expandir</span>
     </div>
   </div>
 

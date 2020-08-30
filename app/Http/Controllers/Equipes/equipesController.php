@@ -30,6 +30,9 @@ class equipesController extends Controller
         ->select(DB::raw("
         TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
         TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+        TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+        TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+        TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
         TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
       "))
         ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7257')
@@ -86,7 +89,9 @@ class equipesController extends Controller
     {
         $equipe = DB::table('TBL_EMPREGADOS')
         ->select(DB::raw("
-        TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+        TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+        TBL_EMPREGADOS.[matricula] as matricula
+
       "))
         ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7257')
         ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -102,7 +107,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7251')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -119,6 +125,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7251')
@@ -177,7 +186,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7244')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -194,6 +204,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7244')
@@ -251,7 +264,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7242')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -268,6 +282,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7242')
@@ -325,7 +342,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7243')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -341,6 +359,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7243')
@@ -398,7 +419,8 @@ class equipesController extends Controller
     {
         $equipe = DB::table('TBL_EMPREGADOS')
         ->select(DB::raw("
-        TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+        TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+        TBL_EMPREGADOS.[matricula] as matricula
       "))
         ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7109')
         ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -414,6 +436,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7109')
@@ -471,7 +496,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7247')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -487,6 +513,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7247')
@@ -543,7 +572,8 @@ class equipesController extends Controller
     {
         $equipe = DB::table('TBL_EMPREGADOS')
         ->select(DB::raw("
-        TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+        TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+        TBL_EMPREGADOS.[matricula] as matricula
       "))
         ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7248')
         ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -559,6 +589,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7248')
@@ -616,7 +649,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7249')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -632,6 +666,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7249')
@@ -688,7 +725,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7254')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -704,6 +742,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7254')
@@ -761,7 +802,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7253')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -777,6 +819,9 @@ class equipesController extends Controller
       ->select(DB::raw("
       TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+      TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+      TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
       TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
     "))
       ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7253')
@@ -834,7 +879,8 @@ class equipesController extends Controller
   {
       $equipe = DB::table('TBL_EMPREGADOS')
       ->select(DB::raw("
-      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto
+      TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+      TBL_EMPREGADOS.[matricula] as matricula
     "))
       ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', '7255')
       ->where('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
@@ -850,6 +896,9 @@ public function listaNomesEquipesSA()
     ->select(DB::raw("
     TBL_GESTAO_EQUIPES_CELULAS.[idEquipe] as idEquipe,
     TBL_GESTAO_EQUIPES_CELULAS.[nomeEquipe] as nomeEquipe,
+    TBL_GESTAO_EQUIPES_CELULAS.[nomeEventual] as nomeEventual,
+    TBL_GESTAO_EQUIPES_CELULAS.[matriculaEventual] as matriculaEventual,
+    TBL_GESTAO_EQUIPES_CELULAS.[matriculaGestor] as matriculaGestor,
     TBL_GESTAO_EQUIPES_CELULAS.[nomeGestor] as nomeGestor
   "))
     ->where('TBL_GESTAO_EQUIPES_CELULAS.codigoUnidadeEquipe', '7255')
