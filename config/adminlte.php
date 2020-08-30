@@ -241,7 +241,7 @@ return [
             'text'        => 'Equipe',
             'url'         => '/equipe',
             'icon'        => 'fas fa-lg fa-fw fa-users mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
         ],
         [
             'text'        => 'Orientações',
