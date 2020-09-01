@@ -289,6 +289,12 @@ input[type=number] {
     width: 80% !important;
     height: 70% !important;
  }
+ .nav-card{
+     background-color: #fdfde8;
+ }
+ .nav-tabs{
+    background-color: #fdfde8;
+ }
  /* .sidebar{
     background-image: url('/img/sidebar-3.jpeg');
  }     */

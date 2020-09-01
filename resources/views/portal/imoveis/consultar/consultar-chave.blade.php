@@ -93,7 +93,7 @@
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                     <li class="nav-item" id="custon-tabs-li-tmaAvista">
-                        <a class="nav-link" id="custom-tabs-one-tmaAvista-tab" data-toggle="pill" href="#custom-tabs-one-tmaAvista" role="tab" aria-controls="custom-tabs-one-tmaAvista" aria-selected="true">
+                        <a class="nav-link active" id="custom-tabs-one-tmaAvista-tab" data-toggle="pill" href="#custom-tabs-one-tmaAvista" role="tab" aria-controls="custom-tabs-one-tmaAvista" aria-selected="true">
                             <h5>Geral</h5>
                         </a>
                     </li>

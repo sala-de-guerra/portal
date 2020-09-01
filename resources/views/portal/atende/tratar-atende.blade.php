@@ -45,32 +45,32 @@
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                   
-                    <li class="nav-item" id="custon-tabs-li-dados-imovel">
-                        <a class="nav-link" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="false">
+                    <li class="nav-item nav-card" id="custon-tabs-li-dados-imovel">
+                        <a class="nav-link active" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="false">
                             <h5>Dados do Imóvel</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item" id="custon-tabs-li-contratacao">
+                    <li class="nav-item nav-card" id="custon-tabs-li-contratacao">
                         <a class="nav-link" id="custom-tabs-one-contratacao-tab" data-toggle="pill" href="#custom-tabs-one-contratacao" role="tab" aria-controls="custom-tabs-one-contratacao" aria-selected="false">
                             <h5>Contratação</h5>
                         </a>
                     </li>
 
 
-                    <li class="nav-item" id="custon-tabs-li-historico">
+                    <li class="nav-item nav-card" id="custon-tabs-li-historico">
                         <a class="nav-link" id="custom-tabs-one-historico-tab" data-toggle="pill" href="#custom-tabs-one-historico" role="tab" aria-controls="custom-tabs-one-historico" aria-selected="false">
                             <h5>Histórico</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-mensagens">
+                    <li class="nav-item nav-card" id="custon-tabs-li-mensagens">
                         <a class="nav-link active" id="custom-tabs-one-mensagens-tab" data-toggle="pill" href="#custom-tabs-one-mensagens" role="tab" aria-controls="custom-tabs-one-mensagens" aria-selected="true">
                             <h5>Responder Atende</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-modeloMensageria">
+                    <li class="nav-item nav-card" id="custon-tabs-li-modeloMensageria">
                         <a class="nav-link" id="custom-tabs-one-modeloMensageria-tab" data-toggle="pill" href="#custom-tabs-one-modeloMensageria" role="tab" aria-controls="custom-tabs-one-modeloMensageria" aria-selected="false">
                             <h5>Modelos de Mensagem</h5>
                         </a>

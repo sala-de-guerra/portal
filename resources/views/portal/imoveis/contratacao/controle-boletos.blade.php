@@ -52,26 +52,26 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item" id="custon-tabs-li-Avista">
-                        <a class="nav-link" id="custom-tabs-one-Avista-tab" data-toggle="pill" href="#custom-tabs-one-Avista" role="tab" aria-controls="custom-tabs-one-Avista" aria-selected="true">
+                    <li class="nav-item nav-card" id="custon-tabs-li-Avista">
+                        <a class="nav-link active" id="custom-tabs-one-Avista-tab" data-toggle="pill" href="#custom-tabs-one-Avista" role="tab" aria-controls="custom-tabs-one-Avista" aria-selected="true">
                             <h5>À vista</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-Financiado">
+                    <li class="nav-item nav-card" id="custon-tabs-li-Financiado">
                         <a class="nav-link" id="custom-tabs-one-Financiado-tab" data-toggle="pill" href="#custom-tabs-one-Financiado" role="tab" aria-controls="custom-tabs-one-Financiado" aria-selected="false">
                             <h5>Financiado</h5>
                         </a>
                     </li>
 
 
-                    <li class="nav-item" id="custon-tabs-li-novos">
+                    <li class="nav-item nav-card" id="custon-tabs-li-novos">
                         <a class="nav-link" id="custom-tabs-one-novos-tab" data-toggle="pill" href="#custom-tabs-one-novos" role="tab" aria-controls="custom-tabs-one-novos" aria-selected="false">
                             <h5>Novos</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="">
+                    <li class="nav-item nav-card" id="">
                         <a class="nav-link" style="display: none;" id="" data-toggle="pill" href="" role="tab" aria-controls="" aria-selected="false">
                             <h5>Exemplo</h5>
                         </a>

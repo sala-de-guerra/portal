@@ -42,26 +42,26 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item" id="custon-tabs-li-hoje">
-                        <a class="nav-link" id="custom-tabs-one-hoje-tab" data-toggle="pill" href="#custom-tabs-one-hoje" role="tab" aria-controls="custom-tabs-one-hoje" aria-selected="true">
+                    <li class="nav-item nav-card" id="custon-tabs-li-hoje">
+                        <a class="nav-link active" id="custom-tabs-one-hoje-tab" data-toggle="pill" href="#custom-tabs-one-hoje" role="tab" aria-controls="custom-tabs-one-hoje" aria-selected="true">
                             <h5>Aberto</h5>
                         </a>
                     </li>
 
                     
-                    <li class="nav-item" id="custon-tabs-li-finalizado">
+                    <li class="nav-item nav-card" id="custon-tabs-li-finalizado">
                         <a class="nav-link"  id="custom-tabs-one-finalizado-tab" data-toggle="pill" href="#custom-tabs-one-finalizado" role="tab" aria-controls="custom-tabs-one-finalizado" aria-selected="false">
                             <h5>Finalizado</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-hidden">
+                    <li class="nav-item nav-card" id="custon-tabs-li-hidden">
                         <a class="nav-link" style="display: none;" id="custom-tabs-one-hidden-tab" data-toggle="pill" href="#custom-tabs-one-hidden" role="tab" aria-controls="custom-tabs-one-hidden" aria-selected="false">
                             <h5>3 Dias +</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-none">
+                    <li class="nav-item nav-card" id="custon-tabs-li-none">
                         <a class="nav-link" style="display: none;" id="custom-tabs-one-none-tab" data-toggle="pill" href="#custom-tabs-one-none" role="tab" aria-controls="custom-tabs-one-none" aria-selected="false">
                             <h5>Vencidas</h5>
                         </a>
