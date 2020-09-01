@@ -26,14 +26,22 @@ $('#selectGILIE').change(function(){
               let linha = `
               <div class="card card-solid">
                   <div class="card-body pb-0">
-                  <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                    <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                      &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                      </div>
-                  </a>
-                      <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                      </div>
+                    <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                      <div class="row" style="cursor: pointer;">
+                        <div class="col-2">
+                          <span role="button"><b>${item.nomeEquipe}:</b></span>
+                        </div>
+                        <div class="col-4">
+                          <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                        </div>
+                        <div class="col-4">
+                          <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                        </div>
+                      </div>   
+                    </a><br>
+                  <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                   </div>
+                </div>
               </div>`
               
               $(linha).appendTo('#divPrincipalSP');
@@ -41,7 +49,7 @@ $('#selectGILIE').change(function(){
               if (item.nomeEventual == null){
                 item.nomeEventual = 'Não selecionado'
                 $('#eventual'+item.matriculaEventual).remove();
-            }          
+            }  
           });
           $('#divPrincipalSP').attr('id', 'divPrincipalSPPopulado');
       }).done(function() {
@@ -121,14 +129,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -220,14 +236,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -319,14 +343,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -418,14 +450,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -517,14 +557,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -616,14 +664,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -715,14 +771,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -814,14 +878,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -913,14 +985,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -1012,14 +1092,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     
@@ -1111,14 +1199,22 @@ $('#selectGILIE').change(function(){
                     let linha = `
                     <div class="card card-solid">
                     <div class="card-body pb-0">
-                    <a type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse${item.idEquipe}">
-                      <div class="card-header"><h3 class="card-title"><b>${item.nomeEquipe}</b> - <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})</h3> 
-                        &nbsp&nbsp&nbsp<span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</h3></span>
-                        </div>
-                    </a>
-                        <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
-                        </div>
+                      <a data-toggle="collapse" data-target="#collapse${item.idEquipe}" id="menuCollapse${item.idEquipe}">
+                        <div class="row" style="cursor: pointer;">
+                          <div class="col-2">
+                            <span role="button"><b>${item.nomeEquipe}:</b></span>
+                          </div>
+                          <div class="col-4">
+                            <span class="badge badge-info badge-large">Gestor:</span> ${item.nomeGestor} (${item.matriculaGestor})
+                          </div>
+                          <div class="col-4">
+                            <span id="eventual${item.matriculaEventual}"><span class="badge badge-info badge-large">Eventual:</span> ${item.nomeEventual} (${item.matriculaEventual})</span>
+                          </div>
+                        </div>   
+                      </a><br>
+                    <div class="row d-flex align-items-stretch" id="divAppendCard${item.idEquipe}">
                     </div>
+                  </div>
                 </div>`
                     
                     

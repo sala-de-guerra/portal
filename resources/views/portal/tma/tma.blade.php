@@ -49,27 +49,27 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item" id="custon-tabs-li-tmaAvista">
-                        <a class="nav-link" id="custom-tabs-one-tmaAvista-tab" data-toggle="pill" href="#custom-tabs-one-tmaAvista" role="tab" aria-controls="custom-tabs-one-tmaAvista" aria-selected="true">
+                    <li class="nav-item nav-card" id="custon-tabs-li-tmaAvista">
+                        <a class="nav-link active" id="custom-tabs-one-tmaAvista-tab" data-toggle="pill" href="#custom-tabs-one-tmaAvista" role="tab" aria-controls="custom-tabs-one-tmaAvista" aria-selected="true">
                             @foreach ($mediaAVista as $media)
                                 <h5>À vista</h5>
                                 @endforeach
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-tmaFinanciado">
+                    <li class="nav-item nav-card" id="custon-tabs-li-tmaFinanciado">
                         <a class="nav-link" id="custom-tabs-one-tmaFinanciado-tab" data-toggle="pill" href="#custom-tabs-one-tmaFinanciado" role="tab" aria-controls="custom-tabs-one-tmaFinanciado" aria-selected="false">
                             <h5>Financiado</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="">
+                    <li class="nav-item nav-card" id="">
                         <a style="display: none;" class="nav-link" id="" data-toggle="pill" href="" role="tab" aria-controls="" aria-selected="false">
                             <h5>Exemplo</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="">
+                    <li class="nav-item nav-card" id="">
                         <a class="nav-link" style="display: none;" id="" data-toggle="pill" href="" role="tab" aria-controls="" aria-selected="false">
                             <h5>Exemplo</h5>
                         </a>

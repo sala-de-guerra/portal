@@ -38,25 +38,25 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item" id="custon-tabs-li-fluxoAgencia">
-                        <a class="nav-link" id="custom-tabs-one-fluxoAgencia-tab" data-toggle="pill" href="#custom-tabs-one-fluxoAgencia" role="tab" aria-controls="custom-tabs-one-fluxoAgencia" aria-selected="true">
+                    <li class="nav-item nav-card" id="custon-tabs-li-fluxoAgencia">
+                        <a class="nav-link active" id="custom-tabs-one-fluxoAgencia-tab" data-toggle="pill" href="#custom-tabs-one-fluxoAgencia" role="tab" aria-controls="custom-tabs-one-fluxoAgencia" aria-selected="true">
                             <h5>Fluxo Agência</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-fluxoCCA">
+                    <li class="nav-item nav-card" id="custon-tabs-li-fluxoCCA">
                         <a class="nav-link" id="custom-tabs-one-fluxoCCA-tab" data-toggle="pill" href="#custom-tabs-one-fluxoCCA" role="tab" aria-controls="custom-tabs-one-fluxoCCA" aria-selected="false">
                             <h5>Fluxo CCA</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item" id="custon-tabs-li-agrupAgencia">
+                    <li class="nav-item nav-card" id="custon-tabs-li-agrupAgencia">
                         <a class="nav-link" id="custom-tabs-one-agrupAgencia-tab" data-toggle="pill" href="#custom-tabs-one-agrupAgencia" role="tab" aria-controls="custom-tabs-one-agrupAgencia" aria-selected="false">
                             <h5>Agrupamento Agência</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-semPagamento">
+                    <li class="nav-item nav-card" id="custon-tabs-li-semPagamento">
                         <a class="nav-link" id="custom-tabs-one-semPagamento-tab" data-toggle="pill" href="#custom-tabs-one-semPagamento" role="tab" aria-controls="custom-tabs-one-semPagamento" aria-selected="false">
                             <h5>Aguardando Pagamento</h5>
                         </a>

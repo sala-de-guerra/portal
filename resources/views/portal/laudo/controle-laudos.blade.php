@@ -52,25 +52,25 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item" id="custon-tabs-li-emDia">
-                        <a class="nav-link" id="custom-tabs-one-emDia-tab" data-toggle="pill" href="#custom-tabs-one-emDia" role="tab" aria-controls="custom-tabs-one-emDia" aria-selected="false">
+                    <li class="nav-item nav-card" id="custon-tabs-li-emDia">
+                        <a class="nav-link active" id="custom-tabs-one-emDia-tab" data-toggle="pill" href="#custom-tabs-one-emDia" role="tab" aria-controls="custom-tabs-one-emDia" aria-selected="false">
                             <h5>À Vencer</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-vencido">
+                    <li class="nav-item nav-card" id="custon-tabs-li-vencido">
                         <a class="nav-link vencidotbl" id="custom-tabs-one-vencido-tab" data-toggle="pill" href="#custom-tabs-one-vencido" role="tab" aria-controls="custom-tabs-one-vencido" aria-selected="false">
                             <h5>Vencido</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item" id="custon-tabs-li-Reavaliacao">
+                    <li class="nav-item nav-card" id="custon-tabs-li-Reavaliacao">
                         <a id="reavaliacaotbl" class="nav-link" id="custom-tabs-one-Reavaliacao-tab" data-toggle="pill" href="#custom-tabs-one-Reavaliacao" role="tab" aria-controls="custom-tabs-one-Reavaliacao" aria-selected="false">
                             <h5>Reavaliação</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-emReavaliacao">
+                    <li class="nav-item nav-card" id="custon-tabs-li-emReavaliacao">
                         <a id="pendenciatbl" class="nav-link" id="custom-tabs-one-emReavaliacao-tab" data-toggle="pill" href="#custom-tabs-one-emReavaliacao" role="tab" aria-controls="custom-tabs-one-emReavaliacao" aria-selected="false">
                             <h5>Pendência</h5>
                         </a>

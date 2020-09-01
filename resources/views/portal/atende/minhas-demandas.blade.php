@@ -41,25 +41,25 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item" id="custon-tabs-li-minhasDemandas">
-                        <a class="nav-link" id="custom-tabs-one-minhasDemandas-tab" data-toggle="pill" href="#custom-tabs-one-minhasDemandas" role="tab" aria-controls="custom-tabs-one-minhasDemandas" aria-selected="true">
+                    <li class="nav-item nav-card" id="custon-tabs-li-minhasDemandas">
+                        <a class="nav-link active" id="custom-tabs-one-minhasDemandas-tab" data-toggle="pill" href="#custom-tabs-one-minhasDemandas" role="tab" aria-controls="custom-tabs-one-minhasDemandas" aria-selected="true">
                             <h5>Atende com contrato</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-faleConosco">
+                    <li class="nav-item nav-card" id="custon-tabs-li-faleConosco">
                         <a class="nav-link" id="custom-tabs-one-faleConosco-tab" data-toggle="pill" href="#custom-tabs-one-faleConosco" role="tab" aria-controls="custom-tabs-one-faleConosco" aria-selected="false">
                             <h5>Atende sem contrato</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="">
+                    <li class="nav-item nav-card" id="">
                         <a style="display: none;" class="nav-link" id="" data-toggle="pill" href="" role="tab" aria-controls="" aria-selected="false">
                             <h5>Exemplo</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="">
+                    <li class="nav-item nav-card" id="">
                         <a class="nav-link" style="display: none;" id="" data-toggle="pill" href="" role="tab" aria-controls="" aria-selected="false">
                             <h5>Exemplo</h5>
                         </a>

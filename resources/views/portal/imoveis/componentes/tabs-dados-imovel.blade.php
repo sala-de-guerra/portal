@@ -4,49 +4,49 @@
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                   
-                    <li class="nav-item" id="custon-tabs-li-dados-imovel">
+                    <li class="nav-item nav-card" id="custon-tabs-li-dados-imovel">
                         <a class="nav-link active" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="true">
                             <h5>Dados do Imóvel</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-laudos">
+                    <li class="nav-item nav-card" id="custon-tabs-li-laudos">
                         <a class="nav-link" id="custom-tabs-one-laudos-tab" data-toggle="pill" href="#custom-tabs-one-laudos" role="tab" aria-controls="custom-tabs-one-laudos" aria-selected="false">
                             <h5>Laudos</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-leiloes">
+                    <li class="nav-item nav-card" id="custon-tabs-li-leiloes">
                         <a class="nav-link" id="custom-tabs-one-leiloes-tab" data-toggle="pill" href="#custom-tabs-one-leiloes" role="tab" aria-controls="custom-tabs-one-leiloes" aria-selected="false">
                             <h5>Leilões</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item" id="custon-tabs-li-contratacao">
+                    <li class="nav-item nav-card" id="custon-tabs-li-contratacao">
                         <a class="nav-link" id="custom-tabs-one-contratacao-tab" data-toggle="pill" href="#custom-tabs-one-contratacao" role="tab" aria-controls="custom-tabs-one-contratacao" aria-selected="false">
                             <h5>Contratação</h5>
                         </a>
                     </li>
 
-                    <li style="display: none;" class="nav-item" id="custon-tabs-li-aviso">
+                    <li style="display: none;" class="nav-item nav-card" id="custon-tabs-li-aviso">
                         <a class="nav-link" id="custom-tabs-one-aviso-tab" data-toggle="pill" href="#custom-tabs-one-aviso" role="tab" aria-controls="custom-tabs-one-aviso" aria-selected="false">
                             <h5>Contratação</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item" id="custon-tabs-li-distrato">
+                    <li class="nav-item nav-card" id="custon-tabs-li-distrato">
                         <a class="nav-link" id="custom-tabs-one-distrato-tab" data-toggle="pill" href="#custom-tabs-one-distrato" role="tab" aria-controls="custom-tabs-one-distrato" aria-selected="false">
                             <h5>Distrato</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-historico">
+                    <li class="nav-item nav-card" id="custon-tabs-li-historico">
                         <a class="nav-link" id="custom-tabs-one-historico-tab" data-toggle="pill" href="#custom-tabs-one-historico" role="tab" aria-controls="custom-tabs-one-historico" aria-selected="false">
                             <h5>Histórico</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-mensagens">
+                    <li class="nav-item nav-card" id="custon-tabs-li-mensagens">
                         <a class="nav-link" id="custom-tabs-one-mensagens-tab" data-toggle="pill" href="#custom-tabs-one-mensagens" role="tab" aria-controls="custom-tabs-one-mensagens" aria-selected="false">
                             <h5>Mensagens</h5>
                         </a>

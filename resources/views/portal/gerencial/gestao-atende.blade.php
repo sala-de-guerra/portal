@@ -44,31 +44,31 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0">
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item" id="custon-tabs-li-hoje">
-                        <a class="nav-link" id="custom-tabs-one-hoje-tab" data-toggle="pill" href="#custom-tabs-one-hoje" role="tab" aria-controls="custom-tabs-one-hoje" aria-selected="true">
+                    <li class="nav-item nav-card" id="custon-tabs-li-hoje">
+                        <a class="nav-link active" id="custom-tabs-one-hoje-tab" data-toggle="pill" href="#custom-tabs-one-hoje" role="tab" aria-controls="custom-tabs-one-hoje" aria-selected="true">
                             <h5>Hoje</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-amanha">
+                    <li class="nav-item nav-card" id="custon-tabs-li-amanha">
                         <a class="nav-link" id="custom-tabs-one-amanha-tab" data-toggle="pill" href="#custom-tabs-one-amanha" role="tab" aria-controls="custom-tabs-one-amanha" aria-selected="false">
                             <h5>Amanhã</h5>
                         </a>
                     </li>
                     
-                    <li class="nav-item" id="custon-tabs-li-doisDias">
+                    <li class="nav-item nav-card" id="custon-tabs-li-doisDias">
                         <a class="nav-link" id="custom-tabs-one-doisDias-tab" data-toggle="pill" href="#custom-tabs-one-doisDias" role="tab" aria-controls="custom-tabs-one-doisDias" aria-selected="false">
                             <h5>2 dias</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-tresDias">
+                    <li class="nav-item nav-card" id="custon-tabs-li-tresDias">
                         <a class="nav-link" id="custom-tabs-one-tresDias-tab" data-toggle="pill" href="#custom-tabs-one-tresDias" role="tab" aria-controls="custom-tabs-one-tresDias" aria-selected="false">
                             <h5>3 Dias +</h5>
                         </a>
                     </li>
 
-                    <li class="nav-item" id="custon-tabs-li-vencidas">
+                    <li class="nav-item nav-card" id="custon-tabs-li-vencidas">
                         <a class="nav-link" id="custom-tabs-one-vencidas-tab" data-toggle="pill" href="#custom-tabs-one-vencidas" role="tab" aria-controls="custom-tabs-one-vencidas" aria-selected="false">
                             <h5>Vencidas</h5>
                         </a>
