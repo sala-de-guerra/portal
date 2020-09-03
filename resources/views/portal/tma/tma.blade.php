@@ -87,7 +87,7 @@
                             <div class="col-sm-12">
                                 <div class="notice notice-success">
                                     @foreach ($mediaAVista as $media)
-                                        <strong>TMA: {{$media->media}}</strong>
+                                        <strong>TMA: {{$media->media}}</strong><a href="/tma/baixar-planilha-tma"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA à Vista &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                                     @endforeach
                                 </div><br>
                                 <div id="displayAberto">
@@ -134,7 +134,7 @@
                                 <div class="col-sm-12">
                                     <div class="notice notice-success"> 
                                         @foreach ($mediaComFinanciamento as $mediaFinanciada)
-                                            <strong>TMA: {{$mediaFinanciada->media}}</strong>
+                                            <strong>TMA: {{$mediaFinanciada->media}}</strong><a href="/tma/baixar-planilha-tma-financiamento"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA com Financiamento &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                                         @endforeach
                                         &nbsp&nbsp&nbsp&nbsp&nbsp
                                         @foreach ($mediaCCA as $mediaApenasCCA)

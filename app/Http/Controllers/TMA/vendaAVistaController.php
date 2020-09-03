@@ -13,8 +13,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\TMA\TMAaVista;
 use App\Models\HistoricoPortalGilie;
 use App\Models\Bloqueados;
+use App\Exports\criaExcelPlanilhaTMAaVista;
+use Maatwebsite\Excel\Facades\Excel;
 
-class vendaAvistaController extends Controller
+class vendaAVistaController extends Controller
 {
     // public function indexVendaAVista()
     // {
@@ -200,6 +202,12 @@ class vendaAvistaController extends Controller
             $request->session()->flash('corpoMensagem', "Aconteceu um erro durante registro. Tente novamente");
         }
         return back();
+    }
+
+    public function criaPlanilhaControleTMA()
+    {
+
+        return Excel::download(new criaExcelPlanilhaTMAaVista, 'PlanilhaTMAaVista.xlsx');
     }
       
 }
