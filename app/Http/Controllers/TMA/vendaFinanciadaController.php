@@ -13,6 +13,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\TMA\TMAfinanciado;
 use App\Models\HistoricoPortalGilie;
 use App\Models\Bloqueados;
+use App\Exports\criaExcelPlanilhaTMAFinaciamento;
+use Maatwebsite\Excel\Facades\Excel;
 
 class vendaFinanciadaController extends Controller
 {
@@ -198,6 +200,13 @@ class vendaFinanciadaController extends Controller
         }
         return back();
     }
+
+    public function criaPlanilhaControleTMAFinanciamento()
+    {
+
+        return Excel::download(new criaExcelPlanilhaTMAFinaciamento, 'PlanilhaTMAFinanciamento.xlsx');
+    }
+      
 
 }
 

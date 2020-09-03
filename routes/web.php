@@ -403,6 +403,10 @@ Route::post('tma/baixar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@ba
 Route::post('tma/cancelar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@cancelarVendaFinanciada');
 //Marcar CHB aguarda pagamento
 Route::post('tma/aguarda-pagamento-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@aguardaVendaFinanciada');
+//Planilha Excel TMA a Vista
+Route::get('/tma/baixar-planilha-tma', 'TMA\vendaAVistaController@criaPlanilhaControleTMA');
+//Planilha Excel TMA a Vista
+Route::get('/tma/baixar-planilha-tma-financiamento', 'TMA\vendaFinanciadaController@criaPlanilhaControleTMAFinanciamento');
 
 //ROTA Controle de Chaves
 Route::get('estoque-imoveis/chaves', 'GestaoImoveisCaixa\controleDeChavesController@index');
