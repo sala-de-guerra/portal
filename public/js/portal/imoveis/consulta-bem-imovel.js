@@ -97,6 +97,11 @@ $(document).ready(function(){
             $('#custon-tabs-li-aviso').css('display', 'block')
 
         }
+
+        if ($('#statusImovel').html() == 'Vendido'){
+            $('#custon-tabs-li-laudos').remove()
+            $('#custon-tabs-li-Pagamentos').css('display', 'block')
+        }
     });
 
     /****************************************************\
@@ -180,4 +185,26 @@ $.getJSON('/estoque-imoveis/leiloes-negativos/codigo-correio/' + numeroContrato,
         $(codigo).appendTo('#codigoDoCorreio')
 
     })
+})
+
+$.getJSON('/pagamentos/' + numeroContrato, function(dados){
+    $.each(dados, function(key, item) {
+        if(item.valorPagamento == 'null' || item.valorPagamento == null){
+            item.valorPagamento = '0,00'  
+        } 
+        let linha =
+            `<tr>
+                <td>${item.credor}</td>
+                <td>${item.servico}</td>
+                <td>`+moment(item.referenciaDe).format('DD/MM/YYYY')+`</td>
+                <td>`+moment(item.referenciaAte).format('DD/MM/YYYY')+`</td>
+                <td>`+moment(item.dataPagamento).format('DD/MM/YYYY')+`</td>
+                <td>R$ ${item.valorPagamento}</td>
+                <td>R$ ${item.valorParcela}</td>
+                <td>${item.numeroCompromisso}</td>
+ 
+            </tr>`
+                $(linha).appendTo('#tblPagamentos>tbody');
+
+    });
 })

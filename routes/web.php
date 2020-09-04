@@ -505,3 +505,10 @@ Route::get('/equipe/listar-nomes-equipe-sa', 'Equipes\equipesController@listaNom
 Route::get('/equipe/listar-equipe-sa', 'Equipes\equipesController@listaEquipeSA');
 Route::get('/equipe/listar-atividade-sa', 'Equipes\equipesController@listaAtividadeSA');
 Route::get('/equipe/listar-gerente-sa', 'Equipes\equipesController@listaGerenteSA');
+
+// ROTAS DE PAGAMENTOS
+Route::prefix('pagamentos')->group(function () {
+    // RETORNA JSON DE PAGAMENTOS
+    Route::get('/{chb}', 'Pagamentos\gestaoDePagamentosController@gestaoDePagamentos');
+
+});
