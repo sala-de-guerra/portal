@@ -16,6 +16,12 @@
                         </a>
                     </li>
 
+                    <li style="display: none;" class="nav-item nav-card" id="custon-tabs-li-Pagamentos">
+                        <a class="nav-link" id="custom-tabs-one-Pagamentos-tab" data-toggle="pill" href="#custom-tabs-one-Pagamentos" role="tab" aria-controls="custom-tabs-one-Pagamentos" aria-selected="false">
+                            <h5>Pagamentos</h5>
+                        </a>
+                    </li>
+
                     <li class="nav-item nav-card" id="custon-tabs-li-leiloes">
                         <a class="nav-link" id="custom-tabs-one-leiloes-tab" data-toggle="pill" href="#custom-tabs-one-leiloes" role="tab" aria-controls="custom-tabs-one-leiloes" aria-selected="false">
                             <h5>Leilões</h5>
@@ -1219,6 +1225,32 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="custom-tabs-one-Pagamentos" role="tabpanel" aria-labelledby="custom-tabs-one-Pagamentos-tab">
+                        
+                        <div class="modal-body">
+                            <table id="tblPagamentos" class="table table-bordered table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th>Credor</th>
+                                        <th>Serviço</th>
+                                        <th>Dê</th>
+                                        <th>Até</th>
+                                        <th>Data Pagamento</th>
+                                        <th>Valor Pagamento</th>
+                                        <th>Valor Parcela</th>
+                                        <th>Compromisso</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>  
+                
+                                </tbody>
+                            </table>
+                        </div>
+      
+
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-aviso" role="tabpanel" aria-labelledby="custom-tabs-one-aviso-tab">
