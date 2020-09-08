@@ -16,12 +16,6 @@
                         </a>
                     </li>
 
-                    <li style="display: none;" class="nav-item nav-card" id="custon-tabs-li-Pagamentos">
-                        <a class="nav-link" id="custom-tabs-one-Pagamentos-tab" data-toggle="pill" href="#custom-tabs-one-Pagamentos" role="tab" aria-controls="custom-tabs-one-Pagamentos" aria-selected="false">
-                            <h5>Pagamentos</h5>
-                        </a>
-                    </li>
-
                     <li class="nav-item nav-card" id="custon-tabs-li-leiloes">
                         <a class="nav-link" id="custom-tabs-one-leiloes-tab" data-toggle="pill" href="#custom-tabs-one-leiloes" role="tab" aria-controls="custom-tabs-one-leiloes" aria-selected="false">
                             <h5>Leilões</h5>
@@ -57,7 +51,15 @@
                             <h5>Mensagens</h5>
                         </a>
                     </li>
-
+                    
+                    <li style="display: none;" class="nav-item nav-card" id="custon-tabs-li-Pagamentos">
+                        <a class="nav-link" id="custom-tabs-one-Pagamentos-tab" data-toggle="pill" href="#custom-tabs-one-Pagamentos" role="tab" aria-controls="custom-tabs-one-Pagamentos" aria-selected="false">
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon bg-warning ">Novo</div>
+                      </div>
+                            <h5>Pagamentos</h5>
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -1228,7 +1230,9 @@
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-Pagamentos" role="tabpanel" aria-labelledby="custom-tabs-one-Pagamentos-tab">
-                        
+                        <div class="notice notice-success">
+                            <strong>Total Valor Parcela: </strong>C<span id="totalParcela"></span> 
+                        </div>
                         <div class="modal-body">
                             <table id="tblPagamentos" class="table table-bordered table-striped ">
                                 <thead>
