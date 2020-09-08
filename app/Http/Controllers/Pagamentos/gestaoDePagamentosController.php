@@ -15,6 +15,7 @@ use App\Models\HistoricoPortalGilie;
 use App\Models\Bloqueados;
 use App\Exports\criaExcelPlanilhaTMAaVista;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Pagamentos\Pagamentos;
 
 class gestaoDePagamentosController extends Controller
 {
@@ -44,4 +45,11 @@ public function gestaoDePagamentos($chb)
 
         return json_encode($gestaoDePagamentos);
     }
+
+    // public function gestaoDePagamentos($chb)
+    // {
+    // $gestaoDePagamentos = Pagamentos::where('BEM', $chb)->get();
+
+    //     return json_encode($gestaoDePagamentos);
+    // }
 }

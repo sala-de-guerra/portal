@@ -187,24 +187,34 @@ $.getJSON('/estoque-imoveis/leiloes-negativos/codigo-correio/' + numeroContrato,
     })
 })
 
-$.getJSON('/pagamentos/' + numeroContrato, function(dados){
-    $.each(dados, function(key, item) {
-        if(item.valorPagamento == 'null' || item.valorPagamento == null){
-            item.valorPagamento = '0,00'  
-        } 
-        let linha =
-            `<tr>
-                <td>${item.credor}</td>
-                <td>${item.servico}</td>
-                <td>`+moment(item.referenciaDe).format('DD/MM/YYYY')+`</td>
-                <td>`+moment(item.referenciaAte).format('DD/MM/YYYY')+`</td>
-                <td>`+moment(item.dataPagamento).format('DD/MM/YYYY')+`</td>
-                <td>R$ ${item.valorPagamento}</td>
-                <td>R$ ${item.valorParcela}</td>
-                <td>${item.numeroCompromisso}</td>
- 
-            </tr>`
-                $(linha).appendTo('#tblPagamentos>tbody');
+//Aba Pagamentos
+$("#custon-tabs-li-Pagamentos").one( "click", function() {
+    $.getJSON('/pagamentos/' + numeroContrato, function(dados){
+        $.each(dados, function(key, item) {
+            if(item.valorPagamento == 'null' || item.valorPagamento == null){
+                item.valorPagamento = '0,00'  
+            } 
+            if(item.servico == 'null' || item.servico == null){
+                item.valorPagamento = ''  
+            } 
+            if(item.numeroCompromisso == 'null' || item.numeroCompromisso == null){
+                item.numeroCompromisso = ''  
+            }
+           
+            let linha =
+                `<tr>
+                    <td>${item.credor}</td>
+                    <td>${item.servico}</td>
+                    <td>`+moment(item.referenciaDe).format('DD/MM/YYYY')+`</td>
+                    <td>`+moment(item.referenciaAte).format('DD/MM/YYYY')+`</td>
+                    <td>`+moment(item.dataPagamento).format('DD/MM/YYYY')+`</td>
+                    <td>R$ ${item.valorPagamento}</td>
+                    <td>R$ ${item.valorParcela}</td>
+                    <td>${item.numeroCompromisso}</td>
+    
+                </tr>`
+                    $(linha).appendTo('#tblPagamentos>tbody');
 
-    });
+        });
+    })
 })
