@@ -34,6 +34,7 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
                 FORMAT(CONVERT(DECIMAL(10,2), REPLACE(TBL_VENDA_AVISTA.[PAGAMENTO_BOLETO], ',', '.')), 'N', 'pt-BR') AS PAGAMENTO_BOLETO,
                 TBL_VENDA_AVISTA.[DIAS_DECORRIDOS] as DIAS_DECORRIDOS,
                 TBL_VENDA_AVISTA.[CLASSIFICACAO] as CLASSIFICACAO,
+                TBL_VENDA_AVISTA.[STATUS_IMOVEL] as STATUS_IMOVEL,
                 TBL_VENDA_AVISTA.[TIPO_VENDA] as tipoVenda,
                 TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
                 TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE         
@@ -54,6 +55,7 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
             'Pagamento',
             'Dias Decorridos',
             'Classificação',
+            'Status',
             'Tipo Venda',
             'Proponente',
             'CPF/CNPJ'

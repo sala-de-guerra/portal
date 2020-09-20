@@ -43,7 +43,7 @@ class ValidaAcessoRotaPortal
             case 'estoque-imoveis/acompanha-contratacao':
             case 'estoque-imoveis/monitora-pagamento-sinal':
             case 'indicadores/distrato':
-                if (!in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', env('NOME_NOSSA_UNIDADE'), 'DESENVOLVEDOR'])) {
+                if (!in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', env('NOME_NOSSA_UNIDADE'), 'DESENVOLVEDOR', 'EVENTUAL'])) {
                     $request->session()->flash('corMensagem', 'warning');
                     $request->session()->flash('tituloMensagem', "Acesso negado!");
                     $request->session()->flash('corpoMensagem', "Você não tem perfil para acessar essa página.");

@@ -141,7 +141,7 @@ estão com atendimento contingencial e reduzido no horário das 10h às 13h***</
 	devem ser contratadas por meio do CCA, conforme opção do cliente realizada no momento da proposta no site da CAIXA;
     </p>
     <p>
-        3.2  <b>A partir do recebimento desta autorização a agência de contratação deverá realizar a indicação de um CCA credenciado a sua agência no SIOPI (caso necessário verifique a relação de credenciados com sua SR).
+        3.2  <b>A partir do recebimento desta autorização a agência de contratação deverá realizar a indicação de um CCA credenciado a sua agência no SIOPI (caso necessário verifique a relação de credenciados com sua SEV).
 	No SIOPI deverá acessar a opção Serviços – Cadastro do Imóvel – Individual (preencher com o número da matricula e cartório) Consultar – Entrar no imóvel – Alterar – preencher com o número do CCA (sem o digito) e salvar;</b>
     <p>
         3.3  O CCA acessará o cadastro do imóvel e documentos digitalizados pela GILIE no SIOPI WEB e realizará os procedimentos de concessão no SICAQ e 
@@ -189,7 +189,7 @@ estão com atendimento contingencial e reduzido no horário das 10h às 13h***</
     </p>
 
     <p>
-        4.3   As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SRs de vinculação.  
+        4.3   As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SEVs de vinculação.  
     </p>
 
 
