@@ -1230,9 +1230,6 @@
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-Pagamentos" role="tabpanel" aria-labelledby="custom-tabs-one-Pagamentos-tab">
-                        <div class="notice notice-success">
-                            <strong>Total Valor Parcela: </strong>C<span id="totalParcela"></span> 
-                        </div>
                         <div class="modal-body">
                             <table id="tblPagamentos" class="table table-bordered table-striped ">
                                 <thead>

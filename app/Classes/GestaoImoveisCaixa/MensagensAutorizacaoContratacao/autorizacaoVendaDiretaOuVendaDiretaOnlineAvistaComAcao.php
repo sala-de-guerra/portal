@@ -137,7 +137,7 @@ estão com atendimento contingencial e reduzido no horário das 10h às 13h***</
     </p>
     
     <p>
-        3.2  As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SRs de vinculação.
+        3.2  As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SEVs de vinculação.
     </p>
 
     
@@ -161,7 +161,7 @@ estão com atendimento contingencial e reduzido no horário das 10h às 13h***</
     </p>
 
     <p>
-        4.3   As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SRs de vinculação;  
+        4.3   As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SEVs de vinculação;  
     </p>
     <p>
         4.4   <b>Todos os dados referentes ao imóvel, proponente e contratação podem ser acessados através do:</b> <a href="https://portal.gilie.sp.caixa/">https://portal.gilie.sp.caixa/</a>;  

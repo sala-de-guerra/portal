@@ -167,7 +167,7 @@ estão com atendimento contingencial e reduzido no horário das 10h às 13h***</
     </p>
 
     <p>
-        4.3   As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SRs de vinculação;  
+        4.3   As Certidões Negativas da CAIXA (Receita Federal ou INSS), podem ser solicitadas às SEVs de vinculação;  
     </p>
 
     <b>5    DOS DÉBITOS DO IMÓVEL:</b>
