@@ -510,5 +510,13 @@ Route::get('/equipe/listar-gerente-sa', 'Equipes\equipesController@listaGerenteS
 Route::prefix('pagamentos')->group(function () {
     // RETORNA JSON DE PAGAMENTOS
     Route::get('/{chb}', 'Pagamentos\gestaoDePagamentosController@gestaoDePagamentos');
+    // RETORNA JSON DDQ TABELA 1
+    Route::get('ddq-1/{chb}', 'Pagamentos\gestaoDDQController@gestaoDDQtabela1');
+    // RETORNA JSON DDQ TABELA 2
+    Route::get('ddq-2/{chb}', 'Pagamentos\gestaoDDQController@gestaoDDQtabela2');
+    // RETORNA JSON DDQ TABELA DADOS
+    Route::get('ddq/{chb}', 'Pagamentos\gestaoDDQController@gestaoDDQDados');
+        // RETORNA JSON DDQ TABELA CDP
+    Route::get('cdp/{chb}', 'Pagamentos\gestaoCDPController@gestaoCDP');
 
 });

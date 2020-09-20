@@ -1230,16 +1230,17 @@
                     </div>
 
                     <div class="tab-pane fade" id="custom-tabs-one-Pagamentos" role="tabpanel" aria-labelledby="custom-tabs-one-Pagamentos-tab">
-                        <div class="notice notice-success">
-                            <strong>Total Valor Parcela: </strong>C<span id="totalParcela"></span> 
-                        </div>
                         <div class="modal-body">
+                            @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR', 'EVENTUAL', 'MATRIZ']))
+                            <div class="notice notice-success">
+                                <strong>Tabela pagamentos: </strong>(SIMOV)
+                            </div>
                             <table id="tblPagamentos" class="table table-bordered table-striped ">
                                 <thead>
                                     <tr>
                                         <th>Credor</th>
                                         <th>Serviço</th>
-                                        <th>Dê</th>
+                                        <th>De</th>
                                         <th>Até</th>
                                         <th>Data Pagamento</th>
                                         <th>Valor Pagamento</th>
@@ -1252,8 +1253,103 @@
                 
                                 </tbody>
                             </table>
+                            <div class="notice notice-success">
+                                <strong>Total valor parcela: </strong><span id="totalValoresPagamento"></span>
+                            </div>
+                            <hr class="pontilhado">
+                            <div class="notice notice-success">
+                                <strong>Tabela: </strong>(CDP -CIWEB)
+                            </div>
+                            <table id="tblCDP" class="table table-bordered table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th>Processo</th>
+                                        <th>CNPJ</th>
+                                        <th>Pagamento</th>
+                                        <th>SQ</th>
+                                        <th>TP</th>
+                                        <th>Despesa</th>
+                                        <th>Valor</th>
+                                        <th>PG</th>
+                                        <th>CLA</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>  
+                
+                                </tbody>
+                            </table>
+                            <div class="notice notice-success">
+                                <strong>Total: </strong><span id="totalValoresCDP"></span>
+                            </div>
+                            <hr class="pontilhado">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="notice notice-success">
+                                        <strong>Tabela valores - data consolidação: </strong>(DDQ - CIWEB)
+                                    </div>
+                                    <table id="tblDDQ1" class="table table-bordered table-striped ">
+                                        <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Valor</th>
+        
+                                            </tr>
+                                        </thead>
+                                        <tbody>  
+                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col">
+                                    <div class="notice notice-success">
+                                        <strong>Tabela valor atualizados até referência: </strong>(DDQ - CIWEB)
+                                    </div>
+                                    <table id="tblDDQ2" class="table table-bordered table-striped ">
+                                        <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Valor</th>
+        
+                                            </tr>
+                                        </thead>
+                                        <tbody>  
+                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-4">
+                                    <label>Data de Alienação:</label>
+                                    <p id="dataAlienacao"></p>
+                                </div>
+                                <div class="col-4">
+                                    <label>Valor de Alienação:</label>
+                                    <p id="valorAlienacao"></p>
+                                </div>
+                                <div class="col-4">
+                                    <label>Leilão:</label>
+                                    <p id="leilao"></p>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-4">
+                                    <label>Devolução ao Ex-Mutuário:</label>
+                                    <p id="devExMutuario"></p>
+                                </div>
+                                <div class="col-4">
+                                    <label>Resultado da Alienação:</label>
+                                    <p id="resultAlienacao"></p>
+                                </div>
+                              </div>
                         </div>
-      
+                        @endIf
+                        @if (in_array(session()->get('acessoEmpregadoPortal'), ['AGENCIA', 'SR']))
+                        <div class="notice notice-danger">
+                            <h3>OOPS!!!<br> Você não tem perfil para acesso a essas informações<br> acione sua GILIE de vinculação</h3>
+                        </div>
+                        @endIf
 
                     </div>
 
@@ -1280,7 +1376,7 @@
 
                     <div class="tab-pane fade" id="custom-tabs-one-mensagens" role="tabpanel" aria-labelledby="custom-tabs-one-mensagens-tab">
                         
-                            @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR']))
+                            @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR', 'EVENTUAL']))
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="alert" style="background-color: #fff9c2;" >

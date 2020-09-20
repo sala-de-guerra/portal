@@ -36,20 +36,12 @@ public function gestaoDePagamentos($chb)
         TRY_CONVERT(date, [DATA_PAGAMENTO], 103) as dataPagamento,
         FORMAT(CONVERT(DECIMAL(10,2), REPLACE([VALOR_PAGAMENTO], ',', '.')), 'N', 'pt-BR') AS valorPagamento,
         FORMAT(CONVERT(DECIMAL(10,2), REPLACE([VALOR_PARCELA], ',', '.')), 'N', 'pt-BR') AS valorParcela,
-        CUB_10_PAGAMENTOS_DESPESAS_SIMOV.[NUMERO_COMPROMISSO] as numeroCompromisso
-
-        
+        CUB_10_PAGAMENTOS_DESPESAS_SIMOV.[NUMERO_COMPROMISSO] as numeroCompromisso,
+        CAST(CUB_10_PAGAMENTOS_DESPESAS_SIMOV.VALOR_TOTAL_PARCELAS as money) as valor  
         "))
          ->where('CUB_10_PAGAMENTOS_DESPESAS_SIMOV.BEM', '=', $chb)
          ->get();
 
         return json_encode($gestaoDePagamentos);
     }
-
-    // public function gestaoDePagamentos($chb)
-    // {
-    // $gestaoDePagamentos = Pagamentos::where('BEM', $chb)->get();
-
-    //     return json_encode($gestaoDePagamentos);
-    // }
 }

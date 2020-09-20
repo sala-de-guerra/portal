@@ -77,7 +77,7 @@ $( document ).ready(function() {
                               </div>
                   
                               <label>Enviar para: </label>
-                              <input type="email" class="form-control" name="emailContato" placeholder="email" required><br>
+                              <input type="email" class="form-control" name="emailContato" value="${item.emailEngenharia}" required><br>
                               <small class="form-text text-muted"><span style="color: red;">* Feche um modelo para abrir o outro.</span></small>
                               <div class="row">
                               <div class="col-sm">

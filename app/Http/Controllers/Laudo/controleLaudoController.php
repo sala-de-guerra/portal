@@ -124,6 +124,9 @@ class controleLaudoController extends Controller
                 TBL_CONTROLE_LAUDO.[observacao] as observacao,
                 TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
                 TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
+                TBL_CONTROLE_LAUDO.[nomeEngenharia] as nomeEngenharia,
+                TBL_CONTROLE_LAUDO.[emailEngenharia] as emailEngenharia,
+                TBL_CONTROLE_LAUDO.[cnpjEngenharia] as cnpjEngenharia,
                 datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) as quanto_falta
               
         '))
@@ -168,6 +171,9 @@ class controleLaudoController extends Controller
                 TBL_CONTROLE_LAUDO.[correcao] as correcao,
                 TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
                 TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
+                TBL_CONTROLE_LAUDO.[nomeEngenharia] as nomeEngenharia,
+                TBL_CONTROLE_LAUDO.[emailEngenharia] as emailEngenharia,
+                TBL_CONTROLE_LAUDO.[cnpjEngenharia] as cnpjEngenharia,
                 datediff(day,getdate(), TBL_CONTROLE_LAUDO.[dataCadastroSiopi]) as laudoPedido
               
         '))
@@ -203,6 +209,9 @@ class controleLaudoController extends Controller
                 TBL_CONTROLE_LAUDO.[observacao] as observacao,
                 TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
                 TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
+                TBL_CONTROLE_LAUDO.[nomeEngenharia] as nomeEngenharia,
+                TBL_CONTROLE_LAUDO.[emailEngenharia] as emailEngenharia,
+                TBL_CONTROLE_LAUDO.[cnpjEngenharia] as cnpjEngenharia,
                 datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) as quanto_falta
               
         '))
@@ -238,6 +247,9 @@ class controleLaudoController extends Controller
                 TBL_CONTROLE_LAUDO.[observacao] as observacao,
                 TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
                 TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
+                TBL_CONTROLE_LAUDO.[nomeEngenharia] as nomeEngenharia,
+                TBL_CONTROLE_LAUDO.[emailEngenharia] as emailEngenharia,
+                TBL_CONTROLE_LAUDO.[cnpjEngenharia] as cnpjEngenharia,
                 datediff(day,getdate(), ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO]) as quanto_falta
               
         '))
@@ -333,6 +345,9 @@ class controleLaudoController extends Controller
                 TBL_CONTROLE_LAUDO.[correcao] as correcao,
                 TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
                 TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
+                TBL_CONTROLE_LAUDO.[nomeEngenharia] as nomeEngenharia,
+                TBL_CONTROLE_LAUDO.[emailEngenharia] as emailEngenharia,
+                TBL_CONTROLE_LAUDO.[cnpjEngenharia] as cnpjEngenharia,
                 datediff(day,getdate(), TBL_CONTROLE_LAUDO.[dataCadastroSiopi]) as laudoPedido
               
         '))
