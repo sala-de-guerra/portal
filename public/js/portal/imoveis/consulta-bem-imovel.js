@@ -188,14 +188,21 @@ $.getJSON('/estoque-imoveis/leiloes-negativos/codigo-correio/' + numeroContrato,
 })
 
 //Aba Pagamentos
+var totalSomaPagamentos = 0
+var somavaloresPag = 0
 $("#custon-tabs-li-Pagamentos").one( "click", function() {
     $.getJSON('/pagamentos/' + numeroContrato, function(dados){
         $.each(dados, function(key, item) {
+            valorParaSoma = (item.valor) / 100;
+            somavaloresPag = valorParaSoma + somavaloresPag;
+            totalSomaPagamentos = somavaloresPag.toLocaleString('pt-BR',{minimumFractionDigits: 2});
+            $('#totalValoresPagamento').text('R$ ' + totalSomaPagamentos)
+
             if(item.valorPagamento == 'null' || item.valorPagamento == null){
                 item.valorPagamento = '0,00'  
             } 
             if(item.servico == 'null' || item.servico == null){
-                item.valorPagamento = ''  
+                item.servico = ''  
             } 
             if(item.numeroCompromisso == 'null' || item.numeroCompromisso == null){
                 item.numeroCompromisso = ''  
@@ -216,5 +223,85 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
                     $(linha).appendTo('#tblPagamentos>tbody');
 
         });
+    })
+    $.getJSON('/pagamentos/ddq-1/' + numeroContrato, function(dados){
+        $.each(dados, function(key, item) {
+            let linha =
+                `<tr>
+                    <td>${item.tipoPagamento}</td>
+                    <td>R$ ${item.valorPagamento}</td>
+                </tr>`
+                    $(linha).appendTo('#tblDDQ1>tbody');
+
+        });
+    })
+    $.getJSON('/pagamentos/ddq-2/' + numeroContrato, function(dados){
+        $.each(dados, function(key, item) {
+            let linha =
+                `<tr>
+                    <td>${item.tipoPagamento}</td>
+                    <td>R$ ${item.valorPagamento}</td>
+                </tr>`
+                    $(linha).appendTo('#tblDDQ2>tbody');
+
+        });
+    })
+    $.getJSON('/pagamentos/ddq/' + numeroContrato, function(dados){
+        $.each(dados, function(key, item) {
+            if(item.status == "Data de Alienação"){
+                $('#dataAlienacao').text(item.valores)
+            }else if(item.status == "Devolução ao Ex-Mutuário"){
+                $('#devExMutuario').text("R$ " + item.valores)
+            }else if(item.status == "Valor de Alienação"){
+                $('#valorAlienacao').text("R$ " + item.valores)
+            }else if(item.status == "Resultado da Alienação"){
+                $('#resultAlienacao').text("R$ " + item.valores)
+            }else if(item.status == "Leilão"){
+                $('#leilao').text(item.valores)
+            }
+
+        });
+    })
+    var somavalores = 0;
+    var totalSoma = 0;
+    $.getJSON('/pagamentos/cdp/' + numeroContrato, function(dados){
+        $.each(dados, function(key, item) {
+            //Formata valores
+            valor = item.valor
+            valorFormatado = Number(valor)/ 100
+            valorBRL = valorFormatado.toLocaleString('pt-BR',{minimumFractionDigits: 2});
+            
+            // tira null
+            if (item.processo == null){
+                item.processo = ''
+            }
+            if (item.cnpj == null){
+                item.cnpj = ''
+            }
+            if (item.sq == null){
+                item.sq = ''
+            }
+            if (item.tp == null){
+                item.tp = ''
+            }
+            let linha =
+                `<tr>
+                    <td>${item.processo}</td>
+                    <td>${item.cnpj}</td>
+                    <td>${item.dataPagamento}</td>
+                    <td>${item.sq}</td>
+                    <td>${item.tp}</td>
+                    <td>${item.despesa}</td>
+                    <td>R$ ${valorBRL}</td>
+                    <td>${item.pg}</td>
+                    <td>${item.cla}</td>
+
+                </tr>`
+        $(linha).appendTo('#tblCDP>tbody');
+
+        somavalores = valorFormatado + somavalores;
+        totalSoma = somavalores.toLocaleString('pt-BR',{minimumFractionDigits: 2});
+        });
+        $('#totalValoresCDP').text('R$ ' + totalSoma)
     })
 })

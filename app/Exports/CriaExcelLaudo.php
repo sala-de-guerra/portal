@@ -39,7 +39,10 @@ class CriaExcelLaudo implements FromCollection, WithHeadings, ShouldAutoSize
                     ALITB001_Imovel_Completo.[CLASSIFICACAO] as CLASSIFICACAO,
                     TBL_CONTROLE_LAUDO.[observacao] as observacao,
                     TBL_CONTROLE_LAUDO.[numeroOS] as numeroOS,
-                    TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi
+                    TBL_CONTROLE_LAUDO.[statusSiopi] as statusSiopi,
+                    TBL_CONTROLE_LAUDO.[nomeEngenharia] as nomeEngenharia,
+                    TBL_CONTROLE_LAUDO.[emailEngenharia] as emailEngenharia,
+                    TBL_CONTROLE_LAUDO.[cnpjEngenharia] as cnpjEngenharia
                   
             '))
              ->where('ALITB001_Imovel_Completo.UNA', '=', $siglaGilie)
@@ -72,7 +75,10 @@ class CriaExcelLaudo implements FromCollection, WithHeadings, ShouldAutoSize
             'Classificação',
             'Observação',
             'O.S', 
-            'Status Siopi'
+            'Status Siopi',
+            'Engenharia',
+            'Email Engenharia',
+            'CNPJ Engenharia'
             ],
         ];
     }
