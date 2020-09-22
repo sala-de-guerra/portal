@@ -178,16 +178,18 @@ if (classificacao == 'Oriundos SFI-Gar. Fiduciária' || classificacao == 'Patrim
 }
 }, 4000);
 
-$.getJSON('/estoque-imoveis/leiloes-negativos/codigo-correio/' + numeroContrato, function(dados){
-    $.each(dados, function(key, item) {
-        codigo = 
-                `<li>${item.codigoDoCorreio}</li>`
-        $(codigo).appendTo('#codigoDoCorreio')
+$("#custom-tabs-one-leiloes-tab").one( "click", function() {
+    $.getJSON('/estoque-imoveis/leiloes-negativos/codigo-correio/' + numeroContrato, function(dados){
+        $.each(dados, function(key, item) {
+            codigo = 
+                    `<li>${item.codigoDoCorreio}</li>`
+            $(codigo).appendTo('#codigoDoCorreio')
 
+        })
     })
 })
 
-//Aba Pagamentos
+// Aba Pagamentos
 var totalSomaPagamentos = 0
 var somavaloresPag = 0
 $("#custon-tabs-li-Pagamentos").one( "click", function() {
@@ -262,46 +264,47 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
 
         });
     })
-    var somavalores = 0;
-    var totalSoma = 0;
-    $.getJSON('/pagamentos/cdp/' + numeroContrato, function(dados){
-        $.each(dados, function(key, item) {
-            //Formata valores
-            valor = item.valor
-            valorFormatado = Number(valor)/ 100
-            valorBRL = valorFormatado.toLocaleString('pt-BR',{minimumFractionDigits: 2});
-            
-            // tira null
-            if (item.processo == null){
-                item.processo = ''
-            }
-            if (item.cnpj == null){
-                item.cnpj = ''
-            }
-            if (item.sq == null){
-                item.sq = ''
-            }
-            if (item.tp == null){
-                item.tp = ''
-            }
-            let linha =
-                `<tr>
-                    <td>${item.processo}</td>
-                    <td>${item.cnpj}</td>
-                    <td>${item.dataPagamento}</td>
-                    <td>${item.sq}</td>
-                    <td>${item.tp}</td>
-                    <td>${item.despesa}</td>
-                    <td>R$ ${valorBRL}</td>
-                    <td>${item.pg}</td>
-                    <td>${item.cla}</td>
+})
 
-                </tr>`
-        $(linha).appendTo('#tblCDP>tbody');
+var somavalores = 0;
+var totalSoma = 0;
+$.getJSON('/pagamentos/cdp/' + numeroContrato, function(dados){
+    $.each(dados, function(key, item) {
+        //Formata valores
+        valor = item.valor
+        valorFormatado = Number(valor)/ 100
+        valorBRL = valorFormatado.toLocaleString('pt-BR',{minimumFractionDigits: 2});
+        
+        // tira null
+        if (item.processo == null){
+            item.processo = ''
+        }
+        if (item.cnpj == null){
+            item.cnpj = ''
+        }
+        if (item.sq == null){
+            item.sq = ''
+        }
+        if (item.tp == null){
+            item.tp = ''
+        }
+        let linha =
+            `<tr>
+                <td>${item.processo}</td>
+                <td>${item.cnpj}</td>
+                <td>${item.dataPagamento}</td>
+                <td>${item.sq}</td>
+                <td>${item.tp}</td>
+                <td>${item.despesa}</td>
+                <td>R$ ${valorBRL}</td>
+                <td>${item.pg}</td>
+                <td>${item.cla}</td>
 
-        somavalores = valorFormatado + somavalores;
-        totalSoma = somavalores.toLocaleString('pt-BR',{minimumFractionDigits: 2});
-        });
-        $('#totalValoresCDP').text('R$ ' + totalSoma)
-    })
+            </tr>`
+    $(linha).appendTo('#tblCDP>tbody');
+
+    somavalores = valorFormatado + somavalores;
+    totalSoma = somavalores.toLocaleString('pt-BR',{minimumFractionDigits: 2});
+    });
+    $('#totalValoresCDP').text('R$ ' + totalSoma)
 })

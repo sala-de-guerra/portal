@@ -3,6 +3,7 @@ var semanaPassada = moment(s).format('DD/MM/YYYY');
 
 
 function _formataTabelaHistorico (numeroContrato) {
+    $("#custom-tabs-one-historico-tab").one( "click", function() {
     $.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
         $.each(dados.historico, function(key, item) {
             var data = moment(item.data).format('DD/MM/YYYY')
@@ -91,61 +92,61 @@ function _formataTabelaHistorico (numeroContrato) {
 
         _formataDatatableComId ("tblHistorico");
     });
+ })
 };
 
-
-
-$.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
-    $.each(dados.historico, function(key, item) {
-        var data = moment(item.data).format('DD/MM/YYYY')
-  
-        var confereSemana = moment(item.data).isBefore(s);
-        if(item.atividade == 'ATENDE'){
-        if (item.tipo == 'RESPOSTA'){
-            status = 'Respondido'
-        }else{
-            status = 'Aberto'
-        }
-
-            if (confereSemana == false){
-               var lista =
-                        `<tr>
-                        <td>${data}</td>
-                        <td>${status}</td>
-                        <td id="obs${item.idHistorico}">${item.observacao}</td>
-                        <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalHistoricoObs${item.idHistorico}">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-
-                        <div class="modal fade" id="modalHistoricoObs${item.idHistorico}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg mda modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                                    <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Descrição atende</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>${item.observacao}</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </td>
-                        </tr>`
-            
-            $(lista).appendTo('#tblHistoricoAtende>tbody');
-            formata_observacao ("obs" + item.idHistorico);
+$("#custom-tabs-one-historico-tab").one( "click", function() {
+    $.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
+        $.each(dados.historico, function(key, item) {
+            var data = moment(item.data).format('DD/MM/YYYY')
+    
+            var confereSemana = moment(item.data).isBefore(s);
+            if(item.atividade == 'ATENDE'){
+            if (item.tipo == 'RESPOSTA'){
+                status = 'Respondido'
+            }else{
+                status = 'Aberto'
             }
-        }
-    }) 
-});
 
+                if (confereSemana == false){
+                var lista =
+                            `<tr>
+                            <td>${data}</td>
+                            <td>${status}</td>
+                            <td id="obs${item.idHistorico}">${item.observacao}</td>
+                            <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalHistoricoObs${item.idHistorico}">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+
+                            <div class="modal fade" id="modalHistoricoObs${item.idHistorico}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg mda modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                    <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
+                                        <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Descrição atende</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>${item.observacao}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </td>
+                            </tr>`
+                
+                $(lista).appendTo('#tblHistoricoAtende>tbody');
+                formata_observacao ("obs" + item.idHistorico);
+                }
+            }
+        }) 
+    });
+})
 
 
 function formata_observacao(idobs){
