@@ -46,7 +46,7 @@
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                   
                     <li class="nav-item nav-card" id="custon-tabs-li-dados-imovel">
-                        <a class="nav-link active" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="false">
+                        <a class="nav-link" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="false">
                             <h5>Dados do Imóvel</h5>
                         </a>
                     </li>

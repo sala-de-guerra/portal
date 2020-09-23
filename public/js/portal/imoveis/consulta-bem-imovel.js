@@ -317,7 +317,3 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
         }
     })
 })
-
-// if ($('#tblPagamentos>tbody').length == 0) {
-//     alert("tem linhas")
-// }
