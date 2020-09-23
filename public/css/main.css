@@ -223,6 +223,15 @@ input[type=number] {
     -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
     box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
     }
+.noticet {
+    padding: 15px;
+    background-color: #f2faff;
+    border-left: 6px solid #7f7f84;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    }
     .notice-warning {
     border-color: #FEAF20;
     }
@@ -231,6 +240,9 @@ input[type=number] {
     }
     .notice-success {
     border-color: #80D651;
+}
+    .notice-total {
+    border-color: #2d87b2;
 }
 .note-insert {
     display: none !important;

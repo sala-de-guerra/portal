@@ -37,7 +37,7 @@ public function gestaoDePagamentos($chb)
         FORMAT(CONVERT(DECIMAL(10,2), REPLACE([VALOR_PAGAMENTO], ',', '.')), 'N', 'pt-BR') AS valorPagamento,
         FORMAT(CONVERT(DECIMAL(10,2), REPLACE([VALOR_PARCELA], ',', '.')), 'N', 'pt-BR') AS valorParcela,
         CUB_10_PAGAMENTOS_DESPESAS_SIMOV.[NUMERO_COMPROMISSO] as numeroCompromisso,
-        CAST(CUB_10_PAGAMENTOS_DESPESAS_SIMOV.VALOR_TOTAL_PARCELAS as money) as valor  
+        CAST(CUB_10_PAGAMENTOS_DESPESAS_SIMOV.VALOR_PARCELA as money) as valor  
         "))
          ->where('CUB_10_PAGAMENTOS_DESPESAS_SIMOV.BEM', '=', $chb)
          ->get();

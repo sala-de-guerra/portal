@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">
@@ -1232,117 +1233,146 @@
                     <div class="tab-pane fade" id="custom-tabs-one-Pagamentos" role="tabpanel" aria-labelledby="custom-tabs-one-Pagamentos-tab">
                         <div class="modal-body">
                             @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR', 'EVENTUAL', 'MATRIZ']))
-                            <div class="notice notice-success">
-                                <strong>Tabela pagamentos: </strong>(SIMOV)
+                            <div class="notice notice-danger" style="display: none;" id="infoPagamentos">
+                                <strong>Tabela pagamentos: </strong>Não disponível ou não migrado para o Portal
                             </div>
-                            <table id="tblPagamentos" class="table table-bordered table-striped ">
-                                <thead>
-                                    <tr>
-                                        <th>Credor</th>
-                                        <th>Serviço</th>
-                                        <th>De</th>
-                                        <th>Até</th>
-                                        <th>Data Pagamento</th>
-                                        <th>Valor Pagamento</th>
-                                        <th>Valor Parcela</th>
-                                        <th>Compromisso</th>
+                            <div id="rowPagamentos">
+                                <div class="notice notice-success">
+                                    <strong>Tabela pagamentos: </strong>(SIMOV)
+                                </div>
+                                <table id="tblPagamentos" class="table table-bordered table-striped ">
+                                    <thead>
+                                        <tr>
+                                            <th>Credor</th>
+                                            <th>Serviço</th>
+                                            <th>De</th>
+                                            <th>Até</th>
+                                            <th>Data Pagamento</th>
+                                            <th>Valor Pagamento</th>
+                                            <th>Valor Parcela</th>
+                                            <th>Compromisso</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>  
-                
-                                </tbody>
-                            </table>
-                            <div class="notice notice-success">
-                                <strong>Total valor parcela: </strong><span id="totalValoresPagamento"></span>
+                                        </tr>
+                                    </thead>
+                                    <tbody>  
+                    
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="noticet notice-total">
+                                            <strong>Total valor parcela: </strong><span id="totalValoresPagamento"></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <hr class="pontilhado">
-                            <div class="notice notice-success">
-                                <strong>Tabela: </strong>(CDP -CIWEB)
+                            <div id="infoCDP" style="display: none;">
+                                <hr class="pontilhado">
+                                <div class="notice notice-danger">
+                                    <strong>Tabela CDP: </strong>Não disponível ou não migrado para o Portal
+                                </div>
                             </div>
-                            <table id="tblCDP" class="table table-bordered table-striped ">
-                                <thead>
-                                    <tr>
-                                        <th>Processo</th>
-                                        <th>CNPJ</th>
-                                        <th>Pagamento</th>
-                                        <th>SQ</th>
-                                        <th>TP</th>
-                                        <th>Despesa</th>
-                                        <th>Valor</th>
-                                        <th>PG</th>
-                                        <th>CLA</th>
+                            <div id="CDP">
+                                <hr class="pontilhado">
+                                <div class="notice notice-success">
+                                    <strong>Tabela: </strong>(CDP -CIWEB)
+                                </div>
+                                <table id="tblCDP" class="table table-bordered table-striped ">
+                                    <thead>
+                                        <tr>
+                                            <th>Processo</th>
+                                            <th>CNPJ</th>
+                                            <th>Pagamento</th>
+                                            <th>SQ</th>
+                                            <th>TP</th>
+                                            <th>Despesa</th>
+                                            <th>Valor</th>
+                                            <th>PG</th>
+                                            <th>CLA</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>  
-                
-                                </tbody>
-                            </table>
-                            <div class="notice notice-success">
-                                <strong>Total: </strong><span id="totalValoresCDP"></span>
+                                        </tr>
+                                    </thead>
+                                    <tbody>  
+                    
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="noticet notice-total">
+                                            <strong>Total: </strong><span id="totalValoresCDP"></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <hr class="pontilhado">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="notice notice-success">
-                                        <strong>Tabela valores - data consolidação: </strong>(DDQ - CIWEB)
+                            <div id="infoDDQ" style="display: none;">
+                                 <hr class="pontilhado">
+                                <div class="notice notice-danger">
+                                    <strong>Tabela DDQ: </strong>Não disponível ou não migrado para o Portal
+                                </div>
+                            </div>
+                            <div id="rowDDQ">
+                                <hr class="pontilhado">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="notice notice-success">
+                                            <strong>Tabela valores - data consolidação: </strong>(DDQ - CIWEB)
+                                        </div>
+                                        <table id="tblDDQ1" class="table table-bordered table-striped ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Valor</th>
+            
+                                                </tr>
+                                            </thead>
+                                            <tbody>  
+                            
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <table id="tblDDQ1" class="table table-bordered table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Status</th>
-                                                <th>Valor</th>
-        
-                                            </tr>
-                                        </thead>
-                                        <tbody>  
-                        
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col">
-                                    <div class="notice notice-success">
-                                        <strong>Tabela valor atualizados até referência: </strong>(DDQ - CIWEB)
+                                    <div class="col">
+                                        <div class="notice notice-success">
+                                            <strong>Tabela valor atualizados até referência: </strong>(DDQ - CIWEB)
+                                        </div>
+                                        <table id="tblDDQ2" class="table table-bordered table-striped ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Valor</th>
+            
+                                                </tr>
+                                            </thead>
+                                            <tbody>  
+                            
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <table id="tblDDQ2" class="table table-bordered table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Status</th>
-                                                <th>Valor</th>
-        
-                                            </tr>
-                                        </thead>
-                                        <tbody>  
-                        
-                                        </tbody>
-                                    </table>
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-4">
-                                    <label>Data de Alienação:</label>
-                                    <p id="dataAlienacao"></p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label>Data de Alienação:</label>
+                                        <p id="dataAlienacao"></p>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Valor de Alienação:</label>
+                                        <p id="valorAlienacao"></p>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Leilão:</label>
+                                        <p id="leilao"></p>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <label>Valor de Alienação:</label>
-                                    <p id="valorAlienacao"></p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label>Devolução ao Ex-Mutuário:</label>
+                                        <p id="devExMutuario"></p>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Resultado da Alienação:</label>
+                                        <p id="resultAlienacao"></p>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <label>Leilão:</label>
-                                    <p id="leilao"></p>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-4">
-                                    <label>Devolução ao Ex-Mutuário:</label>
-                                    <p id="devExMutuario"></p>
-                                </div>
-                                <div class="col-4">
-                                    <label>Resultado da Alienação:</label>
-                                    <p id="resultAlienacao"></p>
-                                </div>
-                              </div>
+                            </div>
                         </div>
                         @endIf
                         @if (in_array(session()->get('acessoEmpregadoPortal'), ['AGENCIA', 'SR']))
