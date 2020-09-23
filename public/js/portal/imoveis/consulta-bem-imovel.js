@@ -223,6 +223,10 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
                     $(linha).appendTo('#tblPagamentos>tbody');
 
         });
+        if ($('#tblPagamentos tbody tr').length < 1){
+            $('#rowPagamentos').remove()
+            $("#infoPagamentos").css("display", "block");
+        }
     })
     $.getJSON('/pagamentos/ddq-1/' + numeroContrato, function(dados){
         $.each(dados, function(key, item) {
@@ -232,8 +236,11 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
                     <td>R$ ${item.valorPagamento}</td>
                 </tr>`
                     $(linha).appendTo('#tblDDQ1>tbody');
-
         });
+        if ($('#tblDDQ1 tbody tr').length < 1){
+            $('#rowDDQ').remove()
+            $("#infoDDQ").css("display", "block");
+        }
     })
     $.getJSON('/pagamentos/ddq-2/' + numeroContrato, function(dados){
         $.each(dados, function(key, item) {
@@ -303,5 +310,14 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
         totalSoma = somavalores.toLocaleString('pt-BR',{minimumFractionDigits: 2});
         });
         $('#totalValoresCDP').text('R$ ' + totalSoma)
+
+        if ($('#tblCDP tbody tr').length < 1){
+            $('#CDP').remove()
+            $("#infoCDP").css("display", "block");
+        }
     })
 })
+
+// if ($('#tblPagamentos>tbody').length == 0) {
+//     alert("tem linhas")
+// }
