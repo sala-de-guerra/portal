@@ -20,7 +20,7 @@
             <b>+ Atende</b>  
         </button> --}}
 
-        <button type="button" class="btn-behance" data-toggle="modal" data-target="#modalAtende">
+        <button type="button" class="btn-behance" data-toggle="modal" data-target="#modalAtende" id="btnAtende">
             <span class="btn-gradient">
               <i class="fas fa-headset"></i>
             </span>

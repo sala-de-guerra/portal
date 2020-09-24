@@ -16,6 +16,7 @@ function _formataTabelaMensagensEnviadas (numeroContrato) {
                 })
             }
             _formataDatatableComId ("tblMensagensEnviadas");
+            _formataData();
         });
     })
 };
