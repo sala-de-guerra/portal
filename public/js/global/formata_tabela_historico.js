@@ -56,24 +56,6 @@ function _formataTabelaHistorico (numeroContrato) {
                     '</td>' +
                     '<td class="formata-data">' + item.data + '</td>' +
                 '</tr>';
-
-            var confereSemana = moment(item.data).isBefore(s);
-            if(item.atividade == 'ATENDE'){
-            if (item.tipo == 'RESPOSTA'){
-                status = 'Respondido'
-            }else{
-                status = 'Aberto'
-            }
-
-                if (confereSemana == false){
-                   var lista =
-                            `<tr>
-                            <td>${data}</td>
-                            <td>${status}</td>
-                            </tr>`
-                $(lista).appendTo('#tblTooltipAtende>tbody');
-                }
-            }
                 
                 $(linha).appendTo('#tblHistorico>tbody');
                 formata_observacao ("obs" + item.idHistorico);
@@ -87,15 +69,14 @@ function _formataTabelaHistorico (numeroContrato) {
                 if (busca == "LEILÃO NEGATIVO") {
                     historicofatiado = $('#obs'+item.idHistorico).text()
                 }
-
-        }) 
-
-        _formataDatatableComId ("tblHistorico");
-    });
- })
+            }) 
+           _formataDatatableComId ("tblHistorico");
+           _formataData();
+        });
+    })
 };
 
-$("#custom-tabs-one-historico-tab").one( "click", function() {
+$("#btnAtende").one( "click", function() {
     $.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
         $.each(dados.historico, function(key, item) {
             var data = moment(item.data).format('DD/MM/YYYY')
@@ -109,6 +90,13 @@ $("#custom-tabs-one-historico-tab").one( "click", function() {
             }
 
                 if (confereSemana == false){
+                    var lista1 =
+                    `<tr>
+                    <td>${data}</td>
+                    <td>${status}</td>
+                    </tr>`
+        $(lista1).appendTo('#tblTooltipAtende>tbody');
+
                 var lista =
                             `<tr>
                             <td>${data}</td>

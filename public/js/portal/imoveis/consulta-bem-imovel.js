@@ -120,7 +120,6 @@ $(document).ready(function(){
         _formataTabelaMensagensEnviadas (numeroContrato);
         _formataListaDistrato (numeroContrato);
         setTimeout(function() {
-            _formataData();
             _formataValores();
             var historicoConsultaLeilaoNegativo = window.document.getElementById('historicoLeilaoNegativo')
             historicoConsultaLeilaoNegativo.innerHTML = historicofatiado

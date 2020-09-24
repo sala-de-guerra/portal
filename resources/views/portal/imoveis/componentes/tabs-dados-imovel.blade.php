@@ -1234,7 +1234,7 @@
                         <div class="modal-body">
                             @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'DESENVOLVEDOR', 'EVENTUAL', 'MATRIZ']))
                             <div class="notice notice-danger" style="display: none;" id="infoPagamentos">
-                                <strong>Tabela pagamentos: </strong>Não disponível ou não migrado para o Portal
+                                <strong>Tabela pagamentos: </strong>Não foram localizados lançamentos de despesas no SIMOV
                             </div>
                             <div id="rowPagamentos">
                                 <div class="notice notice-success">
