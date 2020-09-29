@@ -290,6 +290,10 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
             if (item.tp == null){
                 item.tp = ''
             }
+
+            if (item.pg == null){
+                item.pg = ''
+            }
             let linha =
                 `<tr>
                     <td>${item.processo}</td>
