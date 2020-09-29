@@ -25,8 +25,8 @@ public function gestaoCDP($chb)
     {
 
     $gestaoCDP= DB::table('TBL_CDP')
-        ->join('ALITB001_Imovel_Completo', DB::raw('left(ALITB001_Imovel_Completo.NU_BEM, 12)'), '=', 'TBL_CDP.contrato')
-        
+        ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CAST(TBL_CDP.[contrato] as bigint)'))
+    
         ->select(DB::raw("
         TBL_CDP.[PROCESSO] as processo,
         TBL_CDP.[CNPJ] as cnpj,
@@ -40,7 +40,6 @@ public function gestaoCDP($chb)
         "))
          ->where('ALITB001_Imovel_Completo.BEM_FORMATADO', '=', $chb)
          ->get();
-
         return json_encode($gestaoCDP);
     }
    
