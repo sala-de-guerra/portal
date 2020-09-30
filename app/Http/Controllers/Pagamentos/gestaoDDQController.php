@@ -28,6 +28,7 @@ public function gestaoDDQtabela1($chb)
         ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CAST(TBL_DDQ_1.[contrato] as bigint)'))
         ->select(DB::raw("
         TBL_DDQ_1.[nomeStatus] as tipoPagamento,
+        TBL_DDQ_1.[valoresFormatado] as valoresSemFormatacao,
         FORMAT(CONVERT(DECIMAL(10,2), REPLACE(CAST(CAST(valoresFormatado as money) as numeric(10,2)), ',', '.')), 'N', 'pt-BR') AS valorPagamento
         "))
          ->where('ALITB001_Imovel_Completo.BEM_FORMATADO', '=', $chb)
@@ -43,6 +44,7 @@ $gestaoDDQ= DB::table('TBL_DDQ_2')
     ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CAST(TBL_DDQ_2.[contrato] as bigint)'))
     ->select(DB::raw("
     TBL_DDQ_2.[nomeStatus] as tipoPagamento,
+    TBL_DDQ_2.[valoresFormatados] as valoresSemFormatacao,
     FORMAT(CONVERT(DECIMAL(10,2), REPLACE(CAST(CAST(valoresFormatados as money) as numeric(10,2)), ',', '.')), 'N', 'pt-BR') AS valorPagamento
     "))
         ->where('ALITB001_Imovel_Completo.BEM_FORMATADO', '=', $chb)
