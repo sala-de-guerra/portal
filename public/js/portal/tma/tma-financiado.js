@@ -367,6 +367,20 @@ $(document).ready(function(){
     })
 })
 
+
+$.getJSON('/tma-indicadores-com-financimento', function(dados){
+  $.each(dados, function(key, item) {
+      var valorVendido = item.VALOR_VENDIDO
+      var valorVendidoConvertido = Number(valorVendido)
+      var valorBRL = valorVendidoConvertido.toLocaleString('pt-BR',{minimumFractionDigits: 2});
+      var qtdVendido = item.quantidade_vendidos
+      
+      $('#quantidadeVendidosFinanciado').text(qtdVendido)
+      $('#totalVendidosFinanciado').text('R$ ' + valorBRL)
+
+  })
+})
+
 setTimeout(function(){
   $('#fadeOut').fadeOut("slow");
 }, 2000);

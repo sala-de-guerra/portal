@@ -397,6 +397,10 @@ Route::post('tma/cancelar-chb/{chb}', 'TMA\vendaAVistaController@cancelarVendaAV
 Route::post('tma/aguarda-pagamento-chb/{chb}', 'TMA\vendaAVistaController@aguardaVendaAVista');
 //universo venda com financiamento
 Route::get('tma-venda-com-financimento', 'TMA\vendaFinanciadaController@universoVendaFinanciada');
+//Indicadores venda com financiamento
+Route::get('tma-indicadores-com-financimento', 'TMA\vendaFinanciadaController@indicadoresTMAfinanciado');
+//Indicadores venda à vista
+Route::get('tma-indicadores-a-vista', 'TMA\vendaAVistaController@indicadoresTMAaVista');
 //Marcar CHB baixado
 Route::post('tma/baixar-financiado-chb/{chb}', 'TMA\vendaFinanciadaController@baixarVendaFinanciada');
 //Marcar CHB cancelado
