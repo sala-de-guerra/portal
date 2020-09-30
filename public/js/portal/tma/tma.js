@@ -369,17 +369,21 @@ $(document).ready(function(){
     })
 })
 
+$.getJSON('/tma-indicadores-a-vista', function(dados){
+  $.each(dados, function(key, item) {
+      var valorVendido = item.VALOR_VENDIDO
+      var valorVendidoConvertido = Number(valorVendido)
+      var valorBRL = valorVendidoConvertido.toLocaleString('pt-BR',{minimumFractionDigits: 2});
+      var qtdVendido = item.quantidade_vendidos
+      
+      console.log(qtdVendido)
+      $('#quantidadeVendidosAvista').text(qtdVendido)
+      $('#totalVendidosAvista').text('R$ ' + valorBRL)
 
+  })
+})
 
 
 setTimeout(function(){
   $('#fadeOut').fadeOut("slow");
 }, 2000);
-
-
-{/* <p><b>Status: </b> ${item.statusPagamento} </p>
-<p><b>Data emissão: </b> ${item.dataEmissao} </p>
-<p><b>Data validade: </b> ${item.dataValidade} </p>
-<p><b>Data pagamento: </b> ${item.dataPagamento} </p>
-<p><b>Banco pagamento: </b> ${item.bancoPagamento} </p>
-<p><b>tipo pagamento: </b> ${item.recurso} </p> */}

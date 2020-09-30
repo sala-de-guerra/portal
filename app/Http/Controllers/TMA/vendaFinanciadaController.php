@@ -206,6 +206,25 @@ class vendaFinanciadaController extends Controller
 
         return Excel::download(new criaExcelPlanilhaTMAFinaciamento, 'PlanilhaTMAFinanciamento.xlsx');
     }
+
+    public function indicadoresTMAfinanciado()
+    {
+
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
+        $universoFinanciado= DB::table('ALITB001_Imovel_Completo')
+            ->join('TBL_VENDA_FINANCIADO', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'))
+            ->select(DB::raw("
+             SUM(ALITB001_Imovel_Completo.VALOR_TOTAL_PROPOSTA) AS VALOR_VENDIDO, 
+             count(*) as quantidade_vendidos,
+             TIPO = 'FINANCIADO'
+            
+            "))
+             ->where('TBL_VENDA_FINANCIADO.baixaEfetuada', '=', 'sim')
+             ->where('TBL_VENDA_FINANCIADO.UNA', '=', $siglaGilie)
+             ->get();
+        return json_encode($universoFinanciado);
+    }
       
 
 }

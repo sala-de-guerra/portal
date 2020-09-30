@@ -209,5 +209,24 @@ class vendaAVistaController extends Controller
 
         return Excel::download(new criaExcelPlanilhaTMAaVista, 'PlanilhaTMAaVista.xlsx');
     }
+
+    public function indicadoresTMAaVista()
+    {
+
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
+        $universoAvista= DB::table('ALITB001_Imovel_Completo')
+            ->join('TBL_VENDA_AVISTA', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'))
+            ->select(DB::raw("
+             SUM(ALITB001_Imovel_Completo.VALOR_TOTAL_PROPOSTA) AS VALOR_VENDIDO, 
+             count(*) as quantidade_vendidos,
+             TIPO = 'A Vista'
+            
+            "))
+             ->where('TBL_VENDA_AVISTA.baixaEfetuada', '=', 'sim')
+             ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
+             ->get();
+        return json_encode($universoAvista);
+    }
       
 }

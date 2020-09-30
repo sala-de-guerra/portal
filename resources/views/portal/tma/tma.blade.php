@@ -10,6 +10,23 @@
    max-width:1200px;
   }
 }
+.anima{
+  color: black; 
+  font-family: "arial";
+  font-size: small;
+  margin: 5px 0 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  animation: animtext 4s steps(80, end); 
+   transition: all cubic-bezier(0.1, 0.7, 1.0, 0.1);
+}
+@keyframes animtext { 
+  from {
+      width: 0;
+     transition: all 2s ease-in-out;
+  } 
+}
 </style>
 
 @if (session('tituloMensagem'))
@@ -89,7 +106,13 @@
                                     @foreach ($mediaAVista as $media)
                                         <strong>TMA: {{$media->media}}</strong><a href="/tma/baixar-planilha-tma"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA à Vista &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                                     @endforeach
-                                </div><br>
+
+                                </div>
+                                <div class="row anima">
+                                    <strong>Quantidade vendida: <span id="quantidadeVendidosAvista" style="color: #295dd2"></span> &nbsp&nbsp&nbsp&nbsp&nbsp
+                                    Total vendido: <span id="totalVendidosAvista" style="color: #295dd2" ></span> </strong>                                         
+                                </div>
+                                <br>
                                 <div id="displayAberto">
                                     <div class="col">
                                         <strong>Legenda:</strong>
@@ -140,7 +163,14 @@
                                         @foreach ($mediaCCA as $mediaApenasCCA)
                                         <strong>TMA CCA: {{$mediaApenasCCA->media}}</strong>
                                     @endforeach
-                                    </div><br>
+                                    </div>
+                                        <div class="row anima">
+                                            <strong>Quantidade vendida: <span id="quantidadeVendidosFinanciado" style="color: #295dd2"></span> &nbsp&nbsp&nbsp&nbsp&nbsp
+                                            Total vendido: <span id="totalVendidosFinanciado" style="color: #295dd2" ></span> </strong>                                         
+                                        </div>
+                                    <br>
+                                   
+                                    
                                     <div class="col">
                                         <strong>Legenda:</strong>
                                           <i style="color: blue;" class="fas fa-square"></i> <span style="color: blue;">Baixa sinalizada</span> &nbsp&nbsp&nbsp
