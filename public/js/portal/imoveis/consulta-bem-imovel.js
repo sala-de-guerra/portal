@@ -229,10 +229,13 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
     })
     $.getJSON('/pagamentos/ddq-1/' + numeroContrato, function(dados){
         $.each(dados, function(key, item) {
+            valor = item.valoresSemFormatacao
+            valorFormatado = Number(valor)/ 100
+            valorBRL = valorFormatado.toLocaleString('pt-BR',{minimumFractionDigits: 2});
             let linha =
                 `<tr>
                     <td>${item.tipoPagamento}</td>
-                    <td>R$ ${item.valorPagamento}</td>
+                    <td>R$ ${valorBRL}</td>
                 </tr>`
                     $(linha).appendTo('#tblDDQ1>tbody');
         });
@@ -243,10 +246,13 @@ $("#custon-tabs-li-Pagamentos").one( "click", function() {
     })
     $.getJSON('/pagamentos/ddq-2/' + numeroContrato, function(dados){
         $.each(dados, function(key, item) {
+            valor = item.valoresSemFormatacao
+            valorFormatado = Number(valor)/ 100
+            valorBRL = valorFormatado.toLocaleString('pt-BR',{minimumFractionDigits: 2});
             let linha =
                 `<tr>
                     <td>${item.tipoPagamento}</td>
-                    <td>R$ ${item.valorPagamento}</td>
+                    <td>R$ ${valorBRL}</td>
                 </tr>`
                     $(linha).appendTo('#tblDDQ2>tbody');
 
