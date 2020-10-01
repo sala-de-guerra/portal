@@ -441,6 +441,37 @@ class ConsultaContratoController extends Controller
                     }
                 // }
                 break;
+
+            case 'atende':
+
+            preg_match_all('!\d+!', $request->valorVariavel, $requestApenasNumeros);
+            $resultadoConsulta = DB::table('TBL_ATENDE_DEMANDAS')
+            ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.numeroContrato)'))
+            ->select(DB::raw('
+            ALITB001_Imovel_Completo.[BEM_FORMATADO],
+            ALITB001_Imovel_Completo.[NU_BEM],
+            ALITB001_Imovel_Completo.[ENDERECO_IMOVEL],
+            ALITB001_Imovel_Completo.[CIDADE],
+            ALITB001_Imovel_Completo.[UNA],
+            ALITB001_Imovel_Completo.[CPF_CNPJ_PROPONENTE],
+            ALITB001_Imovel_Completo.[NOME_PROPONENTE],
+            ALITB001_Imovel_Completo.[TIPO_VENDA],
+            ALITB001_Imovel_Completo.[NU_DOC_EX_MUTUARIO],
+            ALITB001_Imovel_Completo.[NO_EX_MUTUARIO],
+            ALITB001_Imovel_Completo.[MATRICULA],
+            ALITB001_Imovel_Completo.[OFICIO]
+
+            '))
+             ->where('TBL_ATENDE_DEMANDAS.idAtende',$requestApenasNumeros)
+             ->get();          
+                    foreach ($resultadoConsulta as $cadaResultado) {
+                        if (!in_array($cadaResultado->NU_BEM, $arrayParaEvitarContratosDuplicados)) {
+                            $arrayConsultaConsolidada = self::montaArrayResultado($arrayConsultaConsolidada, $cadaResultado);
+                            array_push($arrayParaEvitarContratosDuplicados, $cadaResultado->NU_BEM);
+                        }
+                    }
+                // }
+                break;
         }
 
         // SETTA UMA FLAG PARA DIZER SE EXISTE RESULTADO OU NÃO

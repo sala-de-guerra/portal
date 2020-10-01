@@ -88,6 +88,7 @@
                                 <option value="" disabled selected>Selecione</option>
                                 <option class="text-dark" value="numeroContrato">Contrato</option>
                                 <option class="text-dark" value="cpfCnpjProponente">CPF/CNPJ proponente</option>
+                                <option class="text-dark" value="atende">Número Atende</option>
                                 <option class="text-dark" value="nomeProponente">Nome proponente</option>
                                 <option class="text-dark" value="enderecoImovel">Endereço imóvel</option>
                                 <option class="text-dark" value="matriculaImovel">Matrícula do imóvel</option>
@@ -307,18 +308,26 @@
 @section('adminlte_js')
 
     <script>
+        $('#tipoVariavel').change(function(){
+        if ($(this).val() === "atende") {
+            $('#inputBarraBusca').attr("placeholder", "Digite o número do Atende");
+        }else{
+            $('#inputBarraBusca').attr("placeholder", "Digite no mínimo 5 caracteres para pesquisar.");
+        }
+    })
+
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
 
-        function validarBusca() {
-            let inputBarraBuscaValue = $('#inputBarraBusca').val();
-            if (inputBarraBuscaValue.length < 5) {
-                alert('Digite no mínimo 5 caracteres para pesquisar.');
-            } else {
-                $('#formBarraBusca').submit();
-            };
-        };
+        // function validarBusca() {
+        //     let inputBarraBuscaValue = $('#inputBarraBusca').val();
+        //     if (inputBarraBuscaValue.length < 5) {
+        //         alert('Digite no mínimo 5 caracteres para pesquisar.');
+        //     } else {
+        //         $('#formBarraBusca').submit();
+        //     };
+        // };
 
         function validarBuscaSm() {
             let inputBarraBuscaValue = $('#inputBarraBuscaSm').val();
