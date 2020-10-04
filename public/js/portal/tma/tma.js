@@ -45,10 +45,15 @@ function _formataDatatableComId (idTabela){
     });
 };
 
-
+var contador = 0;
+var totalDiasDecorridos = 0;
 $(document).ready(function(){
     $.getJSON('/tma-venda-a-vista', function(dados){
         $.each(dados, function(key, item) {
+          if (item.baixaEfetuada == null){
+            contador += 1;
+            totalDiasDecorridos =  totalDiasDecorridos + Number(item.DIAS_DECORRIDOS);
+          }
             var linha =
                 `<tr>
                     <td><a href="/consulta-bem-imovel/${item.BEM_FORMATADO}" class="cursor-pointer">${item.NU_BEM}</a></td>
@@ -225,7 +230,6 @@ $(document).ready(function(){
                   $.each(dados, function(key, item) {
                     var valorSemformatacao = item.valorBoleto
                     var valBoleto = valorSemformatacao.toString().replace(',', '.')
-                    console.log(item.valBoleto)
                     var valorBoletoFormatado = Number(valBoleto).toLocaleString('pt-BR', {style: "currency", currency: "BRL"})
                     let linha =
                     `<tr>
@@ -364,10 +368,12 @@ $(document).ready(function(){
             }
         )}  
     ).done(function() {
-        _formataDatatableComId('tblTma')
-        $('.spinnerTbl').remove()
+        var media = totalDiasDecorridos / contador
+        $('#mediaAvista').text(Math.round(media));
+        _formataDatatableComId('tblTma');
+        $('.spinnerTbl').remove();
     })
-})
+  })
 
 $.getJSON('/tma-indicadores-a-vista', function(dados){
   $.each(dados, function(key, item) {
@@ -376,7 +382,7 @@ $.getJSON('/tma-indicadores-a-vista', function(dados){
       var valorBRL = valorVendidoConvertido.toLocaleString('pt-BR',{minimumFractionDigits: 2});
       var qtdVendido = item.quantidade_vendidos
       
-      console.log(qtdVendido)
+
       $('#quantidadeVendidosAvista').text(qtdVendido)
       $('#totalVendidosAvista').text('R$ ' + valorBRL)
 
