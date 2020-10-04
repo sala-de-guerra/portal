@@ -68,9 +68,7 @@
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                     <li class="nav-item nav-card" id="custon-tabs-li-tmaAvista">
                         <a class="nav-link active" id="custom-tabs-one-tmaAvista-tab" data-toggle="pill" href="#custom-tabs-one-tmaAvista" role="tab" aria-controls="custom-tabs-one-tmaAvista" aria-selected="true">
-                            @foreach ($mediaAVista as $media)
-                                <h5>À vista</h5>
-                                @endforeach
+                            <h5>À vista</h5>
                         </a>
                     </li>
 
@@ -103,9 +101,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="notice notice-success">
-                                    @foreach ($mediaAVista as $media)
-                                        <strong>TMA: {{$media->media}}</strong><a href="/tma/baixar-planilha-tma"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA à Vista &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
-                                    @endforeach
+                                    <strong>TMA: <span id="mediaAvista"></span> </strong><a href="/tma/baixar-planilha-tma"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA à Vista &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+
 
                                 </div>
                                 <div class="row anima">
@@ -156,13 +153,13 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="notice notice-success"> 
-                                        @foreach ($mediaComFinanciamento as $mediaFinanciada)
-                                            <strong>TMA: <span id="mediaTmaFinanciado">{{$mediaFinanciada->media}}</span></strong><a href="/tma/baixar-planilha-tma-financiamento"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA com Financiamento &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
-                                        @endforeach
+
+                                            <strong>TMA: <span id="mediaFinanciado"></span><span id="mediaTmaFinanciado"></span></strong><a href="/tma/baixar-planilha-tma-financiamento"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA com Financiamento &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+
                                         &nbsp&nbsp&nbsp&nbsp&nbsp
-                                        @foreach ($mediaCCA as $mediaApenasCCA)
-                                        <strong>TMA CCA: {{$mediaApenasCCA->media}}</strong>
-                                    @endforeach
+
+                                        <strong>TMA CCA: <span id="mediaFinanciadoCCA"></span></strong>
+
                                     </div>
                                         <div class="row anima">
                                             <strong>Quantidade vendida: <span id="quantidadeVendidosFinanciado" style="color: #295dd2"></span> &nbsp&nbsp&nbsp&nbsp&nbsp

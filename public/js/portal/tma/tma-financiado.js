@@ -39,10 +39,24 @@ function _formataDatatableComId (idTabela){
     });
 };
 
+var contador = 0;
+var contadorCCA = 0;
+var totalDiasDecorridos = 0;
+var totalDiasDecorridosCCA = 0;
 
 $(document).ready(function(){
     $.getJSON('/tma-venda-com-financimento', function(dados){
         $.each(dados, function(key, item) {
+          if (item.baixaEfetuada == null){
+            contador += 1;
+            totalDiasDecorridos =  totalDiasDecorridos + Number(item.DIAS_DECORRIDOS);
+          }
+
+          if (item.baixaEfetuada == null && item.ACEITA_CCA == 'Sim'){
+            contadorCCA += 1;
+            totalDiasDecorridosCCA =  totalDiasDecorridosCCA + Number(item.DIAS_DECORRIDOS);
+          }
+          console.log(totalDiasDecorridos)
             var linha =
                 `<tr>
                     <td><a href="/consulta-bem-imovel/${item.BEM_FORMATADO}" class="cursor-pointer">${item.NU_BEM}</a></td>
@@ -362,6 +376,10 @@ $(document).ready(function(){
             }
         )}
     ).done(function() {
+              let media = totalDiasDecorridos / contador
+              $('#mediaFinanciado').text(Math.round(media));
+              let mediaCCA = totalDiasDecorridosCCA / contadorCCA
+              $('#mediaFinanciadoCCA').text(Math.round(mediaCCA));
         _formataDatatableComId('tblTmaFinanciado')
          $('.spinnerTbl').remove()
     })
