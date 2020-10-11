@@ -369,16 +369,17 @@ var strDate = d.getDateFormatted()  + "/" + d.getMonthFormatted() + "/" + d.getF
                 })
              }
          )}
-    )
-setTimeout(function(){
-    _formataDatatableComData("tblLaudoEmDia")
+    ).done(function() {
+        _formataDatatableComData("tblLaudoEmDia")
+        $('.spinnerTbl').remove()
+    })
+
+    setTimeout(function(){
+   
     $(".OS").mask("0000.0000.000000000/0000.00.00.00");
     $('#tblLaudoEmDia').dataTable( {
         "autoWidth": false
       } );
     }, 2000);
-    
-setTimeout(function(){
-    $('.spinnerTbl').remove()
-    }, 2000);
+
 

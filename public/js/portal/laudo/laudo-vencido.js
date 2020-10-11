@@ -1,6 +1,40 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 $.fn.dataTable.ext.errMode = 'none';
 
+function _formataDatatableVencido (idTabela){
+    $('#' + idTabela).DataTable({
+        "order": [[ 3, "asc" ]],
+        'columnDefs' : [ { 
+            'searchable'    : false, 
+            'targets'       : [7] 
+            },
+        ],
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Mostrar _MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    });
+};
+
 
      $(".vencidotbl").click(function() {
      $.getJSON('/controle-laudos/laudo-vencido', function(dados){
@@ -330,44 +364,11 @@ $.fn.dataTable.ext.errMode = 'none';
                 })
              }
          )}
-    )
-})
-$(".vencidotbl").click(function() {
-setTimeout(function(){
-    $('.dtableVencido').DataTable({
-        "order": [[ 3, "asc" ]],
-        'columnDefs' : [ { 
-            'searchable'    : false, 
-            'targets'       : [7] 
-            },
-        ],
-        "language": {
-            "sEmptyTable": "Nenhum registro encontrado",
-            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ".",
-            "sLengthMenu": "Mostrar _MENU_ resultados por página",
-            "sLoadingRecords": "Carregando...",
-            "sProcessing": "Processando...",
-            "sZeroRecords": "Nenhum registro encontrado",
-            "sSearch": "Pesquisar",
-            "oPaginate": {
-                "sNext": "Próximo",
-                "sPrevious": "Anterior",
-                "sFirst": "Primeiro",
-                "sLast": "Último"
-            },
-            "oAria": {
-                "sSortAscending": ": Ordenar colunas de forma ascendente",
-                "sSortDescending": ": Ordenar colunas de forma descendente"
-            }
-        }
-    });
-    $('.dtableVencido').removeAttr('id');
-    $('.spinnerTblVencido').remove()
-    $(".vencidotbl").off('click')
-    $(".OS").mask("0000.0000.000000000/0000.00.00.00");
-}, 2000);
+    ).done(function() {
+        _formataDatatableVencido("tblLaudoVencido")
+        $('.dtableVencido').removeAttr('id');
+        $('.spinnerTblVencido').remove()
+        $(".vencidotbl").off('click')
+        $(".OS").mask("0000.0000.000000000/0000.00.00.00");
+    }) 
 })
