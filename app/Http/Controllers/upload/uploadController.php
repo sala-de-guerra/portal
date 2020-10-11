@@ -18,7 +18,7 @@ class uploadController extends Controller
     public function store (Request $request)
     {
         if ($request->file('arquivoTeste')->isValid()){
-           $nameFile = "banana" . $request->file('arquivoTeste')->getClientOriginalName();
+           $nameFile = "teste" . $request->file('arquivoTeste')->getClientOriginalName();
             dd($request->file('arquivoTeste')->storeAS('teste', $nameFile));
         }
     }
