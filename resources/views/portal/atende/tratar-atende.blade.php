@@ -362,7 +362,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Data da Proposta:</label>
-                                    <p id="dataProposta" class="formata-data-sem-hora"></p>
+                                    <p id="dataProposta"></p>
                                 </div>
                             </div>
                             <div class="col-sm-3">

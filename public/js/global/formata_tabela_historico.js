@@ -6,7 +6,7 @@ function _formataTabelaHistorico (numeroContrato) {
     $("#custom-tabs-one-historico-tab").one( "click", function() {
     $.getJSON('/estoque-imoveis/consulta-historico-contrato/' + numeroContrato, function(dados) {
         $.each(dados.historico, function(key, item) {
-            var data = moment(item.data).format('DD/MM/YYYY')
+            var data = moment(item.data).format('DD/MM/YYYY HH:mm')
             var linha = 
                 '<tr>' +
                     '<td>' + item.idHistorico + '</td>' +
@@ -54,7 +54,7 @@ function _formataTabelaHistorico (numeroContrato) {
                             
                         '</div>' +
                     '</td>' +
-                    '<td class="formata-data">' + item.data + '</td>' +
+                    '<td>' + data + '</td>' +
                 '</tr>';
                 
                 $(linha).appendTo('#tblHistorico>tbody');

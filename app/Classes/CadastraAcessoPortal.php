@@ -77,13 +77,12 @@ class CadastraAcessoPortal
 
     public $arrayDesenvolvedores = [
         /* DESENVOLVIMENTO */
-        'c142765',  // Carlos
-        'c111710',  // Chuman
-        'c098453',  // Rafael
-        'c079436',  // Vladimir 
+        'c142765',   // Carlos
+        'c111710',   // Chuman
+        'c098453',   // Rafael
+        'c079436',   // Vladimir 
         'c066517',   // Renata
-        'c142639',   // Fernanda
-        'c141203'   // Marcão
+        'c142639'    // Fernanda
     ];
 
     public $arrayConvidados = [
