@@ -16,7 +16,7 @@
     <div class="col-sm-6">
 
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"><a href="/controle-laudos">Preparar e Ofertar</a> </li>
+            <li class="breadcrumb-item active"><a href="/preparar-e-ofertar/controle-laudos">Preparar e Ofertar</a> </li>
             <li class="breadcrumb-item active"> Controle de Laudos</li>
         </ol>
 

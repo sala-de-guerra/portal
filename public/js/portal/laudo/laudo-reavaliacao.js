@@ -1,6 +1,40 @@
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 $.fn.dataTable.ext.errMode = 'none';
 
+function _formataDatatableReavaliacao (idTabela){
+    $('#' + idTabela).DataTable({
+        "order": [[ 3, "desc" ]],
+        'columnDefs' : [ { 
+                'searchable'    : false, 
+                'targets'       : [7] 
+            },
+        ],
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Mostrar _MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    });
+};
+
 
  $("#reavaliacaotbl").click(function() {
      $.getJSON('/controle-laudos/reavaliacao', function(dados){
@@ -413,44 +447,11 @@ $.fn.dataTable.ext.errMode = 'none';
                 })
              }
          )}
-    )
-})
-$("#reavaliacaotbl").click(function() {
-    setTimeout(function(){
-        $('.dtableReavaliacao').DataTable({
-            "order": [[ 3, "desc" ]],
-            'columnDefs' : [ { 
-                    'searchable'    : false, 
-                    'targets'       : [7] 
-                },
-            ],
-            "language": {
-                "sEmptyTable": "Nenhum registro encontrado",
-                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sInfoThousands": ".",
-                "sLengthMenu": "Mostrar _MENU_ resultados por página",
-                "sLoadingRecords": "Carregando...",
-                "sProcessing": "Processando...",
-                "sZeroRecords": "Nenhum registro encontrado",
-                "sSearch": "Pesquisar",
-                "oPaginate": {
-                    "sNext": "Próximo",
-                    "sPrevious": "Anterior",
-                    "sFirst": "Primeiro",
-                    "sLast": "Último"
-                },
-                "oAria": {
-                    "sSortAscending": ": Ordenar colunas de forma ascendente",
-                    "sSortDescending": ": Ordenar colunas de forma descendente"
-                }
-            }
-        });
+    ).done(function() {
+        _formataDatatableReavaliacao("tblReavaliacao")
         $('.dtableReavaliacao').removeAttr('id');
         $('.spinnerTblReavaliacao').remove()
         $("#reavaliacaotbl").off('click')
         $(".OS").mask("0000.0000.000000000/0000.00.00.00");
-    }, 2000);
+    }) 
 })
