@@ -108,7 +108,8 @@ table th {
 
 <p class="nao-responder">MENSAGEM AUTOMÁTICA. FAVOR NÃO RESPONDER.</p>
 <p>Às GILIES,</p>
-<p>Segue listagem dos boletos pagos na data de %dia_anterior%</p>
+<p>Senhor(a) Gerente</p>
+<p>1.   Segue relação dos boletos pagos na data de %dia_anterior%</p>
                 <table class="table" style="overflow-x:auto;">
                         <thead>
                             <tr>
@@ -116,6 +117,7 @@ table th {
                             <th data-label="Contrato">Contrato</th>
                             <th data-label="Proponente">Proponente</th>
                             <th data-label="Valor">Valor de pagamento</th>
+                            <th data-label="Status">Total proposta</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,9 +125,24 @@ table th {
                     </tbody>
                 </table>
        
+<p>2.   Seguem também relação dos contratos com Previsão de Cancelamento em %dia_anterior%, caso tenha algum contrato com boleto pago ou com prazo concedido ao cliente, deverá ser gerado um boleto com Data de Validade igual ao prazo final para pagamento.</p>
 
-<p>A listagem completa pode ser encontrada em  <a href="https://portal.gilie.sp.caixa/contratacao/controle-boletos">https://portal.gilie.sp.caixa/contratacao/controle-boletos</a></p>
-<p>Acesse também  <a href="https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento">https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento</a>
+                <table class="table" style="overflow-x:auto;">
+                                        <thead>
+                                            <tr>
+                                            <th data-label="GILIE">GILIE</th>
+                                            <th data-label="Contrato">Contrato</th>
+                                            <th data-label="Proponente">Proponente</th>
+                                            <th data-label="Valor">Motivo do Cancelamento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    %listagem_de_cancelados%
+                                    </tbody>
+                                </table>
+
+<p>3.   A listagem completa pode ser encontrada em  <a href="https://portal.gilie.sp.caixa/contratacao/controle-boletos">https://portal.gilie.sp.caixa/contratacao/controle-boletos</a></p>
+<p>4.   Acesse também  <a href="https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento">https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento</a>
 para controle de gestão do tempo de atendimento</p>
 <footer class="fixarRodape">    
 <p class="destaque">
