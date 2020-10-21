@@ -7,7 +7,7 @@ use App\Models\Atende;
 use App\Classes\Ldap;
 use App\Models\Empregado;
 
-class ControleDemandasNavBar
+class ControleSiouvNavBar
 {
     /**
      * Handle an incoming request.
@@ -20,9 +20,9 @@ class ControleDemandasNavBar
     {
         
         $request->session()->put([
-            'demandasAtende' => Atende::where('statusAtende','<>', 'FINALIZADO')
+            'siouvAtende' => Atende::where('statusAtende','<>', 'FINALIZADO')
             ->where('matriculaResponsavelAtividade', session('matricula'))
-            ->where('idAtividade','<>', '4')
+            ->where('idAtividade', '4')
             ->count(),
         ]);
         return $next($request);

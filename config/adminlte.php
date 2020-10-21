@@ -586,6 +586,12 @@ return [
                     // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
                     'url'  => '/gerencial/gestao-equipes/',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
+                ],
+                [
+                    'text' => 'Gestão Siouv',
+                    // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
+                    'url'  => '/gerencial/gestao-siouv/',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ]
     
             ],
@@ -626,7 +632,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
+        // JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
