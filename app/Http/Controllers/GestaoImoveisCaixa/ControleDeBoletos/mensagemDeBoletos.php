@@ -125,7 +125,7 @@ table th {
                     </tbody>
                 </table>
        
-<p>2.   Seguem também relação dos contratos com Previsão de Cancelamento em %dia_anterior%, caso tenha algum contrato com boleto pago ou com prazo concedido ao cliente, deverá ser gerado um boleto com Data de Validade igual ao prazo final para pagamento.</p>
+<p>2.   Seguem também relação dos contratos com previsão de cancelamento em %dia_anterior%, caso tenha algum contrato com boleto pago ou com prazo concedido ao cliente, deverá ser gerado um boleto com data de validade igual ao prazo final para pagamento.</p>
 
                 <table class="table" style="overflow-x:auto;">
                                         <thead>
@@ -141,7 +141,7 @@ table th {
                                     </tbody>
                                 </table>
 
-<p>3.   A listagem completa pode ser encontrada em  <a href="https://portal.gilie.sp.caixa/contratacao/controle-boletos">https://portal.gilie.sp.caixa/contratacao/controle-boletos</a></p>
+<p>3.   A relação completa pode ser encontrada em  <a href="https://portal.gilie.sp.caixa/contratacao/controle-boletos">https://portal.gilie.sp.caixa/contratacao/controle-boletos</a></p>
 <p>4.   Acesse também  <a href="https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento">https://portal.gilie.sp.caixa/contratacao/tempo-medio-atendimento</a>
 para controle de gestão do tempo de atendimento</p>
 <footer class="fixarRodape">    
