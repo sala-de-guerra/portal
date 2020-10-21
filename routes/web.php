@@ -524,3 +524,26 @@ Route::prefix('pagamentos')->group(function () {
     Route::get('cdp/{chb}', 'Pagamentos\gestaoCDPController@gestaoCDP');
 
 });
+
+// ROTAS DO SIOUV
+Route::prefix('gerencial/gestao-siouv')->group(function () {
+    // RETORNA VIEW SIOUV
+    Route::get('/', 'Siouv\siouvController@indexSiouv');
+    // RETORNA UNIVERSO 
+    Route::get('/lista-siouv', 'Siouv\siouvController@listaUniversoSiouv');
+    // CADASTRA DADOS SIOUV
+    Route::post('/cadastra-siouv', 'Siouv\siouvController@cadastraDadosSiouv');
+    // MODELO WORD SAC
+    Route::get('/modelo-sac/{siouv}', 'Siouv\siouvController@modeloSac');
+    // MODELO WORD SIOUV
+    Route::get('/modelo-siouv/{siouv}', 'Siouv\siouvController@modeloSIOUV');
+    // Responder Siouv
+    Route::post('/responder-siouv', 'Siouv\siouvController@responderSiouv');
+    // LISTA ATENDES COM STATUS DO DIA
+    Route::get('/demandas-siouv', 'Siouv\siouvController@listaSiouvDemandasDoDia');
+    // CRIA CE
+    Route::get('/cria-ce', 'Siouv\siouvController@criaNumeroCE');
+    // VIEW CE
+    Route::get('/gestao-siouv-ce', 'Siouv\siouvController@pegaNumeroCE');
+
+});

@@ -147,7 +147,7 @@
                         <li class="nav-item dropdown user-menu mx-1">
                             <a href="#" class="nav-link dropdown-toggle px-0" data-toggle="dropdown">
                                 <i class="far fa-lg fa-bell"></i>
-                                <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') + session()->get('demandasAtende')}}</span>
+                                <span class="badge badge-warning navbar-badge">{{ session()->get('totalAcoesPendentesGestor') + session()->get('demandasAtende') + session()->get('siouvAtende') }}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -161,6 +161,10 @@
                                     <i class="fas fa-envelope mr-2"></i>
                                     {{ session()->get('demandasAtende') }} Atende(s) para responder.
                                 </a>
+                                <a class="dropdown-item" href="/atende/minhas-demandas">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    {{ session()->get('siouvAtende') }} Siouv(s) para responder.
+                                </a>
                             </div>
                         </li>
                     @endIf
@@ -169,7 +173,7 @@
                     <li class="nav-item dropdown user-menu mx-1">
                         <a href="#" class="nav-link dropdown-toggle px-0" data-toggle="dropdown">
                             <i class="far fa-lg fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">{{ session()->get('demandasAtende')}}</span>
+                            <span class="badge badge-warning navbar-badge">{{ session()->get('demandasAtende') + session()->get('siouvAtende')}}</span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -178,6 +182,10 @@
                             <a class="dropdown-item" href="/atende/minhas-demandas">
                                 <i class="fas fa-envelope mr-2"></i>
                                 {{ session()->get('demandasAtende') }} Atende(s) para responder.
+                            </a>
+                            <a class="dropdown-item" href="/atende/minhas-demandas">
+                                <i class="fas fa-envelope mr-2"></i>
+                                {{ session()->get('siouvAtende') }} Siouv(s) para responder.
                             </a>
                         </div>
                     </li>

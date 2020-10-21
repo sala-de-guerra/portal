@@ -64,11 +64,3 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
         ];
     }
 }
-
-
-
-
-
-
-
-

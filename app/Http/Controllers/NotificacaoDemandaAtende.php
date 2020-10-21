@@ -32,7 +32,7 @@
     Notificamos o direcionamento de ATENDE para as suas demandas</p>
 
     <b>Assunto: </b> %Assunto% <br><br>
-    esta demanda está disponivel para tratamento em <a href="https://portal.gilie.sp.caixa/atende/minhas-demandas"> https://portal.gilie.sp.caixa/atende/minhas-demandas</a> </p> 
+    esta demanda está disponível para tratamento em <a href="https://portal.gilie.sp.caixa/atende/minhas-demandas"> https://portal.gilie.sp.caixa/atende/minhas-demandas</a> </p> 
     <p>a resposta deverá ser efetuada até <b> %quantidade_dias%  </b>.</p><br><br>
 
 <footer class="fixarRodape">    

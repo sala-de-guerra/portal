@@ -162,6 +162,10 @@ function montaCardsEquipes (regiaoUnidade) {
 
             $(lista).appendTo('#equipes');
 
+            if(item.nomeEquipe == 'SIOUV'){
+                $('#cardLista' + item.idEquipe).remove()
+            }
+
             $('#eventual' + item.matriculaEventualEquipe).show();
 
             $('#selectExcluirEquipe').change( function() {

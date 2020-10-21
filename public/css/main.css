@@ -203,12 +203,20 @@ input[type=number] {
   align-items:center;
 }
 
+.nav-treeview li {
+    background-color: rgb(250, 151, 37) !important;
+    /* border-radius: 25px; */
+
+}
 .has-treeview li {
     background-color: rgb(250, 151, 37) !important;
     /* border-radius: 25px; */
 
 }
 .has-treeview li p{
+    color: white ;
+}
+.nav-treeview li p{
     color: white ;
 }
 .fa-circle{
