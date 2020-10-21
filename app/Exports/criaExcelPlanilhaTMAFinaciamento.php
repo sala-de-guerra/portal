@@ -28,22 +28,23 @@ class criaExcelPlanilhaTMAFinaciamento implements FromCollection, WithHeadings, 
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
-        $universoAVista= DB::table('TBL_VENDA_FINANCIADO')
+        $universoFinanciamento= DB::table('TBL_VENDA_FINANCIADO')
+            ->join('TBL_PAGAMENTOS_BOLETOS_CUB01', DB::raw('CONVERT(VARCHAR, TBL_PAGAMENTOS_BOLETOS_CUB01.NUMERO_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NU_BEM)'))
             ->select(DB::raw("
-            TBL_VENDA_FINANCIADO.[BEM_FORMATADO] as BEM_FORMATADO,
-                FORMAT(CONVERT(DECIMAL(10,2), REPLACE(TBL_VENDA_FINANCIADO.[PAGAMENTO_BOLETO], ',', '.')), 'N', 'pt-BR') AS PAGAMENTO_BOLETO,
+                TBL_VENDA_FINANCIADO.[BEM_FORMATADO] as BEM_FORMATADO,
+                FORMAT(CONVERT(DECIMAL(10,2), REPLACE(TBL_PAGAMENTOS_BOLETOS_CUB01.[VALOR_TOTAL_BOLETO_PAGO], ',', '.')), 'N', 'pt-BR') AS PAGAMENTO_BOLETO,
                 TBL_VENDA_FINANCIADO.[DIAS_DECORRIDOS] as DIAS_DECORRIDOS,
                 TBL_VENDA_FINANCIADO.[CLASSIFICACAO] as CLASSIFICACAO,
                 TBL_VENDA_FINANCIADO.[TIPO_VENDA] as tipoVenda,
                 TBL_VENDA_FINANCIADO.[NOME_PROPONENTE] as NOME_PROPONENTE,
-                TBL_VENDA_FINANCIADO.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE         
+                TBL_VENDA_FINANCIADO.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
+                TBL_VENDA_FINANCIADO.[PAGAMENTO_BOLETO] as cancelamento        
     
             "))
              ->where('TBL_VENDA_FINANCIADO.UNA', '=', $siglaGilie)
              ->get();
     
-
-            return $universoAVista;
+            return $universoFinanciamento;
     }
 
     public function headings(): array
@@ -56,7 +57,8 @@ class criaExcelPlanilhaTMAFinaciamento implements FromCollection, WithHeadings, 
             'Classificação',
             'Tipo Venda',
             'Proponente',
-            'CPF/CNPJ'
+            'CPF/CNPJ',
+            "Cancelamento"
             ],
         ];
     }

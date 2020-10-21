@@ -29,10 +29,10 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
         $universoAVista= DB::table('TBL_VENDA_AVISTA')
-            ->join('CUB_056_PAGAMENTOS_BOLETOS_SIMOV', DB::raw('CONVERT(VARCHAR, CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
+        ->join('TBL_PAGAMENTOS_BOLETOS_CUB01', DB::raw('CONVERT(VARCHAR, TBL_PAGAMENTOS_BOLETOS_CUB01.NUMERO_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NU_BEM)'))
             ->select(DB::raw("
                 TBL_VENDA_AVISTA.[BEM_FORMATADO] as BEM_FORMATADO,
-                CUB_056_PAGAMENTOS_BOLETOS_SIMOV.[PAGO] as PAGAMENTO_BOLETO,
+                FORMAT(CONVERT(DECIMAL(10,2), REPLACE(TBL_PAGAMENTOS_BOLETOS_CUB01.[VALOR_TOTAL_BOLETO_PAGO], ',', '.')), 'N', 'pt-BR') AS PAGAMENTO_BOLETO,
                 TBL_VENDA_AVISTA.[DIAS_DECORRIDOS] as DIAS_DECORRIDOS,
                 TBL_VENDA_AVISTA.[CLASSIFICACAO] as CLASSIFICACAO,
                 TBL_VENDA_AVISTA.[TIPO_VENDA] as tipoVenda,
@@ -59,16 +59,8 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
             'Tipo Venda',
             'Proponente',
             'CPF/CNPJ',
-            'Cancelado'
+            'Cancelamento'
             ],
         ];
     }
 }
-
-
-
-
-
-
-
-

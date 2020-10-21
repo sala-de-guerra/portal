@@ -166,21 +166,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -290,20 +292,22 @@ class ControleDeBoletos extends Controller
                   array_push($boletosPagosOntem, $boleto );
     
                   //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -412,21 +416,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -535,21 +541,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                 //converte valor do pagamento padrão SQL em R$ 
+                 if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -658,21 +666,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -781,21 +791,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                 //converte valor do pagamento padrão SQL em R$ 
+                 if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -904,21 +916,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -1027,21 +1041,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -1150,21 +1166,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -1273,21 +1291,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -1396,21 +1416,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
@@ -1519,21 +1541,23 @@ class ControleDeBoletos extends Controller
                 if ($boleto->dataPagamento == $ultimoDiaUtil){
                   array_push($boletosPagosOntem, $boleto );
     
-                  //converte valor do pagamento padrão SQL em R$ 
-                  if (strpos($boleto->valorPagamento, "0") == 0){
-                        $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                //converte valor do pagamento padrão SQL em R$ 
+                if ($boleto->totalProposta == null){
+                  $boleto->totalProposta = "(indisponível)";
+                }else if (strpos($boleto->valorPagamento, "0") == 0){
+                  $boleto->valorPagamento = str_replace(',', '.',$boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
 
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                    }else{
-                        $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
-                        $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
-                        $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
-                        
-                        $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
-                        $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
-                }
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+                }else{
+                  $boleto->valorPagamento = str_replace('.', '', $boleto->valorPagamento);
+                  $boleto->valorPagamento = str_replace(',', '.', $boleto->valorPagamento);
+                  $boleto->valorPagamento = number_format($boleto->valorPagamento, 2, ',', '.');
+                  
+                  $boleto->totalProposta = str_replace(',', '.',$boleto->totalProposta);
+                  $boleto->totalProposta = number_format($boleto->totalProposta, 2, ',', '.');
+          }
                   
                   $historico = new HistoricoPortalGilie;
                   $historico->matricula       = session('matricula');
