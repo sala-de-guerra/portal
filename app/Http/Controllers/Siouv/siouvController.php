@@ -39,6 +39,8 @@ class siouvController extends Controller
             TBL_SIOUV.[vencimento] as vencimento,
             TBL_SIOUV.[manifesto] as manifesto,
             TBL_SIOUV.[comentario] as comentario,
+            TBL_SIOUV.[Nome] as Nome,
+            TBL_SIOUV.[CPF] as CPF,
             TBL_SIOUV.[email] as email
             
             "))
@@ -60,7 +62,8 @@ class siouvController extends Controller
             TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
             ISNULL(TBL_SIOUV_DEMANDAS.[NU_BEM], 'Não Possui') as contrato,
             ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Não Possui') as contratoFormatado,
-            TBL_SIOUV_DEMANDAS.[status] as status
+            TBL_SIOUV_DEMANDAS.[status] as status,
+            TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade
             
             "))
             ->where('TBL_SIOUV.unidade', '=', $codigoUnidadeUsuarioSessao)
@@ -84,8 +87,8 @@ class siouvController extends Controller
         $novaDemandaAtende = new Atende;
         $novaDemandaAtende->contratoFormatado               = $dadosSimov->BEM_FORMATADO;
         $novaDemandaAtende->codigoUnidade                   = '7257';
-        $novaDemandaAtende->idEquipe                        = '1045';
-        $novaDemandaAtende->idAtividade                     = '4';
+        $novaDemandaAtende->idEquipe                        = '11';
+        $novaDemandaAtende->idAtividade                     = '76';
         $novaDemandaAtende->numeroContrato                  = $request->cadastraContratoSiouv;
         $novaDemandaAtende->assuntoAtende                   = $request->cadastraProcessolSiouv;
         $novaDemandaAtende->descricaoAtende                 = "Atenção: ao responder esta demanda ainda será necessário copiar a resposta no atender.caixa.". PHP_EOL .
@@ -238,7 +241,7 @@ class siouvController extends Controller
         // $mail->SMTPDebug = 2;
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
-        $mail->addAddress('rafael.economia@yahoo.com.br');
+        $mail->addAddress( $request->email);
         $mail->addCC(session('matricula')."@mail.caixa");
         $mail->addBCC('GILIESP09@caixa.gov.br');
 
@@ -270,7 +273,7 @@ class siouvController extends Controller
             public function pegaNumeroCE()
     {  
         $idCe = DB::table('TBL_NUMERO_CE')->latest('idCe')->first();
-        $numeroCE = "CI GILIE/SP " . str_pad($idCe->idCe, 5, '0', STR_PAD_LEFT)."-04/".date("Y");
+        $numeroCE = "CE GILIE/SP " . str_pad($idCe->idCe, 5, '0', STR_PAD_LEFT)."-04/".date("Y");
         
         return view('portal.gerencial.gestao-siouv-ce', compact('numeroCE'));
     }

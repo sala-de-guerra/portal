@@ -49,6 +49,16 @@ $(document).ready( function () {
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
+                                    <label>Nome:</label>
+                                    <p>${item.Nome}</p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>CPF:</label>
+                                    <p>${item.CPF}</p>
+                                </div>
+
+                                <div class="form-group">
                                 <label>Manifesto:</label>
                                 <p>${item.manifesto}</p>
                                 </div>
@@ -187,6 +197,7 @@ $(document).ready( function () {
                     <td>${item.numeroSiouv}</td>
                     <td>${item.status}</td>
                     <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.contrato}</a></td>
+                    <td>${item.matriculaResponsavelAtividade}</td>
                     </tr>`
 
         $(listaDemandasDiarias).appendTo('#tblSiouvTratados>tbody');

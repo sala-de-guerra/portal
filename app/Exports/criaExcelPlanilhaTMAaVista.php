@@ -29,7 +29,7 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
         $universoAVista= DB::table('TBL_VENDA_AVISTA')
-        ->join('TBL_PAGAMENTOS_BOLETOS_CUB01', DB::raw('CONVERT(VARCHAR, TBL_PAGAMENTOS_BOLETOS_CUB01.NUMERO_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NU_BEM)'))
+            ->join('TBL_PAGAMENTOS_BOLETOS_CUB01', DB::raw('CONVERT(VARCHAR, TBL_PAGAMENTOS_BOLETOS_CUB01.NUMERO_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
             ->select(DB::raw("
                 TBL_VENDA_AVISTA.[BEM_FORMATADO] as BEM_FORMATADO,
                 FORMAT(CONVERT(DECIMAL(10,2), REPLACE(TBL_PAGAMENTOS_BOLETOS_CUB01.[VALOR_TOTAL_BOLETO_PAGO], ',', '.')), 'N', 'pt-BR') AS PAGAMENTO_BOLETO,
@@ -38,13 +38,12 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
                 TBL_VENDA_AVISTA.[TIPO_VENDA] as tipoVenda,
                 TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
                 TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
-                TBL_VENDA_AVISTA.[PAGAMENTO_BOLETO] as cancelamento             
+                TBL_VENDA_AVISTA.[PAGAMENTO_BOLETO] as cancelamento        
     
             "))
              ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
              ->get();
     
-
             return $universoAVista;
     }
 

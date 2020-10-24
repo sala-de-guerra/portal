@@ -100,6 +100,7 @@ $Date = date('d/m/Y');
                 <th>Nº Siouv</th>
                 <th>Status</th>
                 <th>Contrato</th>
+                <th>Designado</th>
               </tr>
             </thead>
             <tbody>
