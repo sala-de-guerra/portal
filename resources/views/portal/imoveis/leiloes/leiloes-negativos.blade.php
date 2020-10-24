@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-4 ml-5">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             <a href="leiloes-negativos/baixar-planilha"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Download planilha completa de leilões"><i class="fas fa-file-download"></i>&nbsp Lista Leilões</button></a>
-                          </div>
+                        </div>
                     </div>
                     <br><br>
 

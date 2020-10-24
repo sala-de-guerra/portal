@@ -22,7 +22,7 @@ class ControleSiouvNavBar
         $request->session()->put([
             'siouvAtende' => Atende::where('statusAtende','<>', 'FINALIZADO')
             ->where('matriculaResponsavelAtividade', session('matricula'))
-            ->where('idAtividade', '4')
+            ->where('idAtividade', '76')
             ->count(),
         ]);
         return $next($request);
