@@ -60,10 +60,13 @@ class vendaAVistaController extends Controller
             TBL_VENDA_AVISTA.[TIPO_VENDA] as tipoVenda,
             TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
             TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
+            ISNULL(TBL_VENDA_AVISTA.[DDD_PROPONENTE], ' ') as ddd,
+            ISNULL(TBL_VENDA_AVISTA.[TELEFONE_PROPONENTE], 'Não Cadastrado') as telefone,
             TBL_VENDA_AUXILIAR.[baixaEfetuada] as baixaEfetuada,
             TBL_VENDA_AVISTA_DUPLICADA.[repetido] as repetido,
             ALITB048_CUB120000.[E-MAIL PROPONENTE] as emailProponente,
-            ALITB048_CUB120000.[UF_PROPONENTE] as ufProponente
+            ALITB048_CUB120000.[UF_PROPONENTE] as ufProponente,
+            TBL_VENDA_AUXILIAR.[nomeProponente] as proponenteTblAuxiliar
             
 
         "))
@@ -142,10 +145,12 @@ class vendaAVistaController extends Controller
             if ($baixarTMA = TBLTmaAuxiliar::find($chb)){
                 $baixarTMA = TBLTmaAuxiliar::find($chb);
                 $baixarTMA->baixaEfetuada  = "del";
+                $baixarTMA->nomeProponente  =$request->nomeProponente;
                 $baixarTMA->save();
                 }else{
                     $baixarTMA = new TBLTmaAuxiliar;
                     $baixarTMA->baixaEfetuada  = "del";
+                    $baixarTMA->nomeProponente  =$request->nomeProponente;
                     $baixarTMA->BEM_FORMATADO  = $chb;
                     $baixarTMA->save();
                 }

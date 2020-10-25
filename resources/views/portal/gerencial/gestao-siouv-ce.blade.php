@@ -1,6 +1,3 @@
-<?php
-    $Date = date('d/m/Y');
-?>
 @extends('adminlte::page')
 
 @section('title', 'Portal GILIE/SP')
@@ -89,7 +86,7 @@
         <h3 class="card-title">Tratados</h3>
     </div> <!-- /.card-header -->
     <div class="notice notice-warning">
-        <strong>Tratados: </strong> SIOUV que foi distribuido Atende ou respondido em <?php echo $Date ?>
+        <strong>Distribuidos: </strong> SIOUV que foi distribuido e NÃO respondido
     </div>
     <div class="card-body">
         <div class="spinner-border spinnerTbl text-primary" role="status">
@@ -101,7 +98,6 @@
               <tr>
                 <th>Tipo</th>
                 <th>Nº Siouv</th>
-                <th>Status</th>
                 <th>Contrato</th>
                 <th>Designado</th>
               </tr>

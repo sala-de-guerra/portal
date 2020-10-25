@@ -116,14 +116,16 @@ $(document).ready(function(){
                               <input type="hidden" name="cpfNnpjProponente" value="${item.CPF_CNPJ_PROPONENTE}">
                               <input type="hidden" name="emailProponente" value="${item.emailProponente}">
                               <input type="hidden" name="ufProponente" value="${item.ufProponente}">
+                              <input type="hidden" name="ddd" value="${item.ddd}">
+                              <input type="hidden" name="telefone" value="${item.telefone}">
                               <input type="hidden" name="_token" value="${csrfVar}">
                               <div class="modal-body">
                                   <p>Deseja marcar o contrato <strong>${item.BEM_FORMATADO}</strong> como distrato ?</p>
                                 </div>
                                 <div class="modal-body">
                                 <label for="observacaoAtendimento">Observação</label>
-                                <textarea class="form-control" name="observacaoAtendimento" rows="5" required>venda cancelada - pagamento não identificado no SIMOV e SIACI - boleto baixado - cpf: ${item.CPF_CNPJ_PROPONENTE} - nome: ${item.NOME_PROPONENTE}
-                                </textarea>
+                                <textarea class="form-control" name="observacaoAtendimento" rows="5" required>venda cancelada - pagamento não identificado no SIMOV e SIACI - boleto baixado - cpf: ${item.CPF_CNPJ_PROPONENTE} - nome: ${item.NOME_PROPONENTE} - Telefone: (${item.ddd}) ${item.telefone} - Email: ${item.emailProponente}
+                               </textarea>
                                 <br>Marcar proponente bloqueado ?<br>
                                 <div class="form-check  form-check-inline">
                                   <input class="form-check-input" type="radio" name="bloquearProponente" value="nao" checked>
@@ -216,7 +218,7 @@ $(document).ready(function(){
               if (item.baixaEfetuada == 'sim'){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: blue;">'+item.NOME_PROPONENTE +'</b>')
                 $('#dropdownMenuButton'+item.NU_BEM).remove()
-              }else if (item.baixaEfetuada == 'del'){
+                }else if (item.baixaEfetuada == 'del' && item.proponenteTblAuxiliar == item.NOME_PROPONENTE){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: red;">'+item.NOME_PROPONENTE +'</b>')
                 $('#dropdownMenuButton'+item.NU_BEM).remove()
               }else if (item.baixaEfetuada == 'pag'){

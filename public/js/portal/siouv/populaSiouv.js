@@ -195,9 +195,8 @@ $(document).ready( function () {
                     `<tr>
                     <td>${item.tipo}</td>
                     <td>${item.numeroSiouv}</td>
-                    <td>${item.status}</td>
                     <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.contrato}</a></td>
-                    <td>${item.matriculaResponsavelAtividade}</td>
+                    <td>${item.nomeEmpregado}</td>
                     </tr>`
 
         $(listaDemandasDiarias).appendTo('#tblSiouvTratados>tbody');

@@ -56,11 +56,14 @@ class vendaFinanciadaController extends Controller
             TBL_VENDA_FINANCIADO.[TIPO_VENDA] as tipoVenda,
             TBL_VENDA_FINANCIADO.[NOME_PROPONENTE] as NOME_PROPONENTE,
             TBL_VENDA_FINANCIADO.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
+            ISNULL(TBL_VENDA_FINANCIADO.[DDD_PROPONENTE], ' ') as ddd,
+            ISNULL(TBL_VENDA_FINANCIADO.[TELEFONE_PROPONENTE], 'Não Cadastrado') as telefone,
             TBL_VENDA_AUXILIAR.[baixaEfetuada] as baixaEfetuada,
             TBL_VENDA_FINANCIADO_DUPLICADAS.[repetido] as repetido,
             TBL_VENDA_FINANCIADO.[ACEITA_CCA] as ACEITA_CCA,
             ALITB048_CUB120000.[E-MAIL PROPONENTE] as emailProponente,
-            ALITB048_CUB120000.[UF_PROPONENTE] as ufProponente
+            ALITB048_CUB120000.[UF_PROPONENTE] as ufProponente,
+            TBL_VENDA_AUXILIAR.[nomeProponente] as proponenteTblAuxiliar
             
 
         "))
@@ -138,10 +141,12 @@ class vendaFinanciadaController extends Controller
             if ($baixarTMA = TBLTmaAuxiliar::find($chb)){
                 $baixarTMA = TBLTmaAuxiliar::find($chb);
                 $baixarTMA->baixaEfetuada  = "del";
+                $baixarTMA->nomeProponente  =$request->nomeProponente;
                 $baixarTMA->save();
                 }else{
                     $baixarTMA = new TBLTmaAuxiliar;
                     $baixarTMA->baixaEfetuada  = "del";
+                    $baixarTMA->nomeProponente  =$request->nomeProponente;
                     $baixarTMA->BEM_FORMATADO  = $chb;
                     $baixarTMA->save();
                 }
