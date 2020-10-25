@@ -51,24 +51,51 @@ class siouvController extends Controller
         return json_encode($universoSiouv);
     }
 
-    public function listaSiouvDemandasDoDia()
+    // public function listaSiouvDemandasDoDia()
+    // {
+    //     $date = date('Y-m-d');
+    //     $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+    //     $universoSiouv= DB::table('TBL_SIOUV_DEMANDAS')
+    //         ->leftjoin('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))
+    //         ->leftjoin('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.matriculaResponsavelAtividade)'))        
+    //         ->select(DB::raw("
+    //         TBL_SIOUV.[tipo] as tipo,
+    //         TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
+    //         ISNULL(TBL_SIOUV_DEMANDAS.[NU_BEM], 'Não Possui') as contrato,
+    //         ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Não Possui') as contratoFormatado,
+    //         TBL_SIOUV_DEMANDAS.[status] as status,
+    //         TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade,
+    //         TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado
+            
+    //         "))
+    //         ->where('TBL_SIOUV.unidade', '=', $codigoUnidadeUsuarioSessao)
+    //         ->where('TBL_SIOUV_DEMANDAS.dataCriacao', '=', $date)
+    //          ->get();
+
+    //     return json_encode($universoSiouv);
+    // }
+
+    public function listaSiouvEmAberto()
     {
-        $date = date('Y-m-d');
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
-        $universoSiouv= DB::table('TBL_SIOUV_DEMANDAS')
-            ->leftjoin('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))    
+        $universoSiouv= DB::table('TBL_ATENDE_DEMANDAS')
+            ->join('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade)'))  
+            ->join('TBL_SIOUV_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.numeroContrato)'))
+            ->leftjoin('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))   
             ->select(DB::raw("
             TBL_SIOUV.[tipo] as tipo,
             TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
-            ISNULL(TBL_SIOUV_DEMANDAS.[NU_BEM], 'Não Possui') as contrato,
-            ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Não Possui') as contratoFormatado,
-            TBL_SIOUV_DEMANDAS.[status] as status,
-            TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade
+            TBL_ATENDE_DEMANDAS.[contratoFormatado] as contratoFormatado,
+            TBL_ATENDE_DEMANDAS.[numeroContrato] as contrato,
+            TBL_ATENDE_DEMANDAS.[contratoFormatado] as matriculaResponsavelAtividade,
+            TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado
             
             "))
-            ->where('TBL_SIOUV.unidade', '=', $codigoUnidadeUsuarioSessao)
-            ->where('TBL_SIOUV_DEMANDAS.dataCriacao', '=', $date)
-             ->get();
+            ->where('TBL_ATENDE_DEMANDAS.codigoUnidade', '=', $codigoUnidadeUsuarioSessao)
+            ->where('TBL_ATENDE_DEMANDAS.statusAtende', '=', 'CADASTRADO')
+            ->where('TBL_ATENDE_DEMANDAS.idAtividade', '=', '4')
+            ->whereRaw('TBL_ATENDE_DEMANDAS.assuntoAtende = TBL_SIOUV_DEMANDAS.processo')
+            ->get();
 
         return json_encode($universoSiouv);
     }

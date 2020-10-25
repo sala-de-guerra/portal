@@ -540,7 +540,7 @@ Route::prefix('gerencial/gestao-siouv')->group(function () {
     // Responder Siouv
     Route::post('/responder-siouv', 'Siouv\siouvController@responderSiouv');
     // LISTA ATENDES COM STATUS DO DIA
-    Route::get('/demandas-siouv', 'Siouv\siouvController@listaSiouvDemandasDoDia');
+    Route::get('/demandas-siouv', 'Siouv\siouvController@listaSiouvEmAberto');
     // CRIA CE
     Route::get('/cria-ce', 'Siouv\siouvController@criaNumeroCE');
     // VIEW CE

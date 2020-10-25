@@ -231,12 +231,12 @@ return [
             'icon'        => 'fas fa-lg fa-fw fa-address-card mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
         ],
-        [
-            'text'        => 'Dúvidas Frequentes',
-            'url'         => '/faq',
-            'icon'        => 'fas fa-lg fa-fw fa-question-circle mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
-        ],
+        // [
+        //     'text'        => 'Dúvidas Frequentes',
+        //     'url'         => '/faq',
+        //     'icon'        => 'fas fa-lg fa-fw fa-question-circle mr-2',
+        //     'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
+        // ],
         [
             'text'        => 'Equipe',
             'url'         => '/equipe',
@@ -244,7 +244,7 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
         ],
         [
-            'text'        => 'Orientações',
+            'text'        => 'Orientações e Dúvidas',
             'url'         => '/orientacoes',
             'icon'        => 'fas fa-lg fa-fw fa-directions mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
