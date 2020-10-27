@@ -51,29 +51,21 @@ class siouvController extends Controller
         return json_encode($universoSiouv);
     }
 
-    // public function listaSiouvDemandasDoDia()
-    // {
-    //     $date = date('Y-m-d');
-    //     $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
-    //     $universoSiouv= DB::table('TBL_SIOUV_DEMANDAS')
-    //         ->leftjoin('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))
-    //         ->leftjoin('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.matriculaResponsavelAtividade)'))        
-    //         ->select(DB::raw("
-    //         TBL_SIOUV.[tipo] as tipo,
-    //         TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
-    //         ISNULL(TBL_SIOUV_DEMANDAS.[NU_BEM], 'Não Possui') as contrato,
-    //         ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Não Possui') as contratoFormatado,
-    //         TBL_SIOUV_DEMANDAS.[status] as status,
-    //         TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade,
-    //         TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado
-            
-    //         "))
-    //         ->where('TBL_SIOUV.unidade', '=', $codigoUnidadeUsuarioSessao)
-    //         ->where('TBL_SIOUV_DEMANDAS.dataCriacao', '=', $date)
-    //          ->get();
+    public function listaCoordenadores()
+    {
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $equipe = DB::table('TBL_EMPREGADOS')
+        ->select(DB::raw("
+        TBL_EMPREGADOS.[nomeCompleto] as nomeCompleto,
+        TBL_EMPREGADOS.[matricula] as matricula
 
-    //     return json_encode($universoSiouv);
-    // }
+      "))
+        ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', $codigoUnidadeUsuarioSessao)
+        ->where('TBL_EMPREGADOS.nomeFuncao', 'COORDENADOR CENTR FILIAL')
+        ->get(); 
+        
+        return json_encode($equipe);
+    }
 
     public function listaSiouvEmAberto()
     {
@@ -87,7 +79,7 @@ class siouvController extends Controller
             TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
             TBL_ATENDE_DEMANDAS.[contratoFormatado] as contratoFormatado,
             TBL_ATENDE_DEMANDAS.[numeroContrato] as contrato,
-            TBL_ATENDE_DEMANDAS.[contratoFormatado] as matriculaResponsavelAtividade,
+            TBL_ATENDE_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade,
             TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado,
             ISNULL(TBL_SIOUV.[vencimento], 'SIOUV Fechado / ATENDE Aberto') as vencimento,
             TBL_SIOUV.[manifesto] as manifesto,
@@ -105,6 +97,35 @@ class siouvController extends Controller
 
         return json_encode($universoSiouv);
     }
+
+    public function listaSiouvPAREmAberto()
+    {
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $universoSiouv= DB::table('TBL_SIOUV_DEMANDAS')
+            ->join('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.matriculaResponsavelAtividade)'))  
+            ->join('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))   
+            ->select(DB::raw("
+            TBL_SIOUV_DEMANDAS.[tipo] as tipo,
+            TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
+            ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Contrato Par') as contratoFormatado,
+            TBL_SIOUV_DEMANDAS.[NU_BEM] as contrato,
+            TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade,
+            TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado,
+            ISNULL(TBL_SIOUV.[vencimento], 'SIOUV Fechado / ATENDE Aberto') as vencimento,
+            TBL_SIOUV.[manifesto] as manifesto,
+            TBL_SIOUV.[comentario] as comentario,
+            TBL_SIOUV.[Nome] as Nome,
+            TBL_SIOUV.[CPF] as CPF,
+            TBL_SIOUV.[email] as email
+            
+            "))
+            ->where('TBL_SIOUV.unidade', '=', $codigoUnidadeUsuarioSessao)
+            ->where('TBL_SIOUV_DEMANDAS.status', '=', 'PAR')
+            ->get();
+
+        return json_encode($universoSiouv);
+    }
+
 
         public function cadastraDadosSiouv(Request $request)
     { 
@@ -153,9 +174,10 @@ class siouvController extends Controller
         $novoSiouv->matriculaResponsavelAtividade   = $request->cadastraResponsavelSiouv;
         $novoSiouv->status                          = 'Distribuido';
         $novoSiouv->NU_BEM                          = $request->cadastraContratoSiouv;
-        $novoSiouv->contratoFormatado               = $dadosSimov->BEM_FORMATADO;;
+        $novoSiouv->contratoFormatado               = $dadosSimov->BEM_FORMATADO;
         $novoSiouv->processo                        = $request->cadastraProcessolSiouv;
         $novoSiouv->dataCriacao                     = $date;
+        $novoSiouv->tipo                            = $request->tipo;
         $novoSiouv->save();
 
         $request->session()->flash('corMensagem', 'success');
@@ -310,6 +332,90 @@ class siouvController extends Controller
         $numeroCE = "CE GILIE/SP " . str_pad($idCe->idCe, 5, '0', STR_PAD_LEFT)."-04/".date("Y");
         
         return view('portal.gerencial.gestao-siouv-ce', compact('numeroCE'));
+    }
+
+    public function cadastraDadosSiouvPar(Request $request)
+    { 
+        $date = date('Y-m-d');
+
+        try {
+            DB::beginTransaction();
+
+        $novoSiouv = new Siouv;
+        $novoSiouv->numeroSiouv                     = $request->siouv;
+        $novoSiouv->matriculaResponsavelAtividade   = $request->cadastraResponsavelSiouv;
+        $novoSiouv->status                          = 'PAR';
+        $novoSiouv->NU_BEM                          = $request->cadastraContratoSiouv;
+        $novoSiouv->contratoFormatado               = null;
+        $novoSiouv->processo                        = $request->cadastraProcessolSiouv;
+        $novoSiouv->dataCriacao                     = $date;
+        $novoSiouv->tipo                            = $request->tipo;
+        $novoSiouv->save();
+
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->CharSet = 'UTF-8'; 
+        $mail->isHTML(true);                                         
+        $mail->Host = 'sistemas.correiolivre.caixa';  
+        $mail->SMTPAuth = false;                                  
+        $mail->Port = 25;
+        // $mail->SMTPDebug = 2;
+        $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+        $mail->addReplyTo('GILIESP01@caixa.gov.br');
+        $mail->addAddress('c098453@mail.caixa');
+        $mail->addCC(session('matricula')."@mail.caixa");
+        $mail->addBCC('GILIESP09@caixa.gov.br');
+
+        $mail->Subject = 'Você recebeu um direcionamento SIOUV - PAR';
+        $mail->Body =  'SIOUV: '.$request->siouv . '<br><br>'. 
+        '<b>'.'Nome: ' . '</b>'.'<br>'.$request->nome . '<br>'. 
+        '<b>'.'CPF: ' . '</b>'.'<br>'.$request->cpf . '<br>'. 
+        '<b>'.'Manifesto: ' . '</b>'.'<br>'.$request->manifesto . '<br>'. 
+        '<b>'.'Comentário: '. '</b>'.'<br>'.$request->comentario. '<br>'. '<br>'. '<br>'.
+        'ROTINAS AUTOMÁTICAS GILIE - SIOUV';
+        $mail->send();
+
+        $request->session()->flash('corMensagem', 'success');
+        $request->session()->flash('tituloMensagem', "Cadastro realizado!");
+        $request->session()->flash('corpoMensagem', "O cadastro do Atende foi realizado com sucesso.");
+
+        DB::commit();
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Cadastro não efetuado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante o cadastro. Tente novamente");
+        }
+
+        return redirect("/gerencial/gestao-siouv");
+    }
+    public function apagariouvPar(Request $request, $siouv)
+    {
+    
+        try {
+            DB::beginTransaction();
+        
+        $apagarSiouvPar = Siouv::find($siouv);
+        $apagarSiouvPar->status  = "BAIXADO";
+        $apagarSiouvPar->save();
+
+        $request->session()->flash('corMensagem', 'success');
+        $request->session()->flash('tituloMensagem', "Siouv deletado!");
+        $request->session()->flash('corpoMensagem', "O Siouv foi deletado com sucesso.");
+
+        DB::commit();
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Não deletado");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a exclusão. Tente novamente");
+        }
+
+    return redirect("/gerencial/gestao-siouv");
     }
    
          
