@@ -532,8 +532,14 @@ Route::prefix('gerencial/gestao-siouv')->group(function () {
     Route::get('/', 'Siouv\siouvController@indexSiouv');
     // RETORNA UNIVERSO 
     Route::get('/lista-siouv', 'Siouv\siouvController@listaUniversoSiouv');
+    // RETORNA UNIVERSO 
+    Route::get('/lista-siouv-par', 'Siouv\siouvController@listaSiouvPAREmAberto');
     // CADASTRA DADOS SIOUV
     Route::post('/cadastra-siouv', 'Siouv\siouvController@cadastraDadosSiouv');
+    // CADASTRA DADOS SIOUV PAR
+    Route::post('/cadastra-siouv-par', 'Siouv\siouvController@cadastraDadosSiouvPar');
+    // APAGA DADOS SIOUV PAR
+    Route::post('/apagar-siouv-par/{siouv}', 'Siouv\siouvController@apagariouvPar');
     // MODELO WORD SAC
     Route::get('/modelo-sac/{siouv}', 'Siouv\siouvController@modeloSac');
     // MODELO WORD SIOUV
@@ -546,5 +552,7 @@ Route::prefix('gerencial/gestao-siouv')->group(function () {
     Route::get('/cria-ce', 'Siouv\siouvController@criaNumeroCE');
     // VIEW CE
     Route::get('/gestao-siouv-ce', 'Siouv\siouvController@pegaNumeroCE');
+    // LISTA COORDENADORES
+    Route::get('/lista-coordenadores', 'Siouv\siouvController@listaCoordenadores');
 
 });
