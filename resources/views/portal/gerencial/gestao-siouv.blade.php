@@ -97,6 +97,7 @@
                 <th>Nº Siouv</th>
                 <th>Contrato</th>
                 <th>Designado</th>
+                <th>Prazo</th>
               </tr>
             </thead>
             <tbody>

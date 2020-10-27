@@ -105,6 +105,7 @@ $(document).ready( function () {
                             <input type="hidden" name="prazo" value="${item.vencimento}">
                             <input type="hidden" name="email" value="${item.email}">
                             <input type="hidden" name="siouv" value="${item.numeroSiouv}">
+                            <input type="hidden" name="tipo" value="${item.tipo}">
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Contrato</label>
@@ -194,9 +195,49 @@ $(document).ready( function () {
             var listaDemandasDiarias =
                     `<tr>
                     <td>${item.tipo}</td>
-                    <td>${item.numeroSiouv}</td>
+                    <td>${item.numeroSiouv}
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalHistoricoSiouv${item.numeroSiouv}"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button>
+
+                    <div class="modal fade" id="modalHistoricoSiouv${item.numeroSiouv}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
+                                <h5 class="modal-title" style="color: white;">Siouv ${item.numeroSiouv}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Nome:</label>
+                                    <p>${item.Nome}</p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>CPF:</label>
+                                    <p>${item.CPF}</p>
+                                </div>
+
+                                <div class="form-group">
+                                <label>Manifesto:</label>
+                                <p>${item.manifesto}</p>
+                                </div>
+
+                                <div class="form-group">
+                                <label>Comentário:</label>
+                                <p>${item.comentario}</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </td>
                     <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.contrato}</a></td>
                     <td>${item.nomeEmpregado}</td>
+                    <td>${item.vencimento}</td>
                     </tr>`
 
         $(listaDemandasDiarias).appendTo('#tblSiouvTratados>tbody');

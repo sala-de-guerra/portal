@@ -277,66 +277,67 @@ function _formataDatatabFinalizados (idTabela){
     });
 };
 
-$.getJSON('listar-finalizados', function(dados){
-    $.each(dados, function(key, item) {
-    let atende = item.idAtende
-     var linha = 
-     `<tr>
-     <td>#`+pad(atende, 5)+`</td>
-     <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
-     <td>${item.nomeEquipe}</td>
-     <td>`+moment(item.dataAlteracao).format('DD/MM/YYYY')+`</td>
-     <td>${item.nomeAtividade}</td>
-     <td>${item.assuntoAtende}</td>
-     <td>${item.matriculaResponsavelAtividade}</td>`+
-     '<td>' + 
-     '<div class="btn-group" role="group">' +
-         '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-             'Ação' + 
-         '</button>' + 
+$('#custom-tabs-one-finalizado-tab').one("click", function() {
+    $.getJSON('listar-finalizados', function(dados){
+        $.each(dados, function(key, item) {
+        let atende = item.idAtende
+        var linha = 
+        `<tr>
+        <td>#`+pad(atende, 5)+`</td>
+        <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
+        <td>${item.nomeEquipe}</td>
+        <td>`+moment(item.dataAlteracao).format('DD/MM/YYYY')+`</td>
+        <td>${item.nomeAtividade}</td>
+        <td>${item.assuntoAtende}</td>
+        <td>${item.matriculaResponsavelAtividade}</td>`+
+        '<td>' + 
+        '<div class="btn-group" role="group">' +
+            '<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                'Ação' + 
+            '</button>' + 
 
-         // botão dropdown
-         '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
-         '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
-         '</div>' +
+            // botão dropdown
+            '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+            '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
+            '</div>' +
 
-         // Modal de consulta
-         '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-         '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
-             '<div class="modal-content">' +
-                 '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
-                     '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
-                     '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
-                         '<span aria-hidden="true">&times;</span>' +
-                     '</button>' +
-                 '</div>' +
-                 '<div class="modal-body">' +
-                     '<div class="container">' +
-                         '<div>' +
-                             '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
-                             '<p><b>'+'Descrição:'+'</b></p>'+
-                             '<textarea class="form-control" rows="5" disabled>'+ item.descricaoAtende +'</textarea>'+
-                         '</div><hr><br>' +
-                        '<div>'+
-                         '<p><b>'+'Resposta:'+'</b></p>'+
-                            '<p>'+ item.respostaAtende +'</p>'+
-                        '</div><br>' +
+            // Modal de consulta
+            '<div class="modal fade" id="Consulta' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+            '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                '<div class="modal-content">' +
+                    '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                        '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Consulta' + '</h5>' +
+                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                            '<span aria-hidden="true">&times;</span>' +
+                        '</button>' +
+                    '</div>' +
+                    '<div class="modal-body">' +
+                        '<div class="container">' +
+                            '<div>' +
+                                '<p><b>'+'Contrato:'+'</b>'+'<span class="pl-5">' + item.contratoFormatado + '</span></p>' +
+                                '<p><b>'+'Descrição:'+'</b></p>'+
+                                '<textarea class="form-control" rows="5" disabled>'+ item.descricaoAtende +'</textarea>'+
+                            '</div><hr><br>' +
+                            '<div>'+
+                            '<p><b>'+'Resposta:'+'</b></p>'+
+                                '<p>'+ item.respostaAtende +'</p>'+
+                            '</div><br>' +
 
-                     '</div>' + 
-                 '</div>' +
-                 '<div class="modal-footer">' +
-                     '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
-                 '</div>' + 
-             '</div>' + 
-         '</div>' + 
-     '</div>' +
-     '</td>' + 
- '</tr>'
+                        '</div>' + 
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                    '</div>' + 
+                '</div>' + 
+            '</div>' + 
+        '</div>' +
+        '</td>' + 
+    '</tr>'
 
- $(linha).appendTo('#tblAtendeFinalizado>tbody');
- })
- _formataDatatabFinalizados("tblAtendeFinalizado")
+    $(linha).appendTo('#tblAtendeFinalizado>tbody');
+    })
+    _formataDatatabFinalizados("tblAtendeFinalizado")
+    })
 })
-
 
 
