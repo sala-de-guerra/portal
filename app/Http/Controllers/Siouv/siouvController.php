@@ -83,17 +83,23 @@ class siouvController extends Controller
             ->join('TBL_SIOUV_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.numeroContrato)'))
             ->leftjoin('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))   
             ->select(DB::raw("
-            TBL_SIOUV.[tipo] as tipo,
+            TBL_SIOUV_DEMANDAS.[tipo] as tipo,
             TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
             TBL_ATENDE_DEMANDAS.[contratoFormatado] as contratoFormatado,
             TBL_ATENDE_DEMANDAS.[numeroContrato] as contrato,
             TBL_ATENDE_DEMANDAS.[contratoFormatado] as matriculaResponsavelAtividade,
-            TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado
+            TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado,
+            ISNULL(TBL_SIOUV.[vencimento], 'SIOUV Fechado / ATENDE Aberto') as vencimento,
+            TBL_SIOUV.[manifesto] as manifesto,
+            TBL_SIOUV.[comentario] as comentario,
+            TBL_SIOUV.[Nome] as Nome,
+            TBL_SIOUV.[CPF] as CPF,
+            TBL_SIOUV.[email] as email
             
             "))
             ->where('TBL_ATENDE_DEMANDAS.codigoUnidade', '=', $codigoUnidadeUsuarioSessao)
             ->where('TBL_ATENDE_DEMANDAS.statusAtende', '=', 'CADASTRADO')
-            ->where('TBL_ATENDE_DEMANDAS.idAtividade', '=', '4')
+            ->where('TBL_ATENDE_DEMANDAS.idAtividade', '=', '76')
             ->whereRaw('TBL_ATENDE_DEMANDAS.assuntoAtende = TBL_SIOUV_DEMANDAS.processo')
             ->get();
 
@@ -117,6 +123,7 @@ class siouvController extends Controller
         $novaDemandaAtende->idEquipe                        = '11';
         $novaDemandaAtende->idAtividade                     = '76';
         $novaDemandaAtende->numeroContrato                  = $request->cadastraContratoSiouv;
+        $novaDemandaAtende->tipo                            = $request->tipo;
         $novaDemandaAtende->assuntoAtende                   = $request->cadastraProcessolSiouv;
         $novaDemandaAtende->descricaoAtende                 = "Atenção: ao responder esta demanda ainda será necessário copiar a resposta no atender.caixa.". PHP_EOL .
                                                             "SIOUV: ". $request->siouv . PHP_EOL. PHP_EOL . $request->manifesto;

@@ -101,6 +101,9 @@
             <div class="tab-pane fade" id="custom-tabs-one-finalizado" role="tabpanel" aria-labelledby="custom-tabs-one-finalizado-tab">
                 <div class="card-body">
                     <div class="row">
+                        <div class="notice notice-warning">
+                            <strong>Finalizados: </strong> Últimos 250 Atendes finalizados
+                        </div>
                         <div class="col-sm-12">
                             <table id="tblAtendeFinalizado" class="table table-bordered table-striped dataTable">
                                   <thead>

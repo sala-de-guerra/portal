@@ -89,7 +89,7 @@ $(document).ready(function(){
                    '</div>'+
                '</div>'+
                '</div>'+
-               '<td class="formata-data-sem-horas" id="novoHistorico'+item.numeroContrato+'"></td>' +
+               '<td class="formata-data-sem-horas" id="novoHistorico'+item.numeroContrato+'">' + item.dataNovoHistorio + '</td>' +
             '</tr>';
 
             
@@ -109,14 +109,14 @@ $(document).ready(function(){
             //     $('.divBotao'+item.numeroContrato).show()
             // }
 
-            // if (item.tipoHistorico == "CONTRATACAO" || item.tipoHistorico == "DISTRATO" ||
-            //     item.tipoHistorico == "PAGAMENTO" || item.tipoHistorico == "PREPARACAO" ||
-            //     item.tipoHistorico == "CONFORMIDADE CONTRATAÇÃO" || item.tipoHistorico == "AVERBACAO" ||
-            //     item.tipoHistorico == "EMGEA" ||
-            //     item.tipoHistorico == "LEILÃO NEGATIVO" || item.tipoHistorico == "ATENDE") 
-            // {
-            //     $('#novoHistorico'+item.numeroContrato).text("")
-            //  }
+            if (item.tipoHistorico == "CONTRATACAO" || item.tipoHistorico == "DISTRATO" ||
+                item.tipoHistorico == "PAGAMENTO" || item.tipoHistorico == "PREPARACAO" ||
+                item.tipoHistorico == "CONFORMIDADE CONTRATAÇÃO" || item.tipoHistorico == "AVERBACAO" ||
+                item.tipoHistorico == "EMGEA" ||
+                item.tipoHistorico == "LEILÃO NEGATIVO" || item.tipoHistorico == "ATENDE") 
+            {
+                $('#novoHistorico'+item.numeroContrato).text("")
+             }
       
 
            
@@ -320,15 +320,8 @@ $(document).ready(function(){
 
         });
     })).done(function() {
-        // _formataDatas()
-        // _formataDatatableComData()
-        $.getJSON('/estoque-imoveis/conformidade-contratacao/listar-data-conformidade', function(dados){
-            $.each(dados, function(key, item) {
-                var dateTime = moment(item.dataAlteração).format("YYYY-MM-DD");
-                console.log("cheguei")
-                $('#novoHistorico'+ item.nuBem).text(item.dataAlteração)
-            })
-        }).done(function() { _formataDatatableComData()})
+        _formataDatas()
+        _formataDatatableComData()
     })
 
 })

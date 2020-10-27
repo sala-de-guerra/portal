@@ -325,22 +325,4 @@ public function listarContratosConformidade()
         // return json_encode($consultaContratosConformidade);
     }
 
-    public function listaDataConformidade()
-    {
-        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
-        $universoSiouv= DB::table('TBL_HISTORICO_PORTAL_GILIE')
-        ->leftjoin('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, TBL_HISTORICO_PORTAL_GILIE.numeroContrato)'))  
-            ->select(DB::raw("
-            TBL_HISTORICO_PORTAL_GILIE.[numeroContrato] as numeroContrato,
-            ALITB001_Imovel_Completo.[NU_BEM] as nuBem,
-            FORMAT(TBL_HISTORICO_PORTAL_GILIE.[updated_at],'dd/MM/yyyy') as dataAlteração,
-            TBL_HISTORICO_PORTAL_GILIE.[atividade] as atividade
-            
-            "))
-            ->where('TBL_HISTORICO_PORTAL_GILIE.atividade', 'CONFORMIDADE')
-             ->get();
-
-        return json_encode($universoSiouv);
-    }
-
 }
