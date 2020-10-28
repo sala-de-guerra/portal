@@ -144,7 +144,6 @@ class siouvController extends Controller
         $novaDemandaAtende->idEquipe                        = '11';
         $novaDemandaAtende->idAtividade                     = '76';
         $novaDemandaAtende->numeroContrato                  = $request->cadastraContratoSiouv;
-        $novaDemandaAtende->tipo                            = $request->tipo;
         $novaDemandaAtende->assuntoAtende                   = $request->cadastraProcessolSiouv;
         $novaDemandaAtende->descricaoAtende                 = "Atenção: ao responder esta demanda ainda será necessário copiar a resposta no atender.caixa.". PHP_EOL .
                                                             "SIOUV: ". $request->siouv . PHP_EOL. PHP_EOL . $request->manifesto;
@@ -362,8 +361,8 @@ class siouvController extends Controller
         // $mail->SMTPDebug = 2;
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
-        $mail->addAddress('c098453@mail.caixa');
-        $mail->addCC(session('matricula')."@mail.caixa");
+        $mail->addAddress($request->cadastraCoordenadorSiouv .'@mail.caixa');
+        $mail->addCC($request->cadastraResponsavelSiouv."@mail.caixa");
         $mail->addBCC('GILIESP09@caixa.gov.br');
 
         $mail->Subject = 'Você recebeu um direcionamento SIOUV - PAR';
