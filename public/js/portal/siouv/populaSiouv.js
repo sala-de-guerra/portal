@@ -199,7 +199,7 @@ $(document).ready( function () {
                                     </div>
                                     <div class="form-group">
                                         <label>Coordenador</label>
-                                        <select class="form-control" id="selectCoordenador${item.numeroSiouv}" name="cadastraResponsavelSiouv"></select>
+                                        <select class="form-control" id="selectCoordenador${item.numeroSiouv}" name="cadastraCoordenadorSiouv"></select>
                                     </div>
                                     <div class="form-group">
                                         <label>Responsável</label>
