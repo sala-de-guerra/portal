@@ -544,6 +544,8 @@ Route::prefix('gerencial/gestao-siouv')->group(function () {
     Route::get('/modelo-sac/{siouv}', 'Siouv\siouvController@modeloSac');
     // MODELO WORD SIOUV
     Route::get('/modelo-siouv/{siouv}', 'Siouv\siouvController@modeloSIOUV');
+    // MODELO WORD SIOUV VIEW ATENDE
+    Route::post('/modelo-siouv', 'Siouv\siouvController@modeloSIOUVviewAtende');
     // Responder Siouv
     Route::post('/responder-siouv', 'Siouv\siouvController@responderSiouv');
     // LISTA ATENDES COM STATUS DO DIA
@@ -554,5 +556,7 @@ Route::prefix('gerencial/gestao-siouv')->group(function () {
     Route::get('/gestao-siouv-ce', 'Siouv\siouvController@pegaNumeroCE');
     // LISTA COORDENADORES
     Route::get('/lista-coordenadores', 'Siouv\siouvController@listaCoordenadores');
+    // PEGA DATA E HORA DA CAPTURA
+    Route::get('/data-hora-captura', 'Siouv\siouvController@pegaDataEhora');
 
 });

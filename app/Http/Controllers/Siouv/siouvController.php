@@ -21,7 +21,15 @@ class siouvController extends Controller
 {
     public function indexSiouv()
     {  
-        return view('portal.gerencial.gestao-siouv');
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $pegaDataEhora= DB::table('TBL_SIOUV')  
+            ->select(DB::raw("
+            TBL_SIOUV.[created_at] as created_at
+            "))
+            ->where('TBL_SIOUV.unidade', '=', $codigoUnidadeUsuarioSessao)
+            ->latest()->get();
+
+        return view('portal.gerencial.gestao-siouv', compact('pegaDataEhora'));
     }
 
     public function listaUniversoSiouv()
@@ -107,8 +115,8 @@ class siouvController extends Controller
             ->select(DB::raw("
             TBL_SIOUV_DEMANDAS.[tipo] as tipo,
             TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
-            ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Contrato Par') as contratoFormatado,
-            TBL_SIOUV_DEMANDAS.[NU_BEM] as contrato,
+            ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Sem contrato') as contratoFormatado,
+            ISNULL(TBL_SIOUV_DEMANDAS.[NU_BEM], 'Sem contrato') as contrato,
             TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade,
             TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado,
             ISNULL(TBL_SIOUV.[vencimento], 'SIOUV Fechado / ATENDE Aberto') as vencimento,
@@ -178,6 +186,29 @@ class siouvController extends Controller
         $novoSiouv->dataCriacao                     = $date;
         $novoSiouv->tipo                            = $request->tipo;
         $novoSiouv->save();
+
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->CharSet = 'UTF-8'; 
+        $mail->isHTML(true);                                         
+        $mail->Host = 'sistemas.correiolivre.caixa';  
+        $mail->SMTPAuth = false;                                  
+        $mail->Port = 25;
+        // $mail->SMTPDebug = 2;
+        $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+        $mail->addReplyTo('GILIESP01@caixa.gov.br');
+        $mail->addAddress($request->cadastraCoordenadorSiouv .'@mail.caixa');
+        $mail->addBCC('GILIESP09@caixa.gov.br');
+
+        $mail->Subject = 'ATENDE - SIOUV direcionado para a sua equipe';
+        $mail->Body =  'SIOUV: '.$request->siouv . '<br><br>'. 
+        '<b>'.'Nome: ' . '</b>'.'<br>'.$request->nome . '<br>'. 
+        '<b>'.'CPF: ' . '</b>'.'<br>'.$request->cpf . '<br>'. 
+        '<b>'.'Contrato: ' . '</b>'.'<br>'.$request->cadastraContratoSiouv . '<br>'. 
+        '<b>'.'Manifesto: ' . '</b>'.'<br>'.$request->manifesto . '<br>'. 
+        '<b>'.'Comentário: '. '</b>'.'<br>'.$request->comentario. '<br>'. '<br>'. '<br>'.
+        'ROTINAS AUTOMÁTICAS GILIE - SIOUV';
+        $mail->send();
 
         $request->session()->flash('corMensagem', 'success');
         $request->session()->flash('tituloMensagem', "Cadastro realizado!");
@@ -365,7 +396,7 @@ class siouvController extends Controller
         $mail->addCC($request->cadastraResponsavelSiouv."@mail.caixa");
         $mail->addBCC('GILIESP09@caixa.gov.br');
 
-        $mail->Subject = 'Você recebeu um direcionamento SIOUV - PAR';
+        $mail->Subject = 'Você recebeu um direcionamento SIOUV - Sem contrato portal';
         $mail->Body =  'SIOUV: '.$request->siouv . '<br><br>'. 
         '<b>'.'Nome: ' . '</b>'.'<br>'.$request->nome . '<br>'. 
         '<b>'.'CPF: ' . '</b>'.'<br>'.$request->cpf . '<br>'. 
@@ -415,6 +446,84 @@ class siouvController extends Controller
         }
 
     return redirect("/gerencial/gestao-siouv");
+    }
+
+    public function pegaDataEhora()
+    {
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $pegaDataEhora= DB::table('TBL_SIOUV')  
+            ->select(DB::raw("
+            TBL_SIOUV.[created_at] as created_at
+            "))
+            ->where('TBL_SIOUV.unidade', '=', $codigoUnidadeUsuarioSessao)
+            ->get();
+
+            return json_encode($pegaDataEhora);
+    }
+
+    public function modeloSIOUVviewAtende(Request $request)
+    {  
+        try {
+
+        $novaCE = new numeroCE;
+        $novaCE->matricula = session('matricula');
+        $novaCE->save();
+
+        $idCe = DB::table('TBL_NUMERO_CE')->latest('idCe')->first();
+        $numeroCE = "CE GILIE/SP " . str_pad($idCe->idCe, 5, '0', STR_PAD_LEFT)."-04/".date("Y");
+
+        $dadosSiouv = DB::table('TBL_SIOUV')->where('numeroSiouv', $request->numeroSiouv)->first();
+        // $dadosDemandaSimov = Siouv::where('numeroSiouv', $siouv)->first();
+        $dadosEmpregado = DB::table('TBL_EMPREGADOS')->where('matricula', session('matricula'))->first();
+
+        setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+
+
+        header("Content-type: application/vnd.ms-word");
+        header("Content-Disposition: attachment;Filename=Siouv". $dadosSiouv->numeroSiouv . ".doc");
+
+        $word = "<html>
+        <meta http-equiv="."Content-Type"." content="."text/html"." charset="."utf-8".">
+        <img src=". asset('img/caixaPNG.png').">
+        <body>
+        ";
+
+
+        $word .= "
+        <p>$numeroCE</p>
+        <p><b>São Paulo, ".strftime('%d de %B de %Y', strtotime('today'))."</b></p>".
+        "<br>
+        <p>À<br>
+        CEOUV</p>".
+        "<p>Assunto: Ocorrência nº <b>". $dadosSiouv->numeroSiouv . "</b></p>".
+        "<p>Prezados Senhores,</p>".
+        "<p>1. Cumprimentando-vos cordialmente, em atenção à abertura de ocorrência de ouvidoria nº <b>". $dadosSiouv->numeroSiouv . "</b>, temos a informar:</p>
+        <p>2.	[CONTEÚDO DA RESPOSTA AQUI]</p>
+        <p>3. Permanecemos à disposição para dirimir eventuais dúvidas.</p>
+        <br>
+        <p>Atenciosamente,</p>
+        <br>".
+        $dadosEmpregado->nomeCompleto."<br>".
+        $dadosEmpregado->nomeFuncao.
+        "<p>XXXXXXXXX<br>
+        Coordenador</p>
+        <p>Marcelo Barboza Fernandes<br>
+        Gerente de Filial</p>
+        <p><b>GILIE/SP | GI ALIENAR BENS MOVEIS E IMOVEIS</b></p>
+        </html>";
+
+        return $word;
+        } catch (\Throwable $th) {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "ERRO");
+            $request->session()->flash('corpoMensagem', "Nº Siouv não localizado");
+
+            return back();
+        }
     }
    
          

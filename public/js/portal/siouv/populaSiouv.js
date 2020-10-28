@@ -29,6 +29,7 @@ function _formataDatatableComData (idTabela){
 
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
+
 $(document).ready( function () {
     $.getJSON('/gerencial/gestao-siouv/lista-siouv', function(dados){
         $.each(dados, function(key, item) {
@@ -117,6 +118,10 @@ $(document).ready( function () {
                                         <input type="number" name="cadastraContratoSiouv" class="form-control" aria-describedby="Numero Contrato" placeholder="Informe contrato sem pontuação" required>
                                     </div>
                                     <div class="form-group">
+                                    <label>Coordenador</label>
+                                        <select class="form-control" id="selectCoordenador${item.numeroSiouv}" name="cadastraCoordenadorSiouv"></select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Responsável</label>
                                         <select class="form-control" id="selectDestinatario${item.numeroSiouv}" name="cadastraResponsavelSiouv"></select>
                                     </div>
@@ -195,11 +200,11 @@ $(document).ready( function () {
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Contrato</label>
-                                        <input type="number" name="cadastraContratoSiouv" class="form-control" aria-describedby="Numero Contrato" placeholder="Informe contrato sem pontuação" required>
+                                        <input type="number" name="cadastraContratoSiouv" class="form-control" aria-describedby="Numero Contrato" placeholder="Informe contrato sem pontuação">
                                     </div>
                                     <div class="form-group">
                                         <label>Coordenador</label>
-                                        <select class="form-control" id="selectCoordenador${item.numeroSiouv}" name="cadastraCoordenadorSiouv"></select>
+                                        <select class="form-control" id="selectCoordenador2${item.numeroSiouv}" name="cadastraCoordenadorSiouv"></select>
                                     </div>
                                     <div class="form-group">
                                         <label>Responsável</label>
@@ -236,6 +241,14 @@ $(document).ready( function () {
                     $(redirect).appendTo('#selectDestinatario'+item.numeroSiouv);
                     })
                 })
+
+                $.getJSON('/gerencial/gestao-siouv/lista-coordenadores', function(dadosEmpregado){
+                    $.each(dadosEmpregado, function(empKey, empItem) {
+                        var redirect =
+                                    '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
+                    $(redirect).appendTo('#selectCoordenador'+item.numeroSiouv);
+                    })
+                })
             });
 
             $('#btnPar'+item.numeroSiouv).one("click", function() { 
@@ -243,7 +256,7 @@ $(document).ready( function () {
                     $.each(dadosEmpregado, function(empKey, empItem) {
                         var redirect =
                                     '<option value="'+empItem.matricula+'">'+empItem.nomeCompleto+'</option>'           
-                    $(redirect).appendTo('#selectCoordenador'+item.numeroSiouv);
+                    $(redirect).appendTo('#selectCoordenador2'+item.numeroSiouv);
                     })
                 })
 
@@ -401,6 +414,11 @@ $(document).ready( function () {
             height: 200,
             lang: "pt-BR" 
           });
+          $.getJSON('/gerencial/gestao-siouv/data-hora-captura', function(dados){
+            $.each(dados, function(key, item) {
+                $('#dataHoraCaptura').text(item.created_at + 'h')
+            })
+        })
     })
 });
 
