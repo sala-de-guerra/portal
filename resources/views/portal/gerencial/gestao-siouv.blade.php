@@ -36,7 +36,8 @@
     <div class="col-sm-4">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active"> <a href="/"> Principal</a> </li>
-            <li class="breadcrumb-item active"> Gestão Siouv</a> </li>
+            <li class="breadcrumb-item active"> Gerencial</li>
+            <li class="breadcrumb-item active"> Gestão Siouv</li>
         </ol>
     </div>
 </div>
@@ -46,7 +47,7 @@
 
 
 @section('content')
-
+<p>Data e hora da captura: <b><span id="dataHoraCaptura"></span></p></b>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Atender.Caixa</h3>

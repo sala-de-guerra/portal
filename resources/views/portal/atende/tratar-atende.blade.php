@@ -606,9 +606,14 @@
                                 <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCadastraMensagem">
                                     <i class="far fa-envelope"></i>
                                     Criar Modelo Mensagem
+                                </button> <br><br>
+
+                                <button type="button" style="background-color: #e47b22; color: white;" class="btn btn-link float-right" data-toggle="modal" data-target="#modalmodeloSiouv">
+                                    <i class="far fa-envelope"></i>
+                                    Modelo Siouv
                                 </button>                      
 
-                                <!-- Modal -->
+                                <!-- Modal Modelo de Mensagem-->
                                 <div class="modal fade modalCadastraAtendimento" id="modalCadastraMensagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
@@ -640,6 +645,33 @@
                                                 </div>
                                             </form>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Modelo de Siouv -->
+                                <div class="modal fade" id="modalmodeloSiouv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
+                                        <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Cria modelo SIOUV</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                         <form method="post" action="/gerencial/gestao-siouv/modelo-siouv">
+                                        {{ csrf_field() }}
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>Nº SIOUV</label>
+                                                <input type="number" name="numeroSiouv" class="form-control" aria-describedby="Numero Siouv" placeholder="Informe número SIOUV">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Criar mensagem</button>
+                                        </div>
+                                    </form>
+                                    </div>
                                     </div>
                                 </div>
 
