@@ -398,6 +398,8 @@ Route::post('tma/cancelar-chb/{chb}', 'TMA\vendaAVistaController@cancelarVendaAV
 Route::post('tma/aguarda-pagamento-chb/{chb}', 'TMA\vendaAVistaController@aguardaVendaAVista');
 //universo venda com financiamento
 Route::get('tma-venda-com-financimento', 'TMA\vendaFinanciadaController@universoVendaFinanciada');
+//universo Financiado SIOPI
+Route::get('tma-status-siopi/{cpf}', 'TMA\vendaFinanciadaController@listaContratosSIOPIcca');
 //Indicadores venda com financiamento
 Route::get('tma-indicadores-com-financimento', 'TMA\vendaFinanciadaController@indicadoresTMAfinanciado');
 //Indicadores venda à vista
@@ -558,5 +560,7 @@ Route::prefix('gerencial/gestao-siouv')->group(function () {
     Route::get('/lista-coordenadores', 'Siouv\siouvController@listaCoordenadores');
     // PEGA DATA E HORA DA CAPTURA
     Route::get('/data-hora-captura', 'Siouv\siouvController@pegaDataEhora');
+    // Testa Python
+    Route::get('/testaPython', 'Siouv\siouvController@testaPython');
 
 });
