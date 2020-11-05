@@ -78,9 +78,9 @@ $(document).ready( function () {
                     </td>
                     <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.contrato}</a></td>
                     <td>${item.responsavel}</td>
-                    <td>${item.vencimento}</td>
+                    <td>${moment(item.vencimento).format("DD/MM/YYYY")}</td>
                     <td>${item.processo}</td>
-                    <td><span data-toggle="tooltip" data-placement="top" title="Abrir atende">
+                    <td style="white-space:nowrap;"><span data-toggle="tooltip" data-placement="top" title="Abrir atende">
                     <button id="btnSiouv${item.numeroSiouv}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalSiouv${item.numeroSiouv}">
                         <i class="fas fa-headset"></i>
                     </button></span>
@@ -108,7 +108,8 @@ $(document).ready( function () {
                             <form method="post" action="/gerencial/gestao-siouv/cadastra-siouv">
                             <input type="hidden" name="_token" value="${csrfVar}">
                             <input type="hidden" name="manifesto" value="${item.manifesto}">
-                            <input type="hidden" name="prazo" value="${item.vencimento}">
+                            <input type="hidden" name="comentario" value="${item.comentario}">
+                            <input type="hidden" name="prazo" value="${moment(item.vencimento).format("DD/MM/YYYY")}">
                             <input type="hidden" name="email" value="${item.email}">
                             <input type="hidden" name="siouv" value="${item.numeroSiouv}">
                             <input type="hidden" name="tipo" value="${item.tipo}">
@@ -152,7 +153,8 @@ $(document).ready( function () {
                             <form method="post" action="/gerencial/gestao-siouv/responder-siouv">
                             <input type="hidden" name="_token" value="${csrfVar}">
                             <input type="hidden" name="manifesto" value="${item.manifesto}">
-                            <input type="hidden" name="prazo" value="${item.vencimento}">
+                            <input type="hidden" name="comentario" value="${item.comentario}">
+                            <input type="hidden" name="prazo" value="${moment(item.vencimento).format("DD/MM/YYYY")}">
                             <input type="hidden" name="email" value="${item.email}">
                             <input type="hidden" name="siouv" value="${item.numeroSiouv}">
                                 <div class="modal-body">
@@ -193,7 +195,7 @@ $(document).ready( function () {
                             <input type="hidden" name="comentario" value="${item.comentario}">
                             <input type="hidden" name="nome" value="${item.Nome}">
                             <input type="hidden" name="cpf" value="${item.CPF}">
-                            <input type="hidden" name="prazo" value="${item.vencimento}">
+                            <input type="hidden" name="prazo" value="${moment(item.vencimento).format("DD/MM/YYYY")}">
                             <input type="hidden" name="email" value="${item.email}">
                             <input type="hidden" name="siouv" value="${item.numeroSiouv}">
                             <input type="hidden" name="tipo" value="${item.tipo}">
@@ -318,6 +320,7 @@ $(document).ready( function () {
                     <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.contrato}</a></td>
                     <td>${item.nomeEmpregado}</td>
                     <td>${item.vencimento}</td>
+                    <td>${item.processo}</td>
                     </tr>`
 
         $(listaDemandasDiarias).appendTo('#tblSiouvTratados>tbody');
@@ -368,7 +371,7 @@ $(document).ready( function () {
                             </div>
                             </div>
                         </td>
-                        <td>${item.contrato}
+                        <td style="white-space:nowrap;">${item.contrato}
                         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#apagarSiouvPar${item.numeroSiouv}"><i style="color: #054f77; font-size: 13pt;" class="fas fa-eraser"></i></button>
 
                         <div class="modal fade" id="apagarSiouvPar${item.numeroSiouv}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -400,11 +403,13 @@ $(document).ready( function () {
                         </td>
                         <td>${item.nomeEmpregado}</td>
                         <td>${item.vencimento}</td>
+                        <td>${item.processo}</td>
                         </tr>`
     
             $(listaDemandasDiarias).appendTo('#tblSiouvTratados>tbody');
             })
         })
+        $('.spinnerTblDistribuido').remove()
     })
         
     }).done(function() {

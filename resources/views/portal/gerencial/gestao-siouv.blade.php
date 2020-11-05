@@ -87,10 +87,10 @@
         <strong>Distribuidos: </strong> SIOUV que foi distribuido e NÃO respondido
     </div>
     <div class="card-body">
-        <div class="spinner-border spinnerTbl text-primary" role="status">
+        <div class="spinner-border spinnerTblDistribuido text-primary" role="status">
             <span class="sr-only"></span>
         </div>
-            <span class="spinnerTbl">Carregando Tabela Aguarde...</span>
+            <span class="spinnerTblDistribuido">Carregando Tabela Aguarde...</span>
         <table id="tblSiouvTratados" class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -99,6 +99,7 @@
                 <th>Contrato</th>
                 <th>Designado</th>
                 <th>Prazo</th>
+                <th>Processo</th>
               </tr>
             </thead>
             <tbody>

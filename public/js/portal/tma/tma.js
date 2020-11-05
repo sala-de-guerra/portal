@@ -45,14 +45,14 @@ function _formataDatatableComId (idTabela){
     });
 };
 
-var contador = 0;
-var totalDiasDecorridos = 0;
+var contadorAvista = 0;
+var totalDiasDecorridosAvista = 0;
 $(document).ready(function(){
     $.getJSON('/tma-venda-a-vista', function(dados){
         $.each(dados, function(key, item) {
           if (item.baixaEfetuada == null){
-            contador += 1;
-            totalDiasDecorridos =  totalDiasDecorridos + Number(item.DIAS_DECORRIDOS);
+            contadorAvista += 1;
+            totalDiasDecorridosAvista =  totalDiasDecorridosAvista + Number(item.DIAS_DECORRIDOS);
           }
             var linha =
                 `<tr>
@@ -370,8 +370,8 @@ $(document).ready(function(){
             }
         )}  
     ).done(function() {
-        var media = totalDiasDecorridos / contador
-        $('#mediaAvista').text(Math.round(media));
+        let mediaAvista = totalDiasDecorridosAvista / contadorAvista
+        $('#mediaAvista').text(Math.round(mediaAvista));
         _formataDatatableComId('tblTma');
         $('.spinnerTbl').remove();
     })
