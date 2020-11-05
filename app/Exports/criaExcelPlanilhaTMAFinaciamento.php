@@ -26,13 +26,13 @@ class criaExcelPlanilhaTMAFinaciamento implements FromCollection, WithHeadings, 
 
     public function collection()
     {
+        // FORMAT(CONVERT(DECIMAL(10,2), REPLACE(TBL_PAGAMENTOS_BOLETOS_CUB01.[VALOR_TOTAL_BOLETO_PAGO], ',', '.')), 'N', 'pt-BR') AS PAGAMENTO_BOLETO,
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
         $universoFinanciamento= DB::table('TBL_VENDA_FINANCIADO')
             ->join('TBL_PAGAMENTOS_BOLETOS_CUB01', DB::raw('CONVERT(VARCHAR, TBL_PAGAMENTOS_BOLETOS_CUB01.NUMERO_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NU_BEM)'))
             ->select(DB::raw("
                 TBL_VENDA_FINANCIADO.[BEM_FORMATADO] as BEM_FORMATADO,
-                FORMAT(CONVERT(DECIMAL(10,2), REPLACE(TBL_PAGAMENTOS_BOLETOS_CUB01.[VALOR_TOTAL_BOLETO_PAGO], ',', '.')), 'N', 'pt-BR') AS PAGAMENTO_BOLETO,
                 TBL_VENDA_FINANCIADO.[DIAS_DECORRIDOS] as DIAS_DECORRIDOS,
                 TBL_VENDA_FINANCIADO.[CLASSIFICACAO] as CLASSIFICACAO,
                 TBL_VENDA_FINANCIADO.[TIPO_VENDA] as tipoVenda,
@@ -52,7 +52,6 @@ class criaExcelPlanilhaTMAFinaciamento implements FromCollection, WithHeadings, 
 
         return [
             ['BEM',
-            'Pagamento',
             'Dias Decorridos',
             'Classificação',
             'Tipo Venda',

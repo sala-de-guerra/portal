@@ -44,7 +44,7 @@ class siouvController extends Controller
             ISNULL(TBL_SIOUV_DEMANDAS.[contratoFormatado], 'Não Cadastrado') as contratoFormatado,
             ISNULL(TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade], 'Não Cadastrado') as responsavel,
             ISNULL(TBL_SIOUV_DEMANDAS.[processo], 'Não Cadastrado') as processo,
-            TBL_SIOUV.[vencimento] as vencimento,
+            DATEADD(day, -1, convert(date, TBL_SIOUV.[vencimento], 103)) as vencimento,
             TBL_SIOUV.[manifesto] as manifesto,
             TBL_SIOUV.[comentario] as comentario,
             TBL_SIOUV.[Nome] as Nome,
@@ -90,6 +90,7 @@ class siouvController extends Controller
             TBL_ATENDE_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade,
             TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado,
             ISNULL(TBL_SIOUV.[vencimento], 'SIOUV Fechado / ATENDE Aberto') as vencimento,
+            TBL_SIOUV_DEMANDAS.[processo] as processo,
             TBL_SIOUV.[manifesto] as manifesto,
             TBL_SIOUV.[comentario] as comentario,
             TBL_SIOUV.[Nome] as Nome,
@@ -98,9 +99,10 @@ class siouvController extends Controller
             
             "))
             ->where('TBL_ATENDE_DEMANDAS.codigoUnidade', '=', $codigoUnidadeUsuarioSessao)
-            ->where('TBL_ATENDE_DEMANDAS.statusAtende', '=', 'CADASTRADO')
+            ->where('TBL_ATENDE_DEMANDAS.statusAtende', '!=', 'FINALIZADO')
             ->where('TBL_ATENDE_DEMANDAS.idAtividade', '=', '76')
             ->whereRaw('TBL_ATENDE_DEMANDAS.assuntoAtende = TBL_SIOUV_DEMANDAS.processo')
+            ->orderBy('vencimento','ASC')
             ->get();
 
         return json_encode($universoSiouv);
@@ -120,6 +122,7 @@ class siouvController extends Controller
             TBL_SIOUV_DEMANDAS.[matriculaResponsavelAtividade] as matriculaResponsavelAtividade,
             TBL_EMPREGADOS.[nomeCompleto] as nomeEmpregado,
             ISNULL(TBL_SIOUV.[vencimento], 'SIOUV Fechado / ATENDE Aberto') as vencimento,
+            TBL_SIOUV_DEMANDAS.[processo] as processo,
             TBL_SIOUV.[manifesto] as manifesto,
             TBL_SIOUV.[comentario] as comentario,
             TBL_SIOUV.[Nome] as Nome,
@@ -171,7 +174,7 @@ class siouvController extends Controller
         $historico->tipo            = "CADASTRO";
         $historico->atividade       = "ATENDE";
         $historico->observacao      = "CADASTRO DO ATENDE #" . str_pad($novaDemandaAtende->idAtende, 5, '0', STR_PAD_LEFT) . " - SIOUV: " . "<br>" .
-            "<b>". "Assunto: " . "</b>" . $request->cadastraProcessolSiouv . "<br>" . "<b>"."Descrição do SIOUV: ". "</b>" . "<br>". $request->manifesto;
+            "<b>". "Assunto: " . "</b>" . $request->cadastraProcessolSiouv . "<br>" . "<b>"."Descrição do SIOUV " . $request->siouv . ":". "</b>" . "<br>". $request->manifesto;
         $historico->created_at      = date("Y-m-d H:i:s", time());
         $historico->updated_at      = date("Y-m-d H:i:s", time());
         $historico->save();

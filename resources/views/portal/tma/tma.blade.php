@@ -151,7 +151,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="notice notice-success"> 
-                                            <strong>TMA: <span id="mediaFinanciado"></span><span id="mediaTmaFinanciado"></span></strong><a href="/tma/baixar-planilha-tma-financiamento"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA com Financiamento &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+                                            <strong>TMA: <span id="mediaFinanciado"></span></strong><a href="/tma/baixar-planilha-tma-financiamento"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha TMA com Financiamento &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                                         &nbsp&nbsp&nbsp&nbsp&nbsp
 
                                         <strong>TMA CCA: <span id="mediaFinanciadoCCA"></span></strong>

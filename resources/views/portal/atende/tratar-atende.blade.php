@@ -749,6 +749,7 @@
                                                     <input type="hidden" name="descricaoAtende" value="{{$listaDemandasAtende->descricaoAtende}}">
                                                     <input type="hidden" name="matriculaCriadorDemanda" value="{{$listaDemandasAtende->matriculaCriadorDemanda}}">
                                                     <input type="hidden" name="contratoFormatado" value="{{$listaDemandasAtende->contratoFormatado}}">
+                                                    <input type="hidden" name="contratoSemFormatacao" value="{{$listaDemandasAtende->numeroContrato}}">
                                                     <input type="hidden" name="numAtende" value="{{$listaDemandasAtende->idAtende}}">
                                                 </div>
                                                         

@@ -471,7 +471,7 @@ class AtendeDemandasController extends Controller
                 $_FILES['arquivo']['name']);
               }
 
-            $mail->Subject = 'Resposta Atende #'. str_pad($request->numAtende, 5, '0', STR_PAD_LEFT);
+            $mail->Subject = 'Resposta Atende #'. str_pad($request->numAtende, 5, '0', STR_PAD_LEFT) . " - Contrato: " . $request->contratoSemFormatacao;
             $mail->Body = "<h3> Você recebeu uma resposta do Atende: #". str_pad($request->numAtende, 5, '0', STR_PAD_LEFT) . "</h3><br>".
             "<b>Resposta Atende </b>: " . "<br><br>" . $request->respostaAtende."<br><br>".
             'Esta demanda foi respondida por: '.  session()->get('nomeCompleto'). '- '  .  session('matricula') . "<br>" .
