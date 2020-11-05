@@ -16,6 +16,8 @@ use App\Models\Siouv\Siouv;
 use App\Models\Siouv\numeroCE;
 use App\Models\Atende;
 use App\Classes\DiasUteisClass;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class siouvController extends Controller
 {
@@ -269,6 +271,13 @@ class siouvController extends Controller
 
     public function modeloSIOUV($siouv)
     {  
+        $novaCE = new numeroCE;
+        $novaCE->matricula = session('matricula');
+        $novaCE->save();
+
+        $idCe = DB::table('TBL_NUMERO_CE')->latest('idCe')->first();
+        $numeroCE = "CE GILIE/SP " . str_pad($idCe->idCe, 5, '0', STR_PAD_LEFT)."-04/".date("Y");
+
         $dadosSiouv = DB::table('TBL_SIOUV')->where('numeroSiouv', $siouv)->first();
         // $dadosDemandaSimov = Siouv::where('numeroSiouv', $siouv)->first();
         $dadosEmpregado = DB::table('TBL_EMPREGADOS')->where('matricula', session('matricula'))->first();
@@ -288,7 +297,7 @@ class siouvController extends Controller
 
 
         $word .= "
-        <p>[COPIAR NÚMERO CE]</p>
+        <p>$numeroCE</p>
         <p><b>São Paulo, ".strftime('%d de %B de %Y', strtotime('today'))."</b></p>".
         "<br>
         <p>À<br>
@@ -524,6 +533,18 @@ class siouvController extends Controller
 
             return back();
         }
+    }
+
+    public function testaPython()
+    {
+        $process = new Process(['python', 'python/oi.py']);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        echo $process->getOutput();
     }
    
          

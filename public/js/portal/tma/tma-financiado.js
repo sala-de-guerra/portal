@@ -64,7 +64,45 @@ $(document).ready(function(){
                     <td>${item.PAGAMENTO_BOLETO}</td>
                     <td>${item.DIAS_DECORRIDOS}</td>
                     <td id="nomeProponente${item.NU_BEM}">${item.NOME_PROPONENTE}</td>
-                    <td style="white-space:nowrap;">${item.CPF_CNPJ_PROPONENTE}</td>
+                    <td style="white-space:nowrap;">${item.CPF_CNPJ_PROPONENTE}
+                    <button type="button" id="btnSiopi${item.NU_BEM}" class="btn btn-link" data-toggle="modal" data-target="#modalConsultaSiopi${item.NU_BEM}"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button>
+                    
+                    <div class="modal fade" id="modalConsultaSiopi${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
+                            <h5 class="modal-title" style="color: white;">CPF ${item.CPF_CNPJ_PROPONENTE}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group" id="siopiCapturado${item.NU_BEM}">
+                              <table id="siopiCapturado${item.NU_BEM}" class="table table-bordered table-striped">
+                                  <thead>
+                                      <tr>
+                                          <th>Contrato</th>
+                                          <th>Etapa</th>
+                                          <th>Proponente Principal</th>
+                                          <th>Nº Proposta</th>
+                                          <th>Situação</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+        
+                                  </tbody>
+                              </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    
+                    </td>
                     <td id="colunacca${item.NU_BEM}">${item.ACEITA_CCA}</td>
                     <td style="white-space:nowrap;">
                     <div class="dropdown">
@@ -281,6 +319,26 @@ $(document).ready(function(){
               if ($('#colunacca' +item.NU_BEM).text() == 'null'){
                 $('#colunacca' +item.NU_BEM).text('Nao')
               }
+
+              $("#btnSiopi" + item.NU_BEM).one("click", function() {
+                var nuBem = item.NU_BEM
+                $.getJSON('/tma-status-siopi/'+ item.CPF_CNPJ_PROPONENTE, function(dados){
+                  $.each(dados, function(Key, item) {
+                      var listarStatusSiouv =
+                      `<tr>
+                        <td>${item.Contrato}</td>
+                        <td>${item.etapa}</td>
+                        <td>${item.proponentePrincipal}</td>
+                        <td>${item.numeroProposta}</td>
+                        <td>${item.situacao}</td>
+                      </tr>`
+                    console.log(nuBem)
+                      $(listarStatusSiouv).appendTo(`#siopiCapturado${nuBem}>tbody`);
+                  })
+                })
+              })
+
+
               $('#formBaixar'+item.NU_BEM).submit( function(e) {
                 e.preventDefault();
                 let datas = JSON.stringify( $(this).serialize() );
