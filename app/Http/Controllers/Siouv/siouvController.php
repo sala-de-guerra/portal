@@ -82,7 +82,7 @@ class siouvController extends Controller
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $universoSiouv= DB::table('TBL_ATENDE_DEMANDAS')
             ->join('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade)'))  
-            ->join('TBL_SIOUV_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.numeroContrato)'))
+            ->leftjoin('TBL_SIOUV_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.numeroSiouv)'))
             ->leftjoin('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))   
             ->select(DB::raw("
             TBL_SIOUV_DEMANDAS.[tipo] as tipo,
@@ -167,6 +167,7 @@ class siouvController extends Controller
         $novaDemandaAtende->dataCadastro                    = date("Y-m-d H:i:s", time());
         $novaDemandaAtende->dataAlteracao                   = date("Y-m-d H:i:s", time());
         $novaDemandaAtende->emailContatoResposta            = $request->email;
+        $novaDemandaAtende->numeroSiouv                     = $request->siouv;
         $novaDemandaAtende->save();
 
         // CADASTRA HISTÓRICO
@@ -202,7 +203,7 @@ class siouvController extends Controller
         // $mail->SMTPDebug = 2;
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
-        $mail->addAddress($request->cadastraCoordenadorSiouv .'@mail.caixa');
+        $mail->addAddress($request->cadastraCoordenadorSiouv .'@corp.caixa.gov.br');
         $mail->addBCC('GILIESP09@caixa.gov.br');
 
         $mail->Subject = 'ATENDE - SIOUV direcionado para a sua equipe';
@@ -340,7 +341,7 @@ class siouvController extends Controller
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
         $mail->addAddress( $request->email);
-        $mail->addCC(session('matricula')."@mail.caixa");
+        $mail->addCC(session('matricula')."@corp.caixa.gov.br");
         $mail->addBCC('GILIESP09@caixa.gov.br');
 
         $mail->Subject = 'Você recebeu uma resposta de GILIE/SP';
@@ -404,8 +405,8 @@ class siouvController extends Controller
         // $mail->SMTPDebug = 2;
         $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
         $mail->addReplyTo('GILIESP01@caixa.gov.br');
-        $mail->addAddress($request->cadastraCoordenadorSiouv .'@mail.caixa');
-        $mail->addCC($request->cadastraResponsavelSiouv."@mail.caixa");
+        $mail->addAddress($request->cadastraCoordenadorSiouv .'@corp.caixa.gov.br');
+        $mail->addCC($request->cadastraResponsavelSiouv."@corp.caixa.gov.br");
         $mail->addBCC('GILIESP09@caixa.gov.br');
 
         $mail->Subject = 'Você recebeu um direcionamento SIOUV - Sem contrato portal';
@@ -540,7 +541,7 @@ class siouvController extends Controller
 
     public function testaPython()
     {
-        $process = new Process(['python', 'python/oi.py']);
+        $process = new Process(['python', 'python/novo_with_pandas.py']);
         $process->run();
 
         if (!$process->isSuccessful()) {

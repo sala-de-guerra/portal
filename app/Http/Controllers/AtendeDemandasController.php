@@ -324,7 +324,7 @@ class AtendeDemandasController extends Controller
                 // $mail->SMTPDebug = 2;
                 $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
                 $mail->addReplyTo('GILIESP01@caixa.gov.br');
-                $mail->addAddress($novaDemandaAtende->matriculaResponsavelAtividade . '@mail.caixa');
+                $mail->addAddress($novaDemandaAtende->matriculaResponsavelAtividade . '@corp.caixa.gov.br');
     
                 $mail->Subject = 'Você recebeu um direcionamento de atende';
                 $mail->Body = $mensagem;
@@ -348,7 +348,7 @@ class AtendeDemandasController extends Controller
                 $mailAbertura->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
                 $mailAbertura->addReplyTo('GILIESP01@caixa.gov.br');
                 if ($novaDemandaAtende->emailContatoResposta == "null" || $novaDemandaAtende->emailContatoResposta == null){
-                    $mailAbertura->addAddress($novaDemandaAtende->matriculaCriadorDemanda. "@mail.caixa");
+                    $mailAbertura->addAddress($novaDemandaAtende->matriculaCriadorDemanda. "@corp.caixa.gov.br");
                     }else {
                     $mailAbertura->addAddress($novaDemandaAtende->emailContatoResposta);
                 }
@@ -446,7 +446,7 @@ class AtendeDemandasController extends Controller
             $mail->setFrom('GILIESP01@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
             $mail->addReplyTo('GILIESP01@caixa.gov.br');
             if ($request->emailContatoResposta == "null" || $request->emailContatoResposta == null){
-            $mail->addAddress($request->matriculaCriadorDemanda. "@mail.caixa");
+            $mail->addAddress($request->matriculaCriadorDemanda. "@corp.caixa.gov.br");
             }else {
             $mail->addAddress($request->emailContatoResposta);
             }
