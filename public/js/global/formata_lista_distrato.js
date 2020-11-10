@@ -224,6 +224,7 @@ function _formataListaDistrato (numeroContrato, view) {
                                                         '<option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>' +
                                                         '<option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>' +
                                                         '<option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>' +
+                                                        '<option value="DANOS ESTRUTURAIS/NÃO ACEITO COMO GARANTIA">DANOS ESTRUTURAIS/NÃO ACEITO COMO GARANTIA</option>' +
                                                         '<option value="DESISTENCIA">DESISTÊNCIA</option>' +
                                                         '<option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>' +
                                                         '<option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>' +
@@ -468,6 +469,7 @@ function _formataListaDistrato (numeroContrato, view) {
                                                         '<option value="ACAO JUDICIAL IMPEDITIVA">AÇÃO JUDICIAL IMPEDITIVA</option>' +
                                                         '<option value="ACAO JUDICIAL NAO IMPEDITIVA">AÇÃO JUDICIAL NÃO IMPEDITIVA</option>' +
                                                         '<option value="CREDITO NAO APROVADO">CRÉDITO NÃO APROVADO</option>' +
+                                                        '<option value="DANOS ESTRUTURAIS/NÃO ACEITO COMO GARANTIA">DANOS ESTRUTURAIS/NÃO ACEITO COMO GARANTIA</option>' +
                                                         '<option value="DESISTENCIA">DESISTÊNCIA</option>' +
                                                         '<option value="DISTRATO CANCELADO">DISTRATO CANCELADO</option>' +
                                                         '<option value="DIREITO DE PREFERENCIA DO EX-MUTUARIO">DIREITO DE PREFERÊNCIA DO EX-MUTUÁRIO</option>' +

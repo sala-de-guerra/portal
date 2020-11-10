@@ -260,15 +260,15 @@ class vendaFinanciadaController extends Controller
     {
         $listaContratosSIOPIcca= DB::table('TBL_STATUS_SIOPI')
             ->select(DB::raw("
-            TBL_TESTE_SIOPI.[CPF] as cpf,
-            TBL_TESTE_SIOPI.[Contrato] as Contrato,
-            TBL_TESTE_SIOPI.[etapa] as etapa,
-            TBL_TESTE_SIOPI.[numeroProposta] as numeroProposta,
-            TBL_TESTE_SIOPI.[proponentePrincipal] as proponentePrincipal,
-            TBL_TESTE_SIOPI.[situacao] as situacao
+            TBL_STATUS_SIOPI.[CPF] as cpf,
+            ISNULL(TBL_STATUS_SIOPI.[Contrato], 'Sem contrato') as Contrato,
+            TBL_STATUS_SIOPI.[etapa] as etapa,
+            TBL_STATUS_SIOPI.[numeroProposta] as numeroProposta,
+            TBL_STATUS_SIOPI.[proponentePrincipal] as proponentePrincipal,
+            TBL_STATUS_SIOPI.[situacao] as situacao
             
             "))
-             ->where('TBL_TESTE_SIOPI.cpf', '=', $cpf)
+             ->where('TBL_STATUS_SIOPI.cpf', '=', $cpf)
              ->get();
         return json_encode($listaContratosSIOPIcca);
     }

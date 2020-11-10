@@ -187,7 +187,7 @@ function Atende ()
                                     <input type="email" class="form-control" name="emailContatoResposta" aria-describedby="emailHelp" placeholder="email">
                                     <small class="form-text text-muted">Preencha este campo caso deseje <b>direcionar</b> a resposta.</small>
                                     <small class="form-text text-muted">este campo em branco, a resposta irá para quem efetuou a abertura do atende.</small>
-                                    <small class="form-text text-muted">envio para email caixa deve seguir o padrao c999999@<b>mail.caixa</b> ou a9999@<b>mail.caixa</b>.</small>
+                                    <small class="form-text text-muted">envio para email caixa deve seguir o padrao c999999@<b>corp.caixa.gov.br</b> ou ag9999@<b>caixa.gov.br</b>.</small>
 
                                 </div>
                                 <button style="float: right;" onclick="addCopia()" type="button" class="btn btn-link">Adicionar cópia de email</button><br>

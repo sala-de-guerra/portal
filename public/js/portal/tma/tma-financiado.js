@@ -332,7 +332,6 @@ $(document).ready(function(){
                         <td>${item.numeroProposta}</td>
                         <td>${item.situacao}</td>
                       </tr>`
-                    console.log(nuBem)
                       $(listarStatusSiouv).appendTo(`#siopiCapturado${nuBem}>tbody`);
                   })
                 })
