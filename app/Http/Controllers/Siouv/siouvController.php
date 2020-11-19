@@ -72,6 +72,7 @@ class siouvController extends Controller
       "))
         ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', $codigoUnidadeUsuarioSessao)
         ->where('TBL_EMPREGADOS.nomeFuncao', 'COORDENADOR CENTR FILIAL')
+        ->Orwhere('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
         ->get(); 
         
         return json_encode($equipe);
@@ -82,8 +83,8 @@ class siouvController extends Controller
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $universoSiouv= DB::table('TBL_ATENDE_DEMANDAS')
             ->join('TBL_EMPREGADOS', DB::raw('CONVERT(VARCHAR, TBL_EMPREGADOS.matricula)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade)'))  
-            ->leftjoin('TBL_SIOUV_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.numeroSiouv)'))
-            ->leftjoin('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))   
+            ->join('TBL_SIOUV_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.numeroSiouv)'))
+            ->join('TBL_SIOUV', DB::raw('CONVERT(VARCHAR, TBL_SIOUV.numeroSiouv)'), '=', DB::raw('CONVERT(VARCHAR, TBL_SIOUV_DEMANDAS.numeroSiouv)'))   
             ->select(DB::raw("
             TBL_SIOUV_DEMANDAS.[tipo] as tipo,
             TBL_SIOUV_DEMANDAS.[numeroSiouv] as numeroSiouv,
@@ -106,8 +107,9 @@ class siouvController extends Controller
             ->whereRaw('TBL_ATENDE_DEMANDAS.assuntoAtende = TBL_SIOUV_DEMANDAS.processo')
             ->orderBy('vencimento','ASC')
             ->get();
-
-        return json_encode($universoSiouv);
+        
+        $retiraDuplicado = $universoSiouv->unique('numeroSiouv');
+        return json_encode($retiraDuplicado);
     }
 
     public function listaSiouvPAREmAberto()

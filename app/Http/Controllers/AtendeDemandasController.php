@@ -560,6 +560,26 @@ class AtendeDemandasController extends Controller
             // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
             $redirecionarAtende->save();
 
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->CharSet = 'UTF-8'; 
+            $mail->isHTML(true);                                         
+            $mail->Host = 'sistemas.correiolivre.caixa';  
+            $mail->SMTPAuth = false;                                  
+            $mail->Port = 25;
+            // $mail->SMTPDebug = 2;
+            $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+            $mail->addReplyTo('GILIESP01@caixa.gov.br');
+            $mail->addAddress($request->matriculaResponsavelAtividade . '@corp.caixa.gov.br');
+
+            $mail->Subject = 'Você recebeu um redirecionamento de atende';
+            $mail->Body = "<B>AVISO DO PORTAL GILIE - Você recebeu um redirecionamento de atende </B>" . "<br><br>".
+            session('matricula') . " - redirecionou o atende #". str_pad($redirecionarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " para você" ."<br><br>" .
+            "<b>Motivo do redirecionamento: </b>"."<br><br>".
+            $request->motivoRedirecionamento;
+            $mail->send();
+
+
             // RETORNA A FLASH MESSAGE
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Atende redirecionado!");

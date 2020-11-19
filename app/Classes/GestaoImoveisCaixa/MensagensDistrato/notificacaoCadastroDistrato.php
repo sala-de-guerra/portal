@@ -91,7 +91,7 @@
                 <td>1.1</td>
                 <td class="pl-20px">
                     A GILIE/SP irá executar a pré-análise desta demanda e reserva-se o 
-                    direito de solicitar maiores informações ou docuumentos durante o processo de análise.
+                    direito de solicitar maiores informações ou documentos durante o processo de análise.
                 </td>
             </tr>
             <br>
