@@ -38,7 +38,8 @@ class criaExcelPlanilhaTMAFinaciamento implements FromCollection, WithHeadings, 
                 TBL_VENDA_FINANCIADO.[TIPO_VENDA] as tipoVenda,
                 TBL_VENDA_FINANCIADO.[NOME_PROPONENTE] as NOME_PROPONENTE,
                 TBL_VENDA_FINANCIADO.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
-                TBL_VENDA_FINANCIADO.[PAGAMENTO_BOLETO] as cancelamento        
+                TBL_VENDA_FINANCIADO.[PAGAMENTO_BOLETO] as cancelamento,
+                TBL_VENDA_FINANCIADO.[ACEITA_CCA] as ACEITA_CCA     
     
             "))
              ->where('TBL_VENDA_FINANCIADO.UNA', '=', $siglaGilie)
@@ -57,7 +58,8 @@ class criaExcelPlanilhaTMAFinaciamento implements FromCollection, WithHeadings, 
             'Tipo Venda',
             'Proponente',
             'CPF/CNPJ',
-            "Cancelamento"
+            "Cancelamento",
+            "CCA"
             ],
         ];
     }

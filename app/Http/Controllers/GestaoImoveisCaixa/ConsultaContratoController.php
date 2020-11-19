@@ -209,6 +209,7 @@ class ConsultaContratoController extends Controller
             'dataLaudoAvaliacao'                                => Carbon::parse($contrato->DATA_LAUDO)->format('Y-m-d'),
             'dataValidadeLaudoAvaliacao'                        => Carbon::parse($contrato->DATA_VENCIMENTO_LAUDO)->format('Y-m-d'),
             'estadoOcupacao'                                    => $contrato->ESTADO_OCUPACAO,
+            'uno'                                               => $contrato->UNO,
 
             // LEILÕES
             'valorPrimeiroLeilao'                               => $contrato->VALOR_PRIMEIRO_LEILAO,
