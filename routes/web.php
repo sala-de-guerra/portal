@@ -564,3 +564,12 @@ Route::prefix('gerencial/gestao-siouv')->group(function () {
     Route::get('/testaPython', 'Siouv\siouvController@testaPython');
 
 });
+
+Route::prefix('/contratacao/controle-sap')->group(function () {
+    // RETORNA VIEW SAP
+    Route::get('/', 'SAP\sapController@indexSap');
+    // RETORNA UNIVERSO SAP A VISTA
+    Route::get('/lista-universo', 'SAP\sapController@listaUniversoSAP');
+    // RETORNA PLANILHA EXCEL GERAL
+    Route::get('/baixa-lista-sap-geral', 'SAP\sapController@criaPlanilhaExcelSapGeral');
+});
