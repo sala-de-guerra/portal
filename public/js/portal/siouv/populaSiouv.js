@@ -369,7 +369,7 @@ $(document).ready( function () {
                                 </div>
                                 </div>
                             </div>
-                            </div>
+                        </div>
                         </td>
                         <td style="white-space:nowrap;">${item.contrato}
                         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#apagarSiouvPar${item.numeroSiouv}"><i style="color: #054f77; font-size: 13pt;" class="fas fa-eraser"></i></button>

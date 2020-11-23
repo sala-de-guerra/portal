@@ -339,6 +339,11 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
                 ],
                 [
+                    'text' => 'Controle SAP',
+                    'url'  => '/contratacao/controle-sap',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // , 'GESTOR'
+                ],
+                [
                     'text' => 'Fila Única',
                     // 'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
@@ -349,6 +354,7 @@ return [
                     'url'  => '/contratacao/tempo-medio-atendimento',
                     'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'], // , 'GESTOR'
                 ],
+
 
                 // [
                 //     'text' => 'TMA venda à vista',
@@ -607,6 +613,7 @@ return [
                     'url'  => '/indicadores/distrato',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // , 'GESTOR'
                 ],
+
             ],
         ],
 
