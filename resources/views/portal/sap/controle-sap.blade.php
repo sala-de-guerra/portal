@@ -47,15 +47,22 @@
                     <div class="notice notice-success">
                         Lista geral de imóveis em contratação com pendência de lançamento da venda no sistema SAP e Simov. &nbsp &nbsp
                     <a href="/contratacao/controle-sap/baixa-lista-sap-geral"><button style="float: right" type="button" class="btn btn-success">Baixar Planilha Geral &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+                    <br>
                     </div><br>
+
+                    <div class="row anima">
+                        <strong>Quantidade pendente: <span id="quantidadePendente" style="color: #295dd2"></span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        Valor pendente de baixa SAP/SIMOV: <span id="totalPendente" style="color: #295dd2" ></span> </strong>                                         
+                    </div><br>
+
 
                     <table id="tblSap" class="table table-bordered table-striped">
                         <thead>
+                       
                         <tr>
                             <th>Gilie</th>
                             <th>Contrato</th> <!--dados do imóvel - criar - colocar endereço, cidade, cep...-->
                             <th>Proponente</th> <!--dados do proponente - criar - colocar CPF...-->
-                            <th>CPF</th>
                             <th>Entrada Simov</th> <!--data de entrada do SIMOV-->
                             <th>Objeto Locação</th> <!--nº do objeto de locação-->
                             <th>Imobilizado</th> <!--nº Imobilizado-->
@@ -63,10 +70,11 @@
                             <th>Boleto</th> <!--valor do boleto-->
                             <th>Pagamento</th> <!--data de pagamento-->
                         </tr>
-                        </thead>
+                       
                         <tbody>
+                        </tbody> 
 
-                        </tbody>
+                        </thead>
                     </table>
 
                 </div>

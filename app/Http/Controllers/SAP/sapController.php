@@ -47,6 +47,7 @@ class sapController extends Controller
         ALITB001_Imovel_Completo.[CEP_PROPONENTE] as cep,
         FORMAT(ALITB001_Imovel_Completo.[DATA_ENTRADA] , 'dd/MM/yyyy') as dataEntradaSimov,
         FORMAT(CONVERT(DECIMAL(10,2), REPLACE(CUB_056_PAGAMENTOS_BOLETOS_SIMOV.[VALOR BOLETO], ',', '.')), 'N', 'pt-BR') AS valorBoleto,
+        REPLACE(CUB_056_PAGAMENTOS_BOLETOS_SIMOV.[VALOR BOLETO], ',', '.') as valorSemFormatacao,
         ISNULL(CUB_056_PAGAMENTOS_BOLETOS_SIMOV.[PAGAMENTO], 'Sem Pagamento') as dataPagamento,
         TBL_CONTRATOSORIGEMSAP.NUM_OBJ_LOC as objLocacao,
         TBL_CONTRATOSORIGEMSAP.NUM_IMOBILIZADO as numeroImobilizado,
