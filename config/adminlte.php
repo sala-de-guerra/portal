@@ -278,7 +278,7 @@ return [
         [
             'text' => 'Carga em Lote',
             'icon' => 'fas fa-lg fa-fw fa-cloud-upload-alt mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
+            'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL','MATRIZ',],
             'submenu' => [
                 [
                     'text' => 'Averbação Leilão Negativo',
@@ -318,7 +318,7 @@ return [
         [
             'text'    => 'Contratação',
             'icon'    => 'fas fa-lg fa-fw fa-file-contract mr-2',
-            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
+            'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL','MATRIZ',],
             'submenu' => [
                 [
                     'text' => 'Acompanhar Contratação',
@@ -330,7 +330,7 @@ return [
                     'text' => 'Controle de Boletos',
                     // 'icon'    => 'fas fa-lg fa-fw fa-calendar-times mr-2',
                     'url'  => '/contratacao/controle-boletos',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL','MATRIZ',],
                 ],
                 [
                     'text' => 'Controle de Distrato',
@@ -341,18 +341,18 @@ return [
                 [
                     'text' => 'Controle SAP',
                     'url'  => '/contratacao/controle-sap',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR','MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], // , 'GESTOR'
                 ],
                 [
                     'text' => 'Fila Única',
                     // 'icon'    => 'fas fa-lg fa-fw fa-calendar-check mr-2',
                     'url'  => '/estoque-imoveis/conformidade-contratacao',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL','MATRIZ',],
                 ],
                 [
                     'text' => 'TMA',
                     'url'  => '/contratacao/tempo-medio-atendimento',
-                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR', env('NOME_NOSSA_UNIDADE'), 'GESTOR', 'EVENTUAL','MATRIZ',], // , 'GESTOR'
                 ],
 
 
