@@ -440,6 +440,8 @@ Route::get('/contratacao/controle-boletos/listar-universo-a-vista', 'GestaoImove
 Route::get('/contratacao/controle-boletos/listar-universo-financiamento', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaUniversoFinanciamento');
 //Controle de Boletos envia mensageria
 Route::get('/contratacao/controle-boletos/envia-mensageria', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@enviaMensageriaGILIES');
+//Controle de Boletos envia mensageria
+Route::get('/contratacao/controle-boletos/envia-teste-mensageria', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@testeEnvioDeBoletos');
 //Controle de Boletos lista pagamentos novos
 Route::get('/contratacao/controle-boletos/listar-pagamentos-novos', 'GestaoImoveisCaixa\ControleDeBoletos\ControleDeBoletos@listaPagamentosNovos');
 //Planilha Excel boletos

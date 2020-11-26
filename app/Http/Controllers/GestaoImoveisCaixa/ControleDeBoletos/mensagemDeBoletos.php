@@ -115,6 +115,7 @@ table th {
                             <tr>
                             <th data-label="GILIE">GILIE</th>
                             <th data-label="Contrato">Contrato</th>
+                            <th data-label="Contrato">UF</th>
                             <th data-label="Proponente">Proponente</th>
                             <th data-label="Valor">Valor de pagamento</th>
                             <th data-label="Status">Total proposta</th>
