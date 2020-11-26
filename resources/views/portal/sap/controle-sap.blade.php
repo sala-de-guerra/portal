@@ -57,24 +57,22 @@
 
 
                     <table id="tblSap" class="table table-bordered table-striped">
-                        <thead>
-                       
-                        <tr>
-                            <th>Gilie</th>
-                            <th>Contrato</th> <!--dados do imóvel - criar - colocar endereço, cidade, cep...-->
-                            <th>Proponente</th> <!--dados do proponente - criar - colocar CPF...-->
-                            <th>Entrada Simov</th> <!--data de entrada do SIMOV-->
-                            <th>Objeto Locação</th> <!--nº do objeto de locação-->
-                            <th>Imobilizado</th> <!--nº Imobilizado-->
-                            <th>Edificio</th> <!--nº Edificio-->
-                            <th>Boleto</th> <!--valor do boleto-->
-                            <th>Pagamento</th> <!--data de pagamento-->
-                        </tr>
-                       
-                        <tbody>
-                        </tbody> 
-
+                        <thead>                   
+                            <tr>
+                                <th>Gilie</th>
+                                <th>Contrato</th> <!--dados do imóvel - criar - colocar endereço, cidade, cep...-->
+                                <th>Proponente</th> <!--dados do proponente - criar - colocar CPF...-->
+                                <th>Entrada Simov</th> <!--data de entrada do SIMOV-->
+                                <th>Objeto Locação</th> <!--nº do objeto de locação-->
+                                <th>Imobilizado</th> <!--nº Imobilizado-->
+                                <th>Edificio</th> <!--nº Edificio-->
+                                <th>Boleto</th> <!--valor do boleto-->
+                                <th>Pagamento</th> <!--data de pagamento-->
+                            </tr>
                         </thead>
+                        <tbody>
+
+                        </tbody> 
                     </table>
 
                 </div>

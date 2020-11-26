@@ -2,9 +2,12 @@ function _formataDatatableComData (idTabela){
     $('#' + idTabela).DataTable({
         "order": [[ 0, "asc" ]],  //vai pegar a 1a coluna e colocar os dados de forma crescente
         columnDefs: [
-            {type: 'date-uk', targets: [4,9]} //vai filtrar a coluna com data dd/mm/yyyy
+            {type: 'date-uk', targets: [3,8]} //vai filtrar a coluna com data dd/mm/yyyy
         ],
-        "scrollX": true,
+        "initComplete": function (settings, json) {  
+            $("#tblSap").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>") 
+        },    
+        // "scrollX": true,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -41,7 +44,8 @@ $(document).ready(function(){
             contadorPendente += 1;
 
             var proponente = item.proponente
-            var proponenteFormatado = proponente.substring(0,20) + "[...]"
+            var prop = proponente.toUpperCase();
+            var proponenteFormatado = prop.substring(0,20) + "[...]"
 
             //var valorSemformatacao = item.valorBoleto
             //var valorPendConvertido = Number(valorSemformatacao)
@@ -55,9 +59,6 @@ $(document).ready(function(){
 
             //converti em Dinheiro e duas casas após a virgula
             var valorReal= valorPendente.toLocaleString(undefined, {minimumFractionDigits: 2})
-            
-            console.log(valorReal)
-
 
             var tabela = `
                 <tr>

@@ -1383,7 +1383,11 @@
                         @endIf
                         @if (in_array(session()->get('acessoEmpregadoPortal'), ['AGENCIA', 'SR']))
                         <div class="notice notice-danger">
-                            <h3>OOPS!!!<br> Você não tem perfil para acesso a essas informações<br> acione sua GILIE de vinculação</h3>
+                            <h3>OOPS!!!<br> Você não tem perfil para acesso a essas informações.<br>
+                            Esta aba é de uso exclusivo da Gilie. <br>
+                            Trata de assuntos relacionados a pagamentos de débitos dos imóveis adjudicados. <br>
+                            
+                            </h3>
                         </div>
                         @endIf
 
