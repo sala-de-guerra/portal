@@ -54,7 +54,7 @@
                 <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
                     <li class="nav-item nav-card" id="custon-tabs-li-emDia">
                         <a class="nav-link active" id="custom-tabs-one-emDia-tab" data-toggle="pill" href="#custom-tabs-one-emDia" role="tab" aria-controls="custom-tabs-one-emDia" aria-selected="false">
-                            <h5>À Vencer</h5>
+                            <h5>A Vencer</h5>
                         </a>
                     </li>
 

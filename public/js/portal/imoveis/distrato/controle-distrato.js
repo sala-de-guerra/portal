@@ -6,7 +6,7 @@ $(document).ready(function(){
             var linha = 
                 '<tr href="/estoque-imoveis/distrato/tratar/' + item.contratoFormatado + '" class="cursor-pointer">' +
                     '<td>' + item.idDistrato + '</td>' +
-                    '<td>' + item.contratoFormatado + '</td>' +
+                    '<td style="white-space:nowrap;">' + item.contratoFormatado + '</td>' +
                     '<td>' + item.nomeProponente + '</td>' +
                     '<td>' + item.statusAnaliseDistrato + '</td>' +
                     '<td>' + item.motivoDistrato + '</td>' +

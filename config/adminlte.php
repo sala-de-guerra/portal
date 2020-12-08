@@ -598,7 +598,14 @@ return [
                     // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
                     'url'  => '/gerencial/gestao-siouv/',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
-                ]
+                ],
+
+                [
+                    'text' => 'Rotinas Automáticas',
+                   // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
+                    'url'  => '/gerencial/rotinas-automaticas/',
+                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                ],
     
             ],
         ],

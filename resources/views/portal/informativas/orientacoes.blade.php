@@ -215,6 +215,10 @@
     </div>    
 </div><br>
 
+
+
+
+
 <div class="col-sm-6">
     <h4 class="m-0 text-dark">
         Dúvidas Frequentes
@@ -567,6 +571,175 @@
     </div> <!-- /.col -->
     
 </div> <!-- /.row -->
+
+
+
+
+
+
+<!-- 
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary card-outline card-outline-tabs">
+            <div class="card-header p-0">
+                <ul class="nav nav-tabs d-flex justify-content-between" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item nav-card" id="custon-tabs-li-Links">
+                        <a class="nav-link active" id="custom-tabs-one-Links-tab" data-toggle="pill" href="#custom-tabs-one-Links" role="tab" aria-controls="custom-tabs-one-Links" aria-selected="true">
+                            <h5>Links</h5>
+                        </a>
+                    </li>
+
+                    <li class="nav-item nav-card" id="custon-tabs-li-duvidas">
+                        <a class="nav-link" id="custom-tabs-one-duvidas-tab" data-toggle="pill" href="#custom-tabs-one-duvidas" role="tab" aria-controls="custom-tabs-one-duvidas" aria-selected="false">
+                            <h5>Dúvidas Frequentes</h5>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+
+                    <div class="tab-pane fade show active" id="custom-tabs-one-Links" role="tabpanel" aria-labelledby="custom-tabs-one-Links-tab">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="row" style="list-style: none;">   
+                                        <li class="col-6 pb-4">
+                                            <a href="http://suban1.mz.caixa/painelimoveis/" target="_blank" class="col-12 btn btn-default">
+                                                Acompanhamento do processo de contratação:
+                                                <br>
+                                                <span class="text-primary">http://suban1.mz.caixa/painelimoveis/</span> 
+                                            </a>
+                                        </li>
+                                        <li class="col-6 pb-4">
+                                            <a href="http://www.portal.dijur.caixa/" target="_blank" class="col-12 btn btn-default">
+                                                Consulta de ações judiciais e demais demandas jurídicas:
+                                                <br>
+                                                <span class="text-primary">http://www.portal.dijur.caixa/</span> 
+                                            </a>
+                                        </li>
+                                        <li class="col-6 pb-4">
+                                            <a href="http://sinafweb.caixa/" target="_blank" class="col-12 btn btn-default">
+                                                Criação de DLE com código de barras:
+                                                <br>
+                                                <span class="text-primary">http://sinafweb.caixa/</span> 
+                                            </a>
+                                        </li>
+                                        <li class="col-6 pb-4">
+                                            <a href="http://inovacao.suban.caixa/apps/atende/#/login" target="_blank" class="col-12 btn btn-default">
+                                                Dúvidas sobre o envio e tratamento da conformidade (ATENDE):
+                                                <br>
+                                                <span class="text-primary">http://inovacao.suban.caixa/apps/atende/#/login</span> 
+                                            </a>
+                                        </li>
+                                        <li class="col-6 pb-4">
+                                            <a href="http://siga.caixa/" target="_blank" class="col-12 btn btn-default">
+                                                Gestão de ativos e contratos:
+                                                <br>
+                                                <span class="text-primary">http://siga.caixa/</span> 
+                                            </a>
+                                        </li>
+
+                                        <li class="col-6 pb-4">
+                                            <a href="https://login.prd.caixa/" target="_blank" class="col-12 btn btn-default">
+                                                Código de acesso para aplicativos corporativos:
+                                                <br>
+                                                <span class="text-primary">https://login.prd.caixa/</span> 
+                                            </a>
+                                        </li>
+
+
+                                        <li class="col-6 pb-4">
+                                            <a href="http://alienar.caixa/" target="_blank" class="col-12 btn btn-default">
+                                                Portal da GEIPT com indicadores e ferramentas de gestão estratégica:
+                                                <br>
+                                                <span class="text-primary">http://alienar.caixa/</span> 
+                                            </a>
+                                        </li>
+                                        <li class="col-6 pb-4">
+                                            <a href="http://www.giliego.go.caixa/geradoc/" target="_blank" class="col-12 btn btn-default">
+                                                Portal da GILIE/GO com ferramenta de geração de MO's preenchidos:
+                                                <br>
+                                                <span class="text-primary">http://www.giliego.go.caixa/geradoc/</span> 
+                                            </a>
+                                        </li>
+                                        <li class="col-6 pb-4">
+                                            <a href="https://wiki.caixa/wiki/index.php/Portal_Gilie" target="_blank" class="col-12 btn btn-default">
+                                                Wiki Caixa informativo sobre o Portal GILIE:
+                                                <br>
+                                                <span class="text-primary">https://wiki.caixa/wiki/index.php/Portal_Gilie</span> 
+                                            </a>
+                                        </li>
+                                    </ul>
+                            
+                                </div>
+                            </div
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="custom-tabs-one-duvidas" role="tabpanel" aria-labelledby="custom-tabs-one-duvidas-tab">
+                        
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">
+                                                        Esclarecemos que os imóveis podem ser retirados da venda a qualquer momento. <br>
+                                                        Consulte a relação atualizada no site da CAIXA: 
+                                                        <a href="http://www.caixa.gov.br/voce/habitacao/imoveis-venda" target="_blank">http://www.caixa.gov.br/voce/habitacao/imoveis-venda</a>.
+                                                    </h3>
+                                                </div> 
+                                            </div> 
+                                        </div> 
+                                    </div> 
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card collapsed-card direct-chat direct-chat-primary">
+
+                                        <div class="card-header">
+                                            <img class="direct-chat-img" src="../img/question-mark.png" alt="Message User Image">
+                                            <div class="direct-chat-text cursor-pointer" data-card-widget="collapse">
+                                                Quem pode adquirir imóveis da Caixa?
+                                                <div class="float-sm-right">
+                                                    <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button> 
+                                                </div>
+                                            </div> 
+                                        </div> 
+
+                                        <div class="card-body padding1220">
+                                            <div class="direct-chat-msg right">
+                                                <img class="direct-chat-img" src="../img/logo-caixa-app.png" style="background-color: #247cb4;" alt="Message User Image">
+                                                <div class="direct-chat-text ">
+                                                    Podem adquirir imóveis da Caixa qualquer pessoa, física ou jurídica, com exceção dos interessados 
+                                                    que tenham relação de parentesco, até terceiro grau civil, com dirigente da CAIXA, empregado da 
+                                                    CAIXA que atue na SUINP e autoridade do ente público a que a CAIXA esteja vinculada. 
+                                                </div> 
+                                            </div> 
+                                        </div> 
+
+                                    </div> 
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+
+
+
+
 
 @section('footer')
 
