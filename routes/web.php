@@ -257,6 +257,8 @@ Route::prefix('gerencial')->group(function () {
         // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });
+        // ROTINAS AUTOMATICAS
+        Route::get('/rotinas-automaticas', 'RotinasAutomaticas\rotinasAutomaticas@index');
 });
 
 // INDICADORES
@@ -354,33 +356,43 @@ Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCor
 
 
 //ROTA Corretores view
-Route::get('corretores', 'CorretoresController@Corretores');
+Route::get('corretores', 'Corretores\CorretoresController@Corretores');
 // lista corretores GILIE SP
-Route::get('corretores/lista-corretores', 'CorretoresController@listaCorretores');
+Route::get('corretores/lista-corretores', 'Corretores\CorretoresController@listaCorretores');
 // lista corretores GILIE SA
-Route::get('corretores/lista-corretores-sa', 'CorretoresController@listaCorretoresSA');
+Route::get('corretores/lista-corretores-sa', 'Corretores\CorretoresController@listaCorretoresSA');
 // lista corretores GILIE RE
-Route::get('corretores/lista-corretores-re', 'CorretoresController@listaCorretoresRE');
+Route::get('corretores/lista-corretores-re', 'Corretores\CorretoresController@listaCorretoresRE');
 // lista corretores GILIE RJ
-Route::get('corretores/lista-corretores-rj', 'CorretoresController@listaCorretoresRJ');
+Route::get('corretores/lista-corretores-rj', 'Corretores\CorretoresController@listaCorretoresRJ');
 // lista corretores GILIE PO
-Route::get('corretores/lista-corretores-po', 'CorretoresController@listaCorretoresPO');
+Route::get('corretores/lista-corretores-po', 'Corretores\CorretoresController@listaCorretoresPO');
 // lista corretores GILIE GO
-Route::get('corretores/lista-corretores-go', 'CorretoresController@listaCorretoresGO');
+Route::get('corretores/lista-corretores-go', 'Corretores\CorretoresController@listaCorretoresGO');
 // lista corretores GILIE FO
-Route::get('corretores/lista-corretores-fo', 'CorretoresController@listaCorretoresFO');
+Route::get('corretores/lista-corretores-fo', 'Corretores\CorretoresController@listaCorretoresFO');
 // lista corretores GILIE CT
-Route::get('corretores/lista-corretores-ct', 'CorretoresController@listaCorretoresCT');
+Route::get('corretores/lista-corretores-ct', 'Corretores\CorretoresController@listaCorretoresCT');
 // lista corretores GILIE BR
-Route::get('corretores/lista-corretores-br', 'CorretoresController@listaCorretoresBR');
+Route::get('corretores/lista-corretores-br', 'Corretores\CorretoresController@listaCorretoresBR');
 // lista corretores GILIE BE
-Route::get('corretores/lista-corretores-be', 'CorretoresController@listaCorretoresBE');
+Route::get('corretores/lista-corretores-be', 'Corretores\CorretoresController@listaCorretoresBE');
 // lista corretores GILIE BU
-Route::get('corretores/lista-corretores-bu', 'CorretoresController@listaCorretoresBU');
+Route::get('corretores/lista-corretores-bu', 'Corretores\CorretoresController@listaCorretoresBU');
 // lista corretores GILIE BH
-Route::get('corretores/lista-corretores-bh', 'CorretoresController@listaCorretoresBH');
+Route::get('corretores/lista-corretores-bh', 'Corretores\CorretoresController@listaCorretoresBH');
 //Cria Planilha
-Route::get('corretores/baixar-planilha', 'CorretoresController@criaPlanilhaExcelCorretores');
+Route::get('corretores/baixar-planilha', 'Corretores\CorretoresController@criaPlanilhaExcelCorretores');
+//Atualiza qualificação
+Route::post('corretores/qualifica-corretor', 'Corretores\CorretoresController@atualizaQualificação');
+//envia-email manual corretor
+Route::post('corretores/envia-email-corretor/{corretor}', 'Corretores\CorretoresController@enviaMensagemCorretor');
+//envia-email manual corretor
+Route::post('corretores/envia-email-cecot/{corretor}', 'Corretores\CorretoresController@enviaMensagemCecot');
+//envia-email listagem diario
+Route::get('corretores/envia-email-cecot-diario', 'Corretores\CorretoresController@listaEmailsCecotDiario');
+//cadastra Edital
+Route::post('corretores/cadastra-edital', 'Corretores\CorretoresController@cadastraEdital');
 
 
 //ROTA TMA Unificado
@@ -400,6 +412,8 @@ Route::post('tma/aguarda-pagamento-chb/{chb}', 'TMA\vendaAVistaController@aguard
 Route::get('tma-venda-com-financimento', 'TMA\vendaFinanciadaController@universoVendaFinanciada');
 //universo Financiado SIOPI
 Route::get('tma-status-siopi/{cpf}', 'TMA\vendaFinanciadaController@listaContratosSIOPIcca');
+//universo Financiado SIOPI
+Route::get('tma-status-siopi', 'TMA\vendaFinanciadaController@listaContratosSIOPIcca');
 //Indicadores venda com financiamento
 Route::get('tma-indicadores-com-financimento', 'TMA\vendaFinanciadaController@indicadoresTMAfinanciado');
 //Indicadores venda à vista
@@ -574,4 +588,12 @@ Route::prefix('/contratacao/controle-sap')->group(function () {
     Route::get('/lista-universo', 'SAP\sapController@listaUniversoSAP');
     // RETORNA PLANILHA EXCEL GERAL
     Route::get('/baixa-lista-sap-geral', 'SAP\sapController@criaPlanilhaExcelSapGeral');
+});
+
+Route::prefix('/api')->group(function () {
+    // RETORNA LISTA CATEGORIAS
+    Route::get('/lista-categorias', 'API\AtendeSuban\AtendeSuban@listaAtende');
+    // CRIA ATENDE
+    Route::get('/cria-atende', 'API\AtendeSuban\AtendeSuban@prepararCabecalhosAtendePost');
+
 });

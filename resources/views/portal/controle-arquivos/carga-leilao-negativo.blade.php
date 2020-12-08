@@ -42,14 +42,14 @@ input[type='file'] {
     <div class="row mb-2">
         <div class="col">
             <h1 class="m-0 text-dark">
-                Carga em Lote Averbacão Leilão Negativo
+                Carga em Lote Averbação Leilão Negativo
             </h1>
         </div>
 
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active"> <a href="/carga-em-lote/averbacao-leilao-negativo"> Carga em Lote</a> </li>
-                     <li class="breadcrumb-item active"> Carga Leilão Negativo</li>
+                     <li class="breadcrumb-item active"> Carga Averbação Leilão Negativo</li>
             </ol>
         </div>
     </div>

@@ -92,12 +92,13 @@ $(document).ready(function(){
                                         <p>Cidade: ${item.cidade} / UF: ${item.uf} / Cep: ${item.cep}</p>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+                
                     </td>
 
 
@@ -120,6 +121,10 @@ $(document).ready(function(){
         $('#quantidadePendente').text(qtdPendente)
         $('#totalPendente').text('R$ ' + valorReal)
         
+
+        if(item= null){
+            document.write(" ")
+        }
     })
     }).done(function() {
         _formataDatatableComData("tblSap")

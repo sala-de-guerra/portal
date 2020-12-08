@@ -263,7 +263,6 @@
             </div>
             @endif
         </div>
-
         <footer class="main-footer">
             <div class="row">
             <div class="col-sm-2">

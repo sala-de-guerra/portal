@@ -982,10 +982,16 @@
                                     <p id="quantidadeParcelasProposta"></p>
                                 </div>
                             </div>
-                            <div style="visibility: hidden;" class="col-sm-3">
+                            {{-- <div style="visibility: hidden;" class="col-sm-3">
                                 <div class="form-group">
                                     <label>Status da Proposta:</label>
                                     <p id="statusProposta"></p>
+                                </div>
+                            </div>  --}}
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Novo Contrato Ciweb:</label>
+                                    <p id="novoContratoCiweb"></p>
                                 </div>
                             </div> 
                         </div>
@@ -1063,6 +1069,12 @@
                                     <p id="dataParecerConformidade" class="formata-data-sem-hora"></p>
                                 </div>
                             </div>
+                            <div style="visibility: hidden;" class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Status da Proposta:</label>
+                                    <p id="statusProposta"></p>
+                                </div>
+                            </div> 
                         </div>
 
                         <hr class="pontilhado" id="pontilhadoConformidade">
