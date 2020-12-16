@@ -13,7 +13,7 @@
 
     <div class="col">
         <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i><a href="/gerencial/rotinas-automaticas">Gerencial</a></li>
+            <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i><a href="/indicadores/rotinas-automaticas">Indicadores</a></li>
             <li class="breadcrumb-item active"> Rotinas Automáticas</li>
         </ol>
     </div>
@@ -50,7 +50,6 @@
                             <tr>
                                 <th>Processo</th>
                                 <th>Descrição</th> <!--o que esse botão vai atualizar-->
-                                <th>Periodicidade</th> <!--quanto em quanto tempo deverá ser feito-->
                                 <th>Último Tratamento</th> 
                                 <th>Usuário</th> 
                                 <th>Histórico</th> <!--algum dado extra para ser mantido em histórico-->

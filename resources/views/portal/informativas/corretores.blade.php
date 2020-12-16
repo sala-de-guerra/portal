@@ -41,16 +41,43 @@
     <div class="col-md-12">
         <div class="card card-default">
 
+            <!--
             <div class="card-header">
                 <h3 class="card-title">Listagem de corretores</h3>&nbsp&nbsp
 
-            </div> <!-- /.card-header -->
+            </div> 
+            -->
+                        <div id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="card card-primary">
+                                <div class="card-header" role="tab" id="headingOne"  onclick="mudaColapse()">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <div class="row">
+                                            <p class="card-title" >Como atualizar o status de contrato dos Corretores?</p>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div id="collapseOne" class="collapse no-show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="card-body" style="background-color: #f4f6ff;">
+                                        <div class="col-sm-12">
+                                            <p class="text-justify mb-0">
+                                                <b>1. </b>Para status "Pré-habilitado", é possível o envio de mensagem com orientação ao corretor ou solicitação à Área Gestora da Caixa para cadastramento no sistema SAP.<br>
+                                                <b>2. </b>Há citação do nº do <b class="editalVigente" class="badge badge-info badge-large mx-4"></b>.<br>
+                                                <b>3. </b>Este nº pode ser atualizado, caso necessário. --> <a data-toggle="modal" href="#cadastraEditalSP"><span style="color: green;"><b>Clique aqui para editar</b></a></span><br>
+                                            </p>
+                                        </div>     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
             
             <div class="card-body">
                 <div class="notice notice-success">
                     <strong>Corretores: </strong>Listagem de corretores com contrato <strong>ATIVO</strong> registrado no SIMOV. &nbsp &nbsp
                     <a href="corretores/baixar-planilha"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha Corretores &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                 </div><br>
+
+                
                 
                 <div class="row">
                     <div class="col-sm-3">
@@ -73,9 +100,11 @@
 
                         <div class="col-sm-2"></div>
                     
+                        <!--
                         <div class="col-sm-4">
                         <p><b class="editalVigente" class="badge badge-info badge-large mx-4"></b> </p>
                         </div>
+                        -->
 
                 </div>
 
@@ -84,14 +113,28 @@
                         <div class="spinner-border spinnerTbl text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        
-                        <div class:="botaoAlterar" style="float: right">
+                        <br>
+                    
+                        <!--
+                            <div class:="botaoAlterar" style="float: right">
                             <br>
+                            <span data-toggle="tooltip" data-placement="top" title="Alterar Edital">
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalSP">
                              <i class="far fa-lg fa-edit"></i> Alterar nº Edital
                             </button>
                             <br>
                         </div>
+                        
+
+                        <div class:="botaoAlterar" style="float: left">
+                            <br>
+                            Clique <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalSP"><span data-toggle="tooltip" data-placement="top" title="Alterar Edital">
+                             <i class="far fa-edit"></i></button> para alterar o nº do Edital de Licitação.
+                            <br><br>
+                        </div>
+
+                        -->
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -109,7 +152,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7257">
                                             <div class="modal-footer">
@@ -123,8 +166,9 @@
                             </div>
                         </div>
                        
-                        <table id="tblCorretores" class="table table-bordered table-striped dataTable">
 
+                        <table id="tblCorretores" class="table table-bordered table-striped dataTable">
+                            <br>
                             <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -145,14 +189,9 @@
                         <div class="spinner-border spinnerTblSA text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalSA">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
-                        <div class="cadastraEdital">
+                        <br>
+
+                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
                             <div class="modal fade" id="cadastraEditalSA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -169,7 +208,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7255">
                                             <div class="modal-footer">
@@ -203,14 +242,9 @@
                         <div class="spinner-border spinnerTblRE text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalRE">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
-                        <div class="cadastraEdital">
+                        <br>
+
+                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
                             <div class="modal fade" id="cadastraEditalRE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -227,7 +261,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7253">
                                             <div class="modal-footer">
@@ -261,13 +295,8 @@
                         <div class="spinner-border spinnerTblRJ text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalRJ">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+ 
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -285,7 +314,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7254">
                                             <div class="modal-footer">
@@ -320,13 +349,9 @@
                         <div class="spinner-border spinnerTblPO text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalPO">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
+ 
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -344,7 +369,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7251">
                                             <div class="modal-footer">
@@ -379,13 +404,8 @@
                         <div class="spinner-border spinnerTblGO text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalGO">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -403,7 +423,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7249">
                                             <div class="modal-footer">
@@ -439,13 +459,8 @@
                         <div class="spinner-border spinnerTblFO text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalFO">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -463,7 +478,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7248">
                                             <div class="modal-footer">
@@ -499,13 +514,8 @@
                         <div class="spinner-border spinnerTblCT text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalCT">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -523,7 +533,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7247">
                                             <div class="modal-footer">
@@ -559,13 +569,8 @@
                         <div class="spinner-border spinnerTblBR text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalBR">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -583,7 +588,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7109">
                                             <div class="modal-footer">
@@ -619,13 +624,8 @@
                         <div class="spinner-border spinnerTblBE text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalBE">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -643,7 +643,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7243">
                                             <div class="modal-footer">
@@ -679,13 +679,8 @@
                         <div class="spinner-border spinnerTblBU text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalBU">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -703,7 +698,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7242">
                                             <div class="modal-footer">
@@ -739,13 +734,8 @@
                         <div class="spinner-border spinnerTblBH text-primary" role="status">
                             <span class="sr-only"></span>
                         </div>
-                        <div class:="botaoAlterar" style="float: right">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastraEditalBH">
-                             <i class="far fa-lg fa-edit"></i> Alterar nº Edital
-                            </button>
-                            <br>
-                        </div>
+                        <br>
+
                         <div class="cadastraEdital">
                             
                             <!-- Modal -->
@@ -763,7 +753,7 @@
                                             @csrf
                                             <div class="form-group">
                                               <label>Nº Edital</label>
-                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-999" maxlength="13" name="numeroEdital">
+                                              <input type="text" class="form-control" aria-describedby="cadastra Edital" placeholder="9999/9999-9999" minlength="14" maxlength="14" name="numeroEdital" required>
                                             </div>
                                             <input type="hidden" name="gilie" value="7244">
                                             <div class="modal-footer">
@@ -827,5 +817,17 @@
         $('.bg-success').fadeOut("slow");
         }, 2000);    
 </script>
+
+<script>
+function mudaColapse() {
+    if($('#collapse').text() == "X" ){
+    $('#collapse').text("Expandir")
+    }else{
+        $('#collapse').text("X")
+    }
+}
+</script>
+
+
 
 @stop

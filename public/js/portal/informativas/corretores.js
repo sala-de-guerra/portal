@@ -104,7 +104,7 @@ $('#selectGILIE').change(function(){
                         <td>
                         <!-- Modal e-mail-->
                         <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Alter">
+                            <span data-toggle="tooltip" data-placement="top" title="Enviar e-mail">
                        
                             <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
                             </button> ` + `
@@ -133,8 +133,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -163,8 +163,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -199,7 +199,7 @@ $('#selectGILIE').change(function(){
             _formataDatatableComData("tblCorretores")
             $('.spinnerTbl').remove()
             $('#tblCorretores').attr('id', 'tblCorretoresPopulada');
-            $("[name='numeroEdital']").mask("0000/0000-000");
+            $("[name='numeroEdital']").mask("0000/0000-0000");
 
         });
 
@@ -216,6 +216,7 @@ $('#selectGILIE').change(function(){
         $('#tblRE').css('display', 'none');
         $('#tblSP').css('display', 'none');
         $('#tblSA').css('display', 'block');
+
         $.getJSON('corretores/lista-corretores-sa', function(dados){
             $.each(dados, function(key, item) {
 
@@ -298,8 +299,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -328,8 +329,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -358,7 +359,7 @@ $('#selectGILIE').change(function(){
             _formataDatatableComData("tblCorretoresSA")
             $('.spinnerTblSA').remove()
             $('#tblCorretoresSA').attr('id', 'tblCorretoresSAPopulada');
-            $("[name='numeroEdital']").mask("0000/0000-000");
+            $("[name='numeroEdital']").mask("0000/0000-0000");
         });
     }else if ($(this).val() === "7253") {
          $('#tblBH').css('display', 'none');
@@ -455,8 +456,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -485,8 +486,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -516,7 +517,7 @@ $('#selectGILIE').change(function(){
             _formataDatatableComData("tblCorretoresRE")
             $('.spinnerTblRE').remove()
             $('#tblCorretoresRE').attr('id', 'tblCorretoresREPopulada');
-            $("[name='numeroEdital']").mask("0000/0000-000");
+            $("[name='numeroEdital']").mask("0000/0000-0000");
         });
     }else if ($(this).val() === "7254") {
         $('#tblBH').css('display', 'none');
@@ -613,8 +614,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -643,8 +644,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -673,7 +674,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresRJ")
            $('.spinnerTblRJ').remove()
            $('#tblCorretoresRJ').attr('id', 'tblCorretoresRJPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else if ($(this).val() === "7251") {
         $('#tblBH').css('display', 'none');
@@ -770,8 +771,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -800,8 +801,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -830,7 +831,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresPO")
            $('.spinnerTblPO').remove()
            $('#tblCorretoresPO').attr('id', 'tblCorretoresPOPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else if ($(this).val() === "7249") {
         $('#tblBH').css('display', 'none');
@@ -927,8 +928,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -957,8 +958,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -987,7 +988,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresGO")
            $('.spinnerTblGO').remove()
            $('#tblCorretoresGO').attr('id', 'tblCorretoresGOPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else if ($(this).val() === "7248") {
         $('#tblBH').css('display', 'none');
@@ -1084,8 +1085,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -1114,8 +1115,8 @@ $('#selectGILIE').change(function(){
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         
                                         </form>
@@ -1144,7 +1145,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresFO")
            $('.spinnerTblFO').remove()
            $('#tblCorretoresFO').attr('id', 'tblCorretoresFOPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
  }else if ($(this).val() === "7247") {
         $('#tblBH').css('display', 'none');
@@ -1240,8 +1241,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1270,8 +1271,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1299,7 +1300,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresCT")
            $('.spinnerTblCT').remove()
            $('#tblCorretoresCT').attr('id', 'tblCorretoresCTPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else if ($(this).val() === "7109") {
         $('#tblBH').css('display', 'none');
@@ -1395,8 +1396,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1425,8 +1426,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1454,7 +1455,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresBR")
            $('.spinnerTblBR').remove()
            $('#tblCorretoresBR').attr('id', 'tblCorretoresBRPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else if ($(this).val() === "7243") {
         $('#tblBH').css('display', 'none');
@@ -1551,8 +1552,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1581,8 +1582,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1611,7 +1612,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresBE")
            $('.spinnerTblBE').remove()
            $('#tblCorretoresBE').attr('id', 'tblCorretoresBEPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else if ($(this).val() === "7242") {
         $('#tblBH').css('display', 'none');
@@ -1708,8 +1709,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1738,8 +1739,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1768,7 +1769,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresBU")
            $('.spinnerTblBU').remove()
            $('#tblCorretoresBU').attr('id', 'tblCorretoresBUPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else if ($(this).val() === "7244") {
         $('#tblSP').css('display', 'none');
@@ -1865,8 +1866,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1895,8 +1896,8 @@ $('#selectGILIE').change(function(){
                                            </div>
 
                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                            </div>
                                        
                                        </form>
@@ -1927,7 +1928,7 @@ $('#selectGILIE').change(function(){
            _formataDatatableComData("tblCorretoresBH")
            $('.spinnerTblBH').remove()
            $('#tblCorretoresBH').attr('id', 'tblCorretoresBHPopulada');
-           $("[name='numeroEdital']").mask("0000/0000-000");
+           $("[name='numeroEdital']").mask("0000/0000-0000");
        });
     }else{
         $('#tblSP').css('display', 'none');
@@ -1942,6 +1943,7 @@ $('#selectGILIE').change(function(){
         $('#tblBE').css('display', 'none');
         $('#tblBU').css('display', 'none');
         $('#tblBH').css('display', 'none');
+        $('.editalVigente').text(" ");
    }
 })
 

@@ -589,6 +589,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item nav-card" id="custon-tabs-li-Links">
+                        <a class="nav-link active" id="custom-tabs-one-Links-tab" data-toggle="pill" href="#custom-tabs-one-Links" role="tab" aria-controls="custom-tabs-one-Links" aria-selected="true">
+                            <h5>Atualizações do Portal</h5>
+                        </a>
+                    </li>
+
                     <li class="nav-item nav-card" id="custon-tabs-li-duvidas">
                         <a class="nav-link" id="custom-tabs-one-duvidas-tab" data-toggle="pill" href="#custom-tabs-one-duvidas" role="tab" aria-controls="custom-tabs-one-duvidas" aria-selected="false">
                             <h5>Dúvidas Frequentes</h5>
