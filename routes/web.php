@@ -257,16 +257,17 @@ Route::prefix('gerencial')->group(function () {
         // MÉTODO PARA LISTAR AS ATIVIDADES DA UNIDADE
         Route::get('/listar-atividades/{codigoUnidade}', 'GestaoEquipesAtividadesController@listarAtividadesComResponsaveis');
     });
-        // ROTINAS AUTOMATICAS
-        Route::get('/rotinas-automaticas', 'RotinasAutomaticas\rotinasAutomaticas@index');
 });
 
 // INDICADORES
-Route::prefix('indicadores')->group(function () {  
-    // INDICADORES DE ACESSO
-    Route::prefix('acessos')->group(function () {
+Route::prefix('indicadores')->group(function () { 
+        // ROTINAS AUTOMATICAS
+        Route::get('/rotinas-automaticas', 'RotinasAutomaticas\rotinasAutomaticas@index'); 
+        // INDICADORES DE ACESSO
+        Route::prefix('acessos')->group(function () {
         // RETORNA A VIEW DOS INDICADORES DE ACESSO
         Route::get('/', 'GestaoEquipesAtividadesController@index'); 
+
     });
     // RETORNA A VIEW DOS INDICADORES DE DISTRATO
     Route::get('distrato', function () {
@@ -300,6 +301,8 @@ Route::put('excluir/gestor/{idAtende}', 'GestaoAtendeController@excluirAtendeGer
 Route::get('gerencial/listar-atende', 'GestaoAtendeController@listarUniverso');
 // LISTAR FINALIZADOS
 Route::get('gerencial/listar-finalizados', 'GestaoAtendeController@listarFinalizados'); 
+// ALTERAR ATENDE DATA ATENDE GESTOR
+Route::put('gerencial/alterar-data-atende/{idAtende}', 'GestaoAtendeController@alterarAtende');
 
 // ROTA CARGA EM LOTE EMGEA
 Route::get('carga-em-lote/controle-arquivos', 'PlaniladeControle\UploadexcelController@importaExcel');
@@ -595,5 +598,15 @@ Route::prefix('/api')->group(function () {
     Route::get('/lista-categorias', 'API\AtendeSuban\AtendeSuban@listaAtende');
     // CRIA ATENDE
     Route::get('/cria-atende', 'API\AtendeSuban\AtendeSuban@prepararCabecalhosAtendePost');
+
+});
+
+Route::prefix('gerencial/gestao-subsidios')->group(function () {
+    //RETORNA VIEW DIJUR
+    Route::get('/', 'Dijur\dijurController@dijurIndex');
+    // RETORNA UNIVERSO 
+    Route::get('/lista-dijur', 'Dijur\dijurController@listaUniversoDijur');
+    // RETORNA UNIVERSO 
+    Route::get('/teste', 'Dijur\dijurController@teste');
 
 });

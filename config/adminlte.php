@@ -593,19 +593,22 @@ return [
                     'url'  => '/gerencial/gestao-equipes/',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ],
+                
                 [
                     'text' => 'Gestão Siouv',
                     // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
                     'url'  => '/gerencial/gestao-siouv/',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ],
+                
 
                 [
-                    'text' => 'Rotinas Automáticas',
-                   // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
-                    'url'  => '/gerencial/rotinas-automaticas/',
-                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                    'text' => 'Gestão Subsídios Jurir',
+                    // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
+                    'url'  => '/gerencial/gestao-subsidios/',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'],
                 ],
+
     
             ],
         ],
@@ -620,6 +623,15 @@ return [
                     'url'  => '/indicadores/distrato',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // , 'GESTOR'
                 ],
+
+                [
+                    'text' => 'Rotinas Automáticas',
+                   // 'icon'       => 'fas fa-lg fa-fw fa-users-cog mr-2',
+                    'url'  => '/indicadores/rotinas-automaticas/',
+                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                ],
+
+
 
             ],
         ],

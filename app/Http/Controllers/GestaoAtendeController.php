@@ -273,4 +273,50 @@ class GestaoAtendeController extends Controller
              return json_encode($dadosAtende);
     }
 
+    public function alterarAtende(Request $request, $idAtende)
+    {
+        try {
+            DB::beginTransaction();
+            // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
+            $alterarAtende = Atende::find($idAtende);
+
+            // EDITAR DADOS DEMANDA
+            $alterarAtende->prazoAtendimentoAtende = $request->prazoAtendimentoAtende;
+            $alterarAtende->dataAlteracao     = date("Y-m-d H:i:s", time());
+
+            // CADASTRA HISTÓRICO
+            $historico = new HistoricoPortalGilie;
+            $historico->matricula       = session('matricula');
+            $historico->numeroContrato  = $alterarAtende->contratoFormatado;
+            $historico->tipo            = "ALTERAÇÃO";
+            $historico->atividade       = "ATENDE";
+            $historico->observacao      = "ATENDE #" . str_pad($alterarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " Nova data de resposta " . $request->prazoAtendimentoAtende ;
+            $historico->created_at      = date("Y-m-d H:i:s", time());
+            $historico->updated_at      = date("Y-m-d H:i:s", time());
+            $historico->save();
+
+            // PERSISTE OS DADOS DO DISTRATO SOMENTE NO FIM DO MÉTODO
+            $alterarAtende->save();
+
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Atende alterado!");
+            $request->session()->flash('corpoMensagem', "O Atende foi alterado com sucesso.");
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+                dd($th);
+            } else {
+                AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+            }
+            DB::rollback();
+            // RETORNA A FLASH MESSAGE
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Alteração não efetuada");
+            $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a alteração do Atende. Tente novamente");
+        }
+        return back();
+    }
+
 }

@@ -91,6 +91,19 @@ return [
             // 'prefix_indexes' => true,
         ],
 
+        'sqlsrv_sisadj' => [
+            'driver' => 'sqlsrv',
+            // 'url' => env('DATABASE_URL'),
+            'host' => env('SISADJ_DB_HOST', 'SP7877SR600\CAIXASQLSP100'),
+            'port' => env('SISADJ_DB_PORT', ''),
+            'database' => env('SISADJ_DB_DATABASE', '7257_1'),
+            'username' => env('SISADJ_DB_USERNAME', 'usr_7257'),
+            'password' => env('SISADJ_DB_PASSWORD', 'pwd_7257_usr'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            // 'prefix_indexes' => true,
+        ],
+
     ],
 
     /*
