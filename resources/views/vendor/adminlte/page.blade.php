@@ -205,7 +205,7 @@
                                         <h3 class="dropdown-item-title ">{{ session()->get('nomeCompleto') }}</h3>
                                         <p class="text-sm">{{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}</p>
                                         <p class="text-sm">UNIDADE: </p> <p class="text-sm" id="lotacao">{{ session()->get('codigoLotacaoAdministrativa') }}</p>
-                                        <p class="text-sm">{{ session()->get('acessoEmpregadoPortal') }}</p>
+                                        <p class="text-sm" id="perfil">{{ session()->get('acessoEmpregadoPortal') }}</p>
                                     </div>
                                 </div>
                             </a>

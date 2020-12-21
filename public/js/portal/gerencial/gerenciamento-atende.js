@@ -73,7 +73,52 @@ $( document ).ready(function() {
             <td>#`+pad(atende, 5)+`</td>
             <td><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
             <td>${item.nomeEquipe}</td>
-            <td id="vencimento${item.idAtende}">${vencimento}</td>
+            <td id="vencimento${item.idAtende}">${vencimento}
+            
+                <span data-toggle="tooltip" data-placement="top" title="Editar Prazo">
+                    <button id="gerencial/alterar-data-atende/${item.idAtende} type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAlterarData${item.idAtende}">
+                    <i class="fas fa-pen"></i>
+                    </button>
+                </span>
+            
+                <!-- Modal -->
+                <div class="modal fade" id="modalAlterarData${item.idAtende}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
+                                <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Alterar Prazo Atendimento - Atende #${item.idAtende}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" action="/gerencial/alterar-data-atende/${item.idAtende}" id="formAlteraData${item.idAtende}">
+                    
+                            <input type="hidden" name="_token" value="${csrfVar}">
+                            <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                            
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="formAlterar${item.idAtende}">Informar novo prazo</label>
+                                    <input type="date" class="form-control datepicker" name="prazoAtendimentoAtende" autocomplete="off" id="formAlterar${item.idAtende}" placeholder="Selecione nova data no calendário...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Motivo da Alteração de Prazo</label>
+                                    <textarea class="form-control" name="motivoPrazo" rows="3"></textarea>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Alterar</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </form> 
+
+        
+            </td>
+
+
             <td>${item.nomeAtividade}</td>
             <td>${item.assuntoAtende}</td>
             <td id="nome${item.idAtende}">${item.matriculaResponsavelAtividade}</td>`+
@@ -86,10 +131,10 @@ $( document ).ready(function() {
                 // botão dropdown
                 '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1'+item.idAtende+'">' +
                 '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#Consulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
-                    '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' redirecionar' + '</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-redirecionar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#redirecionar' + item.idAtende + '">' + '<i class="fas fa-exchange-alt"></i>' + ' Redirecionar' + '</a>' +
                     // '<a class="dropdown-item" type="button" id="btn-tratar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#tratar' + item.idAtende + '">' + '<i class="far fa-edit"></i>' + ' tratar' + '</a>' +
                     '<a class="dropdown-item" type="button" href="/atende/tratar-atende/'+ item.idAtende +'"><i class="far fa-edit"></i>' + ' Tratar' + '</a>'+
-                    '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' excluir</a>' +
+                    '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' Excluir</a>' +
                 '</div>' +
 
                 // Modal de consulta
@@ -128,7 +173,7 @@ $( document ).ready(function() {
                             '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
                             '<input type="hidden" class="form-control" name="_method" value="PUT">' +
                             '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
-                                '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Direcionar' + '</h5>' +
+                                '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Direcionar - ' + 'Atende #'+ item.idAtende + '</h5>' +
                                 '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
                                     '<span aria-hidden="true">&times;</span>' +
                                 '</button>' +
@@ -143,10 +188,19 @@ $( document ).ready(function() {
 
                                     '<div class="form-group">'+
                                     '<label for="exampleFormControlTextarea1">Motivo do redirecionamento</label>'+
-                                    '<textarea class="form-control" name="motivoRedirecionamento" rows="10"></textarea>'+
+                                    '<textarea class="form-control" name="motivoRedirecionamento" rows="5"></textarea>'+
                                 '</div>'+
 
                                     '</div>' +
+                                    
+                                    
+                                '<div class="form-group">' +
+                                    '<label for="formRedirData'+item.idAtende+'">Informar novo prazo</label>' + 
+                                    '<input type="date" class="form-control datepicker" name="prazoAtendimentoAtende" autocomplete="off" id="formRedirData'+item.idAtende+'" placeholder="Selecione nova data no calendário...">' +
+                                    '<small class="form-text text-muted">Este campo em branco, será considerado o prazo já existente.</small>' +
+                                '</div>' +
+
+
                                 '</div>' + 
                             '</div>' +
                             '<div class="modal-footer">' +
@@ -227,6 +281,7 @@ $( document ).ready(function() {
         var confereVencimento = moment(item.prazoAtendimentoAtende).isBefore(hoje);
         
         $(linha).appendTo('#tblAtendeAberto>tbody');
+        
 
             if (confereVencimento == true){
             $('#nome'+item.idAtende).html('<b style="color: red;">'+item.matriculaResponsavelAtividade +'</b>')
@@ -243,8 +298,9 @@ $( document ).ready(function() {
             });
         })
         _formataDatatableComId("tblAtendeAberto")
+        $('.datepicker').datepicker({dateFormat: 'yy-mm-dd',  minDate: 0});
     })
-})
+});
 
 function _formataDatatabFinalizados (idTabela){
     $('#' + idTabela).DataTable({
@@ -340,5 +396,4 @@ $('#custom-tabs-one-finalizado-tab').one("click", function() {
     _formataDatatabFinalizados("tblAtendeFinalizado")
     })
 })
-
 

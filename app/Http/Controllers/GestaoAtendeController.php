@@ -46,6 +46,7 @@ class GestaoAtendeController extends Controller
             DB::beginTransaction();
             // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
             $redirecionarAtende = Atende::find($idAtende);
+            $dataFormatada = date("d/m/Y", strtotime($request->prazoAtendimentoAtende));
 
             // EDITAR DADOS DEMANDA
             $redirecionarAtende->statusAtende                   = 'REDIRECIONADO';
@@ -53,13 +54,25 @@ class GestaoAtendeController extends Controller
             $redirecionarAtende->matriculaResponsavelAtividade  = $request->matriculaResponsavelAtividade;
             $redirecionarAtende->dataAlteracao                  = date("Y-m-d H:i:s", time());
 
+            if (!isset($request->motivoRedirecionamento)) {
+                $request->motivoRedirecionamento = "Decisão gerencial";
+            }
+
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
             $historico->matricula       = session('matricula');
             $historico->numeroContrato  = $redirecionarAtende->contratoFormatado;
             $historico->tipo            = "REDIRECIONADO";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "ATENDE #" . str_pad($redirecionarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " " . $request->motivoRedirecionamento;
+            if (isset($request->prazoAtendimentoAtende)) {
+                $redirecionarAtende->prazoAtendimentoAtende        = $request->prazoAtendimentoAtende;
+                $historico->observacao      = "ATENDE #" . str_pad($redirecionarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " ".
+                "<b>Redirecionado para </b>" . $request->matriculaResponsavelAtividade. "<br><b> Motivo: </b>". $request->motivoRedirecionamento.
+                '<br>'. "<b>Novo prazo: </b>" . $dataFormatada ;
+            }else{
+                $historico->observacao      = "ATENDE #" . str_pad($redirecionarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " ".
+                "<b>Redirecionado para </b>" . $request->matriculaResponsavelAtividade. "<br><b> Motivo: </b>". $request->motivoRedirecionamento;
+            }
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
@@ -279,10 +292,16 @@ class GestaoAtendeController extends Controller
             DB::beginTransaction();
             // CAPTURAR DADOS DOS DEMAIS MODELS (CASO NECESSÁRIO)
             $alterarAtende = Atende::find($idAtende);
+            $dataFormatada = date("d/m/Y", strtotime($request->prazoAtendimentoAtende));
 
             // EDITAR DADOS DEMANDA
             $alterarAtende->prazoAtendimentoAtende = $request->prazoAtendimentoAtende;
+
             $alterarAtende->dataAlteracao     = date("Y-m-d H:i:s", time());
+
+            if (!isset($request->motivoPrazo)) {
+                $request->motivoPrazo = "Decisão gerencial";
+            }
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
@@ -290,7 +309,7 @@ class GestaoAtendeController extends Controller
             $historico->numeroContrato  = $alterarAtende->contratoFormatado;
             $historico->tipo            = "ALTERAÇÃO";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "ATENDE #" . str_pad($alterarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " Nova data de resposta " . $request->prazoAtendimentoAtende ;
+            $historico->observacao      = "ATENDE #" . str_pad($alterarAtende->idAtende, 5, '0', STR_PAD_LEFT) . " <br><b>Nova data de resposta </b>" . $dataFormatada . "<br> <b>Motivo: </b>" . $request->motivoPrazo;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();

@@ -188,7 +188,9 @@ class AtendeDemandasController extends Controller
                                 'nomeAtividade'             => $macroAtividade->nomeAtividade,
                                 'sinteseAtividade'          => $macroAtividade->sinteseAtividade,
                                 'iconeAtividade'            => $macroAtividade->iconeAtividade,
+                                'prazoAtendimento'          => $macroAtividade->prazoAtendimento,
                                 'microAtividade'            => $arrayMicroAtividades,
+
                             ]);
                         } else {
                             array_push($arrayAtividadesEquipe, [
@@ -196,6 +198,7 @@ class AtendeDemandasController extends Controller
                                 'nomeAtividade'             => $macroAtividade->nomeAtividade,
                                 'sinteseAtividade'          => $macroAtividade->sinteseAtividade,
                                 'iconeAtividade'            => $macroAtividade->iconeAtividade,
+                                'prazoAtendimento'          => $macroAtividade->prazoAtendimento,
                             ]);
                         }
                     }
@@ -205,6 +208,7 @@ class AtendeDemandasController extends Controller
                     'idEquipe'      => $equipe->idEquipe,
                     'nomeEquipe'    => $equipe->nomeEquipe,
                     'iconeEquipe'   => $equipe->iconeEquipe,
+                    'prazoAtendimento' => $equipe->prazoAtendimento,
                     'atividades'    => $arrayAtividadesEquipe
                   
                 ];
@@ -233,6 +237,7 @@ class AtendeDemandasController extends Controller
                 'nomeAtividade'             => $atividadeSubordinada->nomeAtividade,
                 'sinteseAtividade'          => $atividadeSubordinada->sinteseAtividade,
                 'iconeAtividade'            => $atividadeSubordinada->iconeAtividade,
+                'prazoAtendimento'          => $atividadeSubordinada->prazoAtendimento,
             ]);
         }
         return $arrayAtividadesSubordinadas;
@@ -274,7 +279,11 @@ class AtendeDemandasController extends Controller
             $novaDemandaAtende->descricaoAtende                 = $request->descricaoAtende;
             $novaDemandaAtende->statusAtende                    = 'CADASTRADO';
             $novaDemandaAtende->matriculaCriadorDemanda         = session('matricula');
-            $novaDemandaAtende->prazoAtendimentoAtende          = DiasUteisClass::contadorDiasUteis(date("Y-m-d", time()), $dadosAtividade->prazoAtendimento);
+            if (isset($request->prazoAtendimentoAtende)) {
+                $novaDemandaAtende->prazoAtendimentoAtende = $request->prazoAtendimentoAtende;
+            }else{
+                $novaDemandaAtende->prazoAtendimentoAtende = DiasUteisClass::contadorDiasUteis(date("Y-m-d", time()), $dadosAtividade->prazoAtendimento);
+            }
             $novaDemandaAtende->matriculaResponsavelAtividade   = self::defineResponsavelDemandaAtende($request->idAtividade, $dadosAtividade);
             $novaDemandaAtende->dataCadastro                    = date("Y-m-d H:i:s", time());
             $novaDemandaAtende->dataAlteracao                   = date("Y-m-d H:i:s", time());

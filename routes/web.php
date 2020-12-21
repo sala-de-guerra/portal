@@ -302,7 +302,7 @@ Route::get('gerencial/listar-atende', 'GestaoAtendeController@listarUniverso');
 // LISTAR FINALIZADOS
 Route::get('gerencial/listar-finalizados', 'GestaoAtendeController@listarFinalizados'); 
 // ALTERAR ATENDE DATA ATENDE GESTOR
-Route::put('gerencial/alterar-data-atende/{idAtende}', 'GestaoAtendeController@alterarAtende');
+Route::post('gerencial/alterar-data-atende/{idAtende}', 'GestaoAtendeController@alterarAtende');
 
 // ROTA CARGA EM LOTE EMGEA
 Route::get('carga-em-lote/controle-arquivos', 'PlaniladeControle\UploadexcelController@importaExcel');
@@ -396,6 +396,8 @@ Route::post('corretores/envia-email-cecot/{corretor}', 'Corretores\CorretoresCon
 Route::get('corretores/envia-email-cecot-diario', 'Corretores\CorretoresController@listaEmailsCecotDiario');
 //cadastra Edital
 Route::post('corretores/cadastra-edital', 'Corretores\CorretoresController@cadastraEdital');
+//CORRETORES CREDENCIAMENTO
+Route::get('corretores/credenciamento', 'Corretores\CorretoresController@viewCorretoresCredenciamento');
 
 
 //ROTA TMA Unificado
