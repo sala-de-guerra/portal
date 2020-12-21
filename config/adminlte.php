@@ -230,6 +230,21 @@ return [
             'url'         => '/corretores',
             'icon'        => 'fas fa-lg fa-fw fa-address-card mr-2',
             'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
+            'submenu' => [
+                [
+                    'text' => 'Consulta',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                   'url'  => '/corretores',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
+               ],
+                [
+                    'text' => 'Credenciamento',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
+                   'url'  => 'corretores/credenciamento',
+                    'perfil_acesso' => ['DESENVOLVEDOR'],
+               ],
+            ],
+
         ],
         // [
         //     'text'        => 'Dúvidas Frequentes',

@@ -1,3 +1,4 @@
+
 function Atende () 
 { 
     var unidade = $('#lotacao').text()
@@ -173,21 +174,30 @@ function Atende ()
                                 <input type="hidden" name="contratoFormatado" value="${numeroContrato}">
                                 <input type="hidden" name="idEquipe" value="${dadosAtividade.idEquipe}">
                                 <input type="hidden" name="idAtividade" value="${dadosAtividade.idAtividade}">
-
+                                
                                 <div class="form-group">
                                     <label>Assunto</label>
                                     <input type="text" name="assuntoAtende" class="form-control" placeholder="Assunto do Atende" required>
                                 </div>
                                 <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Descrição</label>
-                                    <textarea name="descricaoAtende" class="form-control" id="formAtende" rows="3" required></textarea>
+                                    <textarea name="descricaoAtende" class="form-control" id="formAtende" rows="2" required></textarea>
                                 </div>
+
+                                <div class="form-group novoPrazo" style="display:none">
+                                    <label>Informar novo prazo de atendimento</label>
+                                    <input type="text" class="form-control datepicker" autocomplete="off" name="prazoAtendimentoAtende" placeholder="Selecione nova data no calendário...">
+                                    <small class="form-text text-muted">Prazo padrão para atendimento desta demanda: <b>${dadosAtividade.prazoAtendimento}</b> dias úteis. </small>
+                                    <small class="form-text text-muted">Este campo em branco, será considerado o prazo de dias padrão.</small>
+                                </div>
+                                
+
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input type="email" class="form-control" name="emailContatoResposta" aria-describedby="emailHelp" placeholder="email">
-                                    <small class="form-text text-muted">Preencha este campo caso deseje <b>direcionar</b> a resposta.</small>
-                                    <small class="form-text text-muted">este campo em branco, a resposta irá para quem efetuou a abertura do atende.</small>
-                                    <small class="form-text text-muted">envio para email caixa deve seguir o padrao c999999@<b>corp.caixa.gov.br</b> ou ag9999@<b>caixa.gov.br</b>.</small>
+                                    <small class="form-text text-muted">Preencha este campo caso haja necessidade de <b>direcionar</b> a resposta.</small>
+                                    <small class="form-text text-muted">Este campo em branco, a resposta irá para quem efetuou a abertura do atende.</small>
+                                    <small class="form-text text-muted">Envio para email caixa deve seguir o padrao c999999@<b>corp.caixa.gov.br</b> ou ag9999@<b>caixa.gov.br</b>.</small>
 
                                 </div>
                                 <button style="float: right;" onclick="addCopia()" type="button" class="btn btn-link">Adicionar cópia de email</button><br>
@@ -201,32 +211,32 @@ function Atende ()
                                     <label>CC</label>
                                     <input type="email" class="form-control" name="emailContatoNovaCopia" placeholder="email">
                                     <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
-                            </div>
+                                </div>
+
                             </div>
                             <div class="modal-footer">
-                            <button data-toggle="modal" data-target="#modalTeste" style="float: left;" type="button" class="btn btn-link tooltip-col mr-4" aria-hidden="true"><span style="color: red;">Histórico atende aberto nos últimos 7 dias</span>
-                            <small class="form-text text-muted">clique para ver mais.</small>
-                            <span class="tooltiptext5"><br>Atende(s) última semana: <br>
+                                <button data-toggle="modal" data-target="#modalTeste" style="float: left;" type="button" class="btn btn-link tooltip-col mr-4" aria-hidden="true"><span style="color: red;">Histórico atende aberto nos últimos 7 dias</span>
+                                <small class="form-text text-muted">clique para ver mais.</small>
+                                <span class="tooltiptext5"><br>Atende(s) última semana: <br>
                             
-                            <table id="tblTooltipAtende" class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th>Status</th>
+                                <table id="tblTooltipAtende" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Status</th>
 
-                                </thead>
-                                <tbody>  
+                                    </thead>
+                                    <tbody>  
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
                             
-                            </span>
-                            </button>
+                                </span>
+                                </button>
                             
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
-                            
                             
                         </form>
                     </div>
@@ -235,12 +245,14 @@ function Atende ()
         `
         return formAtende
     }
-
+   
+   
     function fecharModais()
-        {
-          $('.modal').modal('hide');
-        }
+    {
+        $('.modal').modal('hide');
+    }
     
+
 
     var _public= {
         criaModalMacroAtividades:criaModalMacroAtividades,
@@ -257,6 +269,12 @@ function addCopia(){
     $('.toggle').toggle()
 }
 
-
-
+setTimeout(function(){ 
+    $('.datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate:0}) 
+    if ($('#perfil').text() == 'GESTOR' ||
+        $('#perfil').text() == 'EVENTUAL' ||
+        $('#perfil').text() == 'DESENVOLVEDOR'){
+        $(".novoPrazo").css("display", "block");
+    }
+}, 1000);
 

@@ -20,7 +20,12 @@ class CorretoresController
 {
     public function Corretores()
     {
-        return view ('portal.informativas.corretores');
+        return view ('portal.Corretores.corretores');
+        
+    }
+    public function viewCorretoresCredenciamento()
+    {
+        return view ('portal.Corretores.credenciamento-corretores');
         
     }
     public function listaCorretores()

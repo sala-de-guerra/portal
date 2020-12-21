@@ -26,6 +26,7 @@
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active">  <a href="/"> Principal</a> </li>
             <li class="breadcrumb-item active"> Corretores</a> </li>
+            <li class="breadcrumb-item active"> Consulta</a> </li>
         </ol>
     </div>
 </div>
@@ -809,7 +810,7 @@
 
 @section('js')
 <script src="{{ asset('js\global\formata-data-datable.js') }}"></script>
-<script src="{{ asset('js/portal/informativas/corretores.js') }}"></script>
+<script src="{{ asset('js/portal/corretores/corretores.js') }}"></script>
 
 <script>
     setTimeout(function(){
