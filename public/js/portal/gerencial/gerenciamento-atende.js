@@ -76,7 +76,7 @@ $( document ).ready(function() {
             <td id="vencimento${item.idAtende}">${vencimento}
             
                 <span data-toggle="tooltip" data-placement="top" title="Editar Prazo">
-                    <button id="gerencial/alterar-data-atende/${item.idAtende} type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAlterarData${item.idAtende}">
+                    <button id="btnAlteraData${item.idAtende}" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAlterarData${item.idAtende}">
                     <i class="fas fa-pen"></i>
                     </button>
                 </span>
@@ -282,6 +282,13 @@ $( document ).ready(function() {
         
         $(linha).appendTo('#tblAtendeAberto>tbody');
         
+            $("#btnAlteraData"+item.idAtende).one( "click", function() {
+                $('.datepicker').datepicker({dateFormat: 'yy-mm-dd',  minDate: 0});
+            });
+
+            $("#btnGroupDrop1"+item.idAtende).one( "click", function() {
+                $('.datepicker').datepicker({dateFormat: 'yy-mm-dd',  minDate: 0});
+            });
 
             if (confereVencimento == true){
             $('#nome'+item.idAtende).html('<b style="color: red;">'+item.matriculaResponsavelAtividade +'</b>')
@@ -298,7 +305,6 @@ $( document ).ready(function() {
             });
         })
         _formataDatatableComId("tblAtendeAberto")
-        $('.datepicker').datepicker({dateFormat: 'yy-mm-dd',  minDate: 0});
     })
 });
 
