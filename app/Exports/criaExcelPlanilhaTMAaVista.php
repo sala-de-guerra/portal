@@ -31,6 +31,7 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
         $universoAVista= DB::table('TBL_VENDA_AVISTA')
             ->join('TBL_PAGAMENTOS_BOLETOS_CUB01', DB::raw('CONVERT(VARCHAR, TBL_PAGAMENTOS_BOLETOS_CUB01.NUMERO_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
+            ->join('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
             ->select(DB::raw("
                 TBL_VENDA_AVISTA.[BEM_FORMATADO] as BEM_FORMATADO,
                 TBL_VENDA_AVISTA.[DIAS_DECORRIDOS] as DIAS_DECORRIDOS,
@@ -38,8 +39,11 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
                 TBL_VENDA_AVISTA.[TIPO_VENDA] as tipoVenda,
                 TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
                 TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
-                TBL_VENDA_AVISTA.[PAGAMENTO_BOLETO] as cancelamento        
-    
+                TBL_VENDA_AVISTA.[PAGAMENTO_BOLETO] as cancelamento,
+                FORMAT(CONVERT(DECIMAL(10,2), REPLACE(ALITB001_Imovel_Completo.[VALOR_TOTAL_PROPOSTA], ',', '.')), 'N', 'pt-BR') AS totalProposta, 
+                FORMAT(CONVERT(DECIMAL(10,2), REPLACE(ALITB001_Imovel_Completo.[VALOR_REC_PROPRIOS_PROPOSTA], ',', '.')), 'N', 'pt-BR') AS valorRecursosProprios,          
+                CONVERT(VARCHAR, ALITB001_Imovel_Completo.[DATA_LAUDO], 103) as dataLaudo,
+                CONVERT(VARCHAR, ALITB001_Imovel_Completo.[DATA_VENCIMENTO_LAUDO], 103) as vencimentoLaudo
             "))
              ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
              ->get();
@@ -57,7 +61,11 @@ class criaExcelPlanilhaTMAaVista implements FromCollection, WithHeadings, Should
             'Tipo Venda',
             'Proponente',
             'CPF/CNPJ',
-            'Cancelamento'
+            'Cancelamento',
+            'Total Proposta',
+            'Recursos Próprios',
+            'Data Laudo',
+            'Vencimento Laudo'
             ],
         ];
     }
