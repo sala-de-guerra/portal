@@ -849,7 +849,6 @@
     $('.toggle').toggle()
 }
 </script>
-<script src="{{ asset('js/global/summernote-cleaner.js') }}"></script>
 <script>
     $('.summernote').summernote({
       height: 200,

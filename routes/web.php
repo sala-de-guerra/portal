@@ -398,6 +398,14 @@ Route::get('corretores/envia-email-cecot-diario', 'Corretores\CorretoresControll
 Route::post('corretores/cadastra-edital', 'Corretores\CorretoresController@cadastraEdital');
 //CORRETORES CREDENCIAMENTO
 Route::get('corretores/credenciamento', 'Corretores\CorretoresController@viewCorretoresCredenciamento');
+//CORRETORES CREDENCIAMENTO 2.0
+Route::get('corretores/lista-credenciados', 'Corretores\CorretoresController@listaCorretoresCredenciamento');
+//CORRETORES CREDENCIAMENTO ADIOCIONA CORRETOR
+Route::post('corretores/adiciona-corretor-credenciado', 'Corretores\CorretoresController@adicionaCorretorTabelaCredenciamento');
+//Cria Planilha
+Route::get('corretores/baixar-planilha-credenciamento', 'Corretores\CorretoresController@criaPlanilhaExcelCorretoresCredenciamento');
+//Upload Planilha
+Route::post('corretores/upload-planilha-credenciamento', 'Corretores\CorretoresController@import');
 
 
 //ROTA TMA Unificado

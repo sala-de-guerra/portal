@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use App\Classes\Ldap;
 use Illuminate\Support\Facades\DB;
 use App\Exports\criaExcelCorretores;
+use App\Exports\criaExcelCorretoresCredenciamento;
 use App\TabelaImportExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\QualificaCorretor;
+use App\Models\CorretorCadastramento;
 use App\Models\EditalCorretor;
 use App\Classes\GestaoImoveisCaixa\AvisoErroPortalPhpMailer;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Classes\DiasUteisClass;
 use Illuminate\Support\Carbon;
 use App\Models\HistoricoPortalGilie;
+use App\Imports\corretoresCredenciamentoImport;
 
 class CorretoresController
 {
@@ -704,5 +707,129 @@ class CorretoresController
       }
       return back();
 
+    }
+
+    public function listaCorretoresCredenciamento()
+    {
+        $corretores= DB::table('TBL_CORRETORES_CADASTRAMENTO')
+        ->select(DB::raw("
+        [idProcesso] as processo
+        ,[credenciado]
+        ,[CNPJ]
+        ,[CPF]
+        ,[Representante]
+        ,[numeroContrato]
+        ,ISNULL([numeroContrato], 'Sem Contrato') as numeroContrato
+        ,[dataConvoc]
+        ,ISNULL([contratoDevolvido], '') as contratoDevolvido
+        ,[endereço]
+        ,[email]
+        ,[obs]
+        ,ISNULL([SICAF], '') as SICAF
+      "))
+        ->get();
+
+         return json_encode($corretores);
+        
+    }
+  
+    public function adicionaCorretorTabelaCredenciamento(Request $request)
+    {
+      try {
+        DB::beginTransaction();
+
+
+      $atualizaCorretor = new CorretorCadastramento;
+      $atualizaCorretor->credenciado = $request->nomeCredenciado;
+      $atualizaCorretor->CNPJ = $request->CNPJ;
+      $atualizaCorretor->CPF = $request->CPF;
+      $atualizaCorretor->Representante = $request->nomeRepresentante;
+      $atualizaCorretor->email = $request->email;
+      $atualizaCorretor->matriculaCadastro = session('matricula');
+      $atualizaCorretor->save();
+
+      $mailCecot = new PHPMailer(true);
+      $mailCecot->isSMTP();
+      $mailCecot->CharSet = 'UTF-8'; 
+      $mailCecot->isHTML(true);                                         
+      $mailCecot->Host = 'sistemas.correiolivre.caixa';  
+      $mailCecot->SMTPAuth = false;                                  
+      $mailCecot->Port = 25;
+      // $mail->SMTPDebug = 2;
+      $mailCecot->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+      $mailCecot->addReplyTo('GILIESP01@caixa.gov.br');
+      if (env('APP_ENV') == 'PRODUCAO'){
+        $mailCecot->addBCC('c142639@caixa.gov.br');
+        $mailCecot->addBCC('c098453@caixa.gov.br');
+      }else{
+          $mailCecot->addAddress('c098453@mail.caixa');
+          $mailCecot->addBCC('c142639@caixa.gov.br');
+      }
+      $mailCecot->Subject = 'Solicitação de efetivação de contratação';
+      $mailCecot->Body = "Cadastramos um corretor";
+      $mailCecot->send();
+
+
+      $request->session()->flash('corMensagem', 'success');
+      $request->session()->flash('tituloMensagem', "inclusão realizada!");
+      $request->session()->flash('corpoMensagem', "A inclusão do corretor foi efetuada com sucesso.");
+
+    DB::commit();
+      } catch (\Throwable $th) {
+          if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
+            AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+          } else {
+              AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+          }
+          DB::rollback();
+          // RETORNA A FLASH MESSAGE
+          $request->session()->flash('corMensagem', 'danger');
+          $request->session()->flash('tituloMensagem', "Inclusão não efetuada");
+          $request->session()->flash('corpoMensagem', "Aconteceu um erro durante a inclusão. Tente novamente");
+      }
+      return back();
+
+    }
+
+    public function criaPlanilhaExcelCorretoresCredenciamento()
+    {
+        return Excel::download(new criaExcelCorretoresCredenciamento, 'Posição_Corretores.xlsx');
+    }
+
+    public function import(Request $request) 
+    {
+        try {
+            
+            $pathtofile = ($_FILES['arquivo']['name']);
+           
+            $info = pathinfo($pathtofile);
+            if ($info["extension"] == "xlsx" || $info["extension"] == "xls"){
+            Excel::import(new corretoresCredenciamentoImport,request()->file('arquivo'));
+          
+            $request->session()->flash('corMensagem', 'success');
+            $request->session()->flash('tituloMensagem', "Cadastro realizado!");
+            $request->session()->flash('corpoMensagem', "O upload foi realizado com sucesso.");
+            }else{
+                $request->session()->flash('corMensagem', 'danger');
+                $request->session()->flash('tituloMensagem', "Não foi possivel cadatrar!");
+                $request->session()->flash('corpoMensagem', "Envie apenas arquivos do Excel (XLS e XLSX)"); 
+            }
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+                 foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+                $failure->values(); // The values of the row that has failed.
+                foreach($failure->errors() as $key => $message){
+                $key = $message;
+                }
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Não foi possivel cadatrar!");
+            $request->session()->flash('corpoMensagem', $message); 
+            }
+        }   
+        
+        return back();
     }
 }
