@@ -406,6 +406,8 @@ Route::post('corretores/adiciona-corretor-credenciado', 'Corretores\CorretoresCo
 Route::get('corretores/baixar-planilha-credenciamento', 'Corretores\CorretoresController@criaPlanilhaExcelCorretoresCredenciamento');
 //Upload Planilha
 Route::post('corretores/upload-planilha-credenciamento', 'Corretores\CorretoresController@import');
+//envia-email credenciamento SICAF
+Route::post('corretores/envia-email-sicaf/{idCredenciado}', 'Corretores\CorretoresController@enviaEmailPendenteSICAF');
 
 
 //ROTA TMA Unificado

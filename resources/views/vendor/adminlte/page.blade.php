@@ -285,7 +285,7 @@
                 </div>
                 <div class="d-inline justify-content-right">
 
-                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="top" title="Carlos Alberto Dalcin David ,    Eduardo Chiaki Chuman ,    Rafael Pimentel Gonçalves ,    Vladimir Pereira de Lemos"><i class="fas fa-info-circle"></i>
+                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="top" title="Carlos Alberto Dalcin David ,    Eduardo Chiaki Chuman ,    Fernanda Naomi Hoota Okubo ,    Rafael Pimentel Gonçalves ,    Vladimir Pereira de Lemos"><i class="fas fa-info-circle"></i>
                 Desenvolvedores
                 </button>
                 </div>
