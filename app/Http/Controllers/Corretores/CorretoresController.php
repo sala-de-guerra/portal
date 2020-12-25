@@ -832,4 +832,50 @@ class CorretoresController
         
         return back();
     }
+
+       public function enviaEmailPendenteSICAF($idCredenciado, Request $request)
+    {
+
+      try { 
+
+      $mensagemPendenteSICAF = file_get_contents(("emailPendenteSICAF.php"), dirname(__FILE__));
+      $mensagemPendenteSICAF = str_replace("%CREDENCIADO%", $request->nomeCredenciado, $mensagemPendenteSICAF);
+
+      $mailPendenteSICAF = new PHPMailer(true);
+      $mailPendenteSICAF->isSMTP();
+      $mailPendenteSICAF->CharSet = 'UTF-8'; 
+      $mailPendenteSICAF->isHTML(true);                                         
+      $mailPendenteSICAF->Host = 'sistemas.correiolivre.caixa';  
+      $mailPendenteSICAF->SMTPAuth = false;                                  
+      $mailPendenteSICAF->Port = 25;
+      // $mail->SMTPDebug = 2;
+      $mailPendenteSICAF->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+      $mailPendenteSICAF->addReplyTo('GILIESP01@caixa.gov.br');
+      if (env('APP_ENV') == 'PRODUCAO'){
+          $mailPendenteSICAF->addBCC('GILIESP09@caixa.gov.br');
+          $mailPendenteSICAF->addBCC('c142639@caixa.gov.br');
+          $mailPendenteSICAF->addBCC('c098453@caixa.gov.br');
+      }else{
+          $mailPendenteSICAF->addAddress('c098453@mail.caixa');
+          $mailPendenteSICAF->addCC('c142639@mail.caixa');
+      }
+      $mailPendenteSICAF->Subject = 'Orientações para efetivação de contratação - Pendência SICAF';
+      $mailPendenteSICAF->Body = $mensagemPendenteSICAF;
+      $mailPendenteSICAF->send();
+
+      session()->flash('corMensagem', 'success');
+      session()->flash('tituloMensagem', "Mensagem enviada");
+      session()->flash('corpoMensagem', "A sua mensagem foi enviada com sucesso.");
+
+    } catch (\Throwable $th) {
+      AvisoErroPortalPhpMailer::enviarMensageria($th, \Request::getRequestUri(), session('matricula'));
+      DB::rollback();
+      // RETORNA A FLASH MESSAGE
+      session()->flash('corMensagem', 'danger');
+      session()->flash('tituloMensagem', "Algo deu errado!!!");
+      session()->flash('corpoMensagem', "Tente novamente");
+  }
+
+      return back();
+    }
 }

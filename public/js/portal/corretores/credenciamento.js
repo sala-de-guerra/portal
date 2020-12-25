@@ -8,7 +8,7 @@ function _formataDatatableComData (idTabela){
            {type: 'date-uk', targets: [3]} //vai filtrar a coluna com data dd/mm/yyyy
         ],
        
-        "pageLength": 15,
+        "pageLength": 10,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -66,17 +66,17 @@ $(document).ready(function(){
                                         <p>${CREDENCIADOFormatado}</p>
                                     </div>
                                     
-                                    <div class="form-group" id="CNPJsemvalor${item.processo}">
+                                    <div class="form-group" id="CNPJValor${item.processo}">
                                         <label>CNPJ:</label>
                                         <p>${item.CNPJ}</p>
                                     </div>
 
-                                    <div class="form-group id="CPFsemvalor${item.processo}">
+                                    <div class="form-group" id="CPFValor${item.processo}">
                                         <label>CPF:</label>
                                         <p>${item.CPF}</p>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" id="RepresValor${item.processo}">
                                         <label>Representante:</label>
                                         <p>${item.Representante}</p>
                                     </div>
@@ -98,59 +98,63 @@ $(document).ready(function(){
 
                     <td style="text-align:center;">${item.numeroContrato}</td>
                     <td style="text-align:center;">${convocacao}</td>
-                    <td style="text-align:center;">${item.contratoDevolvido}</td>                    
-                    <td style="white-space:nowrap;" style="text-align:center;"><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSicaf${item.credenciado}">
+                    <td style="white-space:nowrap;" style="text-align:center;"><a "\\arquivos.caixa\sp\SP7062FS201\PUBLIC\Credenciamento_001.2020_Corretores"><button type="button" class="btn btn-link">${item.contratoDevolvido}</button></a></td>
+
+                    <td style="white-space:nowrap;" style="text-align:center;"><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSicaf${item.processo}">
                     ${item.SICAF}</button>
 
                         <!-- Modal --> 
                             <div class="modal fade" id="modalSicaf${item.processo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <span data-toggle="tooltip" data-placement="top" title="Enviar e-mail">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
-                                    <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Enviar e-mail com aviso de pendência</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
+                                <span data-toggle="tooltip" data-placement="top" title="Enviar e-mail"></span>
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background: linear-gradient(to right, #4F94CD , #63B8FF);">
+                                            <h5 class="modal-title" style="color: white;" id="exampleModalLabel">Enviar e-mail de aviso de pendência no SICAF</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <form class="col" action="envia-email-sicaf/${item.processo}" method="POST">
+                                                <input type="hidden" name="_token" value="${csrfVar}">
+                                                <input type="hidden" name="nomeCredenciado" value="${CREDENCIADOFormatado}">
+                                                <div class="modal-body">
+                                                    <p>Deseja enviar e-mail para <strong>${CREDENCIADOFormatado}</strong> informando sobre a pendência no SICAF?</p>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>   
 
-                                <form method="post" action="/corretores/credencia-corretor">
-                                <input type="hidden" name="_token" value="${csrfVar}">
-                                <input type="hidden" name="credenciado" value="${item.credenciado}">
-                                <div class="modal-body">
-                                <div class="form-group">
-                                <form class="col" action="corretores/envia-email-credencia/${item.credenciado}" method="POST">
-                                <input type="hidden" name="_token" value="${csrfVar}">
-                                    <div class="modal-body">
-                                        Deseja enviar e-mail para <strong>${CREDENCIADOFormatado}</strong> informando sobre a pendência no SICAF? ? 
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                        <button type="submit" class="btn btn-primary">Enviar</button>
-                                    </div>
-                                
-                                </form>
-
-                                </form>  
                                 
                     </td>
 
                     
                 </tr>`
 
+                
 
 
             $(linha).appendTo('#tblCredenciamento>tbody');
 
             if(item.CNPJ == null){
-                $('#CNPJsemvalor' + item.processo).text("")
+                $('#CNPJValor' + item.processo).text("")
             }
 
             if(item.CPF == null){
-                $('#CPFsemvalor' + item.processo).text("")
+                $('#CPFValor' + item.processo).text("")
             }   
 
+            if(item.Representante == null){
+                $('#RepresValor' + item.processo).text("")
+            }   
             
         })
     }).done(function() {
