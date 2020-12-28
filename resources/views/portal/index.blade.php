@@ -123,7 +123,7 @@
             </div>
         </div>
         <div style="position: absolute; height: 10px; bottom: 0; right: 0;  left: 0; ">
-            <img src="{{ asset('img/temaPortal.png') }}" alt="Papai Noel" style="max-height: 180px;">
+            <img src="{{ asset('img/giphy.gif') }}" alt="Papai Noel" style="max-height: 180px;">
         </div>
     </div>
 
