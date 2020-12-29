@@ -7,20 +7,21 @@ use Illuminate\Http\Request;
 
 class BensMoveisController extends Controller
 {
-    function index(){
+    public function index(){
         
-        return view('portal.bens-moveis.doacao-de-bens')->with('lista_itens');
-        dd(request()->all());
+        return view('portal.bens-moveis.index')->with('lista_itens');
+        
 
     }
 
-    function exportaTabela(Request $request){
+    public function exportaTabela(Request $request){
 
-        dd(request()->all());
+        
+        // dd(request()->all());
 
         try{
 
-            $txt->trim(str_replace('"','', $request->txt));
+            $txt = trim(str_replace('"','', $request->txt));
 
             $remover =['</span>', '"'];
             $string = str_replace($remover, '', $txt);   
@@ -35,20 +36,20 @@ class BensMoveisController extends Controller
 
             $total_itens = sizeof($lista_itens_inicial);
 
-            $lista_itens_inicial = array_slice($lista_itens, 1, $total_itens);
+            $lista_itens_inicial = array_slice($lista_itens_inicial, 1, $total_itens);
 
             $lista_itens = [];
             foreach ($lista_itens_inicial as $item){
 
                 array_push($lista_itens, [
                     'quantidade' => $item[0],
-                    'nome   ' => $item[1]
+                    'nome' => $item[1]
                     ]);    
             }
 
-            dd(request()->all());
+            // dd(request()->all());
             
-            return view('portal.bens-moveis.doacao-de-bens', compact('lista_itens'));
+            return view('portal.bens-moveis.index', compact('lista_itens'));
 
         }
         catch(\Exception $e){

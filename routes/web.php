@@ -360,9 +360,8 @@ Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCor
 // Planilha de bens Móveis em doação
 
 Route::post('preparar-e-ofertar/doacao-bens-moveis', 'BensMoveis\bensMoveisController@exportaTabela');
-Route::get('preparar-e-ofertar/doacao-bens-moveis', function(){
-    return view ('portal.bens-moveis.index');
-});
+
+Route::get('preparar-e-ofertar/doacao-bens-moveis', 'BensMoveis\bensMoveisController@index');
 
 
 //ROTA Corretores view
