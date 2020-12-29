@@ -357,6 +357,13 @@ Route::get('preparar-e-ofertar/controle-laudos/controle-baixa', 'Laudo\controleL
 Route::get('preparar-e-ofertar/controle-laudos/controle-correcao', 'Laudo\controleLaudoController@correcaoDeLaudo');
 Route::get('controle-laudos/correcao', 'Laudo\controleLaudoController@laudoEmCorrecao');
 
+// Planilha de bens Móveis em doação
+
+Route::post('preparar-e-ofertar/doacao-bens-moveis', 'BensMoveis\bensMoveisController@exportaTabela');
+Route::get('preparar-e-ofertar/doacao-bens-moveis', function(){
+    return view ('portal.bens-moveis.index');
+});
+
 
 //ROTA Corretores view
 Route::get('corretores', 'Corretores\CorretoresController@Corretores');
@@ -622,3 +629,4 @@ Route::prefix('gerencial/gestao-subsidios')->group(function () {
     Route::get('/teste', 'Dijur\dijurController@teste');
 
 });
+
