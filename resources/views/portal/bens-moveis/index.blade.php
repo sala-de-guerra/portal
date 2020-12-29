@@ -72,7 +72,7 @@
             &#128521; Processamento Realizado com sucesso!
             <p>
               Copie e cole o resultado abaixo numa planilha 
-              (mais interessante se o relatório usar várias páginas com a TAG SPAM ) 
+              (mais interessante se o relatório usar várias páginas com a TAG SPAN ) 
               ou então gere o arquivo excel diretamente no botão verde acima. 
             </p>
           </div>
