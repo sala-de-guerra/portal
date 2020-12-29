@@ -5,7 +5,7 @@ function _formataDatatableComData (idTabela){
         "order": [[ 0, "asc" ]],
 
        columnDefs: [
-           {type: 'date-uk', targets: [6]} //vai filtrar a coluna com data dd/mm/yyyy
+           {type: 'date-uk', targets: [5]} //vai filtrar a coluna com data dd/mm/yyyy
        ],
 
         "pageLength": 25,
@@ -82,6 +82,7 @@ $('#selectGILIE').change(function(){
                                     <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                     <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                     <input type="hidden" name="gilie" value="${item.GILIE}">
+                                    <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -101,81 +102,84 @@ $('#selectGILIE').change(function(){
                                      </form>  
                         </td>
                         
-                        <td>
-                        <!-- Modal e-mail-->
-                        <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Enviar e-mail">
-                       
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
-                            </button> ` + `
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
-                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
-                            </div>
+                        <!--<td>-->                
+                       <!-- Modal e-mail-->
+                       <!--
+                       <div class="dropdown">
+                           <span data-toggle="tooltip" data-placement="top" title="Alter">
+                      
+                           <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
+                           </button> ` + `
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
+                               <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
+                           </div>
                         </div>
+                        -->
 
-                            <!-- Modal enviar Corretor -->
-                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                           <!-- Modal enviar Corretor -->
+                           <!--
+                           <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>
-                            
-                            
-                            <!-- Modal envia CECOT15 -->
-                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>
+                           -->
+                           
+                           <!-- Modal envia CECOT15 -->
+                           <!--
+                           <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>         
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>         
+                            -->
 
-
-                        </td>    
-
+                       <!--</td>-->
 
                         <td>${item.VENCIMENTO}</td>
 
@@ -248,6 +252,7 @@ $('#selectGILIE').change(function(){
                                     <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                     <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                     <input type="hidden" name="gilie" value="${item.GILIE}">
+                                    <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -267,80 +272,84 @@ $('#selectGILIE').change(function(){
                             </form>  
                         </td>
 
-                        <td>
-                        <!-- Modal e-mail-->
-                        <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Alter">
-                       
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
-                            </button> ` + `
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
-                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
-                            </div>
+                        <!--<td>-->                
+                       <!-- Modal e-mail-->
+                       <!--
+                       <div class="dropdown">
+                           <span data-toggle="tooltip" data-placement="top" title="Alter">
+                      
+                           <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
+                           </button> ` + `
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
+                               <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
+                           </div>
                         </div>
+                        -->
 
-                            <!-- Modal enviar Corretor -->
-                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                           <!-- Modal enviar Corretor -->
+                           <!--
+                           <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>
-                            
-                            
-                            <!-- Modal envia CECOT15 -->
-                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>
+                           -->
+                           
+                           <!-- Modal envia CECOT15 -->
+                           <!--
+                           <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>         
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>         
+                            -->
 
-
-                        </td>    
+                       <!--</td>--> 
 
                         <td>${item.VENCIMENTO}</td>
                     </tr>`
@@ -405,6 +414,7 @@ $('#selectGILIE').change(function(){
                                     <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                     <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                     <input type="hidden" name="gilie" value="${item.GILIE}">
+                                    <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -424,80 +434,84 @@ $('#selectGILIE').change(function(){
                             </form>  
                         </td>
 
-                        <td>
-                        <!-- Modal e-mail-->
-                        <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Alter">
-                       
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
-                            </button> ` + `
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
-                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
-                            </div>
+                        <!--<td>-->                
+                       <!-- Modal e-mail-->
+                       <!--
+                       <div class="dropdown">
+                           <span data-toggle="tooltip" data-placement="top" title="Alter">
+                      
+                           <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
+                           </button> ` + `
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
+                               <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
+                           </div>
                         </div>
+                        -->
 
-                            <!-- Modal enviar Corretor -->
-                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                           <!-- Modal enviar Corretor -->
+                           <!--
+                           <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>
-                            
-                            
-                            <!-- Modal envia CECOT15 -->
-                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>
+                           -->
+                           
+                           <!-- Modal envia CECOT15 -->
+                           <!--
+                           <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>         
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>         
+                            -->
 
-
-                        </td>    
+                       <!--</td>-->
 
                         <td>${item.VENCIMENTO}</td>
                     </tr>`
@@ -563,6 +577,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -582,80 +597,84 @@ $('#selectGILIE').change(function(){
                            </form>  
                        </td>
                         
-                       <td>
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
-                        <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Alter">
-                       
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
-                            </button> ` + `
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
-                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
-                            </div>
+                       <!--
+                       <div class="dropdown">
+                           <span data-toggle="tooltip" data-placement="top" title="Alter">
+                      
+                           <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
+                           </button> ` + `
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
+                               <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
+                           </div>
                         </div>
+                        -->
 
-                            <!-- Modal enviar Corretor -->
-                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                           <!-- Modal enviar Corretor -->
+                           <!--
+                           <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>
-                            
-                            
-                            <!-- Modal envia CECOT15 -->
-                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>
+                           -->
+                           
+                           <!-- Modal envia CECOT15 -->
+                           <!--
+                           <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>         
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>         
+                            -->
 
-
-                        </td>    
+                       <!--</td>-->
 
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
@@ -720,6 +739,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -739,80 +759,84 @@ $('#selectGILIE').change(function(){
                            </form>  
                        </td>
                                                
-                       <td>
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
-                        <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Alter">
-                       
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
-                            </button> ` + `
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
-                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
-                            </div>
+                       <!--
+                       <div class="dropdown">
+                           <span data-toggle="tooltip" data-placement="top" title="Alter">
+                      
+                           <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
+                           </button> ` + `
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
+                               <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
+                           </div>
                         </div>
+                        -->
 
-                            <!-- Modal enviar Corretor -->
-                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                           <!-- Modal enviar Corretor -->
+                           <!--
+                           <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>
-                            
-                            
-                            <!-- Modal envia CECOT15 -->
-                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>
+                           -->
+                           
+                           <!-- Modal envia CECOT15 -->
+                           <!--
+                           <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>         
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>         
+                            -->
 
-
-                        </td>    
+                       <!--</td>-->
 
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
@@ -877,6 +901,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -896,80 +921,84 @@ $('#selectGILIE').change(function(){
                            </form>  
                        </td>
                                                                       
-                       <td>
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
-                        <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Alter">
-                       
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
-                            </button> ` + `
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
-                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
-                            </div>
+                       <!--
+                       <div class="dropdown">
+                           <span data-toggle="tooltip" data-placement="top" title="Alter">
+                      
+                           <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
+                           </button> ` + `
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
+                               <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
+                           </div>
                         </div>
+                        -->
 
-                            <!-- Modal enviar Corretor -->
-                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                           <!-- Modal enviar Corretor -->
+                           <!--
+                           <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>
-                            
-                            
-                            <!-- Modal envia CECOT15 -->
-                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>
+                           -->
+                           
+                           <!-- Modal envia CECOT15 -->
+                           <!--
+                           <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>         
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>         
+                            -->
 
-
-                        </td>    
+                       <!--</td>-->
 
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
@@ -1034,6 +1063,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1053,80 +1083,84 @@ $('#selectGILIE').change(function(){
                            </form>  
                        </td>
                        
-                      <td>                   
-                      <!-- Modal e-mail-->
-                        <div class="dropdown">
-                            <span data-toggle="tooltip" data-placement="top" title="Alter">
-                       
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
-                            </button> ` + `
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
-                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
-                            </div>
+                       <!--<td>-->                
+                       <!-- Modal e-mail-->
+                       <!--
+                       <div class="dropdown">
+                           <span data-toggle="tooltip" data-placement="top" title="Alter">
+                      
+                           <button class="btn btn-primary dropdown-toggle" type="button" id="botaoEmail${item.CRECI + item.GILIE}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-target="#modalDadosCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>
+                           </button> ` + `
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
+                               <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
+                           </div>
                         </div>
+                        -->
 
-                            <!-- Modal enviar Corretor -->
-                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                           <!-- Modal enviar Corretor -->
+                           <!--
+                           <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-corretor/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail com orientações para efetivação de contratação ao corretor <strong>${corretorFormatado}</strong>? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>
-                            
-                            
-                            <!-- Modal envia CECOT15 -->
-                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmação de envio</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>
+                           -->
+                           
+                           <!-- Modal envia CECOT15 -->
+                           <!--
+                           <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">Confirmação de envio</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
 
-                                        <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
-                                        <input type="hidden" name="_token" value="${csrfVar}">
-                                        <input type="hidden" name="gilie" value="${item.GILIE}">
-                                            <div class="modal-body">
-                                                Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
-                                            </div>
+                                       <form class="col-md-12" action="corretores/envia-email-cecot/${item.cpfCorretor}" method="POST">
+                                       <input type="hidden" name="_token" value="${csrfVar}">
+                                       <input type="hidden" name="gilie" value="${item.GILIE}">
+                                           <div class="modal-body">
+                                               Deseja enviar e-mail de solicitação de cadastramento do corretor <strong>${corretorFormatado}</strong> para área gestora da Caixa? 
+                                           </div>
 
-                                            <div class="modal-footer">
+                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        
-                                        </form>
-                                    
-                                    </div>
-                                </div> 
-                            </div>         
+                                               <button type="submit" class="btn btn-primary">Enviar</button>
+                                           </div>
+                                       
+                                       </form>
+                                   
+                                   </div>
+                               </div> 
+                           </div>         
+                            -->
 
-
-                        </td>    
+                       <!--</td>-->
 
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
@@ -1191,6 +1225,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1209,8 +1244,9 @@ $('#selectGILIE').change(function(){
                                </div>
                            </form>  
                        </td>
-                       <td>                    
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
+                       <!--
                        <div class="dropdown">
                            <span data-toggle="tooltip" data-placement="top" title="Alter">
                       
@@ -1220,9 +1256,11 @@ $('#selectGILIE').change(function(){
                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
                            </div>
-                       </div>
+                        </div>
+                        -->
 
                            <!-- Modal enviar Corretor -->
+                           <!--
                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1250,9 +1288,10 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>
-                           
+                           -->
                            
                            <!-- Modal envia CECOT15 -->
+                           <!--
                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1280,9 +1319,9 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>         
+                            -->
 
-
-                       </td>    
+                       <!--</td>-->
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
                        $(linha).appendTo('#tblCorretoresCT>tbody');
@@ -1346,6 +1385,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1364,8 +1404,9 @@ $('#selectGILIE').change(function(){
                                </div>
                            </form>  
                        </td>
-                       <td>                 
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
+                       <!--
                        <div class="dropdown">
                            <span data-toggle="tooltip" data-placement="top" title="Alter">
                       
@@ -1375,9 +1416,11 @@ $('#selectGILIE').change(function(){
                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
                            </div>
-                       </div>
+                        </div>
+                        -->
 
                            <!-- Modal enviar Corretor -->
+                           <!--
                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1405,9 +1448,10 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>
-                           
+                           -->
                            
                            <!-- Modal envia CECOT15 -->
+                           <!--
                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1435,9 +1479,9 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>         
+                            -->
 
-
-                       </td>    
+                       <!--</td>-->
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
                        $(linha).appendTo('#tblCorretoresBR>tbody');
@@ -1501,6 +1545,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1520,8 +1565,9 @@ $('#selectGILIE').change(function(){
                            </form>  
                        </td>
                                                
-                       <td>
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
+                       <!--
                        <div class="dropdown">
                            <span data-toggle="tooltip" data-placement="top" title="Alter">
                       
@@ -1531,9 +1577,11 @@ $('#selectGILIE').change(function(){
                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
                            </div>
-                       </div>
+                        </div>
+                        -->
 
                            <!-- Modal enviar Corretor -->
+                           <!--
                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1561,9 +1609,10 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>
-                           
+                           -->
                            
                            <!-- Modal envia CECOT15 -->
+                           <!--
                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1591,9 +1640,9 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>         
+                            -->
 
-
-                       </td>    
+                       <!--</td>--> 
 
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
@@ -1658,6 +1707,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1677,8 +1727,9 @@ $('#selectGILIE').change(function(){
                            </form>  
                        </td>
                                                
-                       <td>
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
+                       <!--
                        <div class="dropdown">
                            <span data-toggle="tooltip" data-placement="top" title="Alter">
                       
@@ -1688,9 +1739,11 @@ $('#selectGILIE').change(function(){
                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
                            </div>
-                       </div>
+                        </div>
+                        -->
 
                            <!-- Modal enviar Corretor -->
+                           <!--
                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1718,9 +1771,10 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>
-                           
+                           -->
                            
                            <!-- Modal envia CECOT15 -->
+                           <!--
                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1748,9 +1802,9 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>         
+                            -->
 
-
-                       </td>     
+                       <!--</td>-->
 
                        <td>${item.VENCIMENTO}</td>
                    </tr>`
@@ -1815,6 +1869,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
+                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1834,8 +1889,9 @@ $('#selectGILIE').change(function(){
                            </form>  
                        </td>
 
-                       <td>                
+                       <!--<td>-->                
                        <!-- Modal e-mail-->
+                       <!--
                        <div class="dropdown">
                            <span data-toggle="tooltip" data-placement="top" title="Alter">
                       
@@ -1845,9 +1901,11 @@ $('#selectGILIE').change(function(){
                                <a class="dropdown-item" id="envCor${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCorretor${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar orientação Corretor</a>
                                <a class="dropdown-item" id="envCecot${item.cpfCorretor}" type="button" data-toggle="modal" data-target="#enviarCecot${item.cpfCorretor}"><i class="far fa-envelope"></i>&nbsp Enviar Área Caixa</a>
                            </div>
-                       </div>
+                        </div>
+                        -->
 
                            <!-- Modal enviar Corretor -->
+                           <!--
                            <div class="modal fade" id="enviarCorretor${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1875,9 +1933,10 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>
-                           
+                           -->
                            
                            <!-- Modal envia CECOT15 -->
+                           <!--
                            <div class="modal fade" id="enviarCecot${item.cpfCorretor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                    <div class="modal-content">
@@ -1905,9 +1964,9 @@ $('#selectGILIE').change(function(){
                                    </div>
                                </div> 
                            </div>         
+                            -->
 
-
-                       </td>
+                       <!--</td>-->
 
                        <td>${item.VENCIMENTO}</td>
 

@@ -98,9 +98,9 @@ $(document).ready(function(){
 
                     <td style="text-align:center;">${item.numeroContrato}</td>
                     <td style="text-align:center;">${convocacao}</td>
-                    <td style="white-space:nowrap;" style="text-align:center;"><a "\\arquivos.caixa\sp\SP7062FS201\PUBLIC\Credenciamento_001.2020_Corretores"><button type="button" class="btn btn-link">${item.contratoDevolvido}</button></a></td>
+                    <td style="white-space:nowrap;" class="text-center"><a href="file:\\arquivos.caixa\sp\SP7062FS201\PUBLIC\Credenciamento_001.2020_Corretores\Corretores Contratados"><button type="button" class="btn btn-link">${item.contratoDevolvido}</button></a></td>
 
-                    <td style="white-space:nowrap;" style="text-align:center;"><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSicaf${item.processo}">
+                    <td style="white-space:nowrap;" class="text-center"><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSicaf${item.processo}">
                     ${item.SICAF}</button>
 
                         <!-- Modal --> 

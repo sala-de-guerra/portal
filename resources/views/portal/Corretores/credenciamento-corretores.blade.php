@@ -24,7 +24,6 @@ input[type='file'] {
     word-wrap:break-word;
     overflow-x: hidden;
 }
-
 </style>
 
 @if (session('tituloMensagem'))
@@ -55,6 +54,12 @@ input[type='file'] {
     </div>
 </div>
 
+                <div class="col-sm-12" style="text-align: right;" >
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarCredenciado">
+                        <i class="far fa-lg fa-edit"></i>
+                        Cadastrar Novo Corretor Credenciado
+                    </button>
+                </div><br>
 
 @stop
 
@@ -126,12 +131,6 @@ input[type='file'] {
                     <a href="/corretores/baixar-planilha-credenciamento"><button style="float: right" type="button" class="btn btn-success">Baixar Lista Geral &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                 <br>
                 </div><br>
-                <div class="col-sm">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarCredenciado">
-                        <i class="far fa-lg fa-edit"></i>
-                        Cadastrar Novo Corretor Credenciado
-                    </button>
-                </div><br>
                 <div class="row">
                     <div class="col-sm-12 table-responsive p-0">
                         <table id="tblCredenciamento" class="table table-bordered table-striped hover dataTable">
@@ -177,22 +176,22 @@ input[type='file'] {
                 </div>
 
                 <div class="modal-body px-0">
-                    <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
+                    
                         <div class="px-2" style="overflow-y: auto; height: 100%;">
                             <div class="form-group">
                                 <label>Nome do Credenciado</label>
                                 <input type="text" name="nomeCredenciado" class="form-control" autocomplete="off" required>
                             </div>
 
-                            <div class="form-group form-check-inline" required>
+                            <div class="form-group" required>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="pfpj" id="pj" value="pj" onclick="mostraPj()">
                                     <label class="form-check-label" for="pj">
                                         Pessoa Jurídica
                                     </label>
-                                        <div class="form-group form-check-inline" style="display: none;" id="mostrarPj">
+                                        <div class="form-group" style="display: none;" id="mostrarPj">
                                             <label>CNPJ</label>
-                                            <input type="text" name="CNPJ" class="form-control"  autocomplete="off" placeholder="00.000.000/0000-00" required><br>
+                                            <input type="text" name="CNPJ" class="form-control" id="dadoCNPJ" autocomplete="off" placeholder="00.000.000/0000-00" required><br>
                                         
                                         <p><b>e/ou</b></p>
                                         
@@ -207,7 +206,7 @@ input[type='file'] {
                                     </label>
                                     <div class="form-group" style="display: none;" id="mostrarPf">
                                             <label>CPF</label>
-                                            <input type="text" name="CPF" class="form-control" autocomplete="off" placeholder="000.000.000-00" required>
+                                            <input type="text" name="CPF" class="form-control" id="dadoCPF"  autocomplete="off" placeholder="000.000.000-00" required>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +222,7 @@ input[type='file'] {
                             </div>
                             
                         </div>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -255,15 +254,17 @@ input[type='file'] {
 <script src="{{ asset('js/portal/corretores/credenciamento.js') }}"></script>
 
 <script>
-
 function mostraPj(){
     $("#mostrarPf").css("display", "none");
-    $("#mostrarPj").css("display", "block"); 
+    $("#mostrarPj").css("display", "block");
+    $("#dadoCPF").removeAttr("required");
+    $("#dadoCNPJ").prop('required',true);
 }
-
 function mostraPf(){
     $("#mostrarPj").css("display", "none");
     $("#mostrarPf").css("display", "block");
+    $("#dadoCNPJ").removeAttr("required");
+    $("#dadoCPF").prop('required',true);
 }
 </script>
 
