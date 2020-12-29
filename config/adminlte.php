@@ -450,6 +450,12 @@ return [
                     'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'], // 
                 ],
                 [
+                    'text' => 'Doação de Bens Móveis',
+                    // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
+                    'url'  => '/preparar-e-ofertar/doacao-bens-moveis',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL', 'GESTOR'], // 
+                ],
+                [
                     'text' => 'Emissão de O.S',
                     // 'icon'    => 'fas fa-lg fa-fw fa-folder-minus mr-2',
                     'url'  => '/preparar-e-ofertar/emitir-os',
