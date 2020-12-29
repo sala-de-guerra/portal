@@ -5,6 +5,12 @@
 @section('content_header')
 
 
+<!-- add the shim first -->
+<script type="text/javascript" src="{{ asset('js/portal/bens-moveis/sheetJS/shim.min.js') }}"></script>
+<!-- after the shim is referenced, add the library -->
+<script type="text/javascript" src="{{ asset('js/portal/bens-moveis/sheetJS/xlsx.full.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/portal/bens-moveis/sheetJS/FileSaver.min.js') }}"></script>
+
 <div class="row mb-2">
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">
