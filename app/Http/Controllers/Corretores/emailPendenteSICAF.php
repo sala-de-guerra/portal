@@ -28,16 +28,16 @@
 
 <p style="color: red;"><b>***ATENÇÃO***</b>   Caso necessário, gentileza contatar diretamente a GILIE - giliesp@caixa.gov.br. ***</p><br>
 
-<p>Ao(À)</p>
+<p>Ao / À</p>
 
 <p>%CREDENCIADO%</p>
 
 <br>
 <p>Prezado (a),</p>
 
-<b class="centralizado">Assunto: Orientações para efetivação de contratação - Credenciamento de corretores e imobiliárias</b><br><br>
+<b class="centralizado">Assunto: Orientações para efetivação de contratação - Credenciamento de corretores e imobiliárias</b><br>
 
-<p> &nbsp;&nbsp;1. Informamos que a área de contratações da CAIXA nos contatou, pois em pesquisa há <b>PENDÊNCIA</b> no SICAF.</p><br>
+<p> &nbsp;&nbsp;1. Informamos que a área de contratações da CAIXA nos contatou, pois em pesquisa há <b>PENDÊNCIA</b> no SICAF.</p>
 <p> &nbsp;&nbsp;2. A apresentação deste documento está previsto no edital de licitação, conforme segue:</p><br>
     
         <ol>a. EDITAL DE LICITAÇÃO – acessível através do seguinte endereço  <a href="https://www.licitacoes.caixa.gov.br/SitePages/pagina_inicial.aspx" target="_blank"> https://www.licitacoes.caixa.gov.br</a> &rarr; Localizar o edital vinculado a sua região de atuação.<br><br>
@@ -51,7 +51,7 @@
         </ol>
         </ol>
         
-<p> &nbsp;&nbsp;3.	Neste sentido, <b><u>é compulsório que o corretor/imobiliária realize o seu cadastramento no SICAF</u></b>, conforme orientações constantes do item 2.2.1 do Edital de licitação:</p><br><br>
+<p> &nbsp;&nbsp;3.	Neste sentido, <b><u>é compulsório que o corretor/imobiliária realize o seu cadastramento no SICAF</u></b>, conforme orientações constantes do item 2.2.1 do Edital de licitação:</p><br>
 
     <ol><i>2.2.1 As Licitantes que não atendem ao disposto no item 2.2 poderão providenciar tanto o credenciamento como o cadastramento nos níveis do SICAF por meio do site <a href="http://www.comprasgovernamentais.gov.br/" target="_blank">http://www.comprasgovernamentais.gov.br/</a>.</i></ol>
 

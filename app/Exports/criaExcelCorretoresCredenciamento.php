@@ -30,7 +30,7 @@ class criaExcelCorretoresCredenciamento implements FromCollection, WithHeadings,
         ,[CPF]
         ,[Representante]
         ,[numeroContrato]
-        ,[dataConvoc]
+        ,CONVERT(VARCHAR, TBL_CORRETORES_CADASTRAMENTO.[dataConvoc], 103) as dataConvoc
         ,[contratoDevolvido]
         ,[endereço]
         ,[email]

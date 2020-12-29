@@ -97,7 +97,7 @@
                         <i class="fa fa-search m-2"></i> Pesquisar Bem Imóvel
                     </a>
                     <br>
-                    <small>Pesquise os imóveis administrados pelas filiais por número de contrato, endereço, nome e CPF do proponente ou ex-mutuário. </small>
+                    <small>Pesquise os imóveis administrados pelas filiais por número de contrato, endereço, matrícula do imóvel, nome e CPF do proponente ou ex-mutuário, nº Atende. </small>
                 </h4>
                 
                 <hr class="pontilhado">

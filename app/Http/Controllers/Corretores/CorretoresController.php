@@ -353,12 +353,17 @@ class CorretoresController
     {
       try {
         DB::beginTransaction();
+        $time = strtotime($request->vencimento);
+
+        $formataDataBancoDeDados = date('Y-m-d',$time);
+  
         $atualizaCorretor = QualificaCorretor::updateOrCreate(
           ['NU_CPF_CORRETOR' => $request->cpfCorretor],
           [
-              'NO_CORRETOR'     => $request->nomeCorretor,
-              'QUALIFICACAO'    => $request->qualificacao,
-              'GILIE'           => $request->gilie
+              'NO_CORRETOR'                  => $request->nomeCorretor,
+              'QUALIFICACAO'                 => $request->qualificacao,
+              'GILIE'                        => $request->gilie,
+              'DT_VENCIMENTO_CONTRATO'       => $formataDataBancoDeDados
           ]
       );
       $request->session()->flash('corMensagem', 'success');
@@ -737,7 +742,20 @@ class CorretoresController
     {
       try {
         DB::beginTransaction();
+        $confereCNPJ = null;
+        $confereCPF = null;
+        if (isset($request->CNPJ)) {
+          $confereCNPJ = DB::table('TBL_CORRETORES_CADASTRAMENTO')->where('CNPJ', $request->CNPJ)->first();
+        }
+        if (isset($request->CPF)) {
+        $confereCPF = DB::table('TBL_CORRETORES_CADASTRAMENTO')->where('CPF', $request->CPF)->first();
+        }
 
+      if ($confereCNPJ || $confereCPF != null){
+            $request->session()->flash('corMensagem', 'danger');
+            $request->session()->flash('tituloMensagem', "Inclusão não efetuada");
+            $request->session()->flash('corpoMensagem', "Já existe CNPJ/CPF cadastrado");
+      }else{
 
       $atualizaCorretor = new CorretorCadastramento;
       $atualizaCorretor->credenciado = $request->nomeCredenciado;
@@ -773,7 +791,7 @@ class CorretoresController
       $request->session()->flash('corMensagem', 'success');
       $request->session()->flash('tituloMensagem', "inclusão realizada!");
       $request->session()->flash('corpoMensagem', "A inclusão do corretor foi efetuada com sucesso.");
-
+    }
     DB::commit();
       } catch (\Throwable $th) {
           if (env('APP_ENV') == 'local' || env('APP_ENV') == 'DESENVOLVIMENTO') {
@@ -805,6 +823,29 @@ class CorretoresController
             $info = pathinfo($pathtofile);
             if ($info["extension"] == "xlsx" || $info["extension"] == "xls"){
             Excel::import(new corretoresCredenciamentoImport,request()->file('arquivo'));
+
+            $mensagemCecot = file_get_contents(("emailAvisoCECOTnovo.php"), dirname(__FILE__));
+
+            $mailCecot = new PHPMailer(true);
+            $mailCecot->isSMTP();
+            $mailCecot->CharSet = 'UTF-8'; 
+            $mailCecot->isHTML(true);                                         
+            $mailCecot->Host = 'sistemas.correiolivre.caixa';  
+            $mailCecot->SMTPAuth = false;                                  
+            $mailCecot->Port = 25;
+            // $mail->SMTPDebug = 2;
+            $mailCecot->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+            $mailCecot->addReplyTo('GILIESP01@caixa.gov.br');
+            if (env('APP_ENV') == 'PRODUCAO'){
+              $mailCecot->addAddress('c098453@mail.caixa');
+              $mailCecot->addBCC('c142639@mail.caixa');
+            }else{
+                $mailCecot->addAddress('c098453@mail.caixa');
+                $mailCecot->addBCC('c142639@mail.caixa');
+            }
+            $mailCecot->Subject = 'Inclusão de novo Credenciamento';
+            $mailCecot->Body = $mensagemCecot;
+            $mailCecot->send();
           
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Cadastro realizado!");
