@@ -761,21 +761,31 @@
                                                     <div class="form-group col-sm-10">
                                                         <input type="file" name="arquivo">
                                                         <button  style="float: right;" onclick="addCopia()" type="button" class="btn btn-primary">Adicionar email para cópia de resposta</button><br><br>
-                                
-                                                    <div style="display: none;" class="form-group toggle">
+                                                    
+                                                    <div style="display: none;" class="form-group toggle mostraCopia">
                                                         <label>Primeiro e-mail cópia</label>
                                                         <input type="email" class="form-control" name="emailAnexadoPeloResponsavel" placeholder="email">
-                                                        <small class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                                                        <small class="form-text text-muted">Preencha este campo caso deseje enviar uma cópia da resposta.</small>
                                                     </div>
-                                                    <div style="display: none;" class="form-group toggle">
+                                                    <div style="display: none;" class="form-group toggle mostraCopia">
                                                         <label>Segundo e-mail cópia</label>
                                                         <input type="email" class="form-control" name="emailAnexadoPeloResponsavelCopia" placeholder="email">
-                                                        <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                                                        <small  class="form-text text-muted">Preencha este campo caso deseje enviar uma cópia da resposta.</small>
                                                     </div>
-                                                    <div style="display: none;" class="form-group toggle">
+                                                    <div style="display: none;" class="form-group toggle mostraCopia">
                                                         <label>Terceiro e-mail cópia</label>
                                                         <input type="email" class="form-control" name="emailAnexadoPeloResponsavelTerceiraCopia" placeholder="email">
-                                                        <small  class="form-text text-muted">Preencha este campo caso deseje enviar um cópia da resposta.</small>
+                                                        <small  class="form-text text-muted">Preencha este campo caso deseje enviar uma cópia da resposta.</small>
+                                                    </div>
+                                                    <div style="display: none;" class="form-group toggle mostraCopia">
+                                                        <label>CCO</label>
+                                                        <input type="email" class="form-control" name="emailContatoCopiaOculta" placeholder="email">
+                                                        <small class="form-text text-muted">Preencha este campo caso deseje enviar uma cópia oculta da resposta.</small>
+                                                    </div>
+                                                    <div style="display: none;" class="form-group toggle mostraCopia">
+                                                        <label>CCO</label>
+                                                        <input type="email" class="form-control" name="emailContatoNovaCopiaOculta" placeholder="email">
+                                                        <small  class="form-text text-muted">Preencha este campo caso deseje enviar uma cópia oculta da resposta.</small>
                                                     </div>
                                                 </div>
                                             <br>
@@ -845,9 +855,15 @@
 <script src="{{ asset('js/global/formata_tabela_historico.js') }}"></script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script>
-    function addCopia(){
-    $('.toggle').toggle()
+
+function addCopia(){
+    $('.mostraCopia').toggle()
 }
+
+function addCopiaOculta(){
+    $('.mostraCopiaOculta').toggle()
+}
+
 </script>
 <script>
     $('.summernote').summernote({

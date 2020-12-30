@@ -41,10 +41,18 @@ input[type='file'] {
 <div class="row">
     <div class="col-lg">
         <h4 class="m-0 text-dark">
-        Controle de Credenciamento dos Corretores feito em colaboração entre as áreas GILIE/SP e CECAT/SP.
+        Controle de Credenciamento dos Corretores feito em colaboração entre as áreas GILIE/SP e CECOT/SP.
         </h4>
+        
     </div>
 
+    <div class="col-sm-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarCredenciado">
+                        <i class="far fa-lg fa-edit"></i>
+                        Cadastrar Novo Corretor Credenciado
+        </button>
+    </div>
+    
     <div class="col-sm-3">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active">  <a href="/"> Principal</a> </li>
@@ -54,12 +62,6 @@ input[type='file'] {
     </div>
 </div>
 
-                <div class="col-sm-12" style="text-align: right;" >
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastrarCredenciado">
-                        <i class="far fa-lg fa-edit"></i>
-                        Cadastrar Novo Corretor Credenciado
-                    </button>
-                </div><br>
 
 @stop
 
@@ -78,7 +80,7 @@ input[type='file'] {
                                         <h3 class="card-title mt-2" >Como fazer a atualização geral dos dados ?</h3>
                                     </div>
                                     <div class="col-md-6">
-                                        <button id="collapse" class="btn btn-primary" style="float: right"><b>expandir</b></button>
+                                        <button id="collapse" class="btn btn-primary" style="float: right">Expandir</button>
                                     </div>
                                 </div>
                             </a>
@@ -134,14 +136,15 @@ input[type='file'] {
                 <div class="row">
                     <div class="col-sm-12 table-responsive p-0">
                         <table id="tblCredenciamento" class="table table-bordered table-striped hover dataTable">
+                    <div class="col-sm-12" style="text-align: right; color: red;">**Dados preenchidos pela CECOT</div>
                             <thead>
                                 <tr>
                                     <th>Processo</th>
                                     <th style="text-align:center;">Nome Credenciado</th>
-                                    <th>Nº Contrato</th> <!--nº do contrato - preenchido Gilog-->
-                                    <th style="text-align:center;">Convocação</th> <!--data convocação - preenchido Gilog-->
-                                    <th>Contrato Disponível</th> <!--SIM/NÃO - preenchido Gilog-->
-                                    <th style="text-align:center;">SICAF</th> <!--pendente/regular - preenchido Gilog-->
+                                    <th>Nº Contrato<b style="color: red;">*</b></th> <!--nº do contrato - preenchido Gilog-->
+                                    <th style="text-align:center;">Convocação<b style="color: red;">*</b></th> <!--data convocação - preenchido Gilog-->
+                                    <th>Contrato Disponível<b style="color: red;">*</b></th> <!--SIM/NÃO - preenchido Gilog-->
+                                    <th style="text-align:center;">SICAF<b style="color: red;">*</b></th> <!--pendente/regular - preenchido Gilog-->
                                 </tr>
                             </thead>
 
@@ -169,7 +172,7 @@ input[type='file'] {
             <form method='post' action='/corretores/adiciona-corretor-credenciado' id="formCadastraCredenciado">
             {{ csrf_field() }} 
                 <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                    <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastro de novo Corretor Credenciado para análise da CECAT</h5>
+                    <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Cadastro de novo Corretor Credenciado para análise da CECOT</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -185,11 +188,31 @@ input[type='file'] {
 
                             <div class="form-group" required>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="pfpj" id="pj" value="pj" onclick="mostraPj()">
-                                    <label class="form-check-label" for="pj">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="pfpj" id="pj" value="pj" onclick="mostraPj()">Pessoa Jurídica
+                                      </label>&nbsp&nbsp&nbsp
+        
+                                      
+                                      <label class="radio-inline">
+                                        <input type="radio" name="pfpj" id="pf" value="pf" onclick="mostraPf()">Pessoa Física
+                                      </label>
+                                    {{-- <input class="form-check-input" type="radio" name="pfpj" id="pj" value="pj" onclick="mostraPj()"> --}}
+                                    {{-- <label class="form-check-label radio-inline" for="pj">
                                         Pessoa Jurídica
-                                    </label>
-                                        <div class="form-group" style="display: none;" id="mostrarPj">
+                                    </label> --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mostrarPj" style="display: none;">
+                                            <label>CNPJ</label>
+                                            <input type="text" name="CNPJ" class="form-control" id="dadoCNPJ" autocomplete="off" placeholder="00.000.000/0000-00" required>
+                                        </div>
+                                        <div class="form-group col-md-6 mostrarPj" style="display: none;">
+                                            <label>CPF</label>
+                                            <input type="text" name="CPF" class="form-control" autocomplete="off" placeholder="000.000.000-00">
+                                            <small class="form-text text-muted">* Preenchimento não obrigatório</small>
+                                        </div>
+                                      </div>
+
+                                        {{-- <div class="form-group" style="display: none;" id="mostrarPj">
                                             <label>CNPJ</label>
                                             <input type="text" name="CNPJ" class="form-control" id="dadoCNPJ" autocomplete="off" placeholder="00.000.000/0000-00" required><br>
                                         
@@ -197,13 +220,13 @@ input[type='file'] {
                                         
                                             <label>CPF</label>
                                             <input type="text" name="CPF" class="form-control" autocomplete="off" placeholder="000.000.000-00">
-                                        </div>
+                                        </div> --}}
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="pfpj" id="pf" value="pf" onclick="mostraPf()">
-                                    <label class="form-check-label" for="pf">
+                                    {{-- <input class="form-check-input" type="radio" name="pfpj" id="pf" value="pf" onclick="mostraPf()"> --}}
+                                    {{-- <label class="form-check-label radio-inline" for="pf">
                                         Pessoa Física
-                                    </label>
+                                    </label> --}}
                                     <div class="form-group" style="display: none;" id="mostrarPf">
                                             <label>CPF</label>
                                             <input type="text" name="CPF" class="form-control" id="dadoCPF"  autocomplete="off" placeholder="000.000.000-00" required>
@@ -253,6 +276,8 @@ input[type='file'] {
 <script src="{{ asset('js\global\formata-data-datable.js') }}"></script>
 <script src="{{ asset('js/portal/corretores/credenciamento.js') }}"></script>
 
+
+<!--
 <script>
 function mostraPj(){
     $("#mostrarPf").css("display", "none");
@@ -289,6 +314,7 @@ function mudaColapse() {
     }
 }
 </script>
+-->
 
 <script>
     setTimeout(function(){
