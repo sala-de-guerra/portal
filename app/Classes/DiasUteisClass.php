@@ -42,7 +42,7 @@ class DiasUteisClass
         return $dataProposta->format('Y-m-d');
     }
 
-    public static function retornaPassadoEmQuantidadeDiasUteis($data, $quantidadeDiasUteis) 
+    public static function retornaPassadoEmQuantidadeDiasUteis($data, $quantidadeDiasUteis, $formatacao = null) 
     {
         $dataProposta = Carbon::parse($data);
         $diasUteis = 0;
@@ -72,7 +72,14 @@ class DiasUteisClass
             }
             $diasUteis++;
         }
-        return $dataProposta->format('d/m/Y');
+
+            if (is_null($formatacao)){
+                return $dataProposta->format('d/m/Y');
+            }
+            else{
+                return $dataProposta->format($formatacao);
+            }
+        
         // $ultimoDiaUtil = DiasUteisClass::retornaPassadoEmQuantidadeDiasUteis(Carbon::now(), 1);
     }
 }

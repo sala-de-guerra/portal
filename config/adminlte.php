@@ -640,6 +640,11 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'], // , 'GESTOR'
             'submenu' => [
                 [
+                    'text' => 'Indicadores do Atende',
+                    'url'  => '/indicadores/atende',
+                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                ],
+                [
                     'text' => 'Indicadores de Distrato',
                     'url'  => '/indicadores/distrato',
                     'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // , 'GESTOR'

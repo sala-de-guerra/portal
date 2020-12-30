@@ -82,7 +82,7 @@ $('#selectGILIE').change(function(){
                                     <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                     <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                     <input type="hidden" name="gilie" value="${item.GILIE}">
-                                    <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                    <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -252,7 +252,7 @@ $('#selectGILIE').change(function(){
                                     <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                     <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                     <input type="hidden" name="gilie" value="${item.GILIE}">
-                                    <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                    <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -414,7 +414,7 @@ $('#selectGILIE').change(function(){
                                     <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                     <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                     <input type="hidden" name="gilie" value="${item.GILIE}">
-                                    <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                    <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -577,7 +577,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -739,7 +739,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -901,7 +901,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1063,7 +1063,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1225,7 +1225,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1385,7 +1385,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1545,7 +1545,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1707,7 +1707,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>
@@ -1869,7 +1869,7 @@ $('#selectGILIE').change(function(){
                                    <input type="hidden" name="cpfCorretor" value="${item.cpfCorretor}">
                                    <input type="hidden" name="nomeCorretor" value="${item.CORRETOR}">
                                    <input type="hidden" name="gilie" value="${item.GILIE}">
-                                   <input type="hidden" name="vencimento" value="${item.VENCIMENTO}">
+                                   <input type="hidden" name="vencimento" value="${item.dataVencimento}">
                                    <div class="modal-body">
                                        <div class="form-group">
                                            <label for="formQualificacao${item.CRECI}">Qualificação</label>

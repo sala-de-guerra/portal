@@ -399,7 +399,7 @@ Route::post('corretores/envia-email-corretor/{corretor}', 'Corretores\Corretores
 //envia-email manual corretor
 Route::post('corretores/envia-email-cecot/{corretor}', 'Corretores\CorretoresController@enviaMensagemCecot');
 //envia-email listagem diario
-Route::get('corretores/envia-email-cecot-diario', 'Corretores\CorretoresController@listaEmailsCecotDiario');
+Route::get('corretores/envia-email-venda-prehabilitado', 'Corretores\CorretoresController@disparaMensagemGILIEvendaCorretorPreHabilitado');
 //cadastra Edital
 Route::post('corretores/cadastra-edital', 'Corretores\CorretoresController@cadastraEdital');
 //CORRETORES CREDENCIAMENTO

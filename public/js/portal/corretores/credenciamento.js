@@ -98,7 +98,7 @@ $(document).ready(function(){
 
                     <td style="text-align:center;">${item.numeroContrato}</td>
                     <td style="text-align:center;">${convocacao}</td>
-                    <td style="white-space:nowrap;" class="text-center"><a href="file:\\arquivos.caixa\sp\SP7062FS201\PUBLIC\Credenciamento_001.2020_Corretores\Corretores Contratados"><button type="button" class="btn btn-link">${item.contratoDevolvido}</button></a></td>
+                    <td style="white-space:nowrap;" class="text-center">${item.contratoDevolvido}</td>
 
                     <td style="white-space:nowrap;" class="text-center"><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalSicaf${item.processo}">
                     ${item.SICAF}</button>
@@ -163,3 +163,34 @@ $(document).ready(function(){
     })
 })
 
+function mostraPj(){
+    $("#mostrarPf").css("display", "none");
+    $(".mostrarPj").css("display", "block");
+    $("#dadoCPF").removeAttr("required");
+    $("#dadoCNPJ").prop('required',true);
+}
+function mostraPf(){
+    $(".mostrarPj").css("display", "none");
+    $("#mostrarPf").css("display", "block");
+    $("#dadoCNPJ").removeAttr("required");
+    $("#dadoCPF").prop('required',true);
+}
+
+$("[name='CNPJ']").mask("00.000.000/0000-00");
+$("[name='CPF']").mask("000.000.000-00");
+
+        $(function () {
+        $('#fupload').change(function() {
+            $('.nomeArquivo').html('<b style="color: green;">Arquivo carregado com sucesso</b>');
+            $('.inputFile').remove();
+            $('#btnEnviar').show();
+        });
+    });
+
+function mudaColapse() {
+    if($('#collapse').text() == "X" ){
+    $('#collapse').text("Expandir")
+    }else{
+        $('#collapse').text("X")
+    }
+}

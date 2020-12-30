@@ -27,9 +27,14 @@ class corretoresCredenciamentoImport implements ToModel, WithValidation, WithSta
             if (isset($row[6])){
             $CorretorCadastramento->dataConvoc         = $row[6] - 2;
             }else{
-                unset($row[6]);
+                $CorretorCadastramento->dataConvoc = null;
             }
             $CorretorCadastramento->contratoDevolvido  = $row[7];
+            if (isset($row[11])){
+                $CorretorCadastramento->SICAF              = $row[11];
+            }else{
+                $CorretorCadastramento->SICAF = null;
+            }
             $CorretorCadastramento->SICAF              = $row[11];
             $CorretorCadastramento->dataUltimoUpload       = date("Y-m-d H:i:s", time());
             $CorretorCadastramento->matriculaUltimoUpload  = session('matricula');

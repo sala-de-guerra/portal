@@ -45,6 +45,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -71,6 +72,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -97,6 +99,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -123,6 +126,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -149,6 +153,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -175,6 +180,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -201,6 +207,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -227,6 +234,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -253,6 +261,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -279,6 +288,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -305,6 +315,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -331,6 +342,7 @@ class CorretoresController
         nullif(TBL_CORRETORES.[CO_TELEFONE_CELULAR], 'Null') as TELEFONECELULAR,
         nullif(TBL_CORRETORES.[ED_EMAIL_PESSOA], 'Null') as EMAIL,
         CONVERT(varchar(25), TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO], 103) as VENCIMENTO ,
+        TBL_CORRETORES.[DT_VENCIMENTO_CONTRATO] as dataVencimento,
         IsNull(TBL_CORRETORES_QUALIFICACAO.[QUALIFICACAO] , 'Pré-habilitado') as qualificacao,
         TBL_CORRETORES.[GILIE] as GILIE,
         TBL_CORRETORES_EDITAIS.[edital] as EDITAL
@@ -353,17 +365,13 @@ class CorretoresController
     {
       try {
         DB::beginTransaction();
-        $time = strtotime($request->vencimento);
-
-        $formataDataBancoDeDados = date('Y-m-d',$time);
-  
         $atualizaCorretor = QualificaCorretor::updateOrCreate(
           ['NU_CPF_CORRETOR' => $request->cpfCorretor],
           [
               'NO_CORRETOR'                  => $request->nomeCorretor,
               'QUALIFICACAO'                 => $request->qualificacao,
               'GILIE'                        => $request->gilie,
-              'DT_VENCIMENTO_CONTRATO'       => $formataDataBancoDeDados
+              'DT_VENCIMENTO_CONTRATO'       => $request->vencimento
           ]
       );
       $request->session()->flash('corMensagem', 'success');
@@ -528,12 +536,11 @@ class CorretoresController
       return back();
     }
 
-    public function listaEmailsCecotDiario()
+    public function disparaMensagemGILIEvendaCorretorPreHabilitado()
     {
-      $ultimoDiaUtil = DiasUteisClass::retornaPassadoEmQuantidadeDiasUteis(Carbon::now()->format('Y-m-d'), 1);
-      $ultimoDiaUtil = strtotime($ultimoDiaUtil);
-      $ultimoDiaUtil = date('Y-d-m',$ultimoDiaUtil);
-
+      $ultimoDiaUtil = DiasUteisClass::retornaPassadoEmQuantidadeDiasUteis(Carbon::now(), 1, 'Y-m-d');
+      $ultimoDiaUtil = '2020-12/28';
+     
         $listaCorretoresEnvioEmailCecot= DB::table('ALITB001_Imovel_Completo') 
         ->leftjoin('TBL_CORRETORES', DB::raw('CONVERT(VARCHAR, TBL_CORRETORES.NU_CRECI)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_CRECI)')) 
         ->leftjoin('TBL_CORRETORES_QUALIFICACAO', DB::raw('CONVERT(VARCHAR, TBL_CORRETORES_QUALIFICACAO.NU_CPF_CORRETOR)'), '=', DB::raw('CONVERT(VARCHAR, TBL_CORRETORES.NU_CPF_CORRETOR)'))  
@@ -555,117 +562,39 @@ class CorretoresController
 
        
 
-        //return json_encode($listaCorretoresEnvioEmailCecot);
+        // return json_encode($listaCorretoresEnvioEmailCecot);
 
           foreach ($listaCorretoresEnvioEmailCecot as $corretor){
               if ($corretor->qualificacaoCorretor == 'Pré-habilitado'){
                 try { 
-                  $mensagemCorretor = file_get_contents(("orientacaoefetivacaocontratacaoCorretor.php"), dirname(__FILE__));
-                  $mensagemCorretor = str_replace("%CORRETOR%", $corretor->CORRETOR, $mensagemCorretor);
-            
-                  $mail = new PHPMailer(true);
-                  $mail->isSMTP();
-                  $mail->CharSet = 'UTF-8'; 
-                  $mail->isHTML(true);                                         
-                  $mail->Host = 'sistemas.correiolivre.caixa';  
-                  $mail->SMTPAuth = false;                                  
-                  $mail->Port = 25;
-                  // $mail->SMTPDebug = 2;
-                  $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
-                  $mail->addReplyTo('GILIESP01@caixa.gov.br');
-                  if (env('APP_ENV') == 'PRODUCAO'){
-                    $mail->addAddress($corretor->emailCorretor);
-                    $mail->addCC( session('matricula') . '@mail.caixa');
-                    $mail->addBCC('GILIESP09@caixa.gov.br');
-                    $mail->addBCC('c142639@caixa.gov.br');
-                    $mail->addBCC('c098453@caixa.gov.br');
-                  }else{
-                      $mail->addAddress('c098453@mail.caixa');  
-                  }
-                  $mail->Subject = 'Orientações para efetivação de contratação - Credenciamento de corretores e imobiliárias';
-                  $mail->Body = $mensagemCorretor;
-                  $mail->send();
-                    
-                  switch ($corretor->UNA) {
-                    case 'GILIE/SP':
-                        $una = '7257';
-                        break;
-                    case 'GILIE/BH':
-                        $una = '7244';
-                        break;
-                      case 'GILIE/BU':
-                        $una = '7242';
-                        break;
-                    case 'GILIE/BE':
-                        $una = '7243';
-                        break;
-                      case 'GILIE/BR':
-                        $una = '7109';
-                        break;
-                    case 'GILIE/CT':
-                        $una = '7247';
-                        break;
-                      case 'GILIE/FO':
-                        $una = '7248';
-                        break;
-                    case 'GILIE/GO':
-                        $una = '7249';
-                        break;
-                      case 'GILIE/PO':
-                        $una = '7251';
-                        break;
-                    case 'GILIE/RJ':
-                        $una = '7254';
-                        break;
-                      case 'GILIE/RE':
-                        $una = '7253';
-                        break;
-                    case 'GILIE/SA':
-                        $una = '7255';
-                        break;                  
-                }
-                  
-                  $edital = DB::table('TBL_CORRETORES_EDITAIS')
-                    ->where('GILIE', $una)
-                    ->first(); 
 
-                  $mensagemCecot = file_get_contents(("confirmacaoCorretorCecot15.php"), dirname(__FILE__));
-                  $mensagemCecot = str_replace("%CORRETOR%", $corretor->CORRETOR, $mensagemCecot);
-                  $mensagemCecot = str_replace("%CPFCORRETOR%", $corretor->cpfCorretor, $mensagemCecot);
-                  $mensagemCecot = str_replace("%EDITAL_CORRETOR%", $edital->edital, $mensagemCecot);
-                  $mensagemCecot = str_replace("%GILIE%", $corretor->UNA, $mensagemCecot);
+                  $mensagemGILIE = file_get_contents(("emailAvisoVendaPreHabilitado.php"), dirname(__FILE__));
+                  $mensagemGILIE = str_replace("%CREDENCIADO%", $corretor->CORRETOR, $mensagemGILIE);
+                  $mensagemGILIE = str_replace("%CHB%", $corretor->nuBem, $mensagemGILIE);
+ 
             
-                  $mailCecot = new PHPMailer(true);
-                  $mailCecot->isSMTP();
-                  $mailCecot->CharSet = 'UTF-8'; 
-                  $mailCecot->isHTML(true);                                         
-                  $mailCecot->Host = 'sistemas.correiolivre.caixa';  
-                  $mailCecot->SMTPAuth = false;                                  
-                  $mailCecot->Port = 25;
+                  $mailGILIE = new PHPMailer(true);
+                  $mailGILIE->isSMTP();
+                  $mailGILIE->CharSet = 'UTF-8'; 
+                  $mailGILIE->isHTML(true);                                         
+                  $mailGILIE->Host = 'sistemas.correiolivre.caixa';  
+                  $mailGILIE->SMTPAuth = false;                                  
+                  $mailGILIE->Port = 25;
                   // $mail->SMTPDebug = 2;
-                  $mailCecot->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
-                  $mailCecot->addReplyTo('GILIESP01@caixa.gov.br');
+                  $mailGILIE->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+                  $mailGILIE->addReplyTo('GILIESP01@caixa.gov.br');
                   if (env('APP_ENV') == 'PRODUCAO'){
-                    $mailCecot->addAddress('CECOT15@caixa.gov.br');
-                    $mailCecot->addBCC('GILIESP09@caixa.gov.br');
-                    $mailCecot->addBCC('c142639@caixa.gov.br');
-                    $mailCecot->addBCC('c098453@caixa.gov.br');
+                    $mailGILIE->addBCC('GILIESP09@caixa.gov.br');
+                    $mailGILIE->addBCC('c142639@mail.caixa');
+                    $mailGILIE->addBCC('c098453@mail.caixa');
                   }else{
-                      $mailCecot->addAddress('c098453@mail.caixa');
+                      $mailGILIE->addAddress('c098453@mail.caixa');
+                      $mailGILIE->addBCC('c142639@mail.caixa');
                   }
-                  $mailCecot->Subject = 'Solicitação de efetivação de contratação';
-                  $mailCecot->Body = $mensagemCecot;
-                  $mailCecot->send();
+                  $mailGILIE->Subject = 'Solicitação de efetivação de contratação';
+                  $mailGILIE->Body = $mensagemGILIE;
+                  $mailGILIE->send();
 
-                  $historico = new HistoricoPortalGilie;
-                  $historico->matricula       = "session('matricula')";
-                  $historico->numeroContrato  = $corretor->nuBem;
-                  $historico->tipo            = "ROTINA AUTOMATICA";
-                  $historico->atividade       = "MENSAGERIA";
-                  $historico->observacao      = "ENVIO DE MENSAGEM AUTOMATICA PARA CECOT15 E CORRETOR: ".$corretor->CORRETOR . " PARA REGULARIZAÇÃO DE CREDENCIAMENTO PÓS VENDA";
-                  $historico->created_at      = date("Y-m-d H:i:s", time());
-                  $historico->updated_at      = date("Y-m-d H:i:s", time());
-                  $historico->save();
             
                   session()->flash('corMensagem', 'success');
                   session()->flash('tituloMensagem', "Mensagem enviada");
@@ -766,6 +695,8 @@ class CorretoresController
       $atualizaCorretor->matriculaCadastro = session('matricula');
       $atualizaCorretor->save();
 
+      $mensagemCECOT = file_get_contents(("emailAvisoCECOTnovo.php"), dirname(__FILE__));
+
       $mailCecot = new PHPMailer(true);
       $mailCecot->isSMTP();
       $mailCecot->CharSet = 'UTF-8'; 
@@ -784,8 +715,34 @@ class CorretoresController
           $mailCecot->addBCC('c142639@caixa.gov.br');
       }
       $mailCecot->Subject = 'Solicitação de efetivação de contratação';
-      $mailCecot->Body = "Cadastramos um corretor";
+      $mailCecot->Body = $mensagemCECOT;
       $mailCecot->send();
+      
+      $mensagemCorretor = file_get_contents(("emailInclusaoAnaliseCECOT.php"), dirname(__FILE__));
+      $mensagemCorretor = str_replace("%CREDENCIADO%", $request->nomeCredenciado, $mensagemCorretor);
+      
+      $mail = new PHPMailer(true);
+      $mail->isSMTP();
+      $mail->CharSet = 'UTF-8'; 
+      $mail->isHTML(true);                                         
+      $mail->Host = 'sistemas.correiolivre.caixa';  
+      $mail->SMTPAuth = false;                                  
+      $mail->Port = 25;
+      // $mail->SMTPDebug = 2;
+      $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+      $mail->addReplyTo('GILIESP01@caixa.gov.br');
+      if (env('APP_ENV') == 'PRODUCAO'){
+        // $mail->addAddress($request->email);
+        $mail->addCC( session('matricula') . '@mail.caixa');
+        $mail->addBCC('GILIESP09@caixa.gov.br');
+        $mail->addBCC('c142639@caixa.gov.br');
+        $mail->addBCC('c098453@caixa.gov.br');
+      }else{
+          $mail->addAddress('c098453@mail.caixa');  
+      }
+      $mail->Subject = 'Orientações para efetivação de contratação - Credenciamento de corretores e imobiliárias';
+      $mail->Body = $mensagemCorretor;
+      $mail->send();
 
 
       $request->session()->flash('corMensagem', 'success');
@@ -824,28 +781,28 @@ class CorretoresController
             if ($info["extension"] == "xlsx" || $info["extension"] == "xls"){
             Excel::import(new corretoresCredenciamentoImport,request()->file('arquivo'));
 
-            $mensagemCecot = file_get_contents(("emailAvisoCECOTnovo.php"), dirname(__FILE__));
+            $mensagemGILIE = file_get_contents(("emailAvisoAlteraCredenciado.php"), dirname(__FILE__));
 
-            $mailCecot = new PHPMailer(true);
-            $mailCecot->isSMTP();
-            $mailCecot->CharSet = 'UTF-8'; 
-            $mailCecot->isHTML(true);                                         
-            $mailCecot->Host = 'sistemas.correiolivre.caixa';  
-            $mailCecot->SMTPAuth = false;                                  
-            $mailCecot->Port = 25;
+            $mailGILIE = new PHPMailer(true);
+            $mailGILIE->isSMTP();
+            $mailGILIE->CharSet = 'UTF-8'; 
+            $mailGILIE->isHTML(true);                                         
+            $mailGILIE->Host = 'sistemas.correiolivre.caixa';  
+            $mailGILIE->SMTPAuth = false;                                  
+            $mailGILIE->Port = 25;
             // $mail->SMTPDebug = 2;
-            $mailCecot->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
-            $mailCecot->addReplyTo('GILIESP01@caixa.gov.br');
+            $mailGILIE->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+            $mailGILIE->addReplyTo('GILIESP01@caixa.gov.br');
             if (env('APP_ENV') == 'PRODUCAO'){
-              $mailCecot->addAddress('c098453@mail.caixa');
-              $mailCecot->addBCC('c142639@mail.caixa');
+              $mailGILIE->addAddress('c098453@mail.caixa');
+              $mailGILIE->addBCC('c142639@mail.caixa');
             }else{
-                $mailCecot->addAddress('c098453@mail.caixa');
-                $mailCecot->addBCC('c142639@mail.caixa');
+                $mailGILIE->addAddress('c098453@mail.caixa');
+                $mailGILIE->addBCC('c142639@mail.caixa');
             }
-            $mailCecot->Subject = 'Inclusão de novo Credenciamento';
-            $mailCecot->Body = $mensagemCecot;
-            $mailCecot->send();
+            $mailGILIE->Subject = 'Inclusão de novo Credenciamento';
+            $mailGILIE->Body = $mensagemGILIE;
+            $mailGILIE->send();
           
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Cadastro realizado!");
