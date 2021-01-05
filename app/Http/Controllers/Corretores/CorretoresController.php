@@ -584,6 +584,7 @@ class CorretoresController
                   $mailGILIE->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
                   $mailGILIE->addReplyTo('GILIESP01@caixa.gov.br');
                   if (env('APP_ENV') == 'PRODUCAO'){
+                    $mailGILIE->addAddress('GILIESP01@caixa.gov.br');
                     $mailGILIE->addBCC('GILIESP09@caixa.gov.br');
                     $mailGILIE->addBCC('c142639@mail.caixa');
                     $mailGILIE->addBCC('c098453@mail.caixa');
@@ -708,6 +709,7 @@ class CorretoresController
       $mailCecot->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
       $mailCecot->addReplyTo('GILIESP01@caixa.gov.br');
       if (env('APP_ENV') == 'PRODUCAO'){
+        $mailCecot->addAddress('CECOT15@caixa.gov.br');
         $mailCecot->addBCC('c142639@caixa.gov.br');
         $mailCecot->addBCC('c098453@caixa.gov.br');
       }else{
@@ -732,7 +734,7 @@ class CorretoresController
       $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
       $mail->addReplyTo('GILIESP01@caixa.gov.br');
       if (env('APP_ENV') == 'PRODUCAO'){
-        // $mail->addAddress($request->email);
+        $mail->addAddress($request->email);
         $mail->addCC( session('matricula') . '@mail.caixa');
         $mail->addBCC('GILIESP09@caixa.gov.br');
         $mail->addBCC('c142639@caixa.gov.br');
@@ -794,7 +796,8 @@ class CorretoresController
             $mailGILIE->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
             $mailGILIE->addReplyTo('GILIESP01@caixa.gov.br');
             if (env('APP_ENV') == 'PRODUCAO'){
-              $mailGILIE->addAddress('c098453@mail.caixa');
+              $mailGILIE->addAddress('GILIESP01@caixa.gov.br');
+              $mailGILIE->addBCC('c098453@mail.caixa');
               $mailGILIE->addBCC('c142639@mail.caixa');
             }else{
                 $mailGILIE->addAddress('c098453@mail.caixa');
@@ -835,7 +838,6 @@ class CorretoresController
     {
 
       try { 
-
       $mensagemPendenteSICAF = file_get_contents(("emailPendenteSICAF.php"), dirname(__FILE__));
       $mensagemPendenteSICAF = str_replace("%CREDENCIADO%", $request->nomeCredenciado, $mensagemPendenteSICAF);
 
@@ -850,6 +852,7 @@ class CorretoresController
       $mailPendenteSICAF->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
       $mailPendenteSICAF->addReplyTo('GILIESP01@caixa.gov.br');
       if (env('APP_ENV') == 'PRODUCAO'){
+          $mailPendenteSICAF->addAddress($request->email);
           $mailPendenteSICAF->addBCC('GILIESP09@caixa.gov.br');
           $mailPendenteSICAF->addBCC('c142639@caixa.gov.br');
           $mailPendenteSICAF->addBCC('c098453@caixa.gov.br');

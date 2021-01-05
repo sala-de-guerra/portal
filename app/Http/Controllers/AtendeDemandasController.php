@@ -474,6 +474,12 @@ class AtendeDemandasController extends Controller
             if (isset($request->emailAnexadoPeloResponsavelTerceiraCopia)){
                 $mail->addCC($request->emailAnexadoPeloResponsavelTerceiraCopia);
             }
+            if (isset($request->emailContatoCopiaOculta)){
+                $mail->addBCC($request->emailContatoCopiaOculta);
+            }
+            if (isset($request->emailContatoNovaCopiaOculta)){
+                $mail->addBCC($request->emailContatoNovaCopiaOculta);
+            }
             $mail->addBCC('GILIESP09@caixa.gov.br');
             if(isset($_FILES['arquivo']['tmp_name']) && $_FILES['arquivo']['tmp_name'] != "") {
                 $mail->AddAttachment($_FILES['arquivo']['tmp_name'],

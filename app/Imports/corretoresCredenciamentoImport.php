@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\User;
+use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithValidation;
@@ -24,24 +25,27 @@ class corretoresCredenciamentoImport implements ToModel, WithValidation, WithSta
         if ($CorretorCadastramento = CorretorCadastramento::find($row[0])){
             $CorretorCadastramento = CorretorCadastramento::find($row[0]);
             $CorretorCadastramento->numeroContrato     = $row[5];
-            if (isset($row[6])){
+            
+        if (isset($row[6]) && is_numeric($row[6])){
             $CorretorCadastramento->dataConvoc         = $row[6] - 2;
-            }else{
+        }elseif (isset($row[6]) && !is_numeric($row[6])) {
+            $CorretorCadastramento->dataConvoc         = Carbon::createFromFormat('d/m/Y', $row[6])->format('Y-m-d');
+        }else{
                 $CorretorCadastramento->dataConvoc = null;
-            }
-            $CorretorCadastramento->contratoDevolvido  = $row[7];
-            if (isset($row[11])){
-                $CorretorCadastramento->SICAF              = $row[11];
-            }else{
-                $CorretorCadastramento->SICAF = null;
-            }
+        }
+        $CorretorCadastramento->contratoDevolvido  = $row[7];
+        if (isset($row[11])){
             $CorretorCadastramento->SICAF              = $row[11];
-            $CorretorCadastramento->dataUltimoUpload       = date("Y-m-d H:i:s", time());
-            $CorretorCadastramento->matriculaUltimoUpload  = session('matricula');
-            $CorretorCadastramento->save();
-            }else{
-                unset($row[0]);
-            }
+        }else{
+            $CorretorCadastramento->SICAF = null;
+        }
+        $CorretorCadastramento->SICAF              = $row[11];
+        $CorretorCadastramento->dataUltimoUpload       = date("Y-m-d H:i:s", time());
+        $CorretorCadastramento->matriculaUltimoUpload  = session('matricula');
+        $CorretorCadastramento->save();
+        }else{
+            unset($row[0]);
+        }
     }
 
     public function rules(): array

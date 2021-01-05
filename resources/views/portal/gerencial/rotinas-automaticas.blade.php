@@ -45,7 +45,7 @@
                         Lista das rotinas a serem atualizadas. &nbsp &nbsp
                     </div><br>
 
-                    <table id="tblSap" class="table table-bordered table-striped">
+                    <table id="tblRotinas" class="table table-bordered table-striped">
                         <thead>                   
                             <tr>
                                 <th>Processo</th>
