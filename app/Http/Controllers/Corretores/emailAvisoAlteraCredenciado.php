@@ -32,13 +32,13 @@
 
 <p><b>AVISO</b></p>
 
-<br><br>
+<br>
 <div class="centralizado">
 
-    <p>Prezado (a),</p><br>
+    <p>Prezado (a),</p>
 
-    <p>Notificamos que houve alteração de dados de Credenciamento de Corretores.</p>
-    <p>Para mais informações acesse <a href="https://portal.gilie.sp.caixa/corretores/credenciamento"> https://portal.gilie.sp.caixa/corretores/credenciamento.</a></p> 
+    <p> &nbsp;&nbsp;1.Notificamos que houve alteração de dados de Credenciamento de Corretores.</p>
+    <p> &nbsp;&nbsp;2.Para mais informações acesse <a href="https://portal.gilie.sp.caixa/corretores/credenciamento"> https://portal.gilie.sp.caixa/corretores/credenciamento.</a></p> <br>
     
 
 </div>

@@ -629,3 +629,9 @@ Route::prefix('gerencial/gestao-subsidios')->group(function () {
 
 });
 
+Route::prefix('/indicadores/atende')->group(function () {
+    //RETORNA VIEW
+    Route::get('/', 'Indicadores\indicadoresAtende@indexIndicadoresAtende');
+
+});
+

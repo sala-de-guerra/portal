@@ -119,6 +119,7 @@ $(document).ready(function(){
                                             <form class="col" action="envia-email-sicaf/${item.processo}" method="POST">
                                                 <input type="hidden" name="_token" value="${csrfVar}">
                                                 <input type="hidden" name="nomeCredenciado" value="${CREDENCIADOFormatado}">
+                                                <input type="hidden" name="email" value="${item.email}">
                                                 <div class="modal-body">
                                                     <p>Deseja enviar e-mail para <strong>${CREDENCIADOFormatado}</strong> informando sobre a pendência no SICAF?</p>
                                                 </div>
