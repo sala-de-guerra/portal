@@ -879,4 +879,10 @@ class CorretoresController
 
       return back();
     }
+
+    public function retornaDadosCorretor($cpfCnpjCorretor)
+    { 
+      $dadosCorretor = DB::table('TBL_CORRETORES')->where('NU_CPF_CORRETOR', $cpfCnpjCorretor)->first(); 
+      return json_encode($dadosCorretor);
+    }
 }

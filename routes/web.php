@@ -414,6 +414,9 @@ Route::get('corretores/baixar-planilha-credenciamento', 'Corretores\CorretoresCo
 Route::post('corretores/upload-planilha-credenciamento', 'Corretores\CorretoresController@import');
 //envia-email credenciamento SICAF
 Route::post('corretores/envia-email-sicaf/{idCredenciado}', 'Corretores\CorretoresController@enviaEmailPendenteSICAF');
+// Busca Dados Corretor
+Route::get('corretores/pesquisa-corretor/{cpfCnpjCorretor}', 'Corretores\CorretoresController@retornaDadosCorretor');
+
 
 
 //ROTA TMA Unificado
@@ -632,6 +635,12 @@ Route::prefix('gerencial/gestao-subsidios')->group(function () {
 Route::prefix('/indicadores/atende')->group(function () {
     //RETORNA VIEW
     Route::get('/', 'Indicadores\indicadoresAtende@indexIndicadoresAtende');
+    //TOTAL ATENDES ABERTO
+    Route::get('/total-atende-aberto', 'Indicadores\indicadoresAtende@mostraTotalAtendesNovos');
+    //TOTAL ATENDES RESPONDIDOS
+    Route::get('/total-atende-respondido', 'Indicadores\indicadoresAtende@mostraTotalAtendesFinalizados');
+    //TOTAL ATENDES VENCIDOS
+    Route::get('/total-atende-vencido', 'Indicadores\indicadoresAtende@mostraTotalAtendesVencidos');
 
 });
 

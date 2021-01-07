@@ -76,99 +76,96 @@
                             <h5>Exemplo</h5>
                         </a>
                     </li>
-                    
+                </ul>
             </div>
 
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-one-tabContent">
 
-            <div class="tab-pane fade show active" id="custom-tabs-one-Avista" role="tabpanel" aria-labelledby="custom-tabs-one-Avista-tab">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="notice notice-success">
-                                <strong>Controle de Boletos: </strong>Contratações à vista. <a href="/contratacao/controle-boletos/baixar-planilha-boletos"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha de Boletos &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
-                            </div><br>
-                            <div id="displayAberto">
-                                <div class="col">
-                                    <table id="tblControleDeBoletosAvista" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Contrato</th>
-                                            <th>Proponente</th>
-                                            <th>Vencimento</th>
-                                            <th>Status</th>
-                                            <th>Valor Pagamento</th>
-                                            <th>Data Pagamento</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                    </tbody>
-                                    </table>
+                    <div class="tab-pane fade show active" id="custom-tabs-one-Avista" role="tabpanel" aria-labelledby="custom-tabs-one-Avista-tab">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="notice notice-success">
+                                        <strong>Controle de Boletos: </strong>Contratações à vista. <a href="/contratacao/controle-boletos/baixar-planilha-boletos"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha de Boletos &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+                                    </div><br>
+                                    <div id="displayAberto">
+                                        <div class="col">
+                                            <table id="tblControleDeBoletosAvista" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Contrato</th>
+                                                    <th>Proponente</th>
+                                                    <th>Vencimento</th>
+                                                    <th>Status</th>
+                                                    <th>Valor Pagamento</th>
+                                                    <th>Data Pagamento</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
           
 
-        <div class="tab-pane fade" id="custom-tabs-one-Financiado" role="tabpanel" aria-labelledby="custom-tabs-one-Financiado-tab">
-                
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="notice notice-success"> 
-                            <strong>Controle de Boletos: </strong> Contratações com financiamento.<a href="/contratacao/controle-boletos/baixar-planilha-boletos"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha de Boletos &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
-                        </div><br>
-                        <div class="col">
-                            <table id="tblControleDeBoletosFinanciado" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Contrato</th>
-                                    <th>Proponente</th>
-                                    <th>Vencimento</th>
-                                    <th>Status</th>
-                                    <th>Valor Pagamento</th>
-                                    <th>Data Pagamento</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                            </table>
+                    <div class="tab-pane fade" id="custom-tabs-one-Financiado" role="tabpanel" aria-labelledby="custom-tabs-one-Financiado-tab">  
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="notice notice-success"> 
+                                        <strong>Controle de Boletos: </strong> Contratações com financiamento.<a href="/contratacao/controle-boletos/baixar-planilha-boletos"><button style="float: right" type="button" class="btn btn-success">Baixar a Planilha de Boletos &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+                                    </div><br>
+                                    <div class="col">
+                                        <table id="tblControleDeBoletosFinanciado" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Contrato</th>
+                                                <th>Proponente</th>
+                                                <th>Vencimento</th>
+                                                <th>Status</th>
+                                                <th>Valor Pagamento</th>
+                                                <th>Data Pagamento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-        </div>
 
 
-                <div class="tab-pane fade" id="custom-tabs-one-novos" role="tabpanel" aria-labelledby="custom-tabs-one-novos-tab">
-                        
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="notice notice-success"> 
-                                    <strong>Controle de Boletos: </strong> Pagos no último dia útil anterior.
-                                </div><br>
-                                <div class="col">
-                                  <table id="tblControleDeBoletosNovos" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Contrato</th>
-                                            <th>Proponente</th>
-                                            <th>Valor Pagamento</th>
-                                            <th>Tipo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                    </tbody>
-                                  </table>
-                                </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-novos" role="tabpanel" aria-labelledby="custom-tabs-one-novos-tab">   
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="notice notice-success"> 
+                                        <strong>Controle de Boletos: </strong> Pagos no último dia útil anterior.
+                                    </div><br>
+                                    <div class="col">
+                                    <table id="tblControleDeBoletosNovos" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Contrato</th>
+                                                <th>Proponente</th>
+                                                <th>Valor Pagamento</th>
+                                                <th>Tipo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -156,8 +156,13 @@ class siouvController extends Controller
         $novaDemandaAtende = new Atende;
         $novaDemandaAtende->contratoFormatado               = $dadosSimov->BEM_FORMATADO;
         $novaDemandaAtende->codigoUnidade                   = '7257';
-        $novaDemandaAtende->idEquipe                        = '11';
-        $novaDemandaAtende->idAtividade                     = '76';
+        if (env('APP_ENV') == 'PRODUCAO'){
+            $novaDemandaAtende->idEquipe                        = '11';
+            $novaDemandaAtende->idAtividade                     = '76';
+        }else{
+            $novaDemandaAtende->idEquipe                        = '1045';
+            $novaDemandaAtende->idAtividade                     = '4'; 
+        }
         $novaDemandaAtende->numeroContrato                  = $request->cadastraContratoSiouv;
         $novaDemandaAtende->assuntoAtende                   = $request->cadastraProcessolSiouv;
         $novaDemandaAtende->descricaoAtende                 = "Atenção: ao responder esta demanda ainda será necessário copiar a resposta no atender.caixa.". PHP_EOL .

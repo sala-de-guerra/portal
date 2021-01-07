@@ -181,10 +181,12 @@ input[type='file'] {
                 <div class="modal-body px-0">
                     
                         <div class="px-2" style="overflow-y: auto; height: 100%;">
-                            <div class="form-group">
-                                <label>Nome do Credenciado</label>
-                                <input type="text" name="nomeCredenciado" class="form-control" autocomplete="off" required>
-                            </div>
+                            
+                            
+                            {{-- <div class="form-group col-md-6">
+                                <label>CRECI</label>
+                                <input type="text" name="cpfCorretor" class="form-control" id="cpfCorretor">
+                            </div> --}}
 
                             <div class="form-group" required>
                                 <div class="form-check">
@@ -196,10 +198,7 @@ input[type='file'] {
                                       <label class="radio-inline">
                                         <input type="radio" name="pfpj" id="pf" value="pf" onclick="mostraPf()">Pessoa Física
                                       </label>
-                                    {{-- <input class="form-check-input" type="radio" name="pfpj" id="pj" value="pj" onclick="mostraPj()"> --}}
-                                    {{-- <label class="form-check-label radio-inline" for="pj">
-                                        Pessoa Jurídica
-                                    </label> --}}
+
                                     <div class="form-row">
                                         <div class="form-group col-md-6 mostrarPj" style="display: none;">
                                             <label>CNPJ</label>
@@ -212,26 +211,23 @@ input[type='file'] {
                                         </div>
                                       </div>
 
-                                        {{-- <div class="form-group" style="display: none;" id="mostrarPj">
-                                            <label>CNPJ</label>
-                                            <input type="text" name="CNPJ" class="form-control" id="dadoCNPJ" autocomplete="off" placeholder="00.000.000/0000-00" required><br>
-                                        
-                                        <p><b>e/ou</b></p>
-                                        
-                                            <label>CPF</label>
-                                            <input type="text" name="CPF" class="form-control" autocomplete="off" placeholder="000.000.000-00">
-                                        </div> --}}
+          
                                 </div>
                                 <div class="form-check">
-                                    {{-- <input class="form-check-input" type="radio" name="pfpj" id="pf" value="pf" onclick="mostraPf()"> --}}
-                                    {{-- <label class="form-check-label radio-inline" for="pf">
-                                        Pessoa Física
-                                    </label> --}}
+  
                                     <div class="form-group" style="display: none;" id="mostrarPf">
                                             <label>CPF</label>
                                             <input type="text" name="CPF" class="form-control" id="dadoCPF"  autocomplete="off" placeholder="000.000.000-00" required>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group"  style="display: none;" id="btnValidarCPF">
+                                <button type="button" class="btn btn-primary" onclick="_validarCPF('#cpfCorretor');">Validar Dados</button>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nome do Credenciado</label>
+                                <input type="text" name="nomeCredenciado" class="form-control" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
@@ -276,45 +272,33 @@ input[type='file'] {
 <script src="{{ asset('js\global\formata-data-datable.js') }}"></script>
 <script src="{{ asset('js/portal/corretores/credenciamento.js') }}"></script>
 
-
-<!--
 <script>
-function mostraPj(){
-    $("#mostrarPf").css("display", "none");
-    $("#mostrarPj").css("display", "block");
-    $("#dadoCPF").removeAttr("required");
-    $("#dadoCNPJ").prop('required',true);
-}
-function mostraPf(){
-    $("#mostrarPj").css("display", "none");
-    $("#mostrarPf").css("display", "block");
-    $("#dadoCNPJ").removeAttr("required");
-    $("#dadoCPF").prop('required',true);
-}
-</script>
 
-<script>
-$("[name='CNPJ']").mask("00.000.000/0000-00");
-$("[name='CPF']").mask("000.000.000-00");
-</script>
+function _validarCPF(cpfCorretor){
+    $("input[name='nomeCredenciado']").val('');
+    $("input[name='nomeRepresentante']").val('');
+    $("input[name='email']").val('');
+    let cpfOuCNPJDoCorretor = "";
 
-<script>
-        $(function () {
-        $('#fupload').change(function() {
-            $('.nomeArquivo').html('<b style="color: green;">Arquivo carregado com sucesso</b>');
-            $('.inputFile').remove();
-            $('#btnEnviar').show();
-        });
-    });
-function mudaColapse() {
-    if($('#collapse').text() == "X" ){
-    $('#collapse').text("Expandir")
+    let cpfDoCorretor = $('#dadoCPF').val()
+    let cnpjDoCorretor = $('#dadoCNPJ').val()
+
+    if (cnpjDoCorretor == ""){
+        cpfOuCNPJDoCorretor = $('#dadoCPF').val()
+        cpfOuCNPJDoCorretor = cpfOuCNPJDoCorretor.replace(".", "").replace(".", "").replace("-", "");
     }else{
-        $('#collapse').text("X")
+        cpfOuCNPJDoCorretor = $('#dadoCNPJ').val()
+        cpfOuCNPJDoCorretor = cpfOuCNPJDoCorretor.replace(".", "").replace(".", "").replace("/", "").replace("-", "");
     }
-}
+    $.getJSON('/corretores/pesquisa-corretor/' + cpfOuCNPJDoCorretor, function(dados){
+         $("input[name='nomeCredenciado']").val(dados.NO_CORRETOR);
+         $("input[name='email']").val(dados.ED_EMAIL_PESSOA);
+    })
+    .fail(function() {
+        alert("Creci: " + cpfOuCNPJDoCorretor + " não encontrado!");
+    });
+};
 </script>
--->
 
 <script>
     setTimeout(function(){
