@@ -36,6 +36,7 @@
 @stop
 
 @section('content')
+<p>Data e hora da captura: <b><span id="dataHoraCaptura"></span></p></b>
 
 <div class="row">
   <div class="col-md-12">
@@ -47,7 +48,7 @@
             <div class="col-lg-3 col-6">
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3 id="totalNovos">150</h3>
                     <p>Novos</p>
                 </div>
                 <div class="icon">
@@ -58,7 +59,7 @@
             <div class="col-lg-3 col-6">
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+                  <h3 id="totalTratados">53</h3>
                   <p>Tratados</p>
                 </div>
                 <div class="icon">
@@ -69,7 +70,7 @@
             <div class="col-lg-3 col-6">
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3 id="totalPendentes">44</h3>
                   <p>Pendentes</p>
                 </div>
                 <div class="icon">
@@ -80,7 +81,7 @@
             <div class="col-lg-3 col-6">
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3 id="totalVencidos"> </h3>
                   <p>Vencidos</p>
                 </div>
                 <div class="icon">
@@ -90,31 +91,75 @@
             </div>
           </div>
         </div>
-        
-        <section class="content">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-body">
-              <table id="tblIndicadorAtende" class="table table-bordered table-striped">
-                <thead>                   
-                  <tr>
-                    <th>Usuário</th>
-                    <th>Novos</th>
-                    <th>Tratados</th> 
-                    <th>Pendentes</th> 
-                    <th>Vencidos</th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                
-                <tboby>
 
-                </tbody>
 
-              </table>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title"><b>Quantidade de Atendes Cadastrados e Respondidos pela Gilie/SP</b></h5>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <p class="text-center">
+                      Meses de x a x de 2021
+                    </p>
+
+                    <div class="chart">
+                      <!-- Sales Chart Canvas -->
+                      <canvas id="myChart"></canvas>
+                    </div>
+                    <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                  
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
             </div>
+            <!-- /.card -->
           </div>
+          <!-- /.col -->
         </div>
+        <!-- /.row -->
+
+
+
+
+
+
+        
+        <table id="tblIndicadorAtende" class="table table-bordered table-striped">
+          <thead>                   
+            <tr>
+              <th>Usuário</th>
+              <th>Novos</th>
+              <th>Tratados</th> 
+              <th>Pendentes</th> 
+              <th>Vencidos</th>
+              <th></th>
+            </tr>
+          </thead>
+          
+          <tboby>
+
+          </tbody>
+
+        </table>
       </div> 
     </div>
   </div>
@@ -130,11 +175,13 @@
 
  
 @section('css')
-    <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+
 @stop
 
 
 @section('js')
     <script src="{{ asset('js/portal/atende/atende_indicadores.js') }}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> -->
 
 @stop

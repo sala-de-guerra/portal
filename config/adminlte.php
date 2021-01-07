@@ -241,7 +241,7 @@ return [
                     'text' => 'Credenciamento',
                     // 'icon'    => 'fas fa-lg fa-fw fa-file-signature mr-2',
                    'url'  => 'corretores/credenciamento',
-                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'AGENCIA', 'SR', 'MATRIZ', 'GESTOR', env('NOME_NOSSA_UNIDADE'), 'EVENTUAL'],
                ],
             ],
 

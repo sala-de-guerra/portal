@@ -167,12 +167,14 @@ $(document).ready(function(){
 function mostraPj(){
     $("#mostrarPf").css("display", "none");
     $(".mostrarPj").css("display", "block");
+    $("#btnValidarCPF").css("display", "block");
     $("#dadoCPF").removeAttr("required");
     $("#dadoCNPJ").prop('required',true);
 }
 function mostraPf(){
     $(".mostrarPj").css("display", "none");
     $("#mostrarPf").css("display", "block");
+    $("#btnValidarCPF").css("display", "block");
     $("#dadoCNPJ").removeAttr("required");
     $("#dadoCPF").prop('required',true);
 }
