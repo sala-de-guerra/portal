@@ -635,12 +635,25 @@ Route::prefix('gerencial/gestao-subsidios')->group(function () {
 Route::prefix('/indicadores/atende')->group(function () {
     //RETORNA VIEW
     Route::get('/', 'Indicadores\indicadoresAtende@indexIndicadoresAtende');
+    //TOTAL NOVOS ATENDES
+    Route::get('/total-novos-atendes', 'Indicadores\indicadoresAtende@mostraTotalAtendesNovos');
     //TOTAL ATENDES ABERTO
-    Route::get('/total-atende-aberto', 'Indicadores\indicadoresAtende@mostraTotalAtendesNovos');
+    Route::get('/total-atende-aberto', 'Indicadores\indicadoresAtende@mostraTotalAtendesParaResponder');
     //TOTAL ATENDES RESPONDIDOS
     Route::get('/total-atende-respondido', 'Indicadores\indicadoresAtende@mostraTotalAtendesFinalizados');
     //TOTAL ATENDES VENCIDOS
     Route::get('/total-atende-vencido', 'Indicadores\indicadoresAtende@mostraTotalAtendesVencidos');
+    //LISTA ATENDES VENCIDOS
+    Route::get('/lista-atende-vencido', 'Indicadores\indicadoresAtende@listaAtendeVencidos');
+    //LISTA ATENDES NOVOS
+    Route::get('/lista-atende-novos', 'Indicadores\indicadoresAtende@listaAtendeNovos');
+    //LISTA ATENDES RESPONDIDOS
+    Route::get('/lista-atende-tratados', 'Indicadores\indicadoresAtende@listaAtendeTratados');
+    //LISTA ATENDES PENDENTES
+    Route::get('/lista-atende-pendente', 'Indicadores\indicadoresAtende@listaAtendesParaResponder');
+    //LISTA ATENDES GERAL
+    Route::get('/lista-atende-geral', 'Indicadores\indicadoresAtende@listaRelatorioGeralAtendes');
+
 
 });
 

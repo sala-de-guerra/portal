@@ -191,9 +191,9 @@ $("[name='CPF']").mask("000.000.000-00");
     });
 
 function mudaColapse() {
-    if($('#collapse').text() == "X" ){
-    $('#collapse').text("Expandir")
+    if($('#collapse').text() == "Expandir" ){
+    $('#collapse').text("Ocultar")
     }else{
-        $('#collapse').text("X")
+        $('#collapse').text("Expandir")
     }
 }

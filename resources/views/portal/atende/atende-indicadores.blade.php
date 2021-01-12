@@ -36,7 +36,6 @@
 @stop
 
 @section('content')
-<p>Data e hora da captura: <b><span id="dataHoraCaptura"></span></p></b>
 
 <div class="row">
   <div class="col-md-12">
@@ -48,34 +47,37 @@
             <div class="col-lg-3 col-6">
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3 id="totalNovos">150</h3>
+                  <h3 id="totalNovos"> </h3>
                     <p>Novos</p>
                 </div>
                 <div class="icon">
                   <i class="far fa-bookmark"></i>
                 </div>
+                <a data-toggle="collapse" aria-expanded="false" aria-controls="listaNovos" href="#listaNovos" class="small-box-footer" role="button" id="listagemNovos"onclick="mudaInfoNovos()">Mais informações</a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3 id="totalTratados">53</h3>
+                  <h3 id="totalTratados"> </h3>
                   <p>Tratados</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-check"></i>
                 </div>
+                <a data-toggle="collapse" aria-expanded="false" aria-controls="listaTratados" href="#listaTratados" class="small-box-footer" role="button" id="listagemTratados" onclick="mudaInfoTratados()">Mais informações</a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3 id="totalPendentes">44</h3>
+                  <h3 id="totalPendentes"> </h3>
                   <p>Pendentes</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-exclamation"></i>
                 </div>
+                <a data-toggle="collapse" aria-expanded="false" aria-controls="listaPendentes" href="#listaPendentes" class="small-box-footer" role="button" id="listagemPendentes" onclick="mudaInfoPendentes()">Mais informações</a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -87,13 +89,88 @@
                 <div class="icon">
                   <i class="fas fa-times"></i>
                 </div>
+                <a data-toggle="collapse" aria-expanded="false" aria-controls="listaVencidos" href="#listaVencidos" class="small-box-footer" role="button" id="listagemVencidos" onclick="mudaInfoVencidos()">Mais informações</a>
               </div>
             </div>
           </div>
         </div>
+        <div class="collapse" id="listaNovos">
+          <div class="card card-body card-outline card-info">
+            <h2 class="card-title"><b>Novos</b></h2><br>
+            <table id="tblIndicadorAtendeNovos" class="table table-bordered table-striped">
+              <thead>                   
+                <tr>
+                  <th style="text-align:center;">Usuário</th>
+                  <th style="text-align:center;">Nº Atende</th>
+                  <th style="text-align:center;">Contrato</th> 
+                </tr>
+              </thead>
+              
+              <tbody>
 
+              </tbody>
+            </table>
+          </div>
+        </div>
 
+        <div class="collapse" id="listaTratados">
+          <div class="card card-body card-outline card-success"> 
+            <h2 class="card-title"><b>Tratados</b></h2><br>
+              <table id="tblIndicadorAtendeTratados" class="table table-bordered table-striped">
+                <thead>                   
+                  <tr>
+                    <th style="text-align:center;">Usuário</th>
+                    <th style="text-align:center;">Nº Atende</th>
+                    <th style="text-align:center;">Contrato</th> 
+                  </tr>
+                </thead>
+                
+                <tbody>
 
+                </tbody>
+              </table>
+          </div>
+        </div>
+
+        <div class="collapse" id="listaPendentes">
+          <div class="card card-body card-outline card-warning">
+            <h2 class="card-title"><b>Pendentes</b></h2><br>
+              <table id="tblIndicadorAtendePendentes" class="table table-bordered table-striped">
+                <thead>                   
+                  <tr>
+                    <th style="text-align:center;">Usuário</th>
+                    <th style="text-align:center;">Nº Atende</th>
+                    <th style="text-align:center;">Contrato</th> 
+                  </tr>
+                </thead>
+                
+                <tbody>
+
+                </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="collapse" id="listaVencidos">
+          <div class="card card-body card-outline card-danger">
+            <h2 class="card-title"><b>Vencidos</b></h2><br>
+              <table id="tblIndicadorAtendeVencidos" class="table table-bordered table-striped">
+                <thead>                   
+                  <tr>
+                    <th style="text-align:center;">Usuário</th>
+                    <th style="text-align:center;">Nº Atende</th>
+                    <th style="text-align:center;">Contrato</th> 
+                    <th style="text-align:center;">Dias Vencidos</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+
+                </tbody>
+
+            </table>
+          </div>
+        </div>
 
         <div class="row">
           <div class="col-md-12">
@@ -114,7 +191,6 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-8">
                     <p class="text-center">
                       Meses de x a x de 2021
                     </p>
@@ -124,8 +200,6 @@
                       <canvas id="myChart"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
-                  </div>
-                  <!-- /.col -->
                   
                 <!-- /.row -->
               </div>
@@ -140,9 +214,7 @@
 
 
 
-
-
-        
+        <div class="col-md-12">
         <table id="tblIndicadorAtende" class="table table-bordered table-striped">
           <thead>                   
             <tr>
@@ -151,20 +223,21 @@
               <th>Tratados</th> 
               <th>Pendentes</th> 
               <th>Vencidos</th>
-              <th></th>
+              <th>Indicadores</th>
             </tr>
           </thead>
           
-          <tboby>
+          <tbody>
 
           </tbody>
 
         </table>
+        </div>
       </div> 
     </div>
   </div>
 </div>
-
+</div>
 
 
 @stop
@@ -182,6 +255,7 @@
 
 @section('js')
     <script src="{{ asset('js/portal/atende/atende_indicadores.js') }}"></script>
+    
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> -->
 
 @stop
