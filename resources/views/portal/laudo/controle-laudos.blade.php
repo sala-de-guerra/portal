@@ -87,7 +87,7 @@
                         <div class="col-sm-12">
                             <table id="tblLaudoEmDia" class="table table-bordered table-striped dataTable">
                                 <div class="notice notice-warning">
-                                    <strong>À vencer: </strong> Laudos que irão vencer em até 70 dias.<a href="controle-laudos/download-excel"><button style="float: right" type="button" class="btn btn-success pb-2">Baixar a Planilha Completa &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+                                    <strong>A vencer: </strong> Laudos que irão vencer em até 70 dias.<a href="controle-laudos/download-excel"><button style="float: right" type="button" class="btn btn-success pb-2">Baixar a Planilha Completa &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
                                 </div>
                                 <div class="spinner-border spinnerTbl text-primary" role="status">
                                     <span class="sr-only"></span>
