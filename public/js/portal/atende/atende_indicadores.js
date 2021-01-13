@@ -5,11 +5,12 @@ function pad(n, width, z) {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
+
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
 function _formataDatatableComData (idTabela){
-    $('#' + idTabela).DataTable({
-        "order": [[ 3, "asc" ]],
+  $('#' + idTabela).DataTable({
+    "order": [[ 3, "asc" ]],
         "pageLength": 10,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
@@ -24,7 +25,7 @@ function _formataDatatableComData (idTabela){
             "sZeroRecords": "Nenhum registro encontrado",
             "sSearch": "Pesquisar",
             "oPaginate": {
-                "sNext": "Próximo",
+              "sNext": "Próximo",
                 "sPrevious": "Anterior",
                 "sFirst": "Primeiro",
                 "sLast": "Último"
@@ -33,36 +34,38 @@ function _formataDatatableComData (idTabela){
                 "sSortAscending": ": Ordenar colunas de forma ascendente",
                 "sSortDescending": ": Ordenar colunas de forma descendente"
             }
-        }
+          }
     });
-}
-
-
-
+  }
+  
+  
+  
 $(document).ready( function () {
-    $.getJSON('atende/total-novos-atendes', function(dados){
-        $.each(dados, function(key, item) {  
-            $('#totalNovos').text(item.totalAtendesNovos)
-        })
+  $.getJSON('atende/total-novos-atendes', function(dados){
+    $.each(dados, function(key, item) {  
+      $('#totalNovos').text(item.totalAtendesNovos)
     })
+  })
+  
+  $.getJSON('atende/total-atende-respondido', function(dados){
+    $.each(dados, function(key, item) {  
+      $('#totalTratados').text(item.totalAtendesRespondidos)
+    })
+  })
 
-    $.getJSON('atende/total-atende-respondido', function(dados){
-        $.each(dados, function(key, item) {  
-            $('#totalTratados').text(item.totalAtendesRespondidos)
-        })
+  $.getJSON('atende/total-atende-aberto', function(dados){
+    $.each(dados, function(key, item) {  
+      $('#totalPendentes').text(item.totalAtendeParaResponder)
     })
-
-    $.getJSON('atende/total-atende-aberto', function(dados){
-        $.each(dados, function(key, item) {  
-            $('#totalPendentes').text(item.totalAtendeParaResponder)
-        })
+  })
+  
+  $.getJSON('atende/total-atende-vencido', function(dados){
+    $.each(dados, function(key, item) {  
+      $('#totalVencidos').text(item.totalAtendesVencidos)
     })
-
-    $.getJSON('atende/total-atende-vencido', function(dados){
-        $.each(dados, function(key, item) {  
-          $('#totalVencidos').text(item.totalAtendesVencidos)
-        })
-    })
+  })
+  
+  $('.spinnerTblDistribuido').remove()
 
   $("#listagemVencidos").one("click", function() {
     $.getJSON('atende/lista-atende-vencido', function(dados){
@@ -70,20 +73,19 @@ $(document).ready( function () {
         let atende = item.idAtende  
         var tabela = 
         `
-        <tr>
-        <td style="text-align:center;">${item.nomeResponsavelAtividade}</td>
-        <td style="text-align:center;">#`+pad(atende, 5)+`</td>
-        <td style="text-align:center;"><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
-        <td style="text-align:center;">${item.diasVencido}</td>
-        </tr>
+          <tr>
+            <td style="text-align:center;">${item.nomeResponsavelAtividade}</td>
+            <td style="text-align:center;">#`+pad(atende, 5)+`</td>
+            <td style="text-align:center;"><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
+            <td style="text-align:center;">${item.diasVencido}</td>
+          </tr>
         `
-        $(tabela).appendTo('#tblIndicadorAtendeVencidos>tbody');  
+      $(tabela).appendTo('#tblIndicadorAtendeVencidos>tbody');  
       })
     }).done(function() {
-      _formataDatatableComData("tblIndicadorAtendeVencidos")
+    _formataDatatableComData ("tblIndicadorAtendeVencidos")
     })
   })
-  
 
   $("#listagemNovos").one("click", function() {
     $.getJSON('atende/lista-atende-novos', function(dados){
@@ -91,16 +93,16 @@ $(document).ready( function () {
         let atende = item.idAtende  
         var tabela = 
           `
-          <tr>
+            <tr>
               <td style="text-align:center;">${item.nomeResponsavelAtividade}</td>
               <td style="text-align:center;">#`+pad(atende, 5)+`</td>
               <td style="text-align:center;"><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
-          </tr>
+            </tr>
           `
         $(tabela).appendTo('#tblIndicadorAtendeNovos>tbody');  
       })
     }).done(function() {
-      _formataDatatableComData("tblIndicadorAtendeNovos")
+      _formataDatatableComData ("tblIndicadorAtendeNovos")
     })
   })
 
@@ -110,84 +112,94 @@ $(document).ready( function () {
         let atende = item.idAtende  
         var tabela = 
           `
-          <tr>
+            <tr>
               <td style="text-align:center;">${item.nomeResponsavelAtividade}</td>
               <td style="text-align:center;">#`+pad(atende, 5)+`</td>
               <td style="text-align:center;"><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
-          </tr>
+            </tr>
           `
         $(tabela).appendTo('#tblIndicadorAtendeTratados>tbody');  
       })
     }).done(function() {
-      _formataDatatableComData("tblIndicadorAtendeTratados")
+      _formataDatatableComData ("tblIndicadorAtendeTratados")
     })
   })
-
+  
   $("#listagemPendentes").one("click", function() {
     $.getJSON('atende/lista-atende-pendente', function(dados){
       $.each(dados, function(key, item) {
         let atende = item.idAtende  
         var tabela = 
           `
-          <tr>
+            <tr>
               <td style="text-align:center;">${item.nomeResponsavelAtividade}</td>
               <td style="text-align:center;">#`+pad(atende, 5)+`</td>
               <td style="text-align:center;"><a href="/consulta-bem-imovel/${item.contratoFormatado}" class="cursor-pointer">${item.numeroContrato}</a></td>
-          </tr>
+            </tr>
           `
         $(tabela).appendTo('#tblIndicadorAtendePendentes>tbody');  
       })
     }).done(function() {
-      _formataDatatableComData("tblIndicadorAtendePendentes")
+      _formataDatatableComData ("tblIndicadorAtendePendentes")
     })
   })
-
-  $.getJSON('atende/lista-atende-geral', function(dados){
-    $.each(dados, function(key, item) {
-      
-      var novo = Number(item.novos)
-      var pendentes = Number(item.pendente)
-      var finalizados = Number(item.finalizado)
-      var vencidos = Number(item.vencido)
-      var total = pendentes + finalizados + vencidos
-
-      var n = (novo*100)/total
-      var f = (finalizados*100)/total
-      var p = (pendentes*100)/total
-      var v = (vencidos*100)/total
-
+  
+  $("#listagemGeral").one("click", function() {
+    $.getJSON('atende/lista-atende-geral', function(dados){
+      $.each(dados, function(key, item) {
+        
+        var novo = Number(item.novos)
+        var pendentes = Number(item.pendente)
+        var finalizados = Number(item.finalizado)
+        var vencidos = Number(item.vencido)
+        var total = pendentes + finalizados + vencidos
+        
+        var n = (novo*100)/total
+        var f = (finalizados*100)/total
+        var p = (pendentes*100)/total
+        var v = (vencidos*100)/total
+        
         let linha =
-        `<tr>
-            <td>${item.matricula}</td>
-            <td>${novo}</td>
-            <td>${finalizados}</td>
-            <td>${pendentes}</td>
-            <td>${vencidos}</td>
-            <td>
-            </div>
-            <div class="progress mt-1" style="height: 4px;">
-              <div class="progress-bar bg-info" role="progressbar" style="width: ${n}%" aria-valuenow="${novo}" aria-valuemin="0" aria-valuemax="${total}"></div>
-            </div>
-            <div 
-            <div class="progress mt-1" style="height: 4px;">
-              <div class="progress-bar bg-success" role="progressbar" style="width: ${f}%" aria-valuenow="${finalizados}" aria-valuemin="0" aria-valuemax="${total}"></div>
-            </div>
-            <div class="progress mt-1" style="height: 4px;">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: ${p}%" aria-valuenow="${pendentes}" aria-valuemin="0" aria-valuemax="${total}"></div>
-            </div>
-            <div class="progress mt-1" style="height: 4px;">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: ${v}%" aria-valuenow="${vencidos}" aria-valuemin="0" aria-valuemax="${total}"></div>
-            </div><br>
+          `
+            <tr>
+              <td style="text-align:center;">${item.nome}</td>
+              <td style="text-align:center;">${novo}</td>
+              <td style="text-align:center;">${finalizados}</td>
+              <td style="text-align:center;">${pendentes}</td>
+              <td style="text-align:center;">${vencidos}</td>
+              <td>
+                
+                <span data-toggle="tooltip" data-placement="top" title="${novo} Atendes Novos">
+                <div class="progress mt-1" style="height: 4px;">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: ${n}%" aria-valuenow="${novo}" aria-valuemin="0" aria-valuemax="${total}"></div>
+                </div></span>
+                
+                <span data-toggle="tooltip" data-placement="top" title="${finalizados} Atendes Tratados">
+                <div class="progress mt-1" style="height: 4px;">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: ${f}%" aria-valuenow="${finalizados}" aria-valuemin="0" aria-valuemax="${total}"></div>
+                </div></span>
+                
+                <span data-toggle="tooltip" data-placement="top" title="${pendentes} Atendes Pendentes">
+                <div class="progress mt-1" style="height: 4px;">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: ${p}%" aria-valuenow="${pendentes}" aria-valuemin="0" aria-valuemax="${total}"></div>
+                </div></span>
 
-            </td>
-        </tr>`
-      $(linha).appendTo('#tblIndicadorAtende>tbody');
+                <span data-toggle="tooltip" data-placement="top" title="${vencidos} Atendes Vencidos">
+                <div class="progress mt-1" style="height: 4px;">
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: ${v}%" aria-valuenow="${vencidos}" aria-valuemin="0" aria-valuemax="${total}"></div></span>
+                </div>
+
+              </td>
+            </tr>
+          `
+          $(linha).appendTo('#tblIndicadorAtende>tbody');
+      })
+    }).done(function() {
+    _formataDatatableComData("tblIndicadorAtende")
     })
-  }).done(function() {
-  _formataDatatableComData("tblIndicadorAtende")
   })
 })
-
+      
 function mudaInfoPendentes() {
   if($('#listagemPendentes').text() == "Mais informações"){
     $('#listagemPendentes').text("Ocultar");
@@ -203,7 +215,7 @@ function mudaInfoTratados() {
     $('#listagemTratados').text("Mais informações")
   }
 }
-
+      
 function mudaInfoNovos() {
   if($('#listagemNovos').text() == "Mais informações"){
     $('#listagemNovos').text("Ocultar");
@@ -220,20 +232,39 @@ function mudaInfoVencidos() {
   }
 }
 
+function mudaInfoGrafico() {
+  if($('#geralGrafico').text() == "Mais informações"){
+    $('#geralGrafico').text("Ocultar");
+  }else{
+    $('#geralGrafico').text("Mais informações")
+  }
+}
+
+function mudaInfoGeral() {
+  if($('#listagemGeral').text() == "Mais informações"){
+    $('#listagemGeral').text("Ocultar");
+  }else{
+    $('#listagemGeral').text("Mais informações")
+  }
+}
+
+function mudaFoto(foto){
+  document.getElementsById("icone").src=foto;
+}
 
 /* 
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
-
-    type: 'line',
-
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+  
+  type: 'line',
+  
+  data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [0, 10, 5, 2, 20, 30, 45]
         }]
     },
 

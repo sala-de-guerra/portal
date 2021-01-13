@@ -135,10 +135,12 @@ class indicadoresAtende extends Controller
             ,'novos' = count(statusAtende)
             ,'pendente' = 0
             ,'vencido' = 0
+            ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
+            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende in ('CADASTRADO', 'REDIRECIONADO') -- FINALIZADO REDIRECIONADO
             and CONVERT(date, getdate()) = CONVERT(date, dataAlteracao)
-            group by matriculaResponsavelAtividade
+            group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
             
             
             union 
@@ -149,9 +151,11 @@ class indicadoresAtende extends Controller
             ,'novos' = 0
             ,'pendente' = count(statusAtende)
             ,'vencido' = 0
+            ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
+            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende in ('CADASTRADO', 'REDIRECIONADO') -- FINALIZADO REDIRECIONADO
-            group by matriculaResponsavelAtividade
+            group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
             
             union 
             
@@ -161,10 +165,12 @@ class indicadoresAtende extends Controller
             ,'novos' = 0
             ,'pendente' = 0
             ,'vencido' = 0
+            ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
+            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende = 'FINALIZADO' -- FINALIZADO REDIRECIONADO
             and CONVERT(date, getdate()) = CONVERT(date, dataAlteracao)
-            group by matriculaResponsavelAtividade
+            group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
             
             union 
             
@@ -174,21 +180,24 @@ class indicadoresAtende extends Controller
             ,'novos' = 0
             ,'pendente' = 0
             ,'vencido' = count(statusAtende)
+            ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
+            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende in ('CADASTRADO', 'REDIRECIONADO')  -- FINALIZADO REDIRECIONADO
             and getdate() > prazoAtendimentoAtende
-            group by matriculaResponsavelAtividade
+            group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
             
             )
             
             select 
                 matricula
+                ,nome
                 ,'finalizado' = sum(finalizado)
                 ,'novos' = sum(novos)
                 ,'pendente' = sum(pendente)
                 ,'vencido' = sum(vencido)
             from relatorio_atende
-            group by matricula
+            group by matricula,nome
             ");
              return json_encode($listaRelatorioGeralAtendes);
     }

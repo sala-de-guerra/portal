@@ -50,7 +50,7 @@
             -->
                         <div id="accordion" role="tablist" aria-multiselectable="true">
                             <div class="card card-primary">
-                                <div class="card-header" role="tab" id="headingOne"  onclick="mudaColapse()">
+                                <div class="card-header" role="tab" id="headingOne" onclick="mudaColapse()">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <div class="row">
                                             <p class="card-title" >Como atualizar o status de contrato dos Corretores?</p>
@@ -821,10 +821,10 @@
 
 <script>
 function mudaColapse() {
-    if($('#collapse').text() == "X" ){
-    $('#collapse').text("Expandir")
+    if($('#collapse').text() == "Expandir" ){
+    $('#collapse').text("Ocultar")
     }else{
-        $('#collapse').text("X")
+        $('#collapse').text("Expandir")
     }
 }
 </script>
