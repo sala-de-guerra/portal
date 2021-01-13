@@ -43,6 +43,10 @@
       <div class="card-body">
         <section class="content">
         <div class="container-fluid">
+          <div class="spinner-border spinnerTblDistribuido text-primary" role="status">
+              <span class="sr-only"></span>
+          </div>
+              <span class="spinnerTblDistribuido">Carregando Dados Aguarde...</span>
           <div class="row">
             <div class="col-lg-3 col-6">
               <div class="small-box bg-info">
@@ -151,6 +155,7 @@
             </table>
           </div>
         </div>
+
         <div class="collapse" id="listaVencidos">
           <div class="card card-body card-outline card-danger">
             <h2 class="card-title"><b>Vencidos</b></h2><br>
@@ -172,13 +177,97 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="container-fluid">
+          <div class ="row">
+            <div class="col-lg">
+              <div class="info-box" onmouseover="mudaFoto('/img/estatisticas_B.png')" onmouseout="mudaFoto('/img/estatisticas_A.png')">
+                <span class="info-box-icon elevation-0.5"><img src="/img/estatisticas_A.png"></span>
+                <div class="info-box-content">
+                  <div class="card-body">
+                    <h4>Gráfico dos Indicadores Atende</h4>
+                  </div>
+                  <div class="card-footer d-flex justify-content-end">
+                  <a data-toggle="collapse" aria-expanded="false" aria-controls="graficoGeral" href="#graficoGeral" class="small-box-footer" role="button" id="geralGrafico"onclick="mudaInfoGrafico()">Mais informações</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg">
+              <div class="info-box">
+                <span class="info-box-icon elevation-0.5"><img src="/img/contas_A.png"></span>
+                <div class="info-box-content">
+                  <div class="card-body">
+                    <h4>Tabela Geral de Indicadores por Usuário</h4>
+                  </div>
+                  <div class="card-footer d-flex justify-content-end">
+                  <a data-toggle="collapse" aria-expanded="false" aria-controls="listaGeral" href="#listaGeral" class="small-box-footer" role="button" id="listagemGeral" onclick="mudaInfoGeral()">Mais informações</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse" id="graficoGeral">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title"><b>Quantidade de Atendes Cadastrados e Respondidos pela Gilie/SP</b></h5>
+                <h5 class="card-title"><b>Quantidade de Atendes Diários - Gilie/SP</b></h5>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <p class="text-center">
+                    Meses de x a x de 2021
+                  </p>
 
-                <div class="card-tools">
+                  <div class="chart">
+                    <canvas id="myChart"></canvas>
+                  </div>                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse" id="listaGeral">
+          <div class="col-md-12">
+            <table id="tblIndicadorAtende" class="table table-bordered table-striped">
+              <thead>                   
+                <tr>
+                  <th style="text-align:center;">Usuário</th>
+                  <th style="text-align:center;">Novos</th>
+                  <th style="text-align:center;">Tratados</th> 
+                  <th style="text-align:center;">Pendentes</th> 
+                  <th style="text-align:center;" >Vencidos</th>
+                  <th >Indicadores: &nbsp
+                    <span class="badge bg-info">Novos</span>
+                    <span class="badge bg-success">Tratados</span>
+                    <span class="badge bg-warning">Pendentes</span>  
+                    <span class="badge bg-danger">Vencidos</span>                   
+                  </th>
+                </tr>
+              </thead>
+              
+              <tbody>
+
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<!--
+<div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -187,57 +276,8 @@
                     <i class="fas fa-times"></i>
                   </button>
                 </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <div class="row">
-                    <p class="text-center">
-                      Meses de x a x de 2021
-                    </p>
+-->
 
-                    <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <canvas id="myChart"></canvas>
-                    </div>
-                    <!-- /.chart-responsive -->
-                  
-                <!-- /.row -->
-              </div>
-              <!-- /.card-footer -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-
-
-
-
-        <div class="col-md-12">
-        <table id="tblIndicadorAtende" class="table table-bordered table-striped">
-          <thead>                   
-            <tr>
-              <th>Usuário</th>
-              <th>Novos</th>
-              <th>Tratados</th> 
-              <th>Pendentes</th> 
-              <th>Vencidos</th>
-              <th>Indicadores</th>
-            </tr>
-          </thead>
-          
-          <tbody>
-
-          </tbody>
-
-        </table>
-        </div>
-      </div> 
-    </div>
-  </div>
-</div>
-</div>
 
 
 @stop

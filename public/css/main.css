@@ -318,3 +318,10 @@ input[type=number] {
  /* .sidebar{
     background-image: url('/img/sidebar-3.jpeg');
  }     */
+
+ @media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1200px;
+    }
+  }

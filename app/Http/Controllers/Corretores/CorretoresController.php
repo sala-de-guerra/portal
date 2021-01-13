@@ -539,8 +539,9 @@ class CorretoresController
     public function disparaMensagemGILIEvendaCorretorPreHabilitado()
     {
       $ultimoDiaUtil = DiasUteisClass::retornaPassadoEmQuantidadeDiasUteis(Carbon::now(), 1, 'Y-m-d');
-      $ultimoDiaUtil = '2020-12/28';
-     
+      $ultimoDiaUtil = '2020-12-28';
+   
+
         $listaCorretoresEnvioEmailCecot= DB::table('ALITB001_Imovel_Completo') 
         ->leftjoin('TBL_CORRETORES', DB::raw('CONVERT(VARCHAR, TBL_CORRETORES.NU_CRECI)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_CRECI)')) 
         ->leftjoin('TBL_CORRETORES_QUALIFICACAO', DB::raw('CONVERT(VARCHAR, TBL_CORRETORES_QUALIFICACAO.NU_CPF_CORRETOR)'), '=', DB::raw('CONVERT(VARCHAR, TBL_CORRETORES.NU_CPF_CORRETOR)'))  
@@ -567,7 +568,6 @@ class CorretoresController
           foreach ($listaCorretoresEnvioEmailCecot as $corretor){
               if ($corretor->qualificacaoCorretor == 'Pré-habilitado'){
                 try { 
-
                   $mensagemGILIE = file_get_contents(("emailAvisoVendaPreHabilitado.php"), dirname(__FILE__));
                   $mensagemGILIE = str_replace("%CREDENCIADO%", $corretor->CORRETOR, $mensagemGILIE);
                   $mensagemGILIE = str_replace("%CHB%", $corretor->nuBem, $mensagemGILIE);
@@ -595,6 +595,35 @@ class CorretoresController
                   $mailGILIE->Subject = 'Solicitação de efetivação de contratação';
                   $mailGILIE->Body = $mensagemGILIE;
                   $mailGILIE->send();
+
+                  $mensagemCorretor = file_get_contents(("orientacaoefetivacaocontratacaoCorretor.php"), dirname(__FILE__));
+                  $mensagemCorretor = str_replace("%CORRETOR%",  $corretor->CORRETOR, $mensagemCorretor);
+                  $anexo = storage_path("app/public/Boas_Vindas_Corretores.pdf");
+                  
+                  $mail = new PHPMailer(true);
+                  $mail->isSMTP();
+                  $mail->CharSet = 'UTF-8'; 
+                  $mail->isHTML(true);                                         
+                  $mail->Host = 'sistemas.correiolivre.caixa';  
+                  $mail->SMTPAuth = false;                                  
+                  $mail->Port = 25;
+                  // $mail->SMTPDebug = 2;
+                  $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+                  $mail->addReplyTo('GILIESP01@caixa.gov.br');
+                  if (env('APP_ENV') == 'PRODUCAO'){
+                    $mail->addAddress($corretor->emailCorretor);
+                    $mail->addCC( session('matricula') . '@mail.caixa');
+                    $mail->addBCC('GILIESP09@caixa.gov.br');
+                    $mail->addBCC('c142639@caixa.gov.br');
+                    $mail->addBCC('c098453@caixa.gov.br');
+                  }else{
+                      $mail->addAddress('c098453@mail.caixa');
+                      $mail->addCC('c142639@mail.caixa');
+                  }
+                  $mail->Subject = 'Orientações para efetivação de contratação - Credenciamento de corretores e imobiliárias';
+                  $mail->Body = $mensagemCorretor;
+                  $mail->AddAttachment($anexo);
+                  $mail->send();
 
             
                   session()->flash('corMensagem', 'success');
