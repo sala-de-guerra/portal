@@ -653,6 +653,8 @@ Route::prefix('/indicadores/atende')->group(function () {
     Route::get('/lista-atende-pendente', 'Indicadores\indicadoresAtende@listaAtendesParaResponder');
     //LISTA ATENDES GERAL
     Route::get('/lista-atende-geral', 'Indicadores\indicadoresAtende@listaRelatorioGeralAtendes');
+    //LISTA QUANTIDADE ULTIMOS 30 DIAS
+    Route::get('/lista-atende-grafico', 'Indicadores\indicadoresAtende@listaUltimos30diasParaGrafico');
 
 
 });

@@ -100,7 +100,7 @@
         </div>
         <div class="collapse" id="listaNovos">
           <div class="card card-body card-outline card-info">
-            <h2 class="card-title"><b>Novos</b></h2><br>
+            <h2 class="card-title"><b>Novos</b></h2>&nbsp
             <table id="tblIndicadorAtendeNovos" class="table table-bordered table-striped">
               <thead>                   
                 <tr>
@@ -119,7 +119,7 @@
 
         <div class="collapse" id="listaTratados">
           <div class="card card-body card-outline card-success"> 
-            <h2 class="card-title"><b>Tratados</b></h2><br>
+            <h2 class="card-title"><b>Tratados</b></h2>&nbsp
               <table id="tblIndicadorAtendeTratados" class="table table-bordered table-striped">
                 <thead>                   
                   <tr>
@@ -138,7 +138,7 @@
 
         <div class="collapse" id="listaPendentes">
           <div class="card card-body card-outline card-warning">
-            <h2 class="card-title"><b>Pendentes</b></h2><br>
+            <h2 class="card-title"><b>Pendentes</b></h2>&nbsp
               <table id="tblIndicadorAtendePendentes" class="table table-bordered table-striped">
                 <thead>                   
                   <tr>
@@ -158,7 +158,7 @@
 
         <div class="collapse" id="listaVencidos">
           <div class="card card-body card-outline card-danger">
-            <h2 class="card-title"><b>Vencidos</b></h2><br>
+            <h2 class="card-title"><b>Vencidos</b></h2>&nbsp
               <table id="tblIndicadorAtendeVencidos" class="table table-bordered table-striped">
                 <thead>                   
                   <tr>
@@ -180,8 +180,8 @@
         <div class="container-fluid">
           <div class ="row">
             <div class="col-lg">
-              <div class="info-box" onmouseover="mudaFoto('/img/estatisticas_B.png')" onmouseout="mudaFoto('/img/estatisticas_A.png')">
-                <span class="info-box-icon elevation-0.5"><img src="/img/estatisticas_A.png"></span>
+              <div class="info-box" >
+                <span class="info-box-icon elevation-0.5"><img src="/img/estatisticas2.png" onmouseover="this.src='/img/estatisticas1.png'" onmouseout="this.src='/img/estatisticas2.png'"></span>
                 <div class="info-box-content">
                   <div class="card-body">
                     <h4>Gráfico dos Indicadores Atende</h4>
@@ -194,8 +194,8 @@
             </div>
 
             <div class="col-lg">
-              <div class="info-box">
-                <span class="info-box-icon elevation-0.5"><img src="/img/contas_A.png"></span>
+              <div class="info-box" id="boxTabela" onmouseover="mouserOver();" onmouseout="mouseOut();">
+                <span class="info-box-icon elevation-0.5" id="imagemTabela"><img src="/img/tabela2.png" onmouseover="this.src='/img/tabela1.png'" onmouseout="this.src='/img/tabela2.png'"></span>
                 <div class="info-box-content">
                   <div class="card-body">
                     <h4>Tabela Geral de Indicadores por Usuário</h4>
@@ -213,18 +213,16 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title"><b>Quantidade de Atendes Diários - Gilie/SP</b></h5>
+                <h5 class="card-title"><b>Quantidade de Demandas Atende dos Últimos 30 Dias - Gilie/SP</b></h5>
               </div>
               <div class="card-body">
-                <div class="row">
-                  <p class="text-center">
-                    Meses de x a x de 2021
-                  </p>
+    
+ 
+                    <canvas id="myChart" height="50pt"></canvas>
 
-                  <div class="chart">
-                    <canvas id="myChart"></canvas>
-                  </div>                  
-                </div>
+
+                
+           
               </div>
             </div>
           </div>
@@ -232,28 +230,37 @@
 
         <div class="collapse" id="listaGeral">
           <div class="col-md-12">
-            <table id="tblIndicadorAtende" class="table table-bordered table-striped">
-              <thead>                   
-                <tr>
-                  <th style="text-align:center;">Usuário</th>
-                  <th style="text-align:center;">Novos</th>
-                  <th style="text-align:center;">Tratados</th> 
-                  <th style="text-align:center;">Pendentes</th> 
-                  <th style="text-align:center;" >Vencidos</th>
-                  <th >Indicadores: &nbsp
-                    <span class="badge bg-info">Novos</span>
-                    <span class="badge bg-success">Tratados</span>
-                    <span class="badge bg-warning">Pendentes</span>  
-                    <span class="badge bg-danger">Vencidos</span>                   
-                  </th>
-                </tr>
-              </thead>
-              
-              <tbody>
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title"><b>Indicador Diário por Usuário - Gilie/SP</b></h5>
+              </div>
+              <div class="card-body">
+                
+                  <table id="tblIndicadorAtende" class="table table-bordered table-striped">
+                    <thead>                   
+                      <tr>
+                        <th style="text-align:center;">Usuário</th>
+                        <th style="text-align:center;">Novos</th>
+                        <th style="text-align:center;">Tratados</th> 
+                        <th style="text-align:center;">Pendentes</th> 
+                        <th style="text-align:center;" >Vencidos</th>
+                        <th >Indicadores: &nbsp
+                          <span class="badge bg-info">Novos</span>
+                          <span class="badge bg-success">Tratados</span>
+                          <span class="badge bg-warning">Pendentes</span>  
+                          <span class="badge bg-danger">Vencidos</span>                   
+                        </th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
 
-              </tbody>
+                    </tbody>
 
-            </table>
+                  </table>
+                
+              </div>
+            </div>
           </div>
         </div>
       </div> 
@@ -290,12 +297,19 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css">
+
 @stop
 
 
 @section('js')
-    <script src="{{ asset('js/portal/atende/atende_indicadores.js') }}"></script>
-    
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> -->
+<script src="{{ asset('js/portal/atende/insere_grafico_atende.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="{{ asset('js/portal/atende/atende_indicadores.js') }}"></script>
+
+
+
+
+
 
 @stop

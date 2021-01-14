@@ -5,12 +5,12 @@ function pad(n, width, z) {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
-
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 
-function _formataDatatableComData (idTabela){
+
+function _formataDatatableComData (idTabela, ordenaColuna, ordenaForma){
   $('#' + idTabela).DataTable({
-    "order": [[ 3, "asc" ]],
+    "order": [[ ordenaColuna, ordenaForma ]],
         "pageLength": 10,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
@@ -83,7 +83,7 @@ $(document).ready( function () {
       $(tabela).appendTo('#tblIndicadorAtendeVencidos>tbody');  
       })
     }).done(function() {
-    _formataDatatableComData ("tblIndicadorAtendeVencidos")
+      _formataDatatableComData ('tblIndicadorAtendeVencidos', '3', 'asc')
     })
   })
 
@@ -102,7 +102,7 @@ $(document).ready( function () {
         $(tabela).appendTo('#tblIndicadorAtendeNovos>tbody');  
       })
     }).done(function() {
-      _formataDatatableComData ("tblIndicadorAtendeNovos")
+      _formataDatatableComData ('tblIndicadorAtendeNovos', '1', 'asc')
     })
   })
 
@@ -121,7 +121,7 @@ $(document).ready( function () {
         $(tabela).appendTo('#tblIndicadorAtendeTratados>tbody');  
       })
     }).done(function() {
-      _formataDatatableComData ("tblIndicadorAtendeTratados")
+      _formataDatatableComData ('tblIndicadorAtendeTratados', '1', 'asc')
     })
   })
   
@@ -140,7 +140,7 @@ $(document).ready( function () {
         $(tabela).appendTo('#tblIndicadorAtendePendentes>tbody');  
       })
     }).done(function() {
-      _formataDatatableComData ("tblIndicadorAtendePendentes")
+      _formataDatatableComData ('tblIndicadorAtendePendentes', '1', 'asc')
     })
   })
   
@@ -154,10 +154,10 @@ $(document).ready( function () {
         var vencidos = Number(item.vencido)
         var total = pendentes + finalizados + vencidos
         
-        var n = (novo*100)/total
-        var f = (finalizados*100)/total
-        var p = (pendentes*100)/total
-        var v = (vencidos*100)/total
+        var porcentagemNovos = (novo*100)/total
+        var porcentagemFinalizados = (finalizados*100)/total
+        var porcentagemPendentes = (pendentes*100)/total
+        var porcentagemVencidos = (vencidos*100)/total
         
         let linha =
           `
@@ -168,25 +168,61 @@ $(document).ready( function () {
               <td style="text-align:center;">${pendentes}</td>
               <td style="text-align:center;">${vencidos}</td>
               <td>
-                
-                <span data-toggle="tooltip" data-placement="top" title="${novo} Atendes Novos">
-                <div class="progress mt-1" style="height: 4px;">
-                  <div class="progress-bar bg-info" role="progressbar" style="width: ${n}%" aria-valuenow="${novo}" aria-valuemin="0" aria-valuemax="${total}"></div>
-                </div></span>
-                
-                <span data-toggle="tooltip" data-placement="top" title="${finalizados} Atendes Tratados">
-                <div class="progress mt-1" style="height: 4px;">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: ${f}%" aria-valuenow="${finalizados}" aria-valuemin="0" aria-valuemax="${total}"></div>
-                </div></span>
-                
-                <span data-toggle="tooltip" data-placement="top" title="${pendentes} Atendes Pendentes">
-                <div class="progress mt-1" style="height: 4px;">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: ${p}%" aria-valuenow="${pendentes}" aria-valuemin="0" aria-valuemax="${total}"></div>
-                </div></span>
+              
+                <div class="container">
+                  <div class="row">
+                    <div class="col col-sm-1">
+                      <span class="badge bg-info">${novo}</span>
+                    </div>
+                    <div class="col col-sm-6">
+                      <div class="progress mt-1" style="height: 6px;">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: ${porcentagemNovos}%" aria-valuenow="${novo}" aria-valuemin="0" aria-valuemax="${total}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                <span data-toggle="tooltip" data-placement="top" title="${vencidos} Atendes Vencidos">
-                <div class="progress mt-1" style="height: 4px;">
-                  <div class="progress-bar bg-danger" role="progressbar" style="width: ${v}%" aria-valuenow="${vencidos}" aria-valuemin="0" aria-valuemax="${total}"></div></span>
+                <div class="container">
+                  <div class="row">
+                    <div class="col col-sm-1">
+                      <span class="badge bg-success">${finalizados}</span>
+                    </div>
+                    <div class="col col-sm-6">
+                      <div class="progress mt-1" style="height: 6px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: ${porcentagemFinalizados}%" aria-valuenow="${finalizados}" aria-valuemin="0" aria-valuemax="${total}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  
+                <div class="container">
+                  <div class="row">
+                    <div class="col col-sm-1">
+                      <span class="badge bg-warning">${pendentes}</span>
+                    </div>
+                    <div class="col col-sm-6">
+                      <div class="progress mt-1" style="height: 6px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: ${porcentagemPendentes}%" aria-valuenow="${pendentes}" aria-valuemin="0" aria-valuemax="${total}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="container">
+                  <div class="row">
+                    <div class="col col-sm-1">
+                      <span class="badge bg-danger">${vencidos}</span>
+                    </div>
+                    <div class="col col-sm-6">
+                      <div class="progress mt-1" style="height: 6px;">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: ${porcentagemVencidos}%" aria-valuenow="${vencidos}" aria-valuemin="0" aria-valuemax="${total}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </td>
@@ -195,7 +231,7 @@ $(document).ready( function () {
           $(linha).appendTo('#tblIndicadorAtende>tbody');
       })
     }).done(function() {
-    _formataDatatableComData("tblIndicadorAtende")
+    _formataDatatableComData('tblIndicadorAtende', '4', 'desc')
     })
   })
 })
@@ -248,29 +284,65 @@ function mudaInfoGeral() {
   }
 }
 
-function mudaFoto(foto){
-  document.getElementsById("icone").src=foto;
-}
+// function grafico(nome, quantidade){
+//   var ctx = document.getElementById('myChart').getContext('2d');
+//   var chart = new Chart(ctx, {
+    
+//       // The type of chart we want to create
+//       type: 'line',
 
-/* 
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-  
-  type: 'line',
-  
-  data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45]
-        }]
-    },
+//       // The data for our dataset
+//       data: {
+//           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//           datasets: [{
+//               label: 'My First dataset',
+//               backgroundColor: 'rgb(255, 99, 132)',
+//               borderColor: 'rgb(255, 99, 132)',
+//               data: [0, 10, 5, 2, 20, 30, 45]
+//           }]
+//       },
 
-    options: {}
-});
-*/
+//       // Configuration options go here
+//       options: {}
+//   });
+// }
+
+// function grafico(nome, quantidade){
+//     var ctx = document.getElementById('myChart').getContext('2d');
+
+
+//   var chart = new Chart(ctx, {
+
+//     type:'bar',
+//     // type: 'bar',
+//     // type: 'doughnut',
+//     // type: 'horizontalBar',
+//     // type: 'polarArea',
+
+//     data: {
+//         labels: [`GILIE`, `Agência`, `EMGEA`],
+//             datasets: [{
+//             label: "",            
+//             backgroundColor: ['RoyalBlue', 'DeepSkyBlue', 'seagreen'],
+//             borderColor: 'white',
+//             data: [10, 10, 5],
+//             barThickness: 86,
+//             maxBarThickness: 88,
+//             minBarLength: 2,
+//         }]
+//     },
+
+//     // Configuration options go here
+//     options: {
+//         legend: {
+//             display: false
+//         },
+//     }
+//   }); 
+// }
+
+
+
 
 setTimeout(function(){
     $('#fadeOut').fadeOut("slow");
