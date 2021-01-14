@@ -60,30 +60,9 @@
                                 </tbody>
                                 
                             </table> 
-                            <canvas id="myChart" height="80pt"></canvas>
+                            <canvas id="myChart"></canvas>
                         </div> <!-- /.col-sm-12 -->
 
-                        <div class="col-sm-6 table-responsive p-0">
-
-                            <table id="tblIndicadoresDistrato" class="table table-bordered table-striped hover dataTable">
-                               <thead>
-                                   <tr>
-                                       {{-- <th style="background-color: #FF4500; color: white;">Não Iniciadas</th> --}}
-                                       <th style="background-color: RoyalBlue; color: white;">Em tratamento GILIE</th>
-                                       <th style="background-color: DeepSkyBlue; color: white;">Em tratamento Agência</th>
-                                       <th style="background-color: seagreen; color: white;">Pendente Jurir / EMGEA</th>
-                                       {{-- <th style="background-color: LimeGreen; color: white;">Concluídas</th>
-                                       <th style="background-color: CornflowerBlue; color: white;">Tempo Médio de Atendimento</th> --}}
-                                   </tr>
-                               </thead>
-
-                               <tbody>
-                                   
-                               </tbody>
-                               
-                           </table> 
-                           <canvas id="myChart" height="80pt"></canvas>
-                       </div> <!-- /.col-sm-12 -->
 
 
 
@@ -111,13 +90,14 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css">
 @stop
 
 
 @section('js')
 
 <script src="{{ asset('js/global/insere_grafico.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="{{ asset('js/portal/atende/atende_indicadores.js') }}"></script>
 <Script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></Script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
 <script src="{{ asset('js/portal/imoveis/distrato/indicadores-distrato.js') }}"></script>

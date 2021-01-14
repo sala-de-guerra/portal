@@ -1,5 +1,3 @@
-
-//formata data table
 function _formataDatatable (idTabela){
     $('#' + idTabela).DataTable({
         "order": [[ 2, "asc" ]],
