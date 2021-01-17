@@ -233,6 +233,7 @@ $(document).ready( function () {
     }).done(function() {
     _formataDatatableComData('tblIndicadorAtende', '4', 'desc')
     })
+  
   })
 })
       
@@ -283,63 +284,6 @@ function mudaInfoGeral() {
     $('#listagemGeral').text("Mais informações")
   }
 }
-
-// function grafico(nome, quantidade){
-//   var ctx = document.getElementById('myChart').getContext('2d');
-//   var chart = new Chart(ctx, {
-    
-//       // The type of chart we want to create
-//       type: 'line',
-
-//       // The data for our dataset
-//       data: {
-//           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-//           datasets: [{
-//               label: 'My First dataset',
-//               backgroundColor: 'rgb(255, 99, 132)',
-//               borderColor: 'rgb(255, 99, 132)',
-//               data: [0, 10, 5, 2, 20, 30, 45]
-//           }]
-//       },
-
-//       // Configuration options go here
-//       options: {}
-//   });
-// }
-
-// function grafico(nome, quantidade){
-//     var ctx = document.getElementById('myChart').getContext('2d');
-
-
-//   var chart = new Chart(ctx, {
-
-//     type:'bar',
-//     // type: 'bar',
-//     // type: 'doughnut',
-//     // type: 'horizontalBar',
-//     // type: 'polarArea',
-
-//     data: {
-//         labels: [`GILIE`, `Agência`, `EMGEA`],
-//             datasets: [{
-//             label: "",            
-//             backgroundColor: ['RoyalBlue', 'DeepSkyBlue', 'seagreen'],
-//             borderColor: 'white',
-//             data: [10, 10, 5],
-//             barThickness: 86,
-//             maxBarThickness: 88,
-//             minBarLength: 2,
-//         }]
-//     },
-
-//     // Configuration options go here
-//     options: {
-//         legend: {
-//             display: false
-//         },
-//     }
-//   }); 
-// }
 
 
 

@@ -137,7 +137,7 @@ class indicadoresAtende extends Controller
             ,'vencido' = 0
             ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
-            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
+            INNER JOIN [TBL_EMPREGADOS] ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende in ('CADASTRADO', 'REDIRECIONADO') -- FINALIZADO REDIRECIONADO
             and CONVERT(date, getdate()) = CONVERT(date, dataAlteracao)
             group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
@@ -153,7 +153,7 @@ class indicadoresAtende extends Controller
             ,'vencido' = 0
             ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
-            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
+            INNER JOIN [TBL_EMPREGADOS] ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende in ('CADASTRADO', 'REDIRECIONADO') -- FINALIZADO REDIRECIONADO
             group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
             
@@ -167,7 +167,7 @@ class indicadoresAtende extends Controller
             ,'vencido' = 0
             ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
-            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
+            INNER JOIN [TBL_EMPREGADOS] ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende = 'FINALIZADO' -- FINALIZADO REDIRECIONADO
             and CONVERT(date, getdate()) = CONVERT(date, dataAlteracao)
             group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
@@ -182,7 +182,7 @@ class indicadoresAtende extends Controller
             ,'vencido' = count(statusAtende)
             ,'nome' = TBL_EMPREGADOS.nomeCompleto
             from TBL_ATENDE_DEMANDAS
-            INNER JOIN [7257_DES].[dbo].TBL_EMPREGADOS ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
+            INNER JOIN [TBL_EMPREGADOS] ON TBL_EMPREGADOS.matricula = TBL_ATENDE_DEMANDAS.matriculaResponsavelAtividade
             WHERE statusAtende in ('CADASTRADO', 'REDIRECIONADO')  -- FINALIZADO REDIRECIONADO
             and getdate() > prazoAtendimentoAtende
             group by matriculaResponsavelAtividade,TBL_EMPREGADOS.nomeCompleto
@@ -209,6 +209,19 @@ class indicadoresAtende extends Controller
         COUNT(DISTINCT idAtende) as total
         ,CONVERT(DATE, dataAlteracao) as dataUltimaAlteracao
         FROM TBL_ATENDE_DEMANDAS where dataAlteracao >= DATEADD(day,-30,GETDATE())
+        group by CONVERT(DATE, dataAlteracao)
+        order by CONVERT(DATE, dataAlteracao) asc
+            ");
+         return json_encode($listaRelatorioGeralAtendes);
+    }
+
+    public function listaUltimos30diasNovosAtendesParaGrafico()
+    {
+        $listaRelatorioGeralAtendes = DB::select("
+        SELECT 
+        COUNT(DISTINCT idAtende) as totalAtendesNovos
+        ,CONVERT(DATE, dataAlteracao) as dataUltimaAlteracao
+        FROM TBL_ATENDE_DEMANDAS where dataCadastro >= DATEADD(day,-30,GETDATE())
         group by CONVERT(DATE, dataAlteracao)
         order by CONVERT(DATE, dataAlteracao) asc
             ");

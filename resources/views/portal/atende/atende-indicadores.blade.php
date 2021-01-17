@@ -186,15 +186,15 @@
                   <div class="card-body">
                     <h4>Gráfico dos Indicadores Atende</h4>
                   </div>
-                  <div class="card-footer d-flex justify-content-end">
-                  <a data-toggle="collapse" aria-expanded="false" aria-controls="graficoGeral" href="#graficoGeral" class="small-box-footer" role="button" id="geralGrafico"onclick="mudaInfoGrafico()">Mais informações</a>
-                  </div>
+                  <a data-toggle="collapse" aria-expanded="false" aria-controls="graficoGeral" href="#graficoGeral" role="button" id="geralGrafico" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Mostrar Gráfico</a>
+                
+                  
                 </div>
               </div>
             </div>
 
             <div class="col-lg">
-              <div class="info-box" id="boxTabela" onmouseover="mouserOver();" onmouseout="mouseOut();">
+              <div class="info-box" id="boxTabela">
                 <span class="info-box-icon elevation-0.5" id="imagemTabela"><img src="/img/tabela2.png" onmouseover="this.src='/img/tabela1.png'" onmouseout="this.src='/img/tabela2.png'"></span>
                 <div class="info-box-content">
                   <div class="card-body">
@@ -218,7 +218,7 @@
               <div class="card-body">
     
  
-                    <canvas id="myChart" height="50pt"></canvas>
+                    <canvas id="myChart"></canvas>
 
 
                 
