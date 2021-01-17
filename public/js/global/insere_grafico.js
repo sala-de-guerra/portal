@@ -37,7 +37,7 @@ $.ajax({
                     label: "",            
                     backgroundColor: ['RoyalBlue', 'DeepSkyBlue', 'seagreen'],
                     borderColor: 'white',
-                    data: [10, 10, 5],
+                    data: quantidade,
                     barThickness: 86,
                     maxBarThickness: 88,
                     minBarLength: 2,

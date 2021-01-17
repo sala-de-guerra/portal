@@ -507,11 +507,19 @@ class AtendeDemandasController extends Controller
             $responderAtende->respostaAtende    = nl2br($request->respostaAtende);
             $responderAtende->dataAlteracao     = date("Y-m-d H:i:s", time());
             
-            $newcontent = str_replace("<p>", "<br>", $request->respostaAtende);
-            $newcontent = str_replace("</p>", "", $newcontent);
+            $newcontent = str_replace("</p>", "<br>", $request->respostaAtende);
+            $newcontent = str_replace("<p>", "", $newcontent);
+            // //$newcontent = str_replace("&nbsp;", "", $newcontent);
+            $newcontent = trim(preg_replace('/\s\s+/', ' ', $newcontent));
+            $newcontent = preg_replace('#<br />(\s*<br />)+#', '<br />', $newcontent);
+            $newcontent = strip_tags($newcontent,'<br>');
+            //dd($request->respostaAtende);
+            //dd($newcontent);
 
             $newcontentDescricao = str_replace("<p>", "<br>", $request->descricaoAtende);
             $newcontentDescricao = str_replace("</p>", "", $newcontentDescricao);
+            $newcontentDescricao = trim(preg_replace('/\s\s+/', ' ', $newcontentDescricao));
+            $newcontentDescricao = preg_replace('#<br />(\s*<br />)+#', '<br />', $newcontentDescricao);
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
@@ -519,7 +527,7 @@ class AtendeDemandasController extends Controller
             $historico->numeroContrato  = $responderAtende->contratoFormatado;
             $historico->tipo            = "RESPOSTA";
             $historico->atividade       = "ATENDE";
-            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " <br>" .  strip_tags($newcontent,'<br>')
+            $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " <br>" .  $newcontent
                                          ."<br>"."<b>Esta resposta refere-se ao questionamento </b>: ". "<br><br>" . strip_tags($newcontentDescricao,'<br>');
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
