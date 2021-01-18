@@ -654,9 +654,9 @@ Route::prefix('/indicadores/atende')->group(function () {
     //LISTA ATENDES GERAL
     Route::get('/lista-atende-geral', 'Indicadores\indicadoresAtende@listaRelatorioGeralAtendes');
     //LISTA QUANTIDADE TOTAL ATENDE ULTIMOS 30 DIAS
-    Route::get('/lista-atende-grafico', 'Indicadores\indicadoresAtende@listaUltimos30diasParaGrafico');
-    //LISTA QUANTIDADE TOTAL ABERTO ATENDE ULTIMOS 30 DIAS
-    Route::get('/lista-novos-atendes-grafico', 'Indicadores\indicadoresAtende@listaUltimos30diasNovosAtendesParaGrafico');
+    Route::get('/lista-atende-grafico', 'Indicadores\indicadoresAtende@listaDadosParaGrafico');
+    //LISTA QUANTIDADE TOTAL FINALIZADO ATENDE ULTIMOS 30 DIAS
+    Route::get('/lista-finalizados-grafico', 'Indicadores\indicadoresAtende@listaUltimos30diasRespondidosParaGrafico');
 
 
 });
