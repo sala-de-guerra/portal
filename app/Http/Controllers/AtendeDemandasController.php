@@ -516,10 +516,10 @@ class AtendeDemandasController extends Controller
             //dd($request->respostaAtende);
             //dd($newcontent);
 
-            $newcontentDescricao = str_replace("<p>", "<br>", $request->descricaoAtende);
-            $newcontentDescricao = str_replace("</p>", "", $newcontentDescricao);
-            $newcontentDescricao = trim(preg_replace('/\s\s+/', ' ', $newcontentDescricao));
-            $newcontentDescricao = preg_replace('#<br />(\s*<br />)+#', '<br />', $newcontentDescricao);
+            // $newcontentDescricao = str_replace("<p>", "<br>", $request->descricaoAtende);
+            // $newcontentDescricao = str_replace("</p>", "", $newcontentDescricao);
+            // $newcontentDescricao = trim(preg_replace('/\s\s+/', ' ', $newcontentDescricao));
+            // $newcontentDescricao = preg_replace('#<br />(\s*<br />)+#', '<br />', $newcontentDescricao);
 
             // CADASTRA HISTÓRICO
             $historico = new HistoricoPortalGilie;
@@ -528,7 +528,7 @@ class AtendeDemandasController extends Controller
             $historico->tipo            = "RESPOSTA";
             $historico->atividade       = "ATENDE";
             $historico->observacao      = "ATENDE #" . str_pad($responderAtende->idAtende, 5, '0', STR_PAD_LEFT) . " <br>" .  $newcontent
-                                         ."<br>"."<b>Esta resposta refere-se ao questionamento </b>: ". "<br><br>" . strip_tags($newcontentDescricao,'<br>');
+                                         ."<br>"."<b>Esta resposta refere-se ao questionamento </b>: ". "<br><br>" . $request->descricaoAtende;
             $historico->created_at      = date("Y-m-d H:i:s", time());
             $historico->updated_at      = date("Y-m-d H:i:s", time());
             $historico->save();
