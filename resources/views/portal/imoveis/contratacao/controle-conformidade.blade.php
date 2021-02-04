@@ -85,6 +85,7 @@
                                         <th>Status CIOPE</th>
                                         <th>Ações</th>
                                         <th>Último Tratamento</th>
+                                        <th>Vencimento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -204,6 +205,7 @@
 @section('js')
     <script src="{{ asset('js/global/formata_data.js') }}"></script>
     <script src="{{ asset('js/portal/imoveis/contratacao/controle-conformidade.js') }}"></script>
+    <script src="{{ asset('js/portal/imoveis/contratacao/fila-unica-fluxo-agencia.js') }}"></script>
     <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
     <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
 @stop

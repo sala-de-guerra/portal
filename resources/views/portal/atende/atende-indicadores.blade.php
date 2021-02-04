@@ -2,7 +2,9 @@
 
 @section('title', 'Portal GILIE/SP')
 
+
 @section('content_header')
+
 
 @if (session('tituloMensagem'))
 
@@ -52,7 +54,8 @@
               <div class="small-box bg-info">
                 <div class="inner">
                   <h3 id="totalNovos"> </h3>
-                    <p>Novos</p>
+                    <h5><strong>Novos</strong></h5>
+                    <p>Cadastros de Atendes realizados hoje</p>
                 </div>
                 <div class="icon">
                   <i class="far fa-bookmark"></i>
@@ -64,7 +67,8 @@
               <div class="small-box bg-success">
                 <div class="inner">
                   <h3 id="totalTratados"> </h3>
-                  <p>Tratados</p>
+                  <h5><strong>Tratados</strong></h5>
+                    <p>Atendes tratados hoje</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-check"></i>
@@ -76,7 +80,8 @@
               <div class="small-box bg-warning">
                 <div class="inner">
                   <h3 id="totalPendentes"> </h3>
-                  <p>Pendentes</p>
+                  <h5><strong>Pendentes</strong></h5>
+                    <p>Quantidade de Atendes pendentes</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-exclamation"></i>
@@ -88,7 +93,8 @@
               <div class="small-box bg-danger">
                 <div class="inner">
                   <h3 id="totalVencidos"> </h3>
-                  <p>Vencidos</p>
+                  <h5><strong>Vencidos</strong></h5>
+                    <p>Quantidade de Atendes vencidos</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-times"></i>
@@ -177,31 +183,40 @@
           </div>
         </div>
 
-        <div class="container-fluid">
-          <div class ="row">
-            <div class="col-lg">
-              <div class="info-box" >
-                <span class="info-box-icon elevation-0.5"><img src="/img/estatisticas2.png" onmouseover="this.src='/img/estatisticas1.png'" onmouseout="this.src='/img/estatisticas2.png'"></span>
-                <div class="info-box-content">
-                  <div class="card-body">
-                    <h4>Gráfico dos Indicadores Atende</h4>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card" id="Grafico">
+              <div class="card-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-xs align-middle">
+                      <img class="card-img-left" id="imagemGrafico" src="/img/analytics.png">
+                    </div>
+                    <div class="col">
+                      <h5 class="card-title"><strong>Gráfico dos Indicadores Atende Geral - Gilie/SP</strong></h5>
+                        <p class="card-text">Gráfico com dados dos últimos 30 dias.</p>
+                      <div class="float-right" id="botaoGrafico">
+                      </div>
+                    </div>
                   </div>
-                  <a data-toggle="collapse" aria-expanded="false" aria-controls="graficoGeral" href="#graficoGeral" role="button" id="geralGrafico" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Mostrar Gráfico</a>
-                
-                  
                 </div>
               </div>
             </div>
-
-            <div class="col-lg">
-              <div class="info-box" id="boxTabela">
-                <span class="info-box-icon elevation-0.5" id="imagemTabela"><img src="/img/tabela2.png" onmouseover="this.src='/img/tabela1.png'" onmouseout="this.src='/img/tabela2.png'"></span>
-                <div class="info-box-content">
-                  <div class="card-body">
-                    <h4>Tabela Geral de Indicadores por Usuário</h4>
-                  </div>
-                  <div class="card-footer d-flex justify-content-end">
-                  <a data-toggle="collapse" aria-expanded="false" aria-controls="listaGeral" href="#listaGeral" class="small-box-footer" role="button" id="listagemGeral" onclick="mudaInfoGeral()">Mais informações</a>
+          </div>
+          <div class="col-sm-6">
+            <div class="card" id="Tabela">
+              <div class="card-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-xs">
+                      <img class="card-img-left" id="imagemTabela" src="/img/tabela.png">
+                    </div>
+                    <div class="col">
+                      <h5 class="card-title"><strong>Tabela Geral de Indicadores por Usuário</strong></h5>
+                      <p class="card-text">Indicador diário de Atende por Usuário</p>
+                      <div class="float-right" id="botaoTabela">
+                      </div>
+                    </div> 
                   </div>
                 </div>
               </div>
@@ -209,57 +224,57 @@
           </div>
         </div>
 
-        <div class="collapse" id="graficoGeral">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title"><b>Quantidade de Demandas Atende dos Últimos 30 Dias - Gilie/SP</b></h5>
-              </div>
-              <div class="card-body">
-    
- 
-                    <canvas id="myChart"></canvas>
 
-
-                
-           
-              </div>
+        <div id="graficoGeral">
+          <div class="spinner-border spinnerGrafico text-primary" role="status">
+              <span class="sr-only"></span>
+          </div>
+              <span class="spinnerGrafico">Carregando Dados Aguarde...</span>
+          <div class="card">
+            <div class="card-header">
+              <button type="button" class="close" id="fechaGrafico" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h5 class="card-title"><b>Quantidade de Demandas Atende dos Últimos 30 Dias - Gilie/SP</b></h5>
+            </div>
+            <div class="card-body">
+              <canvas id="myChart" width="400" height="100"> Gráfico</canvas>
             </div>
           </div>
         </div>
 
-        <div class="collapse" id="listaGeral">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title"><b>Indicador Diário por Usuário - Gilie/SP</b></h5>
-              </div>
-              <div class="card-body">
-                
-                  <table id="tblIndicadorAtende" class="table table-bordered table-striped">
-                    <thead>                   
-                      <tr>
-                        <th style="text-align:center;">Usuário</th>
-                        <th style="text-align:center;">Novos</th>
-                        <th style="text-align:center;">Tratados</th> 
-                        <th style="text-align:center;">Pendentes</th> 
-                        <th style="text-align:center;" >Vencidos</th>
-                        <th >Indicadores: &nbsp
-                          <span class="badge bg-info">Novos</span>
-                          <span class="badge bg-success">Tratados</span>
-                          <span class="badge bg-warning">Pendentes</span>  
-                          <span class="badge bg-danger">Vencidos</span>                   
-                        </th>
-                      </tr>
-                    </thead>
-                    
-                    <tbody>
 
-                    </tbody>
-
-                  </table>
+        <div id="listaGeral">
+          <div class="card">
+            <div class="card-header">
+              <button type="button" class="close" id="fechaLista" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h5 class="card-title"><b>Indicador Diário por Usuário - Gilie/SP</b></h5>
+            </div>
+            <div class="card-body">
+              <table id="tblIndicadorAtende" class="table table-bordered table-striped">
+                <thead>                   
+                  <tr>
+                    <th style="text-align:center;">Usuário</th>
+                    <th style="text-align:center;">Novos</th>
+                    <th style="text-align:center;">Tratados</th> 
+                    <th style="text-align:center;">Pendentes</th> 
+                    <th style="text-align:center;">Vencidos</th>
+                    <th >Indicadores: &nbsp
+                      <span class="badge bg-info">Novos</span>
+                      <span class="badge bg-success">Tratados</span>
+                      <span class="badge bg-warning">Pendentes</span>  
+                      <span class="badge bg-danger">Vencidos</span>                   
+                    </th>
+                  </tr>
+                </thead>
                 
-              </div>
+                <tbody>
+
+                </tbody>
+
+              </table>
             </div>
           </div>
         </div>
@@ -298,6 +313,15 @@
 <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css">
+
+<style>
+
+.trocaFundo {
+  background-color: #CDCDCD;
+
+}
+
+</style>
 
 @stop
 

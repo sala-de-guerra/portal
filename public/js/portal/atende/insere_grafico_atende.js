@@ -1,78 +1,71 @@
 
-var nomearray = [];
-var quantidadeTotalarray = [];
+var totalDataUltimos30dias = [];
+var quantidadeTotalAberto = [];
+var quantidadeRespondidos = [];
 var nomeNovosarray = [];
 var quantidadeNovosarray = [];
 
-$("#geralGrafico").one("click", function() {
+$("#Grafico").one("click", function() {
+  
 
   $('document').ready(function() {
 
     $.getJSON('/indicadores/atende/lista-atende-grafico', function(dados){
       $.each(dados, function(key, item) {  
-      dataFormatoBr = item.dataUltimaAlteracao
+      dataFormatoBr = item.dataCadastro
       dataFormatoBr = moment(dataFormatoBr).format("DD/MM/YYYY")
-      quantidadeTotalarray.push(item.total);
-      nomearray.push(dataFormatoBr);
+      quantidadeTotalAberto.push(item.total);
+      totalDataUltimos30dias.push(dataFormatoBr);
 
       })
     })
 
-    $.getJSON('/indicadores/atende/lista-novos-atendes-grafico', function(dados){
+    $.getJSON('/indicadores/atende/lista-finalizados-grafico', function(dados){
       $.each(dados, function(key, item) {  
-      dataFormatoBr = item.dataUltimaAlteracao
-      dataFormatoBr = moment(dataFormatoBr).format("DD/MM/YYYY")
-      quantidadeNovosarray.push(item.totalAtendesNovos);
-      nomeNovosarray.push(dataFormatoBr);
+        quantidadeRespondidos.push(item.totalRespondido);
+      //nomeNovosarray.push(dataFormatoBr);
 
       })
-      grafico(quantidadeTotalarray, nomearray, quantidadeNovosarray, nomeNovosarray)
-      console.log(quantidadeNovosarray)
+      grafico(totalDataUltimos30dias,quantidadeTotalAberto, quantidadeRespondidos, nomeNovosarray)
     })
 
     
 
-    function grafico(quantidadeTotal, nome, quantidadeNovos, nomeNovos){
+    function grafico(totalDataUltimos30dias, quantidadeTotalAberto, quantidadeRespondidos, nomeNovos){
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
           
             // The type of chart we want to create
-            type: 'line',
+            type: 'bar',
       
             // The data for our dataset
             data: {
-                labels: nome,
+                labels: totalDataUltimos30dias,
                 datasets: [
                 {
-                  label: 'Total atendes (aberto e/ou respondido)',
-                  borderColor: 'blue',
-                  backgroundColor: 'rgba(255,255,255, 0)',
-                  data: quantidadeTotal
+                  label: 'Total',
+                  borderColor: 'rgba(23,162,84)',
+                  backgroundColor: 'rgba(220,53,69)',
+                  data: quantidadeTotalAberto
                 },
                 {
-                  label: 'Novos',
-                  borderColor: 'rgba(23,162,184)',
-                  backgroundColor: 'rgba(255,255,255, 0)',
-                  data: quantidadeNovos
-                },
-                {
-                  label: 'Tratados',
+                  label: 'Respondidos',
                   borderColor: 'rgba(40,167,69)',
-                  backgroundColor: 'rgba(255,255,255, 0)',
-                  data: [1, 5, 6, 8, 2, 3, 5, 0, 4]
-                },
-                {
-                  label: 'Pendentes',
-                  borderColor: 'rgba(255,193,7)',
-                  backgroundColor: 'rgba(255,255,255, 0)',
-                  data: [2, 6, 8, 5, 3, 8, 0, 7, 5]
-                },
-                {
-                  label: 'Vencidos',
-                  borderColor: 'rgba(220,53,69)',
-                  backgroundColor: 'rgba(255,255,255, 0)',
-                  data: [4, 9, 9, 3, 3, 7, 1, 2, 5]
+                  backgroundColor: 'rgba(40,167,69)',
+                  data: quantidadeRespondidos
                 }
+                // {
+                //   label: 'Pendentes',
+                //   borderColor: 'rgba(255,193,7)',
+                //   backgroundColor: 'rgba(255,193,7, 0.7)',
+                //   data: quantidadePendentes
+                // },
+                // {
+                //   label: 'Vencidos',
+                //   borderColor: 'rgba(220,53,69)',
+                //   backgroundColor: 'rgba(220,53,69, 0.7)',
+                //   data: quantidadeVencidos
+                // }
               ]
             },
             // Configuration options go here
@@ -120,5 +113,11 @@ $("#geralGrafico").one("click", function() {
             }
         });
       }
+      $('#graficoGeral').show();
+    $('.spinnerGrafico').remove()
   })
 })
+
+$( "#Grafico" ).click(function() {
+  $('#graficoGeral').show();
+});

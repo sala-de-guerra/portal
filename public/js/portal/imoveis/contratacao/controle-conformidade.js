@@ -45,51 +45,110 @@ $(document).ready(function(){
                     //     '<a href="file://///arquivos.caixa/sp/SP7257FS201/PUBLICO/PUBLIC/EstoqueImoveis/' + item.contratoFormatado + '" id="linkServidor' + item.numeroContrato + '" hidden>\\\\arquivos.caixa\\sp\\SP7257FS201\\PUBLICO\\PUBLIC\\EstoqueImoveis\\'+ item.contratoFormatado +'</a>&nbsp&nbsp&nbsp&nbsp' +
                     // '</div>' +
                     
-                    '<div >'+
-                    '<button id="'+item.numeroContrato+'" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOBS'+ item.numeroContrato+'"><i class="fas fa-info-circle"></i>'+'</button>&nbsp&nbsp&nbsp&nbsp'+
+                    '<div>'+
+                        '<button id="'+item.numeroContrato+'" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOBS'+ item.numeroContrato+'"><i class="fas fa-info-circle"></i>'+
+                        '</button>&nbsp&nbsp&nbsp&nbsp'
+                        +
+                    '</div>' +
+                    '<div>'+
+                        '<button id="botaoOpcao'+item.numeroContrato+'" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOpcao'+ item.numeroContrato+'"><i class="far fa-edit"></i>'+
+                        '</button>'
+                        +
                     '</div>' +
                     '<div class="divBotao'+item.numeroContrato+'" style="display: none;">'+
-                    '<button id="botaoContato'+item.numeroContrato+'" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalContato'+ item.numeroContrato+'"><i class="far fa-envelope"></i>'+'</button>'+
+                        '<button id="botaoContato'+item.numeroContrato+'" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalContato'+ item.numeroContrato+'"><i class="far fa-envelope"></i>'+
+                        '</button>'+
                     '</div>' +
 
                     // Modal de Observação
-                '<div class="modal fade" id="modalOBS'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
-                '<div class="modal-dialog modal-lg" role="document">'+
-                    '<div class="modal-content">'+
-                    '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
-                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Observação' + '</h5>' +
-                            '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-                        '<span aria-hidden="true">&times;</span>'+
-                        '</button>'+
+                    '<div class="modal fade" id="modalOBS'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
+                        '<div class="modal-dialog modal-lg" role="document">'+
+                            '<div class="modal-content">'+
+                                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Observação' + '</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                                            '<span aria-hidden="true">&times;</span>'+
+                                        '</button>'+
+                                '</div>'+
+                                '<div class="modal-body" id="modal'+ item.numeroContrato+'">'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
                     '</div>'+
-                    '<div class="modal-body" id="modal'+ item.numeroContrato+'">'+
+
+
+                    // Modal Controle e-mails
+                    '<div class="modal fade" id="modalOpcao'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
+                        '<div class="modal-dialog modal-lg" role="document">'+
+                            '<div class="modal-content">'+
+                                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Escolha e Clique' + '</h5>' +
+                                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                                        '<span aria-hidden="true">&times;</span>'+
+                                    '</button>'+
+                                '</div>'+
+                                '<div class="modal-body" id="modal'+ item.numeroContrato+'">'+
+                                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">'+'Falar com @mdo'+'</button>'+
+                                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">'+'Falar com @fat'+'</button>'+
+                                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">'+'Falar com @getbootstrap'+'</button>'+
+
+                                    '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
+                                        '<div class="modal-dialog" role="document">'+
+                                            '<div class="modal-content">'+
+                                                '<div class="modal-header">'+
+                                                    '<h5 class="modal-title" id="exampleModalLabel">'+'Nova mensagem'+'</h5>'+
+                                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">'+
+                                                            '<span aria-hidden="true">'+'&times;'+'</span>'+
+                                                        '</button>'+
+                                                '</div>'+
+                                                '<div class="modal-body">'+
+                                                    '<form>'+
+                                                        '<div class="form-group">'+
+                                                            '<label for="recipient-name" class="col-form-label">'+'Destinatário:'+'</label>'+
+                                                            '<input type="text" class="form-control" id="recipient-name">'+
+                                                        '</div>'+
+                                                        '<div class="form-group">'+
+                                                            '<label for="message-text" class="col-form-label">'+'Mensagem:'+'</label>'+
+                                                            '<textarea class="form-control" id="message-text">'+'</textarea>'+
+                                                        '</div>'+
+                                                    '</form>'+
+                                                '</div>'+
+                                                '<div class="modal-footer">'+
+                                                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">'+'Fechar'+'</button>'+
+                                                    '<button type="button" class="btn btn-primary">'+'Enviar'+'</button>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+    
+                        '</div>'+
                     '</div>'+
-                '</div>'+
-                '</div>'+
-                '</div>'+
+                
+                
             
-                          // Modal de contato
-               '<div class="modal fade" id="modalContato'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">'+
-               '<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">'+
-                   '<div class="modal-content">'+
-                    '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
-                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Enviar Mensagem' + '</h5>' +
-                       '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-                       '<span aria-hidden="true">&times;</span>'+
-                       '</button>'+
-                   '</div><br>'+
+                    // Modal de contato
+                    '<div class="modal fade" id="modalContato'+ item.numeroContrato+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">'+
+                        '<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">'+
+                            '<div class="modal-content">'+
+                                '<div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">' +
+                                    '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Enviar Mensagem' + '</h5>' +
+                                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                                        '<span aria-hidden="true">&times;</span>'+
+                                    '</button>'+
+                                '</div><br>'+
                 //    '<div class="container">'+
 
                 //     '<p class="ml-3">Deseja enviar um email cobrando o andamento do processo <b>'+item.contratoFormatado+'</b><br>'+ 
                 //     'em nome de <b>'+item.nomeProponente+' </b> para a agência: <b>'+item.codigoAgencia+'</b></p>'+
                 //    '</div>'+
-                   '<div class="modal-body" id="formContato'+ item.numeroContrato+'">'+ 
-
-                   '</div>'+
-                   '</div>'+
-               '</div>'+
-               '</div>'+
+                                '<div class="modal-body" id="formContato'+ item.numeroContrato+'">'+ 
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
                '<td class="formata-data-sem-horas" id="novoHistorico'+item.numeroContrato+'"></td>' +
+               '<td>' + '</td>' +
             '</tr>';
 
             

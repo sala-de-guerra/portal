@@ -207,21 +207,22 @@ class indicadoresAtende extends Controller
         $listaRelatorioGeralAtendes = DB::select("
         SELECT 
         COUNT(DISTINCT idAtende) as total
-        ,CONVERT(DATE, dataAlteracao) as dataUltimaAlteracao
+        ,CONVERT(DATE, dataCadastro) as dataCadastro
         FROM TBL_ATENDE_DEMANDAS where dataAlteracao >= DATEADD(day,-30,GETDATE())
-        group by CONVERT(DATE, dataAlteracao)
-        order by CONVERT(DATE, dataAlteracao) asc
+        group by CONVERT(DATE, dataCadastro)
+        order by CONVERT(DATE, dataCadastro) asc
             ");
          return json_encode($listaRelatorioGeralAtendes);
     }
 
-    public function listaUltimos30diasNovosAtendesParaGrafico()
+    public function listaUltimos30diasRespondidosParaGrafico()
     {
         $listaRelatorioGeralAtendes = DB::select("
         SELECT 
-        COUNT(DISTINCT idAtende) as totalAtendesNovos
-        ,CONVERT(DATE, dataAlteracao) as dataUltimaAlteracao
-        FROM TBL_ATENDE_DEMANDAS where dataCadastro >= DATEADD(day,-30,GETDATE())
+        COUNT(DISTINCT idAtende) as totalRespondido
+        ,CONVERT(DATE, dataAlteracao) as dataAlteracao
+        FROM TBL_ATENDE_DEMANDAS where dataAlteracao >= DATEADD(day,-30,GETDATE())
+        and statusAtende = 'Finalizado'
         group by CONVERT(DATE, dataAlteracao)
         order by CONVERT(DATE, dataAlteracao) asc
             ");
