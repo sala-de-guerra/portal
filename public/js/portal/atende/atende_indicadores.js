@@ -41,6 +41,8 @@ function _formataDatatableComData (idTabela, ordenaColuna, ordenaForma){
   
   
 $(document).ready( function () {
+  $('#graficoGeral').hide()
+  $('#listaGeral').hide()
   $.getJSON('atende/total-novos-atendes', function(dados){
     $.each(dados, function(key, item) {  
       $('#totalNovos').text(item.totalAtendesNovos)
@@ -144,7 +146,8 @@ $(document).ready( function () {
     })
   })
   
-  $("#listagemGeral").one("click", function() {
+  $("#Tabela").one("click", function() {
+    $('#listaGeral').show();
     $.getJSON('atende/lista-atende-geral', function(dados){
       $.each(dados, function(key, item) {
         
@@ -233,8 +236,32 @@ $(document).ready( function () {
     }).done(function() {
     _formataDatatableComData('tblIndicadorAtende', '4', 'desc')
     })
-  
   })
+
+  $( "#Tabela" ).click(function() {
+    $('#listaGeral').show();
+  });
+
+  $('#Grafico').hover(function(){
+    $(this).addClass('trocaFundo');
+    $('#imagemGrafico').attr('src','/img/analytics2.png');
+    $('#botaoGrafico').html('Clique para mais informações').addClass("cursor-pointer").css('text-align', 'center').css('color', 'rgb(36, 124, 180)')
+  }, function(){
+    $(this).removeClass('trocaFundo');
+    $('#imagemGrafico').attr('src','/img/analytics.png');
+    $('#botaoGrafico').html('')
+  })
+
+  $('#Tabela').hover(function(){
+    $(this).addClass('trocaFundo');
+    $('#imagemTabela').attr('src','/img/tabela1.png');
+    $('#botaoTabela').html('Clique para mais informações').css('text-align', 'center').css('color', 'rgb(36, 124, 180)')
+  }, function (){
+    $(this).removeClass('trocaFundo')
+    $('#imagemTabela').attr('src', '/img/tabela.png')
+    $('#botaoTabela').html('')
+  })
+
 })
       
 function mudaInfoPendentes() {
@@ -269,25 +296,15 @@ function mudaInfoVencidos() {
   }
 }
 
-function mudaInfoGrafico() {
-  if($('#geralGrafico').text() == "Mais informações"){
-    $('#geralGrafico').text("Ocultar");
-  }else{
-    $('#geralGrafico').text("Mais informações")
-  }
-}
+$('#fechaGrafico').click(function(){
+  $('#graficoGeral').hide();
+})
 
-function mudaInfoGeral() {
-  if($('#listagemGeral').text() == "Mais informações"){
-    $('#listagemGeral').text("Ocultar");
-  }else{
-    $('#listagemGeral').text("Mais informações")
-  }
-}
-
-
+$('#fechaLista').click(function(){
+  $('#listaGeral').hide();
+})
 
 
 setTimeout(function(){
     $('#fadeOut').fadeOut("slow");
-  }, 2000);
+  }, 1000);
