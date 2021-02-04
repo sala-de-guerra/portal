@@ -334,7 +334,7 @@ $.getJSON('demandas-finalizadas-responsavel', function(dados){
 
 setTimeout(function(){
     $('#fadeOut').fadeOut("slow");
-}, 2000);
+}, 5000);
 
 //troca demanda aberta por finalizada
 $("#btnFinalizado").click(function() {
