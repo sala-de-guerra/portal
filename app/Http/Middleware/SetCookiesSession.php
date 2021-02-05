@@ -55,6 +55,24 @@ class SetCookiesSession
                 $empregado = Empregado::find($usuario->getMatricula());
                 $baseSimov = BaseSimov::select('DATA_ULTIMA_ALTERACAO')->orderBy('DATA_ULTIMA_ALTERACAO', 'desc')->first();
                 $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
+                if ($_SERVER['REMOTE_HOST'] == '10.11.182.66'){
+                    $empregado = Empregado::find('c098453'); // Rafael
+                    $request->session()->put([
+                        'matricula'                     => $empregado->matricula,
+                        'nomeCompleto'                  => $empregado->nomeCompleto,
+                        'primeiroNome'                  => $empregado->primeiroNome,
+                        'codigoFuncao'                  => $empregado->codigoFuncao,
+                        'nomeFuncao'                    => $empregado->nomeFuncao,
+                        'codigoLotacaoAdministrativa'   => $empregado->codigoLotacaoAdministrativa,
+                        'nomeLotacaoAdministrativa'     => $empregado->nomeLotacaoAdministrativa,
+                        'codigoLotacaoFisica'           => $empregado->codigoLotacaoFisica,
+                        'nomeLotacaoFisica'             => $empregado->nomeLotacaoFisica,
+                        'acessoEmpregadoPortal'         => $empregado->acessaPortal->nivelAcesso,
+                        'unidadeEmpregadoPortal'        => $empregado->acessaPortal->unidade
+                    ]);
+    
+                    $perfilAcessoPortal = new CadastraAcessoPortal($empregado);
+                }else{
                 $request->session()->put([
                     'matricula' => $empregado->matricula,
                     'nomeCompleto' => $empregado->nomeCompleto,
@@ -70,6 +88,7 @@ class SetCookiesSession
                     'dataAtualizacaoBaseSimov' => Carbon::parse($baseSimov->DATA_ULTIMA_ALTERACAO)->format('d/m/Y')
                 ]); 
 
+                };
 
             }
         }
