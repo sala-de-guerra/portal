@@ -657,7 +657,9 @@ Route::prefix('/indicadores/atende')->group(function () {
     Route::get('/lista-atende-grafico', 'Indicadores\indicadoresAtende@listaUltimos30diasParaGrafico');
     //LISTA QUANTIDADE TOTAL FINALIZADO ATENDE ULTIMOS 30 DIAS
     Route::get('/lista-finalizados-grafico', 'Indicadores\indicadoresAtende@listaUltimos30diasRespondidosParaGrafico');
-
-
+});
+Route::prefix('/indicadores/doacoes')->group(function () {
+    //RETORNA VIEW
+    Route::get('/', 'Indicadores\indicadoresDoacoesBensMoveis@indexIndicadoresDoacoes');
 });
 

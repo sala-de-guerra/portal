@@ -640,14 +640,19 @@ return [
             'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'], // , 'GESTOR'
             'submenu' => [
                 [
-                    'text' => 'Indicadores Atende',
+                    'text' => 'Atende',
                     'url'  => '/indicadores/atende',
-                    'perfil_acesso' => ['DESENVOLVEDOR'],
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'], 
                 ],
                 [
-                    'text' => 'Indicadores de Distrato',
+                    'text' => 'Distrato',
                     'url'  => '/indicadores/distrato',
-                    'perfil_acesso' => ['DESENVOLVEDOR', 'EVENTUAL'], // , 'GESTOR'
+                    'perfil_acesso' => ['DESENVOLVEDOR'], // , 'GESTOR'
+                ],
+                [
+                    'text' => 'Doações Bens Móveis',
+                    'url'  => '/indicadores/doacoes',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'], 
                 ],
 
                 [
