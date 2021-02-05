@@ -202,15 +202,41 @@ class indicadoresAtende extends Controller
              return json_encode($listaRelatorioGeralAtendes);
     }
 
-    public function listaUltimos30diasParaGrafico()
+    public function listaDadosParaGrafico()
     {
         $listaRelatorioGeralAtendes = DB::select("
-        SELECT 
-        COUNT(DISTINCT idAtende) as total
-        ,CONVERT(DATE, dataCadastro) as dataCadastro
-        FROM TBL_ATENDE_DEMANDAS where dataAlteracao >= DATEADD(day,-30,GETDATE())
-        group by CONVERT(DATE, dataCadastro)
-        order by CONVERT(DATE, dataCadastro) asc
+        with relatorio_atende as (
+            Select 
+            COUNT(DISTINCT idAtende) as total
+            ,'data' = CONVERT(DATE, dataCadastro) 
+            ,'TotalAtendesRespondidos' = 0
+            FROM TBL_ATENDE_DEMANDAS 
+            --where dataAlteracao >= DATEADD(day,-30,GETDATE())
+            group by CONVERT(DATE, dataCadastro)
+            
+                             
+            union 
+                        
+            Select 
+            'total' = 0
+            ,'data' = CONVERT(DATE, dataAlteracao) 
+            ,'TotalAtendesRespondidos' = COUNT(DISTINCT idAtende)  
+            FROM TBL_ATENDE_DEMANDAS 
+            --where dataAlteracao >= DATEADD(day,-30,GETDATE())
+            where statusAtende = 'Finalizado'
+            group by CONVERT(DATE, dataAlteracao)
+            
+                                  
+            )
+                        
+            select 
+                [data]
+                ,'totalAtendesCadastrados' = max(total)
+               ,'totalAtendesRespondidos' = max(TotalAtendesRespondidos)
+            from relatorio_atende
+            where [data] >= DATEADD(day,-30,GETDATE())
+            group by [data]
+            order by [data]
             ");
          return json_encode($listaRelatorioGeralAtendes);
     }

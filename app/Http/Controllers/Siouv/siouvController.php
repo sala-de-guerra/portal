@@ -71,8 +71,9 @@ class siouvController extends Controller
 
       "))
         ->where('TBL_EMPREGADOS.codigoLotacaoAdministrativa', $codigoUnidadeUsuarioSessao)
-        ->where('TBL_EMPREGADOS.nomeFuncao', 'COORDENADOR CENTR FILIAL')
-        ->Orwhere('TBL_EMPREGADOS.nomeFuncao', 'GERENTE DE FILIAL')
+        ->whereIn('TBL_EMPREGADOS.nomeFuncao', array('GERENTE DE FILIAL', 'COORDENADOR CENTR FILIAL', 'EVENTUAL'))
+         ->orWhere('TBL_EMPREGADOS.matricula', 'C052847')
+         ->orWhere('TBL_EMPREGADOS.matricula', 'C090719')
         ->get(); 
         
         return json_encode($equipe);
