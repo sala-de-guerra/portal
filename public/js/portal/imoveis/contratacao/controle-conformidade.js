@@ -92,12 +92,24 @@ $(document).ready(function(){
                                     </button>
                                 </div>
                                 <div class="modal-body" id="modal${item.numeroContrato}">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Correção de Inconformidade</button>&nbsp&nbsp
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModals">Dossiê Gilie</button>&nbsp&nbsp
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Sem proposta SIOPI</button>&nbsp&nbsp
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Proposta não vinculada</button>&nbsp&nbsp</br></br>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Assinatura do Contrato Pendente</button>&nbsp&nbsp
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Outros</button>
+                                    
+                                    <button type="button" class="btn btn-link tooltip-col" data-toggle="modal" data-target="#modalGerarPropostaSiopi${item.numeroContrato}" title="teste">
+                                    
+                                    <i class="far fa-sticky-note"></i><p>Gerar Proposta SIOPI</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br> este é um teste</span>
+                                    </button>
+                                    
+                                    &nbsp&nbsp
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModals">Vincular Proposta SIOPI</button>&nbsp&nbsp
+                                    
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Efetivar Assinatura Contrato</button>&nbsp&nbsp
+                                    
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Inconforme SIIAC</button>&nbsp&nbsp</br></br>
+                                    
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Dossiê GILIE</button>&nbsp&nbsp
+                                    
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Dossiê Agência</button>&nbsp&nbsp
+                                    
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Outros</button><br>
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -107,31 +119,36 @@ $(document).ready(function(){
                         </div>
                     </div>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalGerarPropostaSiopi${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelGerarPropostaSiopi" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Nova mensagem</h5>
+                                    <h5 class="modal-title" id="ModalLabelGerarPropostaSiopi">Conforme no SIIAC e sem proposta no SIOPI</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form method="post" action=""id="formGerarPropostaSiopi${item.contratoFormatado}>
+                                        <input type="hidden" name="_token" value="${csrfVar}">
+                                        <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Destinatário:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                            <small class="form-text text-muted">**Campo Obrigatório</small>
                                         </div>
                                         <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Mensagem:</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
+                                            <label for="message-text" class="col-form-label">Observações:</label>
+                                            <textarea class="form-control" name="obsGerarPropostaSiopi" id="obsGerarPropostaSiopi"></textarea>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <div class="btn btn-default btn-file">
                                                 <i class="fas fa-paperclip"></i> Anexar
                                                 <input type="file" name="attachment">
                                             </div>
-                                            <p class="help-block">Max. 2MB</p>
+                                                <small class="form-text text-muted">**Máx. 2MB</small>
                                         </div>
                                     </form>
                                 </div>
@@ -144,37 +161,7 @@ $(document).ready(function(){
                     </div>
                 
 
-                    <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Nova</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Destinatário:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Mensagem:</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                    <button type="button" class="btn btn-primary">Enviar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
+                  
                            
                 
                 

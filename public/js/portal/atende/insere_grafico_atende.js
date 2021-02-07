@@ -1,32 +1,27 @@
 
 var totalDataUltimos30dias = [];
-var quantidadeTotalAberto = [];
-var quantidadeRespondidos = [];
-var nomeNovosarray = [];
-var quantidadeNovosarray = [];
+var totalAtendesCadastrados = [];
+var totalAtendesRespondidos = [];
+
 
 $("#Grafico").one("click", function() {
   
 
   $('document').ready(function() {
 
-    $.getJSON('/indicadores/atende/lista-atende-grafico', function(dados){
-      $.each(dados, function(key, item) {  
-      dataFormatoBr = item.dataCadastro
-      dataFormatoBr = moment(dataFormatoBr).format("DD/MM/YYYY")
-      quantidadeTotalAberto.push(item.total);
-      totalDataUltimos30dias.push(dataFormatoBr);
+    $('document').ready(function() {
 
+      $.getJSON('/indicadores/atende/lista-atende-grafico', function(dados){
+        $.each(dados, function(key, item) {  
+        dataFormatoBr = item.data
+        dataFormatoBr = moment(dataFormatoBr).format("DD/MM/YYYY")
+        totalDataUltimos30dias.push(dataFormatoBr);
+        totalAtendesCadastrados.push(item.totalAtendesCadastrados);
+        totalAtendesRespondidos.push(item.totalAtendesRespondidos);
+
+        })
+        grafico(totalDataUltimos30dias,totalAtendesCadastrados, totalAtendesRespondidos)
       })
-    })
-
-    $.getJSON('/indicadores/atende/lista-finalizados-grafico', function(dados){
-      $.each(dados, function(key, item) {  
-        quantidadeRespondidos.push(item.totalRespondido);
-      //nomeNovosarray.push(dataFormatoBr);
-
-      })
-      grafico(totalDataUltimos30dias,quantidadeTotalAberto, quantidadeRespondidos, nomeNovosarray)
     })
 
     
@@ -43,9 +38,9 @@ $("#Grafico").one("click", function() {
                 labels: totalDataUltimos30dias,
                 datasets: [
                 {
-                  label: 'Total',
-                  borderColor: 'rgba(23,162,84)',
-                  backgroundColor: 'rgba(220,53,69)',
+                  label: 'Abertos',
+                  borderColor: 'rgba(36,124,180)',
+                  backgroundColor: 'rgba(36,124,180)',
                   data: quantidadeTotalAberto
                 },
                 {
@@ -54,18 +49,6 @@ $("#Grafico").one("click", function() {
                   backgroundColor: 'rgba(40,167,69)',
                   data: quantidadeRespondidos
                 }
-                // {
-                //   label: 'Pendentes',
-                //   borderColor: 'rgba(255,193,7)',
-                //   backgroundColor: 'rgba(255,193,7, 0.7)',
-                //   data: quantidadePendentes
-                // },
-                // {
-                //   label: 'Vencidos',
-                //   borderColor: 'rgba(220,53,69)',
-                //   backgroundColor: 'rgba(220,53,69, 0.7)',
-                //   data: quantidadeVencidos
-                // }
               ]
             },
             // Configuration options go here
@@ -113,7 +96,6 @@ $("#Grafico").one("click", function() {
             }
         });
       }
-      $('#graficoGeral').show();
     $('.spinnerGrafico').remove()
   })
 })

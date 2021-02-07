@@ -255,7 +255,7 @@ $(document).ready( function () {
   $('#Tabela').hover(function(){
     $(this).addClass('trocaFundo');
     $('#imagemTabela').attr('src','/img/tabela1.png');
-    $('#botaoTabela').html('Clique para mais informações').css('text-align', 'center').css('color', 'rgb(36, 124, 180)')
+    $('#botaoTabela').html('Clique para mais informações').addClass("cursor-pointer").css('text-align', 'center').css('color', 'rgb(36, 124, 180)')
   }, function (){
     $(this).removeClass('trocaFundo')
     $('#imagemTabela').attr('src', '/img/tabela.png')
