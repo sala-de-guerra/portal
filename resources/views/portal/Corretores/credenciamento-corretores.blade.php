@@ -206,8 +206,8 @@ input[type='file'] {
                                         </div>
                                         <div class="form-group col-md-6 mostrarPj" style="display: none;">
                                             <label>CPF</label>
-                                            <input type="text" name="CPF" class="form-control" autocomplete="off" placeholder="000.000.000-00">
-                                            <small class="form-text text-muted">* Preenchimento não obrigatório</small>
+                                            <input type="text" name="CPF" class="form-control" autocomplete="off" placeholder="000.000.000-00" required>
+                                            <small class="form-text text-muted">* Obrigatório (CPF do responsável pela assinatura do contrato)</small>
                                         </div>
                                       </div>
 
