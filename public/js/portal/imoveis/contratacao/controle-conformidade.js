@@ -29,7 +29,7 @@ $(document).ready(function(){
 
     $.when($.getJSON('/estoque-imoveis/conformidade-contratacao/listar-contratos', function(dados){
         $.each(dados, function(key, item) {
-
+           var dataRetorno =  moment(item.dataRetorno).format("DD/MM/YYYY")
             elementoLinkServidor = "'#linkServidor" + item.numeroContrato + "'";
             var linha =
             `
@@ -54,7 +54,7 @@ $(document).ready(function(){
                         </button>&nbsp&nbsp&nbsp&nbsp
                     </div>
                     <div>
-                        <button id="botaoOpcao${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOpcao${item.numeroContrato}"><i class="far fa-edit"></i>
+                        <button onclick="datepicker()" id="botaoOpcao${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOpcao${item.numeroContrato}"><i class="far fa-edit"></i>
                         </button>
                     </div>
                     <div class="divBotao'+item.numeroContrato+'" style="display: none;">
@@ -86,30 +86,31 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                                    <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Escolha e Clique</h5>
+                                    <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Escolha a melhor opção:</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body" id="modal${item.numeroContrato}">
                                     
-                                    <button type="button" class="btn btn-link tooltip-col" data-toggle="modal" data-target="#modalGerarPropostaSiopi${item.numeroContrato}" title="teste">
+                                <!--
+                                    <button type="button" class="btn btn-link tooltip-col" data-toggle="modal" data-target="#modalGerarPropostaSiopi${item.numeroContrato}" title="teste"><i class="far fa-sticky-note"></i><p>Gerar Proposta SIOPI</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br> este é um teste</span>
+                                    </button>&nbsp&nbsp
+                                -->
+
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalGerarPropostaSiopi${item.numeroContrato}"><i class="far fa-sticky-note"></i><p>Gerar Proposta SIOPI</p></button>&nbsp&nbsp
+
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalVincularPropostaSiopi${item.numeroContrato}"><i class="fas fa-link"></i><p>Vincular Proposta SIOPI</p></button>&nbsp&nbsp
                                     
-                                    <i class="far fa-sticky-note"></i><p>Gerar Proposta SIOPI</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br> este é um teste</span>
-                                    </button>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalEfetivarAssinaturaContrato${item.numeroContrato}"><i class="fas fa-file-signature"></i><p>Efetivar Assinatura Contrato</p></button>&nbsp&nbsp
                                     
-                                    &nbsp&nbsp
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModals">Vincular Proposta SIOPI</button>&nbsp&nbsp
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalInconformeSiiac${item.numeroContrato}"><i class="fas fa-exclamation"></i><p>Inconforme SIIAC</p></button>&nbsp&nbsp</br></br>
                                     
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Efetivar Assinatura Contrato</button>&nbsp&nbsp
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieGilie${item.numeroContrato}"><i class="fas fa-archive"></i><p>Dossiê GILIE</p></button>&nbsp&nbsp
                                     
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Inconforme SIIAC</button>&nbsp&nbsp</br></br>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieAgencia${item.numeroContrato}" disabled><i class="fas fa-store-alt"></i><p>Dossiê Agência</p></button>&nbsp&nbsp
                                     
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Dossiê GILIE</button>&nbsp&nbsp
-                                    
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Dossiê Agência</button>&nbsp&nbsp
-                                    
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Outros</button><br>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalOutros${item.numeroContrato}" disabled><i class="fas fa-th-large"></i><p>Outros</p></button><br>
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -120,51 +121,309 @@ $(document).ready(function(){
                     </div>
 
                     <div class="modal fade" id="modalGerarPropostaSiopi${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelGerarPropostaSiopi" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabelGerarPropostaSiopi">Conforme no SIIAC e sem proposta no SIOPI</h5>
+                                    <h5 class="modal-title" id="ModalLabelGerarPropostaSiopi">Situação: Conforme no SIIAC e sem proposta no SIOPI</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
-                                <div class="modal-body">
-                                    <form method="post" action=""id="formGerarPropostaSiopi${item.contratoFormatado}>
+                                <form method="POST" action="conformidade-contratacao/gerar-proposta-siouv-mail" id="formGerarPropostaSiopi${item.contratoFormatado}">
+                                    <div class="form-group">
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                                        <div class="modal-body">
+                                            <p> Caso o processo esteja conforme no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI:</p>
+                                            <p><strong>Não foi gerada proposta no SIOPI </strong></p>
+                                            <p>Importante:</p>
+                                            <ul>
+                                                <li>Verificar se o laudo de avaliação está válido e apresenta 540 dias de validade para permitir vinculação</li>
+                                            </ul>
+                                            <hr>
 
-                                        <div class="form-group">
-                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno</label>
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
                                             <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
                                             <small class="form-text text-muted">**Campo Obrigatório</small>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Observações:</label>
-                                            <textarea class="form-control" name="obsGerarPropostaSiopi" id="obsGerarPropostaSiopi"></textarea>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>    
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="modal fade" id="modalVincularPropostaSiopi${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelVincularPropostaSiopi" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabelVincularPropostaSiopi">Situação: Conforme no SIIAC e proposta não vinculada ao imóvel</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <form method="post" action="conformidade-contratacao/vincular-proposta-siouv-mail/${item.contratoFormatado}" id="formVincularPropostaSiopi${item.contratoFormatado}">
+                                    <div class="form-group">
+                                        <input type="hidden" name="_token" value="${csrfVar}">
+                                        <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+
+                                        <div class="modal-body">
+                                            <p> Caso o processo esteja conforme no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI:</p>
+                                            <p><strong>Proposta foi gerada no SIOPI e não vinculada ao imóvel</strong></p>
+                                            <p>Importante:</p>
+                                            <ul>
+                                                <li>Verificar se taxa já foi isenta e vinculada à proposta</li>
+                                                <li>Observar se o laudo de avaliação está válido e apresenta 540 dias de validade</li>
+                                                <li>Verificar se no imóvel não consta proposta anterior bloqueando o imóvel</li>
+                                            </ul>
+                                            <hr>
+
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                            <small class="form-text text-muted">**Campo Obrigatório</small>
                                         </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="modal fade" id="modalEfetivarAssinaturaContrato${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelEfetivarAssinaturaContrato" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabelEfetivarAssinaturaContrato">Situação: Conforme no SIIAC, proposta gerada e vinculada no SIOPI, falta apenas a emissão de contrato</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <form method="post" action="conformidade-contratacao/efetivar-assinatura-mail/${item.contratoFormatado}" id="formEfetivarAssinaturaContrato${item.contratoFormatado}">
+                                    <div class="form-group">
+                                        <input type="hidden" name="_token" value="${csrfVar}">
+                                        <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+
+                                        <div class="modal-body">
+                                            <p> Caso o processo esteja conforme no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI:</p>
+                                            <p><strong>Proposta SIOPI gerada, vinculada e apenas falta assinatura do contrato</strong></p>
+                                            <p>Importante:</p>
+                                            <ul>
+                                                <li>Verficar no CIWEB se o contrato novo apresenta TP 025</li>
+                                                <li>OBS: caso apresente situação LIB ou PEND, significa que já houve assinatura do contrato</li>
+                                            </ul>
+                                            <hr>
+
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                            <small class="form-text text-muted">**Campo Obrigatório</small>
+                                        </div>                                        
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                          
+                    
+                    <div class="modal fade" id="modalInconformeSiiac${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelInconformeSiiac" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabelInconformeSiiac">Situação: A documentação está inconforme no SIIAC e necessita de ação da agência para regularização</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <form method="post" action="conformidade-contratacao/inconformidade-siiac-mail/${item.contratoFormatado}" id="formInconformeSiiac${item.contratoFormatado}" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <input type="hidden" name="_token" value="${csrfVar}">
+                                        <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+
+                                        <div class="modal-body">
+                                            <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente </p>
+                                            <p><strong>Necessária ação da agência para correção de inconformidade</strong><p>
+                                            <p>Importante:</p>
+                                            <ul>
+                                                <li>Anexar PA, disponível ao analisar o CPF do proponente em <a href="http://siiac.caixa/jsp/index.cef" target="_blank">http://siiac.caixa/jsp/index.cef</a></li>
+                                            </ul>
+                                            <hr>
                                         
-                                        <div class="form-group">
-                                            <div class="btn btn-default btn-file">
-                                                <i class="fas fa-paperclip"></i> Anexar
-                                                <input type="file" name="attachment">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                            <small class="form-text text-muted">**Campo Obrigatório</small>
+                                        
+                                        
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Observações:</label>
+                                                <textarea class="form-control" name="obsInconformeSiiac" id="obsInconformeSiiac"></textarea>
                                             </div>
-                                                <small class="form-text text-muted">**Máx. 2MB</small>
+                                            
+                                            <div class="form-group">
+                                                <div class="btn btn-default btn-file">
+                                                    <i class="fas fa-paperclip"></i> Anexar
+                                                    <input type="file" name="attachment" class="form-control-file">
+                                                </div>
+                                                    <small class="form-text text-muted">**Máx. 2MB</small>
+                                            </div>
                                         </div>
-                                    </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalDossieGilie${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelDossieGilie" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabelDossieGilie">Situação: A documentação inicial não foi enviada no fila única pela GILIE e necessita de ação da agência para envio</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                    <button type="button" class="btn btn-primary">Enviar</button>
-                                </div>
+                                <form method="post" action="conformidade-contratacao/dossie-gilie-mail/${item.contratoFormatado}" id="formDossieGilie${item.contratoFormatado}">
+                                    <div class="form-group">
+                                        <input type="hidden" name="_token" value="${csrfVar}">
+                                        <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                                        
+                                        <div class="modal-body">
+                                            <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente.</p>
+                                            <p>Status AGUARDA DOCS GILIE no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Processos Digitalizados</p>
+                                            <p><strong>Necessária ação da agência para envio de documentos<strong></p>                                 
+                                            <hr>
+                                            <label for="message-text" class="col-form-label">Itens a serem enviados pela Agência:</label>
+                                            <div class="form-group form-check">
+                                                <input type="checkbox" class="form-check-input" id="comprovanteEndereco" name="checkbox">
+                                                <label class="form-check-label" for="comprovanteEndereco" value='compEndereco'>Comprovante de Endereço</label>
+                                            </div>
+                                        
+
+                                            <div class="form-group">
+                                                <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
+                                                <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                                <small class="form-text text-muted">**Campo Obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 
 
-                  
-                           
+                    <div class="modal fade" id="modalDossieAgencia${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelDossieAgencia" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabelDossieAgencia">Situação: A documentação inicial não foi enviada no fila única da agência após DOSSIE GILIE no siiac.caixa estar conforme -> envio pela agência no SICT2</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <form method="post" action="conformidade-contratacao/dossie-agencia-mail/${item.contratoFormatado}" id="formDossieAgencia${item.contratoFormatado}">
+                                    <input type="hidden" name="_token" value="${csrfVar}">
+                                    <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                                    <div class="modal-body">
+                                        <p> Considerando-se Fluxo Agência para a presente proposta, inicialmente observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente </p>
+                                        <p>Status AGUARDA DOCS AGÊNCIA no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> aba Processos Digitalizados</p>
+                                        <p><strong>Necessária ação da agência para envio inicial de documentos </strong></p>
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-2">Escolha os itens a serem enviados pela Agência:</div>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="comprovanteEndereco" name="checkbox">
+                                                    <label class="form-check-label" for="comprovanteEndereco" value='compEndereco'>Comprovante de Endereço</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                            <small class="form-text text-muted">**Campo Obrigatório</small>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="btn btn-default btn-file">
+                                                <i class="fas fa-paperclip"></i> Anexar
+                                                <input type="file" name="attachment" class="form-control-file">
+                                            </div>
+                                                <small class="form-text text-muted">**Máx. 2MB</small>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 
-                
+                    <div class="modal fade" id="modalOutros${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelOutros" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabelOutros">Situação: Outros</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <form method="post" action=""id="formOutros${item.contratoFormatado}">
+                                <input type="hidden" name="_token" value="${csrfVar}">
+                                <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                                <div class="modal-body">
+                                    <p> Outros – será apenas utilizado corpo do e-mail, caberá ao usuário formular e-mail e salvar na respectiva pasta no servidor.</p>
+
+                                    <div class="form-group">
+                                        <label for="obsOutros${item.numeroContrato}">Escreva o e-mail a ser enviado:</label>
+                                        <textarea class="form-control" id="obsOutros${item.numeroContrato}" rows="3" required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
+                                        <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                        <small class="form-text text-muted">**Campo Obrigatório</small>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="btn btn-default btn-file">
+                                            <i class="fas fa-paperclip"></i> Anexar
+                                            <input type="file" name="attachment" class="form-control-file">
+                                        </div>
+                                            <small class="form-text text-muted">**Máx. 2MB</small>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             
                     <!-- Modal de contato -->
 
@@ -191,7 +450,7 @@ $(document).ready(function(){
                         </div>
                     </div>
                <td class="formata-data-sem-horas" id="novoHistorico${item.numeroContrato}"></td>
-               <td> </td>
+               <td>${dataRetorno}</td>
             </tr>
             `
 
@@ -428,7 +687,6 @@ $(document).ready(function(){
         $.getJSON('/estoque-imoveis/conformidade-contratacao/listar-data-conformidade', function(dados){
             $.each(dados, function(key, item) {
                 var dateTime = moment(item.dataAlteração).format("YYYY-MM-DD");
-                console.log("cheguei")
                 $('#novoHistorico'+ item.nuBem).text(item.dataAlteração)
             })
         }).done(function() { _formataDatatableComData()})
@@ -686,3 +944,8 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
     _formataDatatableComData()
     $('.spinnerTbl').remove()
 })
+
+
+function datepicker() {
+    $('.datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate:0}) 
+  }

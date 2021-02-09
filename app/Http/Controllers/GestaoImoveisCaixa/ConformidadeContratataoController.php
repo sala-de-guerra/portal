@@ -209,6 +209,7 @@ public function listarContratosConformidade()
                                         ->leftjoin('ADJTBL_imoveisCaixa', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, ADJTBL_imoveisCaixa.numeroContrato)'))
                                         ->leftjoin('TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.AGENCIA_CONTRATACAO_PROPOSTA)'), '=', DB::raw('CONVERT(VARCHAR, TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL.nomeAgencia)'))
                                         ->leftJoin('TBL_HISTORICO_PORTAL_GILIE', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, TBL_HISTORICO_PORTAL_GILIE.numeroContrato)'))
+                                        ->leftJoin('TBL_CONTROLA_RETORNO', DB::raw('CONVERT(VARCHAR, TBL_CONTROLA_RETORNO.nuBem)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'))
                                         ->select(DB::raw('
                                             ALITB001_Imovel_Completo.[BEM_FORMATADO] as contratoFormatado,
                                             ALITB001_Imovel_Completo.[ACEITA_CCA] as aceitaCca, 
@@ -231,7 +232,9 @@ public function listarContratosConformidade()
                                             TBL_SALDO_ATUALIZADO_CONTRATOS_SINAF.[saldoAtualContrato] as valorTotalRecebido,
                                             TBL_HISTORICO_PORTAL_GILIE.[updated_at] as dataNovoHistorio,
                                             TBL_HISTORICO_PORTAL_GILIE.[atividade] as tipoHistorico,
-                                            TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL.[emailAgencia] as emailAgencia
+                                            TBL_RELACAO_AG_SR_GIGAD_COM_EMAIL.[emailAgencia] as emailAgencia,
+                                            TBL_CONTROLA_RETORNO.[dataRetorno] as dataRetorno
+
                                     '))
 
                                             ->where('ALITB001_Imovel_Completo.UNA', $siglaGilie)
@@ -316,6 +319,7 @@ public function listarContratosConformidade()
                     'gilieDeVinculacao' =>$contrato->gilieDeVinculacao,
                     'dataNovoHistorio' =>$contrato->dataNovoHistorio,
                     'tipoHistorico' =>$contrato->tipoHistorico,
+                    'dataRetorno' =>$contrato->dataRetorno,
 
                 ]);
                 array_push($arrayContratosParaRemoverRepetidos, $contrato->numeroContrato);
