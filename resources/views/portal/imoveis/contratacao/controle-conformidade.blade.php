@@ -33,6 +33,20 @@
 
 
 @section('content')
+
+@if (session('tituloMensagem'))
+    <div id="fadeOut" class="card text-white bg-{{ session('corMensagem') }} hidden" >
+        <div class="card-header">
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
+                <br>
+                <p class="card-text">{{ session('corpoMensagem') }}</p>
+            </div>
+        </div>
+    </div>
+@endif
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">
@@ -117,6 +131,7 @@
                                         <th>Status CIOPE</th>
                                         <th>Ações</th>
                                         <th>Último Tratamento</th>
+                                        <th>Vencimento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -146,6 +161,7 @@
                                         <th>Status CIOPE</th>
                                         <th>Ações</th>
                                         <th>Último Tratamento</th>
+                                        <th>Vencimento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -208,4 +224,9 @@
     <script src="{{ asset('js/portal/imoveis/contratacao/fila-unica-fluxo-agencia.js') }}"></script>
     <script src="{{ asset('js/global/formata-datable-dataVencimento.js') }}"></script>
     <script src="{{ asset('js/global/formata-data-datable.js') }}"></script>
+    <script>
+        setTimeout(function(){
+        $('#fadeOut').fadeOut("slow");
+        }, 4000);
+    </script>
 @stop

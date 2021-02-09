@@ -112,6 +112,14 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::post('registrar-historico/{contrato}', 'GestaoImoveisCaixa\ConformidadeContratataoController@registrarHistoricoConformidade');
         Route::post('/mensagem', 'GestaoImoveisCaixa\ConformidadeContratataoController@EnviodeCobrancaAgencia');
         Route::post('/mensagemPagamento', 'GestaoImoveisCaixa\ConformidadeContratataoController@EnviodeCobrancaPagamentoCliente');
+        // Enviar mensagerias de conformidade Agência
+        Route::post('/gerar-proposta-siouv-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@gerarPropostaSiouvMail');
+        Route::post('/vincular-proposta-siouv-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@vincularPropostaMail');
+        Route::post('/efetivar-assinatura-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@efetivarAssinaturaMail');
+        Route::post('/inconformidade-siiac-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@inconformeSIIACMail');
+        Route::post('/dossie-gilie-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@dossieGilieMail');
+        Route::post('/dossie-agencia-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@dossieAgenciaMail');
+
     });
 
     // ROTAS DO PROJETO DE LEILÕES NEGATIVOS

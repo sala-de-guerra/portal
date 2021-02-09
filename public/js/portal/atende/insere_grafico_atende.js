@@ -26,7 +26,7 @@ $("#Grafico").one("click", function() {
 
     
 
-    function grafico(totalDataUltimos30dias, quantidadeTotalAberto, quantidadeRespondidos, nomeNovos){
+    function grafico(totalDataUltimos30dias, totalAtendesCadastrados, totalAtendesRespondidos, nomeNovos){
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
           
@@ -38,16 +38,16 @@ $("#Grafico").one("click", function() {
                 labels: totalDataUltimos30dias,
                 datasets: [
                 {
-                  label: 'Abertos',
+                  label: 'Cadastrados',
                   borderColor: 'rgba(36,124,180)',
                   backgroundColor: 'rgba(36,124,180)',
-                  data: quantidadeTotalAberto
+                  data: totalAtendesCadastrados
                 },
                 {
                   label: 'Respondidos',
                   borderColor: 'rgba(40,167,69)',
                   backgroundColor: 'rgba(40,167,69)',
-                  data: quantidadeRespondidos
+                  data: totalAtendesRespondidos
                 }
               ]
             },
