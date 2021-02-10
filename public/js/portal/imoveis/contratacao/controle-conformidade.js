@@ -86,7 +86,7 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                                    <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Escolha a melhor opção:</h5>
+                                    <h5 style="color: white;" class="modal-title" id="exampleModalLabel">Escolha a melhor opção para situação do contrato ${item.contratoFormatado}:</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -108,13 +108,14 @@ $(document).ready(function(){
                                     
                                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieGilie${item.numeroContrato}"><i class="fas fa-archive"></i><p>Dossiê GILIE</p></button>&nbsp&nbsp
                                     
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieAgencia${item.numeroContrato}" disabled><i class="fas fa-store-alt"></i><p>Dossiê Agência</p></button>&nbsp&nbsp
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieAgencia${item.numeroContrato}"><i class="fas fa-store-alt"></i><p>Dossiê Agência</p></button>&nbsp&nbsp
                                     
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalOutros${item.numeroContrato}" disabled><i class="fas fa-th-large"></i><p>Outros</p></button><br>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalOutros${item.numeroContrato}"><i class="fas fa-th-large"></i><p>Outros</p></button><br>
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -124,33 +125,37 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabelGerarPropostaSiopi">Situação: Conforme no SIIAC e sem proposta no SIOPI</h5>
+                                    <h5 class="modal-title" id="ModalLabelGerarPropostaSiopi"><b>Contrato ${item.contratoFormatado}</b> | Situação: Em conformidade no SIIAC e sem proposta no SIOPI</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
-                                <form method="POST" action="conformidade-contratacao/gerar-proposta-siouv-mail" id="formGerarPropostaSiopi${item.contratoFormatado}">
-                                    <div class="form-group">
+                                <form method="POST" action="conformidade-contratacao/gerar-proposta-siouv-mail/${item.contratoFormatado}" id="formGerarPropostaSiopi${item.contratoFormatado}">
+                                    <div class="modal-body">
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
-                                        <div class="modal-body">
-                                            <p> Caso o processo esteja conforme no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI:</p>
-                                            <p><strong>Não foi gerada proposta no SIOPI </strong></p>
-                                            <p>Importante:</p>
-                                            <ul>
-                                                <li>Verificar se o laudo de avaliação está válido e apresenta 540 dias de validade para permitir vinculação</li>
-                                            </ul>
-                                            <hr>
+                                    
+                                        <p>Caso o processo esteja em conformidade no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI.</p>
+                                        
+                                        <p>Importante:</p>
+                                        <ul>
+                                            <li>Verificar se o laudo de avaliação está válido e apresenta 540 dias de validade para permitir vinculação</li>
+                                        </ul>
+                                        <hr>
 
-                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
-                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                        <div class="form-group">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required size="32">
                                             <small class="form-text text-muted">**Campo Obrigatório</small>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <button type="submit" class="btn btn-primary">Enviar</button>
-                                        </div>    
+
                                     </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -160,36 +165,38 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabelVincularPropostaSiopi">Situação: Conforme no SIIAC e proposta não vinculada ao imóvel</h5>
+                                    <h5 class="modal-title" id="ModalLabelVincularPropostaSiopi"><b>Contrato ${item.contratoFormatado}</b> | Situação: Em conformidade no SIIAC e proposta não vinculada ao imóvel</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
                                 <form method="post" action="conformidade-contratacao/vincular-proposta-siouv-mail/${item.contratoFormatado}" id="formVincularPropostaSiopi${item.contratoFormatado}">
-                                    <div class="form-group">
+                                    <div class="modal-body">
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
 
-                                        <div class="modal-body">
-                                            <p> Caso o processo esteja conforme no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI:</p>
-                                            <p><strong>Proposta foi gerada no SIOPI e não vinculada ao imóvel</strong></p>
-                                            <p>Importante:</p>
-                                            <ul>
-                                                <li>Verificar se taxa já foi isenta e vinculada à proposta</li>
-                                                <li>Observar se o laudo de avaliação está válido e apresenta 540 dias de validade</li>
-                                                <li>Verificar se no imóvel não consta proposta anterior bloqueando o imóvel</li>
-                                            </ul>
-                                            <hr>
+                                        <p>Caso o processo esteja em conformidade no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI.</p>
+                                        
+                                        <p>Importante:</p>
+                                        <ul>
+                                            <li>Verificar se taxa já foi isenta e vinculada à proposta</li>
+                                            <li>Observar se o laudo de avaliação está válido e apresenta 540 dias de validade</li>
+                                            <li>Verificar se no imóvel não consta proposta anterior bloqueando o imóvel</li>
+                                        </ul>
+                                        <hr>
 
-                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
-                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                        <div class="form-group">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazoVincular${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
                                             <small class="form-text text-muted">**Campo Obrigatório</small>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <button type="submit" class="btn btn-primary">Enviar</button>
-                                        </div>                                        
                                     </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>                                        
+                                    
                                 </form>
                             </div>
                         </div>
@@ -199,35 +206,43 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabelEfetivarAssinaturaContrato">Situação: Conforme no SIIAC, proposta gerada e vinculada no SIOPI, falta apenas a emissão de contrato</h5>
+                                    <h5 class="modal-title" id="ModalLabelEfetivarAssinaturaContrato"><b>Contrato ${item.contratoFormatado}</b> | Situação: Em conformidade no SIIAC, proposta gerada e vinculada no SIOPI, falta apenas a emissão de contrato</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
                                 <form method="post" action="conformidade-contratacao/efetivar-assinatura-mail/${item.contratoFormatado}" id="formEfetivarAssinaturaContrato${item.contratoFormatado}">
-                                    <div class="form-group">
+                                    <div class="modal-body">
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
 
-                                        <div class="modal-body">
-                                            <p> Caso o processo esteja conforme no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI:</p>
-                                            <p><strong>Proposta SIOPI gerada, vinculada e apenas falta assinatura do contrato</strong></p>
-                                            <p>Importante:</p>
-                                            <ul>
-                                                <li>Verficar no CIWEB se o contrato novo apresenta TP 025</li>
-                                                <li>OBS: caso apresente situação LIB ou PEND, significa que já houve assinatura do contrato</li>
-                                            </ul>
-                                            <hr>
-
-                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
-                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                        <p>Caso o processo esteja em conformidade no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI.</p>
+                                        <p>Importante:</p>
+                                        <ul>
+                                            <li>Verificar no CIWEB se o contrato novo apresenta TP 025</li>
+                                            <li style="color: red;"><strong>Atenção:</strong> caso seja observado que há TP 025 LIB/PEND/ATU para o novo contrato, não será necessário o envio do presente e-mail, apenas proceder com os acertos contábeis.</li>
+                                            <li>OBS: Para verificar o status do TP025:
+                                                <ul>
+                                                    <li> <a href="http://ciweb4.extranet.caixa/sso/" target="_blank">Ciweb</a> &rarr; pesquisar pelo CPF do proponente &rarr; tela CPE </li>
+                                                    ou
+                                                    <li> <a href="http://siopi.caixa/siopi-web/" target="_blank">SIOPI</a> &rarr; Proposta individual PF/PJ &rarr; clicar na proposta desejada (comparar endereço do imóvel) número do contrato será escrito no lado direito da tela </li>
+                                                </ul> 
+                                            </li>
+                                        </ul>
+                                        <hr>
+                                        
+                                        <div class="form-group">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazoAssinatura${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
                                             <small class="form-text text-muted">**Campo Obrigatório</small>
-                                        </div>                                        
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <button type="submit" class="btn btn-primary">Enviar</button>
                                         </div>
+                                    </div>                                        
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
                                     </div>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -238,48 +253,48 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabelInconformeSiiac">Situação: A documentação está inconforme no SIIAC e necessita de ação da agência para regularização</h5>
+                                    <h5 class="modal-title" id="ModalLabelInconformeSiiac"><b>Contrato ${item.contratoFormatado}</b> | Situação: A documentação está inconforme no SIIAC e necessita de ação da agência para regularização</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
                                 <form method="post" action="conformidade-contratacao/inconformidade-siiac-mail/${item.contratoFormatado}" id="formInconformeSiiac${item.contratoFormatado}" enctype="multipart/form-data">
-                                    <div class="form-group">
+                                    <div class="modal-body">
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+ 
+                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente </p>
+                                        
+                                        <p>Importante:</p>
+                                        <ul>
+                                            <li>Anexar PA, disponível ao analisar o CPF do proponente em <a href="http://siiac.caixa/jsp/index.cef" target="_blank">http://siiac.caixa/jsp/index.cef</a></li>
+                                        </ul>
+                                        <hr>
 
-                                        <div class="modal-body">
-                                            <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente </p>
-                                            <p><strong>Necessária ação da agência para correção de inconformidade</strong><p>
-                                            <p>Importante:</p>
-                                            <ul>
-                                                <li>Anexar PA, disponível ao analisar o CPF do proponente em <a href="http://siiac.caixa/jsp/index.cef" target="_blank">http://siiac.caixa/jsp/index.cef</a></li>
-                                            </ul>
-                                            <hr>
-                                        
-                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
-                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                        <div class="form-group">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazoInconforme${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
                                             <small class="form-text text-muted">**Campo Obrigatório</small>
-                                        
-                                        
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Observações:</label>
-                                                <textarea class="form-control" name="obsInconformeSiiac" id="obsInconformeSiiac"></textarea>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <div class="btn btn-default btn-file">
-                                                    <i class="fas fa-paperclip"></i> Anexar
-                                                    <input type="file" name="attachment" class="form-control-file">
-                                                </div>
-                                                    <small class="form-text text-muted">**Máx. 2MB</small>
-                                            </div>
+                                        </div>                                        
+                                    
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Observações:</label>
+                                            <textarea class="form-control" name="obsInconformeSiiac" id="obsInconformeSiiac"></textarea>
+                                            <small class="form-text text-muted">**Campo opcional</small>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        
+                                        <div class="form-group"> 
+                                            <input type="file" name="attachment" class="fupload form-control-file" required>
+                                            <small class="form-text text-muted">**Campo Obrigatório** Máx. 2MB</small>
+                                            <label for="fupload" class="control-label label-bordered inputFile"></label>
                                         </div>
                                     </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -289,39 +304,87 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabelDossieGilie">Situação: A documentação inicial não foi enviada no fila única pela GILIE e necessita de ação da agência para envio</h5>
+                                    <h5 class="modal-title" id="ModalLabelDossieGilie"><b>Contrato ${item.contratoFormatado}</b> | Situação: A documentação inicial não foi enviada no fila única pela GILIE e necessita de ação da agência para envio</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
                                 <form method="post" action="conformidade-contratacao/dossie-gilie-mail/${item.contratoFormatado}" id="formDossieGilie${item.contratoFormatado}">
-                                    <div class="form-group">
+                                    <div class="modal-body">
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
                                         
-                                        <div class="modal-body">
-                                            <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente.</p>
-                                            <p>Status AGUARDA DOCS GILIE no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Processos Digitalizados</p>
-                                            <p><strong>Necessária ação da agência para envio de documentos<strong></p>                                 
-                                            <hr>
-                                            <label for="message-text" class="col-form-label">Itens a serem enviados pela Agência:</label>
-                                            <div class="form-group form-check">
-                                                <input type="checkbox" class="form-check-input" id="comprovanteEndereco" name="checkbox">
-                                                <label class="form-check-label" for="comprovanteEndereco" value='compEndereco'>Comprovante de Endereço</label>
-                                            </div>
-                                        
+                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente.</p>
 
-                                            <div class="form-group">
-                                                <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
-                                                <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
-                                                <small class="form-text text-muted">**Campo Obrigatório</small>
-                                            </div>
+                                        <p>Status AGUARDA DOCS GILIE no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Processos Digitalizados</p>
+                               
+                                        <hr>
+                                            
+                                        <p><strong>Itens a serem enviados pela Agência:</strong></p>
+                                        
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="docIdent" id="docIdent" name="docIdent">
+                                            <label class="form-check-label" for="docIdent">Documento de Identificação (RG/CNH/etc)<b style="color:red;"> *CO 020</b></label>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="compEndereco" name="compEndereco" id="compEndereco">
+                                            <label class="form-check-label" for="compEndereco">Comprovante de Endereço<b style="color:red;"> *CO 020</b></label>
                                         </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="compRenda" id="compRenda" name="compRenda">
+                                            <label class="form-check-label" for="compRenda">Comprovante de Renda<b style="color:red;"> *CR016</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="certNascCas" id="certNascCas" name="certNascCas">
+                                            <label class="form-check-label" for="certNascCas">Certidão de Nascimento/Casamento</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="compPagto" id="compPagto" name="compPagto">
+                                            <label class="form-check-label" for="compPagto">Comprovante de Pagamento de Entrada (PP15 ou boleto <b>e</b> respectivo comprovante)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="impRenda" id="impRenda" name="impRenda">
+                                            <label class="form-check-label" for="impRenda">Imposto de Renda Completo (Apenas recibo não basta) OU <b style="color:red;"> *MO29899</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="formEnc" id="formEnc" name="formEnc">
+                                            <label class="form-check-label" for="formEnc">Formulário de Encaminhamento de Demanda<b style="color:red;"> *PF MO19601 PJ MO19602</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="propCompra" id="propCompra" name="propCompra">
+                                            <label class="form-check-label" for="propCompra">Proposta de Compra / Termo de Arrematação<b style="color:red;"> *MO19570</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="termoDir" id="termoDir" name="termoDir">
+                                            <label class="form-check-label" for="termoDir">Termo de Aquisição por Exercício de Direito de Preferência<b style="color:red;"> *MO28097</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="declNeg" id="declNeg" name="declNeg">
+                                            <label class="form-check-label" for="declNeg">Declaração Negativa de Propriedade do Imóvel<b style="color:red;"> *MO29898</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="certIptu" id="certIptu" name="certIptu">
+                                            <label class="form-check-label" for="certIptu">Certidão de IPTU na prefeitura demonstrando endereço atualizado</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="matrImov" id="matrImov" name="matrImov">
+                                            <label class="form-check-label" for="matrImov">Matrícula do Imóvel - verificar se ao mandar é possível "puxar" matrícula e cartório</label>
+                                        </div> 
+                                        <br>
+                                    
+                                        <div class="form-group">
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazoGilie${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                            <small class="form-text text-muted">**Campo Obrigatório</small>
+                                        </div>
+
                                     </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -332,47 +395,88 @@ $(document).ready(function(){
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabelDossieAgencia">Situação: A documentação inicial não foi enviada no fila única da agência após DOSSIE GILIE no siiac.caixa estar conforme -> envio pela agência no SICT2</h5>
+                                    <h5 class="modal-title" id="ModalLabelDossieAgencia"><b>Contrato ${item.contratoFormatado}</b> | Situação: A documentação inicial não foi enviada no fila única da agência após DOSSIE GILIE no siiac.caixa estar em conformidade</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
                                 <form method="post" action="conformidade-contratacao/dossie-agencia-mail/${item.contratoFormatado}" id="formDossieAgencia${item.contratoFormatado}">
-                                    <input type="hidden" name="_token" value="${csrfVar}">
-                                    <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                                
                                     <div class="modal-body">
-                                        <p> Considerando-se Fluxo Agência para a presente proposta, inicialmente observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente </p>
-                                        <p>Status AGUARDA DOCS AGÊNCIA no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> aba Processos Digitalizados</p>
-                                        <p><strong>Necessária ação da agência para envio inicial de documentos </strong></p>
+                                        <input type="hidden" name="_token" value="${csrfVar}">
+                                        <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                                    
+                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente.</p>
 
-                                        <div class="form-group row">
-                                            <div class="col-sm-2">Escolha os itens a serem enviados pela Agência:</div>
-                                            <div class="col-sm-10">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="comprovanteEndereco" name="checkbox">
-                                                    <label class="form-check-label" for="comprovanteEndereco" value='compEndereco'>Comprovante de Endereço</label>
-                                                </div>
-                                            </div>
+                                        <p>Status AGUARDA DOCS GILIE no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Processos Digitalizados</p>
+                               
+                                        <hr>
+                                    
+                                        <p><strong>Itens a serem enviados pela Agência:</strong></p>
+                                        
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="docIdent" id="docIdentAg" name="docIdent">
+                                            <label class="form-check-label" for="docIdentAg">Documento de Identificação (RG/CNH/etc)<b style="color:red;"> *CO 020</b></label>
                                         </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="compEndereco" name="compEndereco" id="compEnderecoAg">
+                                            <label class="form-check-label" for="compEnderecoAg">Comprovante de Endereço<b style="color:red;"> *CO 020</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="compRenda" id="compRendaAg" name="compRenda">
+                                            <label class="form-check-label" for="compRendaAg">Comprovante de Renda<b style="color:red;"> *CR016</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="certNascCas" id="certNascCasAg" name="certNascCas">
+                                            <label class="form-check-label" for="certNascCasAg">Certidão de Nascimento/Casamento</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="compPagto" id="compPagtoAg" name="compPagto">
+                                            <label class="form-check-label" for="compPagtoAg">Comprovante de Pagamento de Entrada (PP15 ou boleto <b>e</b> respectivo comprovante)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="impRenda" id="impRendaAg" name="impRenda">
+                                            <label class="form-check-label" for="impRendaAg">Imposto de Renda Completo (Apenas recibo não basta) OU <b style="color:red;"> *MO29899</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="formEnc" id="formEncAg" name="formEnc">
+                                            <label class="form-check-label" for="formEncAg">Formulário de Encaminhamento de Demanda<b style="color:red;"> *PF MO19601 PJ MO19602</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="propCompra" id="propCompraAg" name="propCompra">
+                                            <label class="form-check-label" for="propCompraAg">Proposta de Compra / Termo de Arrematação<b style="color:red;"> *MO19570</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="termoDir" id="termoDirAg" name="termoDir">
+                                            <label class="form-check-label" for="termoDirAg">Termo de Aquisição por Exercício de Direito de Preferência<b style="color:red;"> *MO28097</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="declNeg" id="declNegAg" name="declNeg">
+                                            <label class="form-check-label" for="declNegAg">Declaração Negativa de Propriedade do Imóvel<b style="color:red;"> *MO29898</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="certIptu" id="certIptuAg" name="certIptu">
+                                            <label class="form-check-label" for="certIptuAg">Certidão de IPTU na prefeitura demonstrando endereço atualizado</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="matrImov" id="matrImovAg" name="matrImov">
+                                            <label class="form-check-label" for="matrImovAg">Matrícula do Imóvel - verificar se ao mandar é possível "puxar" matrícula e cartório</label>
+                                        </div> 
+                                        <br>
 
                                         <div class="form-group">
-                                            <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
-                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                            <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
+                                            <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazoAgencia${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
                                             <small class="form-text text-muted">**Campo Obrigatório</small>
                                         </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="btn btn-default btn-file">
-                                                <i class="fas fa-paperclip"></i> Anexar
-                                                <input type="file" name="attachment" class="form-control-file">
-                                            </div>
-                                                <small class="form-text text-muted">**Máx. 2MB</small>
-                                        </div>
+
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                         <button type="submit" class="btn btn-primary">Enviar</button>
                                     </div>
+
                                 </form>
                             </div>
                         </div>
@@ -382,40 +486,45 @@ $(document).ready(function(){
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="ModalLabelOutros">Situação: Outros</h5>
+                                <h5 class="modal-title" id="ModalLabelOutros"><b>Contrato ${item.contratoFormatado}</b> | Situação: Outros</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                             </div>
-                            <form method="post" action=""id="formOutros${item.contratoFormatado}">
-                                <input type="hidden" name="_token" value="${csrfVar}">
-                                <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                            <form method="post" action="conformidade-contratacao/outros-agencia-mail/${item.contratoFormatado}" id="formOutros${item.contratoFormatado}" enctype="multipart/form-data">
                                 <div class="modal-body">
-                                    <p> Outros – será apenas utilizado corpo do e-mail, caberá ao usuário formular e-mail e salvar na respectiva pasta no servidor.</p>
+                                    <input type="hidden" name="_token" value="${csrfVar}">
+                                    <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
+                                
+                                    <p>Será apenas utilizado corpo do e-mail.</p>
+                                    <p>Cabe ao analista formular e-mail e salvar na respectiva pasta no servidor.</p>
+                                    <hr>
 
                                     <div class="form-group">
-                                        <label for="obsOutros${item.numeroContrato}">Escreva o e-mail a ser enviado:</label>
-                                        <textarea class="form-control" id="obsOutros${item.numeroContrato}" rows="3" required></textarea>
+                                        <label for="obsOutros${item.numeroContrato}">Digite os parágrafos a serem acrescentados no e-mail:</label>
+                                        <textarea class="form-control" id="obsOutros${item.numeroContrato}" rows="3" name="textoEmail" required></textarea>
+                                        <small class="form-text text-muted">**Campo Obrigatório</small>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="formPrazo${item.numeroContrato}">Informar prazo para retorno para Agência</label>
-                                        <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazo${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
+                                        <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
+                                        <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazoOutros${item.numeroContrato}" placeholder="Selecione data no calendário..." required>
                                         <small class="form-text text-muted">**Campo Obrigatório</small>
                                     </div>
                                     
-                                    <div class="form-group">
-                                        <div class="btn btn-default btn-file">
-                                            <i class="fas fa-paperclip"></i> Anexar
-                                            <input type="file" name="attachment" class="form-control-file">
-                                        </div>
-                                            <small class="form-text text-muted">**Máx. 2MB</small>
+                                    <div class="form-group"> 
+                                        <input type="file" name="attachment" class="fupload form-control-file">
+                                        <small class="form-text text-muted">**Máx. 2MB</small>
+                                        <label for="fupload" class="control-label label-bordered inputFile"></label>
                                     </div>
+                                    
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </div>
+
                             </form>
                         </div>
                     </div>
@@ -944,7 +1053,6 @@ $.when($.getJSON('/estoque-imoveis/acompanha-contratacao/listar-contratos-sem-pa
     _formataDatatableComData()
     $('.spinnerTbl').remove()
 })
-
 
 function datepicker() {
     $('.datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate:0}) 

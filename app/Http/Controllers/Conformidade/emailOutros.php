@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" type="text/css" href="./estilos.css">  não deu --> 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Proposta não gerada no SIOPI</title>
+    <title>Outros</title>
 
 </head>
 
@@ -27,13 +26,13 @@
 
     <ol>
     <li style="text-align: justify;"> &nbsp;&nbsp;Informamos que o imóvel %NUMEROIMOVEL% está em processo de contratação pelo proponente <strong>%NOMEPROPONENTE1%</strong> CPF <strong>%CPFPROPONENTE1%</strong>, cuja proposta foi na modalidade <strong>%TIPODEVENDA%</strong> em <strong>%DATAPROPOSTA%</strong>, referente ao imóvel situado à %ENDERECOIMOVEL%.</li></br>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Em continuidade ao processo de contratação supracitado, observamos que o processo encontra-se conforme no SIIAC tanto no processo TRIAGEM GILIE quanto TRIAGEM AGÊNCIA, porém até o momento não consta proposta gerada para o CPF do proponente no SIOPI. Desta forma, orientamos a prosseguir com a geração de proposta no SIOPI e demais tramites para a contratação.</li></br>
+    <li style="text-align: justify;"> &nbsp;&nbsp; %OBSERVAÇÕES% </li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, poderá ser iniciado processo de distrato.</li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Aproveitamos o ensejo para lembrar que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a> está disponível cartilha para auxílio no processo de contratação (Cartilha para Contratação com uso de FGTS e Parcelamento).</li><br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Permanecemos à disposição.</li>
     </ol>
 </div>
-<footer style="bottom: 0; width: 80%;">    
+<footer style="bottom: 0; width: 80%;">      
 <p class="destaque">
 </br>
 Atenciosamente,
