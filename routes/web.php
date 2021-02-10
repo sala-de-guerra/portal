@@ -119,6 +119,7 @@ Route::prefix('estoque-imoveis')->group(function () {
         Route::post('/inconformidade-siiac-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@inconformeSIIACMail');
         Route::post('/dossie-gilie-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@dossieGilieMail');
         Route::post('/dossie-agencia-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@dossieAgenciaMail');
+        Route::post('/outros-agencia-mail/{numeroCHB}', 'Conformidade\retornoDeConformidadeController@gerarOutrosMail');
 
     });
 

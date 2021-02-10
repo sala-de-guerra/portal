@@ -41,12 +41,12 @@ function _formataProgressBar (idBarra, arrayPorcentagemEStatus, statusAtual) {
                 statusAtual = 'Contratação';
                 break;
             case 'Vendido':
+                statusAtual = 'Vendido';
+                break;
             case 'Venda Direta Beneficiário':
             case 'Venda Direta Especial':
             case 'Venda Direta FAR':
             case 'Venda por credenciado':
-                statusAtual = 'Vendido';
-                break;
             case 'Venda Direta Online':
             case 'Venda Direta':
             case 'Licitação':

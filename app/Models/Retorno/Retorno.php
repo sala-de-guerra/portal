@@ -8,6 +8,7 @@ class Retorno extends Model
 {
     protected $table = 'TBL_CONTROLA_RETORNO';
     public $timestamps = false;
+    protected $primaryKey = 'nuBem';
     protected $fillable = [
         'idRetorno'
         ,'nuBem'

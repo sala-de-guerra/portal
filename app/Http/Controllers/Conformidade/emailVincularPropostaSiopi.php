@@ -28,7 +28,7 @@
     <ol>
     <li style="text-align: justify;"> &nbsp;&nbsp;Informamos que o imóvel %NUMEROIMOVEL% está em processo de contratação pelo proponente <strong>%NOMEPROPONENTE1%</strong> CPF <strong>%CPFPROPONENTE1%</strong>, cuja proposta foi na modalidade <strong>%TIPODEVENDA%</strong> em <strong>%DATAPROPOSTA%</strong>, referente ao imóvel situado à %ENDERECOIMOVEL%.</li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Em continuidade ao processo de contratação supracitado, observamos que consta proposta gerada para o CPF do proponente, porém até o momento não foi vinculada ao imóvel pretendido. Desta forma, orientamos vincular a proposta ao imóvel pretendido e seguir a contratação, ou verificar se a proposta necessita de eventuais correções.</li></br>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, será iniciado processo de distrato.</li></br>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, poderá ser iniciado processo de distrato.</li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Aproveitamos o ensejo para lembrar que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a> está disponível cartilha para auxílio no processo de contratação (Cartilha para Contratação com uso de FGTS e Parcelamento).</li><br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Permanecemos à disposição.</li>
 

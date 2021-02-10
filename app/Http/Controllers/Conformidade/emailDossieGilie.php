@@ -32,9 +32,20 @@
             <li type='a' style="text-align: justify;">Portanto, para que seja possível o envio da documentação por esta GILIE/SP para a conformidade, se faz necessária ação da agência de contratação. Desta forma, solicitamos que nos seja enviado, mediante resposta ao presente e-mail com a seguinte documentação:</li></br>
             <ul>
                 %lista1%
+                %lista2%
+                %lista3%
+                %lista4%
+                %lista5%
+                %lista6%
+                %lista7%
+                %lista8%
+                %lista9%
+                %lista10%
+                %lista11%
+                %lista12%
             </ul><br>
         </ol>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, será iniciado processo de distrato.</li></br>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, poderá ser iniciado processo de distrato.</li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Aproveitamos o ensejo para lembrar que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a> está disponível cartilha para auxílio no processo de contratação (Cartilha para Contratação com uso de FGTS e Parcelamento).</li><br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Permanecemos à disposição.</li>
     </ol>
