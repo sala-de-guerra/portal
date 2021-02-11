@@ -52,11 +52,11 @@ $(document).ready(function(){
                     <div>
                         <button id="${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOBS${item.numeroContrato}"><i class="fas fa-info-circle"></i>
                         </button>&nbsp&nbsp&nbsp&nbsp
-                    </div>
-                    <div>
+                    
                         <button onclick="datepicker()" id="botaoOpcao${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOpcao${item.numeroContrato}"><i class="far fa-edit"></i>
                         </button>
                     </div>
+                    
                     <div class="divBotao'+item.numeroContrato+'" style="display: none;">
                         <button id="botaoContato${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalContato${item.numeroContrato}"><i class="far fa-envelope"></i>
                         </button>
@@ -97,19 +97,18 @@ $(document).ready(function(){
                                     <button type="button" class="btn btn-link tooltip-col" data-toggle="modal" data-target="#modalGerarPropostaSiopi${item.numeroContrato}" title="teste"><i class="far fa-sticky-note"></i><p>Gerar Proposta SIOPI</p><span class="tooltiptext4"><br>Síntese da atividade: <br><hr><br> este é um teste</span>
                                     </button>&nbsp&nbsp
                                 -->
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieGilie${item.numeroContrato}"><i class="fas fa-archive"></i><p>Dossiê GILIE</p></button>&nbsp&nbsp
+
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieAgencia${item.numeroContrato}"><i class="fas fa-store-alt"></i><p>Dossiê Agência</p></button>&nbsp&nbsp
+
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalInconformeSiiac${item.numeroContrato}"><i class="fas fa-exclamation"></i><p>Inconforme SIIAC</p></button>&nbsp&nbsp
 
                                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalGerarPropostaSiopi${item.numeroContrato}"><i class="far fa-sticky-note"></i><p>Gerar Proposta SIOPI</p></button>&nbsp&nbsp
 
                                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalVincularPropostaSiopi${item.numeroContrato}"><i class="fas fa-link"></i><p>Vincular Proposta SIOPI</p></button>&nbsp&nbsp
                                     
                                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalEfetivarAssinaturaContrato${item.numeroContrato}"><i class="fas fa-file-signature"></i><p>Efetivar Assinatura Contrato</p></button>&nbsp&nbsp
-                                    
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalInconformeSiiac${item.numeroContrato}"><i class="fas fa-exclamation"></i><p>Inconforme SIIAC</p></button>&nbsp&nbsp</br></br>
-                                    
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieGilie${item.numeroContrato}"><i class="fas fa-archive"></i><p>Dossiê GILIE</p></button>&nbsp&nbsp
-                                    
-                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalDossieAgencia${item.numeroContrato}"><i class="fas fa-store-alt"></i><p>Dossiê Agência</p></button>&nbsp&nbsp
-                                    
+                    
                                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalOutros${item.numeroContrato}"><i class="fas fa-th-large"></i><p>Outros</p></button><br>
 
                                     <div class="modal-footer">
@@ -135,7 +134,9 @@ $(document).ready(function(){
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
                                     
-                                        <p>Caso o processo esteja em conformidade no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI.</p>
+                                        <p><b>Atenção:</b> Observar se o presente processo de contratação está conforme no SIIAC <a href="http://siiac.caixa/" target="_blank">http://siiac.caixa/</a>, ao consultar por CPF nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, e se não foi gerada proposta no SIOPI para o presente CPF.</p>
+
+                                        <p>Caso tenha sido gerada e apenas não tenha sido vinculada, deve-se retornar a tela anterior e acionar a opção <em>Vincular Proposta SIOPI</em>.</p>
                                         
                                         <p>Importante:</p>
                                         <ul>
@@ -175,7 +176,7 @@ $(document).ready(function(){
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
 
-                                        <p>Caso o processo esteja em conformidade no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI.</p>
+                                        <p>Caso o processo esteja em conformidade no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, proposta já gerada no SIOPI para o CPF e não vinculada ao imóvel desejado, deve-se observar aos itens abaixo e caso se cumpram proceder o envio do e-mail.</p>
                                         
                                         <p>Importante:</p>
                                         <ul>
@@ -216,14 +217,14 @@ $(document).ready(function(){
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
 
-                                        <p>Caso o processo esteja em conformidade no SIIAC nas opções TRIAGEM GILIE e TRIAGEM AGÊNCIA, deve-se observar a movimentação da contratação no SIOPI.</p>
+                                        <p>Observar no SIOPI se a proposta já possui data de agendamento de assinatura. Em caso positivo aguardar antes de enviar o presente e-mail.</p>
                                         <p>Importante:</p>
                                         <ul>
                                             <li>Verificar no CIWEB se o contrato novo apresenta TP 025</li>
                                             <li style="color: red;"><strong>Atenção:</strong> caso seja observado que há TP 025 LIB/PEND/ATU para o novo contrato, não será necessário o envio do presente e-mail, apenas proceder com os acertos contábeis.</li>
                                             <li>OBS: Para verificar o status do TP025:
                                                 <ul>
-                                                    <li> <a href="http://ciweb4.extranet.caixa/sso/" target="_blank">Ciweb</a> &rarr; pesquisar pelo CPF do proponente &rarr; tela CPE </li>
+                                                    <li> <a href="http://ciweb4.extranet.caixa/sso/" target="_blank">Ciweb</a> &rarr; Pesquisar pelo CPF do proponente &rarr; Entrar no contrato e conferir tela CPE, inclusive comparando endereço do imóvel (tela CEI ou 3ª página do TP 001 da tela CPE). </li>
                                                     ou
                                                     <li> <a href="http://siopi.caixa/siopi-web/" target="_blank">SIOPI</a> &rarr; Proposta individual PF/PJ &rarr; clicar na proposta desejada (comparar endereço do imóvel) número do contrato será escrito no lado direito da tela </li>
                                                 </ul> 
@@ -250,7 +251,7 @@ $(document).ready(function(){
                           
                     
                     <div class="modal fade" id="modalInconformeSiiac${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelInconformeSiiac" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="ModalLabelInconformeSiiac"><b>Contrato ${item.contratoFormatado}</b> | Situação: A documentação está inconforme no SIIAC e necessita de ação da agência para regularização</h5>
@@ -263,7 +264,9 @@ $(document).ready(function(){
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
  
-                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente </p>
+                                        <p>Considerando-se que a presente contratação se dará via Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço<a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente.</p>
+
+                                        <p>Se ainda não houve o envio inicial de dossiê GILIE ou de dossie Agência, voltar a tela anterior e utilizar a opção Dossiê GILIE ou Dossiê Agência conforme necessidade.</p>
                                         
                                         <p>Importante:</p>
                                         <ul>
@@ -301,7 +304,7 @@ $(document).ready(function(){
                     </div>
 
                     <div class="modal fade" id="modalDossieGilie${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelDossieGilie" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="ModalLabelDossieGilie"><b>Contrato ${item.contratoFormatado}</b> | Situação: A documentação inicial não foi enviada no fila única pela GILIE e necessita de ação da agência para envio</h5>
@@ -314,10 +317,9 @@ $(document).ready(function(){
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
                                         
-                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente.</p>
-
-                                        <p>Status AGUARDA DOCS GILIE no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Processos Digitalizados</p>
-                               
+                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente ou Processos Digitalizados</p>
+                                        <p>Se exibido Status AGUARDA DOCS GILIE, observar quais são os documentos necessários ao apertar o botão ENVIAR DOCUMENTOS e selecionar abaixo quais destes devem ser enviados PELA AGÊNCIA para que a GILIE envie a respectiva documentação.</p>
+                                        <p>Caso seja exibida mensagem AGUARDA DOCS AGENCIA orientamos voltar a tela anterior e utilizar a opção Dossiê Agência.</p>                               
                                         <hr>
                                             
                                         <p><strong>Itens a serem enviados pela Agência:</strong></p>
@@ -406,63 +408,11 @@ $(document).ready(function(){
                                         <input type="hidden" name="_token" value="${csrfVar}">
                                         <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
                                     
-                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente.</p>
+                                        <p>Considerando-se Fluxo Agência, observar a necessidade de enviar dossiê inicial ou regularização de inconformidade no endereço <a href="http://retaguarda.caixa/digitalizar/#/digitalizacaoPendente" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Digitalização Pendente ou Processos Digitalizados.</p>
 
-                                        <p>Status AGUARDA DOCS GILIE no <a href="http://retaguarda.caixa/digitalizar/#/" target="_blank">http://retaguarda.caixa/digitalizar/#/</a> - Aba Processos Digitalizados</p>
-                               
+                                        <p>Se exibido Status AGUARDA DOCS AGÊNCIA proceda com o envio do presente e-mail.
+                                        Caso seja exibida mensagem AGUARDA DOCS GILIE orientamos voltar a tela anterior e utilizar a opção Dossiê Gilie.</p>
                                         <hr>
-                                    
-                                        <p><strong>Itens a serem enviados pela Agência:</strong></p>
-                                        
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="docIdent" id="docIdentAg" name="docIdent">
-                                            <label class="form-check-label" for="docIdentAg">Documento de Identificação (RG/CNH/etc)<b style="color:red;"> *CO 020</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="compEndereco" name="compEndereco" id="compEnderecoAg">
-                                            <label class="form-check-label" for="compEnderecoAg">Comprovante de Endereço<b style="color:red;"> *CO 020</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="compRenda" id="compRendaAg" name="compRenda">
-                                            <label class="form-check-label" for="compRendaAg">Comprovante de Renda<b style="color:red;"> *CR016</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="certNascCas" id="certNascCasAg" name="certNascCas">
-                                            <label class="form-check-label" for="certNascCasAg">Certidão de Nascimento/Casamento</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="compPagto" id="compPagtoAg" name="compPagto">
-                                            <label class="form-check-label" for="compPagtoAg">Comprovante de Pagamento de Entrada (PP15 ou boleto <b>e</b> respectivo comprovante)</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="impRenda" id="impRendaAg" name="impRenda">
-                                            <label class="form-check-label" for="impRendaAg">Imposto de Renda Completo (Apenas recibo não basta) OU <b style="color:red;"> *MO29899</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="formEnc" id="formEncAg" name="formEnc">
-                                            <label class="form-check-label" for="formEncAg">Formulário de Encaminhamento de Demanda<b style="color:red;"> *PF MO19601 PJ MO19602</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="propCompra" id="propCompraAg" name="propCompra">
-                                            <label class="form-check-label" for="propCompraAg">Proposta de Compra / Termo de Arrematação<b style="color:red;"> *MO19570</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="termoDir" id="termoDirAg" name="termoDir">
-                                            <label class="form-check-label" for="termoDirAg">Termo de Aquisição por Exercício de Direito de Preferência<b style="color:red;"> *MO28097</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="declNeg" id="declNegAg" name="declNeg">
-                                            <label class="form-check-label" for="declNegAg">Declaração Negativa de Propriedade do Imóvel<b style="color:red;"> *MO29898</b></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="certIptu" id="certIptuAg" name="certIptu">
-                                            <label class="form-check-label" for="certIptuAg">Certidão de IPTU na prefeitura demonstrando endereço atualizado</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="matrImov" id="matrImovAg" name="matrImov">
-                                            <label class="form-check-label" for="matrImovAg">Matrícula do Imóvel - verificar se ao mandar é possível "puxar" matrícula e cartório</label>
-                                        </div> 
-                                        <br>
 
                                         <div class="form-group">
                                             <label for="formPrazo${item.numeroContrato}">Informar prazo de retorno da Agência</label>
@@ -496,8 +446,9 @@ $(document).ready(function(){
                                     <input type="hidden" name="_token" value="${csrfVar}">
                                     <input type="hidden" name="contratoFormatado" value="${item.contratoFormatado}">
                                 
-                                    <p>Será apenas utilizado corpo do e-mail.</p>
-                                    <p>Cabe ao analista formular e-mail e salvar na respectiva pasta no servidor.</p>
+                                    <p>Casos pontuais não englobados em nenhuma das outras opções.</p>
+                                    <p>Formule os itens intermediários no campo abaixo.</p>
+                                    
                                     <hr>
 
                                     <div class="form-group">

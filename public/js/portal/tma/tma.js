@@ -74,6 +74,7 @@ $(document).ready(function(){
                           <a class="dropdown-item" id="baixar${item.NU_BEM}" type="button" data-toggle="modal" data-target="#baixarContrato${item.NU_BEM}"><i class="fas fa-dollar-sign"></i>&nbsp Lançar Venda</a>
                           <a class="dropdown-item" id="cancelar${item.NU_BEM}" type="button" data-toggle="modal" data-target="#cancelarContrato${item.NU_BEM}"><i class="fas fa-times"></i>&nbsp Distrato</a>
                           <a class="dropdown-item" id="aguarda${item.NU_BEM}" type="button" data-toggle="modal" data-target="#aguardaContrato${item.NU_BEM}"><i class="far fa-pause-circle"></i> Aguardar</a>
+                          <a class="dropdown-item" id="email${item.NU_BEM}" type="button" data-toggle="modal" data-target="#enviaEmail${item.NU_BEM}"><i class="far fa-edit"></i> Enviar e-mail</a>
                         </div>
                       </div>
 
@@ -154,7 +155,7 @@ $(document).ready(function(){
                           <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Aguarda pagamento</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Aguarda pagamento - Contrato <strong>${item.BEM_FORMATADO}</strong> </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -173,6 +174,73 @@ $(document).ready(function(){
                             </div>
                           </div>
                         </div>
+
+
+                        <!-- Modal Envia E-mail-->
+                        <div class="modal fade" id="enviaEmail${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="ModalLabelEmail" aria-hidden="true">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabelEmail"><b>Contrato ${item.BEM_FORMATADO}</b> | Situação: Outros</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                      </button>
+                              </div>
+                              <form method="post" action="../../estoque-imoveis/conformidade-contratacao/outros-agencia-mail/${item.BEM_FORMATADO}" id="formMailTma${item.BEM_FORMATADO}">
+                                <div class="modal-body">
+                                  <input type="hidden" name="_token" value="${csrfVar}">
+                                  <input type="hidden" name="contratoFormatado" value="${item.BEM_FORMATADO}">
+                              
+                                  <p>Casos pontuais não englobados em nenhuma das outras opções.</p>
+                                  <p>Formule os itens intermediários no campo abaixo.</p>
+                                  
+                                  <hr>
+
+                                  <div class="form-group">
+                                    <label for="mail${item.BEM_FORMATADO}">Digite os parágrafos a serem acrescentados no e-mail:</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    
+                                    <textarea class="form-control" id="mail${item.BEM_FORMATADO}" rows="3" name="textoEmail" required></textarea>
+                                    <small class="form-text text-muted">**Campo Obrigatório</small>
+                                    <button type="button" class="btn btn-link tooltip-col btn-sm text-muted float-right">Exemplo do e-mail que será enviado<span class="tooltiptext4"><br>MODELO DO E-MAIL: <br><hr>
+                                    
+    <p> <strong>Assunto</strong>: Contratação de Imóvel Adjudicado <br>– Fluxo de contratação Agência<br> – Imóvel <strong>%NUMEROIMOVEL%</strong></p>
+
+    <ol>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Informamos que o imóvel %NUMEROIMOVEL% <br>está em processo de contratação pelo <br>proponente <strong>%NOMEPROPONENTE1%</strong><br> CPF <strong>%CPFPROPONENTE1%</strong>, cuja proposta foi <br>na modalidade <strong>%TIPODEVENDA%</strong> em <br><strong>%DATAPROPOSTA%</strong>, referente ao imóvel situado <br> à %ENDERECOIMOVEL%.</li>
+    <li style="text-align: justify;"> &nbsp;&nbsp; <strong style="color: red;"><mark>O TEXTO APARECERÁ AQUI</mark></strong></li>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta<br> a presente solicitação e/ou justificativa <br>para o e-mail <b>giliesp01@caixa.gov.br</b> <br>até <strong style="color: red;">%DATARETORNO%</strong>.<br> Caso contrário, poderá ser iniciado<br> processo de distrato.</li>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Aproveitamos o ensejo para lembrar<br> que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a><br> está disponível cartilha para auxílio no processo <br>de contratação (Cartilha para Contratação com uso<br> de FGTS e Parcelamento).</li>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Permanecemos à disposição.</li>
+    </ol>
+
+                                    
+                                    </span></button>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="formPrazoMail${item.BEM_FORMATADO}">Informar prazo de retorno da Agência</label>
+                                    <input type="date" class="form-control datepicker" name="prazoAtendimentoAgencia" autocomplete="off" id="formPrazoTma${item.BEM_FORMATADO}" placeholder="Selecione data no calendário..." required>
+                                    <small class="form-text text-muted">**Campo Obrigatório</small>
+                                  </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+      
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+
+
+
 
                         <div class="modal fade" id="consultaBoletoModalaVista${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-xxl" role="document">
@@ -214,6 +282,10 @@ $(document).ready(function(){
                 </tr>`
               
             $(linha).appendTo('#tblTma>tbody');
+
+              $("#email"+item.NU_BEM).one( "click", function() {
+                $('.datepicker').datepicker({dateFormat: 'yy-mm-dd',  minDate: 0});
+              });
 
               if (item.baixaEfetuada == 'sim'){
                 $('#nomeProponente'+item.NU_BEM).html('<b style="color: blue;">'+item.NOME_PROPONENTE +'</b>')
@@ -390,7 +462,6 @@ $.getJSON('/tma-indicadores-a-vista', function(dados){
 
   })
 })
-
 
 setTimeout(function(){
   $('#fadeOut').fadeOut("slow");

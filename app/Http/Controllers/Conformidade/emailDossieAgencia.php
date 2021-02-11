@@ -30,7 +30,7 @@
     <ul>
         <li>Portanto, para que seja possível prosseguir com a contratação se faz necessário envio da documentação pela agência de contratação no SICT2. Para obter cartilha contendo detalhamentos referentes ao envio link no item 4 do presente e-mail.</li>
     </ul><br>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, poderá ser iniciado processo de distrato.</li></br>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa para o e-mail <b>giliesp01@caixa.gov.br</b> até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, poderá ser iniciado processo de distrato.</li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Aproveitamos o ensejo para lembrar que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a> está disponível cartilha para auxílio no processo de contratação (Cartilha para Contratação com uso de FGTS e Parcelamento).</li><br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Permanecemos à disposição.</li>
     </ol>

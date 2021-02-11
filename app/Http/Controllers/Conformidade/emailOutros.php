@@ -27,7 +27,7 @@
     <ol>
     <li style="text-align: justify;"> &nbsp;&nbsp;Informamos que o imóvel %NUMEROIMOVEL% está em processo de contratação pelo proponente <strong>%NOMEPROPONENTE1%</strong> CPF <strong>%CPFPROPONENTE1%</strong>, cuja proposta foi na modalidade <strong>%TIPODEVENDA%</strong> em <strong>%DATAPROPOSTA%</strong>, referente ao imóvel situado à %ENDERECOIMOVEL%.</li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp; %OBSERVAÇÕES% </li></br>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, poderá ser iniciado processo de distrato.</li></br>
+    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa para o e-mail <b>giliesp01@caixa.gov.br</b> até <strong style="color: red;">%DATARETORNO%</strong>. Caso contrário, poderá ser iniciado processo de distrato.</li></br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Aproveitamos o ensejo para lembrar que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a> está disponível cartilha para auxílio no processo de contratação (Cartilha para Contratação com uso de FGTS e Parcelamento).</li><br>
     <li style="text-align: justify;"> &nbsp;&nbsp;Permanecemos à disposição.</li>
     </ol>
