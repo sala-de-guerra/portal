@@ -49,19 +49,18 @@ $(document).ready(function(){
                         </div>
                     -->
                     
-                    <div>
-                        <button id="${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOBS${item.numeroContrato}"><i class="fas fa-info-circle"></i>
-                        </button>&nbsp&nbsp&nbsp&nbsp
-                    
-                        <button onclick="datepicker()" id="botaoOpcao${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOpcao${item.numeroContrato}"><i class="far fa-edit"></i>
-                        </button>
+                    <div style="white-space:nowrap">
+                            <button id="${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOBS${item.numeroContrato}"><i class="fas fa-info-circle"></i>
+                            </button>
+                            <button onclick="datepicker()" id="botaoOpcao${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalOpcao${item.numeroContrato}"><i class="far fa-edit"></i>
+                            </button>&nbsp&nbsp
+                        
+                        
+                        <div class="divBotao'+item.numeroContrato+'" style="display: none;">
+                            <button id="botaoContato${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalContato${item.numeroContrato}"><i class="far fa-envelope"></i>
+                            </button>
+                        </div>
                     </div>
-                    
-                    <div class="divBotao'+item.numeroContrato+'" style="display: none;">
-                        <button id="botaoContato${item.numeroContrato}" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalContato${item.numeroContrato}"><i class="far fa-envelope"></i>
-                        </button>
-                    </div>
-
                     <!-- Modal de Observação -->
 
                     <div class="modal fade" id="modalOBS${item.numeroContrato}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -515,34 +514,19 @@ $(document).ready(function(){
             `
 
             
-            if (item.cardAgrupamento == "Agência" && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios" ) {
+            if (item.cardAgrupamento == "Agência" && item.tipoProposta != "A vista com recursos proprios" ) {
                 $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
                 $('.divBotao'+item.numeroContrato).show()
-            } else if (item.fluxoContratacao == "AG" && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios") {
+            } else if (item.fluxoContratacao == "AG"  && item.tipoProposta != "A vista com recursos proprios") {
                 $(linha).appendTo('#tblConformidadeFluxoAgencia>tbody');
-            } else if (item.fluxoContratacao == "CCA" && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios"){ 
+            } else if (item.fluxoContratacao == "CCA" && item.tipoProposta != "A vista com recursos proprios"){ 
                 $(linha).appendTo('#tblConformidadeFluxoCca>tbody');
-            } else if (item.cardAgrupamento == null && item.sinalPago == "SIM" && item.tipoProposta != "A vista com recursos proprios"){ 
+            } else if (item.cardAgrupamento == null && item.tipoProposta != "A vista com recursos proprios"){ 
                 $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
             }
 
-            // else {
-            //     $(linha).appendTo('#tblCardAgrupamentoAgencia>tbody');
-            //     $('.divBotao'+item.numeroContrato).show()
-            // }
-
-            // if (item.tipoHistorico == "CONTRATACAO" || item.tipoHistorico == "DISTRATO" ||
-            //     item.tipoHistorico == "PAGAMENTO" || item.tipoHistorico == "PREPARACAO" ||
-            //     item.tipoHistorico == "CONFORMIDADE CONTRATAÇÃO" || item.tipoHistorico == "AVERBACAO" ||
-            //     item.tipoHistorico == "EMGEA" ||
-            //     item.tipoHistorico == "LEILÃO NEGATIVO" || item.tipoHistorico == "ATENDE") 
-            // {
-            //     $('#novoHistorico'+item.numeroContrato).text("")
-            //  }
-      
-
-           
  
+
 
         $('#'+item.numeroContrato).click(function() {
         $.get( '/estoque-imoveis/consulta-historico-contrato/'+item.contratoFormatado, function(data) {
