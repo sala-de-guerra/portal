@@ -78,11 +78,11 @@
                             <span class="sr-only">{{ __('adminlte::adminlte.toggle_navigation') }}</span>
                         </a>
                     </li>
-                    @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
+                    <!-- @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item') -->
                     @yield('content_top_nav_left')
 
                     <li class="nav-item d-none d-sm-block">
-                        <form class="form-inline m-0" id="formBarraBusca" onsubmit="validarBusca()" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
+                        <!-- <form class="form-inline m-0" id="formBarraBusca" onsubmit="validarBusca()" action="/estoque-imoveis/consultar-imovel/resultado" method="post">
                             {{ csrf_field() }}
                             <select name="tipoVariavel" id="tipoVariavel" class="form-control form-control-navbar mr-3 text-white" required>
                                 <option value="" disabled selected>Selecione</option>
@@ -101,7 +101,7 @@
                                     <button class="btn btn-navbar" type="submit" id="botaoPesquisar" title="Pesquisar"> <i class="fas fa-search"></i> </button>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
                     </li>
                 </ul>
 
@@ -143,7 +143,7 @@
                         </a>
                     </li>
 
-                    @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
+                    <!-- @if (in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', 'DESENVOLVEDOR']))
                         <li class="nav-item dropdown user-menu mx-1">
                             <a href="#" class="nav-link dropdown-toggle px-0" data-toggle="dropdown">
                                 <i class="far fa-lg fa-bell"></i>
@@ -167,7 +167,7 @@
                                 </a>
                             </div>
                         </li>
-                    @endIf
+                    @endIf -->
 
                     @if (in_array(session()->get('acessoEmpregadoPortal'), [env('NOME_NOSSA_UNIDADE')]))
                     <li class="nav-item dropdown user-menu mx-1">
@@ -204,7 +204,7 @@
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title ">{{ session()->get('nomeCompleto') }}</h3>
                                         <p class="text-sm">{{ session()->get('matricula') }} - {{ session()->get('nomeFuncao') }}</p>
-                                        <p class="text-sm"><p class="text-sm" id="lotacao">UNIDADE: {{ session()->get('codigoLotacaoAdministrativa') }}</p>
+                                        <p class="text-sm">UNIDADE: </p> <p class="text-sm" id="lotacao">{{ session()->get('codigoLotacaoAdministrativa') }}</p>
                                         <p class="text-sm" id="perfil">{{ session()->get('acessoEmpregadoPortal') }}</p>
                                     </div>
                                 </div>
@@ -267,27 +267,8 @@
             <div class="row">
             <div class="col-sm-2">
                 <div class="d-inline justify-content-center">
-                    <img src="{{ asset('img/LogoGilie.png') }}" alt="Logo Gilie" style="max-height: 40px;">
-                </div>
-            </div>
-            <div class="col-sm-10">
-
-                <div class="d-inline justify-content-center">
-                    <b class="m-2">2020 - GILIE - </b>
-                </div>
-
-                <div class="d-sm-inline d-none justify-content-center">
-                    <b class="m-2">Gerência de Alienar Bens Móveis e Imóveis</b>
-                </div>
-
-                <div class="d-inline justify-content-right">
-                    <b class="m-2">Data da atualização: {{ session('dataAtualizacaoBaseSimov') }}</b>
-                </div>
-                <div class="d-inline justify-content-right">
-
-                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="top" title="Carlos Alberto Dalcin David ,    Eduardo Chiaki Chuman ,    Fernanda Naomi Hoota Okubo ,    Rafael Pimentel Gonçalves ,    Vladimir Pereira de Lemos"><i class="fas fa-info-circle"></i>
-                Desenvolvedores
-                </button>
+                    <img src="{{ asset('img/logo_vilop.png') }}" alt="Logo Gilie" style="max-height: 40px;">
+                    <b class="m-2">2021 - VILOP </b>
                 </div>
             </div>
 
@@ -315,13 +296,13 @@
 @section('adminlte_js')
 
     <script>
-        $('#tipoVariavel').change(function(){
-        if ($(this).val() === "atende") {
-            $('#inputBarraBusca').attr("placeholder", "Digite o número do Atende");
-        }else{
-            $('#inputBarraBusca').attr("placeholder", "Digite no mínimo 5 caracteres para pesquisar.");
-        }
-    })
+    //     $('#tipoVariavel').change(function(){
+    //     if ($(this).val() === "atende") {
+    //         $('#inputBarraBusca').attr("placeholder", "Digite o número do Atende");
+    //     }else{
+    //         $('#inputBarraBusca').attr("placeholder", "Digite no mínimo 5 caracteres para pesquisar.");
+    //     }
+    // })
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -336,14 +317,14 @@
         //     };
         // };
 
-        function validarBuscaSm() {
-            let inputBarraBuscaValue = $('#inputBarraBuscaSm').val();
-            if (inputBarraBuscaValue.length < 5) {
-                alert('Digite no mínimo 5 caracteres para pesquisar.');
-            } else {
-                $('#formBarraBuscaSm').submit();
-            };
-        };
+        // function validarBuscaSm() {
+        //     let inputBarraBuscaValue = $('#inputBarraBuscaSm').val();
+        //     if (inputBarraBuscaValue.length < 5) {
+        //         alert('Digite no mínimo 5 caracteres para pesquisar.');
+        //     } else {
+        //         $('#formBarraBuscaSm').submit();
+        //     };
+        // };
     </script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>

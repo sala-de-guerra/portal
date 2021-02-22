@@ -1,0 +1,1 @@
+@extends('portal.produtividade-cepat.index')

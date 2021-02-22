@@ -181,7 +181,7 @@ $(document).ready(function(){
                           <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="ModalLabelEmail"><b>Contrato ${item.BEM_FORMATADO}</b> | Situação: Outros</h5>
+                                <h5 class="modal-title" id="ModalLabelEmail"><b>Contrato ${item.BEM_FORMATADO}</b> | Situação: Personalizar e-mail para unidade</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                       </button>
@@ -197,24 +197,11 @@ $(document).ready(function(){
                                   <hr>
 
                                   <div class="form-group">
-                                    <label for="mail${item.BEM_FORMATADO}">Digite os parágrafos a serem acrescentados no e-mail:</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    <label for="mail${item.BEM_FORMATADO}">Digite o item 2. da mensagem:</label>&nbsp&nbsp&nbsp&nbsp&nbsp
                                     
                                     <textarea class="form-control" id="mail${item.BEM_FORMATADO}" rows="3" name="textoEmail" required></textarea>
                                     <small class="form-text text-muted">**Campo Obrigatório</small>
-                                    <button type="button" class="btn btn-link tooltip-col btn-sm text-muted float-right">Exemplo do e-mail que será enviado<span class="tooltiptext4"><br>MODELO DO E-MAIL: <br><hr>
-                                    
-    <p> <strong>Assunto</strong>: Contratação de Imóvel Adjudicado <br>– Fluxo de contratação Agência<br> – Imóvel <strong>%NUMEROIMOVEL%</strong></p>
-
-    <ol>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Informamos que o imóvel %NUMEROIMOVEL% <br>está em processo de contratação pelo <br>proponente <strong>%NOMEPROPONENTE1%</strong><br> CPF <strong>%CPFPROPONENTE1%</strong>, cuja proposta foi <br>na modalidade <strong>%TIPODEVENDA%</strong> em <br><strong>%DATAPROPOSTA%</strong>, referente ao imóvel situado <br> à %ENDERECOIMOVEL%.</li>
-    <li style="text-align: justify;"> &nbsp;&nbsp; <strong style="color: red;"><mark>O TEXTO APARECERÁ AQUI</mark></strong></li>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Assim, solicitamos retorno com resposta<br> a presente solicitação e/ou justificativa <br>para o e-mail <b>giliesp01@caixa.gov.br</b> <br>até <strong style="color: red;">%DATARETORNO%</strong>.<br> Caso contrário, poderá ser iniciado<br> processo de distrato.</li>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Aproveitamos o ensejo para lembrar<br> que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a><br> está disponível cartilha para auxílio no processo <br>de contratação (Cartilha para Contratação com uso<br> de FGTS e Parcelamento).</li>
-    <li style="text-align: justify;"> &nbsp;&nbsp;Permanecemos à disposição.</li>
-    </ol>
-
-                                    
-                                    </span></button>
+                                    <button type="button" class="btn btn-link btn-sm text-muted float-right" data-toggle="modal" data-target="#modalExemploMail${item.NU_BEM}">Exemplo do e-mail que será enviado</button>
                                   </div>
 
                                   <div class="form-group">
@@ -233,14 +220,6 @@ $(document).ready(function(){
                             </div>
                           </div>
                         </div>
-
-
-
-
-
-
-
-
 
                         <div class="modal fade" id="consultaBoletoModalaVista${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-xxl" role="document">
@@ -277,6 +256,38 @@ $(document).ready(function(){
                             </div>
                           </div>
                         </div>
+
+                        <!-- Modal Exemplo e-mail-->
+                        <div class="modal fade" id="modalExemploMail${item.NU_BEM}" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+                          <div class="modal-dialog float-right" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="TituloModalLongoExemplo">Modelo de E-mail</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body" id="corpoEmail">
+                                <p><strong>Assunto</strong>: Contratação de Imóvel Adjudicado – Fluxo de contratação Agência – Imóvel <strong>${item.BEM_FORMATADO}</strong></p> 
+                                <ol>
+                                <li> &nbsp;Informamos que o imóvel ${item.BEM_FORMATADO} está em processo de contratação pelo proponente <strong>${item.NOME_PROPONENTE}</strong> CPF <strong>${item.CPF_CNPJ_PROPONENTE}</strong>, cuja proposta foi na modalidade <strong>${item.tipoVenda}</strong> em <strong>(DATA DA PROPOSTA)</strong>, referente ao imóvel situado à (ENDEREÇO IMÓVEL).</li>
+                                <li> &nbsp; <mark><b>(O TEXTO APARECERÁ AQUI)</b></mark> </li>
+                                <li> &nbsp;Assim, solicitamos retorno com resposta a presente solicitação e/ou justificativa para o e-mail <b>giliesp01@caixa.gov.br</b> até <strong style="color: red;"><mark><b>(DATA RETORNO APARECERÁ AQUI)</b></mark></strong>. Caso contrário, poderá ser iniciado processo de distrato.</li>
+                                <li> &nbsp;Aproveitamos o ensejo para lembrar que no endereço <a href="https://portal.gilie.sp.caixa/orientacoes">https://portal.gilie.sp.caixa/orientacoes</a> está disponível cartilha para auxílio no processo de contratação (Cartilha para Contratação com uso de FGTS e Parcelamento).</li>
+                                <li> &nbsp;Permanecemos à disposição.</li>
+                                </ol>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        
+
 
                     </td>
                 </tr>`

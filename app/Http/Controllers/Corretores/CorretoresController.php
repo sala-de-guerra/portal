@@ -596,34 +596,34 @@ class CorretoresController
                   $mailGILIE->Body = $mensagemGILIE;
                   $mailGILIE->send();
 
-                  $mensagemCorretor = file_get_contents(("orientacaoefetivacaocontratacaoCorretor.php"), dirname(__FILE__));
-                  $mensagemCorretor = str_replace("%CORRETOR%",  $corretor->CORRETOR, $mensagemCorretor);
-                  $anexo = storage_path("app/public/Boas_Vindas_Corretores.pdf");
+                  // $mensagemCorretor = file_get_contents(("orientacaoefetivacaocontratacaoCorretor.php"), dirname(__FILE__));
+                  // $mensagemCorretor = str_replace("%CORRETOR%",  $corretor->CORRETOR, $mensagemCorretor);
+                  // $anexo = storage_path("app/public/Boas_Vindas_Corretores.pdf");
                   
-                  $mail = new PHPMailer(true);
-                  $mail->isSMTP();
-                  $mail->CharSet = 'UTF-8'; 
-                  $mail->isHTML(true);                                         
-                  $mail->Host = 'sistemas.correiolivre.caixa';  
-                  $mail->SMTPAuth = false;                                  
-                  $mail->Port = 25;
-                  // $mail->SMTPDebug = 2;
-                  $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
-                  $mail->addReplyTo('GILIESP01@caixa.gov.br');
-                  if (env('APP_ENV') == 'PRODUCAO'){
-                    $mail->addAddress($corretor->emailCorretor);
-                    $mail->addCC( session('matricula') . '@mail.caixa');
-                    $mail->addBCC('GILIESP09@caixa.gov.br');
-                    $mail->addBCC('c142639@caixa.gov.br');
-                    $mail->addBCC('c098453@caixa.gov.br');
-                  }else{
-                      $mail->addAddress('c098453@mail.caixa');
-                      $mail->addCC('c142639@mail.caixa');
-                  }
-                  $mail->Subject = 'Orientações para efetivação de contratação - Credenciamento de corretores e imobiliárias';
-                  $mail->Body = $mensagemCorretor;
-                  $mail->AddAttachment($anexo);
-                  $mail->send();
+                  // $mail = new PHPMailer(true);
+                  // $mail->isSMTP();
+                  // $mail->CharSet = 'UTF-8'; 
+                  // $mail->isHTML(true);                                         
+                  // $mail->Host = 'sistemas.correiolivre.caixa';  
+                  // $mail->SMTPAuth = false;                                  
+                  // $mail->Port = 25;
+                  // // $mail->SMTPDebug = 2;
+                  // $mail->setFrom('GILIESP09@caixa.gov.br', 'GILIESP - Rotinas Automáticas');
+                  // $mail->addReplyTo('GILIESP01@caixa.gov.br');
+                  // if (env('APP_ENV') == 'PRODUCAO'){
+                  //   $mail->addAddress($corretor->emailCorretor);
+                  //   $mail->addCC( session('matricula') . '@mail.caixa');
+                  //   $mail->addBCC('GILIESP09@caixa.gov.br');
+                  //   $mail->addBCC('c142639@caixa.gov.br');
+                  //   $mail->addBCC('c098453@caixa.gov.br');
+                  // }else{
+                  //     $mail->addAddress('c098453@mail.caixa');
+                  //     $mail->addCC('c142639@mail.caixa');
+                  // }
+                  // $mail->Subject = 'Orientações para efetivação de contratação - Credenciamento de corretores e imobiliárias';
+                  // $mail->Body = $mensagemCorretor;
+                  // $mail->AddAttachment($anexo);
+                  // $mail->send();
 
             
                   session()->flash('corMensagem', 'success');

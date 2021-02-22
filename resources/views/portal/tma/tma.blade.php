@@ -4,6 +4,11 @@
 
 @section('content_header')
 <style>
+#corpoEmail{
+    font-size: 10pt;
+    margin-left: 0;
+    white-space: pre-wrap;
+}
 @media (min-width: 768px) {
   .modal-xxl {
     width: 90%;

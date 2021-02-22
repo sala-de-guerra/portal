@@ -81,6 +81,7 @@
         var numeroContrato = '{{ $numeroContrato }}';
 
         function avisoMensageria(url) {
+            console.log(url)
             Swal.fire({
             titleText: 'Deseja realmente enviar a autorização de contratação?',
             text: "certifique-se de que a PP15 foi paga",
