@@ -17,6 +17,7 @@ class Ldap
     // private $simularMatricula = 'c082403'; // Carla - Assistente JR - GILIE/SP
     // private $simularMatricula = 'c083912'; // MARTINA  - Gerente GILIE/PO
     // private $simularMatricula = 'c085308'; // Cristiane  - Prestador
+    // private $simularMatricula = 'c111710'; // Cristiane  - Chuman
 
     private $matricula;
     private $nomeCompleto;

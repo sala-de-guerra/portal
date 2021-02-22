@@ -54,7 +54,6 @@ Route::get("/download/{file}", function ($file="") {
     return response()->download(storage_path("app/public/".$file));
     });
 
-
 // Consulta de bem imóvel
 Route::get('consulta-bem-imovel/{contrato}', 'GestaoImoveisCaixa\ConsultaContratoController@show')->name('consulta-bem-imovel');
 
@@ -671,4 +670,95 @@ Route::prefix('/indicadores/doacoes')->group(function () {
     //RETORNA VIEW
     Route::get('/', 'Indicadores\indicadoresDoacoesBensMoveis@indexIndicadoresDoacoes');
 });
+
+Route::prefix('produtividade-vilop/')->group(function () {
+  
+    //index
+    Route::get('/', 'VILOP\produtividadeVilopController@index');
+    //index
+    Route::get('/dashboard/dash', 'VILOP\produtividadeVilopController@dashboard');
+    //index da pesquisa
+    Route::get('/produtividade-vilop/lista/{cgc}', 'VILOP\produtividadeVilopController@index');
+    //Upload de atividades
+    Route::get('/atividades-em-lote/upload', 'VILOP\produtividadeVilopController@viewUploadEmLote');
+    //upload de atividades enviar
+    Route::post('/carga-em-lote/envia', 'VILOP\produtividadeVilopController@import');
+    //lista dados do Upload
+    Route::get('/atividades-em-lote/dados', 'VILOP\produtividadeVilopController@listaDadosDeUpload');
+    //lista Macro Atividade
+    Route::get('/lista-macro-processo/{cgc}', 'VILOP\produtividadeVilopController@listaMacroProcesso');
+    //lista Areas com Macro Atividade Cadastrada
+    Route::get('/unidades-macro-cadastrada', 'VILOP\produtividadeVilopController@listaAreasComMacroAtividade');
+    //Cria Macro Atividade
+    Route::post('/cria-macro-atividade', 'VILOP\produtividadeVilopController@createMacroProcessoVilop');
+    //view Micro Atividade
+    Route::get('/microatividade/{idMacro}', 'VILOP\produtividadeVilopController@viewMicroatividade');
+    //Cria Micro Atividade
+    Route::post('/cria-micro-atividade/{idMacro}', 'VILOP\produtividadeVilopController@createMicroProcessoVilop');
+    //view com DataTable
+    Route::get('/{cgc}', 'VILOP\produtividadeVilopController@indexVilop');
+    //update Micro Atividade
+    Route::post('/update-micro-atividade/{idMicro}', 'VILOP\produtividadeVilopController@updateMicroProcessoVilop');
+    //lista unidades
+    Route::get('/lista-unidades/lista', 'VILOP\produtividadeVilopController@viewListaUnidades');
+    //baixa-excel-geral
+    Route::get('/excel/planilha-vilop-geral', 'VILOP\produtividadeVilopController@criaPlanilhaExcelVilopGeral');
+    //baixa-excel-unidade
+    Route::get('/excel/planilha-vilop-geral/{unidade}', 'VILOP\produtividadeVilopController@criaPlanilhaExcelVilopUnidade');
+    //Excluir Macro Atividade
+    Route::post('/delete-macro-atividade/{idMacro}', 'VILOP\produtividadeVilopController@deleteMacroProcessoVilop');
+    //lista dados da Macroatividade
+    Route::get('/dashboard/dados-macro', 'VILOP\produtividadeVilopController@listaDadosMacroatividade');
+    //lista dados da Microatividade
+    Route::get('/dashboard/dados-micro', 'VILOP\produtividadeVilopController@listaDadosMicroatividade');
+    //lista média niveis da Microatividade
+    Route::get('/dashboard/media-niveis-micro/{unidade}', 'VILOP\produtividadeVilopController@mediaNiveisMicro');
+    //lista indicadores Microatividade
+    Route::get('/dashboard/dados-indicadores-micro/{unidade}', 'VILOP\produtividadeVilopController@dadosIndicadoresMicro');
+});
+//update Micro Atividade na Raiz
+Route::post('/update-micro-atividade/{idMicro}', 'VILOP\produtividadeVilopController@updateMicroProcessoVilop');
+
+
+Route::prefix('produtividade-cepat/')->group(function () {
+  
+    //index
+    Route::get('/', 'CEPAT\cepatController@index');
+    //index
+    Route::get('/dashboard/dash', 'CEPAT\cepatController@dashboard');
+    //view com DataTable
+    Route::get('/{cgc}', 'CEPAT\cepatController@indexCepat');
+    //index da pesquisa
+    Route::get('/produtividade-cepat/lista/{cgc}', 'CEPAT\cepatController@index');
+    //Upload de atividades
+    Route::get('/atividades-em-lote/upload', 'CEPAT\cepatController@viewUploadEmLote');
+    //upload de atividades enviar
+    Route::post('/carga-em-lote/envia', 'CEPAT\cepatController@import');
+    //lista dados do Upload
+    Route::get('/atividades-em-lote/dados', 'CEPAT\cepatController@listaDadosDeUpload');
+    //lista Macro Atividade
+    Route::get('/lista-macro-processo/{cgc}', 'CEPAT\cepatController@listaMacroProcesso');
+    //lista Areas com Macro Atividade Cadastrada
+    Route::get('/unidades-macro-cadastrada/lista', 'CEPAT\cepatController@listaAreasComMacroAtividade');
+    //Cria Macro Atividade
+    Route::post('/cria-macro-atividade', 'CEPAT\cepatController@createMacroProcessoCepat');
+    //view Micro Atividade
+    Route::get('/microatividade/{idMacro}', 'CEPAT\cepatController@viewMicroatividade');
+    //Cria Micro Atividade
+    Route::post('/cria-micro-atividade/{idMacro}', 'CEPAT\cepatController@createMicroProcessoCepat');
+    //update Micro Atividade
+    Route::post('/update-micro-atividade/{idMicro}', 'CEPAT\cepatController@updateMicroProcessoCepat');
+    //lista unidades
+    Route::get('/lista-unidades/lista', 'CEPAT\cepatController@viewListaUnidades');
+    //baixa-excel-geral
+    Route::get('/excel/planilha-cepat-geral', 'CEPAT\cepatController@criaPlanilhaExcelCepatGeral');
+    //baixa-excel-unidade
+    Route::get('/excel/planilha-cepat-geral/{unidade}', 'CEPAT\cepatController@criaPlanilhaExcelCepatUnidade');
+    //Excluir Macro Atividade
+    Route::post('/delete-macro-atividade/{idMacro}', 'CEPAT\cepatController@deleteMacroProcessoCepat');
+    //Criar atividade da micro
+    Route::post('/cria-atividade-da-micro/{idMicro}', 'CEPAT\cepatController@novaAtividade');
+});
+//update Micro Atividade na Raiz
+Route::post('/update-micro-atividade/{idMicro}', 'CEPAT\cepatController@updateMicroProcessoCepat');
 

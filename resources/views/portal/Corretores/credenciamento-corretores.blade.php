@@ -127,32 +127,32 @@ input[type='file'] {
                 </div>
             
 
-            <div class="card-body">
-                <div class="notice notice-success">
-                Lista geral de credenciamento dos corretores. &nbsp &nbsp
-                    <a href="/corretores/baixar-planilha-credenciamento"><button style="float: right" type="button" class="btn btn-success">Baixar Lista Geral &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
-                <br>
-                </div><br>
-                <div class="row">
-                    <div class="col-sm-12 table-responsive p-0">
-                        <table id="tblCredenciamento" class="table table-bordered table-striped hover dataTable">
-                    <div class="col-sm-12" style="text-align: right; color: red;">**Dados preenchidos pela CECOT</div>
-                            <thead>
-                                <tr>
-                                    <th>Processo</th>
-                                    <th style="text-align:center;">Nome Credenciado</th>
-                                    <th>Nº Contrato<b style="color: red;">*</b></th> <!--nº do contrato - preenchido Gilog-->
-                                    <th style="text-align:center;">Convocação<b style="color: red;">*</b></th> <!--data convocação - preenchido Gilog-->
-                                    <th>Contrato Disponível<b style="color: red;">*</b></th> <!--SIM/NÃO - preenchido Gilog-->
-                                    <th style="text-align:center;">SICAF<b style="color: red;">*</b></th> <!--pendente/regular - preenchido Gilog-->
-                                </tr>
-                            </thead>
+                <div class="card-body">
+                    <div class="notice notice-success">
+                    Lista geral de credenciamento dos corretores. &nbsp &nbsp
+                        <a href="/corretores/baixar-planilha-credenciamento"><button style="float: right" type="button" class="btn btn-success">Baixar Lista Geral &nbsp &nbsp<i class="fas fa-file-excel"></i></button></a>
+                        <br>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive p-0">
+                            <table id="tblCredenciamento" class="table table-bordered table-striped hover dataTable">
+                                <div class="col-sm-12" style="text-align: right; color: red;">**Dados preenchidos pela CECOT</div>
+                                <thead>
+                                    <tr>
+                                        <th>Processo</th>
+                                        <th style="text-align:center;">Nome Credenciado</th>
+                                        <th>Nº Contrato<b style="color: red;">*</b></th> <!--nº do contrato - preenchido Gilog-->
+                                        <th style="text-align:center;">Convocação<b style="color: red;">*</b></th> <!--data convocação - preenchido Gilog-->
+                                        <th>Contrato Disponível<b style="color: red;">*</b></th> <!--SIM/NÃO - preenchido Gilog-->
+                                        <th style="text-align:center;">SICAF<b style="color: red;">*</b></th> <!--pendente/regular - preenchido Gilog-->
+                                    </tr>
+                                </thead>
 
-                            <tbody>
+                                <tbody>
 
-                            </tbody>
-                            
-                        </table><br>
+                                </tbody>
+                                
+                            </table><br>
 
                         </div>
                     </div>
