@@ -719,6 +719,16 @@ Route::prefix('produtividade-vilop/')->group(function () {
 //update Micro Atividade na Raiz
 Route::post('/update-micro-atividade/{idMicro}', 'VILOP\produtividadeVilopController@updateMicroProcessoVilop');
 
+Route::prefix('produtividade-vilop/indicadores/')->group(function () {
+    //lista indicadores Microatividade (tabela)
+    Route::get('view/{unidade}', 'VILOP\indicadoresProdutividadeVilop@viewIndicadoresTabela');
+    //lista top 5 Media/dia
+    Route::get('media-dia/{unidade}', 'VILOP\indicadoresProdutividadeVilop@listaMediaDiaUnidade');
+    //lista tabela geral
+    Route::get('tabela-geral/{unidade}', 'VILOP\indicadoresProdutividadeVilop@listaTabelaGeral');
+    //lista tabela geral
+    Route::get('tabela-geral-sql/{unidade}', 'VILOP\indicadoresProdutividadeVilop@listaTabelaGeralSQL');
+});
 
 Route::prefix('produtividade-cepat/')->group(function () {
   

@@ -34,16 +34,16 @@
                                 <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/atividades-em-lote/upload">                    
                                         <i class="far fa-fw fa-circle "></i>
-                                        <p>Atividades em lote</p>
+                                        <p>Importar dados</p>
                                     </a>
                                 </li>  
 
-                                <li class="nav-item ">
+                                {{-- <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/dashboard/dash">                    
                                         <i class="far fa-fw fa-circle "></i>
                                         <p>Indicadores</p>
                                     </a>
-                                </li>   
+                                </li>    --}}
                             </ul>
                         </li>
                     </ul>

@@ -20,8 +20,8 @@ class CreatePesquisaCepatMicroatividade extends Migration
             $table->string('NOME_MICROATIVIDADE', 120);
             $table->string('MENSURAVEL', 1);
             $table->float('QTDE_PESSOAS_ALOCADAS')->nullable();
-            $table->integer('VOLUME_TOTAL_DEMANDA');
-            $table->integer('VOLUME_TOTAL_TRATADA');
+            $table->integer('VOLUME_TOTAL_DEMANDA')->nullable();
+            $table->integer('VOLUME_TOTAL_TRATADA')->nullable();
             $table->dateTime('PERIODO_TRATADO_DE')->nullable();
             $table->dateTime('PERIODO_TRATADO_ATE')->nullable();
             $table->float('MEDIA_DIA')->nullable();
@@ -31,7 +31,7 @@ class CreatePesquisaCepatMicroatividade extends Migration
             $table->float('GRAU_CRITICIDADE')->nullable();
             $table->float('GRAU_PADRONIZACAO')->nullable();
             $table->float('GRAU_AUTONOMIA')->nullable();
-            $table->string('EXCLUIDO_USUARIO', 1);
+            $table->string('EXCLUIDO_USUARIO', 1)->nullable();
             $table->string('MATRICULA_RESPONSAVEL_EXCLUSAO', 12)->nullable();
             $table->string('SISTEMA_ORIGEM_INFORMACAO', 255)->nullable();
             $table->string('MATRICULA_RESPONSAVEL_UPLOAD', 12)->nullable();

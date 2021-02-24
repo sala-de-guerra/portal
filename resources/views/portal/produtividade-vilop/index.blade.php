@@ -186,6 +186,11 @@
                     <h3 class="card-title callout callout-info mt-1">
                         <span id='unidade'> {{$unidadeCGC}} </span> - {{$unidadeNome}}
                     </h3>
+                    <div class="float-right">
+                        <form action="/produtividade-vilop/indicadores/view/{{$unidadeCGC}}">
+                            <button type="submit" class="btn btn-warning" disabled><i class="fas fa-chart-bar"> &nbsp&nbspIndicadores</i></button>
+                        </form>
+                    </div>
                 </div> <!-- /.card-header -->
                 <input type="hidden" id='tokenVilop' value="{{ csrf_token() }}">
                 <div class="card-body">

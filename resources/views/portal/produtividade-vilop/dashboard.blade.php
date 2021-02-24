@@ -26,13 +26,13 @@
               <div class="small-box bg-info">
                 <div class="inner">
                   <h3 id="totalUnidades"></h3>
-                    <h5><strong>Unidades pesquisadas</strong></h5>
-                    <p>Qtde áreas com resposta</p>
+                    <h5><strong>Unidades Pesquisadas</strong></h5>
+                    <p>Qtde de Áreas com resposta</p>
                 </div>
                 <div class="icon">
                   <i class="far fa-bookmark"></i>
                 </div>
-                <a data-toggle="collapse" aria-expanded="false" aria-controls="listaNovos" href="#listaNovos" class="small-box-footer" role="button" id="listagemNovos"onclick="mudaInfoNovos()">Mais informações</a>
+                <a data-toggle="collapse" aria-expanded="false" aria-controls="listaNovos" href="#listaNovos" class="small-box-footer" role="button" id="listagemNovos" onclick="mudaInfoNovos()">Mais informações</a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -52,8 +52,8 @@
               <div class="small-box bg-warning">
                 <div class="inner">
                   <h3 id="totalMicro"> </h3>
-                  <h5><strong>Microatividade</strong></h5>
-                    <p>Qtde macroatividades cadastradas</p>
+                  <h5><strong>Microatividades</strong></h5>
+                    <p>Qtde microatividades cadastradas</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-exclamation"></i>
@@ -66,7 +66,7 @@
 
         <div class="collapse" id="listaNovos">
           <div class="card card-body card-outline card-info">
-            <h2 class="card-title"><b>Novos</b></h2>&nbsp
+            <h2 class="card-title"><b>Unidades Pesquisadas</b></h2>&nbsp
             <table id="listaUnidades" class="table table-bordered table-striped">
               <thead>                   
                 <tr>
@@ -85,7 +85,7 @@
 
         <div class="collapse" id="listaTratados">
           <div class="card card-body card-outline card-success"> 
-            <h2 class="card-title"><b>Tratados</b></h2>&nbsp
+            <h2 class="card-title"><b>Macroatividades Cadastradas</b></h2>&nbsp
               <table id="tblListaMacro" class="table table-bordered table-striped">
                 <thead>                   
                   <tr>
@@ -105,7 +105,7 @@
 
         <div class="collapse" id="listaPendentes">
           <div class="card card-body card-outline card-warning">
-            <h2 class="card-title"><b>Pendentes</b></h2>&nbsp
+            <h2 class="card-title"><b>Microatividades Cadastradas</b></h2>&nbsp
               <table id="tblListaMicro" class="table table-bordered table-striped">
                 <thead>                   
                   <tr>
@@ -383,6 +383,31 @@ $.getJSON('/produtividade-vilop/dashboard/dados-indicadores-micro/' + unidade, f
         })
     })
 }
-    </script>
+
+function mudaInfoPendentes() {
+  if($('#listagemPendentes').text() == "Mais informações"){
+    $('#listagemPendentes').text("Ocultar");
+  }else{
+    $('#listagemPendentes').text("Mais informações")
+  }
+}
+
+function mudaInfoTratados() {
+  if($('#listagemTratados').text() == "Mais informações"){
+    $('#listagemTratados').text("Ocultar");
+  }else{
+    $('#listagemTratados').text("Mais informações")
+  }
+}
+      
+function mudaInfoNovos() {
+  if($('#listagemNovos').text() == "Mais informações"){
+    $('#listagemNovos').text("Ocultar");
+  }else{
+    $('#listagemNovos').text("Mais informações")
+  }
+}
+
+</script>
 
 @endsection

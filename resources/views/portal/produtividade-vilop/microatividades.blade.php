@@ -92,24 +92,24 @@
                             <p><em>Ex. Atividade não mensurável: administrativo, caixa postal, teams, apresentações, reuniões e etc.</em></p>">
                             <i class="far fa-question-circle 5x"></i>
                         </a>     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp           
-                        <div class="custom-control custom-radio custom-control-inline">
+                        <div class="form-check form-check-inline">
                             <input type="radio" 
                             id="opc-mensuravel-s" 
                             name="mensuravel" 
                             value="S" 
-                            class="custom-control-input" 
+                            class="form-check-input"  
                             onclick="mensuravelClicado()"
                             checked>
-                            <label for="opc-mensuravel-s" class="custom-control-label font-weight-normal">Sim</label><br>
+                            <label for="opc-mensuravel-s" class="form-check-label">Sim</label><br>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
+                        <div class="form-check form-check-inline">
                             <input type="radio" 
                             id="opc-mensuravel-n" 
                             name="mensuravel" 
                             value="N" 
-                            class="custom-control-input"
+                            class="form-check-input" 
                             onclick="mensuravelClicado()">
-                            <label for="opc-mensuravel-n" class="custom-control-label font-weight-normal">Não</label><br>
+                            <label for="opc-mensuravel-n" class="form-check-label">Não</label><br>
                         </div>
                     </div>
                 </div>                
@@ -269,29 +269,29 @@
 
             <div class="col-6">
                             
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelComplexidade" id="nivel-complexidade-1" value = "1" required checked>
-                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-1">Muito baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelComplexidade" id="nivel-complexidade-1" value = "1" required checked>
+                    <label class="form-check-label" for="nivel-complexidade-1">Muito baixo</label>
                 </div>
         
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelComplexidade" id="nivel-complexidade-2" value = "2">
-                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-2">Baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelComplexidade" id="nivel-complexidade-2" value = "2">
+                    <label class="form-check-label" for="nivel-complexidade-2">Baixo</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelComplexidade" id="nivel-complexidade-3" value = "3">
-                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-3">Médio</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelComplexidade" id="nivel-complexidade-3" value = "3">
+                    <label class="form-check-label" for="nivel-complexidade-3">Médio</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelComplexidade" id="nivel-complexidade-4" value = "4">
-                    <label  class="custom-control-label font-weight-normal" for="nivel-complexidade-4">Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelComplexidade" id="nivel-complexidade-4" value = "4">
+                    <label  class="form-check-label" for="nivel-complexidade-4">Alto</label>
                 </div>                
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelComplexidade" id="nivel-complexidade-5" value = "5">
-                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-5">Muito Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelComplexidade" id="nivel-complexidade-5" value = "5">
+                    <label class="form-check-label" for="nivel-complexidade-5">Muito Alto</label>
                 </div>
             </div>
         </div>
@@ -318,29 +318,29 @@
                 </div>   
             </div>
             <div class="col-6">
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelAutomacao" id="nivel-automacao-1" value = "1" required checked>
-                    <label class="custom-control-label font-weight-normal"  for="nivel-automacao-1">Muito baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelAutomacao" id="nivel-automacao-1" value = "1" required checked>
+                    <label class="form-check-label"  for="nivel-automacao-1">Muito baixo</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">    
-                    <input class="custom-control-input" type="radio" name="nivelAutomacao" id="nivel-automacao-2" value = "2">
-                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-2">Baixo</label>
+                <div class="form-check form-check-inline">    
+                    <input class="form-check-input"  type="radio" name="nivelAutomacao" id="nivel-automacao-2" value = "2">
+                    <label class="form-check-label" for="nivel-automacao-2">Baixo</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelAutomacao" id="nivel-automacao-3" value = "3">
-                    <label  class="custom-control-label font-weight-normal" for="nivel-automacao-3">Médio</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelAutomacao" id="nivel-automacao-3" value = "3">
+                    <label  class="form-check-label" for="nivel-automacao-3">Médio</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelAutomacao" id="nivel-automacao-4" value = "4">
-                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-4">Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelAutomacao" id="nivel-automacao-4" value = "4">
+                    <label class="form-check-label" for="nivel-automacao-4">Alto</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="nivelAutomacao" id="nivel-automacao-5" value = "5">
-                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-5">Muito Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="nivelAutomacao" id="nivel-automacao-5" value = "5">
+                    <label class="form-check-label" for="nivel-automacao-5">Muito Alto</label>
                 </div>
             </div>
         </div>
@@ -367,29 +367,29 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauCriticidade" id="nivel-criticidade-1" value = "1" required checked>
-                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-1">Muito baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauCriticidade" id="nivel-criticidade-1" value = "1" required checked>
+                    <label class="form-check-label" for="nivel-criticidade-1">Muito baixo</label>
                 </div>
         
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauCriticidade" id="nivel-criticidade-2" value = "2">
-                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-2">Baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauCriticidade" id="nivel-criticidade-2" value = "2">
+                    <label class="form-check-label" for="nivel-criticidade-2">Baixo</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauCriticidade" id="nivel-criticidade-3" value = "3">
-                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-3">Médio</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauCriticidade" id="nivel-criticidade-3" value = "3">
+                    <label class="form-check-label" for="nivel-criticidade-3">Médio</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauCriticidade" id="nivel-criticidade-4" value = "4">
-                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-4">Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauCriticidade" id="nivel-criticidade-4" value = "4">
+                    <label class="form-check-label" for="nivel-criticidade-4">Alto</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauCriticidade" id="nivel-criticidade-5" value = "5">
-                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-5">Muito Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauCriticidade" id="nivel-criticidade-5" value = "5">
+                    <label class="form-check-label" for="nivel-criticidade-5">Muito Alto</label>
                 </div>
             </div>
         </div>
@@ -416,29 +416,29 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauPadronizacao" id="nivel-padronizacao-1" value = "1" required checked>
-                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-1">Muito baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauPadronizacao" id="nivel-padronizacao-1" value = "1" required checked>
+                    <label class="form-check-label" for="nivel-padronizacao-1">Muito baixo</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauPadronizacao" id="nivel-padronizacao-2" value = "2">
-                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-2">Baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauPadronizacao" id="nivel-padronizacao-2" value = "2">
+                    <label class="form-check-label" for="nivel-padronizacao-2">Baixo</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-3" value = "3">
-                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-3">Médio</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input"  name="grauPadronizacao" id="nivel-padronizacao-3" value = "3">
+                    <label class="form-check-label" for="nivel-padronizacao-3">Médio</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-4" value = "4">
-                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-4">Alto</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input"  name="grauPadronizacao" id="nivel-padronizacao-4" value = "4">
+                    <label class="form-check-label" for="nivel-padronizacao-4">Alto</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-5" value = "5">
-                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-5">Muito Alto</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input"  name="grauPadronizacao" id="nivel-padronizacao-5" value = "5">
+                    <label class="form-check-label" for="nivel-padronizacao-5">Muito Alto</label>
                 </div>
             </div>
         </div>
@@ -466,29 +466,29 @@
                 </div>
             </div> 
             <div class="col-6">
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauAutonomia" id="nivel-autonomia-1" value = "1" required checked>
-                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-1">Muito baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauAutonomia" id="nivel-autonomia-1" value = "1" required checked>
+                    <label class="form-check-label" for="nivel-autonomia-1">Muito baixo</label>
                 </div>
             
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauAutonomia" id="nivel-autonomia-2" value = "2">    
-                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-2">Baixo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauAutonomia" id="nivel-autonomia-2" value = "2">    
+                    <label class="form-check-label" for="nivel-autonomia-2">Baixo</label>
                 </div>
                 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauAutonomia" id="nivel-autonomia-3" value = "3">
-                    <label class="custom-control-label font-weight-normal"for="nivel-autonomia-3">Médio</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauAutonomia" id="nivel-autonomia-3" value = "3">
+                    <label class="form-check-label"for="nivel-autonomia-3">Médio</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauAutonomia" id="nivel-autonomia-4" value = "4">
-                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-4">Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauAutonomia" id="nivel-autonomia-4" value = "4">
+                    <label class="form-check-label" for="nivel-autonomia-4">Alto</label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" name="grauAutonomia" id="nivel-autonomia-5" value = "5">
-                    <label class="custom-control-label font-weight-normal"for="nivel-autonomia-5">Muito Alto</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"  type="radio" name="grauAutonomia" id="nivel-autonomia-5" value = "5">
+                    <label class="form-check-label"for="nivel-autonomia-5">Muito Alto</label>
                 </div>
             </div>
         </div>
