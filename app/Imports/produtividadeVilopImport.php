@@ -56,11 +56,11 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
             }
             if (isset($row[6])){
                 $dataDE   =  ($row[6] - 25569) * 86400;
-                $novaMicroAtividadeVilop->MEDIA_DIA                  = gmdate("Y-m-d", $dataDE);
+                $novaMicroAtividadeVilop->PERIODO_TRATADO_DE                  = gmdate("Y-m-d", $dataDE);
             }
             if (isset($row[7])){
                 $dataPARA =  ($row[7] - 25569) * 86400;
-                $novaMicroAtividadeVilop->MEDIA_DIA                  = gmdate("Y-m-d", $dataPARA);
+                $novaMicroAtividadeVilop->PERIODO_TRATADO_ATE                  = gmdate("Y-m-d", $dataPARA);
             }
             
             if (isset($row[9])){
@@ -120,23 +120,23 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
             }else{
                 $novaMicroAtividadeVilop->MENSURAVEL                  = "N";
             }
-            if (isset($row[5])){
+            if (isset($row[4])){
                 $novaMicroAtividadeVilop->VOLUME_TOTAL_DEMANDA        = $row[4];
             }else{
                 $novaMicroAtividadeVilop->VOLUME_TOTAL_DEMANDA        = 0;
             }
-            if (isset($row[6])){
+            if (isset($row[5])){
                 $novaMicroAtividadeVilop->VOLUME_TOTAL_TRATADA        = $row[5];
             }else{
                 $novaMicroAtividadeVilop->VOLUME_TOTAL_TRATADA        = 0;
             }
             if (isset($row[6])){
                 $dataDE   =  ($row[6] - 25569) * 86400;
-                $novaMicroAtividadeVilop->MEDIA_DIA                  = gmdate("Y-m-d", $dataDE);
+                $novaMicroAtividadeVilop->PERIODO_TRATADO_DE                  = gmdate("Y-m-d", $dataDE);
             }
             if (isset($row[7])){
                 $dataPARA =  ($row[7] - 25569) * 86400;
-                $novaMicroAtividadeVilop->MEDIA_DIA                  = gmdate("Y-m-d", $dataPARA);
+                $novaMicroAtividadeVilop->PERIODO_TRATADO_ATE                  = gmdate("Y-m-d", $dataPARA);
             }
             if (isset($row[9])){
                 $novaMicroAtividadeVilop->MEDIA_DIA                  = $row[8];

@@ -47,37 +47,14 @@
                             <tr>
                                 <th>Processo</th>
                                 <th>Último Tratamento</th>
-                                <th>Status</th> 
+                                <th>Status</th>
+                                <th>Observação</th>
                                 <th> </th>
                             </tr>
                         </thead>
                         
-                        <tboby>
-                            <tr>
-                                <th>Atualização Portal</th>
-                                <th>04/01/2021</th> 
-                                <th><span class="badge badge-success">Atualizado</span></th>
-                                <th><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObsPortal">
-                                    <i class="far fa-lg fa-edit"></i></button></th>
-                            </tr>
-                            <tr>
-                                <th>Envia e-mail corretor com orientações venda</th>
-                                <th>04/01/2021</th> 
-                                <th><span class="badge badge-warning">Pendente</span> </th>
-                                <th> </th>
-                            </tr>
-                            <tr>
-                                <th>Verificação de venda de corretor pré-habilitado</th>
-                                <th>04/01/2021</th> 
-                                <th><span class="badge badge-danger">Erro na Atualização</span></th>
-                                <th> </th>
-                            </tr>
-                            <tr>
-                                <th>Verificação de venda de corretor pré-habilitado</th>
-                                <th>04/01/2021</th> 
-                                <th><span class="badge badge-info">Outra info</span></th>
-                                <th> </th>
-                            </tr>
+                        <tbody>
+                        
                         </tbody>
 
                     </table>

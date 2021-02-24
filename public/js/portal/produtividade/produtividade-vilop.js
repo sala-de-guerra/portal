@@ -75,19 +75,19 @@ $(document).ready(function(){
                                     </button>
                                 </div>
 
-                                <form action="update-micro-atividade/${item.idMicro}" method="post" id='formUpdate${item.idMicro}'>
+                                <form action="/produtividade-vilop/update-micro-atividade/${item.idMicro}" method="post" id='formUpdate${item.idMicro}'>
                                     <input type="hidden" name="_token" value="${csrfVarVilop}">
                                     
                                     <div class="modal-body">    
                                         <div class="form-inline">
                                             <h5 style="color:red"><b>Deseja Excluir Micro Atividade: ${item.NOME_MICROATIVIDADE}?</b></h5>&nbsp&nbsp&nbsp&nbsp
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" value="Naoexcluir" id="exampleCheck2" class="custom-control-input" name="excluirMicroAtividade" checked>
-                                                <label class="custom-control-label font-weight-normal" for="exampleCheck2">Não</label>
-                                            </div>
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" value="excluir" class="custom-control-input" id="exampleCheck1" name="excluirMicroAtividade">
-                                                <label class="custom-control-label font-weight-normal" for="exampleCheck1">Sim</label>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" value="Naoexcluir" class="form-check-input" name="excluirMicroAtividade" id="exampleCheck2" checked>
+                                                <label class="form-check-label" for="exampleCheck2">Não</label>
+                                            </div>&nbsp&nbsp&nbsp
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" value="excluir" class="form-check-input" name="excluirMicroAtividade" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">Sim</label>
                                             </div>
                                         </div>
                                         <hr>
@@ -114,24 +114,24 @@ $(document).ready(function(){
                                             <div class="col-lg-6">
                                                 <div class="form-inline">
                                                     <h5 class="text-danger">3. Esta atividade é Mensurável?** &nbsp</h5>             
-                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                        <div class="form-check form-check-inline">
                                                             <input type="radio" 
                                                             id="opc-mensuravel-${item.idMicro}S" 
                                                             name="mensuravel" 
                                                             value="S" 
-                                                            class="custom-control-input"  
+                                                            class="form-check-input" 
                                                             onclick="mensuravelClicado()"
                                                             >
-                                                            <label for="opc-mensuravel-s" class="custom-control-label font-weight-normal">Sim</label><br>
-                                                        </div>
-                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <label for="opc-mensuravel-s" class="form-check-label">Sim</label><br>
+                                                        </div>&nbsp&nbsp&nbsp
+                                                        <div class="form-check form-check-inline">
                                                             <input type="radio" 
                                                             id="opc-mensuravel-${item.idMicro}N" 
                                                             name="mensuravel" 
                                                             value="N" 
-                                                            class="custom-control-input" 
+                                                            class="form-check-input"
                                                             onclick="mensuravelClicado()">
-                                                            <label for="opc-mensuravel-n" class="custom-control-label font-weight-normal">Não</label><br>
+                                                            <label for="opc-mensuravel-n" class="form-check-label">Não</label><br>
                                                         </div>
                                                 </div>
                                             </div>
@@ -213,7 +213,7 @@ $(document).ready(function(){
                                                 <label class="font-weight-normal" for="media-dia">6.3. Média de Atendimentos por dia </label>
                                                 <input 
                                                     type="number"
-                                                    min="1" 
+                                                    step="0.01"
                                                     name="mediaDia" 
                                                     id="media-atendimento-dia"
                                                     class="form-control"
@@ -224,6 +224,7 @@ $(document).ready(function(){
                                                 <label class="font-weight-normal" for="tempo-realizado-microprocesso">6.4. Tempo de realização (minutos)</label>                                    
                                                 <input 
                                                     type="number" 
+                                                    step="0.01"
                                                     name="tempoEmMinutos" 
                                                     id="tempo-realizado-microprocesso"
                                                     class="form-control"
@@ -237,27 +238,29 @@ $(document).ready(function(){
                                             <div class="col-sm-3">
                                                 <h5>Nível de Complexidade</h5>
                                             </div>
-                                            <div class="col-6">     
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}1" value = "1" ${item.NIVEL_COMPLEXIDADE == "1.0" ? 'cheked':''}>
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-1">Muito baixo</label>
+                                            <div class="col-6">
+                                                
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" class="form-check-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}1" value = "1" ${item.NIVEL_COMPLEXIDADE == "1.0" ? 'cheked':''}>
+                                                    <label class="form-check-label" for="nivel-complexidade-1">Muito baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}2" value = "2" ${item.NIVEL_COMPLEXIDADE == "2.0" ? 'cheked':''}>
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-2">Baixo</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" class="form-check-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}2" value = "2" ${item.NIVEL_COMPLEXIDADE == "2.0" ? 'cheked':''}>
+                                                    <label class="form-check-label" for="nivel-complexidade-2">Baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}3" value = "3" ${item.NIVEL_COMPLEXIDADE == "3.0" ? 'cheked':''}>
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-3">Médio</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" class="form-check-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}3" value = "3" ${item.NIVEL_COMPLEXIDADE == "3.0" ? 'cheked':''}>
+                                                    <label class="form-check-label" for="nivel-complexidade-3">Médio</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}4" value = "4" ${item.NIVEL_COMPLEXIDADE == "4.0" ? 'cheked':''}>
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-4">Alto</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" class="form-check-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}4" value = "4" ${item.NIVEL_COMPLEXIDADE == "4.0" ? 'cheked':''}>
+                                                    <label class="form-check-label" for="nivel-complexidade-4">Alto</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline">        
-                                                    <input type="radio" class="custom-control-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}5" value = "5" ${item.NIVEL_COMPLEXIDADE == "5.0" ? 'cheked':''}>
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-complexidade-5">Muito Alto</label>
+                                                <div class="form-check form-check-inline">        
+                                                    <input type="radio" class="form-check-input" name="nivelComplexidade" id="nivel-complexidade-${item.idMicro}5" value = "5" ${item.NIVEL_COMPLEXIDADE == "5.0" ? 'cheked':''}>
+                                                    <label class="form-check-label" for="nivel-complexidade-5">Muito Alto</label>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                         <hr>
@@ -267,25 +270,25 @@ $(document).ready(function(){
                                                 <h5>Nível de Automação</h5>
                                             </div>
                                             <div class="col-6"> 
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}1" value = "1">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-1">Muito baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}1" value = "1">
+                                                    <label class="form-check-label" for="nivel-automacao-1">Muito baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}2" value = "2">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-2">Baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}2" value = "2">
+                                                    <label class="form-check-label" for="nivel-automacao-2">Baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}3" value = "3">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-3">Médio</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}3" value = "3">
+                                                    <label class="form-check-label" for="nivel-automacao-3">Médio</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input"name="nivelAutomacao" id="nivel-automacao-${item.idMicro}4" value = "4">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-4">Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input"name="nivelAutomacao" id="nivel-automacao-${item.idMicro}4" value = "4">
+                                                    <label class="form-check-label" for="nivel-automacao-4">Alto</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}5" value = "5">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-automacao-5">Muito Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="nivelAutomacao" id="nivel-automacao-${item.idMicro}5" value = "5">
+                                                    <label class="form-check-label" for="nivel-automacao-5">Muito Alto</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -296,25 +299,25 @@ $(document).ready(function(){
                                                 <h5>Grau de Criticidade</h5>
                                             </div>
                                             <div class="col-6">
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}1" value = "1">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-1">Muito baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}1" value = "1">
+                                                    <label class="form-check-label" for="nivel-criticidade-1">Muito baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}2" value = "2">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-2">Baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}2" value = "2">
+                                                    <label class="form-check-label" for="nivel-criticidade-2">Baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}3" value = "3">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-3">Médio</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}3" value = "3">
+                                                    <label class="form-check-label" for="nivel-criticidade-3">Médio</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}4" value = "4">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-4">Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}4" value = "4">
+                                                    <label class="form-check-label" for="nivel-criticidade-4">Alto</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}5" value = "5">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-criticidade-5">Muito Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauCriticidade" id="nivel-criticidade-${item.idMicro}5" value = "5">
+                                                    <label class="form-check-label" for="nivel-criticidade-5">Muito Alto</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -325,25 +328,25 @@ $(document).ready(function(){
                                                 <h5>Grau de Padronização</h5>
                                             </div>
                                             <div class="col-6">
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}1" value = "1">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-1">Muito baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}1" value = "1">
+                                                    <label class="form-check-label" for="nivel-padronizacao-1">Muito baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}2" value = "2">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-2">Baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}2" value = "2">
+                                                    <label class="form-check-label" for="nivel-padronizacao-2">Baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}3" value = "3">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-3">Médio</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}3" value = "3">
+                                                    <label class="form-check-label" for="nivel-padronizacao-3">Médio</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}4" value = "4">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-4">Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}4" value = "4">
+                                                    <label class="form-check-label" for="nivel-padronizacao-4">Alto</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}5" value = "5">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-padronizacao-5">Muito Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauPadronizacao" id="nivel-padronizacao-${item.idMicro}5" value = "5">
+                                                    <label class="form-check-label" for="nivel-padronizacao-5">Muito Alto</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -354,25 +357,25 @@ $(document).ready(function(){
                                                 <h5>Grau de Autonomia</h5>
                                             </div>
                                             <div class="col-6">
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}1" value = "1">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-1">Muito baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}1" value = "1">
+                                                    <label class="form-check-label" for="nivel-autonomia-1">Muito baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}2" value = "2">    
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-2">Baixo</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}2" value = "2">    
+                                                    <label class="form-check-label" for="nivel-autonomia-2">Baixo</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}3" value = "3">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-3">Médio</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}3" value = "3">
+                                                    <label class="form-check-label" for="nivel-autonomia-3">Médio</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}4" value = "4">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-4">Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}4" value = "4">
+                                                    <label class="form-check-label" for="nivel-autonomia-4">Alto</label>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline"> 
-                                                    <input type="radio" class="custom-control-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}5" value = "5">
-                                                    <label class="custom-control-label font-weight-normal" for="nivel-autonomia-5">Muito Alto</label>
+                                                <div class="form-check form-check-inline"> 
+                                                    <input type="radio" class="form-check-input" name="grauAutonomia" id="nivel-autonomia-${item.idMicro}5" value = "5">
+                                                    <label class="form-check-label" for="nivel-autonomia-5">Muito Alto</label>
                                                 </div>
                                             </div>
                                         </div>

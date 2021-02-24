@@ -24,4 +24,6 @@ class rotinasAutomaticas extends Controller
     {
         return view('portal.gerencial.rotinas-automaticas');
     }
+
+    
 }
