@@ -229,7 +229,7 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
             },
             '16' => function($attribute, $value, $onFailure) { 
                 if (!isset($value)) {
-                    $onFailure('Coluna QTDE_PESSOAS_ALOCADAS não pode ter célula vazia'); 
+                    $onFailure('Coluna QTDE_PESSOAS_ALOCADAS não pode ter célula vazia, caso todas as células desta coluna estejam preenchidas, delete as últimas linhas em branco.'); 
                 } 
             },
         ];

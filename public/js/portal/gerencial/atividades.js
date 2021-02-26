@@ -3,6 +3,10 @@ var equipes;
 var equipe;
 var regiaoUnidadeSecao = $('#lotacao').html();
 
+var str = regiaoUnidadeSecao
+var regiaoUnidadeSecao = str.replace(/\D/g, "");
+console.log(regiaoUnidadeSecao)
+
 $(document).ready( function () {
     $(".menu-hamburguer").click();
 });

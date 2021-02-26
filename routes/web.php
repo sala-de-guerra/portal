@@ -772,3 +772,7 @@ Route::prefix('produtividade-cepat/')->group(function () {
 //update Micro Atividade na Raiz
 Route::post('/update-micro-atividade/{idMicro}', 'CEPAT\cepatController@updateMicroProcessoCepat');
 
+Route::prefix('/indicadores/pesquisa-cepat')->group(function () {
+    //RETORNA VIEW
+    Route::get('/', 'Indicadores\indicadoresPesquisaCepat@indexIndicadoresPesquisaCepat');
+});
