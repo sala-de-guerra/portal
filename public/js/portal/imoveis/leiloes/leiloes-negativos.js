@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
     var unidade = $('#lotacao').text()
+    var str = unidade
+    var unidade = str.replace(/\D/g, "");
     $.getJSON('/estoque-imoveis/leiloes-negativos/listar-leiloes/'+ unidade, function(dados){
         $.each(dados, function(key, item) {
             dataLeilaoNegativo = item.dataSegundoLeilao

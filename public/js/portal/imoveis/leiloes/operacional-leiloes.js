@@ -1,4 +1,6 @@
 var unidade = $('#lotacao').text()
+var str = unidade
+var unidade = str.replace(/\D/g, "");
 var csrfVar = $('meta[name="csrf-token"]').attr('content');
 var url     = window.location.href;
 var chbsplit     = url.slice(75) 
