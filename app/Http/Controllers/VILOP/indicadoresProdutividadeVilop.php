@@ -73,8 +73,8 @@ class indicadoresProdutividadeVilop extends Controller
         WITH MAIORES_VOLUMES(MEDIA_DIA) AS
         (
             SELECT TOP 5 round([MEDIA_DIA], 0) as MEDIA_DIA
-              FROM [7257_DES].[dbo].[TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS] as macro
-              inner join [7257_DES].[dbo].[TBL_PRODUTIVIDADE_VILOP_TBL_MICROPROCESSOS] as micro on [IdMacro] = [IdMacroProcesso]
+              FROM [TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS] as macro
+              inner join [TBL_PRODUTIVIDADE_VILOP_TBL_MICROPROCESSOS] as micro on [IdMacro] = [IdMacroProcesso]
               where 
               CGC_UNIDADE ='7723' 
               and micro.EXCLUIDO_USUARIO='N' and macro.[EXCLUIDO_USUARIO]='N'
@@ -91,50 +91,54 @@ class indicadoresProdutividadeVilop extends Controller
         
 
     $listaMediaDiaUnidade = DB::select("
-    SELECT TOP 1000 [IdMacro]
-          ,[CGC_UNIDADE]
-          ,[NOME_UNIDADE]
-          ,[NOME_MACROATIVIDADE]
-          ,[NOME_MICROATIVIDADE]
-          ,[MATRICULA_RESPONSAVEL_RESPOSTA]
-          ,[DATA_RESPOSTA]
-          ,macro.[EXCLUIDO_USUARIO]
-          ,macro.[MATRICULA_RESPONSAVEL_EXCLUSAO]
-          ,micro.[MEDIA_DIA]
-          ,CASE 
-                WHEN [MEDIA_DIA] >= $MENOR_MAIOR_VALOR  THEN 'VERDADEIRO'
-                ELSE 'FALSO'
-            END AS MAIOR_VOLUME
-          ,CASE 
-                WHEN [NIVEL_COMPLEXIDADE] > 4 and [GRAU_CRITICIDADE] > 4  THEN 'VERDADEIRO'
-                ELSE 'FALSO'
-            END AS COMPLEXO_CRITICO
-            ,CASE 
-                WHEN [NIVEL_AUTOMACAO] <= 3 and [GRAU_PADRONIZACAO] <= 3  THEN 'VERDADEIRO'
-                ELSE 'FALSO'
-            END AS BAIXA_AUTOMATIZACAO_PADRONIZACAO
-            ,CASE 
-                WHEN [NIVEL_AUTOMACAO] <= 3 and [GRAU_PADRONIZACAO] <= 3 AND [NIVEL_COMPLEXIDADE] < 4 and [GRAU_CRITICIDADE] < 4  THEN 'VERDADEIRO'
-                ELSE 'FALSO'
-            END AS MANUAIS
-            ,CASE 
-                WHEN [NIVEL_AUTOMACAO] =5  THEN 'VERDADEIRO'
-                ELSE 'FALSO'
-            END AS AUTOMATIZADOS
-            ,CASE
-                WHEN [NIVEL_AUTOMACAO] =5  THEN 'AUTOMATIZADOS'
-                WHEN [MEDIA_DIA] >= $MENOR_MAIOR_VALOR  THEN 'MAIOR VOLUME'
-                WHEN [NIVEL_COMPLEXIDADE] > 4 and [GRAU_CRITICIDADE] > 4  THEN 'COMPLEXOS CRITICOS'
-                WHEN [NIVEL_AUTOMACAO] <= 3 and [GRAU_PADRONIZACAO] <= 3 AND [NIVEL_COMPLEXIDADE] < 4 and [GRAU_CRITICIDADE] < 4  THEN 'MANUAIS'
-                ELSE 'SECUNDÁRIOS'
-            END AS RESULTADO
-    FROM    [TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS] as macro
-            INNER JOIN
-            [TBL_PRODUTIVIDADE_VILOP_TBL_MICROPROCESSOS] as micro on [IdMacro] = [IdMacroProcesso]
-    WHERE
-            CGC_UNIDADE = $cgc
-            and micro.EXCLUIDO_USUARIO='N' and macro.[EXCLUIDO_USUARIO]='N'
-    ORDER BY NOME_MACROATIVIDADE ASC
+    SELECT [IdMacro]
+      ,[CGC_UNIDADE]
+      ,[NOME_UNIDADE]
+      ,[NOME_MACROATIVIDADE]
+      ,[idMicro]
+      ,[NOME_MICROATIVIDADE]
+      ,[MATRICULA_RESPONSAVEL_RESPOSTA]
+      ,[DATA_RESPOSTA]
+      ,macro.[EXCLUIDO_USUARIO]
+      ,macro.[MATRICULA_RESPONSAVEL_EXCLUSAO]
+      ,micro.[MEDIA_DIA]
+      ,CASE 
+            WHEN [MEDIA_DIA] >= $MENOR_MAIOR_VALOR  THEN 'VERDADEIRO'
+            ELSE 'FALSO'
+        END AS MAIOR_VOLUME
+      ,CASE 
+            WHEN [NIVEL_COMPLEXIDADE] > 4 and [GRAU_CRITICIDADE] > 4  THEN 'VERDADEIRO'
+            ELSE 'FALSO'
+        END AS COMPLEXO_CRITICO
+        ,CASE 
+            WHEN [NIVEL_AUTOMACAO] <= 3 and [GRAU_PADRONIZACAO] <= 3  THEN 'VERDADEIRO'
+            ELSE 'FALSO'
+        END AS BAIXA_AUTOMATIZACAO_PADRONIZACAO
+        ,CASE 
+            WHEN [NIVEL_AUTOMACAO] <= 3 and [GRAU_PADRONIZACAO] <= 3 AND [NIVEL_COMPLEXIDADE] < 4 and [GRAU_CRITICIDADE] < 4  THEN 'VERDADEIRO'
+            ELSE 'FALSO'
+        END AS MANUAIS
+        ,CASE 
+            WHEN [NIVEL_AUTOMACAO] =5  THEN 'VERDADEIRO'
+            ELSE 'FALSO'
+        END AS AUTOMATIZADOS
+        ,CASE
+            WHEN [NIVEL_AUTOMACAO] =5  THEN 'AUTOMATIZADOS'
+            WHEN [MEDIA_DIA] >= $MENOR_MAIOR_VALOR  THEN 'MAIOR VOLUME'
+            WHEN [NIVEL_COMPLEXIDADE] > 4 and [GRAU_CRITICIDADE] > 4  THEN 'COMPLEXOS CRITICOS'
+            WHEN [NIVEL_AUTOMACAO] <= 3 and [GRAU_PADRONIZACAO] <= 3 AND [NIVEL_COMPLEXIDADE] < 4 and [GRAU_CRITICIDADE] < 4  THEN 'MANUAIS'
+            ELSE 'SECUNDÁRIOS'
+        END AS RESULTADO
+-- cálculo realizado com base no tempo médio em min da cada atividade e quantidade de pessoas alocadas. 300min/dia, 20 dias úteis.
+,MINUTOS_DISPONIVEIS = round([QTDE_PESSOAS_ALOCADAS] * 20 * 300,2)
+,MINUTOS_TRABALHADOS = round([TEMPO_EM_MINUTOS] * [VOLUME_TOTAL_TRATADA],1)
+FROM    [TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS] as macro
+        INNER JOIN
+        [TBL_PRODUTIVIDADE_VILOP_TBL_MICROPROCESSOS] as micro on [IdMacro] = [IdMacroProcesso]
+WHERE
+        CGC_UNIDADE ='7723' -- aqui precisa vir pela rota
+        and micro.EXCLUIDO_USUARIO='N' and macro.[EXCLUIDO_USUARIO]='N'
+ORDER BY RESULTADO ASC
         ");
     
     return json_encode($listaMediaDiaUnidade);      

@@ -14,7 +14,7 @@
 </div>
 
 @if (session('tituloMensagem'))
-<div id="fadeOut" class="card text-white bg-{{ session('corMensagem') }}">
+<div class="card text-white bg-{{ session('corMensagem') }}">
     <div class="card-header">
         <div class="card-body">
             <h5 class="card-title"><strong>{{ session('tituloMensagem') }}</strong></h5>
@@ -299,10 +299,6 @@ $(document).ready(function(){
     })
 })
 
-setTimeout(function(){
-    $('.bg-success').fadeOut("slow");
-    $('.bg-danger').fadeOut("slow");
-    }, 4000);
 
 $(function () {
     $('#fupload').change(function() {

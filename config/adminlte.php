@@ -661,7 +661,11 @@ return [
                     'url'  => '/indicadores/rotinas-automaticas/',
                     'perfil_acesso' => ['DESENVOLVEDOR'],
                 ],
-
+                [
+                    'text' => 'Pesquisa CEPAT',
+                    'url'  => '/indicadores/pesquisa-cepat',
+                    'perfil_acesso' => ['DESENVOLVEDOR', 'GESTOR', 'EVENTUAL'], 
+                ],
 
 
             ],

@@ -9,15 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <title>Produtividade Vilop</title>
         
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/vendor/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/vendor/overlayScrollbars/css/OverlayScrollbars.min.css"> 
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/plugins/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/vendor/adminlte/dist/css/adminlte.css">
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/plugins/jquery-ui/jquery-ui.css">
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/plugins/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/css/main.css">
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/plugins/typeahead/typeahead.css">
-    <link rel="stylesheet" href="https://portal.gilie.des.sp.caixa/css/main.css">
+    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/vendor/overlayScrollbars/css/OverlayScrollbars.min.css"> 
+    <link rel="stylesheet" href="/plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.css">
+    <link rel="stylesheet" href="/plugins/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="/plugins/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/plugins/typeahead/typeahead.css">
+    <link rel="stylesheet" href="/css/main.css">
 
 <style>
 
@@ -143,25 +143,25 @@
         </div>
     </div>
 
-        <script src="https://portal.gilie.des.sp.caixa/vendor/jquery/jquery.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/jquery-ui/jquery-ui.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/jquery-ui/ui.datepicker-pt-BR.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/numeral/numeral.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/numeral/locales/pt-br.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/masks/jquery.mask.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/moment/moment-with-locales.min.js"></script>
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/plugins/jquery-ui/ui.datepicker-pt-BR.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <script src="/plugins/numeral/numeral.min.js"></script>
+        <script src="/plugins/numeral/locales/pt-br.min.js"></script>
+        <script src="/plugins/masks/jquery.mask.min.js"></script>
+        <script src="/plugins/moment/moment-with-locales.min.js"></script>
         <script src="/js/global/FormataDataClass.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
         <script src="/js/global/summernote-pt-BR.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/sweetalert2/sweetalert2.all.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/vendor/adminlte/dist/js/adminlte.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/plugins/DataTables/dataTables.fixedColumns.min.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/js/global/formata_datatable.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/js/global/toggle_fullscreen.js"></script>
-        <script src="https://portal.gilie.des.sp.caixa/js/global/copy_to_clipboard.js"></script>
+        <script src="/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+        <script src="/vendor/adminlte/dist/js/adminlte.min.js"></script>
+        <script src="/plugins/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="/plugins/DataTables/dataTables.fixedColumns.min.js"></script>
+        <script src="/js/global/formata_datatable.js"></script>
+        <script src="/js/global/toggle_fullscreen.js"></script>
+        <script src="/js/global/copy_to_clipboard.js"></script>
         <script>
 
             $('#buscaCGC').submit( function(e) {
