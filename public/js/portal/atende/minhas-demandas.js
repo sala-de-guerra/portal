@@ -75,7 +75,7 @@ $(document).ready(function(){
                 '<tr>' +
                     '<td id="numeroAtende'+item.idAtende+'">#' + pad(atende, 5) + '</td>' +
                     '<td><a href="/consulta-bem-imovel/'+ item.contratoFormatado +'" class="cursor-pointer">' + item.numeroContrato + '</a></td>' +
-                    '<td>' + item.nomeAtividade + '</td>' +
+                    '<td id="atividade'+item.idAtende+'">' + item.nomeAtividade + '</td>' +
                     `<td id="vencimento${item.idAtende}">${vencimento}</td>`+
                     '<td>' + item.assuntoAtende + '</td>' +
                     '<td class="obs'+item.idAtende+'">' + item.descricaoAtende + '</td>' +
@@ -85,7 +85,7 @@ $(document).ready(function(){
                                 'Ação' + 
                             '</button>' +
                             // botão dropdown
-                        '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
+                        '<div id="dropdown'+item.idAtende+'" class="dropdown-menu" aria-labelledby="btnGroupDrop1">' +
                             '<a class="dropdown-item" type="button" id="btn-consulta' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalConsulta' + item.idAtende + '">' + '<i class="fa fa-search" aria-hidden="true"></i>' + ' Consultar' + '</a>' +
                             // '<a class="dropdown-item" type="button" id="btn-editar' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#modalTratar' + item.idAtende + '">' + '<i class="far fa-edit">' + '</i>' + ' Tratar' + '</a>' +
                             '<a class="dropdown-item" type="button" href="/atende/tratar-atende/'+ item.idAtende +'"><i class="far fa-edit"></i>' + ' Tratar' + '</a>'+
@@ -195,10 +195,44 @@ $(document).ready(function(){
                                 '</div>' + 
                             '</div>' + 
                         '</div>' + 
+
+                        '<div class="modal fade" id="excluir' + item.idAtende + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                        '<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">' +
+                            '<div class="modal-content">' +
+                                '<form method="post" action="/excluir/gestor/' + item.idAtende + '">' +
+                                        '<input type="hidden" class="form-control" name="_token" value="' + csrfVar + '">' +
+                                        '<input type="hidden" class="form-control" name="_method" value="PUT">' +
+                                    '<div style="background: linear-gradient(to right, #cc0000 0%, #ff6699 100%);" class="modal-header">' +
+                                        '<h5 style="color: white;" class="modal-title" id="exampleModalLabel">' + 'Excluir' + '</h5>' +
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                        '</button>' +
+                                    '</div>' +
+                                    '<div class="modal-body">' +
+                                        '<div class="container">' +
+                                            '<div>' +
+                
+                                            '<label for="exampleFormControlTextarea1">Motivo da Exclusão</label>'+
+                                            '<textarea class="form-control" name="respostaAtende" rows="5" required></textarea>'+
+                
+                                            '</div>' +
+                                        '</div>' + 
+                                    '</div>' +
+                                    '<div class="modal-footer">' +
+                                        '<button type="button" class="btn btn-secondary" data-dismiss="modal">' + 'Sair' + '</button>' +
+                                        '<button type="submit" class="btn btn-danger">Excluir</button>' +
+                                    '</div>' +
+                                '</form>'+ 
+                            '</div>' + 
+                        '</div>' + 
+                    '</div>' +
+                    
                     '</td>'+
                 '</tr>' 
-                
-            var confereVencimento = moment(item.prazoAtendimentoAtende).isBefore(hoje);
+
+
+
+        var confereVencimento = moment(item.prazoAtendimentoAtende).isBefore(hoje);
 
         $(linha).appendTo('#tblminhasDemandas>tbody');
 
@@ -213,6 +247,11 @@ $(document).ready(function(){
             })
             
 
+        if ($('#atividade' + item.idAtende).text() == 'SIOUV'){
+            var btnexcluir = '<a class="dropdown-item" type="button" id="btn-excluir' + item.idAtende +' "class="btn btn-primary" data-toggle="modal" data-target="#excluir' + item.idAtende + '">'+ '<i class="far fa-trash-alt"></i>' + ' Excluir</a>'
+            $(btnexcluir).appendTo("#dropdown" + item.idAtende);
+        }
+        
         if (confereVencimento == true){
             $('#numeroAtende'+item.idAtende).html('<b style="color: red;">#' + pad(atende, 5) + '</b>')
         }
