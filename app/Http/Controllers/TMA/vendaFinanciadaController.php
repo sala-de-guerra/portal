@@ -45,6 +45,7 @@ class vendaFinanciadaController extends Controller
         ->leftjoin('TBL_VENDA_FINANCIADO_DUPLICADAS', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO_DUPLICADAS.NOME_PROPONENTE)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NOME_PROPONENTE)'))
         ->leftjoin('TBL_VENDA_AUXILIAR', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AUXILIAR.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.BEM_FORMATADO)'))
         ->leftjoin('ALITB048_CUB120000', DB::raw('CONVERT(VARCHAR, ALITB048_CUB120000.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NU_BEM)'))
+        ->leftjoin('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NU_BEM)'))
         ->leftjoin('CUB_056_PAGAMENTOS_BOLETOS_SIMOV', DB::raw('CONVERT(VARCHAR, CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_FINANCIADO.NU_BEM)'))
         ->select(DB::raw("
             TBL_VENDA_FINANCIADO.[BEM_FORMATADO] as BEM_FORMATADO,
@@ -68,7 +69,7 @@ class vendaFinanciadaController extends Controller
 
         "))
          ->where('TBL_VENDA_FINANCIADO.UNA', '=', $siglaGilie)
-         ->whereRaw('TBL_VENDA_FINANCIADO.NOME_PROPONENTE = ALITB048_CUB120000.[NOME PROPONENTE]')
+         ->whereRaw('TBL_VENDA_FINANCIADO.NOME_PROPONENTE = ALITB001_Imovel_Completo.[NOME_PROPONENTE]')
          ->get();
 
         $retiraDuplicado = $universoFinanciado->unique('NU_BEM');

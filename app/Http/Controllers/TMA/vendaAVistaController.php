@@ -49,6 +49,7 @@ class vendaAVistaController extends Controller
     ->leftjoin('TBL_VENDA_AVISTA_DUPLICADA', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA_DUPLICADA.NOME_PROPONENTE)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NOME_PROPONENTE)'))
     ->leftjoin('TBL_VENDA_AUXILIAR', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AUXILIAR.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.BEM_FORMATADO)'))
     ->leftjoin('ALITB048_CUB120000', DB::raw('CONVERT(VARCHAR, ALITB048_CUB120000.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
+    ->leftjoin('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
     ->leftjoin('CUB_056_PAGAMENTOS_BOLETOS_SIMOV', DB::raw('CONVERT(VARCHAR, CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
         ->select(DB::raw("
             TBL_VENDA_AVISTA.[BEM_FORMATADO] as BEM_FORMATADO,
@@ -71,12 +72,12 @@ class vendaAVistaController extends Controller
 
         "))
          ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
-         ->whereRaw('TBL_VENDA_AVISTA.NOME_PROPONENTE = ALITB048_CUB120000.[NOME PROPONENTE]')
+         ->whereRaw('TBL_VENDA_AVISTA.NOME_PROPONENTE = ALITB001_Imovel_Completo.[NOME_PROPONENTE]')
          ->get();
 
         $retiraDuplicado = $universoAVista->unique('NU_BEM');
 
-        return json_encode($retiraDuplicado);
+        return json_encode($universoAVista);
     }
 
     public function baixarVendaAVista(Request $request, $chb)

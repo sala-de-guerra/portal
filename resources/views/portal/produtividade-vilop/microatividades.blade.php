@@ -406,10 +406,10 @@
                         <p>Avalie o Nível de Padronização  que melhor descreve a atividade de acordo
                             com os critérios e a afirmativa abaixo e selecione o número 
                             correspondente na escala:</p>
-                        <p><b>Escala 1:</b> Atividade seqüencial, uniforme e repetitiva.
-                            As etapas e habilidades exigidas são as mesmas, sem mudança/variação.</p>
-                        <p><b>Escala 5:</b> Atividade diversificada e não repetitiva.
+                        <p><b>Escala 1:</b> Atividade diversificada e não repetitiva.
                             As etapas e as habilidades exigidas são variadas, com alto grau de inovação.</p>
+                        <p><b>Escala 5:</b> Atividade seqüencial, uniforme e repetitiva.
+                            As etapas e habilidades exigidas são as mesmas, sem mudança/variação.</p>
                         ">
                         <span><i class="far fa-question-circle"></i></span>
                     </a>
