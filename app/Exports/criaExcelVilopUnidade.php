@@ -54,6 +54,7 @@ class criaExcelVilopUnidade implements FromCollection, WithHeadings, ShouldAutoS
 
       "))
         ->where('TBL_PRODUTIVIDADE_VILOP_TBL_MICROPROCESSOS.EXCLUIDO_USUARIO', 'N')
+        ->where('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS.EXCLUIDO_USUARIO', 'N')
         ->where('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS.CGC_UNIDADE', $this->unidade)
         ->orderBy('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS.CGC_UNIDADE', 'asc')
         ->orderBy('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS.IdMacro', 'asc')
