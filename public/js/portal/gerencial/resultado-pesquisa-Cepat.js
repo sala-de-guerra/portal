@@ -34,106 +34,106 @@ $(document).ready(function(){
     `
         <tr>
             <td>Administração dos imóveis do PAR - Aspectos físicos PAR</td>
-            <td>C061649 - SOLANGE PEDRO - 14 votos</td>
-            <td>C040644 - ANTONIO SARAIVA - 4 votos</td>
-            <td>C059653 - SANDRA DAS DORES - 3 votos</td>
+            <td>C061649 - SOLANGE PEDRO <small class="text-muted">14 votos</small></td>
+            <td>C040644 - ANTONIO SARAIVA <small class="text-muted">4 votos</small></td>
+            <td>C059653 - SANDRA DAS DORES <small class="text-muted">3 votos</small></td>
             <td></td>
         </tr>  
         <tr>
             <td>Administração dos imóveis do PAR - Pagamentos PAR</td>
-            <td>C052847 - CARLOS SARREA - 10 votos</td>
-            <td>C050505 - CELSO WATANABE - 6 votos</td>
-            <td>C109636 - PATRICIA PEREIRA - 3 votos</td>
-            <td>C099532 - SELMER GRILLO - 3 votos</td>
+            <td>C052847 - CARLOS SARREA <small class="text-muted">10 votos</small></td>
+            <td>C050505 - CELSO WATANABE <small class="text-muted">6 votos</small></td>
+            <td>C109636 - PATRICIA PEREIRA <small class="text-muted">3 votos</small></td>
+            <td>C099532 - SELMER GRILLO <small class="text-muted">3 votos</small></td>
         </tr>
         <tr>
             <td>Administração dos imóveis do PAR - Demanda judicial PAR</td>
-            <td>C090681 - MARISA GUERREIRO  - 9 votos</td>
-            <td>C074575 - Ana Julia Chiaradia - 8 votos</td>
-            <td>C040644 - ANTONIO SARAIVA - 3 votos</td>
-            <td>C086588 - RODRIGO ANGELO - 3 votos</td>
+            <td>C090681 - MARISA GUERREIRO <small class="text-muted">9 votos</small></td>
+            <td>C074575 - Ana Julia Chiaradia <small class="text-muted">8 votos</small></td>
+            <td>C040644 - ANTONIO SARAIVA <small class="text-muted">3 votos</small></td>
+            <td>C086588 - RODRIGO ANGELO <small class="text-muted">3 votos</small></td>
         </tr>
         <tr>
             <td>Administração dos imóveis do PAR - Desligamento das unidades do PAR</td>
-            <td>C136667 - Rosilene Golembiewski - 9 votos</td>
-            <td>C052847 - Carlos Eduardo Sarrea - 5 votos</td>
-            <td>C070113 - Alexandre Ricardo Miranda - 4 votos</td>
-            <td>C038350 - Maristela de Athayde - 3 votos</td>
+            <td>C136667 - Rosilene Golembiewski <small class="text-muted">9 votos</small></td>
+            <td>C052847 - Carlos Eduardo Sarrea  <small class="text-muted">5 votos</small></td>
+            <td>C070113 - Alexandre Ricardo Miranda <small class="text-muted">4 votos</small></td>
+            <td>C038350 - Maristela de Athayde <small class="text-muted">3 votos</small></td>
         </tr>
         <tr>
             <td>Administração de Contratos de Arrendamento - Manutenção de contratos individuais de Arrendamento Residencial</td>
-            <td>C078433 - Adriana Reges - 8 votos</td>
-            <td>C130343 - Katia da Rocha Rodrigues - 4 votos</td>
+            <td>C078433 - Adriana Reges <small class="text-muted">8 votos</small></td>
+            <td>C130343 - Katia da Rocha Rodrigues <small class="text-muted">4 votos</small></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Gestão de Condomínios do PAR - Administração de condomínio do PAR não migrado</td>
-            <td>C052847 - Carlos Eduardo Sarrea - 7 votos</td>
+            <td>C052847 - Carlos Eduardo Sarrea <small class="text-muted">7 votos</small></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Gestão de Condomínios do PAR - Administração de condomínio do PAR migrado</td>
-            <td>C052847 - Carlos Eduardo Sarrea - 3 votos</td>
-            <td>C086588 - Rodrigo Angelo Souza - 3 votos</td>
+            <td>C052847 - Carlos Eduardo Sarrea <small class="text-muted">3 votos</small></td>
+            <td>C086588 - Rodrigo Angelo Souza <small class="text-muted">3 votos</small></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Gestão de empresas para administração do PAR - Contratação de Empresas para gestão dos imóveis do PAR</td>
-            <td>C052124 - Sylvia Tojar - 10 votos</td>
+            <td>C052124 - Sylvia Tojar <small class="text-muted">10 votos</small></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Gestão de empresas para administração do PAR - Gestão dos contratos de empresas administradoras do PAR</td>
-            <td>C052847 - Carlos Eduardo Sarrea - 10 votos</td>
+            <td>C052847 - Carlos Eduardo Sarrea <small class="text-muted">10 votos</small></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Tratamento de Bens Móveis - Administração de bens móveis não de uso</td>
-            <td>c076585 - Vanessa Melleiro de Castro Janini - 6 votos</td>
-            <td>C086588 - Rodrigo Angelo Souza - 4 votos</td>
-            <td>c080853 - Isaac Jose Benzecry - 3 votos</td>
+            <td>c076585 - Vanessa Melleiro de Castro Janini <small class="text-muted">6 votos</small></td>
+            <td>C086588 - Rodrigo Angelo Souza <small class="text-muted">4 votos</small></td>
+            <td>c080853 - Isaac Jose Benzecry <small class="text-muted">3 votos</small></td>
             <td></td>
         </tr>
         <tr>
             <td>Tratamento de Bens Móveis - Alienação de bens móveis não de uso</td>
-            <td>C076585 - Vanessa Melleiro de Castro - 8 votos</td>
+            <td>C076585 - Vanessa Melleiro de Castro <small class="text-muted">8 votos</small></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Tratamento do Penhor - Alienação das Garantias do Penhor</td>
-            <td>C095043 - Luiz Francisco do Nascimento - 11 votos</td>
-            <td>C130343 - Katia da Rocha Rodrigues - 4 votos</td>
-            <td>c080853 - Isaac Jose Benzecry - 3 votos</td>
+            <td>C095043 - Luiz Francisco do Nascimento <small class="text-muted">11 votos</small></td>
+            <td>C130343 - Katia da Rocha Rodrigues <small class="text-muted">4 votos</small></td>
+            <td>c080853 - Isaac Jose Benzecry <small class="text-muted">3 votos</small></td>
             <td></td>
         </tr>
         <tr>
             <td>Alienação de Veículos, máquinas e equipamentos</td>
-            <td>C076585 - Vanessa Melleiro de Castro - 3 votos</td>
+            <td>C076585 - Vanessa Melleiro de Castro <small class="text-muted">3 votos</small></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Programação, Desenvolvimento e Manutenção de Sistemas</td>
-            <td>c098453 - Rafael Pimentel Gonçalves - 13 votos</td>
-            <td>c064598 - Anderson Jones Silva - 3 votos</td>
+            <td>c098453 - Rafael Pimentel Gonçalves <small class="text-muted">13 votos</small></td>
+            <td>c064598 - Anderson Jones Silva <small class="text-muted">3 votos</small></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Agente de RH / Administrativo / Compliance / Pronto Pagamento</td>
-            <td>cC082403 - Carla Macedo de Mello - 7 votos</td>
-            <td>C066517 - Renata D Oliveira Sallum - 5 votos</td>
+            <td>cC082403 - Carla Macedo de Mello <small class="text-muted">7 votos</small></td>
+            <td>C066517 - Renata D Oliveira Sallum <small class="text-muted">5 votos</small></td>
             <td></td>
             <td></td>
         </tr>

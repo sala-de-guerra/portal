@@ -43,6 +43,10 @@ class ValidaAcessoRotaPortal
             case 'estoque-imoveis/acompanha-contratacao':
             case 'estoque-imoveis/monitora-pagamento-sinal':
             case 'indicadores/distrato':
+            // case 'produtividade-vilop':
+            // case 'produtividade-vilop/atividades-em-lote/upload':
+            // case 'produtividade-vilop/relatorio-geral/relatorio':
+            
             
                 if (!in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', env('NOME_NOSSA_UNIDADE'), 'DESENVOLVEDOR', 'EVENTUAL'])) {
                     $request->session()->flash('corMensagem', 'warning');

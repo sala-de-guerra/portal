@@ -244,11 +244,11 @@
 
 @section('js')
 <script>
-$('#selectGILIE').change(function() {
-    window.location = '/contratacao/tempo-medio-atendimento/' + $(this).val();
-});
-</script>
+    $('#selectGILIE').change(function() {
+        window.location = $(this).val();
+    });
+    </script>
 <script src="{{ asset('js/global/formata_data.js') }}"></script>
-<script src="{{ asset('js/portal/tma/tma.js') }}"></script>
-<script src="{{ asset('js/portal/tma/tma-financiado.js') }}"></script>
+<script src="{{ asset('js/portal/tma/tma-gilie.js') }}"></script>
+<script src="{{ asset('js/portal/tma/tma-financiado-gilie.js') }}"></script>
 @stop

@@ -33,15 +33,13 @@
         <div class="card card-default">
             <div class="card-body">
                 
-                <div class="row anima">
+                <div class="d-flex justify-content-between">
                     <strong>Quantidade respostas: <span style="color: #295dd2">85</span> 
+                    &nbsp&nbsp&nbsp&nbsp&nbsp
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#ModalLongoExemplo">
+                        Usuários que responderam a pesquisa
+                    </button>
                 </div>
-                
-                <div>
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ModalLongoExemplo">
-                    Usuários que responderam a pesquisa
-    </button>
-</div>
                 
 <!-- Modal -->
 <div class="modal fade" id="ModalLongoExemplo" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
@@ -127,7 +125,6 @@
 <tr>	<td>	Vanessa Candioto	</td>	<td>	c074072	</td>	</tr>
 <tr>	<td>	Edmar Rezende	</td>	<td>	c040862	</td>	</tr>
 <tr>	<td>	Luiz Negri	</td>	<td>	c091065	</td>	</tr>
-<tr>	<td>	Luiz Negri	</td>	<td>	c091065	</td>	</tr>
 <tr>	<td>	Tereza Przebeiovicz	</td>	<td>	c066539	</td>	</tr>
 <tr>	<td>	Ana Almeida	</td>	<td>	c092895	</td>	</tr>
 <tr>	<td>	Isabelle Silva	</td>	<td>	c085527	</td>	</tr>
@@ -153,7 +150,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar mudanças</button>
             </div>
         </div>
     </div>
@@ -172,46 +168,46 @@
                             <div class="col">
                                 <div class="small-box bg-primary">
                                     <div class="inner">
-                                        <p>PAR Danos Físicos e Regularização Documental</p>
+                                        <p class="text-center">PAR Danos Físicos e Regularização Documental</p>
                                     </div>
                                 
-                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaNovos" href="#listaParDanos" class="small-box-footer" role="button" id="listagemParDanos"onclick="mudaInfoParDanos()">Mais informações</a>
+                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaNovos" href="#listaParDanos" class="small-box-footer text-muted font-weight-light" role="button" id="listagemParDanos"onclick="mudaInfoParDanos()">Mais informações</a>
                                 </div>
                             </div>
 
                             <div class="col">
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <p>PAR Administração e Pagamentos</p>
+                                        <p class="text-center">PAR Administração e Pagamentos</p>
                                     </div>
-                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaParAdm" href="#listaParAdm" class="small-box-footer" role="button" id="listagemParAdm" onclick="mudaInfoParAdm()">Mais informações</a>
+                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaParAdm" href="#listaParAdm" class="small-box-footer text-muted font-weight-light" role="button" id="listagemParAdm" onclick="mudaInfoParAdm()">Mais informações</a>
                                 </div>
                             </div>
                 
                             <div class="col">
                                 <div class="small-box bg-maroon">
                                     <div class="inner">
-                                        <p>PAR Alienação</p>
+                                        <p class="text-center">PAR Alienação<br>&nbsp</p>
                                     </div>
-                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaParAlienar" href="#listaParAlienar" class="small-box-footer" role="button" id="listagemParAlienar" onclick="mudaInfoParAlienar()">Mais informações</a>
+                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaParAlienar" href="#listaParAlienar" class="small-box-footer text-muted font-weight-light" role="button" id="listagemParAlienar" onclick="mudaInfoParAlienar()">Mais informações</a>
                                 </div>
                             </div>
 
                             <div class="col">
                                 <div class="small-box bg-purple">
                                     <div class="inner">
-                                        <p>Bens Móveis</p>
+                                        <p class="text-center">Bens Móveis<br>&nbsp</p>
                                     </div>
-                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaBensMoveis" href="#listaBensMoveis" class="small-box-footer" role="button" id="listagemBensMoveis" onclick="mudaInfoBensMoveis()">Mais informações</a>
+                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaBensMoveis" href="#listaBensMoveis" class="small-box-footer text-muted font-weight-light" role="button" id="listagemBensMoveis" onclick="mudaInfoBensMoveis()">Mais informações</a>
                                 </div>
                             </div>
 
                             <div class="col">
                                 <div class="small-box bg-navy">
                                     <div class="inner" style="color:white;">
-                                        <p>Inovação / Atendimento / Compliance / RH</h5>
+                                        <p class="text-center">Inovação / Atendimento / Compliance / RH</p>
                                     </div>
-                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaInovacao" href="#listaInovacao" class="small-box-footer" role="button" id="listagemInovacao" onclick="mudaInfoInovacao()">Mais informações</a>
+                                    <a data-toggle="collapse" aria-expanded="false" aria-controls="listaInovacao" href="#listaInovacao" class="small-box-footer text-muted font-weight-light" role="button" id="listagemInovacao" onclick="mudaInfoInovacao()">Mais informações</a>
                                 </div>
                             </div>
                             </div>  
@@ -225,7 +221,7 @@
                         <div class="container">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header"style="color:#3c8dbc">
-                                    5 estrelas<i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i>
+                                    5 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Osmar Junior</li>
@@ -237,7 +233,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#3c8dbc">
-                                    4 estrelas<i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i>
+                                4 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Ary Silva</li>
@@ -252,7 +248,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header"style="color:#3c8dbc">
-                                    3 estrelas<i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i>
+                                    3 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star" ></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Katia Rodrigues</li>
@@ -271,7 +267,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header"style="color:#3c8dbc">
-                                    2 estrelas<i class="far fa-star" ></i><i class="far fa-star" ></i>
+                                    2 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Benedita Silveira</li>
@@ -292,7 +288,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#3c8dbc">
-                                    1 estrela<i class="far fa-star" ></i>
+                                    1 estrela<i class="fas fa-star"></i><i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Rafael Goncalves</li>
@@ -358,7 +354,7 @@
                         <div class="container">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#00a65a">
-                                    5 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    5 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Daniel Almeida
@@ -392,7 +388,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#00a65a">
-                                    4 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                4 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Katia Rodrigues
@@ -413,7 +409,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#00a65a">
-                                    3 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    3 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Isaac Benzecry
@@ -431,7 +427,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#00a65a">
-                                    2 estrelas<i class="far fa-star"></i><i class="far fa-star"></i>
+                                    2 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Benedita Silveira
@@ -450,7 +446,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#00a65a">
-                                    1 estrela<i class="far fa-star"></i>
+                                    1 estrela<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Rafael Goncalves
@@ -491,7 +487,7 @@
                         <div class="container">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#D81B60">
-                                    5 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    5 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Daniel Almeida
@@ -530,7 +526,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#D81B60">
-                                    4 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                4 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Camila Coutinho
@@ -556,7 +552,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#D81B60">
-                                    3 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    3 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Katia Rodrigues
@@ -577,7 +573,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#D81B60">
-                                    2 estrelas<i class="far fa-star"></i><i class="far fa-star"></i>
+                                    2 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Rafael Goncalves
@@ -596,7 +592,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#D81B60">
-                                    1 estrela<i class="far fa-star"></i>
+                                    1 estrela<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Renata Melo
@@ -625,7 +621,7 @@
                         <div class="container">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#605ca8">
-                                    5 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    5 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Isaac Benzecry
@@ -654,7 +650,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#605ca8">
-                                    4 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                4 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Katia Rodrigues
@@ -671,7 +667,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#605ca8">
-                                    3 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    3 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Camila Coutinho
@@ -692,7 +688,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#605ca8">
-                                    2 estrelas<i class="far fa-star"></i><i class="far fa-star"></i>
+                                    2 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Rafael Goncalves
@@ -709,7 +705,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#605ca8">
-                                    1 estrela<i class="far fa-star"></i>
+                                    1 estrela<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Benedita Silveira
@@ -758,7 +754,7 @@
                         <div class="container">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#001F3F">
-                                    5 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    5 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Rafael Goncalves
@@ -786,7 +782,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#001F3F">
-                                    4 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                4 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star" ></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Isaac Benzecry
@@ -806,7 +802,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#001F3F">
-                                    3 estrelas<i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    3 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Milena Lessa
@@ -824,7 +820,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#001F3F">
-                                    2 estrelas<i class="far fa-star"></i><i class="far fa-star"></i>
+                                    2 estrelas<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Katia Rodrigues
@@ -846,7 +842,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header" style="color:#001F3F">
-                                    1 estrela<i class="far fa-star"></i>
+                                    1 estrela<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                 </div>
                                 <ul class="font-weight-normal">
                                     <li>Benedita Silveira

@@ -20,8 +20,12 @@ class tmaVisaoUnificadaController extends Controller
     {  
         return view('portal.tma.tma');
     }
-        
 
+    public function indexPorGilie()
+    {  
+        return view('portal.tma.tma-por-gilie');
+    }
+        
     public function indexVendaFinanciada()
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();

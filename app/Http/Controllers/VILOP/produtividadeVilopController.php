@@ -98,6 +98,19 @@ class produtividadeVilopController extends Controller
         return view('portal.produtividade-vilop.upload-de-atividade');
     }
 
+    public function viewRelatorioVilop()
+    {
+
+        return view('portal.produtividade-vilop.relatorio');
+    }
+
+    public function viewIndicadoresVilop()
+    {
+
+        return view('portal.produtividade-vilop.indicadores-vilop');
+    }
+
+
     public function listaMacroProcesso($cgc)
     {
         $listaProcesso = MacroProcesso::with('microAtividades')->where('CGC_UNIDADE', $cgc)
@@ -443,6 +456,7 @@ class produtividadeVilopController extends Controller
     
     return json_encode($dadosIndicadoresMicro);      
     }
-       
+    
+    
          
 }
