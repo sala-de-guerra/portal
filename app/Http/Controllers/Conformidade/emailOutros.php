@@ -22,7 +22,7 @@
 
     <p>Prezados (as),</p><br>
 
-    <p> <strong>Assunto</strong>: Contratação de Imóvel Adjudicado – Fluxo de contratação Agência – Imóvel <strong>%NUMEROIMOVEL%</strong></p> <br>
+    <p> <strong>Assunto</strong>: Contratação de Imóvel Adjudicado – Imóvel <strong>%NUMEROIMOVEL%</strong></p> <br>
 
     <ol>
     <li style="text-align: justify;"> &nbsp;&nbsp;Informamos que o imóvel %NUMEROIMOVEL% está em processo de contratação pelo proponente <strong>%NOMEPROPONENTE1%</strong> CPF <strong>%CPFPROPONENTE1%</strong>, cuja proposta foi na modalidade <strong>%TIPODEVENDA%</strong> em <strong>%DATAPROPOSTA%</strong>, referente ao imóvel situado à %ENDERECOIMOVEL%.</li></br>

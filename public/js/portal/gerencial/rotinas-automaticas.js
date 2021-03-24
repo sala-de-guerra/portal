@@ -1,17 +1,18 @@
 $(document).ready(function(){
-    let linha =
+ 
+        let linha =
     `
         <tr>
             <td>Atualização Portal</td>
-            <td>04/01/2021</td> 
+            <td>01/03/2021</td> 
             <td><span class="badge badge-success">Atualizado</span></td>
             <td> </td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObsPortal">
-                <i class="far fa-lg fa-edit"></i></button></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObsRotina">
+                <i class="far fa-edit"></i></button></td>
         </tr>  
         <tr>
             <td>Atualização Leilão Negativo</td>
-            <td>04/01/2021</td> 
+            <td>01/03/2021</td> 
             <td><span class="badge badge-danger">Erro na Atualização</span></td>
             <td> </td>
             <td> </td>
@@ -72,4 +73,6 @@ $(document).ready(function(){
                         
     `
     $(linha).appendTo('#tblRotinas>tbody');
-})
+        
+
+});

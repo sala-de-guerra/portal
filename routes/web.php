@@ -271,6 +271,8 @@ Route::prefix('gerencial')->group(function () {
 Route::prefix('indicadores')->group(function () { 
         // ROTINAS AUTOMATICAS
         Route::get('/rotinas-automaticas', 'RotinasAutomaticas\rotinasAutomaticas@index'); 
+        // RETORNA UNIVERSO 
+        Route::get('/lista-rotinas', 'RotinasAutomaticas\rotinasautomaricas@listaUniversoRotinas');
         // INDICADORES DE ACESSO
         Route::prefix('acessos')->group(function () {
         // RETORNA A VIEW DOS INDICADORES DE ACESSO
@@ -460,6 +462,18 @@ Route::post('tma/aguarda-pagamento-financiado-chb/{chb}', 'TMA\vendaFinanciadaCo
 Route::get('/tma/baixar-planilha-tma', 'TMA\vendaAVistaController@criaPlanilhaControleTMA');
 //Planilha Excel TMA a Vista
 Route::get('/tma/baixar-planilha-tma-financiamento', 'TMA\vendaFinanciadaController@criaPlanilhaControleTMAFinanciamento');
+//view index
+Route::get('contratacao/tempo-medio-atendimento/{gilie}', 'TMA\tmaVisaoUnificadaController@indexPorGilie');
+//universo venda a vista
+Route::get('tma-venda-a-vista', 'TMA\vendaAVistaController@universoVendaAVista');
+//universo venda a vista por GILIE
+Route::get('tma-venda-a-vista/{gilie}', 'TMA\vendaAVistaController@universoVendaAVistaPorGilie');
+//Indicadores venda à vista
+Route::get('tma-indicadores-a-vista/{gilie}', 'TMA\vendaAVistaController@indicadoresTMAaVistaPorGILIE');
+//universo venda com financiamento por GILIE
+Route::get('tma-venda-com-financimento/{gilie}', 'TMA\vendaFinanciadaController@universoVendaFinanciadaPorGILIE');
+//Indicadores venda com financiamento
+Route::get('tma-indicadores-com-financimento/{gilie}', 'TMA\vendaFinanciadaController@indicadoresTMAfinanciadoPorGilie');
 
 //ROTA Controle de Chaves
 Route::get('estoque-imoveis/chaves', 'GestaoImoveisCaixa\controleDeChavesController@index');
@@ -681,8 +695,10 @@ Route::prefix('produtividade-vilop/')->group(function () {
     Route::get('/produtividade-vilop/lista/{cgc}', 'VILOP\produtividadeVilopController@index');
     //Upload de atividades
     Route::get('/atividades-em-lote/upload', 'VILOP\produtividadeVilopController@viewUploadEmLote');
+    
     //upload de atividades enviar
     Route::post('/carga-em-lote/envia', 'VILOP\produtividadeVilopController@import');
+
     //lista dados do Upload
     Route::get('/atividades-em-lote/dados', 'VILOP\produtividadeVilopController@listaDadosDeUpload');
     //lista Macro Atividade
@@ -715,9 +731,14 @@ Route::prefix('produtividade-vilop/')->group(function () {
     Route::get('/dashboard/media-niveis-micro/{unidade}', 'VILOP\produtividadeVilopController@mediaNiveisMicro');
     //lista indicadores Microatividade
     Route::get('/dashboard/dados-indicadores-micro/{unidade}', 'VILOP\produtividadeVilopController@dadosIndicadoresMicro');
+    //relatorio geral
+    Route::get('/relatorio-geral/relatorio', 'VILOP\produtividadeVilopController@viewRelatorioVilop');
+    //dashboard de indicadores da Vilop
+    Route::get('/indicadores/indicadores-vilop', 'VILOP\produtividadeVilopController@viewIndicadoresVilop');
 });
 //update Micro Atividade na Raiz
 Route::post('/update-micro-atividade/{idMicro}', 'VILOP\produtividadeVilopController@updateMicroProcessoVilop');
+
 
 Route::prefix('produtividade-vilop/indicadores/')->group(function () {
     //lista indicadores Microatividade (tabela)
@@ -728,6 +749,7 @@ Route::prefix('produtividade-vilop/indicadores/')->group(function () {
     Route::get('tabela-geral/{unidade}', 'VILOP\indicadoresProdutividadeVilop@listaTabelaGeral');
     //lista tabela geral
     Route::get('tabela-geral-sql/{unidade}', 'VILOP\indicadoresProdutividadeVilop@listaTabelaGeralSQL');
+    
 });
 
 Route::prefix('produtividade-cepat/')->group(function () {

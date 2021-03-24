@@ -70,24 +70,33 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalObsPortal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="modalObsRotina" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form method='post' action='/gerencial/rotinas' id="formObsPortal">
             {{ csrf_field() }} 
                 <div style="background: linear-gradient(to right, #4F94CD , #63B8FF);" class="modal-header">
-                    <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Observações</h5>
+                    <h5 style="color: white;" class="modal-title" id="exampleModalScrollableTitle">Editar Status</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <div class="modal-body px-0">
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label for="formAlterar">Informar status</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Atualizado</option>
+                                <option>Erro na Atualização</option>
+                                <option>Pendente</option>
+                                <option>4</option>
+                            </select>
+                        </div>
                     
                         <div class="px-2" style="overflow-y: auto; height: 100%;">
                             <div class="form-group">
                                 <label>Nova Observação</label>
-                                <textarea name="observacaoAtendimento" class="form-control" rows="5" required></textarea>
+                                <textarea name="observacaoAtendimento" class="form-control" rows="2"></textarea>
                             </div>                      
                         </div>
                     

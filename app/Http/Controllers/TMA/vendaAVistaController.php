@@ -260,5 +260,61 @@ class vendaAVistaController extends Controller
              ->get();
         return json_encode($universoAvista);
     }
+
+    public function universoVendaAVistaPorGilie($gilie)
+    {
+    $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($gilie);
+    $universoAVista= DB::table('TBL_VENDA_AVISTA')
+    ->leftjoin('TBL_VENDA_AVISTA_DUPLICADA', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA_DUPLICADA.NOME_PROPONENTE)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NOME_PROPONENTE)'))
+    ->leftjoin('TBL_VENDA_AUXILIAR', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AUXILIAR.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.BEM_FORMATADO)'))
+    ->leftjoin('ALITB048_CUB120000', DB::raw('CONVERT(VARCHAR, ALITB048_CUB120000.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
+    ->leftjoin('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
+    ->leftjoin('CUB_056_PAGAMENTOS_BOLETOS_SIMOV', DB::raw('CONVERT(VARCHAR, CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.NU_BEM)'))
+        ->select(DB::raw("
+            TBL_VENDA_AVISTA.[BEM_FORMATADO] as BEM_FORMATADO,
+            TBL_VENDA_AVISTA.[NU_BEM] as NU_BEM,
+            ISNULL(CUB_056_PAGAMENTOS_BOLETOS_SIMOV.[PAGO], '0,00') as PAGAMENTO_BOLETO,
+            TBL_VENDA_AVISTA.[UNA] as UNA,
+            TBL_VENDA_AVISTA.[DIAS_DECORRIDOS] as DIAS_DECORRIDOS,
+            TBL_VENDA_AVISTA.[CLASSIFICACAO] as CLASSIFICACAO,
+            TBL_VENDA_AVISTA.[TIPO_VENDA] as tipoVenda,
+            TBL_VENDA_AVISTA.[NOME_PROPONENTE] as NOME_PROPONENTE,
+            TBL_VENDA_AVISTA.[CPF_CNPJ_PROPONENTE] as CPF_CNPJ_PROPONENTE,
+            ISNULL(TBL_VENDA_AVISTA.[DDD_PROPONENTE], ' ') as ddd,
+            ISNULL(TBL_VENDA_AVISTA.[TELEFONE_PROPONENTE], 'Não Cadastrado') as telefone,
+            TBL_VENDA_AUXILIAR.[baixaEfetuada] as baixaEfetuada,
+            TBL_VENDA_AVISTA_DUPLICADA.[repetido] as repetido,
+            ALITB048_CUB120000.[E-MAIL PROPONENTE] as emailProponente,
+            ALITB048_CUB120000.[UF_PROPONENTE] as ufProponente,
+            TBL_VENDA_AUXILIAR.[nomeProponente] as proponenteTblAuxiliar
+            
+
+        "))
+         ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
+         ->whereRaw('TBL_VENDA_AVISTA.NOME_PROPONENTE = ALITB001_Imovel_Completo.[NOME_PROPONENTE]')
+         ->get();
+
+        $retiraDuplicado = $universoAVista->unique('NU_BEM');
+
+        return json_encode($retiraDuplicado);
+    }
+
+    public function indicadoresTMAaVistaPorGILIE($gilie)
+    {
+        $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($gilie);
+        $universoAvista= DB::table('ALITB001_Imovel_Completo')
+            ->leftjoin('TBL_VENDA_AUXILIAR', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AUXILIAR.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'))    
+            ->join('TBL_VENDA_AVISTA', DB::raw('CONVERT(VARCHAR, TBL_VENDA_AVISTA.BEM_FORMATADO)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'))
+            ->select(DB::raw("
+             SUM(ALITB001_Imovel_Completo.VALOR_TOTAL_PROPOSTA) AS VALOR_VENDIDO, 
+             count(*) as quantidade_vendidos,
+             TIPO = 'A Vista'
+            
+            "))
+             ->where('TBL_VENDA_AUXILIAR.baixaEfetuada', '=', 'sim')
+             ->where('TBL_VENDA_AVISTA.UNA', '=', $siglaGilie)
+             ->get();
+        return json_encode($universoAvista);
+    }
       
 }

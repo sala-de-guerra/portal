@@ -36,7 +36,11 @@ class GestaoEquipesEmpregadosMiddleware
         ];
 
         $arrayCodigoFuncaoGestao = [
-            '2030' // COORDENADOR DE PROJETOS MATRIZ
+            '2026' // CONSULTOR DE DIRIGENTE
+            ,'2267' // CONSULTOR CHEFE DA PRESIDENCIA
+            ,'2024' // CHEFE DE GABINETE DA PRESIDENCIA
+            ,'2029' // CONSULTOR MATRIZ
+            ,'2030' // COORDENADOR DE PROJETOS MATRIZ
             ,'2031' // COORDENADOR DE PROJETOS TI
             ,'2061' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 1
             ,'2062' // COORDENADOR - CENTRALIZADORA/FILIAL - PORTE 2

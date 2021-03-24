@@ -25,5 +25,21 @@ class rotinasAutomaticas extends Controller
         return view('portal.gerencial.rotinas-automaticas');
     }
 
+    public function listaUniversoRotinas()
+    {
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        $listaRotinas = DB::table('TBL_DADOS_ROTINAS')
+        ->leftjoin('ALITB001_Imovel_Completo', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.NU_BEM)'), '=', DB::raw('CONVERT(VARCHAR, TBL_DADOS_ROTINAS.Contrato)'))    
+        ->select(DB::raw("
+        TBL_DADOS_ROTINAS.[processo],
+        TBL_DADOS_ROTINAS.[dataAtualizacao],
+        TBL_DADOS_ROTINAS.[status],
+        TBL_DADOS_ROTINAS.[observacao],
+        ALITB001_Imovel_Completo.[UNA] as gilie,
+      "))
+        ->get(); 
+        
+        return json_encode($listaRotinas);
+    }
     
 }

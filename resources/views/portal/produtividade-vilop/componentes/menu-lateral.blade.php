@@ -36,7 +36,19 @@
                                         <i class="far fa-fw fa-circle "></i>
                                         <p>Importar dados</p>
                                     </a>
-                                </li>  
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="/produtividade-vilop/relatorio-geral/relatorio">                    
+                                        <i class="far fa-fw fa-circle "></i>
+                                        <p>Relatório</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="/produtividade-vilop/indicadores/indicadores-vilop">                    
+                                        <i class="far fa-fw fa-circle "></i>
+                                        <p>Vilop Indicadores</p>
+                                    </a>
+                                </li>   
 
                                 {{-- <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/dashboard/dash">                    
