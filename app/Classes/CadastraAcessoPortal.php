@@ -95,13 +95,8 @@ class CadastraAcessoPortal
         'c100377', // Luciana
         'c129457', // Pedro Santiago
         'c124798', // Cleberson
-        'c129457',
-        'c125012', // bruno pletti
-        'c082807', // Raimundo Everton
-        'c098389', // Bertolla
-        'c081584', // Wanderson
-
-
+        'c129457'
+        
     ];
 
     public $arrayConvidados = [

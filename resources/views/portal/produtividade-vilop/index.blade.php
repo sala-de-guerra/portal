@@ -32,10 +32,11 @@
                     <div class="card-body">
 
 
-                        <form method="post" 
-                            action="/produtividade-vilop/cria-macro-atividade" 
-                            id="formMacroatividade"
-                            class="form-inline">
+                        <form 
+                        method="post" 
+                        action="/produtividade-vilop/cria-macro-atividade" 
+                        id="formMacroatividade"
+                        class="form-inline">
                                     <div class="modal-body">
                                         {{ csrf_field() }}
 
@@ -61,7 +62,13 @@
                                             name="nomeMacroAtividade" 
                                             title="Atenção! Neste campo já se inicia o preenchimento da pesquisa"
                                             placeholder="Digite aqui o nome da MACROATIVIDADE para unidade abaixo..." autofocus required>
-                                            <button type="submit" class=" form-group btn btn-primary mt-1 ">Criar MACROATIVIDADE</button>
+                                            
+                                            <button 
+                                                type="submit" 
+                                                class=" form-group btn btn-primary mt-1 "
+                                                {{-- title="prazo encerrado em 12/03/2020" --}}
+                                                >
+                                                Criar MACROATIVIDADE</button>
                                             
                                         </div>
 
@@ -186,11 +193,15 @@
                     <h3 class="card-title callout callout-info mt-1">
                         <span id='unidade'> {{$unidadeCGC}} </span> - {{$unidadeNome}}
                     </h3>
-                    <div class="float-right">
+                    
+                    
+                    {{-- <div class="float-right">
                         <form action="/produtividade-vilop/indicadores/view/{{$unidadeCGC}}">
-                            <button type="submit" class="btn btn-warning"><i class="fas fa-chart-bar"> &nbsp&nbspIndicadores</i></button>
+                            <button type="submit" class="btn btn-warning disabled"><i class="fas fa-chart-bar"> Indicadores</i></button>
                         </form>
-                    </div>
+                    </div> --}}
+
+
                 </div> <!-- /.card-header -->
                 <input type="hidden" id='tokenVilop' value="{{ csrf_token() }}">
                 <div class="card-body">

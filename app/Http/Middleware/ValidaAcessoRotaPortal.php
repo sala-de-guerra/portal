@@ -43,16 +43,13 @@ class ValidaAcessoRotaPortal
             case 'estoque-imoveis/acompanha-contratacao':
             case 'estoque-imoveis/monitora-pagamento-sinal':
             case 'indicadores/distrato':
-            // case 'produtividade-vilop':
-            // case 'produtividade-vilop/atividades-em-lote/upload':
-            // case 'produtividade-vilop/relatorio-geral/relatorio':
-            
+            case 'produtividade-vilop':
             
                 if (!in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', env('NOME_NOSSA_UNIDADE'), 'DESENVOLVEDOR', 'EVENTUAL'])) {
                     $request->session()->flash('corMensagem', 'warning');
                     $request->session()->flash('tituloMensagem', "Acesso negado!");
                     $request->session()->flash('corpoMensagem', "Você não tem perfil para acessar essa página.");
-                    return redirect('/');
+                    return redirect('https://caixa.sharepoint.com/teams/O365GRP-GTProdutividade-Vilop');
                 }
                 break;
         }
