@@ -150,6 +150,9 @@ class DistratoDemandaController extends Controller
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
         $siglaGilie = Ldap::defineSiglaUnidadeUsuarioSessao($codigoUnidadeUsuarioSessao);
+        if ($siglaGilie == 'CEPAT'){
+            $siglaGilie = 'GILIE/SP';
+        }
         $universoProtocolosDistrato = DB::table('ALITB001_Imovel_Completo')
         ->join('TBL_DISTRATOS_DEMANDAS', DB::raw('CONVERT(VARCHAR, TBL_DISTRATOS_DEMANDAS.contratoFormatado)'), '=', DB::raw('CONVERT(VARCHAR, ALITB001_Imovel_Completo.BEM_FORMATADO)'))
         ->select(DB::raw('

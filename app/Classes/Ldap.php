@@ -270,6 +270,7 @@ class Ldap
             'GILIE/RJ' => '7254',
             'GILIE/RE' => '7253',
             'GILIE/SA' => '7255',
+            'CEPAT'    => '7077',
             'GILIE/BU' => '7242'
         ];
         return array_search($codigoUnidadeUsuarioSessao, $arraySiglasUnidadesGilie);
@@ -289,6 +290,7 @@ class Ldap
             '7254' => 'GILIE/RJ',
             '7253' => 'GILIE/RE',
             '7255' => 'GILIE/SA',
+            '7077' => 'GILIE/SP',
             '7242' => 'GILIE/BU'
         ];
         return array_search($siglaUnidade, $arraySiglasUnidadesGilie);
