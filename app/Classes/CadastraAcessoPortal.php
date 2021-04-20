@@ -72,6 +72,7 @@ class CadastraAcessoPortal
         '7254', // GILIE/RJ
         '7253', // GILIE/RE
         '7255', // GILIE/SA
+        '7077', // CEPAT
         '7242'  // GILIE/BU
     ];
 
@@ -86,16 +87,17 @@ class CadastraAcessoPortal
         'c078433',    // Adriana
 
         // VILOP
-        'C022964', // Ronaldo
-        'c058832', // Priscilla
-        'c108550', // Tiago 
-        'C077563', // Paulo Stefan
-        'c091778', // Guilherme
-        'c073272', // Gilmara
-        'c100377', // Luciana
-        'c129457', // Pedro Santiago
-        'c124798', // Cleberson
-        'c129457'
+        // 'C022964', // Ronaldo
+        // 'c058832', // Priscilla
+        // 'c108550', // Tiago 
+        // 'C077563', // Paulo Stefan
+        // 'c091778', // Guilherme
+        // 'c073272', // Gilmara
+        // 'c100377', // Luciana
+        // 'c129457', // Pedro Santiago
+        // 'c124798', // Cleberson
+        'c129457',
+        'c090120', // Barboza
         
     ];
 

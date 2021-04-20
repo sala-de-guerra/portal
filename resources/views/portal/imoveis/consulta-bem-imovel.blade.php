@@ -20,13 +20,39 @@
             <b>+ Atende</b>  
         </button> --}}
 
-        <button type="button" class="btn-behance" data-toggle="modal" data-target="#modalAtende" id="btnAtende">
+        <button type="button" class="btn-behance" data-toggle="modal" data-target="#modalAtendeAviso" id="btnAtende">
             <span class="btn-gradient">
               <i class="fas fa-headset"></i>
             </span>
             <span class="btn-text">Atende</span>
           </button>
-            
+        
+          <div class="modal fade" id="modalAtendeAviso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header" style="background: repeating-linear-gradient(
+                    45deg,
+                    #d1e704,
+                    #d1e704 10px,
+                    #98a802 10px,
+                    #98a802 20px
+                  );">
+                  <h5 class="modal-title" id="exampleModalLabel"><b>Atenção:</b></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    O estoque de contratação da GILIE/SP  foi migrado para a CEVEN em 29/03/2021 .<br>
+                    Solicitamos abrir demanda para aquela área via ATENDE SUBAN pelo endereço:<br>
+                    <a  href="http://inovacao.suban.caixa/apps/atende/#/login">http://inovacao.suban.caixa/apps/atende/#/login</a>, opção Imóveis CAIXA
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                </div>
+              </div>
+            </div>
+          </div>
         
             {{-- @endif
         @endif --}}

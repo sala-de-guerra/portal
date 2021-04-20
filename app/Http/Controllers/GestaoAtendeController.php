@@ -206,6 +206,9 @@ class GestaoAtendeController extends Controller
 
         // return json_encode($dadosAtende);
         $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        if ($unidadeUsuario == '7077'){
+            $unidadeUsuario = '7257';
+        }
         $dadosAtende = DB::table('TBL_ATENDE_DEMANDAS')
             ->join('TBL_GESTAO_EQUIPES_ATIVIDADES', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_ATIVIDADES.idAtividade)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idAtividade)'))
             ->join('TBL_GESTAO_EQUIPES_CELULAS', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_CELULAS.idEquipe)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idEquipe)'))
@@ -250,6 +253,9 @@ class GestaoAtendeController extends Controller
 
         // return json_encode($dadosAtende);
         $unidadeUsuario = Ldap::defineUnidadeUsuarioSessao();
+        if ($unidadeUsuario == '7077'){
+            $unidadeUsuario = '7257';
+        }
         $dadosAtende = DB::table('TBL_ATENDE_DEMANDAS')
             ->join('TBL_GESTAO_EQUIPES_ATIVIDADES', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_ATIVIDADES.idAtividade)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idAtividade)'))
             ->join('TBL_GESTAO_EQUIPES_CELULAS', DB::raw('CONVERT(VARCHAR, TBL_GESTAO_EQUIPES_CELULAS.idEquipe)'), '=', DB::raw('CONVERT(VARCHAR, TBL_ATENDE_DEMANDAS.idEquipe)'))
