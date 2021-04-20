@@ -32,7 +32,9 @@ class GestaoEquipesEmpregadosMiddleware
             '7254', // GILIE/RJ
             '7253', // GILIE/RE
             '7255', // GILIE/SA
+            '7077', // CEPAT
             '7242'  // GILIE/BU
+
         ];
 
         $arrayCodigoFuncaoGestao = [

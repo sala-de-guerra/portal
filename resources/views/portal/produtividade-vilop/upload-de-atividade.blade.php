@@ -58,7 +58,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <form method="POST" action="/produtividade-vilop/carga-em-lote/envia" enctype="multipart/form-data">
+                                        <form 
+                                              method="POST" 
+                                              action="/produtividade-vilop/carga-em-lote/envia" 
+                                              enctype="multipart/form-data">
                                             {{ csrf_field() }}
 
                                             {{-- <input type="file" name="arquivo" required><br><br> --}}
@@ -68,7 +71,14 @@
                                             <div class="nomeArquivo"></div>
                                             <input type="file" id="fupload" name="arquivo" accept=".xlsx, .xls" class="fupload form-control" style="display: none;"/>
                                             <br>
-                                            <button type="submit" id="btnEnviar" style="display: none;" class="mb-2 btn btn-success">Enviar &nbsp &nbsp<i class="fas fa-file-upload"></i></button> 
+                                            <button 
+                                                type="submit" 
+                                                id="btnEnviar" 
+                                                style="display: none;" 
+                                                class="mb-2 btn btn-success" 
+                                                {{-- title="prazo encerrado em 12/03/2020" --}}
+                                                >
+                                                Enviar <i class="fas fa-file-upload"></i></button> 
 
                                         </form>
                                     </div>
@@ -108,11 +118,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>NOME_MACROATIVIDADE</td>
+                                    <td>NOME_MACROATIVIDADE - <strong> (Tamanho Máximo de 200 caracteres!) </strong> </td>
                                     <td>O macroprocesso é o meio pelo qual a unidade reúne os conjuntos de microprocessos para gerar valor e cumprir a sua missão.</td>
                                 </tr>
                                 <tr>
-                                    <td>NOME_MICROATIVIDADE</td>
+                                    <td>NOME_MICROATIVIDADE - <strong> (Tamanho Máximo de 200 caracteres!) </strong> </td>
                                     <td>Os microprocessos são o conjunto de atividades e tarefas sequenciais com começo,meio e fim na unidade. O detalhamento deve acompanhar a possibilidade ou não de se apurar o volume, a fte alocada, o tempo gasto, bem como a necessidade de se apurar a produtividade de forma individual.</td>
                                 </tr>
                                 <tr>

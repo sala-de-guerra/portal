@@ -77,7 +77,7 @@ class vendaAVistaController extends Controller
 
         $retiraDuplicado = $universoAVista->unique('NU_BEM');
 
-        return json_encode($retiraDuplicado);
+        return json_encode($universoAVista);
     }
 
     public function baixarVendaAVista(Request $request, $chb)

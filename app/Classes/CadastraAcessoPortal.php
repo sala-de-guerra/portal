@@ -72,6 +72,7 @@ class CadastraAcessoPortal
         '7254', // GILIE/RJ
         '7253', // GILIE/RE
         '7255', // GILIE/SA
+        '7077', // CEPAT
         '7242'  // GILIE/BU
     ];
 
@@ -96,13 +97,8 @@ class CadastraAcessoPortal
         // 'c129457', // Pedro Santiago
         // 'c124798', // Cleberson
         'c129457',
-        'c125012', // bruno pletti
-        'c082807', // Raimundo Everton
-        'c098389', // Bertolla
-        'c081584', // Wanderson
-        'c066770', // Rogerio Prado
-
-
+        'c090120', // Barboza
+        
     ];
 
     public $arrayConvidados = [

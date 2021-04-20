@@ -24,6 +24,9 @@ class ControleDeBoletos extends Controller
     public function listaDadosBoleto($id)
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        if ($codigoUnidadeUsuarioSessao == '7077'){
+          $codigoUnidadeUsuarioSessao = '7257';
+         }
         $boletosAvista= DB::table('CUB_056_PAGAMENTOS_BOLETOS_SIMOV')
         ->leftjoin('ALITB001_Imovel_Completo', 'ALITB001_Imovel_Completo.NU_BEM',  "=", 'CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM')
         ->select(DB::raw("
@@ -52,6 +55,9 @@ class ControleDeBoletos extends Controller
     public function listaUniversoAvista()
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        if ($codigoUnidadeUsuarioSessao == '7077'){
+          $codigoUnidadeUsuarioSessao = '7257';
+         }
         $boletosAvista= DB::table('CUB_056_PAGAMENTOS_BOLETOS_SIMOV')
         ->leftjoin('ALITB001_Imovel_Completo', 'ALITB001_Imovel_Completo.NU_BEM',  "=", 'CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM')
         ->select(DB::raw("
@@ -78,6 +84,9 @@ class ControleDeBoletos extends Controller
     public function listaUniversoFinanciamento()
     {
         $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        if ($codigoUnidadeUsuarioSessao == '7077'){
+          $codigoUnidadeUsuarioSessao = '7257';
+         }
         $boletosFinanciamento= DB::table('CUB_056_PAGAMENTOS_BOLETOS_SIMOV')
         ->leftjoin('ALITB001_Imovel_Completo', 'ALITB001_Imovel_Completo.NU_BEM',  "=", 'CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM')
         ->select(DB::raw("
@@ -1637,6 +1646,9 @@ class ControleDeBoletos extends Controller
           $ultimoDiaUtil = DiasUteisClass::retornaPassadoEmQuantidadeDiasUteis(Carbon::now(), 1);
 
              $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+             if ($codigoUnidadeUsuarioSessao == '7077'){
+              $codigoUnidadeUsuarioSessao = '7257';
+             }
              $boletosAvista= DB::table('CUB_056_PAGAMENTOS_BOLETOS_SIMOV')
              ->leftjoin('ALITB001_Imovel_Completo', 'ALITB001_Imovel_Completo.NU_BEM',  "=", 'CUB_056_PAGAMENTOS_BOLETOS_SIMOV.NU_BEM')
              ->select(DB::raw("
