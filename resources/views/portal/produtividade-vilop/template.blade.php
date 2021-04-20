@@ -102,12 +102,12 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             
                                 @yield('saudacao')
                             
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active"> <i class="fa fa-map-signs"></i> <a href="/produtividade-vilop"> Produtividade Vilop</a> </li>
                             </ol>
@@ -163,7 +163,7 @@
         <script src="/js/global/toggle_fullscreen.js"></script>
         <script src="/js/global/copy_to_clipboard.js"></script>
         <script>
-
+            
             $('#buscaCGC').submit( function(e) {
             e.preventDefault();
             var $input = $(this).find('[name=numeroCGC]');

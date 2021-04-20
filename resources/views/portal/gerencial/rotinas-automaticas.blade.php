@@ -1,3 +1,37 @@
+<style>
+#svg-map path {
+  fill: #0094d9
+}
+
+#svg-map text {
+  fill: #fff;
+  font: 12px Arial-BoldMT, sans-serif;
+  cursor: pointer
+}
+
+#svg-map a {
+  text-decoration: none
+}
+
+#svg-map a:hover {
+  cursor: pointer;
+  text-decoration: none
+}
+
+#svg-map a:hover path {
+  fill: #003399 !important
+}
+
+#svg-map .circle {
+  fill: #66ccff
+}
+
+#svg-map a:hover .circle {
+  fill: #003399 !important;
+  cursor: pointer
+}
+
+    </style>
 @extends('adminlte::page')
 
 @section('title', 'Portal GILIE/SP')
@@ -34,6 +68,7 @@
     </div>
 </div>
 @endif
+
 
 
     <div class="row">
@@ -130,7 +165,6 @@
   
 </form>
 -->
-
 
 
 @stop

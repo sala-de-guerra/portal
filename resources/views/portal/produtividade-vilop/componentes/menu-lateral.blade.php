@@ -22,9 +22,15 @@
                                 <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop">                    
                                         <i class="far fa-fw fa-circle "></i>
-                                        <p>Formulário de Pesquisa</p>
+                                        <p>Pesquisa Unidade</p>
                                     </a>
-                                </li>    
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="/produtividade-vilop/pesquisa/colaborador">                    
+                                        <i class="far fa-fw fa-circle "></i>
+                                        <p>Pesquisa Colaborador</p>
+                                    </a>
+                                </li>      
                                 <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/lista-unidades/lista">                    
                                         <i class="far fa-fw fa-circle "></i>
@@ -48,7 +54,8 @@
                                         <i class="far fa-fw fa-circle "></i>
                                         <p>Vilop Indicadores</p>
                                     </a>
-                                </li>   
+                                </li>
+
 
                                 {{-- <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/dashboard/dash">                    

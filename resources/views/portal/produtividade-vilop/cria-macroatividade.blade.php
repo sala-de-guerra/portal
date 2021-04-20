@@ -3,11 +3,8 @@
 
 
 @section('saudacao')
-    <h5 class="col-lg-12 callout callout-info">
-        <strong> CGC/UNIDADE   - {{$unidadeCGC ?? ''}} </strong> 
-        <br> Ref: Macroatividade - {{$nomeMacroAtividade ?? ''}}
-    </h5>
-    
+<h1>Cadastro de atividade</h1>
+
 @endsection
 
 
@@ -27,7 +24,7 @@
 	<div class="card-header"> 
         <h4>
             <i class="nav-icon fas fa-chart-pie"></i> 
-            Microatividade - Detalhamento
+            Cadastrar Atividade
         </h4>
            
         </form>
@@ -36,11 +33,38 @@
     <!-- /.card-header -->
     <div class="card-body">
         <div class="form-group">
-            <form action="/produtividade-vilop/cria-micro-atividade/{{$idMacro ?? ''}}" method="post">
+            <form action="/produtividade-vilop/cria-macro-atividade/{{$unidadeCGC}}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden"  name="unidadeCGC" value="{{$unidadeCGC}}">
-                <input type="hidden"  name="idMacroatividade" value="{{$idMacro}}">
 
+               
+                   
+
+                    <div class="form-group">
+                        <input type="hidden" name="cgcUnidade" value="{{$unidadeCGC}}">
+                        <label for="nomeMacroAtividade" class="mt-0"><h4>
+                            Escolha o nome da Macroatividade
+                        </h4></label>
+                        <a 
+                            tabindex="-1"
+                            href="#" data-toggle="tooltip" data-placement="top" 
+                            data-html="true"
+                            title="<p>Use este campo para criar a macroatividade da unidade abaixo.</p>
+                            ">
+                            <span><i class="far fa-question-circle"></i></span>
+                        </a> 
+                                                                    
+                        <input 
+                        type="text" 
+                        class="form-control-plaintext mt-1 border-bottom" 
+                        id="nomeMacroAtividade" 
+                        rows="1" 
+                        name="nomeMacroAtividade" 
+                        title="Atenção! Neste campo já se inicia o preenchimento da pesquisa"
+                        placeholder="Digite aqui o nome da MACROATIVIDADE para unidade ..." autofocus required>
+                        
+                    </div>
+                    <br>
                 <label class="font-weight-normal" for="nome-microatividade">1. Nome da Microatividade &nbsp</label>
                 <a href="#" data-toggle="tooltip" data-placement="top" 
                     data-html="true"
@@ -161,11 +185,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-start">
-                        <h4>Período de Apuração &nbsp</h4>
+                        <h4>Mês Competência &nbsp</h4>
                         <a tabindex="-1"
                             href="#" data-toggle="tooltip" data-placement="top" 
                             data-html="true"
-                            title="<p>Período de apuração dos dados da volumetria</p>">
+                            title="<p>Mês de apuração 0 à 12</p>">
                             <span><i class="far fa-question-circle"></i></span>
                         </a>
                     </div>    
@@ -182,7 +206,7 @@
                         max="12"
                         >
                 </div>
-            
+
                 <div class="col lg-6">
                     <label class="font-weight-normal" for="periodo-inicio">6.1. Ano de apuração dos dados &nbsp</label>
                     <input 
@@ -194,6 +218,7 @@
                         value='2021'
                         >
                 </div>
+            
 
                 <div class="col lg-3">
                     <label class="font-weight-normal" for="media-dia">6.3. Média de Atendimentos por dia &nbsp</label>
