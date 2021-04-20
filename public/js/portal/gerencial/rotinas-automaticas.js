@@ -74,5 +74,6 @@ $(document).ready(function(){
     `
     $(linha).appendTo('#tblRotinas>tbody');
         
+    
 
 });

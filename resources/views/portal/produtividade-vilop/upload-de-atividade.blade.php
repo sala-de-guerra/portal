@@ -234,7 +234,6 @@
                             <thead>
                                 <tr>
                                     <th>CGC - SIGLA</th>
-                                    <th>NOME UNIDADE</th>
                                     <th>RESPONSÁVEL</th>
                                     <th>DATA UPLOAD</th>
                                 </tr>
@@ -259,7 +258,7 @@
 
 function _formataDatatableComData (idTabela){
     $('#' + idTabela).DataTable({
-        "order": [[ 3, "desc" ]],     
+        "order": [[ 2, "asc" ]],     
         "pageLength": 10,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
@@ -290,14 +289,13 @@ function _formataDatatableComData (idTabela){
 $(document).ready(function(){
         $.getJSON('/produtividade-vilop/atividades-em-lote/dados', function(dados){
             $.each(dados, function(key, item) {
-                let diaUpload = moment(item.DATA_UPLOAD).format("DD/MM/YYYY HH:mm")
+                let diaUpload = moment(item.DT_UPLOAD).format("DD/MM/YYYY HH:mm")
 
                 var linha =
                     `
                     <tr>
                         <td>${item.CGC_UNIDADE}</td>
-                        <td>${item.NOME_UNIDADE}</td>
-                        <td>${item.MATRICULA_RESPONSAVEL_UPLOAD}</td>
+                        <td>${item.MATRICULA_RESPONSAVEL}</td>
                         <td>${diaUpload}h</td>
                     </tr>        
                     `

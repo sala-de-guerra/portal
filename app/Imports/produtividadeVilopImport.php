@@ -27,7 +27,8 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
     public function model(array $row)
     {
     try {
-        $listaProcesso = DB::table('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS')->where('CGC_UNIDADE', $row[0])
+        
+        $listaProcesso = DB::table('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS')->where('CGC_UNIDADE', str_pad($row[0] , 4 , '0' , STR_PAD_LEFT))
         ->where('NOME_MACROATIVIDADE', $row[1])
         ->where('EXCLUIDO_USUARIO', 'N')
         ->first();
@@ -59,14 +60,14 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
             
             if (isset($row[6])){
                 // dd(trim($row[6]));
-                // $dataDE   =  (trim($row[6]) - 25569) * 86400;
-                $dataDE = DateTime::createFromFormat('d/m/y',trim($row[6]));
+                $dataDE   =  (trim($row[6]) - 25569) * 86400;
+                // $dataDE = DateTime::createFromFormat('d/m/y',trim($row[6]));
                 $novaMicroAtividadeVilop->PERIODO_TRATADO_DE                  = gmdate("Y-m-d", $dataDE);
             }
             if (isset($row[7])){
                 // dd($row[7]);
-                // $dataPARA =  (trim($row[7]) - 25569) * 86400;
-                $dataPARA = DateTime::createFromFormat('d/m/y',trim($row[7]));
+                $dataPARA =  (trim($row[7]) - 25569) * 86400;
+                // $dataPARA = DateTime::createFromFormat('d/m/y',trim($row[7]));
                 $novaMicroAtividadeVilop->PERIODO_TRATADO_ATE                  = gmdate("Y-m-d", $dataPARA);
             }
             
@@ -97,12 +98,12 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
             
         }else{
             
-            $unidades = DB::table('TB_CAPTURA_UNIDADES_ATT')->where('codigoAgencia', $row[0])->first();
+            $unidades = DB::table('TB_CAPTURA_UNIDADES_ATT')->where('codigoAgencia', str_pad($row[0] , 4 , '0' , STR_PAD_LEFT))->first();
             if(is_object($unidades)){
             $unidadeNome = $unidades->nomeAgencia;
 
             $novaMacroAtividadeVilop = new MacroProcesso;
-            $novaMacroAtividadeVilop->CGC_UNIDADE                       = $row[0];
+            $novaMacroAtividadeVilop->CGC_UNIDADE                       = str_pad($row[0] , 4 , '0' , STR_PAD_LEFT);
             $novaMacroAtividadeVilop->NOME_UNIDADE                      = $unidadeNome;
             $novaMacroAtividadeVilop->NOME_MACROATIVIDADE               = $row[1];
             $novaMacroAtividadeVilop->EXCLUIDO_USUARIO                  = 'N';
@@ -110,7 +111,7 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
             $novaMacroAtividadeVilop->DATA_RESPOSTA                     = date("Y-m-d H:i:s", time());
             $novaMacroAtividadeVilop->save();
 
-            $listaProcesso = DB::table('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS')->where('CGC_UNIDADE', $row[0])
+            $listaProcesso = DB::table('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS')->where('CGC_UNIDADE', str_pad($row[0] , 4 , '0' , STR_PAD_LEFT))
             ->where('NOME_MACROATIVIDADE', $row[1])
             ->where('EXCLUIDO_USUARIO', 'N')
             ->first();
@@ -140,13 +141,13 @@ class produtividadeVilopImport implements ToModel, WithValidation, WithStartRow
             }
             if (isset($row[6])){
                 // dd($row[6]);
-                // $dataDE   =  (trim($row[6]) - 25569) * 86400;
-                $dataDE = DateTime::createFromFormat('d/m/y',trim($row[6]));
+                $dataDE   =  (trim($row[6]) - 25569) * 86400;
+                // $dataDE = DateTime::createFromFormat('d/m/y',trim($row[6]));
                 $novaMicroAtividadeVilop->PERIODO_TRATADO_DE                  = gmdate("Y-m-d", $dataDE);
             }
             if (isset($row[7])){
-                // $dataPARA =  (trim($row[7]) - 25569) * 86400;
-                $dataPARA = DateTime::createFromFormat('d/m/y',trim($row[7]));
+                $dataPARA =  (trim($row[7]) - 25569) * 86400;
+                // $dataPARA = DateTime::createFromFormat('d/m/y',trim($row[7]));
                 $novaMicroAtividadeVilop->PERIODO_TRATADO_ATE                  = gmdate("Y-m-d", $dataPARA);
             }
             if (isset($row[9])){

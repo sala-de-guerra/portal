@@ -9,7 +9,7 @@ class Ldap
 {
     private $simularMatricula; 
     // private $simularMatricula ='c082807';
-
+    //    private $simularMatricula ='c091778';
     // private $simularMatricula ='c022964'; // Ronaldo
     // private $simularMatricula = 'c070499'; // viviane - AG
     // private $simularMatricula = 'c090120'; // Marcelo Barboza - GILIE
