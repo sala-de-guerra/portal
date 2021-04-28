@@ -189,6 +189,11 @@ class produtividadeVilopController extends Controller
             
                 $updateMicroProcesso = MicroProcessoNovo::find($idMicro);
                 $updateCargaMensal   = CargaMensal::find($request->idcargaMensal);
+
+                if (isset($request->mesApuracao)){
+                $updateCargaMensal->MM_REFERENCIA              = $request->mesApuracao;
+                $updateCargaMensal->AA_REFERENCIA              = $request->anoApuracao;
+                }
               
                 if (isset($request->nomeMicroAtividade)){
                     $updateMicroProcesso->DE_MICRO  = $request->nomeMicroAtividade;
@@ -242,6 +247,7 @@ class produtividadeVilopController extends Controller
             }
             DB::commit();
 
+
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Alteração realizada!");
             $request->session()->flash('corpoMensagem', "A alteração foi realizada com sucesso.");
@@ -254,6 +260,7 @@ class produtividadeVilopController extends Controller
             $request->session()->flash('tituloMensagem', "ERRO");
             $request->session()->flash('corpoMensagem', "Não foi possivel gravar, tente mais tarde!!!!");
         }
+        // DB::select("EXEC SP_PRODUTIVIDADE_V4");
         return back();
     }
 
@@ -273,6 +280,7 @@ class produtividadeVilopController extends Controller
             $updateMacroProcesso->DT_ATUALIZACAO              = date("Y-m-d H:i:s", time());
             $updateMacroProcesso->save();   
             DB::commit();
+            
 
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Exclusão realizada!");
@@ -286,20 +294,13 @@ class produtividadeVilopController extends Controller
             $request->session()->flash('tituloMensagem', "ERRO");
             $request->session()->flash('corpoMensagem', "Não foi Excluir, tente mais tarde!!!!");
         }
+        // DB::select("EXEC SP_PRODUTIVIDADE_V4");
         return back();
     }
 
     public function criaPlanilhaExcelVilopUnidade($unidade)
     {
         return Excel::download(new criaExcelVilopUnidade($unidade), 'Produtividade_Vilop_Unidade.xlsx');
-    }
-    
-    static function indicadoresPrincipalUnidade ()
-    {
-
-    $listaMediaDiaUnidade = DB::select("EXEC SP_PRODUTIVIDADE_V4");
-    return $listaMediaDiaUnidade;
-    
     }
 
     public function import(Request $request) 
@@ -336,7 +337,7 @@ class produtividadeVilopController extends Controller
             $request->session()->flash('corpoMensagem', $message); 
             }
         }   
-    
+        // DB::select("EXEC SP_PRODUTIVIDADE_V4");
         return back();
     }
 
@@ -466,6 +467,12 @@ public function createMacroProcessoVilopNovo(Request $request)
         $CargaMensal = new CargaMensal();
         $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
         $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
+        if (isset($request->mesApuracao)){
+            $CargaMensal->MM_REFERENCIA         = $request->mesApuracao;
+        }
+        if (isset($request->anoApuracao)){
+            $CargaMensal->AA_REFERENCIA        = $request->anoApuracao ;
+        }
 
         if (isset($request->quantidadePessoasAlocadas)){
             $CargaMensal->QTDE_PESSOAS_ALOCADAS        = $request->quantidadePessoasAlocadas;
@@ -537,6 +544,8 @@ public function createMacroProcessoVilopNovo(Request $request)
         $CargaMensal->save();
         DB::commit();
 
+
+
         $request->session()->flash('corMensagem', 'success');
         $request->session()->flash('tituloMensagem', "Cadastro realizado!");
         $request->session()->flash('corpoMensagem', "O cadastro foi realizado com sucesso.");
@@ -550,6 +559,7 @@ public function createMacroProcessoVilopNovo(Request $request)
         $request->session()->flash('tituloMensagem', "ERRO");
         $request->session()->flash('corpoMensagem', "Não foi possivel gravar, tente mais tarde!!!!");
     }
+    // DB::select("EXEC SP_PRODUTIVIDADE_V4");
     return redirect ('produtividade-vilop/');
 }
 
@@ -607,6 +617,14 @@ public function createMacroProcessoVilopNovo(Request $request)
         $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
         $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
         $CargaMensal->QTDE_PESSOAS_ALOCADAS           = $request->quantidadePessoasAlocadas;
+
+        if (isset($request->mesApuracao)){
+            $CargaMensal->MM_REFERENCIA         = $request->mesApuracao;
+        }
+        if (isset($request->anoApuracao)){
+            $CargaMensal->AA_REFERENCIA        = $request->anoApuracao ;
+        }
+        
         if (isset($request->volumeTotalDemanda)){
             $CargaMensal->VOLUME_TOTAL_DEMANDA        = $request->volumeTotalDemanda;
         }else{
@@ -672,6 +690,7 @@ public function createMacroProcessoVilopNovo(Request $request)
         
         DB::commit();
 
+
         $request->session()->flash('corMensagem', 'success');
         $request->session()->flash('tituloMensagem', "Cadastro realizado!");
         $request->session()->flash('corpoMensagem', "O cadastro foi realizado com sucesso.");
@@ -685,6 +704,7 @@ public function createMacroProcessoVilopNovo(Request $request)
         $request->session()->flash('tituloMensagem', "ERRO");
         $request->session()->flash('corpoMensagem', "Não foi possivel gravar, tente mais tarde!!!!");
     }
+    // DB::select("EXEC SP_PRODUTIVIDADE_V4");
     return back();
 }
 
@@ -741,200 +761,288 @@ public function listaMicroProcessoNovo($cgc)
 }
 
 public function listaAreasComMacroAtividadeNovo()
-{
-    $listaAreasComMacroAtividade = DB::select("SELECT 
-    distinct REPLICATE('0',4-LEN(RTRIM(NU_CGC))) + RTRIM(NU_CGC) as CGC_UNIDADE
-    ,Sigla 
-    ,nomeAgencia  as NOME_UNIDADE
-    FROM produtividade.TB_RELACAO_CGC_MACRO_MICRO
-    INNER JOIN TB_CAPTURA_UNIDADES_ATT  ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = produtividade.TB_RELACAO_CGC_MACRO_MICRO.NU_CGC
-    where produtividade.TB_RELACAO_CGC_MACRO_MICRO.IC_ATIVO = 1
-    order by CGC_UNIDADE ASC");
-    return json_encode($listaAreasComMacroAtividade);
-    
-}
+    {
+        $listaAreasComMacroAtividade = DB::select("SELECT 
+        distinct REPLICATE('0',4-LEN(RTRIM(NU_CGC))) + RTRIM(NU_CGC) as CGC_UNIDADE
+        ,Sigla 
+        ,nomeAgencia  as NOME_UNIDADE
+        FROM produtividade.TB_RELACAO_CGC_MACRO_MICRO
+        INNER JOIN TB_CAPTURA_UNIDADES_ATT  ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = produtividade.TB_RELACAO_CGC_MACRO_MICRO.NU_CGC
+        where produtividade.TB_RELACAO_CGC_MACRO_MICRO.IC_ATIVO = 1
+        order by CGC_UNIDADE ASC");
+        return json_encode($listaAreasComMacroAtividade);
+        
+    }
 
 public function montaJsonRelatorioMicroAtividades($unidade)
 
-{
-    $montaJsonRelatorioMicroAtividades = DB::select("select
-    ID_MACRO AS ID_MACRO,
-    DE_MICRO AS DE_MICRO,
-    VOLUME_TOTAL_MES AS volumeTotalMes,
-    VOLUME_REALIZADO_MES AS VolumeRealizadoMes,
-    format(TEMPO_MEDIO_REALIZADO, '#.00') AS tempoMedioRealizado,
-    format(HORAS_ALOCADAS,'#.00') AS horasAlocadas,
-    DESEMPENHO as desempenho,
-    format(PESSOAS, '#.00') as pessoas,
-    format(UPLOP_BASE, '#.00') as uplopBase,
-    format(UPLOP_PRODUZIDA, '#.00') AS uplopProduzida,
-    format(PRODUTIVIDADE_UPLOP, '#.00') as produtividadeUplop,
-    format(HH_NECE_REALIZAR_ESTOQUE,'0.00') AS horaExtraNecessaria,
-    format(TEMPO_MEDIO_NECESSARIO, '0.00') AS tempoMedioNecessario,
-    format(UPLOAD_DEVIDA, '0.00') as uplopDevida
-    from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
-    where [NU_CGC] =".$unidade);
-    return json_encode($montaJsonRelatorioMicroAtividades); 
-}
+    {
+        $montaJsonRelatorioMicroAtividades = DB::select("select
+        ID_MACRO AS ID_MACRO,
+        DE_MICRO AS DE_MICRO,
+        replace(VOLUME_TOTAL_MES, '.', ',') AS volumeTotalMes,
+        replace(VOLUME_REALIZADO_MES, '.', ',') AS VolumeRealizadoMes,
+        replace(format(TEMPO_MEDIO_REALIZADO, '0.0'), '.', ',') AS tempoMedioRealizado,
+        replace(format(isnull(HORAS_ALOCADAS,'0.0'),'0.0'), '.', ',') AS horasAlocadas,
+        replace(format(DESEMPENHO, '0.0'), '.', ',') as desempenho,
+        replace(format(isnull(PESSOAS, '0.0'), '0.0'), '.', ',') as pessoas,
+        replace(format(UPLOP_BASE, '0.0'), '.', ',') as uplopBase,
+        replace(format(UPLOP_PRODUZIDA, '0.0'), '.', ',') AS uplopProduzida,
+        replace(format(isnull(PRODUTIVIDADE_UPLOP, '0.0'), '0.0'), '.', ',') as produtividadeUplop,
+        replace(format(isnull(HH_NECE_REALIZAR_ESTOQUE,'0.0'),'0.0'), '.', ',') AS horaExtraNecessaria,
+        replace(format(TEMPO_MEDIO_NECESSARIO, '0.0'), '.', ',') AS tempoMedioNecessario,
+        replace(format(isnull(UPLOAD_DEVIDA, '0.0'), '0.0'), '.', ',') as uplopDevida
+        from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
+        where [AUTOMATIZADO] < 5
+        and [NU_CGC] =".$unidade);
+        return json_encode($montaJsonRelatorioMicroAtividades); 
+    }
+
+    public function montaJsonRelatorioAutomatizados($unidade)
+
+    {
+        $montaJsonRelatorioMicroAtividades = DB::select("select
+        ID_MACRO AS ID_MACRO,
+        DE_MICRO AS DE_MICRO,
+        replace(VOLUME_TOTAL_MES, '.', ',') AS volumeTotalMes,
+        replace(VOLUME_REALIZADO_MES, '.', ',') AS VolumeRealizadoMes,
+        replace(format(TEMPO_MEDIO_REALIZADO, '0.0'), '.', ',') AS tempoMedioRealizado,
+        replace(format(isnull(HORAS_ALOCADAS,'0.0'),'0.0'), '.', ',') AS horasAlocadas,
+        replace(format(DESEMPENHO, '0.0'), '.', ',') as desempenho,
+        replace(format(isnull(PESSOAS, '0.0'), '0.0'), '.', ',') as pessoas,
+        replace(format(UPLOP_BASE, '0.0'), '.', ',') as uplopBase,
+        replace(format(UPLOP_PRODUZIDA, '0.0'), '.', ',') AS uplopProduzida,
+        replace(format(isnull(PRODUTIVIDADE_UPLOP, '0.0'), '0.0'), '.', ',') as produtividadeUplop,
+        replace(format(isnull(HH_NECE_REALIZAR_ESTOQUE,'0.0'),'0.0'), '.', ',') AS horaExtraNecessaria,
+        replace(format(TEMPO_MEDIO_NECESSARIO, '0.0'), '.', ',') AS tempoMedioNecessario,
+        replace(format(isnull(UPLOAD_DEVIDA, '0.0'), '0.0'), '.', ',') as uplopDevida
+        from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
+        where [AUTOMATIZADO] = 5
+        and [NU_CGC] =".$unidade);
+        return json_encode($montaJsonRelatorioMicroAtividades); 
+    }
+
+    public function montaJsonRelatorioTotais($unidade)
+
+    {
+        $montaJsonRelatorioMicroAtividades = DB::select("select
+        replace(sum(VOLUME_TOTAL_MES),'.',',') AS volumeTotalMes,
+        replace(sum(VOLUME_REALIZADO_MES),'.',',') AS VolumeRealizadoMes,
+        replace(format(sum(TEMPO_MEDIO_REALIZADO), '0.0'),'.',',') AS tempoMedioRealizado,
+        replace(format(sum(HORAS_ALOCADAS),'0.0'),'.',',') AS horasAlocadas,
+        replace(format(AVG(DESEMPENHO), '0.0'),'.',',') as desempenho,
+        replace(format(AVG(PESSOAS), '0.0'),'.',',') as pessoas,
+        replace(format(AVG(UPLOP_BASE), '0.0'),'.',',') as uplopBase,
+        replace(format(sum(UPLOP_PRODUZIDA), '0.0'),'.',',') AS uplopProduzida,
+        replace(format(AVG(PRODUTIVIDADE_UPLOP), '0.0'),'.',',') as produtividadeUplop,
+        replace(format(sum(HH_NECE_REALIZAR_ESTOQUE),'0.0'),'.',',') AS horaExtraNecessaria,
+        replace(format(sum(TEMPO_MEDIO_NECESSARIO),'0.0'),'.',',') AS tempoMedioNecessario,
+        replace(format(sum(UPLOAD_DEVIDA), '0.0'),'.',',') as uplopDevida
+        from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
+        where [AUTOMATIZADO] = 5
+        and [NU_CGC] = ".$unidade);
+        return json_encode($montaJsonRelatorioMicroAtividades); 
+    }
 
 public function montaJsonRelatorioMacroAtividades($unidade)
 
-{
-    $montaJsonRelatorioMacroAtividades = DB::select("select
-    ID_MACRO AS ID_MACRO,
-    DE_MACRO AS DE_MACRO,
-    sum(VOLUME_TOTAL_MES) AS volumeTotalMes,
-    sum(VOLUME_REALIZADO_MES) AS VolumeRealizadoMes,
-    format(sum(TEMPO_MEDIO_REALIZADO), '#.00') AS tempoMedioRealizado,
-    format(sum(HORAS_ALOCADAS),'#.00') AS horasAlocadas,
-    AVG(DESEMPENHO) as desempenho,
-    format(AVG(PESSOAS), '#.00') as pessoas,
-    format(AVG(UPLOP_BASE), '#.00') as uplopBase,
-    format(sum(UPLOP_PRODUZIDA), '#.00') AS uplopProduzida,
-    format(AVG(PRODUTIVIDADE_UPLOP), '#.00') as produtividadeUplop,
-    format(sum(HH_NECE_REALIZAR_ESTOQUE),'0.00') AS horaExtraNecessaria,
-    format(sum(TEMPO_MEDIO_NECESSARIO),'#.00') AS tempoMedioNecessario,
-    format(sum(UPLOAD_DEVIDA), '0.00') as uplopDevida
-    from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
-    where [NU_CGC] =".$unidade."
-    group by ID_MACRO,DE_MACRO");
-    return json_encode($montaJsonRelatorioMacroAtividades);
-}
+    {
+        $montaJsonRelatorioMacroAtividades = DB::select("select
+        ID_MACRO AS ID_MACRO,
+        DE_MACRO AS DE_MACRO,
+        replace(sum(VOLUME_TOTAL_MES),'.',',') AS volumeTotalMes,
+        replace(sum(VOLUME_REALIZADO_MES),'.',',') AS VolumeRealizadoMes,
+        replace(format(sum(TEMPO_MEDIO_REALIZADO), '0.0'),'.',',') AS tempoMedioRealizado,
+        replace(format(sum(HORAS_ALOCADAS),'0.0'),'.',',') AS horasAlocadas,
+        replace(format(AVG(DESEMPENHO), '0.0'),'.',',') as desempenho,
+        replace(format(AVG(PESSOAS), '0.0'),'.',',') as pessoas,
+        replace(format(AVG(UPLOP_BASE), '0.0'),'.',',') as uplopBase,
+        replace(format(sum(UPLOP_PRODUZIDA), '0.0'),'.',',') AS uplopProduzida,
+        replace(format(AVG(PRODUTIVIDADE_UPLOP), '0.0'),'.',',') as produtividadeUplop,
+        replace(format(sum(HH_NECE_REALIZAR_ESTOQUE),'0.0'),'.',',') AS horaExtraNecessaria,
+        replace(format(sum(TEMPO_MEDIO_NECESSARIO),'0.0'),'.',',') AS tempoMedioNecessario,
+        replace(format(sum(UPLOAD_DEVIDA), '0.0'),'.',',') as uplopDevida
+        from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
+        where [AUTOMATIZADO] < 5
+        and [NU_CGC] =".$unidade."
+        group by ID_MACRO,DE_MACRO");
+        return json_encode($montaJsonRelatorioMacroAtividades);
+    }
 
 public function montaJsonRelatorioCards($unidade)
 
-{
-    $montaJsonRelatorioCards = DB::select("select 
-    format(PRODUTIVIDADE_G1, '0.00') as PRODUTIVIDADE,
-    DESEMPENHO,
-    FORMAT(PESSOAS, '#.00') AS PESSOAS,
-    format(FTE_APURADA, '0.00') as FTE_APURADA,
-    format(FTE_APURADA_MENSURAVEL_G1, '0.00') as FTE_APURADA_MENSURAVEL_G1,
-    format(FTE_TECNICA_MENSURAVEL_G1, '0.00') as FTE_TECNICA_MENSURAVEL_G1,
-    format(FTE_NAO_MENSURAVEL_G1, '0.00') as FTE_NAO_MENSURAVEL_G1,
-    GESTOTES,
-    AFASTADOS,
-    LAP_UNIDADE,
-    QT_MICRO,
-    QT_MACRO,
-    format(QT_HORAS_ALOCADAS_G1, '0.00') as QT_HORAS_ALOCADAS_G1,
-    format(QT_UPLOP_POR_HORA_G1, '0.00') as QT_UPLOP_POR_HORA_G1,
-    QT_UPLOP_DEVIDA_G1,
-    format(QT_UPLOP_PRODUZIDA_G1, '0.00') as QT_UPLOP_PRODUZIDA_G1,
-    QT_UPLOP_DEVIDA_EMPREGADO_G1,
-    format(QT_UPLOP_PRODUZIDA_EMPREGADO_G1, '0.00') as QT_UPLOP_PRODUZIDA_EMPREGADO_G1,
-    LAP_LIQUIDA_G1,
-    format(PRODUTIVIDADE_G2, '0.00') as PRODUTIVIDADE_G2,
-    format(QT_UPLOP_DEVIDA_G2, '0.00') as QT_UPLOP_DEVIDA_G2,
-    format(QT_UPLOP_PRODUZIDA_G2, '0.00') as QT_UPLOP_PRODUZIDA_G2,
-    format(QT_UPLOP_DEVIDA_EMPREGADO_G2, '0.00') as QT_UPLOP_DEVIDA_EMPREGADO_G2,
-    format(QT_UPOP_PRODUZIDA_EMPREGADO_G2, '0.00') as QT_UPOP_PRODUZIDA_EMPREGADO_G2,
-    format(LAP_LIQUIDA_G2, '0.00') as LAP_LIQUIDA_G2
-    from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
-    where NU_CGC =" .$unidade);
-    return json_encode($montaJsonRelatorioCards);
-}
+    {
+        $montaJsonRelatorioCards = DB::select("select 
+        replace(format(PRODUTIVIDADE_G1, '0.0'),'.',',') as PRODUTIVIDADE,
+        replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO,
+        replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS,
+        replace(format(FTE_APURADA, '0.0'),'.',',') as FTE_APURADA,
+        replace(format(FTE_APURADA_MENSURAVEL_G1, '0.0'),'.',',') as FTE_APURADA_MENSURAVEL_G1,
+        replace(format(FTE_TECNICA_MENSURAVEL_G1, '0.0'),'.',',') as FTE_TECNICA_MENSURAVEL_G1,
+        replace(format(FTE_NAO_MENSURAVEL_G1, '0.0'),'.',',') as FTE_NAO_MENSURAVEL_G1,
+        replace(format(GESTOTES, '0.0'),'.',',') as GESTOTES,
+        replace(AFASTADOS,'.',',') as AFASTADOS,
+        replace(LAP_UNIDADE,'.',',') as LAP_UNIDADE,
+        replace(QT_MICRO,'.',',') as QT_MICRO,
+        replace(QT_MACRO,'.',',') as QT_MACRO,
+        replace(format(QT_HORAS_ALOCADAS_G1, '0.0'),'.',',') as QT_HORAS_ALOCADAS_G1,
+        replace(format(QT_UPLOP_POR_HORA_G1, '0.0'),'.',',') as QT_UPLOP_POR_HORA_G1,
+        replace(QT_UPLOP_DEVIDA_G1,'.',',') as QT_UPLOP_DEVIDA_G1,
+        replace(format(QT_UPLOP_PRODUZIDA_G1, '0.0'),'.',',') as QT_UPLOP_PRODUZIDA_G1,
+        replace(QT_UPLOP_DEVIDA_EMPREGADO_G1,'.',',') as QT_UPLOP_DEVIDA_EMPREGADO_G1,
+        replace(format(QT_UPLOP_PRODUZIDA_EMPREGADO_G1, '0.0'),'.',',') as QT_UPLOP_PRODUZIDA_EMPREGADO_G1,
+        replace(LAP_LIQUIDA_G1,'.',',') as LAP_LIQUIDA_G1,
+        replace(format(PRODUTIVIDADE_G2, '0.0'),'.',',') as PRODUTIVIDADE_G2,
+        replace(format(QT_UPLOP_DEVIDA_G2, '0.0'),'.',',') as QT_UPLOP_DEVIDA_G2,
+        replace(format(QT_UPLOP_PRODUZIDA_G2, '0.0'),'.',',') as QT_UPLOP_PRODUZIDA_G2,
+        replace(format(QT_UPLOP_DEVIDA_EMPREGADO_G2, '0.0'),'.',',') as QT_UPLOP_DEVIDA_EMPREGADO_G2,
+        replace(format(QT_UPOP_PRODUZIDA_EMPREGADO_G2, '0.0'),'.',',') as QT_UPOP_PRODUZIDA_EMPREGADO_G2,
+        replace(format(LAP_LIQUIDA_G2, '0.0'),'.',',') as LAP_LIQUIDA_G2
+        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        where NU_CGC =" .$unidade);
+        return json_encode($montaJsonRelatorioCards);
+    }
 
 public function montaJsonRelatorioCardsGeral()
 
-{
-    $montaJsonRelatorioCards = DB::select("select
-    NU_CGC,
-	nomeAgencia,
-    Sigla,
-    format(PRODUTIVIDADE_G1, '0.00') as PRODUTIVIDADE,
-    DESEMPENHO,
-    FORMAT(PESSOAS, '#.00') AS PESSOAS,
-    FTE_APURADA,
-    FTE_APURADA_MENSURAVEL_G1,
-    format(FTE_TECNICA_MENSURAVEL_G1, '0.00') as FTE_TECNICA_MENSURAVEL_G1,
-    FTE_NAO_MENSURAVEL_G1,
-    GESTOTES,
-    AFASTADOS,
-    LAP_UNIDADE,
-    QT_MICRO,
-    QT_MACRO,
-    QT_HORAS_ALOCADAS_G1,
-    format(QT_UPLOP_POR_HORA_G1, '0.00') as QT_UPLOP_POR_HORA_G1,
-    QT_UPLOP_DEVIDA_G1,
-    format(QT_UPLOP_PRODUZIDA_G1, '0.00') as QT_UPLOP_PRODUZIDA_G1,
-    QT_UPLOP_DEVIDA_EMPREGADO_G1,
-    format(QT_UPLOP_PRODUZIDA_EMPREGADO_G1, '0.00') as QT_UPLOP_PRODUZIDA_EMPREGADO_G1,
-    LAP_LIQUIDA_G1,
-    format(PRODUTIVIDADE_G2, '0.00') as PRODUTIVIDADE_G2,
-    format(QT_UPLOP_DEVIDA_G2, '0.00') as QT_UPLOP_DEVIDA_G2,
-    format(QT_UPLOP_PRODUZIDA_G2, '0.00') as QT_UPLOP_PRODUZIDA_G2,
-    QT_UPLOP_DEVIDA_EMPREGADO_G2,
-    format(QT_UPOP_PRODUZIDA_EMPREGADO_G2, '0.00') as QT_UPOP_PRODUZIDA_EMPREGADO_G2,
-    LAP_LIQUIDA_G2
-    from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
-	join TB_CAPTURA_UNIDADES_ATT 
-	ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC");
-    return json_encode($montaJsonRelatorioCards);
-}
+    {
+        $montaJsonRelatorioCards = DB::select("select
+        NU_CGC,
+        nomeAgencia,
+        Sigla,
+        format(PRODUTIVIDADE_G1, '0.0') as PRODUTIVIDADE,
+        DESEMPENHO,
+        FORMAT(PESSOAS, '0.0') AS PESSOAS,
+        FTE_APURADA,
+        FTE_APURADA_MENSURAVEL_G1,
+        format(FTE_TECNICA_MENSURAVEL_G1, '0.0') as FTE_TECNICA_MENSURAVEL_G1,
+        FTE_NAO_MENSURAVEL_G1,
+        GESTOTES,
+        AFASTADOS,
+        LAP_UNIDADE,
+        QT_MICRO,
+        QT_MACRO,
+        QT_HORAS_ALOCADAS_G1,
+        format(QT_UPLOP_POR_HORA_G1, '0.0') as QT_UPLOP_POR_HORA_G1,
+        QT_UPLOP_DEVIDA_G1,
+        format(QT_UPLOP_PRODUZIDA_G1, '0.0') as QT_UPLOP_PRODUZIDA_G1,
+        QT_UPLOP_DEVIDA_EMPREGADO_G1,
+        format(QT_UPLOP_PRODUZIDA_EMPREGADO_G1, '0.0') as QT_UPLOP_PRODUZIDA_EMPREGADO_G1,
+        LAP_LIQUIDA_G1,
+        format(PRODUTIVIDADE_G2, '0.0') as PRODUTIVIDADE_G2,
+        format(QT_UPLOP_DEVIDA_G2, '0.0') as QT_UPLOP_DEVIDA_G2,
+        format(QT_UPLOP_PRODUZIDA_G2, '0.0') as QT_UPLOP_PRODUZIDA_G2,
+        QT_UPLOP_DEVIDA_EMPREGADO_G2,
+        format(QT_UPOP_PRODUZIDA_EMPREGADO_G2, '0.0') as QT_UPOP_PRODUZIDA_EMPREGADO_G2,
+        LAP_LIQUIDA_G2
+        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC");
+        return json_encode($montaJsonRelatorioCards);
+    }
 
 public function montaJsonTotalUnidade($unidade)
 
-{
-    $montaJsonTotalUnidade = DB::select("select
-    NU_CGC,
-    sum(VOLUME_TOTAL_MES) AS volumeTotalMes,
-    sum(VOLUME_REALIZADO_MES) AS VolumeRealizadoMes,
-    format(sum(TEMPO_MEDIO_REALIZADO), '#.00') AS tempoMedioRealizado,
-    format(sum(HORAS_ALOCADAS),'#.00') AS horasAlocadas,
-    AVG(DESEMPENHO) as desempenho,
-    format(AVG(PESSOAS), '#.00') as pessoas,
-    format(AVG(UPLOP_BASE), '#.00') as uplopBase,
-    format(sum(UPLOP_PRODUZIDA), '#.00') AS uplopProduzida,
-    format(AVG(PRODUTIVIDADE_UPLOP), '#.00') as produtividadeUplop,
-    format(sum(HH_NECE_REALIZAR_ESTOQUE),'0.00') AS horaExtraNecessaria,
-    format(sum(TEMPO_MEDIO_NECESSARIO),'#.00') AS tempoMedioNecessario,
-    format(sum(UPLOAD_DEVIDA), '0.00') as uplopDevida
-    from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
-    where [NU_CGC] =" .$unidade."
-    group by NU_CGC");
-    return json_encode($montaJsonTotalUnidade);
-}
+    {
+        $montaJsonTotalUnidade = DB::select("select
+        NU_CGC,
+        sum(VOLUME_TOTAL_MES) AS volumeTotalMes,
+        sum(VOLUME_REALIZADO_MES) AS VolumeRealizadoMes,
+        format(sum(TEMPO_MEDIO_REALIZADO), '0.0') AS tempoMedioRealizado,
+        format(sum(HORAS_ALOCADAS),'0.0') AS horasAlocadas,
+        AVG(DESEMPENHO) as desempenho,
+        format(AVG(PESSOAS), '0.0') as pessoas,
+        format(AVG(UPLOP_BASE), '0.0') as uplopBase,
+        format(sum(UPLOP_PRODUZIDA), '0.0') AS uplopProduzida,
+        format(AVG(PRODUTIVIDADE_UPLOP), '0.0') as produtividadeUplop,
+        format(sum(HH_NECE_REALIZAR_ESTOQUE),'0.0') AS horaExtraNecessaria,
+        format(sum(TEMPO_MEDIO_NECESSARIO),'0.0') AS tempoMedioNecessario,
+        format(sum(UPLOAD_DEVIDA), '0.0') as uplopDevida
+        from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
+        where [NU_CGC] =" .$unidade."
+        group by NU_CGC");
+        return json_encode($montaJsonTotalUnidade);
+    }
 
 public function montaJsonNaoMensuraveis($unidade)
 
-{
-    $montaJsonNaoMensuraveis = DB::select("SELECT 
-    TB_MICROPROCESSO.ID_MICRO,
-    DE_MICRO,
-    format(TB_CARGA_MENSAL.QTDE_PESSOAS_ALOCADAS, '0.00') as QTDE_PESSOAS_ALOCADAS
-    FROM produtividade.TB_MICROPROCESSO
-    JOIN produtividade.TB_RELACAO_CGC_MACRO_MICRO 
-    ON produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO = produtividade.TB_MICROPROCESSO.ID_MICRO
-    JOIN produtividade.TB_CARGA_MENSAL
-    on produtividade.TB_CARGA_MENSAL.ID_AG_MACRO_MICRO = produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_AG_MACRO_MICRO
-    where IC_MENSURAVEL = 'N' and 
-    TB_RELACAO_CGC_MACRO_MICRO.NU_CGC =".$unidade);
-    return json_encode($montaJsonNaoMensuraveis);
-}
+    {
+        $montaJsonNaoMensuraveis = DB::select("SELECT 
+        TB_MICROPROCESSO.ID_MICRO,
+        DE_MICRO,
+        replace(format(isnull(QTDE_PESSOAS_ALOCADAS, '0.0'), '0.0'), '.', ',') as QTDE_PESSOAS_ALOCADAS
+        FROM produtividade.TB_MICROPROCESSO
+        JOIN produtividade.TB_RELACAO_CGC_MACRO_MICRO 
+        ON produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO = produtividade.TB_MICROPROCESSO.ID_MICRO
+        JOIN produtividade.TB_CARGA_MENSAL
+        on produtividade.TB_CARGA_MENSAL.ID_AG_MACRO_MICRO = produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_AG_MACRO_MICRO
+        where IC_MENSURAVEL = 'N' and 
+        TB_RELACAO_CGC_MACRO_MICRO.NU_CGC =".$unidade);
+        return json_encode($montaJsonNaoMensuraveis);
+    }
 
 public function viewRelatorioVilop()
-{
-    $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
-    try {
-    $listaProcesso = DB::table('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS')->where('CGC_UNIDADE', $codigoUnidadeUsuarioSessao)->first();
-    $unidadeCGC = $listaProcesso->CGC_UNIDADE;
-    $unidadeNome = $listaProcesso->NOME_UNIDADE;
-    return view('portal.produtividade-vilop.relatorio', [
-        'unidadeCGC' => $unidadeCGC
-        ,'unidadeNome' => $unidadeNome
-    ]);
-    }catch (\Throwable $th) {
-        $codigoUnidadeUsuarioSessao = str_pad($codigoUnidadeUsuarioSessao, 4, '0', STR_PAD_LEFT);
-        $listaProcesso = DB::table('TB_CAPTURA_UNIDADES_ATT')->where('codigoAgencia', $codigoUnidadeUsuarioSessao)->first();
-        $unidadeCGC =  $codigoUnidadeUsuarioSessao;
-        $unidadeNome = $listaProcesso->nomeAgencia;
+    {
+        $codigoUnidadeUsuarioSessao = Ldap::defineUnidadeUsuarioSessao();
+        try {
+        $listaProcesso = DB::table('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS')->where('CGC_UNIDADE', $codigoUnidadeUsuarioSessao)->first();
+        $unidadeCGC = $listaProcesso->CGC_UNIDADE;
+        $unidadeNome = $listaProcesso->NOME_UNIDADE;
         return view('portal.produtividade-vilop.relatorio', [
             'unidadeCGC' => $unidadeCGC
             ,'unidadeNome' => $unidadeNome
         ]);
+        }catch (\Throwable $th) {
+            $codigoUnidadeUsuarioSessao = str_pad($codigoUnidadeUsuarioSessao, 4, '0', STR_PAD_LEFT);
+            $listaProcesso = DB::table('TB_CAPTURA_UNIDADES_ATT')->where('codigoAgencia', $codigoUnidadeUsuarioSessao)->first();
+            $unidadeCGC =  $codigoUnidadeUsuarioSessao;
+            $unidadeNome = $listaProcesso->nomeAgencia;
+            return view('portal.produtividade-vilop.relatorio', [
+                'unidadeCGC' => $unidadeCGC
+                ,'unidadeNome' => $unidadeNome
+            ]);
 
+        }
+    }
+
+public function resultadoFarolUnidade($unidade)
+
+{
+    $resultadoFarolUnidade = DB::select("SELECT [NU_CGC]
+    ,[PRODUTIVIDADE_G1]
+    ,[DESEMPENHO]
+    ,[PESSOAS]
+    ,[RESULTADO] = CASE 
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G1] >= 120 THEN 'Sobrecarga'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G1] >= 120 then 'Sobrecarga'
+                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G1] >= 120 then 'Sobrecarga'
+                        
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G1] BETWEEN 95 AND 120 then 'Limite'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G1] BETWEEN 95 AND 120  then 'Limite'
+                        WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G1] BETWEEN 95 AND 120  then 'Sobrecarga'
+                        
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G1] < 95 then 'Receptora de Processos'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G1] < 95 then 'Receptora de Processos'
+                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G1] < 95 and PESSOAS > 120 then 'LIMITE'  
+                  END 
+    FROM [7257_DES].[produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+    where [NU_CGC] = ".$unidade);
+    return json_encode($resultadoFarolUnidade);
 }
-}
+
+public function TotalNaoMensuraveis($unidade)
+
+    {
+        $montaJsonNaoMensuraveis = DB::select("SELECT 
+		replace(format(sum(QTDE_PESSOAS_ALOCADAS), '0.0'),'.',',') as totalNaoMensuravel 
+        FROM produtividade.TB_MICROPROCESSO
+        JOIN produtividade.TB_RELACAO_CGC_MACRO_MICRO 
+        ON produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO = produtividade.TB_MICROPROCESSO.ID_MICRO
+        JOIN produtividade.TB_CARGA_MENSAL
+        on produtividade.TB_CARGA_MENSAL.ID_AG_MACRO_MICRO = produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_AG_MACRO_MICRO
+        where IC_MENSURAVEL = 'N' and 
+        TB_RELACAO_CGC_MACRO_MICRO.NU_CGC =".$unidade);
+        return json_encode($montaJsonNaoMensuraveis);
+    }
         
 }

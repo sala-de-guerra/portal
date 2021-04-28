@@ -85,15 +85,41 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
             $CargaMensal = new CargaMensal();
             $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
             $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
-            $CargaMensal->QTDE_PESSOAS_ALOCADAS           = $row[16];
+
+            if (isset($row[6])){
+                $CargaMensal->MM_REFERENCIA               = $row[6];
+            }
+            if (isset($row[7])){
+                $CargaMensal->AA_REFERENCIA               = $row[7] ;
+            }
+            
+            if (isset($row[16])){
+                if($row[16] == 0){
+                    $CargaMensal->QTDE_PESSOAS_ALOCADAS        = null;
+                }else{
+                $CargaMensal->QTDE_PESSOAS_ALOCADAS        = $row[16];
+                }
+            }else{
+                $CargaMensal->QTDE_PESSOAS_ALOCADAS        = null;
+            }
+
             if (isset($row[4])){
-                $CargaMensal->VOLUME_TOTAL_DEMANDA        = $row[4];
+                if($row[4] == 0){
+                    $CargaMensal->VOLUME_TOTAL_DEMANDA        = null;
+                }else{
+                    $CargaMensal->VOLUME_TOTAL_DEMANDA        = $row[4];
+                }
             }else{
                 $CargaMensal->VOLUME_TOTAL_DEMANDA        = null;
             }
     
+
             if (isset($row[5])){
-                $CargaMensal->VOLUME_TOTAL_TRATADA        = $row[5];
+                if($row[5] == 0){
+                    $CargaMensal->VOLUME_TOTAL_TRATADA        = null;
+                }else{
+                    $CargaMensal->VOLUME_TOTAL_TRATADA        = $row[5];
+                }
             }else{
                 $CargaMensal->VOLUME_TOTAL_TRATADA        = null;
             }
@@ -183,15 +209,41 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
                 $CargaMensal = new CargaMensal();
                 $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
                 $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
-                $CargaMensal->QTDE_PESSOAS_ALOCADAS           = $row[16];
+
+                if (isset($row[6])){
+                    $CargaMensal->MM_REFERENCIA               = $row[6];
+                }
+                if (isset($row[7])){
+                    $CargaMensal->AA_REFERENCIA               = $row[7] ;
+                }
+ 
+                if (isset($row[16])){
+                    if($row[16] == 0){
+                        $CargaMensal->QTDE_PESSOAS_ALOCADAS        = null;
+                    }else{
+                    $CargaMensal->QTDE_PESSOAS_ALOCADAS        = $row[16];
+                    }
+                }else{
+                    $CargaMensal->QTDE_PESSOAS_ALOCADAS        = null;
+                }
+    
                 if (isset($row[4])){
-                    $CargaMensal->VOLUME_TOTAL_DEMANDA        = $row[4];
+                    if($row[4] == 0){
+                        $CargaMensal->VOLUME_TOTAL_DEMANDA        = null;
+                    }else{
+                        $CargaMensal->VOLUME_TOTAL_DEMANDA        = $row[4];
+                    }
                 }else{
                     $CargaMensal->VOLUME_TOTAL_DEMANDA        = null;
                 }
         
+    
                 if (isset($row[5])){
-                    $CargaMensal->VOLUME_TOTAL_TRATADA        = $row[5];
+                    if($row[5] == 0){
+                        $CargaMensal->VOLUME_TOTAL_TRATADA        = null;
+                    }else{
+                        $CargaMensal->VOLUME_TOTAL_TRATADA        = $row[5];
+                    }
                 }else{
                     $CargaMensal->VOLUME_TOTAL_TRATADA        = null;
                 }

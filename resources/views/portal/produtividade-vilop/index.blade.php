@@ -83,7 +83,6 @@
                             <div class="col-md-4 mb-3">
                                 <label for="volTotDemanda">Volume Total de Demanda</label>
 
-<<<<<<< HEAD
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalInfoVolTot"><i style="color: #054f77; font-size: 13pt;" class="fas fa-info-circle"></i></button>
 
                                 <div class="modal fade" id="modalInfoVolTot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,46 +91,6 @@
                                             <div class="modal-body">
                                                 aqui vai o texto
                                             </div>
-=======
-                        <form 
-                        method="post" 
-                        action="/produtividade-vilop/cria-macro-atividade" 
-                        id="formMacroatividade"
-                        class="form-inline">
-                                    <div class="modal-body">
-                                        {{ csrf_field() }}
-
-                                        <div class="form-group">
-                                            <input type="hidden" name="cgcUnidade" value="{{$unidadeCGC}}">
-                                            <input type="hidden" name="nomeUnidade" value="{{$unidadeNome}}">
-                                            <label for="nomeMacroAtividade" class="mt-0">Estabeleça as macroatividades da unidade abaixo</label>
-                                            <a 
-                                                tabindex="-1"
-                                                href="#" data-toggle="tooltip" data-placement="top" 
-                                                data-html="true"
-                                                title="<p>Use este campo para criar as macroatividades da unidade abaixo.</p>
-                                                <p> Caso deseje alterar outra unidade é necessário navegar pela busca acima no campo 'Pesquise por CGC'. </p>
-                                                ">
-                                                <span><i class="far fa-question-circle"></i></span>
-                                            </a> 
-                                                                                        
-                                            <input 
-                                            type="text" 
-                                            class="form-control-plaintext mt-1 border-bottom" 
-                                            id="nomeMacroAtividade" 
-                                            rows="1" 
-                                            name="nomeMacroAtividade" 
-                                            title="Atenção! Neste campo já se inicia o preenchimento da pesquisa"
-                                            placeholder="Digite aqui o nome da MACROATIVIDADE para unidade abaixo..." autofocus required>
-                                            
-                                            <button 
-                                                type="submit" 
-                                                class=" form-group btn btn-primary mt-1 "
-                                                {{-- title="prazo encerrado em 12/03/2020" --}}
-                                                >
-                                                Criar MACROATIVIDADE</button>
-                                            
->>>>>>> e846ecf00fddd72b9c807cbe9bcdaa7c6af99438
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +169,6 @@
                 </ul>
             </div>
 
-<<<<<<< HEAD
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-one-tabContent">
                     <div class="tab-pane fade show active" id="custom-tabs-one-Atividades" role="tabpanel" aria-labelledby="custom-tabs-one-Atividades-tab">
@@ -226,30 +184,6 @@
                         </div>
                         <div class="card-body">
                             <input type="hidden" id='tokenVilop' value="{{ csrf_token() }}">
-=======
-    <div  style="display: none;" class="row" id='cardTabela'>
-        <div class="col-md-12">
-            <div class="card card-default">
-    
-                <div class="card-header">
-                    <h3 class="card-title callout callout-info mt-1">
-                        <span id='unidade'> {{$unidadeCGC}} </span> - {{$unidadeNome}}
-                    </h3>
-                    
-                    
-                    {{-- <div class="float-right">
-                        <form action="/produtividade-vilop/indicadores/view/{{$unidadeCGC}}">
-                            <button type="submit" class="btn btn-warning disabled"><i class="fas fa-chart-bar"> Indicadores</i></button>
-                        </form>
-                    </div> --}}
-
-
-                </div> <!-- /.card-header -->
-                <input type="hidden" id='tokenVilop' value="{{ csrf_token() }}">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
->>>>>>> e846ecf00fddd72b9c807cbe9bcdaa7c6af99438
                             <table id="tblAtividadesVilop" class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
