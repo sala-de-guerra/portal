@@ -136,6 +136,78 @@
         }
         33% {
             transform-origin: right center;
+            transform: rotate(20deg);
+        }
+        66% {
+            transform-origin: right center;
+            transform: rotate(20deg);
+        }
+        100% {
+            transform-origin:right center;
+            transform: rotate(20deg);
+        }
+    }
+
+    .scorer-2-tick {
+        position: absolute;
+        top: 40%;
+        left: -250%;
+        width: 300%;
+        height: 5px;
+        background-color: #000000;
+        animation-name: ticker-mover-2;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-top-right-radius: 5%;
+        border-bottom-right-radius: 5%;
+    }
+
+    @keyframes ticker-mover-2 {
+        0% {
+            transform-origin: right center;
+            transform: rotate(0deg);
+        }
+        33% {
+            transform-origin: right center;
+            transform: rotate(90deg);
+        }
+        66% {
+            transform-origin: right center;
+            transform: rotate(90deg);
+        }
+        100% {
+            transform-origin:right center;
+            transform: rotate(90deg);
+        }
+    }
+
+    .scorer-3-tick {
+        position: absolute;
+        top: 40%;
+        left: -250%;
+        width: 300%;
+        height: 5px;
+        background-color: #000000;
+        animation-name: ticker-mover-3;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-top-right-radius: 5%;
+        border-bottom-right-radius: 5%;
+    }
+
+    @keyframes ticker-mover-3 {
+        0% {
+            transform-origin: right center;
+            transform: rotate(0deg);
+        }
+        33% {
+            transform-origin: right center;
             transform: rotate(150deg);
         }
         66% {
@@ -205,6 +277,13 @@
         font-size: 10px !important;
     }
    
+   .legenda{
+       color: #eff5f6;
+       font-size: 13px;
+       text-align:right;
+   }
+
+   
 
 </style>
 
@@ -229,14 +308,14 @@
             <span id="unidade">{{$unidadeCGC}}</span> - {{$unidadeNome}}
         </h3>
     </div>
-
+<!--
     <div class="col-sm-2">
         <div class="container" style="align-items:center;">
-            <div class="layout-align" > 
+            <div class="layout-align" >
                 <div id="score-meter-1" class="layout-align">
-                    {{-- <div id="scorer-1-inner-div">
+                    <div id="scorer-1-inner-div">
                         <div id="scorer-1-inner-div-5">
-                            <div class="scorer-1-tick">
+                            <div id="corUnidade">
                             </div>
                         </div>
                     </div>
@@ -246,12 +325,14 @@
                     </div>
                     <div id="scorer-1-inner-div-4">
                     </div>
-                </div> --}}
-                {{-- <span id="scoreUnidade">Unidade com Sobrecarga</span> --}}
-            </div>
+                </div>
+                <span style="align:center;" id="scoreUnidade"></span>
             </div>
         </div>
     </div>
+
+-->
+
 </div>
 @endsection
 
@@ -266,20 +347,16 @@
             <div class="container"> 
                 <h1 id="produtividadeUnidade"></h1>
                 <h4 class="tituloCard">Produtividade</h4>
+                <p class="legenda">UPLop Produzida / UPLop Devida</p>
             </div>
-            <a data-toggle="collapse" aria-expanded="false" aria-controls="listaProdutividade" href="#listaProdutividade" class="small-box-footer float-right" role="button" id="listagemProdutividade"><i id="iconeProdutividade" class="fa fa-angle-double-down" style="color: white"></i></a>       
+            <a class="small-box-footer float-right" role="button" id="listagemProdutividade"><i id="iconeProdutividade" class="fa fa-angle-double-down" style="color: white"></i></a>       
         </div>           
     </div>
     <div class="card TotUnidade">
         <div class="card-body align-middle">
             <h1 id="desempenhoUnidade" ></h1>
-            <h4 class="tituloCard">Desempenho</h4>      
-        </div>
-    </div>
-    <div class="card TotUnidade">
-        <div class="card-body align-middle">
-            <h1 id="pessoasUnidade"></h1>
-            <h4 class="tituloCard">Pessoas</h4>    
+            <h4 class="tituloCard">Desempenho</h4>
+            <p class="legenda">Volume Realizado / Volume Total</p>      
         </div>
     </div>
     <div class="card TotUnidade">
@@ -287,14 +364,16 @@
             <div class="container"> 
                 <h1 id="fteUnidade"></h1>
                 <h4 class="tituloCard">FTE Apurada</h4>
+                <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
             </div>
-            <a data-toggle="collapse" aria-expanded="false" aria-controls="listaFTE" href="#listaFTE" class="small-box-footer float-right" role="button" id="listagemFTE"><i id="iconeFTE" class="fa fa-angle-double-down" style="color: white"></i></a>       
+            <a class="small-box-footer float-right" role="button" id="listagemFTE"><i id="iconeFTE" class="fa fa-angle-double-down" style="color: white"></i></a>       
         </div>
     </div>
     <div class="card TotUnidade">
         <div class="card-body align-middle">
             <h1 id="lapUnidade"></h1>
-            <h4 class="tituloCard">LAP Unidade</h4>    
+            <h4 class="tituloCard">LAP Unidade</h4>
+            <p class="legenda">FTE Unidade</p>    
         </div>
     </div>
 </div>
@@ -415,6 +494,36 @@
 <br>
 <div id='principal'>
 
+  
+
+    <div class="card" id='cardNaoMensuravel' style="display: none;">
+        <div class="card-header">
+            <div class="d-flex justify-content-start" style="color: #004c8c">
+                <h4 style="font-size:18px;"><b>Macroprocesso:</b>&nbsp&nbsp<span class="macro" id="macroprocesso_naoMensuravel">SUPORTE / ATIVIDADES NÃO MENSURÁVEIS</span></h4> 
+            </div>
+
+            <div class="table-responsive">
+                <table id="primeiraTabelaNaoMensuravel" class="table table-super-condensed table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="colunaNormal"data-toggle="tooltip" title="">Pessoas Alocadas<br><small class="text-muted">qtdade</small></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="totMacroNaoMensuravel" class="atendimentos">
+                            <td class="estiloTotal font-weight-bold"><a class="btn btn-link text-center font-weight-bold align-middle" data-toggle="collapse" href=".collapseNaoMensuravel" role="button" aria-expanded="false" aria-controls="collapseExample" style="font-size:14px;">
+                                Total</a>
+                            </td>
+                            <td class="align-middle font-weight-bold"><span id="totalNaoMensuravel"></span></td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
 </div>
 
 
@@ -457,17 +566,23 @@
     var $input = $(this).find('[name=numeroCGC]');
     window.location = `/produtividade-vilop/relatorio-geral/${$input.val()}`
     })
-  /*
-$('#listagemFTE').click(function(){
-    if ('#iconeFTE' == "class='fa fa-angle-double-down'")
-    $('#iconeFTE').addClass('fa fa-angle-double-up');
-    $('#iconeFTE').removeClass('fa fa-angle-double-down');
-    $('#listagemProdutividade').hide()
-});
-*/
+  
+
+
 $('#listagemProdutividade').click(function(){
     $('#iconeProdutividade').toggleClass('fa fa-angle-double-up fa fa-angle-double-down');
+    $("#listaProdutividade").toggle();
+    $("#listaFTE").css("display", "none");
+    $('#iconeFTE').attr('class','fa fa-angle-double-down');
 });
+
+$('#listagemFTE').click(function(){
+    $('#iconeFTE').toggleClass('fa fa-angle-double-up fa fa-angle-double-down');
+    $("#listaFTE").toggle();
+    $("#listaProdutividade").css("display", "none");
+    $('#iconeProdutividade').attr('class','fa fa-angle-double-down');    
+});
+
 
 var unidade = $('#unidade').text()
 unidade = unidade.trim();
@@ -478,11 +593,7 @@ $(document).ready(function(){
     $.getJSON('/produtividade-vilop/api/relatorio-cards/'+unidade, function(dados){
         $.each(dados, function(key, item){
 
-            var valueProdutividade2 = item.PRODUTIVIDADE_G2
-            var valProdutividade2 = parseFloat(valueProdutividade2)
-            var valorProdutividade2 = valProdutividade2.toLocaleString('pt-BR')
-
-            $('#produtividadeUnidade').html('<b>'+valorProdutividade2+'</b> <sup style="font-size: 20px">%</sup>' )
+            $('#produtividadeUnidade').html('<b>'+item.PRODUTIVIDADE_G2+'</b> <sup style="font-size: 20px">%</sup>' )
 
             $('#cardTotalMicroatividades').css("display", "none");
             $('#cardTotalHorasAlocadas').css("display", "none");
@@ -492,11 +603,11 @@ $(document).ready(function(){
             //$('#totalMicroatividades').html('<b>'+ '' +'</b>')
             //$('#totalHorasAlocadas').html('<b>'+ '' +'</b>')
             //$('#totalUplopHora').html('<b>'+ '' +'</b>')
-            $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G2.replace('.',',') +'</b>')
-            $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G2.replace('.',',') +'</b>')
-            $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G2.replace('.',',') +'</b>')
-            $('#totalUplopProduzidaEmpregado').html('<b>'+ item.QT_UPOP_PRODUZIDA_EMPREGADO_G2.replace('.',',') +'</b>')
-            $('#totalLapLiquida').html('<b>'+ item.LAP_LIQUIDA_G2.replace('.',',') +'</b>')
+            $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G2 +'</b>')
+            $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G2 +'</b>')
+            $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G2 +'</b>')
+            $('#totalUplopProduzidaEmpregado').html('<b>'+ item.QT_UPOP_PRODUZIDA_EMPREGADO_G2 +'</b>')
+            $('#totalLapLiquida').html('<b>'+ item.LAP_LIQUIDA_G2 +'</b>')
 
                 $("#filtroVisao").change(function(){
                     if ($(this).val() === "totalSemGAS") {
@@ -505,25 +616,18 @@ $(document).ready(function(){
                         $('#cardTotalHorasAlocadas').css("display", "block");
                         $('#cardTotalUplopHora').css("display", "block");
 
-                        var valueProdutividade = item.PRODUTIVIDADE
-                        var valProdutividade = parseFloat(valueProdutividade)
-                        var valorProdutividade = valProdutividade.toLocaleString('pt-BR');
-
-                        $('#produtividadeUnidade').html('<b>'+item.PRODUTIVIDADE.replace('.',',')+'</b> <sup style="font-size: 20px">%</sup>' )
+                        $('#produtividadeUnidade').html('<b>'+item.PRODUTIVIDADE+'</b> <sup style="font-size: 20px">%</sup>' )
                         $('#totalMicroatividades').html('<b>'+ item.QT_MICRO +'</b>')
-                        $('#totalHorasAlocadas').html('<b>'+ item.QT_HORAS_ALOCADAS_G1.replace('.',',') +'</b>')
-                        $('#totalUplopHora').html('<b>'+ item.QT_UPLOP_POR_HORA_G1.replace('.',',') +'</b>')
-                        $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G1.replace('.',',') +'</b>')
-                        $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G1.replace('.',',') +'</b>')
-                        $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G1.replace('.',',') +'</b>')
-                        $('#totalUplopProduzidaEmpregado').html('<b>'+ item.QT_UPLOP_PRODUZIDA_EMPREGADO_G1.replace('.',',') +'</b>')
-                        $('#totalLapLiquida').html('<b>'+ item.LAP_LIQUIDA_G1.replace('.',',') +'</b>')
+                        $('#totalHorasAlocadas').html('<b>'+ item.QT_HORAS_ALOCADAS_G1 +'</b>')
+                        $('#totalUplopHora').html('<b>'+ item.QT_UPLOP_POR_HORA_G1 +'</b>')
+                        $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G1 +'</b>')
+                        $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G1 +'</b>')
+                        $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G1 +'</b>')
+                        $('#totalUplopProduzidaEmpregado').html('<b>'+ item.QT_UPLOP_PRODUZIDA_EMPREGADO_G1 +'</b>')
+                        $('#totalLapLiquida').html('<b>'+ item.LAP_LIQUIDA_G1 +'</b>')
                     }else{
-                        var valueProdutividade2 = item.PRODUTIVIDADE_G2
-                        var valProdutividade2 = parseFloat(valueProdutividade2)
-                        var valorProdutividade2 = valProdutividade2.toLocaleString('pt-BR')
-
-                        $('#produtividadeUnidade').html('<b>'+valorProdutividade2+'</b> <sup style="font-size: 20px">%</sup>' )
+                        
+                        $('#produtividadeUnidade').html('<b>'+item.PRODUTIVIDADE_G2+'</b> <sup style="font-size: 20px">%</sup>' )
 
                         $('#cardTotalMicroatividades').css("display", "none");
                         $('#cardTotalHorasAlocadas').css("display", "none");
@@ -532,11 +636,11 @@ $(document).ready(function(){
                         //$('#totalMicroatividades').html('<b>'+ 'pendente' +'</b>')
                         //$('#totalHorasAlocadas').html('<b>'+ 'pendente' +'</b>')
                         //$('#totalUplopHora').html('<b>'+ 'pendente' +'</b>')
-                        $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G2.replace('.',',') +'</b>')
-                        $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G2.replace('.',',') +'</b>')
-                        $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G2.replace('.',',') +'</b>')
-                        $('#totalUplopProduzidaEmpregado').html('<b>'+ item.QT_UPOP_PRODUZIDA_EMPREGADO_G2.replace('.',',') +'</b>')
-                        $('#totalLapLiquida').html('<b>'+ item.LAP_LIQUIDA_G2.replace('.',',') +'</b>')
+                        $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G2 +'</b>')
+                        $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G2 +'</b>')
+                        $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G2 +'</b>')
+                        $('#totalUplopProduzidaEmpregado').html('<b>'+ item.QT_UPOP_PRODUZIDA_EMPREGADO_G2 +'</b>')
+                        $('#totalLapLiquida').html('<b>'+ item.LAP_LIQUIDA_G2 +'</b>')
                     }
                 })
         })/*.done(function() {
@@ -556,29 +660,117 @@ $(document).ready(function(){
     $.getJSON('/produtividade-vilop/api/relatorio-cards/'+unidade, function(dados){
         $.each(dados, function(key, item) {
             
-            $('#desempenhoUnidade').html('<b>'+item.DESEMPENHO.replace('.',',')+'</b> <sup style="font-size: 20px">%</sup>' )
-            $('#pessoasUnidade').html('<b>'+item.PESSOAS.replace('.',',')+'</b> <sup style="font-size: 20px">%</sup>' )
-            $('#fteUnidade').html('<b>'+item.FTE_APURADA.replace('.',',')+'</b> <sup style="font-size: 20px">%</sup>' )
+            $('#desempenhoUnidade').html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
+         
+            $('#fteUnidade').html('<b>'+item.FTE_APURADA_MENSURAVEL_G1+'</b> <sup style="font-size: 20px">%</sup>' )
             $('#lapUnidade').html('<b>'+parseInt(item.LAP_UNIDADE)+'</b>')
 
-            $('#fteApuradaMensuravel').html('<b>'+ item.FTE_APURADA_MENSURAVEL_G1.replace('.',',') +'</b> <sup style="font-size: 20px">%</sup>')
-            $('#fteTecnicaMensuravel').html('<b>'+ item.FTE_TECNICA_MENSURAVEL_G1.replace('.',',') +'</b>')
-            $('#fteNaoMensuravel').html('<b>'+ item.FTE_NAO_MENSURAVEL_G1.replace('.',',') +'</b>')
+            $('#fteApuradaMensuravel').html('<b>'+ item.FTE_APURADA_MENSURAVEL_G1 +'</b> <sup style="font-size: 20px">%</sup>')
+            $('#fteTecnicaMensuravel').html('<b>'+ item.FTE_TECNICA_MENSURAVEL_G1 +'</b>')
+            $('#fteNaoMensuravel').html('<b>'+ item.FTE_NAO_MENSURAVEL_G1 +'</b>')
             $('#fteGestores').html('<b>'+ parseInt(item.GESTOTES) +'</b>')
             $('#fteAfastados').html('<b>'+ parseInt(item.AFASTADOS) +'</b>')
 
         })
     })
 
-    $.getJSON('/produtividade-vilop/api/relatorio-macro/'+unidade, function(dados){
-        $.each(dados, function(key, item) {
-            var valueVolumeTotalMes = item.volumeTotalMes
-            var valVolumeTotalMes = Number(valueVolumeTotalMes)
-            var valorVolumeTotalMes = valVolumeTotalMes.toLocaleString('pt-BR');
+    var verificaCardAutomatizados = 0
+    $.getJSON('/produtividade-vilop/api/relatorio-automatizados-totais/'+unidade, function(dados){
+        $.each(dados, function(key, item){
+            if (dados != null && verificaCardAutomatizados == 0){
+                var montaTabelaAutomatizados = `
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-start" style="color: #004c8c">
+                                <h4 style="font-size:18px;"><b>Macroprocesso:</b>&nbsp&nbsp<span class="macro" id="automatizados">AUTOMATIZADOS</span></h4> 
+                            </div>
+                        
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="primeiraTabelaAutomatizados" class="table table-super-condensed table-hover table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th class="colunaNormal"data-toggle="tooltip" title="Volumetria total recebida no mês">Volume total<br><small class="text-muted">mês</small></th>
 
-            var valueVolumeRealizadoMes = item.VolumeRealizadoMes
-            var valVolumeRealizadoMes = Number(valueVolumeRealizadoMes)
-            var valorVolumeRealizadoMes = valVolumeRealizadoMes.toLocaleString('pt-BR');       
+                                                <th class="colunaNormal" data-toggle="tooltip" title="Volumetria tratada no mês">Volume realizado<br><small class="text-muted">mês</small></th>
+                                                
+                                                <th class="colunaDiferenciada" data-toggle="tooltip" title="Volume Realizado / Volume Total">Desempenho<br><small class="text-muted">%</small></th>
+
+                                                <th class="colunaDiferenciada" data-toggle="tooltip" title="% de ref. do microprocesso sobre UPLop Base">UPLop Base<br><small class="text-muted">%</small></th>
+
+                                                <th class="colunaDiferenciada" data-toggle="tooltip" title="UPLop Devida considerando as Horas Alocadas">UPLop Devida<br><small class="text-muted">qtdade</small></th>
+
+                                                <th class="colunaDiferenciada" data-toggle="tooltip" title="UPLop Produzida ponderando volumetria e tempo médio">UPLop Produzida<br><small class="text-muted">qtdade</small></th>
+
+                                                <th class="colunaDiferenciada" data-toggle="tooltip" title="Relação entre UPLop Produzida pela UPLop Devida">Produtividade<br><small class="text-muted">%</small></th>
+                                                
+                                                <th class="colunaNormal" data-toggle="tooltip" title="Qtdade de horas para realizar o volume tratado">Horas alocadas<br><small class="text-muted">qtdade</small></th>
+                                                
+                                                <th class="colunaNormal" data-toggle="tooltip" title="Horas necessárias considerando o tempo médio">Horas necessárias<br><small class="text-muted">qtdade</small></th>
+
+                                                <th class="colunaNormal" data-toggle="tooltip" title="Média dos minutos para realizar volumetria tratada">Tempo médio realizado<br><small class="text-muted">minutos</small></th>
+
+                                                <th class="colunaNormal" data-toggle="tooltip" title="Tempo médio estimado para realização do estoque">Tempo médio necessário<br><small class="text-muted">qtdade</small></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="totMacro" class="atendimentos">
+                                                <td class="estiloTotal"><a class="btn btn-link text-center font-weight-bold align-middle" data-toggle="collapse" href=".collapseAutomatizados" role="button" aria-expanded="false" aria-controls="collapseExample" style="font-size:14px;">
+                                                    Total</a>
+                                                </td>
+                                                <td class="align-middle font-weight-bold">${item.volumeTotalMes}</td>
+                                                <td class="align-middle font-weight-bold">${item.VolumeRealizadoMes}</td>
+                                                <td class="colunaDiferenciada align-middle font-weight-bold">${item.desempenho}</td>
+                                                <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopBase}</td>
+                                                <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopDevida}</td>
+                                                <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopProduzida}</td>
+                                                <td class="colunaDiferenciada align-middle font-weight-bold">${item.produtividadeUplop}</td>
+                                                <td class="align-middle font-weight-bold">${item.horasAlocadas}</td>
+                                                <td class="align-middle font-weight-bold">${item.horaExtraNecessaria}</td>
+                                                <td class="align-middle font-weight-bold">${item.tempoMedioRealizado}</td>
+                                                <td class="align-middle font-weight-bold">${item.tempoMedioNecessario}</td>
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `   
+                $(montaTabelaAutomatizados).prependTo('#principal');
+                verificaCardAutomatizados += 1
+            }
+        })
+    }).done(function() {
+        $.getJSON('/produtividade-vilop/api/relatorio-automatizados/'+unidade, function(dados){
+        $.each(dados, function(key, item) {      
+
+            var montaTabela = `
+                    <tr class="atendimentos collapse collapseAutomatizados">
+                        <td  class="tituloMicro text-justify align-middle" style="max-width: 300px;">
+                                <b>${item.DE_MICRO}</b>
+                        </td>
+                        <td class="align-middle">${item.volumeTotalMes}</td>
+                        <td class="align-middle">${item.VolumeRealizadoMes}</td>
+                        <td class="colunaDiferenciada align-middle">${item.desempenho}</td>
+                        <td class="colunaDiferenciada align-middle">${item.uplopBase}</td>
+                        <td class="colunaDiferenciada align-middle">${item.uplopDevida}</td>
+                        <td class="colunaDiferenciada align-middle">${item.uplopProduzida}</td>
+                        <td class="colunaDiferenciada align-middle">${item.produtividadeUplop}</td>
+                        <td class="align-middle">${item.horasAlocadas}</td>
+                        <td class="align-middle">${item.horaExtraNecessaria}</td>
+                        <td class="align-middle">${item.tempoMedioRealizado}</td>
+                        <td class="align-middle">${item.tempoMedioNecessario}</td>
+                    </tr> 
+                    `
+                $(montaTabela).appendTo(`#primeiraTabelaAutomatizados>tbody`);
+       
+
+        })
+        }).done(function() {
+        $.getJSON('/produtividade-vilop/api/relatorio-macro/'+unidade, function(dados){
+        $.each(dados, function(key, item) {      
 
         var montaCard = `
             <div class="card">
@@ -596,14 +788,8 @@ $(document).ready(function(){
                                         <th class="colunaNormal"data-toggle="tooltip" title="Volumetria total recebida no mês">Volume total<br><small class="text-muted">mês</small></th>
 
                                         <th class="colunaNormal" data-toggle="tooltip" title="Volumetria tratada no mês">Volume realizado<br><small class="text-muted">mês</small></th>
-
-                                        <th class="colunaNormal" data-toggle="tooltip" title="Média dos minutos para realizar volumetria tratada">Tempo médio realizado<br><small class="text-muted">minutos</small></th>
-
-                                        <th class="colunaNormal" data-toggle="tooltip" title="Qtdade de horas para realizar o volume tratado">Horas alocadas<br><small class="text-muted">qtdade</small></th>
-
+                                        
                                         <th class="colunaDiferenciada" data-toggle="tooltip" title="Volume Realizado / Volume Total">Desempenho<br><small class="text-muted">%</small></th>
-
-                                        <th class="colunaDiferenciada" data-toggle="tooltip" title="% para realizar o estoque ou de sobrecarga">Pessoas<br><small class="text-muted">%</small></th>
 
                                         <th class="colunaDiferenciada" data-toggle="tooltip" title="% de ref. do microprocesso sobre UPLop Base">UPLop Base<br><small class="text-muted">%</small></th>
 
@@ -612,8 +798,12 @@ $(document).ready(function(){
                                         <th class="colunaDiferenciada" data-toggle="tooltip" title="UPLop Produzida ponderando volumetria e tempo médio">UPLop Produzida<br><small class="text-muted">qtdade</small></th>
 
                                         <th class="colunaDiferenciada" data-toggle="tooltip" title="Relação entre UPLop Produzida pela UPLop Devida">Produtividade<br><small class="text-muted">%</small></th>
-
+                                        
+                                        <th class="colunaNormal" data-toggle="tooltip" title="Qtdade de horas para realizar o volume tratado">Horas alocadas<br><small class="text-muted">qtdade</small></th>
+                                        
                                         <th class="colunaNormal" data-toggle="tooltip" title="Horas necessárias considerando o tempo médio">Horas necessárias<br><small class="text-muted">qtdade</small></th>
+
+                                        <th class="colunaNormal" data-toggle="tooltip" title="Média dos minutos para realizar volumetria tratada">Tempo médio realizado<br><small class="text-muted">minutos</small></th>
 
                                         <th class="colunaNormal" data-toggle="tooltip" title="Tempo médio estimado para realização do estoque">Tempo médio necessário<br><small class="text-muted">qtdade</small></th>
                                     </tr>
@@ -623,18 +813,17 @@ $(document).ready(function(){
                                         <td class="estiloTotal"><a class="btn btn-link text-center font-weight-bold align-middle" data-toggle="collapse" href=".collapse${item.ID_MACRO}" role="button" aria-expanded="false" aria-controls="collapseExample" style="font-size:14px;">
                                             Total</a>
                                         </td>
-                                        <td class="align-middle">${valorVolumeTotalMes}</td>
-                                        <td class="align-middle">${valorVolumeRealizadoMes}</td>
-                                        <td class="align-middle">${item.tempoMedioRealizado.replace('.',',')}</td>
-                                        <td class="align-middle">${item.horasAlocadas.replace('.',',')}</td>
-                                        <td class="colunaDiferenciada align-middle">${item.desempenho.replace('.',',')}</td>
-                                        <td class="colunaDiferenciada align-middle">${item.pessoas.replace('.',',')}</td>
-                                        <td class="colunaDiferenciada align-middle">${item.uplopBase.replace('.',',')}</td>
-                                        <td class="colunaDiferenciada align-middle">${item.uplopDevida.replace('.',',')}</td>
-                                        <td class="colunaDiferenciada align-middle">${item.uplopProduzida.replace('.',',')}</td>
-                                        <td class="colunaDiferenciada align-middle">${item.produtividadeUplop.replace('.',',')}</td>
-                                        <td class="align-middle">${item.horaExtraNecessaria.replace('.',',')}</td>
-                                        <td class="align-middle">${item.tempoMedioNecessario.replace('.',',')}</td>
+                                        <td class="align-middle font-weight-bold">${item.volumeTotalMes}</td>
+                                        <td class="align-middle font-weight-bold">${item.VolumeRealizadoMes}</td>
+                                        <td class="colunaDiferenciada align-middle font-weight-bold">${item.desempenho}</td>
+                                        <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopBase}</td>
+                                        <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopDevida}</td>
+                                        <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopProduzida}</td>
+                                        <td class="colunaDiferenciada align-middle font-weight-bold">${item.produtividadeUplop}</td>
+                                        <td class="align-middle font-weight-bold">${item.horasAlocadas}</td>
+                                        <td class="align-middle font-weight-bold">${item.horaExtraNecessaria}</td>
+                                        <td class="align-middle font-weight-bold">${item.tempoMedioRealizado}</td>
+                                        <td class="align-middle font-weight-bold">${item.tempoMedioNecessario}</td>
                                     </tr> 
                                 </tbody>
                             </table>
@@ -643,88 +832,49 @@ $(document).ready(function(){
                 </div>
             </div>
                 `   
-        $(montaCard).appendTo('#principal');
+        $(montaCard).prependTo('#principal');
 
-        })
+            })
         }).done(function() {
+           
             $.getJSON('/produtividade-vilop/api/relatorio-micro/'+unidade, function(dados){
             $.each(dados, function(key, item) { 
-
-                var valueVolumeTotalMes = item.volumeTotalMes
-                var valVolumeTotalMes = Number(valueVolumeTotalMes)
-                var valorVolumeTotalMes = valVolumeTotalMes.toLocaleString('pt-BR');
-
-                var valueVolumeRealizadoMes = item.VolumeRealizadoMes
-                var valVolumeRealizadoMes = Number(valueVolumeRealizadoMes)
-                var valorVolumeRealizadoMes = valVolumeRealizadoMes.toLocaleString('pt-BR');
-
-                var valueuplopDevida = item.uplopDevida
-                var valuplopDevida = Number(valueuplopDevida)
-                var valorUplopDevida = valuplopDevida.toLocaleString('pt-BR');
 
                 var montaTabela = `
                     <tr class="atendimentos collapse collapse${item.ID_MACRO}">
                         <td  class="tituloMicro text-justify align-middle" style="max-width: 300px;">
                                 <b>${item.DE_MICRO}</b>
                         </td>
-                        <td class="align-middle">${valorVolumeTotalMes}</td>
-                        <td class="align-middle">${valorVolumeRealizadoMes}</td>
-                        <td class="align-middle">${item.tempoMedioRealizado.replace('.',',')}</td>
-                        <td class="align-middle">${item.horasAlocadas.replace('.',',')}</td>
-                        <td class="colunaDiferenciada align-middle">${item.desempenho.replace('.',',')}</td>
-                        <td class="colunaDiferenciada align-middle">${item.pessoas.replace('.',',')}</td>
-                        <td class="colunaDiferenciada align-middle">${item.uplopBase.replace('.',',')}</td>
-                        <td class="colunaDiferenciada align-middle">${valorUplopDevida}</td>
-                        <td class="colunaDiferenciada align-middle">${item.uplopProduzida.replace('.',',')}</td>
-                        <td class="colunaDiferenciada align-middle">${item.produtividadeUplop.replace('.',',')}</td>
-                        <td class="align-middle">${item.horaExtraNecessaria.replace('.',',')}</td>
-                        <td class="align-middle">${item.tempoMedioNecessario.replace('.',',')}</td>
+                        <td class="align-middle">${item.volumeTotalMes}</td>
+                        <td class="align-middle">${item.VolumeRealizadoMes}</td>
+                        <td class="colunaDiferenciada align-middle">${item.desempenho}</td>
+                        <td class="colunaDiferenciada align-middle">${item.uplopBase}</td>
+                        <td class="colunaDiferenciada align-middle">${item.uplopDevida}</td>
+                        <td class="colunaDiferenciada align-middle">${item.uplopProduzida}</td>
+                        <td class="colunaDiferenciada align-middle">${item.produtividadeUplop}</td>
+                        <td class="align-middle">${item.horasAlocadas}</td>
+                        <td class="align-middle">${item.horaExtraNecessaria}</td>
+                        <td class="align-middle">${item.tempoMedioRealizado}</td>
+                        <td class="align-middle">${item.tempoMedioNecessario}</td>
                     </tr> 
                     `
                 $(montaTabela).appendTo(`#primeiraTabela${item.ID_MACRO}>tbody`);
             })
         })
+        })
     })
+  })
+  
 
 
     var TotalNaoMensuravel = 0;
     $.getJSON('/produtividade-vilop/api/relatorio-nao-mensuraveis/'+unidade, function(dados){
         $.each(dados, function(key, item) {
 
-            if (TotalNaoMensuravel == 0){
-                let cardNaoMensuravel = 
-                `
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-start" style="color: #004c8c">
-                                <h4 style="font-size:18px;"><b>Macroprocesso:</b>&nbsp&nbsp<span class="macro" id="macroprocesso_naoMensuravel">SUPORTE / ATIVIDADES NÃO MENSURÁVEIS</span></h4> 
-                            </div>
-
-                            <div class="table-responsive">
-                                <table id="primeiraTabelaNaoMensuravel" class="table table-super-condensed table-hover table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th class="colunaNormal"data-toggle="tooltip" title="">Pessoas Alocadas<br><small class="text-muted">qtdade</small></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr id="totMacroNaoMensuravel" class="atendimentos">
-                                            <td class="estiloTotal"><a class="btn btn-link text-center font-weight-bold align-middle" data-toggle="collapse" href=".collapseNaoMensuravel" role="button" aria-expanded="false" aria-controls="collapseExample" style="font-size:14px;">
-                                                Total</a>
-                                            </td>
-                                            <td class="align-middle"><span id="totalNaoMensuravel"></span></td>
-                                        </tr> 
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
-                    </div>
-                `
-                $(cardNaoMensuravel).appendTo('#principal');
+            if (TotalNaoMensuravel <= 0){
+                $('#cardNaoMensuravel').css("display", "block");
             }
-
+            
             var qtdadePessoas = item.QTDE_PESSOAS_ALOCADAS
             var QtdadePessoas = parseFloat(qtdadePessoas)
             var qtPessoas = qtdadePessoas        
@@ -735,14 +885,44 @@ $(document).ready(function(){
                     <td  class="tituloMicro text-justify align-middle" style="max-width: 300px;">
                             <b>${item.DE_MICRO}</b>
                     </td>
-                    <td class="align-middle">${item.QTDE_PESSOAS_ALOCADAS.replace('.',',')}</td>
+                    <td class="align-middle">${item.QTDE_PESSOAS_ALOCADAS}</td>
                 </tr> 
                 `
             $(montaTabelaNaoMensuravel).appendTo(`#primeiraTabelaNaoMensuravel>tbody`);
-        
-            var somaNaoMensuravel = TotalNaoMensuravel
-            $('#totalNaoMensuravel').html('<b>' + somaNaoMensuravel.toFixed(2).replace('.',',') + '</b>')
 
+
+        })
+    })
+})
+
+window.addEventListener('load', function () {
+    $.getJSON('/produtividade-vilop/api/total-nao-mensuraveis/'+unidade, function(dados){
+        $.each(dados, function(key, item) {
+
+            $('#totalNaoMensuravel').html('<b>' + item.totalNaoMensuravel + '</b>')
+
+        
+/*
+            $('#scoreUnidade').html('<b>' + item.RESULTADO + '</b>')
+        
+            
+            switch (item.RESULTADO){
+                case "Receptora de Processos":
+                    $('#corUnidade').addClass("scorer-1-tick");
+                break
+                case "Limite":
+                    $('#corUnidade').addClass("scorer-2-tick");
+                break
+                case "Sobrecarga":
+                    $('#corUnidade').addClass("scorer-3-tick");
+                break
+                case "LIMITE":
+                    $('#corUnidade').addClass("scorer-3-tick");
+                break
+            }
+            
+                
+  */          
         })
     })
 })

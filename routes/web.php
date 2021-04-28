@@ -739,16 +739,25 @@ Route::prefix('produtividade-vilop/')->group(function () {
     //relatorio geral
     Route::get('/relatorio-geral/{unidade}', 'VILOP\produtividadeVilopController@viewRelatorioVilopUnidade');
 
+    //Resultado Farol
+    Route::get('/relatorio-geral/resultado-farol/{unidade}', 'VILOP\produtividadeVilopController@resultadoFarolUnidade');
+
     //relatorio Macro
     Route::get('api/relatorio-macro/{unidade}', 'VILOP\produtividadeVilopController@montaJsonRelatorioMacroAtividades');
     //relatorio Micro
     Route::get('api/relatorio-micro/{unidade}', 'VILOP\produtividadeVilopController@montaJsonRelatorioMicroAtividades');
+    //automatizados
+    Route::get('api/relatorio-automatizados/{unidade}', 'VILOP\produtividadeVilopController@montaJsonRelatorioAutomatizados');
+    //automatizados Totais
+    Route::get('api/relatorio-automatizados-totais/{unidade}', 'VILOP\produtividadeVilopController@montaJsonRelatorioTotais');
     //relatorio Cards
     Route::get('api/relatorio-cards/{unidade}', 'VILOP\produtividadeVilopController@montaJsonRelatorioCards');
     //relatorio total
     Route::get('api/relatorio-total/{unidade}', 'VILOP\produtividadeVilopController@montaJsonTotalUnidade');
     //nao mensuraveis
     Route::get('api/relatorio-nao-mensuraveis/{unidade}', 'VILOP\produtividadeVilopController@montaJsonNaoMensuraveis');
+    //total não mensuraveis
+    Route::get('api/total-nao-mensuraveis/{unidade}', 'VILOP\produtividadeVilopController@TotalNaoMensuraveis');
     //nao cards total
     Route::get('api/relatorio-cards-geral', 'VILOP\produtividadeVilopController@montaJsonRelatorioCardsGeral');
 
