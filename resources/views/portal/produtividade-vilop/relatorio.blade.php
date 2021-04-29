@@ -24,6 +24,28 @@
         background: -moz-linear-gradient(bottom, #66CFBF, #40A797);
     }
 
+    .verde{
+        color: white;
+        background: -webkit-gradient(linear, left top, right top, from(#c2dc26), to(#c2dc26));
+        background: -moz-linear-gradient(bottom, #c2dc26, #c2dc26);
+    }
+
+    .amarelo{
+        color: white;
+        background: -webkit-gradient(linear, left top, right top, from(#ffc230), to(#ffc230));
+        background: -moz-linear-gradient(bottom, #ffc230, #ffc230);
+    }
+
+    .vermelho{
+        color: white;
+        background: -webkit-gradient(linear, left top, right top, from(#fc8a76), to(#fc8a76));
+        background: -moz-linear-gradient(bottom, #fc8a76, #fc8a76);
+    }
+
+    #resultadoCor{
+        text-align: right;
+        margin-top: 50px;
+    }
     #container{
         padding-left: 100px;
         position: relative;
@@ -376,8 +398,15 @@
             <p class="legenda">FTE Unidade</p>    
         </div>
     </div>
+    @if ($resultado != null)
+    <div class="card {{$cor}}">
+        <div class="card-body align-middle">
+            <h4 id="resultadoCor">{{$resultado}}</h4>
+            <p class="legenda">Produtividade / Desempenho</p>  
+        </div>
+    </div>
+    @endif
 </div>
-
 <br>
 
 <div class="collapse" id="listaProdutividade">
@@ -678,6 +707,7 @@ $(document).ready(function(){
     $.getJSON('/produtividade-vilop/api/relatorio-automatizados-totais/'+unidade, function(dados){
         $.each(dados, function(key, item){
             if (dados != null && verificaCardAutomatizados == 0){
+                if(item.volumeTotalMes != null){
                 var montaTabelaAutomatizados = `
                     <div class="card">
                         <div class="card-header">
@@ -695,7 +725,7 @@ $(document).ready(function(){
 
                                                 <th class="colunaNormal" data-toggle="tooltip" title="Volumetria tratada no mês">Volume realizado<br><small class="text-muted">mês</small></th>
                                                 
-                                                <th class="colunaDiferenciada" data-toggle="tooltip" title="Volume Realizado / Volume Total">Desempenho<br><small class="text-muted">%</small></th>
+                                                <th class="colunaNormal" data-toggle="tooltip" title="Volume Realizado / Volume Total">Desempenho<br><small class="text-muted">%</small></th>
 
                                                 <th class="colunaDiferenciada" data-toggle="tooltip" title="% de ref. do microprocesso sobre UPLop Base">UPLop Base<br><small class="text-muted">%</small></th>
 
@@ -704,14 +734,7 @@ $(document).ready(function(){
                                                 <th class="colunaDiferenciada" data-toggle="tooltip" title="UPLop Produzida ponderando volumetria e tempo médio">UPLop Produzida<br><small class="text-muted">qtdade</small></th>
 
                                                 <th class="colunaDiferenciada" data-toggle="tooltip" title="Relação entre UPLop Produzida pela UPLop Devida">Produtividade<br><small class="text-muted">%</small></th>
-                                                
-                                                <th class="colunaNormal" data-toggle="tooltip" title="Qtdade de horas para realizar o volume tratado">Horas alocadas<br><small class="text-muted">qtdade</small></th>
-                                                
-                                                <th class="colunaNormal" data-toggle="tooltip" title="Horas necessárias considerando o tempo médio">Horas necessárias<br><small class="text-muted">qtdade</small></th>
-
-                                                <th class="colunaNormal" data-toggle="tooltip" title="Média dos minutos para realizar volumetria tratada">Tempo médio realizado<br><small class="text-muted">minutos</small></th>
-
-                                                <th class="colunaNormal" data-toggle="tooltip" title="Tempo médio estimado para realização do estoque">Tempo médio necessário<br><small class="text-muted">qtdade</small></th>
+                        
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -721,15 +744,12 @@ $(document).ready(function(){
                                                 </td>
                                                 <td class="align-middle font-weight-bold">${item.volumeTotalMes}</td>
                                                 <td class="align-middle font-weight-bold">${item.VolumeRealizadoMes}</td>
-                                                <td class="colunaDiferenciada align-middle font-weight-bold">${item.desempenho}</td>
+                                                <td class="align-middle font-weight-bold">${item.desempenho}</td>
                                                 <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopBase}</td>
                                                 <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopDevida}</td>
                                                 <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopProduzida}</td>
                                                 <td class="colunaDiferenciada align-middle font-weight-bold">${item.produtividadeUplop}</td>
-                                                <td class="align-middle font-weight-bold">${item.horasAlocadas}</td>
-                                                <td class="align-middle font-weight-bold">${item.horaExtraNecessaria}</td>
-                                                <td class="align-middle font-weight-bold">${item.tempoMedioRealizado}</td>
-                                                <td class="align-middle font-weight-bold">${item.tempoMedioNecessario}</td>
+                                                
                                             </tr> 
                                         </tbody>
                                     </table>
@@ -740,6 +760,7 @@ $(document).ready(function(){
                     `   
                 $(montaTabelaAutomatizados).prependTo('#principal');
                 verificaCardAutomatizados += 1
+            }
             }
         })
     }).done(function() {
@@ -753,15 +774,12 @@ $(document).ready(function(){
                         </td>
                         <td class="align-middle">${item.volumeTotalMes}</td>
                         <td class="align-middle">${item.VolumeRealizadoMes}</td>
-                        <td class="colunaDiferenciada align-middle">${item.desempenho}</td>
+                        <td class="align-middle">${item.desempenho}</td>
                         <td class="colunaDiferenciada align-middle">${item.uplopBase}</td>
                         <td class="colunaDiferenciada align-middle">${item.uplopDevida}</td>
                         <td class="colunaDiferenciada align-middle">${item.uplopProduzida}</td>
                         <td class="colunaDiferenciada align-middle">${item.produtividadeUplop}</td>
-                        <td class="align-middle">${item.horasAlocadas}</td>
-                        <td class="align-middle">${item.horaExtraNecessaria}</td>
-                        <td class="align-middle">${item.tempoMedioRealizado}</td>
-                        <td class="align-middle">${item.tempoMedioNecessario}</td>
+                        
                     </tr> 
                     `
                 $(montaTabela).appendTo(`#primeiraTabelaAutomatizados>tbody`);
@@ -789,7 +807,7 @@ $(document).ready(function(){
 
                                         <th class="colunaNormal" data-toggle="tooltip" title="Volumetria tratada no mês">Volume realizado<br><small class="text-muted">mês</small></th>
                                         
-                                        <th class="colunaDiferenciada" data-toggle="tooltip" title="Volume Realizado / Volume Total">Desempenho<br><small class="text-muted">%</small></th>
+                                        <th class="colunaNormal" data-toggle="tooltip" title="Volume Realizado / Volume Total">Desempenho<br><small class="text-muted">%</small></th>
 
                                         <th class="colunaDiferenciada" data-toggle="tooltip" title="% de ref. do microprocesso sobre UPLop Base">UPLop Base<br><small class="text-muted">%</small></th>
 
@@ -815,7 +833,7 @@ $(document).ready(function(){
                                         </td>
                                         <td class="align-middle font-weight-bold">${item.volumeTotalMes}</td>
                                         <td class="align-middle font-weight-bold">${item.VolumeRealizadoMes}</td>
-                                        <td class="colunaDiferenciada align-middle font-weight-bold">${item.desempenho}</td>
+                                        <td class="align-middle font-weight-bold">${item.desempenho}</td>
                                         <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopBase}</td>
                                         <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopDevida}</td>
                                         <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopProduzida}</td>
@@ -847,7 +865,7 @@ $(document).ready(function(){
                         </td>
                         <td class="align-middle">${item.volumeTotalMes}</td>
                         <td class="align-middle">${item.VolumeRealizadoMes}</td>
-                        <td class="colunaDiferenciada align-middle">${item.desempenho}</td>
+                        <td class="align-middle">${item.desempenho}</td>
                         <td class="colunaDiferenciada align-middle">${item.uplopBase}</td>
                         <td class="colunaDiferenciada align-middle">${item.uplopDevida}</td>
                         <td class="colunaDiferenciada align-middle">${item.uplopProduzida}</td>
