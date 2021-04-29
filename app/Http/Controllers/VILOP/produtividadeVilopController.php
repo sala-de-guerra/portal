@@ -87,6 +87,46 @@ class produtividadeVilopController extends Controller
     {
     
         try {
+
+            $resultadoFarolUnidade = DB::select("SELECT [NU_CGC]
+            ,[PRODUTIVIDADE_G2]
+            ,[DESEMPENHO]
+            ,[PESSOAS]
+            ,[RESULTADO] = CASE 
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
+                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'sobrecarga'  
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
+                          END 
+             ,[COR] = CASE 
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
+                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
+                          END 
+            FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+            where [NU_CGC] = ".$unidade);
+            $cor = null;
+            $resultado = null;
+            if(!empty($resultadoFarolUnidade)){
+                foreach ($resultadoFarolUnidade as &$farol) {
+                    $cor = $farol->COR;
+                    $resultado = $farol->RESULTADO;
+                }
+            }
+            
             $unidade = str_pad($unidade, 4, '0', STR_PAD_LEFT);
             $listaProcesso = DB::table('TB_CAPTURA_UNIDADES_ATT')->where('codigoAgencia', $unidade)->first();
             $unidadeCGC =  $unidade;
@@ -94,6 +134,8 @@ class produtividadeVilopController extends Controller
             return view('portal.produtividade-vilop.relatorio', [
                 'unidadeCGC' => $unidadeCGC
                 ,'unidadeNome' => $unidadeNome
+                ,'cor' => $cor
+                ,'resultado' => $resultado
             ]);
         }catch (\Throwable $th) {
 
@@ -911,7 +953,7 @@ public function montaJsonRelatorioCardsGeral()
         nomeAgencia,
         Sigla,
         format(PRODUTIVIDADE_G1, '0.0') as PRODUTIVIDADE,
-        DESEMPENHO,
+        replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO,
         FORMAT(PESSOAS, '0.0') AS PESSOAS,
         FTE_APURADA,
         FTE_APURADA_MENSURAVEL_G1,
@@ -988,18 +1030,102 @@ public function viewRelatorioVilop()
         $listaProcesso = DB::table('TBL_PRODUTIVIDADE_VILOP_TBL_MACROPROCESSOS')->where('CGC_UNIDADE', $codigoUnidadeUsuarioSessao)->first();
         $unidadeCGC = $listaProcesso->CGC_UNIDADE;
         $unidadeNome = $listaProcesso->NOME_UNIDADE;
+
+        $resultadoFarolUnidade = DB::select("SELECT [NU_CGC]
+        ,[PRODUTIVIDADE_G2]
+        ,[DESEMPENHO]
+        ,[PESSOAS]
+        ,[RESULTADO] = CASE 
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
+                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'sobrecarga'  
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
+                      END 
+         ,[COR] = CASE 
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
+                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
+                      END 
+        FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        where [NU_CGC] = ".$unidadeCGC);
+        $cor = null;
+        $resultado = null;
+        if(!empty($resultadoFarolUnidade)){
+            foreach ($resultadoFarolUnidade as &$farol) {
+                $cor = $farol->COR;
+                $resultado = $farol->RESULTADO;
+            }
+        }
+        
         return view('portal.produtividade-vilop.relatorio', [
             'unidadeCGC' => $unidadeCGC
             ,'unidadeNome' => $unidadeNome
+            ,'cor' => $cor
+            ,'resultado' => $resultado
         ]);
         }catch (\Throwable $th) {
             $codigoUnidadeUsuarioSessao = str_pad($codigoUnidadeUsuarioSessao, 4, '0', STR_PAD_LEFT);
             $listaProcesso = DB::table('TB_CAPTURA_UNIDADES_ATT')->where('codigoAgencia', $codigoUnidadeUsuarioSessao)->first();
             $unidadeCGC =  $codigoUnidadeUsuarioSessao;
             $unidadeNome = $listaProcesso->nomeAgencia;
+
+            $resultadoFarolUnidade = DB::select("      SELECT [NU_CGC]
+            ,[PRODUTIVIDADE_G2]
+            ,[DESEMPENHO]
+            ,[PESSOAS]
+            ,[RESULTADO] = CASE 
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
+                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'sobrecarga'  
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
+                          END 
+             ,[COR] = CASE 
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
+                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
+                          END 
+            FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+            where [NU_CGC] = ".$unidadeCGC);
+            $cor = null;
+            $resultado = null;
+            if(!empty($resultadoFarolUnidade)){
+                foreach ($resultadoFarolUnidade as &$farol) {
+                    $cor = $farol->COR;
+                    $resultado = $farol->RESULTADO;
+                }
+            }
+
             return view('portal.produtividade-vilop.relatorio', [
                 'unidadeCGC' => $unidadeCGC
                 ,'unidadeNome' => $unidadeNome
+                ,'cor' => $cor
+                ,'resultado' => $resultado
             ]);
 
         }
@@ -1009,28 +1135,42 @@ public function resultadoFarolUnidade($unidade)
 
 {
     $resultadoFarolUnidade = DB::select("SELECT [NU_CGC]
-    ,[PRODUTIVIDADE_G1]
+    ,[PRODUTIVIDADE_G2]
     ,[DESEMPENHO]
     ,[PESSOAS]
     ,[RESULTADO] = CASE 
-                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G1] >= 120 THEN 'Sobrecarga'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G1] >= 120 then 'Sobrecarga'
-                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G1] >= 120 then 'Sobrecarga'
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
                         
-                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G1] BETWEEN 95 AND 120 then 'Limite'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G1] BETWEEN 95 AND 120  then 'Limite'
-                        WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G1] BETWEEN 95 AND 120  then 'Sobrecarga'
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
+                        WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
                         
-                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G1] < 95 then 'Receptora de Processos'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G1] < 95 then 'Receptora de Processos'
-                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G1] < 95 and PESSOAS > 120 then 'LIMITE'  
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS > 120 then 'LIMITE'  
                   END 
-    FROM [7257_DES].[produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+
+	 ,[COR] = CASE 
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                        
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
+                        WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
+                        
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS > 120 then 'amarelo'  
+                  END 
+    FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
     where [NU_CGC] = ".$unidade);
     return json_encode($resultadoFarolUnidade);
 }
 
-public function TotalNaoMensuraveis($unidade)
+    public function TotalNaoMensuraveis($unidade)
 
     {
         $montaJsonNaoMensuraveis = DB::select("SELECT 
@@ -1043,6 +1183,25 @@ public function TotalNaoMensuraveis($unidade)
         where IC_MENSURAVEL = 'N' and 
         TB_RELACAO_CGC_MACRO_MICRO.NU_CGC =".$unidade);
         return json_encode($montaJsonNaoMensuraveis);
+    }
+
+    public function TotalOrganogramaSN()
+
+    {
+        $TotalOrganograma = DB::select("select
+        [nomeSr],
+        [codigoSr],
+        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
+        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
+        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
+        replace(avg(FTE_APURADA),'.',',') as totalFTEAPURADA,
+        sum(LAP_UNIDADE) as totalLAP
+        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
+        group by [codigoSr],[nomeSr]");
+
+        return json_encode($TotalOrganograma);
     }
         
 }

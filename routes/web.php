@@ -771,6 +771,8 @@ Route::prefix('produtividade-vilop/')->group(function () {
     Route::get('/lista/lista-colaboradores', 'VILOP\produtividadeVilopController@viewBaseEmpregados');
     //dashboard lista colaboradores da unidade
     Route::get('/lista/lista-universo/{unidade}', 'VILOP\produtividadeVilopController@listaUniversoEmpregados');
+    //json organograma SN
+    Route::get('/indicadores/cards-sn', 'VILOP\produtividadeVilopController@TotalOrganogramaSN');   
 
     //edita colaborador
     Route::post('/edita-operacional/{matricula}', 'VILOP\produtividadeVilopController@editaOperacional');
