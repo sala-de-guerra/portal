@@ -43,15 +43,114 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
 
         if(is_object($listaProcesso)){
 
+            $procuraMicroAtividade = DB::table('produtividade.TB_RELACAO_CGC_MACRO_MICRO')->where('NU_CGC', str_pad($row[0] , 4 , '0' , STR_PAD_LEFT))
+            ->join('produtividade.TB_MICROPROCESSO', 'produtividade.TB_MICROPROCESSO.ID_MICRO', '=', 'produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO')
+            ->where('DE_MICRO', strval($row[2]))
+            ->where('TB_RELACAO_CGC_MACRO_MICRO.IC_ATIVO', '1')
+            ->first();
+            if(is_object($procuraMicroAtividade)){
+                $ControleProcesso = new ControleProcesso();
+            
+                $ControleProcesso->DT_CADASTRO               = date("Y-m-d H:i:s", time());
+                if (isset($row[6])){
+                    $ControleProcesso->MM_REFERENCIA         = $row[6];
+                }
+                if (isset($row[7])){
+                    $ControleProcesso->AA_REFERENCIA        = $row[7] ;
+                }
+                $ControleProcesso->DT_ENVIO_DA_CARGA                      = date("Y-m-d H:i:s", time());
+                $ControleProcesso->CO_MATRICULA_RESPONSAVEL_ENVIO         = session('matricula');
+                $ControleProcesso->DT_PROCESSAMENTO          = NULL;
+                $ControleProcesso->NU_CGC                    = str_pad($row[0], 4 , '0' , STR_PAD_LEFT);
+                $ControleProcesso->IC_ATIVO                     = '1';
+                $ControleProcesso->save();
+        
+                $dadosCargaMensal= DB::table('produtividade.TB_RELACAO_CGC_MACRO_MICRO')->orderBy('ID_AG_MACRO_MICRO', 'desc')->first();
+                $idCarga= DB::table('produtividade.TB_CONTROLE_PROCESSO')->orderBy('ID_CARGA', 'desc')->first();  
+        
+                $CargaMensal = new CargaMensal();
+                $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
+                $CargaMensal->ID_AG_MACRO_MICRO               = $procuraMicroAtividade->ID_AG_MACRO_MICRO;
+                $CargaMensal->NU_CGC                          = str_pad($row[0], 4 , '0' , STR_PAD_LEFT);
+    
+                if (isset($row[6])){
+                    $CargaMensal->MM_REFERENCIA               = $row[6];
+                }
+                if (isset($row[7])){
+                    $CargaMensal->AA_REFERENCIA               = $row[7] ;
+                }
+                
+                if (isset($row[16])){
+                    if($row[16] == 0){
+                        $CargaMensal->QTDE_PESSOAS_ALOCADAS        = null;
+                    }else{
+                    $CargaMensal->QTDE_PESSOAS_ALOCADAS        = $row[16];
+                    }
+                }else{
+                    $CargaMensal->QTDE_PESSOAS_ALOCADAS        = null;
+                }
+    
+                if (isset($row[4])){
+                    if($row[4] == 0){
+                        $CargaMensal->VOLUME_TOTAL_DEMANDA        = null;
+                    }else{
+                        $CargaMensal->VOLUME_TOTAL_DEMANDA        = $row[4];
+                    }
+                }else{
+                    $CargaMensal->VOLUME_TOTAL_DEMANDA        = null;
+                }
+        
+    
+                if (isset($row[5])){
+                    if($row[5] == 0){
+                        $CargaMensal->VOLUME_TOTAL_TRATADA        = null;
+                    }else{
+                        $CargaMensal->VOLUME_TOTAL_TRATADA        = $row[5];
+                    }
+                }else{
+                    $CargaMensal->VOLUME_TOTAL_TRATADA        = null;
+                }
+        
+                $CargaMensal->DIAS_UTEIS                      = null;
+        
+                if (isset($row[8])){
+                    if($row[8] == 0){
+                        $CargaMensal->MEDIA_DIA        = null;
+                    }else{
+                        $CargaMensal->MEDIA_DIA        = $row[8];
+                    }
+                }else{
+                    $CargaMensal->MEDIA_DIA        = null;
+                }
+
+                if (isset($row[9])){
+                    if($row[9] == 0){
+                        $CargaMensal->TEMPO_EM_MINUTOS        = null;
+                    }else{
+                        $CargaMensal->TEMPO_EM_MINUTOS        = $row[9];
+                    }
+                }else{
+                    $CargaMensal->TEMPO_EM_MINUTOS        = null;
+                }
+        
+                $CargaMensal->NIVEL_COMPLEXIDADE                    = $row[10];
+                $CargaMensal->GRAU_CRITICIDADE                      = $row[12];
+                $CargaMensal->NIVEL_AUTOMACAO                       = $row[11];
+                $CargaMensal->GRAU_PADRONIZACAO                     = $row[13];
+                $CargaMensal->GRAU_AUTONOMIA                        = $row[14];
+                $CargaMensal->SISTEMA_ORIGEM_INFORMACAO             = $row[15];
+                $CargaMensal->save();
+            }else{
+            
             $novaMicroAtividadeVilop = new MicroProcessoNovo();
-            $novaMicroAtividadeVilop->DE_MICRO                          = $row[2];
+            $novaMicroAtividadeVilop->DE_MICRO                          = strval($row[2]);
             $novaMicroAtividadeVilop->IC_MENSURAVEL                     = $row[3];
             $novaMicroAtividadeVilop->CO_RESPONSAVEL_ATUALIZACAO        = session('matricula');
             $novaMicroAtividadeVilop->DT_ATUALIZACAO                    = date("Y-m-d H:i:s", time());
             $novaMicroAtividadeVilop->save();
             
     
-            $dadosMicroAtividadeVilop = DB::table('produtividade.TB_MICROPROCESSO')->where('DE_MICRO', $row[2])
+            $dadosMicroAtividadeVilop = DB::table('produtividade.TB_MICROPROCESSO')->where('DE_MICRO', strval($row[2]))
             ->orderBy('ID_MICRO', 'desc')->first(); 
             
             $novoRelVilop = new TabelaRelacionamento;
@@ -77,6 +176,7 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
             $ControleProcesso->CO_MATRICULA_RESPONSAVEL_ENVIO         = session('matricula');
             $ControleProcesso->DT_PROCESSAMENTO          = NULL;
             $ControleProcesso->NU_CGC                    = str_pad($row[0], 4 , '0' , STR_PAD_LEFT);
+            $ControleProcesso->IC_ATIVO                     = '1';
             $ControleProcesso->save();
     
             $dadosCargaMensal= DB::table('produtividade.TB_RELACAO_CGC_MACRO_MICRO')->orderBy('ID_AG_MACRO_MICRO', 'desc')->first();
@@ -85,6 +185,7 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
             $CargaMensal = new CargaMensal();
             $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
             $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
+            $CargaMensal->NU_CGC                          = str_pad($row[0], 4 , '0' , STR_PAD_LEFT);
 
             if (isset($row[6])){
                 $CargaMensal->MM_REFERENCIA               = $row[6];
@@ -127,14 +228,24 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
             $CargaMensal->DIAS_UTEIS                      = null;
     
             if (isset($row[8])){
-                $CargaMensal->MEDIA_DIA                  = $row[8];
+                if($row[8] == 0){
+                    $CargaMensal->MEDIA_DIA        = null;
+                }else{
+                    $CargaMensal->MEDIA_DIA        = $row[8];
+                }
             }else{
-                $CargaMensal->MEDIA_DIA                  = null;
+                $CargaMensal->MEDIA_DIA        = null;
             }
+
+
             if (isset($row[9])){
-                $CargaMensal->TEMPO_EM_MINUTOS           = $row[9];
+                if($row[9] == 0){
+                    $CargaMensal->TEMPO_EM_MINUTOS        = null;
+                }else{
+                    $CargaMensal->TEMPO_EM_MINUTOS        = $row[9];
+                }
             }else{
-                $CargaMensal->TEMPO_EM_MINUTOS           = null;
+                $CargaMensal->TEMPO_EM_MINUTOS        = null;
             }
     
             $CargaMensal->NIVEL_COMPLEXIDADE                    = $row[10];
@@ -144,6 +255,7 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
             $CargaMensal->GRAU_AUTONOMIA                        = $row[14];
             $CargaMensal->SISTEMA_ORIGEM_INFORMACAO             = $row[15];
             $CargaMensal->save();
+        }
             
         }else{
             
@@ -168,14 +280,14 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
                 ->orderBy('ID_MACRO', 'desc')->first();  
                 
                 $novaMicroAtividadeVilop = new MicroProcessoNovo();
-                $novaMicroAtividadeVilop->DE_MICRO                          = $row[2];
+                $novaMicroAtividadeVilop->DE_MICRO                          = strval($row[2]);
                 $novaMicroAtividadeVilop->IC_MENSURAVEL                     = $row[3];
                 $novaMicroAtividadeVilop->CO_RESPONSAVEL_ATUALIZACAO        = session('matricula');
                 $novaMicroAtividadeVilop->DT_ATUALIZACAO                    = date("Y-m-d H:i:s", time());
                 $novaMicroAtividadeVilop->save();
                 
         
-                $dadosMicroAtividadeVilop = DB::table('produtividade.TB_MICROPROCESSO')->where('DE_MICRO', $row[2])
+                $dadosMicroAtividadeVilop = DB::table('produtividade.TB_MICROPROCESSO')->where('DE_MICRO', strval($row[2]))
                 ->orderBy('ID_MICRO', 'desc')->first(); 
                 
                 $novoRelVilop = new TabelaRelacionamento;
@@ -201,6 +313,7 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
                 $ControleProcesso->CO_MATRICULA_RESPONSAVEL_ENVIO         = session('matricula');
                 $ControleProcesso->DT_PROCESSAMENTO          = NULL;
                 $ControleProcesso->NU_CGC                    = str_pad($row[0], 4 , '0' , STR_PAD_LEFT);
+                $ControleProcesso->IC_ATIVO                     = '1';
                 $ControleProcesso->save();
         
                 $dadosCargaMensal= DB::table('produtividade.TB_RELACAO_CGC_MACRO_MICRO')->orderBy('ID_AG_MACRO_MICRO', 'desc')->first();
@@ -209,6 +322,7 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
                 $CargaMensal = new CargaMensal();
                 $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
                 $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
+                $CargaMensal->NU_CGC                          = str_pad($row[0], 4 , '0' , STR_PAD_LEFT);
 
                 if (isset($row[6])){
                     $CargaMensal->MM_REFERENCIA               = $row[6];
@@ -251,14 +365,23 @@ class produtividadeVilopImportNovo implements ToModel, WithValidation, WithStart
                 $CargaMensal->DIAS_UTEIS                      = null;
         
                 if (isset($row[8])){
-                    $CargaMensal->MEDIA_DIA                  = $row[8];
+                    if($row[8] == 0){
+                        $CargaMensal->MEDIA_DIA        = null;
+                    }else{
+                        $CargaMensal->MEDIA_DIA        = $row[8];
+                    }
                 }else{
-                    $CargaMensal->MEDIA_DIA                  = null;
+                    $CargaMensal->MEDIA_DIA        = null;
                 }
+
                 if (isset($row[9])){
-                    $CargaMensal->TEMPO_EM_MINUTOS           = $row[9];
+                    if($row[9] == 0){
+                        $CargaMensal->TEMPO_EM_MINUTOS        = null;
+                    }else{
+                        $CargaMensal->TEMPO_EM_MINUTOS        = $row[9];
+                    }
                 }else{
-                    $CargaMensal->TEMPO_EM_MINUTOS           = null;
+                    $CargaMensal->TEMPO_EM_MINUTOS        = null;
                 }
         
                 $CargaMensal->NIVEL_COMPLEXIDADE                    = $row[10];

@@ -509,6 +509,7 @@ public function createMacroProcessoVilopNovo(Request $request)
         $CargaMensal = new CargaMensal();
         $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
         $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
+        $CargaMensal->NU_CGC                          = str_pad($request->cgcUnidade, 4 , '0' , STR_PAD_LEFT);
         if (isset($request->mesApuracao)){
             $CargaMensal->MM_REFERENCIA         = $request->mesApuracao;
         }
@@ -659,6 +660,7 @@ public function createMacroProcessoVilopNovo(Request $request)
         $CargaMensal->ID_CARGA                        = $idCarga->ID_CARGA;
         $CargaMensal->ID_AG_MACRO_MICRO               = $dadosCargaMensal->ID_AG_MACRO_MICRO;
         $CargaMensal->QTDE_PESSOAS_ALOCADAS           = $request->quantidadePessoasAlocadas;
+        $CargaMensal->NU_CGC                          = str_pad($request->cgcUnidade, 4 , '0' , STR_PAD_LEFT);
 
         if (isset($request->mesApuracao)){
             $CargaMensal->MM_REFERENCIA         = $request->mesApuracao;
@@ -1185,7 +1187,25 @@ public function resultadoFarolUnidade($unidade)
         return json_encode($montaJsonNaoMensuraveis);
     }
 
-    public function TotalOrganogramaSN()
+    public function TotalOrganogramaVilop()
+
+    {
+        $TotalOrganograma = DB::select("select
+        unidade = '5807',
+        nomeUnidade = 'VILOP',
+        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
+        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
+        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
+        replace(format(avg(FTE_APURADA),'0.0'),'.',',') as totalFTEAPURADA,
+        sum(FLOOR(LAP_UNIDADE)) as totalLAP
+        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC");
+
+        return json_encode($TotalOrganograma);
+    }
+
+    public function TotalOrganogramaGN()
 
     {
         $TotalOrganograma = DB::select("select
@@ -1200,6 +1220,119 @@ public function resultadoFarolUnidade($unidade)
         join TB_CAPTURA_UNIDADES_ATT 
         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
         group by [codigoSr],[nomeSr]");
+
+        return json_encode($TotalOrganograma);
+    }
+
+    public function TotalOrganogramaSN()
+
+    {
+        $TotalOrganograma = DB::select("
+            SET NOCOUNT ON 
+            CREATE TABLE #tabelaSN(
+            [nomeAgencia] [nvarchar](255) NULL,
+            [Sigla] [nvarchar](255) NULL,
+            [PRODUTIVIDADE_G2] [float] NULL,
+            [DESEMPENHO] [float] NULL,
+            [PESSOAS] [float] NULL,
+            [FTE_APURADA] [float] NULL,
+            [LAP_UNIDADE] [float] NULL,
+        )
+        insert into #tabelaSN
+        select
+        [nomeSr] as [nomeAgencia],
+        [codigoSr] as [Sigla],
+        avg(PRODUTIVIDADE_G2) as PRODUTIVIDADE,
+        avg(DESEMPENHO) as DESEMPENHO,
+        avg(PESSOAS) AS PESSOAS,
+        avg(FTE_APURADA) as totalFTEAPURADA,
+        sum(LAP_UNIDADE) as totalLAP
+        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
+        group by [codigoSr],[nomeSr]
+        
+        select 
+        TB_CAPTURA_UNIDADES_ATT.[nomeSr],
+        TB_CAPTURA_UNIDADES_ATT.[codigoSr],
+        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
+        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
+        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
+        replace(format(avg(FTE_APURADA),'0.0'),'.',',') as totalFTEAPURADA,
+        sum(LAP_UNIDADE) as totalLAP
+        from #tabelaSN
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaSN.sigla
+        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]");
+
+        return json_encode($TotalOrganograma);
+    }
+
+    public function TotalOrganogramaDI()
+
+    {
+        $TotalOrganograma = DB::select("
+        SET NOCOUNT ON 
+        CREATE TABLE #tabelaSN(
+         [nomeAgencia] [nvarchar](255) NULL,
+         [Sigla] [nvarchar](255) NULL,
+         [PRODUTIVIDADE_G2] [float] NULL,
+         [DESEMPENHO] [float] NULL,
+         [PESSOAS] [float] NULL,
+         [FTE_APURADA] [float] NULL,
+         [LAP_UNIDADE] [float] NULL,
+         )
+        
+         CREATE TABLE #tabelaGN(
+         [nomeAgencia] [nvarchar](255) NULL,
+         [Sigla] [nvarchar](255) NULL,
+         [PRODUTIVIDADE_G2] [float] NULL,
+         [DESEMPENHO] [float] NULL,
+         [PESSOAS] [float] NULL,
+         [FTE_APURADA] [float] NULL,
+         [LAP_UNIDADE] [float] NULL,
+         )
+        
+         insert into #tabelaSN
+         select
+         [nomeSr] as [nomeAgencia],
+         [codigoSr] as [Sigla],
+         avg(PRODUTIVIDADE_G2) as PRODUTIVIDADE,
+         avg(DESEMPENHO) as DESEMPENHO,
+         avg(PESSOAS) AS PESSOAS,
+         avg(FTE_APURADA) as totalFTEAPURADA,
+         sum(LAP_UNIDADE) as totalLAP
+         from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+         join TB_CAPTURA_UNIDADES_ATT 
+         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
+         group by [codigoSr],[nomeSr]
+        
+         insert into #tabelaGN
+         select 
+         TB_CAPTURA_UNIDADES_ATT.[nomeSr],
+         TB_CAPTURA_UNIDADES_ATT.[codigoSr],
+         avg(PRODUTIVIDADE_G2) as PRODUTIVIDADE,
+         avg(DESEMPENHO) as DESEMPENHO,
+         avg(PESSOAS) AS PESSOAS,
+         avg(FTE_APURADA) as totalFTEAPURADA,
+         sum(LAP_UNIDADE) as totalLAP
+         from #tabelaSN
+         join TB_CAPTURA_UNIDADES_ATT 
+         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaSN.sigla
+         group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]
+        
+        select  
+        TB_CAPTURA_UNIDADES_ATT.[nomeSr],
+        TB_CAPTURA_UNIDADES_ATT.[codigoSr],
+        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
+        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
+        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
+        replace(format(avg(FTE_APURADA),'0.0'),'.',',') as totalFTEAPURADA,
+        sum(LAP_UNIDADE) as totalLAP
+        from #tabelaGN
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaGN.sigla
+        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]");
 
         return json_encode($TotalOrganograma);
     }

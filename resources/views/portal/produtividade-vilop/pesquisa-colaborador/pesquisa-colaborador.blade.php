@@ -19,10 +19,12 @@
   <div class="card-body">
     <h4>Instruções para responder o questionário:</h4>
     <hr>
-    <p><b style="color: #005ca9;">{{$nome}}</b>, considerando as atividades que você executa atualmente, escolha dentre as microatividades da unidade {{$unidadeCGC}} – {{$sigla}}, aquelas que você realiza e indique o tempo médio para finalização de 1 (uma) demanda de cada uma das microatividades selecionadas. </p>
-    <p>Salientamos que as respostas <b>não são editáveis</b>, ou seja, uma vez respondidas <mark style="background-color: rgb(243,146,0);"><b>não poderão ser modificadas</b></mark>.</p>
-    <p>As questões respondidas serão salvas separadamente, não havendo necessidade de responder todas de uma vez, desde que dentro do prazo estipulado pela Vilop.</p>
-    <p><b style= "color:red;">**ATENÇÃO:</b> Caso sua lotação seja diferente de {{$unidadeCGC}} – {{$sigla}}, orientamos utilizar o campo de busca abaixo para ser direcionado à unidade e assim proceder com a indicação das microatividades exercidas.</p>
+    <p>Oi <b style="color: #005ca9;">{{$nome}}</b>! <i class="far fa-smile"></i> <p>
+    <p>Queremos conhecer você e sua unidade um pouco melhor e, para isso, contamos com seu apoio para indicar as microatividades da {{$unidadeCGC}} ( {{$sigla}} ) que você faz e o seu tempo médio para executá-las.</p>
+    <p>Ah! As respostas <b>não são editáveis</b> e são <b>salvas uma a uma</b>, ou seja, <b>não tem como alterar depois de responder o item.</b>.</p>
+    <p>Então, preencha os campos com tranquilidade e atenção usando o prazo disponível, tá? <i class="far fa-calendar-check"></i> <b style="color: #005ca9;">3 a 5 de maio de 2021.</b></p>
+    <p><b ><i class="fas fa-exclamation-triangle" style= "color:red;"></i>**ATENÇÃO</b>:  Se sua lotação for diferente de {{$unidadeCGC}} – {{$sigla}}, use o campo de busca abaixo para achar sua unidade atual.</p>
+
     <form class="form-inline m-0" id="buscaUnidade" action="" method="post">
       <div class="input-group">
         <input class="form-control" type="text"  autocomplete="off" name="buscaUnidade" placeholder="Pesquise por CGC" title="Digite o código da unidade que se pretende buscar..." required>
@@ -106,8 +108,8 @@ function _formataDatatableComData (idTabela){
 };
 $(document).ready(function(){
   swal({
-    title: "Atenção!",
-    text: "Para responder o mais fidedigno possível ao questionário, leia atentamente as instruções.",
+    title: "Leia com atenção e ajude-nos a melhorar as nossas atividades na VILOP.",
+    text: "Participe, respondendo o questionário até 05/05/2021.",
     icon: "warning",
     confirmButtonText: 'Ok'
   });
@@ -137,7 +139,7 @@ $(document).ready(function(){
                             <input type="hidden" name="unidade" value="${unidade}">
                             <input type="hidden" name="idMicro" value="${item.idMicro}">
                             <div class="modal-body">
-                              <label for="appt">Eu me dedico a esta atividade por: </label><br>
+                              <label for="appt">O tempo médio para realização de 1 volume dessa atividade é: </label><br>
                               <p class="text-muted"><i>O Campo deverá ser preenchido com números &rarr; HH:MM:SS </i></p>
                               <p class="text-muted"><i>Exemplo: 01 hora 25 minutos 15 segundos . Digite &rarr; 01:25:15 </i></p>
                               <p class="text-muted"><mark><i>Após o envio, este dado <b>não</b> poderá ser modificado!</i></mark></p>
