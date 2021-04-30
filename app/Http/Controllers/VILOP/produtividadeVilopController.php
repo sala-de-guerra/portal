@@ -101,7 +101,7 @@ class produtividadeVilopController extends Controller
                                 WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
                                 WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
                                 WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'sobrecarga'  
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
                                 WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
                           END 
              ,[COR] = CASE 
@@ -823,6 +823,7 @@ public function montaJsonRelatorioMicroAtividades($unidade)
     {
         $montaJsonRelatorioMicroAtividades = DB::select("select
         ID_MACRO AS ID_MACRO,
+        ID_MICRO AS ID_MICRO,
         DE_MICRO AS DE_MICRO,
         replace(VOLUME_TOTAL_MES, '.', ',') AS volumeTotalMes,
         replace(VOLUME_REALIZADO_MES, '.', ',') AS VolumeRealizadoMes,
@@ -833,9 +834,12 @@ public function montaJsonRelatorioMicroAtividades($unidade)
         replace(format(UPLOP_BASE, '0.0'), '.', ',') as uplopBase,
         replace(format(UPLOP_PRODUZIDA, '0.0'), '.', ',') AS uplopProduzida,
         replace(format(isnull(PRODUTIVIDADE_UPLOP, '0.0'), '0.0'), '.', ',') as produtividadeUplop,
-        replace(format(isnull(HH_NECE_REALIZAR_ESTOQUE,'0.0'),'0.0'), '.', ',') AS horaExtraNecessaria,
         replace(format(TEMPO_MEDIO_NECESSARIO, '0.0'), '.', ',') AS tempoMedioNecessario,
         replace(format(isnull(UPLOAD_DEVIDA, '0.0'), '0.0'), '.', ',') as uplopDevida
+		,horaExtraNecessaria = CASE 
+        WHEN HH_NECE_REALIZAR_ESTOQUE > 0.0 THEN ('+ ' +  replace(format(isnull(HH_NECE_REALIZAR_ESTOQUE,'0.0'),'0.0'), '.', ',')) 
+		WHEN HH_NECE_REALIZAR_ESTOQUE <= 0.0 THEN (replace(format(isnull(HH_NECE_REALIZAR_ESTOQUE,'0.0'),'0.0'), '.', ',')) 
+        END 
         from [produtividade].[TB_SAIDA_MENSAL_MACRO_MICRO]
         where [AUTOMATIZADO] < 5
         and [NU_CGC] =".$unidade);
@@ -950,38 +954,41 @@ public function montaJsonRelatorioCards($unidade)
 public function montaJsonRelatorioCardsGeral()
 
     {
-        $montaJsonRelatorioCards = DB::select("select
-        NU_CGC,
-        nomeAgencia,
-        Sigla,
-        format(PRODUTIVIDADE_G1, '0.0') as PRODUTIVIDADE,
-        replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO,
-        FORMAT(PESSOAS, '0.0') AS PESSOAS,
-        FTE_APURADA,
-        FTE_APURADA_MENSURAVEL_G1,
-        format(FTE_TECNICA_MENSURAVEL_G1, '0.0') as FTE_TECNICA_MENSURAVEL_G1,
-        FTE_NAO_MENSURAVEL_G1,
-        GESTOTES,
-        AFASTADOS,
-        LAP_UNIDADE,
-        QT_MICRO,
-        QT_MACRO,
-        QT_HORAS_ALOCADAS_G1,
-        format(QT_UPLOP_POR_HORA_G1, '0.0') as QT_UPLOP_POR_HORA_G1,
-        QT_UPLOP_DEVIDA_G1,
-        format(QT_UPLOP_PRODUZIDA_G1, '0.0') as QT_UPLOP_PRODUZIDA_G1,
-        QT_UPLOP_DEVIDA_EMPREGADO_G1,
-        format(QT_UPLOP_PRODUZIDA_EMPREGADO_G1, '0.0') as QT_UPLOP_PRODUZIDA_EMPREGADO_G1,
-        LAP_LIQUIDA_G1,
-        format(PRODUTIVIDADE_G2, '0.0') as PRODUTIVIDADE_G2,
-        format(QT_UPLOP_DEVIDA_G2, '0.0') as QT_UPLOP_DEVIDA_G2,
-        format(QT_UPLOP_PRODUZIDA_G2, '0.0') as QT_UPLOP_PRODUZIDA_G2,
-        QT_UPLOP_DEVIDA_EMPREGADO_G2,
-        format(QT_UPOP_PRODUZIDA_EMPREGADO_G2, '0.0') as QT_UPOP_PRODUZIDA_EMPREGADO_G2,
-        LAP_LIQUIDA_G2
-        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
-        join TB_CAPTURA_UNIDADES_ATT 
-        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC");
+        $montaJsonRelatorioCards = DB::select("SELECT 
+        [NU_CGC]
+        ,replace(format(PRODUTIVIDADE_G2, '0.0'),'.',',') as PRODUTIVIDADE_G2
+        ,nomeAgencia
+        ,replace(LAP_UNIDADE,'.',',') as LAP_UNIDADE
+        ,replace(format(FTE_APURADA_MENSURAVEL_G1,'0.0'),'.',',') as totalFTEAPURADA
+        ,FLOOR(LAP_UNIDADE) as totalLAP
+        ,replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO
+        ,replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS
+        ,[RESULTADO] = CASE 
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
+                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
+                      END 
+         ,[COR] = CASE 
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
+                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
+                      END 
+        FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        join [dbo].[TB_CAPTURA_UNIDADES_ATT] on [TB_CAPTURA_UNIDADES_ATT].codigoAgencia = [TB_SAIDA_MENSAL_INDICADORES].[NU_CGC]");
         return json_encode($montaJsonRelatorioCards);
     }
 
@@ -1046,7 +1053,7 @@ public function viewRelatorioVilop()
                             WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
                             WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
                             WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'sobrecarga'  
+                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
                             WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
                       END 
          ,[COR] = CASE 
@@ -1084,7 +1091,7 @@ public function viewRelatorioVilop()
             $unidadeCGC =  $codigoUnidadeUsuarioSessao;
             $unidadeNome = $listaProcesso->nomeAgencia;
 
-            $resultadoFarolUnidade = DB::select("      SELECT [NU_CGC]
+            $resultadoFarolUnidade = DB::select("SELECT [NU_CGC]
             ,[PRODUTIVIDADE_G2]
             ,[DESEMPENHO]
             ,[PESSOAS]
@@ -1097,7 +1104,7 @@ public function viewRelatorioVilop()
                                 WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
                                 WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
                                 WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'sobrecarga'  
+                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
                                 WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
                           END 
              ,[COR] = CASE 

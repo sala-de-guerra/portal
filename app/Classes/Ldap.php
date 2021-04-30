@@ -9,7 +9,7 @@ class Ldap
 {
     private $simularMatricula; 
     // private $simularMatricula ='c082807';
-    //    private $simularMatricula ='c091778';
+    // private $simularMatricula ='c091778';
     // private $simularMatricula ='c022964'; // Ronaldo
     // private $simularMatricula = 'c070499'; // viviane - AG
     // private $simularMatricula = 'c090120'; // Marcelo Barboza - GILIE
@@ -20,7 +20,7 @@ class Ldap
     // private $simularMatricula = 'c082403'; // Carla - Assistente JR - GILIE/SP
     // private $simularMatricula = 'c083912'; // MARTINA  - Gerente GILIE/PO
     // private $simularMatricula = 'c085308'; // Cristiane  - Prestador
-    // private $simularMatricula = 'c111710'; // Cristiane  - Chuman
+    // private $simularMatricula = 'c091778'; // Cristiane  - Chuman
 
     private $matricula;
     private $nomeCompleto;

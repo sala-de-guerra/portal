@@ -177,7 +177,8 @@
                 $('[data-toggle="tooltip"]').tooltip()
             })
         </script>
-        
+
+
           @yield('js')
 </body>
 </html>

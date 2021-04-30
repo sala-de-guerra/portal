@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $(".menu-hamburguer").click();
 
     $.getJSON('/produtividade-vilop/api/relatorio-cards-geral', function(dados){
         $.each(dados, function(key, item){
@@ -6,10 +7,27 @@ $(document).ready(function(){
             $('#nome'+item.NU_CGC).html(item.nomeAgencia)
             $('#produtividade'+item.NU_CGC).html('<b>'+item.PRODUTIVIDADE_G2+'</b> <sup style="font-size: 20px">%</sup>' )
             $('#desempenho'+item.NU_CGC).html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
-            $('#fteApurada'+item.NU_CGC).html('<b>'+item.FTE_APURADA+'</b> <sup style="font-size: 20px">%</sup>' )
+            $('#fteApurada'+item.NU_CGC).html('<b>'+item.totalFTEAPURADA+'</b> <sup style="font-size: 20px">%</sup>' )
             $('#lap'+item.NU_CGC).html('<b>'+parseInt(item.LAP_UNIDADE)+'</b>' )
-            $('#centralizadora'+item.NU_CGC).html(item.NU_CGC+" - "+item.Sigla)
+            //$('#centralizadora'+item.NU_CGC).html(item.NU_CGC+" - "+item.Sigla)
             $('#nomeCentralizadora'+item.NU_CGC).html(item.nomeAgencia)
+            $('#resultado'+item.NU_CGC).html('<b>'+item.RESULTADO+'</b>').css({"padding-top": "50px"})
+
+            var colorido = item.COR
+            switch (colorido){
+                case "vermelho":
+                    $(`#corUnidade${item.NU_CGC}`).css({"background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
+                break
+                case "amarelo":
+                    $(`#corUnidade${item.NU_CGC}`).css({"background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
+                break
+                case "verde":
+                    $(`#corUnidade${item.NU_CGC}`).css({"background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
+                break
+                case null:
+                    $(`#corUnidade${item.NU_CGC}`).remove()
+                break
+            }
         })
     })
 });
