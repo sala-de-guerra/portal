@@ -46,11 +46,13 @@ class ValidaAcessoRotaPortal
             case 'produtividade-vilop':
             
                 if (!in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', env('NOME_NOSSA_UNIDADE'), 'DESENVOLVEDOR', 'EVENTUAL'])) {
-                    $request->session()->flash('corMensagem', 'warning');
-                    $request->session()->flash('tituloMensagem', "Acesso negado!");
-                    $request->session()->flash('corpoMensagem', "Você não tem perfil para acessar essa página.");
-                    return redirect('https://caixa.sharepoint.com/teams/O365GRP-GTProdutividade-Vilop');
+                    return redirect('/produtividade-vilop/pesquisa/colaborador');
                 }
+            case 'produtividade-vilop/{unidade}':
+            
+                    if (!in_array(session()->get('acessoEmpregadoPortal'), ['GESTOR', env('NOME_NOSSA_UNIDADE'), 'DESENVOLVEDOR', 'EVENTUAL'])) {
+                        return redirect('/produtividade-vilop/pesquisa/colaborador');
+                    }
                 break;
         }
         return $next($request);

@@ -78,6 +78,7 @@ class produtividadeColaboradores extends Controller
         produtividade.TB_RELACAO_CGC_MACRO_MICRO.[ID_MACRO] as idMacro,
         produtividade.TB_MACROPROCESSOS.[DE_MACRO] as nomeMacroatividade
         "))
+        ->where('produtividade.TB_MICROPROCESSO.IC_MENSURAVEL', '=', 'S')
         ->where('TB_RELACAO_CGC_MACRO_MICRO.NU_CGC', '=', $cgc)
         ->where('TB_RELACAO_CGC_MACRO_MICRO.IC_ATIVO', '=',1)
         ->get();
@@ -88,14 +89,15 @@ class produtividadeColaboradores extends Controller
 public function listaMicroProcessoColaboradoresPorColaborador($cgc)
 {
     $listaMicroProcessoNovo= DB::table('produtividade.TB_RELACAO_CGC_MACRO_MICRO')
-        ->leftjoin('produtividade.TB_MICROPROCESSO', DB::raw('CONVERT(VARCHAR, produtividade.TB_MICROPROCESSO.ID_MICRO)'), '=', DB::raw('CONVERT(VARCHAR, produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO)'))    
-        ->leftjoin('produtividade.TB_PESQUISA_COLABORADOR', DB::raw('CONVERT(VARCHAR, produtividade.TB_PESQUISA_COLABORADOR.idMicro)'), '=', DB::raw('CONVERT(VARCHAR, produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO)'))        
+        ->join('produtividade.TB_MICROPROCESSO', DB::raw('CONVERT(VARCHAR, produtividade.TB_MICROPROCESSO.ID_MICRO)'), '=', DB::raw('CONVERT(VARCHAR, produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO)'))    
+        ->join('produtividade.TB_PESQUISA_COLABORADOR', DB::raw('CONVERT(VARCHAR, produtividade.TB_PESQUISA_COLABORADOR.idMicro)'), '=', DB::raw('CONVERT(VARCHAR, produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_MICRO)'))        
         ->select(DB::raw("
         produtividade.TB_MICROPROCESSO.[DE_MICRO] as nomeMicroatividade,
         produtividade.TB_RELACAO_CGC_MACRO_MICRO.[ID_MICRO] as idMicro,
         produtividade.TB_RELACAO_CGC_MACRO_MICRO.[ID_MACRO] as idMacro,
         produtividade.TB_PESQUISA_COLABORADOR.[idPesquisaColaborador] as idPesquisaColaborador
         "))
+        ->where('produtividade.TB_MICROPROCESSO.IC_MENSURAVEL', '=', 'S')
         ->where('TB_RELACAO_CGC_MACRO_MICRO.NU_CGC', '=', $cgc)
         ->where('TB_RELACAO_CGC_MACRO_MICRO.IC_ATIVO', '=',1)
         ->where('TB_PESQUISA_COLABORADOR.matricula', '=',session('matricula'))

@@ -450,6 +450,13 @@ body {
 .level-5 > span:hover{
     display: show;
 }
+
+.legenda{
+       color: #48586c;
+       font-size: 13px;
+       text-align:right;
+   }
+
 </style>
 @extends('portal.produtividade-vilop.template')
 @extends('portal.produtividade-vilop.componentes.menu-lateral')
@@ -496,25 +503,34 @@ body {
                                     <div class="card">
                                         <div class="card-body">
                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5807"></span></h2>
-                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                         </div>
                                     </div>
                                     <div class="card">
                                         <div class="card-body">
                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5807"></span></h2>
-                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                         </div>
                                     </div>  
                                     <div class="card">
                                         <div class="card-body">
                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5807"></span></h2>
-                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                         </div>
                                     </div>
                                     <div class="card">
                                         <div class="card-body">
                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5807"></span></h2>
-                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                        </div>
+                                    </div>
+                                    <div class="card"  id="corUnidade5807">                                                       
+                                        <div class="card-body align-middle">
+                                            <h4><span id="resultado5807"></span></h4>
+                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                         </div>
                                     </div>
                                 </div>
@@ -545,25 +561,34 @@ body {
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5016"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5016"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4>
+                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                 </div>
                                             </div>  
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5016"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5016"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                </div>
+                                            </div>
+                                            <div class="card"  id="corUnidade5016">                                                          
+                                                <div class="card-body align-middle">
+                                                    <h4><span id="resultado5016"></span></h4>
+                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                 </div>
                                             </div>
                                         </div>
@@ -593,26 +618,35 @@ body {
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5061"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5061"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4>
+                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                         </div>
                                                     </div>  
                                                    
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5061"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5061"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card"  id="corUnidade5061">                                                          
+                                                        <div class="card-body align-middle">
+                                                            <h4><span id="resultado5061"></span></h4>
+                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                         </div>
                                                     </div>
                                                 </div>
@@ -641,25 +675,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5532"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5532"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4>
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5532"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5532"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5532">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5532"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -687,25 +730,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5625"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5625"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada5625"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5625"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade5625">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado5625"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -731,25 +783,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5568"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5568"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4>
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada5568"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5568"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade5568">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado5568"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -778,25 +839,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5307"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5307"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5307"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5307"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5307">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5307"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -823,25 +893,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5688"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5688"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4>
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada5688"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5688"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade5688">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado5688"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -872,26 +951,35 @@ body {
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5032"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5032"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                         </div>
                                                     </div>  
                                                    
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5032"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5032"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card"  id="corUnidade5032">                                                          
+                                                        <div class="card-body align-middle">
+                                                            <h4><span id="resultado5032"></span></h4>
+                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                         </div>
                                                     </div>
                                                 </div>
@@ -920,25 +1008,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5402"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5402"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5402"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5402"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card" id="corUnidade5402">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5402"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -966,25 +1063,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7822"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7822"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7822"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7822"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7822">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7822"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1010,25 +1116,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7009"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7009"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7009"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7009"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7009">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7009"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1058,25 +1173,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5401"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5401"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5401"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5401"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5401">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5401"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1103,25 +1227,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7330"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7330"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7330"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7330"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7330">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7330"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1148,25 +1281,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7008"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7008"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7008"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7008"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7008">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7008"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1216,25 +1358,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7829"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7829"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7829"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7829"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7829">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7829"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1257,25 +1408,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7740"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7740"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7740"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7740"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7740">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7740"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1298,25 +1458,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7764"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7764"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7764"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7764"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7764">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7764"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1339,25 +1508,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7010"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7010"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7010"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7010"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7010">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7010"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1380,25 +1558,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7011"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7011"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7011"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7011"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7011">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7011"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1421,25 +1608,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7790"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7790"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7790"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7790"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7790">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7790"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1462,25 +1658,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7758"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7758"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7758"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7758"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7758">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7758"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1503,25 +1708,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7838"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7838"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7838"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7838"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7838">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7838"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1544,25 +1758,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7844"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7844"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7844"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7844"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7844">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7844"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1591,25 +1814,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5517"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5517"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5517"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5517"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5517">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5517"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1636,25 +1868,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7017"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7017"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7017"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7017"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7017">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7017"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1680,25 +1921,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7014"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7014"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7014"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7014"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7014">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7014"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1744,25 +1994,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7823"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7823"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7823"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7823"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7823">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7823"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1785,25 +2044,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7772"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7772"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7772"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7772"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7772">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7772"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1826,25 +2094,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7804"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7804"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7804"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7804"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7804">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7804"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1867,25 +2144,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7723"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7723"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7723"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7723"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7723">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7723"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1908,25 +2194,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7743"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7743"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7743"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7743"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7743">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7743"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1949,25 +2244,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1990,25 +2294,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7824"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7824"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7824"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7824"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7824">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7824"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2031,25 +2344,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7736"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7736"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7736"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7736"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7736">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7736"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2076,25 +2398,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7253"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7253"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7253"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7253"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7253">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7253"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2123,25 +2454,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5510"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5510"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5510"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5510"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card" id="corUnidade5510">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5510"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2168,25 +2508,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7012"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7012"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7012"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7012"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7012">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7012"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2212,25 +2561,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7854"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7854"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7854"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7854"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7854">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7854"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2259,25 +2617,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5516"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5516"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5516"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5516"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5516">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5516"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2304,25 +2671,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7016"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7016"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7016"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7016"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7016">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7016"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2348,25 +2724,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7786"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7786"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7786"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7786"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7786">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7786"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2392,25 +2777,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7077"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7077"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7077"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7077"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7077">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7077"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2436,25 +2830,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7251"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7251"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7251"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7251"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7251">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7251"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2480,25 +2883,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7015"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7015"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7015"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7015"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7015">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7015"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2531,26 +2943,35 @@ body {
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5119"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5119"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                 </div>
                                             </div>  
                                         
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5119"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5119"></span></h2>
-                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                </div>
+                                            </div>
+                                            <div class="card" id="corUnidade5119">
+                                                <div class="card-body align-middle">
+                                                    <h4><span id="resultado5119"></span></h4>
+                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                 </div>
                                             </div>
                                         </div>
@@ -2579,26 +3000,35 @@ body {
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5173"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5173"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                         </div>
                                                     </div>  
                                                    
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5173"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5173"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="card"  id="corUnidade5173">
+                                                        <div class="card-body align-middle">
+                                                            <h4><span id="resultado5173"></span></h4>
+                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2627,25 +3057,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5334"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5334"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5334"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5334"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5334">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5334"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2672,25 +3111,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7088"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7088"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7088"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7088"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7088">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7088"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2719,25 +3167,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7079"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7079"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte7079"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7079"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade7079">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado7079"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2764,25 +3221,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7081"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7081"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7081"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7081"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7081">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7081"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2813,25 +3279,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5427"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5427"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5427"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5427"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card" id="corUnidade5427">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5427"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2858,25 +3333,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7083"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7083"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7083"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7083"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7083">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7083"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2908,26 +3392,35 @@ body {
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5020"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5020"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                         </div>
                                                     </div>  
                                                    
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5020"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5020"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="card"  id="corUnidade5020">
+                                                        <div class="card-body align-middle">
+                                                            <h4><span id="resultado5020"></span></h4>
+                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2955,25 +3448,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5304"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5304"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5304"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5304"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5304">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5304"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3000,25 +3502,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7097"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7097"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7097"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7097"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7097">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7097"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3045,25 +3556,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7087"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7087"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7087"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7087"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7087">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7087"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3092,25 +3612,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5531"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5531"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5531"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5531"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card"  id="corUnidade5531">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5531"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3137,25 +3666,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7074"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7074"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7074"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7074"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7074">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7074"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3181,25 +3719,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7072"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7072"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7072"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7072"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7072">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7072"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3230,26 +3777,35 @@ body {
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5397"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5397"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                         </div>
                                                     </div>  
                                                    
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5397"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5397"></span></h2>
-                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="card"  id="corUnidade5397">
+                                                        <div class="card-body align-middle">
+                                                            <h4><span id="resultado5397"></span></h4>
+                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3277,25 +3833,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5390"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5390"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5390"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5390"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card" id="corUnidade5390">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5390"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3322,25 +3887,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7431"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7431"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7431"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7431"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7431">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7431"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3366,25 +3940,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7754"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7754"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7754"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7754"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7754">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7754"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3413,25 +3996,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5554"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5554"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5554"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5554"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card" id="corUnidade5554">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5554"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3458,25 +4050,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7932"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7932"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7932"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7932"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7932">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7932"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3505,25 +4106,34 @@ body {
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade5533"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                    <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho5533"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                    <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                    <p class="legenda">Volume Realizado / Volume Total</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="fte5533"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                    <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                    <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap5533"></span></h2>
-                                                                    <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                    <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="card" id="corUnidade5533">
+                                                                <div class="card-body align-middle">
+                                                                    <h4><span id="resultado5533"></span></h4>
+                                                                    <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3558,25 +4168,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7635"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7635"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div>  
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7635"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7635"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7635">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7635"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -3599,25 +4218,34 @@ body {
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="produtividade7637"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Produtividade</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">Produtividade</h4>
+                                                                            <p class="legenda">UPLop Produzida / UPLop Devida</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="desempenho7637"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">Desempenho</h5>      
+                                                                            <h4 style="text-align:right; color: #48586c">Desempenho</h4> 
+                                                                            <p class="legenda">Volume Realizado / Volume Total</p>
                                                                         </div>
                                                                     </div> 
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="fteApurada7637"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">FTE Apurada</h5>
+                                                                            <h4 style="text-align:right; color: #48586c">FTE Apurada</h4>
+                                                                            <p class="legenda">FTE Atv Mensuráveis / FTE Produtiva</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h2 id="" style="color: #005ca9; text-align:left;"><span id="lap7637"></span></h2>
-                                                                            <h5 style="text-align:right; color: #48586c">LAP Unidade</h5>    
+                                                                            <h4 style="text-align:right; color: #48586c">LAP Unidade</h4> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card" id="corUnidade7637">
+                                                                        <div class="card-body align-middle">
+                                                                            <h4><span id="resultado7637"></span></h4>
+                                                                            <p class="legenda" style="color: white;">Produtividade / Desempenho</p>  
                                                                         </div>
                                                                     </div>
                                                                 </div>

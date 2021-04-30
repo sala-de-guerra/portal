@@ -839,7 +839,7 @@ $(document).ready(function(){
                                         <td class="colunaDiferenciada align-middle font-weight-bold">${item.uplopProduzida}</td>
                                         <td class="colunaDiferenciada align-middle font-weight-bold">${item.produtividadeUplop}</td>
                                         <td class="align-middle font-weight-bold">${item.horasAlocadas}</td>
-                                        <td class="align-middle font-weight-bold">${item.horaExtraNecessaria}</td>
+                                        <td class="align-middle font-weight-bold" id='horaExtraNecessaria${item.ID_MACRO}'>${item.horaExtraNecessaria}</td>
                                         <td class="align-middle font-weight-bold">${item.tempoMedioRealizado}</td>
                                         <td class="align-middle font-weight-bold">${item.tempoMedioNecessario}</td>
                                     </tr> 
@@ -852,7 +852,11 @@ $(document).ready(function(){
                 `   
         $(montaCard).prependTo('#principal');
 
-            })
+        let horaExtraFloat = (item.horaExtraNecessaria).replace(',','.')
+        if(parseFloat(horaExtraFloat) > 0.0){
+            $('#horaExtraNecessaria'+item.ID_MACRO).text("+ " + item.horaExtraNecessaria)
+        }
+    })
         }).done(function() {
            
             $.getJSON('/produtividade-vilop/api/relatorio-micro/'+unidade, function(dados){
@@ -871,7 +875,7 @@ $(document).ready(function(){
                         <td class="colunaDiferenciada align-middle">${item.uplopProduzida}</td>
                         <td class="colunaDiferenciada align-middle">${item.produtividadeUplop}</td>
                         <td class="align-middle">${item.horasAlocadas}</td>
-                        <td class="align-middle">${item.horaExtraNecessaria}</td>
+                        <td class="align-middle" id="horaExtraNecessaria${item.ID_MICRO}">${item.horaExtraNecessaria}</td>
                         <td class="align-middle">${item.tempoMedioRealizado}</td>
                         <td class="align-middle">${item.tempoMedioNecessario}</td>
                     </tr> 
