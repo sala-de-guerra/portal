@@ -23,6 +23,9 @@ class CargaMensal extends Model
         ,'GRAU_PADRONIZACAO'
         ,'GRAU_AUTONOMIA'
         ,'SISTEMA_ORIGEM_INFORMACAO'
+        ,'MM_REFERENCIA'
+        ,'AA_REFERENCIA'
+        ,'NU_CGC'
         ];
 
     public function processoDaCarga()
