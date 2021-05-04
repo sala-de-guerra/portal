@@ -94,27 +94,27 @@ class produtividadeVilopController extends Controller
             ,[PESSOAS]
             ,[RESULTADO] = CASE 
                                 WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
-                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'Limite'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Limite'
+                                WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'LIMITE'  
                           END 
              ,[COR] = CASE 
                                 WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
-                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'amarelo'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'amarelo'
+                                WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'vermelho'  
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'amarelo'  
                           END 
             FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
             where [NU_CGC] = ".$unidade);
@@ -226,7 +226,11 @@ class produtividadeVilopController extends Controller
                 $updateMicroProcesso->IC_ATIVO                    =  0; 
                 $updateMicroProcesso->CO_RESPONSAVEL_ATUALIZACAO  =  session('matricula');  
                 $updateMicroProcesso->DT_ATUALIZACAO              = date("Y-m-d H:i:s", time());
-                $updateMicroProcesso->save();     
+                $updateMicroProcesso->save(); 
+                
+                $updateControleProcesso = ControleProcesso::find($request->idcargaMensal);
+                $updateControleProcesso->IC_ATIVO      =  0; 
+                $updateControleProcesso->save(); 
             }else{
             
                 $updateMicroProcesso = MicroProcessoNovo::find($idMicro);
@@ -321,9 +325,33 @@ class produtividadeVilopController extends Controller
             $updateMacroProcesso->CO_RESPONSAVEL_ATUALIZACAO  =  session('matricula');  
             $updateMacroProcesso->DT_ATUALIZACAO              = date("Y-m-d H:i:s", time());
             $updateMacroProcesso->save();   
-            DB::commit();
             
+            $dadosCargaMacro= DB::table('produtividade.TB_RELACAO_CGC_MACRO_MICRO')
+            ->where('ID_MACRO',$IdMacro)
+            ->get();
+            $arraysMicroAtividade = [];
+            
+            foreach ($dadosCargaMacro as &$IdMicro) {
+                array_push($arraysMicroAtividade, $IdMicro->ID_MICRO);
+            }
+            
+            $arraysIdcarga = [];
 
+            foreach ($arraysMicroAtividade as $Idcarga) {
+               $numeroIdCarga =  DB::table('produtividade.TB_CARGA_MENSAL')
+                ->where('ID_AG_MACRO_MICRO',$Idcarga)
+                ->first();
+                array_push($arraysIdcarga, $numeroIdCarga->ID_CARGA);
+            }
+
+            foreach ($arraysIdcarga as $IdCarga) {
+                $updateControleProcesso = ControleProcesso::find($IdCarga);
+                $updateControleProcesso->IC_ATIVO      =  0; 
+                $updateControleProcesso->save();  
+            }
+            
+            DB::commit();
+        
             $request->session()->flash('corMensagem', 'success');
             $request->session()->flash('tituloMensagem', "Exclusão realizada!");
             $request->session()->flash('corpoMensagem', "A Exclusão foi realizada com sucesso.");
@@ -334,7 +362,7 @@ class produtividadeVilopController extends Controller
 
             $request->session()->flash('corMensagem', 'danger');
             $request->session()->flash('tituloMensagem', "ERRO");
-            $request->session()->flash('corpoMensagem', "Não foi Excluir, tente mais tarde!!!!");
+            $request->session()->flash('corpoMensagem', "Não foi Excluido, tente mais tarde!!!!");
         }
         // DB::select("EXEC SP_PRODUTIVIDADE_V4");
         return back();
@@ -650,7 +678,7 @@ public function createMacroProcessoVilopNovo(Request $request)
         }
         $ControleProcesso->DT_ENVIO_DA_CARGA         = NULL;
         $ControleProcesso->DT_PROCESSAMENTO          = NULL;
-        $ControleProcesso->NU_CGC                    = str_pad($request->cgcUnidade, 4 , '0' , STR_PAD_LEFT);
+        $ControleProcesso->NU_CGC                    = str_pad($request->unidadeCGC, 4 , '0' , STR_PAD_LEFT);
         $ControleProcesso->save();
 
         $dadosCargaMensal= DB::table('produtividade.TB_RELACAO_CGC_MACRO_MICRO')->orderBy('ID_AG_MACRO_MICRO', 'desc')->first();
@@ -954,41 +982,44 @@ public function montaJsonRelatorioCards($unidade)
 public function montaJsonRelatorioCardsGeral()
 
     {
-        $montaJsonRelatorioCards = DB::select("SELECT 
+        $montaJsonRelatorioCards = DB::select("
+        SELECT 
         [NU_CGC]
         ,replace(format(PRODUTIVIDADE_G2, '0.0'),'.',',') as PRODUTIVIDADE_G2
         ,nomeAgencia
+        ,[Sigla]
         ,replace(LAP_UNIDADE,'.',',') as LAP_UNIDADE
         ,replace(format(FTE_APURADA_MENSURAVEL_G1,'0.0'),'.',',') as totalFTEAPURADA
         ,FLOOR(LAP_UNIDADE) as totalLAP
         ,replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO
         ,replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS
         ,[RESULTADO] = CASE 
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
-                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
-                      END 
-         ,[COR] = CASE 
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
-                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
-                      END 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'Limite'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Limite'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'LIMITE'  
+        END 
+        ,[COR] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'amarelo'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'amarelo'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'vermelho'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'amarelo'  
+        END 
         FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
-        join [dbo].[TB_CAPTURA_UNIDADES_ATT] on [TB_CAPTURA_UNIDADES_ATT].codigoAgencia = [TB_SAIDA_MENSAL_INDICADORES].[NU_CGC]");
+        join [dbo].[TB_CAPTURA_UNIDADES_ATT] on [TB_CAPTURA_UNIDADES_ATT].codigoAgencia = [TB_SAIDA_MENSAL_INDICADORES].[NU_CGC]
+        ");
         return json_encode($montaJsonRelatorioCards);
     }
 
@@ -1028,6 +1059,7 @@ public function montaJsonNaoMensuraveis($unidade)
         JOIN produtividade.TB_CARGA_MENSAL
         on produtividade.TB_CARGA_MENSAL.ID_AG_MACRO_MICRO = produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_AG_MACRO_MICRO
         where IC_MENSURAVEL = 'N' and 
+        [IC_ATIVO] = '1' and
         TB_RELACAO_CGC_MACRO_MICRO.NU_CGC =".$unidade);
         return json_encode($montaJsonNaoMensuraveis);
     }
@@ -1046,27 +1078,27 @@ public function viewRelatorioVilop()
         ,[PESSOAS]
         ,[RESULTADO] = CASE 
                             WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
-                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
+                            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'Limite'
+                            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Limite'
+                            WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Sobrecarga'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+                            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'LIMITE'  
                       END 
          ,[COR] = CASE 
                             WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
-                            WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
-                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                            WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
-                            WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
+                            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'amarelo'
+                            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'amarelo'
+                            WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'vermelho'
+                            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'vermelho'  
+                            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'amarelo'  
                       END 
         FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
         where [NU_CGC] = ".$unidadeCGC);
@@ -1097,27 +1129,27 @@ public function viewRelatorioVilop()
             ,[PESSOAS]
             ,[RESULTADO] = CASE 
                                 WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
-                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'Sobrecarga'  
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'LIMITE'  
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'Limite'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Limite'
+                                WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Sobrecarga'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'LIMITE'  
                           END 
              ,[COR] = CASE 
                                 WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
-                                WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
-                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                                WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS >= 120 then 'vermelho'  
-                                WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS < 120 then 'amarelo'  
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'amarelo'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'amarelo'
+                                WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'vermelho'
+                                WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                                WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS >= 120 then 'vermelho'  
+                                WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS < 120 then 'amarelo'  
                           END 
             FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
             where [NU_CGC] = ".$unidadeCGC);
@@ -1149,30 +1181,30 @@ public function resultadoFarolUnidade($unidade)
     ,[PESSOAS]
     ,[RESULTADO] = CASE 
                         WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'Sobrecarga'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
-                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
+                        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'Sobrecarga'
                         
-                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'Limite'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Limite'
-                        WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'Sobrecarga'
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'Limite'
+                        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Limite'
+                        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'Sobrecarga'
                         
-                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'Receptora de Processos'
-                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS > 120 then 'LIMITE'  
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'Receptora de Processos'
+                        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS > 120 then 'LIMITE'  
                   END 
 
 	 ,[COR] = CASE 
                         WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] >= 120 THEN 'vermelho'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
-                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
+                        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] >= 120 then 'vermelho'
                         
-                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120 then 'amarelo'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'amarelo'
-                        WHEN [DESEMPENHO] < 95 and [PRODUTIVIDADE_G2] BETWEEN 95 AND 120  then 'vermelho'
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120 then 'amarelo'
+                        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'amarelo'
+                        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE_G2] BETWEEN 90 AND 120  then 'vermelho'
                         
-                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                        WHEN [DESEMPENHO] BETWEEN 95 AND 100 AND [PRODUTIVIDADE_G2] < 95 then 'verde'
-                        WHEN [DESEMPENHO] < 95 AND [PRODUTIVIDADE_G2] < 95 and PESSOAS > 120 then 'amarelo'  
+                        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE_G2] < 90 then 'verde'
+                        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE_G2] < 90 and PESSOAS > 120 then 'amarelo'  
                   END 
     FROM [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
     where [NU_CGC] = ".$unidade);
@@ -1190,6 +1222,7 @@ public function resultadoFarolUnidade($unidade)
         JOIN produtividade.TB_CARGA_MENSAL
         on produtividade.TB_CARGA_MENSAL.ID_AG_MACRO_MICRO = produtividade.TB_RELACAO_CGC_MACRO_MICRO.ID_AG_MACRO_MICRO
         where IC_MENSURAVEL = 'N' and 
+        [IC_ATIVO] = '1' and
         TB_RELACAO_CGC_MACRO_MICRO.NU_CGC =".$unidade);
         return json_encode($montaJsonNaoMensuraveis);
     }
@@ -1197,17 +1230,61 @@ public function resultadoFarolUnidade($unidade)
     public function TotalOrganogramaVilop()
 
     {
-        $TotalOrganograma = DB::select("select
-        unidade = '5807',
-        nomeUnidade = 'VILOP',
-        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
-        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
-        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
-        replace(format(avg(FTE_APURADA),'0.0'),'.',',') as totalFTEAPURADA,
-        sum(FLOOR(LAP_UNIDADE)) as totalLAP
-        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
-        join TB_CAPTURA_UNIDADES_ATT 
-        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC");
+        $TotalOrganograma = DB::select("
+            SET NOCOUNT ON 
+            CREATE TABLE #tabelaTempVilop(
+            nomeUnidade [nvarchar](255) NULL,
+            unidade [nvarchar](255) NULL,
+            [PRODUTIVIDADE] [float] NULL,
+            [DESEMPENHO] [float] NULL,
+            [PESSOAS] [float] NULL,
+            [FTE_APURADA] [float] NULL,
+            [LAP_UNIDADE] [float] NULL,
+            )
+            insert into #tabelaTempVilop
+            select
+            nomeUnidade = 'VILOP',
+            unidade = '5807',
+            avg(PRODUTIVIDADE_G2)as PRODUTIVIDADE,
+            avg(DESEMPENHO)as DESEMPENHO,
+            avg(PESSOAS) AS PESSOAS,
+            avg(FTE_APURADA) as totalFTEAPURADA,
+            sum(FLOOR(LAP_UNIDADE)) as totalLAP
+            from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+            select
+            unidade,
+            nomeUnidade,
+            replace(format([PRODUTIVIDADE], '0.0'),'.',',') as PRODUTIVIDADE,
+            replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO,
+            replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS,
+            replace(format(FTE_APURADA,'0.0'),'.',',') as totalFTEAPURADA,
+            LAP_UNIDADE as totalLAP
+            ,[RESULTADO] = CASE 
+            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'Sobrecarga'
+            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'Limite'
+            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Limite'
+            WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Sobrecarga'
+            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'LIMITE'  
+            END 
+            ,[COR] = CASE 
+            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'vermelho'
+            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'amarelo'
+            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'amarelo'
+            WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'vermelho'
+            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'vermelho'  
+            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'amarelo'  
+            END 
+            from #tabelaTempVilop
+            ");
 
         return json_encode($TotalOrganograma);
     }
@@ -1215,18 +1292,68 @@ public function resultadoFarolUnidade($unidade)
     public function TotalOrganogramaGN()
 
     {
-        $TotalOrganograma = DB::select("select
+        $TotalOrganograma = DB::select("
+        SET NOCOUNT ON 
+        CREATE TABLE #tabelaGN(
+        [nomeAgencia] [nvarchar](255) NULL,
+        [Sigla] [nvarchar](255) NULL,
+        [PRODUTIVIDADE] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+
+        insert into #tabelaGN
+        select
         [nomeSr],
         [codigoSr],
-        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
-        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
-        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
-        replace(avg(FTE_APURADA),'.',',') as totalFTEAPURADA,
+        avg(PRODUTIVIDADE_G2) as PRODUTIVIDADE,
+        avg(DESEMPENHO) as DESEMPENHO,
+        avg(PESSOAS) AS PESSOAS,
+        avg(FTE_APURADA) as totalFTEAPURADA,
         sum(LAP_UNIDADE) as totalLAP
         from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
         join TB_CAPTURA_UNIDADES_ATT 
         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
-        group by [codigoSr],[nomeSr]");
+        group by [codigoSr],[nomeSr]
+
+        select  
+        #tabelaGN.[nomeAgencia],
+        #tabelaGN.[Sigla] as unidade,
+		TB_CAPTURA_UNIDADES_ATT.[Sigla],
+        replace(format([PRODUTIVIDADE], '0.0'),'.',',') as [PRODUTIVIDADE]
+        ,replace(LAP_UNIDADE,'.',',') as totalLAP
+        ,replace(format(FTE_APURADA,'0.0'),'.',',') as totalFTEAPURADA
+        ,replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO
+        ,replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS
+        ,[RESULTADO] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'Sobrecarga'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'Limite'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Limite'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'LIMITE'  
+        END 
+        ,[COR] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'vermelho'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'amarelo'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'amarelo'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'vermelho'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'amarelo'  
+        END 
+        from #tabelaGN
+	    join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaGN.[Sigla]");
 
         return json_encode($TotalOrganograma);
     }
@@ -1235,15 +1362,15 @@ public function resultadoFarolUnidade($unidade)
 
     {
         $TotalOrganograma = DB::select("
-            SET NOCOUNT ON 
-            CREATE TABLE #tabelaSN(
-            [nomeAgencia] [nvarchar](255) NULL,
-            [Sigla] [nvarchar](255) NULL,
-            [PRODUTIVIDADE_G2] [float] NULL,
-            [DESEMPENHO] [float] NULL,
-            [PESSOAS] [float] NULL,
-            [FTE_APURADA] [float] NULL,
-            [LAP_UNIDADE] [float] NULL,
+        SET NOCOUNT ON 
+        CREATE TABLE #tabelaSN(
+        [nomeAgencia] [nvarchar](255) NULL,
+        [Sigla] [nvarchar](255) NULL,
+        [PRODUTIVIDADE] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
         )
         insert into #tabelaSN
         select
@@ -1258,19 +1385,68 @@ public function resultadoFarolUnidade($unidade)
         join TB_CAPTURA_UNIDADES_ATT 
         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
         group by [codigoSr],[nomeSr]
+            
+        CREATE TABLE #tabelaSNcomFarol(
+        [nomeSr] [nvarchar](255) NULL,
+        [codigoSr] [nvarchar](255) NULL,
+        [PRODUTIVIDADE] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
         
-        select 
+        insert into #tabelaSNcomFarol
+        select
         TB_CAPTURA_UNIDADES_ATT.[nomeSr],
         TB_CAPTURA_UNIDADES_ATT.[codigoSr],
-        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
-        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
-        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
-        replace(format(avg(FTE_APURADA),'0.0'),'.',',') as totalFTEAPURADA,
-        sum(LAP_UNIDADE) as totalLAP
+        avg(PRODUTIVIDADE),
+        avg(DESEMPENHO) ,
+        avg(PESSOAS) ,
+        avg(FTE_APURADA), 
+        sum(LAP_UNIDADE) 
         from #tabelaSN
         join TB_CAPTURA_UNIDADES_ATT 
         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaSN.sigla
-        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]");
+        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]
+        
+        select 
+        #tabelaSNcomFarol.[nomeSr],
+        #tabelaSNcomFarol.[codigoSr],
+        TB_CAPTURA_UNIDADES_ATT.[Sigla],
+        replace(format([PRODUTIVIDADE], '0.0'),'.',',') as [PRODUTIVIDADE]
+        ,replace(LAP_UNIDADE,'.',',') as totalLAP
+        ,replace(format(FTE_APURADA,'0.0'),'.',',') as totalFTEAPURADA
+        ,replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO
+        ,replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS
+        ,[RESULTADO] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'Sobrecarga'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'Limite'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Limite'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'LIMITE'  
+        END 
+        ,[COR] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'vermelho'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'amarelo'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'amarelo'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'vermelho'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'amarelo'  
+        END 
+        from #tabelaSNcomFarol
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaSNcomFarol.[codigoSr]
+     ");
 
         return json_encode($TotalOrganograma);
     }
@@ -1281,65 +1457,115 @@ public function resultadoFarolUnidade($unidade)
         $TotalOrganograma = DB::select("
         SET NOCOUNT ON 
         CREATE TABLE #tabelaSN(
-         [nomeAgencia] [nvarchar](255) NULL,
-         [Sigla] [nvarchar](255) NULL,
-         [PRODUTIVIDADE_G2] [float] NULL,
-         [DESEMPENHO] [float] NULL,
-         [PESSOAS] [float] NULL,
-         [FTE_APURADA] [float] NULL,
-         [LAP_UNIDADE] [float] NULL,
-         )
-        
-         CREATE TABLE #tabelaGN(
-         [nomeAgencia] [nvarchar](255) NULL,
-         [Sigla] [nvarchar](255) NULL,
-         [PRODUTIVIDADE_G2] [float] NULL,
-         [DESEMPENHO] [float] NULL,
-         [PESSOAS] [float] NULL,
-         [FTE_APURADA] [float] NULL,
-         [LAP_UNIDADE] [float] NULL,
-         )
-        
-         insert into #tabelaSN
-         select
-         [nomeSr] as [nomeAgencia],
-         [codigoSr] as [Sigla],
-         avg(PRODUTIVIDADE_G2) as PRODUTIVIDADE,
-         avg(DESEMPENHO) as DESEMPENHO,
-         avg(PESSOAS) AS PESSOAS,
-         avg(FTE_APURADA) as totalFTEAPURADA,
-         sum(LAP_UNIDADE) as totalLAP
-         from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
-         join TB_CAPTURA_UNIDADES_ATT 
-         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
-         group by [codigoSr],[nomeSr]
-        
-         insert into #tabelaGN
-         select 
-         TB_CAPTURA_UNIDADES_ATT.[nomeSr],
-         TB_CAPTURA_UNIDADES_ATT.[codigoSr],
-         avg(PRODUTIVIDADE_G2) as PRODUTIVIDADE,
-         avg(DESEMPENHO) as DESEMPENHO,
-         avg(PESSOAS) AS PESSOAS,
-         avg(FTE_APURADA) as totalFTEAPURADA,
-         sum(LAP_UNIDADE) as totalLAP
-         from #tabelaSN
-         join TB_CAPTURA_UNIDADES_ATT 
-         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaSN.sigla
-         group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]
-        
+        [nomeAgencia] [nvarchar](255) NULL,
+        [Sigla] [nvarchar](255) NULL,
+        [PRODUTIVIDADE_G2] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+                        
+        CREATE TABLE #tabelaGN(
+        [nomeAgencia] [nvarchar](255) NULL,
+        [Sigla] [nvarchar](255) NULL,
+        [PRODUTIVIDADE_G2] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+
+        CREATE TABLE #tabelaGNcomFarol(
+        [nomeSr] [nvarchar](255) NULL,
+        [codigoSr] [nvarchar](255) NULL,
+        [PRODUTIVIDADE] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+                        
+        insert into #tabelaSN
+        select
+        [nomeSr] as [nomeAgencia],
+        [codigoSr] as [Sigla],
+        avg(PRODUTIVIDADE_G2),
+        avg(DESEMPENHO),
+        avg(PESSOAS),
+        avg(FTE_APURADA),
+        sum(LAP_UNIDADE)
+        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
+        group by [codigoSr],[nomeSr]
+                        
+        insert into #tabelaGN
+        select 
+        TB_CAPTURA_UNIDADES_ATT.[nomeSr],
+        TB_CAPTURA_UNIDADES_ATT.[codigoSr],
+        avg(PRODUTIVIDADE_G2),
+        avg(DESEMPENHO),
+        avg(PESSOAS),
+        avg(FTE_APURADA),
+        sum(LAP_UNIDADE)
+        from #tabelaSN
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaSN.sigla
+        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]
+                        
+        insert into #tabelaGNcomFarol
         select  
         TB_CAPTURA_UNIDADES_ATT.[nomeSr],
         TB_CAPTURA_UNIDADES_ATT.[codigoSr],
-        replace(format(avg(PRODUTIVIDADE_G2), '0.0'),'.',',') as PRODUTIVIDADE,
-        replace(format(avg(DESEMPENHO), '0.0'),'.',',') as DESEMPENHO,
-        replace(FORMAT(avg(PESSOAS), '0.0'),'.',',') AS PESSOAS,
-        replace(format(avg(FTE_APURADA),'0.0'),'.',',') as totalFTEAPURADA,
+        avg(PRODUTIVIDADE_G2),
+        avg(DESEMPENHO) as DESEMPENHO,
+        avg(PESSOAS) AS PESSOAS,
+        avg(FTE_APURADA)as totalFTEAPURADA,
         sum(LAP_UNIDADE) as totalLAP
         from #tabelaGN
         join TB_CAPTURA_UNIDADES_ATT 
         ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaGN.sigla
-        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]");
+        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]
+
+        select  
+        #tabelaGNcomFarol.[nomeSr],
+        #tabelaGNcomFarol.[codigoSr],
+        TB_CAPTURA_UNIDADES_ATT.[Sigla],
+        replace(format([PRODUTIVIDADE], '0.0'),'.',',') as [PRODUTIVIDADE]
+        ,replace(LAP_UNIDADE,'.',',') as totalLAP
+        ,replace(format(FTE_APURADA,'0.0'),'.',',') as totalFTEAPURADA
+        ,replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO
+        ,replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS
+        ,[RESULTADO] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'Sobrecarga'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'Limite'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Limite'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'LIMITE'  
+        END 
+        ,[COR] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'vermelho'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'amarelo'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'amarelo'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'vermelho'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'amarelo'  
+        END 
+        from #tabelaGNcomFarol
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaGNcomFarol.[codigoSr]
+
+ ");
 
         return json_encode($TotalOrganograma);
     }

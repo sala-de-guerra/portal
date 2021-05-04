@@ -143,7 +143,7 @@ $(document).ready(function(){
                               <p class="text-muted"><i>O Campo deverá ser preenchido com números &rarr; HH:MM:SS </i></p>
                               <p class="text-muted"><i>Exemplo: 01 hora 25 minutos 15 segundos . Digite &rarr; 01:25:15 </i></p>
                               <p class="text-muted"><mark><i>Após o envio, este dado <b>não</b> poderá ser modificado!</i></mark></p>
-                              <input type="time" step="1" name="quantidadeHoras" required><br>
+                              <input type="time" step="1" id="quantidadeHoras${item.idMicro}"name="quantidadeHoras" required><br>
                               
                             </div>
                             <div class="modal-footer">
@@ -162,12 +162,15 @@ $(document).ready(function(){
 
             $('#formColaborador'+item.idMicro).submit( function(e) {
             e.preventDefault();
+            
+            var valorInput = $("#quantidadeHoras"+item.idMicro).val()
+            if (valorInput == '00:00' || valorInput == '00:00:00'){
+              alert("O preenchimento não pode ser zerado")
+            }else{
             let datas = JSON.stringify( $(this).serialize() );
             let url = $(this).attr('action');
             let method = $(this).attr('method');
-            // console.log(datas);
-            // console.log(url);
-            // console.log(method);
+   
             $.ajax({
                 type: method,
                 url: url,
@@ -187,7 +190,8 @@ $(document).ready(function(){
                         title: 'Erro: tente novamente!'
                     });
                 }
-              });
+             });
+            }
             })
         })
     }).done(function() {
