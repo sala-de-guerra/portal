@@ -624,14 +624,14 @@ $(document).ready(function(){
 
             $('#produtividadeUnidade').html('<b>'+item.PRODUTIVIDADE_G2+'</b> <sup style="font-size: 20px">%</sup>' )
 
-            $('#cardTotalMicroatividades').css("display", "none");
-            $('#cardTotalHorasAlocadas').css("display", "none");
-            $('#cardTotalUplopHora').css("display", "none");
+            //$('#cardTotalMicroatividades').css("display", "none");
+            //$('#cardTotalHorasAlocadas').css("display", "none");
+            //$('#cardTotalUplopHora').css("display", "none");
 
 
-            //$('#totalMicroatividades').html('<b>'+ '' +'</b>')
-            //$('#totalHorasAlocadas').html('<b>'+ '' +'</b>')
-            //$('#totalUplopHora').html('<b>'+ '' +'</b>')
+            $('#totalMicroatividades').html('<b>'+ 'pendente' +'</b>')
+            $('#totalHorasAlocadas').html('<b>'+ item.QT_HORAS_ALOCADAS_G1 +'</b>')
+            $('#totalUplopHora').html('<b>'+ item.QT_UPLOP_POR_HORA_G1 +'</b>')
             $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G2 +'</b>')
             $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G2 +'</b>')
             $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G2 +'</b>')
@@ -641,9 +641,9 @@ $(document).ready(function(){
                 $("#filtroVisao").change(function(){
                     if ($(this).val() === "totalSemGAS") {
                         
-                        $('#cardTotalMicroatividades').css("display", "block");
-                        $('#cardTotalHorasAlocadas').css("display", "block");
-                        $('#cardTotalUplopHora').css("display", "block");
+                        //$('#cardTotalMicroatividades').css("display", "block");
+                        //$('#cardTotalHorasAlocadas').css("display", "block");
+                        //$('#cardTotalUplopHora').css("display", "block");
 
                         $('#produtividadeUnidade').html('<b>'+item.PRODUTIVIDADE+'</b> <sup style="font-size: 20px">%</sup>' )
                         $('#totalMicroatividades').html('<b>'+ item.QT_MICRO +'</b>')
@@ -658,13 +658,13 @@ $(document).ready(function(){
                         
                         $('#produtividadeUnidade').html('<b>'+item.PRODUTIVIDADE_G2+'</b> <sup style="font-size: 20px">%</sup>' )
 
-                        $('#cardTotalMicroatividades').css("display", "none");
-                        $('#cardTotalHorasAlocadas').css("display", "none");
-                        $('#cardTotalUplopHora').css("display", "none");
+                        //$('#cardTotalMicroatividades').css("display", "none");
+                        //$('#cardTotalHorasAlocadas').css("display", "none");
+                        //$('#cardTotalUplopHora').css("display", "none");
 
-                        //$('#totalMicroatividades').html('<b>'+ 'pendente' +'</b>')
-                        //$('#totalHorasAlocadas').html('<b>'+ 'pendente' +'</b>')
-                        //$('#totalUplopHora').html('<b>'+ 'pendente' +'</b>')
+                        $('#totalMicroatividades').html('<b>'+ 'pendente' +'</b>')
+                        $('#totalHorasAlocadas').html('<b>'+ item.QT_HORAS_ALOCADAS_G1 +'</b>')
+                        $('#totalUplopHora').html('<b>'+ item.QT_UPLOP_POR_HORA_G1 +'</b>')
                         $('#totalUplopDevidaUnidade').html('<b>'+ item.QT_UPLOP_DEVIDA_G2 +'</b>')
                         $('#totalUplopProduzidaUnidade').html('<b>'+ item.QT_UPLOP_PRODUZIDA_G2 +'</b>')
                         $('#totalUplopDevidaEmpregado').html('<b>'+ item.QT_UPLOP_DEVIDA_EMPREGADO_G2 +'</b>')
