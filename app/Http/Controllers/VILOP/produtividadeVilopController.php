@@ -1231,59 +1231,135 @@ public function resultadoFarolUnidade($unidade)
 
     {
         $TotalOrganograma = DB::select("
-            SET NOCOUNT ON 
-            CREATE TABLE #tabelaTempVilop(
-            nomeUnidade [nvarchar](255) NULL,
-            unidade [nvarchar](255) NULL,
-            [PRODUTIVIDADE] [float] NULL,
-            [DESEMPENHO] [float] NULL,
-            [PESSOAS] [float] NULL,
-            [FTE_APURADA] [float] NULL,
-            [LAP_UNIDADE] [float] NULL,
-            )
-            insert into #tabelaTempVilop
-            select
-            nomeUnidade = 'VILOP',
-            unidade = '5807',
-            avg(PRODUTIVIDADE_G2)as PRODUTIVIDADE,
-            avg(DESEMPENHO)as DESEMPENHO,
-            avg(PESSOAS) AS PESSOAS,
-            avg(FTE_APURADA) as totalFTEAPURADA,
-            sum(FLOOR(LAP_UNIDADE)) as totalLAP
-            from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
-            select
-            unidade,
-            nomeUnidade,
-            replace(format([PRODUTIVIDADE], '0.0'),'.',',') as PRODUTIVIDADE,
-            replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO,
-            replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS,
-            replace(format(FTE_APURADA,'0.0'),'.',',') as totalFTEAPURADA,
-            LAP_UNIDADE as totalLAP
-            ,[RESULTADO] = CASE 
-            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'Sobrecarga'
-            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
-            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
-            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'Limite'
-            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Limite'
-            WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Sobrecarga'
-            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
-            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
-            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
-            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'LIMITE'  
-            END 
-            ,[COR] = CASE 
-            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'vermelho'
-            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
-            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
-            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'amarelo'
-            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'amarelo'
-            WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'vermelho'
-            WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'verde'
-            WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'verde'
-            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'vermelho'  
-            WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'amarelo'  
-            END 
-            from #tabelaTempVilop
+        SET NOCOUNT ON 
+        CREATE TABLE #tabelaSN(
+        [nomeAgencia] [nvarchar](255) NULL,
+        [Sigla] [nvarchar](255) NULL,
+        [PRODUTIVIDADE_G2] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+                                
+        CREATE TABLE #tabelaGN(
+        [nomeAgencia] [nvarchar](255) NULL,
+        [Sigla] [nvarchar](255) NULL,
+        [PRODUTIVIDADE_G2] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+
+        CREATE TABLE #tabelaGNcomFarol(
+        [nomeSr] [nvarchar](255) NULL,
+        [codigoSr] [nvarchar](255) NULL,
+        [PRODUTIVIDADE] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+
+        CREATE table #vilop(
+        nomeUnidade [nvarchar](255) NULL,
+        unidade [nvarchar](255) NULL,
+        [PRODUTIVIDADE] [float] NULL,
+        [DESEMPENHO] [float] NULL,
+        [PESSOAS] [float] NULL,
+        [FTE_APURADA] [float] NULL,
+        [LAP_UNIDADE] [float] NULL,
+        )
+                                
+        insert into #tabelaSN
+        select
+        [nomeSr] as [nomeAgencia],
+        [codigoSr] as [Sigla],
+        avg(PRODUTIVIDADE_G2),
+        avg(DESEMPENHO),
+        avg(PESSOAS),
+        avg(FTE_APURADA),
+        sum(LAP_UNIDADE)
+        from [produtividade].[TB_SAIDA_MENSAL_INDICADORES]
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = TB_SAIDA_MENSAL_INDICADORES.NU_CGC
+        group by [codigoSr],[nomeSr]
+                                
+        insert into #tabelaGN
+        select 
+        TB_CAPTURA_UNIDADES_ATT.[nomeSr],
+        TB_CAPTURA_UNIDADES_ATT.[codigoSr],
+        avg(PRODUTIVIDADE_G2),
+        avg(DESEMPENHO),
+        avg(PESSOAS),
+        avg(FTE_APURADA),
+        sum(LAP_UNIDADE)
+        from #tabelaSN
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaSN.sigla
+        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]
+                                
+        insert into #tabelaGNcomFarol
+        select  
+        TB_CAPTURA_UNIDADES_ATT.[nomeSr],
+        TB_CAPTURA_UNIDADES_ATT.[codigoSr],
+        avg(PRODUTIVIDADE_G2),
+        avg(DESEMPENHO) as DESEMPENHO,
+        avg(PESSOAS) AS PESSOAS,
+        avg(FTE_APURADA)as totalFTEAPURADA,
+        sum(LAP_UNIDADE) as totalLAP
+        from #tabelaGN
+        join TB_CAPTURA_UNIDADES_ATT 
+        ON TB_CAPTURA_UNIDADES_ATT.codigoAgencia = #tabelaGN.sigla
+        group by TB_CAPTURA_UNIDADES_ATT.[nomeSr],TB_CAPTURA_UNIDADES_ATT.[codigoSr]
+
+        insert into #vilop
+        select  
+        nomeUnidade = 'VILOP',
+        unidade = '5807',
+        avg(PRODUTIVIDADE),
+        avg(DESEMPENHO) as DESEMPENHO,
+        avg(PESSOAS) AS PESSOAS,
+        avg(FTE_APURADA)as totalFTEAPURADA,
+        sum(LAP_UNIDADE) as totalLAP
+        from #tabelaGNcomFarol
+        
+
+        select  
+        nomeUnidade,
+        unidade,
+        replace(format([PRODUTIVIDADE], '0.0'),'.',',') as [PRODUTIVIDADE]
+        ,replace(LAP_UNIDADE,'.',',') as totalLAP
+        ,replace(format(FTE_APURADA,'0.0'),'.',',') as totalFTEAPURADA
+        ,replace(format(DESEMPENHO, '0.0'),'.',',') as DESEMPENHO
+        ,replace(FORMAT(PESSOAS, '0.0'),'.',',') AS PESSOAS
+        ,[RESULTADO] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'Sobrecarga'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'Limite'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Limite'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'Sobrecarga'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'Receptora de Processos'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'Sobrecarga'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'LIMITE'  
+        END 
+        ,[COR] = CASE 
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] >= 120 THEN 'vermelho'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] >= 120 then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120 then 'amarelo'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'amarelo'
+        WHEN [DESEMPENHO] < 90 and [PRODUTIVIDADE] BETWEEN 90 AND 120  then 'vermelho'
+        WHEN [DESEMPENHO] = 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] BETWEEN 90 AND 100 AND [PRODUTIVIDADE] < 90 then 'verde'
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS >= 120 then 'vermelho'  
+        WHEN [DESEMPENHO] < 90 AND [PRODUTIVIDADE] < 90 and PESSOAS < 120 then 'amarelo'  
+        END 
+        from #vilop
+
             ");
 
         return json_encode($TotalOrganograma);

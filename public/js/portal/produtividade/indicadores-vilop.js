@@ -3,13 +3,22 @@ $(document).ready(function(){
 
     $.getJSON('/produtividade-vilop/api/relatorio-cards-geral', function(dados){
         $.each(dados, function(key, item){
-            
+
+            $(`#botao${item.NU_CGC}`).css({"background-color": "#5f758f", "color": "white"})
             $('#sigla'+item.NU_CGC).html(item.Sigla)
             $('#nome'+item.NU_CGC).html(item.nomeAgencia)
 
+            $('#prodUnidade'+item.NU_CGC).css("display", "block");
+            $('#unidadeSemNenhumDado'+item.NU_CGC).css("display", "none");
             $('#produtividade'+item.NU_CGC).html('<b>'+item.PRODUTIVIDADE_G2+'</b> <sup style="font-size: 20px">%</sup>' )
+            
+            $('#desUnidade'+item.NU_CGC).css("display", "block");
             $('#desempenho'+item.NU_CGC).html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#fteUnidade'+item.NU_CGC).css("display", "block");
             $('#fteApurada'+item.NU_CGC).html('<b>'+item.totalFTEAPURADA+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#lapUnidade'+item.NU_CGC).css("display", "block");
             $('#lap'+item.NU_CGC).html('<b>'+parseInt(item.LAP_UNIDADE)+'</b>' )
 
 
@@ -20,13 +29,13 @@ $(document).ready(function(){
             var colorido = item.COR
             switch (colorido){
                 case "vermelho":
-                    $(`#corUnidade${item.NU_CGC}`).css({"background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.NU_CGC}`).css({"display": "block","background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "amarelo":
-                    $(`#corUnidade${item.NU_CGC}`).css({"background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.NU_CGC}`).css({"display": "block","background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "verde":
-                    $(`#corUnidade${item.NU_CGC}`).css({"background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.NU_CGC}`).css({"display": "block","background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case null:
                     $('#corUnidade'+item.NU_CGC).remove()
@@ -41,27 +50,39 @@ $(document).ready(function(){
     //modal VILOP
     $.getJSON('/produtividade-vilop/indicadores/indicadores-vilop/cards-vilop', function(dados){
         $.each(dados, function(key, item){
+            $(`#botao${item.unidade}`).css({"background-color": "#005ca9", "color": "white"})
+
             $('#sigla'+item.unidade).html(item.nomeUnidade)
             //$('#nome'+item.unidade).html(item.nomeUnidade)
 
             $('#vice'+item.unidade).html(item.unidade)
             $('#siglaVice'+item.unidade).html(item.nomeUnidade+" - VP Logística e Operações")
+
+            $('#unidadeSemNenhumDado'+item.unidade).css("display", "none");
+
+            $('#prodUnidade'+item.unidade).css("display", "block");
             $('#produtividade'+item.unidade).html('<b>'+item.PRODUTIVIDADE+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#desUnidade'+item.unidade).css("display", "block");
             $('#desempenho'+item.unidade).html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#fteUnidade'+item.unidade).css("display", "block");
             $('#fte'+item.unidade).html('<b>'+item.totalFTEAPURADA+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#lapUnidade'+item.unidade).css("display", "block");
             $('#lap'+item.unidade).html('<b>'+parseInt(item.totalLAP)+'</b>' )
             $('#resultado'+item.unidade).html('<b>'+item.RESULTADO+'</b>').css({"padding-top": "50px"})
 
             var colorido = item.COR
             switch (colorido){
                 case "vermelho":
-                    $(`#corUnidade${item.unidade}`).css({"background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.unidade}`).css({"display": "block","background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "amarelo":
-                    $(`#corUnidade${item.unidade}`).css({"background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.unidade}`).css({"display": "block","background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "verde":
-                    $(`#corUnidade${item.unidade}`).css({"background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.unidade}`).css({"display": "block","background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case null:
                     $('#corUnidade'+item.unidade).remove()
@@ -75,39 +96,41 @@ $(document).ready(function(){
     //modal DI
     $.getJSON('/produtividade-vilop/indicadores/indicadores-vilop/cards-di', function(dados){
         $.each(dados, function(key, item){
+            $(`#botao${item.codigoSr}`).css({"background-color": "#f39200", "color": "white"})
 
             $('#sigla'+item.codigoSr).html(item.Sigla)
             $('#nome'+item.codigoSr).html(item.nomeSr)
 
+
+            $('#unidadeSemNenhumDado'+item.codigoSr).css("display", "none");
+
             $('#diretoria'+item.codigoSr).html(item.codigoSr+" - "+item.Sigla)
             $('#siglaDiretoria'+item.codigoSr).html(item.nomeSr)
 
-            var produtividade = item.PRODUTIVIDADE
-            if (produtividade === '' || produtividade === null){
-                $('#corUnidade'+item.codigoSr).css("display", "none")
-                $('#produtividade'+item.codigoSr).html('<b> Não há dados</b> <sup style="font-size: 20px">%</sup>' )
+            $('#prodUnidade'+item.codigoSr).css("display", "block");
+            $('#produtividade'+item.codigoSr).html('<b>'+item.PRODUTIVIDADE+'</b> <sup style="font-size: 20px">%</sup>' )
 
-            } else {
-                $('#produtividade'+item.codigoSr).html('<b>'+item.PRODUTIVIDADE+'</b> <sup style="font-size: 20px">%</sup>' )
-                $('#desempenho'+item.codigoSr).html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
-                $('#fte'+item.codigoSr).html('<b>'+item.totalFTEAPURADA+'</b> <sup style="font-size: 20px">%</sup>' )
-                $('#lap'+item.codigoSr).html('<b>'+parseInt(item.totalLAP)+'</b>' )
+            $('#desUnidade'+item.codigoSr).css("display", "block");
+            $('#desempenho'+item.codigoSr).html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
 
-                $('#resultado'+item.codigoSr).html('<b>'+item.RESULTADO+'</b>').css({"padding-top": "50px"})
+            $('#fteUnidade'+item.codigoSr).css("display", "block");
+            $('#fte'+item.codigoSr).html('<b>'+item.totalFTEAPURADA+'</b> <sup style="font-size: 20px">%</sup>' )
 
-            }
+            $('#lapUnidade'+item.codigoSr).css("display", "block");
+            $('#lap'+item.codigoSr).html('<b>'+parseInt(item.totalLAP)+'</b>' )
 
+            $('#resultado'+item.codigoSr).html('<b>'+item.RESULTADO+'</b>').css({"padding-top": "50px"})
             
             var colorido = item.COR
             switch (colorido){
                 case "vermelho":
-                    $(`#corUnidade${item.codigoSr}`).css({"background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.codigoSr}`).css({"display": "block","background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "amarelo":
-                    $(`#corUnidade${item.codigoSr}`).css({"background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.codigoSr}`).css({"display": "block","background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "verde":
-                    $(`#corUnidade${item.codigoSr}`).css({"background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.codigoSr}`).css({"display": "block","background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case null:
                     $('#corUnidade'+item.codigoSr).remove()
@@ -122,43 +145,45 @@ $(document).ready(function(){
     $.getJSON('/produtividade-vilop/indicadores/indicadores-vilop/cards-sn', function(dados){
         $.each(dados, function(key, item){
             console.log(typeof(dados))
+            
             $('#sigla'+item.codigoSr).html(item.Sigla)
             $('#nome'+item.codigoSr).html(item.nomeSr)
+            
+            $(`#botao${item.codigoSr}`).css({"background-color": "#54bbab", "color": "white"})
+
+            $('#unidadeSemNenhumDado'+item.codigoSr).css("display", "none");
 
             $('#super'+item.codigoSr).html(item.codigoSr+" - "+item.Sigla)
             $('#siglaSuper'+item.codigoSr).html(item.nomeSr)
 
+            $('#prodUnidade'+item.codigoSr).css("display", "block");
             $('#produtividade'+item.codigoSr).html('<b>'+item.PRODUTIVIDADE+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#desUnidade'+item.codigoSr).css("display", "block");
             $('#desempenho'+item.codigoSr).html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#fteUnidade'+item.codigoSr).css("display", "block");
             $('#fte'+item.codigoSr).html('<b>'+item.totalFTEAPURADA+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#lapUnidade'+item.codigoSr).css("display", "block");
             $('#lap'+item.codigoSr).html('<b>'+parseInt(item.totalLAP)+'</b>' )
             $('#resultado'+item.codigoSr).html('<b>'+item.RESULTADO+'</b>').css({"padding-top": "50px"})
 
             var colorido = item.COR
             switch (colorido){
                 case "vermelho":
-                    $(`#corUnidade${item.codigoSr}`).css({"background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.codigoSr}`).css({"display": "block","background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "amarelo":
-                    $(`#corUnidade${item.codigoSr}`).css({"background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.codigoSr}`).css({"display": "block","background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "verde":
-                    $(`#corUnidade${item.codigoSr}`).css({"background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.codigoSr}`).css({"display": "block","background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
             }
-            // console.log($('#corUnidade'+item.codigoSr).css('background-color'))
-            if ($('#corUnidade'+item.codigoSr).css('background-color') == 'rgb(255, 255, 255)') {
-                $(this).remove()
-            }
-        })
-        
+            
+        })  
     })
-    // var produtividade = item.PRODUTIVIDADE
-    //     if (produtividade === [] || produtividade === null){
-    //         $('#corUnidade'+item.codigoSr).remove()
-    //         $('#produtividade'+item.codigoSr).html('<b> Não há dados</b> <sup style="font-size: 20px">%</sup>' )
-
-    //     } 
 });
 
 $(document).ready(function(){
@@ -166,14 +191,26 @@ $(document).ready(function(){
     $.getJSON('/produtividade-vilop/indicadores/indicadores-vilop/cards-gn', function(dados){
         $.each(dados, function(key, item){
 
+            $(`#botao${item.unidade}`).css({"background-color": "#00b5e5", "color": "white"})
+
             $('#sigla'+item.unidade).html(item.Sigla)
             $('#nome'+item.unidade).html(item.nomeAgencia)
 
+            $('#unidadeSemNenhumDado'+item.unidade).css("display", "none");
+
             $('#gerencia'+item.unidade).html(item.unidade+" - "+item.Sigla)
             $('#siglaGerencia'+item.unidade).html(item.nomeAgencia)
+
+            $('#prodUnidade'+item.unidade).css("display", "block");
             $('#produtividade'+item.unidade).html('<b>'+item.PRODUTIVIDADE+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#desUnidade'+item.unidade).css("display", "block");
             $('#desempenho'+item.unidade).html('<b>'+item.DESEMPENHO+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#fteUnidade'+item.unidade).css("display", "block");
             $('#fte'+item.unidade).html('<b>'+item.totalFTEAPURADA+'</b> <sup style="font-size: 20px">%</sup>' )
+
+            $('#lapUnidade'+item.unidade).css("display", "block");
             $('#lap'+item.unidade).html('<b>'+parseInt(item.totalLAP)+'</b>' )
 
             $('#resultado'+item.unidade).html('<b>'+item.RESULTADO+'</b>').css({"padding-top": "50px"})
@@ -181,13 +218,13 @@ $(document).ready(function(){
             var colorido = item.COR
             switch (colorido){
                 case "vermelho":
-                    $(`#corUnidade${item.unidade}`).css({"background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.unidade}`).css({"display": "block","background-color": "#fc8a76", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "amarelo":
-                    $(`#corUnidade${item.unidade}`).css({"background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.unidade}`).css({"display": "block","background-color": "#ffc230", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case "verde":
-                    $(`#corUnidade${item.unidade}`).css({"background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
+                    $(`#corUnidade${item.unidade}`).css({"display": "block","background-color": "#c2dc26", "color": "white","text-align": "right", "padding-top":"50px"});
                 break
                 case null:
                     $('#corUnidade'+item.unidade).remove()
@@ -200,57 +237,43 @@ $(document).ready(function(){
 
 $('.level-1').hover(function(event){
     $($(this).find("span")[1]).show();
-    $(this).css("background", "#004c8c");
 }, function() {
     $($(this).find("span")[1]).hide();
-    $(this).css("background", "#005ca9");
 })
 
 $('.level-2').hover(function(event){
     $($(this).find("span")[1]).show();
-    $(this).css("background", "#ec7500");
 }, function() {
     $($(this).find("span")[1]).hide();
-    $(this).css("background", "#f39200");
 })
 
 $('.level-3').hover(function(event){
     $($(this).find("span")[1]).show();
-    $(this).css("background", "#40a797");
 }, function() {
     $($(this).find("span")[1]).hide();
-    $(this).css("background", "#54bbab");
 })
 
 $('.level-4').hover(function(event){
     $($(this).find("span")[1]).show();
-    $(this).css("background", "#00a2cd");
 }, function() {
     $($(this).find("span")[1]).hide();
-    $(this).css("background", "#00b5e5");
 })
 
 $('.level-4B').hover(function(event){
     $($(this).find("span")[1]).show();
-    $(this).css("background", "#00a2cd");
 }, function() {
     $($(this).find("span")[1]).hide();
-    $(this).css("background", "#00b5e5");
 })
 
 $('.level-5').hover(function(event){
     $($(this).find("span")[1]).show();
-    $(this).css("background", "#3a4859");
 }, function() {
     $($(this).find("span")[1]).hide();
-    $(this).css("background", "#5f758f");
 })
 
 $('.list-group-item').hover(function(event){
-    $(this).css("background", "#b3c7cb");
     $($(this).find("span")[1]).show();
 }, function() {
-    $(this).css("background-color", "#EFF5F6");
     $($(this).find("span")[1]).hide();
 })
 

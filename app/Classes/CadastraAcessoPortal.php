@@ -88,16 +88,19 @@ class CadastraAcessoPortal
 
         // VILOP
         // 'C022964', // Ronaldo
-        // 'c058832', // Priscilla
-        // 'c108550', // Tiago 
+        'c058832', // Priscilla
+        'c108550', // Tiago 
         // 'C077563', // Paulo Stefan
-        // 'c091778', // Guilherme
-        // 'c073272', // Gilmara
+        'c091778', // Guilherme
+        'c073272', // Gilmara
         // 'c100377', // Luciana
         // 'c129457', // Pedro Santiago
         // 'c124798', // Cleberson
         'c129457',
         'c090120', // Barboza
+        'c057626', // Flavio DEOPC
+        'c095732', // Leandro Deopc
+
         
     ];
 
