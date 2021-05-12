@@ -486,7 +486,6 @@ Route::post('estoque-imoveis/empresta-chave/{idChave}', 'GestaoImoveisCaixa\cont
 Route::get('/testedeupload', function () {
     return view('portal.upload.testeDeUpload');
 });
-//Marcar CHB cancelado
 Route::post('testedeupload/enviar', 'upload\uploadController@store');
 
 //Controle de Boletos

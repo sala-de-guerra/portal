@@ -26,12 +26,14 @@
                                     </a>
                                 </li>
                                 @endif
+                                @if (session()->get('acessoEmpregadoPortal') == "DESENVOLVEDOR" || session()->get('acessoEmpregadoPortal') == "GESTOR")
                                 <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/pesquisa/colaborador">                    
                                         <i class="far fa-fw fa-circle "></i>
                                         <p>Pesquisa Colaborador</p>
                                     </a>
                                 </li>
+                                @endif
                                 @if (session()->get('acessoEmpregadoPortal') == "DESENVOLVEDOR")      
                                 <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/lista-unidades/lista">                    
@@ -56,12 +58,14 @@
                                     </a>
                                 </li>
                                 @endif
+                                @if (session()->get('acessoEmpregadoPortal') == "DESENVOLVEDOR" || session()->get('acessoEmpregadoPortal') == "GESTOR")
                                 <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/indicadores/indicadores-vilop">                    
                                         <i class="far fa-fw fa-circle "></i>
                                         <p>Vilop Indicadores</p>
                                     </a>
                                 </li>
+                                @endif
                                 {{-- <li class="nav-item ">
                                     <a class="nav-link " href="/produtividade-vilop/dashboard/dash">                    
                                         <i class="far fa-fw fa-circle "></i>
